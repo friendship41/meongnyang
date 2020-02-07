@@ -14,9 +14,9 @@
 	
 	<!-- resources mapping -->
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
-	<mvc:resources mapping="/admin/css/**" location="/resources/admin/css/"/>
-	<mvc:resources mapping="/admin/js/**" location="/resources/admin/js/"/>
-	<mvc:resources mapping="/admin/plugins/**" location="/resources/admin/plugins/" />
+<!--	<mvc:resources mapping="/admin/css/**" location="/resources/admin/css/"/>-->
+<!--	<mvc:resources mapping="/admin/js/**" location="/resources/admin/js/"/>-->
+<!--	<mvc:resources mapping="/admin/plugins/**" location="/resources/admin/plugins/" />-->
 	
 	<!-- 관리자 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.mall.meongnyang.admin"/>
