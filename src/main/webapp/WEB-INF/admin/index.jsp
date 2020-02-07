@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -16,7 +16,7 @@
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/plugins/icomoon/style.css" rel="stylesheet">
     <link href="assets/plugins/uniform/css/default.css" rel="stylesheet"/>
@@ -220,7 +220,8 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-        </div><!-- /Page Header -->
+        </div>
+        <!-- /Page Header -->
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
@@ -316,7 +317,8 @@
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table id="stockProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="stockProductTable" class="display table"
+                                           style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>ì í ì½ë</th>
@@ -352,7 +354,8 @@
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table id="expirationProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="expirationProductTable" class="display table"
+                                           style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>ì í ì½ë</th>
@@ -388,7 +391,8 @@
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table id="orderProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="orderProductTable" class="display table"
+                                           style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>ì£¼ë¬¸ ë²í¸</th>
@@ -620,7 +624,6 @@
 </div><!-- /Page Container -->
 
 
-
 <script>
     function chartGo() {
         new Chart(document.getElementById("sales_chart_week"), {
@@ -651,7 +654,6 @@
             },
             "options": {}
         });
-
 
 
     }
