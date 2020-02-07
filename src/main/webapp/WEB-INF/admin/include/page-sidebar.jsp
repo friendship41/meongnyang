@@ -1,5 +1,4 @@
 <%--
-    dev test
   Created by IntelliJ IDEA.
   User: stage
   Date: 2020-02-07
