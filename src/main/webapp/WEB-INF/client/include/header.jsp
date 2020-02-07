@@ -47,7 +47,6 @@
 <jsp:include page="login-modal.jsp"/>
 <%--<%@include file="login-modal.jsp"%>--%>
 
-<a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-eye-open" aria-hidden="true">asdasd</span></a>
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
