@@ -2,9 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:c="http://www.springframework.org/schema/c"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
@@ -12,8 +12,18 @@
 	<!-- 어노테이션 활성화 -->
 	<mvc:annotation-driven/>
 	
+	<!-- resources mapping -->
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
+	<mvc:resources mapping="/admin/css/**" location="/resources/admin/css/"/>
+	<mvc:resources mapping="/admin/img/**" location="/resources/admin/images/"/>
+	<mvc:resources mapping="/admin/js/**" location="/resources/admin/js/"/>
+	<mvc:resources mapping="/admin/plugins/**" location="/resources/admin/plugins/" />
+	
 	<!-- 관리자 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.mall.meongnyang.admin"/>
+	
+	
+	
 	
 
 	<!-- View Resolver -->

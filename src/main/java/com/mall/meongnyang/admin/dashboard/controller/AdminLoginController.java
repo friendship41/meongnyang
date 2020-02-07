@@ -1,5 +1,5 @@
 package com.mall.meongnyang.admin.dashboard.controller;
 
-public class DashBoardController {
+public class AdminLoginController {
 
 }
