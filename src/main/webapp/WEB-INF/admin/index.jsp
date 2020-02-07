@@ -12,11 +12,11 @@
     <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>오늘뭐먹냥 - 관리자페이지</title>
+    <title>ecaps - Responsive Admin Dashboard Template</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <link href="/resources/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/plugins/icomoon/style.css" rel="stylesheet">
     <link href="assets/plugins/uniform/css/default.css" rel="stylesheet"/>
@@ -46,7 +46,7 @@
     <!-- Page Sidebar -->
     <div class="page-sidebar">
         <a class="logo-box" href="index.html">
-            <span>ë­ë¨¹ë¥</span>
+            <span>뭐먹냥</span>
             <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
             <i class="icon-close" id="sidebar-toggle-button-close"></i>
         </a>
@@ -55,61 +55,61 @@
                 <ul class="accordion-menu">
                     <li class="active-page">
                         <a href="index.html">
-                            <i class="menu-icon icon-home4"></i><span>ëìë³´ë</span>
+                            <i class="menu-icon icon-home4"></i><span>대시보드</span>
                         </a>
                     </li>
                     <li>
                         <a href="javascript:void(0)">
-                            <i class="menu-icon icon-users icon-format_list_bulleted"></i><span>íìê´ë¦¬</span><i
+                            <i class="menu-icon icon-users icon-format_list_bulleted"></i><span>회원관리</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="member/member-overview.html">ìì¸íí©</a></li>
-                            <li><a href="member/member-manage.html">íìê´ë¦¬</a></li>
-                            <li><a href="member/term-manage.html">ì ì±ê´ë¦¬</a></li>
+                            <li><a href="member/member-overview.html">상세현황</a></li>
+                            <li><a href="member/member-manage.html">회원관리</a></li>
+                            <li><a href="member/term-manage.html">정책관리</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0)">
-                            <i class="menu-icon icon-shopping_cart icon-format_list_bulleted"></i><span>ìíê´ë¦¬</span><i
+                            <i class="menu-icon icon-shopping_cart icon-format_list_bulleted"></i><span>상품관리</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="product/product-overview.html">ìì¸íí©</a></li>
-                            <li><a href="product/product-add.html">ìíë±ë¡</a></li>
-                            <li><a href="product/product-analysis.html">ìíë¶ì</a></li>
-                            <li><a href="product/product-stock.html">ì¬ê³ ê´ë¦¬</a></li>
+                            <li><a href="product/product-overview.html">상세현황</a></li>
+                            <li><a href="product/product-add.html">상품등록</a></li>
+                            <li><a href="product/product-analysis.html">상품분석</a></li>
+                            <li><a href="product/product-stock.html">재고관리</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0)">
-                            <i class="menu-icon icon-question icon-format_list_bulleted"></i><span>ì¼íëª°ê´ë¦¬</span><i
+                            <i class="menu-icon icon-question icon-format_list_bulleted"></i><span>쇼핑몰관리</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="shoppingmall/shoppingmall-notice-list.html">ê³µì§ê´ë¦¬</a></li>
+                            <li><a href="shoppingmall/shoppingmall-notice-list.html">공지관리</a></li>
                             <li><a href="shoppingmall/shoppingmall-qna-list.html">Q&A</a></li>
                             <li><a href="shoppingmall/shoppingmall-faq-list.html">FAQ</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0)">
-                            <i class="menu-icon icon-price-tags icon-format_list_bulleted"></i><span>ë§ì¼íê´ë¦¬</span><i
+                            <i class="menu-icon icon-price-tags icon-format_list_bulleted"></i><span>마케팅관리</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="marketing/promotion-overview.html">íë¡ëª¨ì íí©</a></li>
-                            <li><a href="marketing/promotion-write.html">íë¡ëª¨ì ë±ë¡</a></li>
+                            <li><a href="marketing/promotion-overview.html">프로모션 현황</a></li>
+                            <li><a href="marketing/promotion-write.html">프로모션 등록</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0)">
-                            <i class="menu-icon icon-coin-dollar icon-format_list_bulleted"></i><span>ë§¤ì¶ê´ë¦¬</span><i
+                            <i class="menu-icon icon-coin-dollar icon-format_list_bulleted"></i><span>매출관리</span><i
                                 class="accordion-icon fa fa-angle-left"></i>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="sales/sales-overview.html">ë§¤ì¶íí©</a></li>
-                            <li><a href="sales/sales-analysis.html">ë§¤ì¶ë¶ì</a></li>
+                            <li><a href="sales/sales-overview.html">매출현황</a></li>
+                            <li><a href="sales/sales-analysis.html">매출분석</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -140,7 +140,7 @@
                     <div class="navbar-header">
                         <div class="logo-sm">
                             <a href="javascript:void(0)" id="sidebar-toggle-button"><i class="fa fa-bars"></i></a>
-                            <a class="logo-box" href="index.html"><span>ì¤ëë­ë¨¹ë¥</span></a>
+                            <a class="logo-box" href="index.html"><span>오늘뭐먹냥</span></a>
                         </div>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                                 data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -220,12 +220,11 @@
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-        </div>
-        <!-- /Page Header -->
+        </div><!-- /Page Header -->
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">ëìë³´ë</h3>
+                <h3 class="breadcrumb-header">대시보드</h3>
             </div>
             <div id="main-wrapper">
                 <!-- Row -->
@@ -235,7 +234,7 @@
                             <div class="panel-body">
                                 <div class="pull-left">
                                     <span class="stats-number">50,000,000</span>
-                                    <p class="stats-info">ì ë§¤ì¶</p>
+                                    <p class="stats-info">월 매출</p>
                                 </div>
                                 <div class="pull-right">
                                     <i class="icon-arrow_upward stats-icon"></i>
@@ -248,7 +247,7 @@
                             <div class="panel-body">
                                 <div class="pull-left">
                                     <span class="stats-number">5,000,000</span>
-                                    <p class="stats-info">ì¼ ë§¤ì¶</p>
+                                    <p class="stats-info">일 매출</p>
                                 </div>
                                 <div class="pull-right">
                                     <i class="icon-arrow_downward stats-icon"></i>
@@ -261,7 +260,7 @@
                             <div class="panel-body">
                                 <div class="pull-left">
                                     <span class="stats-number">+10,555</span>
-                                    <p class="stats-info">ì ê· íì</p>
+                                    <p class="stats-info">신규 회원</p>
                                 </div>
                                 <div class="pull-right">
                                     <i class="icon-arrow_upward stats-icon"></i>
@@ -274,7 +273,7 @@
                             <div class="panel-body">
                                 <div class="pull-left">
                                     <span class="stats-number">5,000,000</span>
-                                    <p class="stats-info">ì¼ì¼ ë°©ë¬¸ì</p>
+                                    <p class="stats-info">일일 방문자</p>
                                 </div>
                                 <div class="pull-right">
                                     <i class="icon-arrow_upward stats-icon"></i>
@@ -289,7 +288,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">ì£¼ê° ë§¤ì¶</h4>
+                                <h4 class="panel-title">주간 매출</h4>
                             </div>
                             <div class="panel-body">
                                 <canvas id="sales_chart_week"></canvas>
@@ -299,7 +298,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">ì£¼ê° ë°©ë¬¸ì</h4>
+                                <h4 class="panel-title">주간 방문자</h4>
                             </div>
                             <div class="panel-body">
                                 <canvas id="visit_chart_week"></canvas>
@@ -313,28 +312,27 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">ì¬ê³  íí©</h4>
+                                <h4 class="panel-title">재고 현황</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table id="stockProductTable" class="display table"
-                                           style="width: 100%; cellspacing: 0;">
+                                    <table id="stockProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
-                                            <th>ì í ì½ë</th>
-                                            <th>ì í ì´ë¦</th>
-                                            <th>ì íìë</th>
+                                            <th>제품 코드</th>
+                                            <th>제품 이름</th>
+                                            <th>제품수량</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>000001</td>
-                                            <td>ê°ìì§ ì¬ë£</td>
+                                            <td>강아지 사료</td>
                                             <td>50</td>
                                         </tr>
                                         <tr>
                                             <td>000002</td>
-                                            <td>ê³ ìì´ ì¬ë£</td>
+                                            <td>고양이 사료</td>
                                             <td>80</td>
                                         </tr>
                                         </tbody>
@@ -350,28 +348,27 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">ì íµê¸°í ìë° ìí íí©</h4>
+                                <h4 class="panel-title">유통기한 임박 상품 현황</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table id="expirationProductTable" class="display table"
-                                           style="width: 100%; cellspacing: 0;">
+                                    <table id="expirationProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
-                                            <th>ì í ì½ë</th>
-                                            <th>ì í ì´ë¦</th>
-                                            <th>ì íìë</th>
+                                            <th>제품 코드</th>
+                                            <th>제품 이름</th>
+                                            <th>제품수량</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>000001</td>
-                                            <td>ê°ìì§ ì¬ë£</td>
+                                            <td>강아지 사료</td>
                                             <td>50</td>
                                         </tr>
                                         <tr>
                                             <td>000002</td>
-                                            <td>ê³ ìì´ ì¬ë£</td>
+                                            <td>고양이 사료</td>
                                             <td>80</td>
                                         </tr>
                                         </tbody>
@@ -387,46 +384,45 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">ì£¼ë¬¸ íí©</h4>
+                                <h4 class="panel-title">주문 현황</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table id="orderProductTable" class="display table"
-                                           style="width: 100%; cellspacing: 0;">
+                                    <table id="orderProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
-                                            <th>ì£¼ë¬¸ ë²í¸</th>
-                                            <th>ì£¼ë¬¸ ìí</th>
-                                            <th>ì£¼ë¬¸ìëª</th>
-                                            <th>ì£¼ë¬¸ê¸ì¡</th>
-                                            <th>ì£¼ë¬¸ì¼ì</th>
-                                            <th>ì£¼ë¬¸ìí</th>
+                                            <th>주문 번호</th>
+                                            <th>주문 상품</th>
+                                            <th>주문자명</th>
+                                            <th>주문금액</th>
+                                            <th>주문일자</th>
+                                            <th>주문상태</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>000002</td>
-                                            <td>ê° ì¬ë£ ì¸ 1ì¢</td>
-                                            <td>ìì°½í¸</td>
+                                            <td>개 사료 외 1종</td>
+                                            <td>안창호</td>
                                             <td>150,000</td>
                                             <td>2011/04/25</td>
-                                            <td><span class="label label-nowGo">ë°°ì¡ì¤</span></td>
+                                            <td><span class="label label-nowGo">배송중</span></td>
                                         </tr>
                                         <tr>
                                             <td>000003</td>
-                                            <td>ê° ì¬ë£ ì¸ 1ì¢</td>
-                                            <td>ìì°½í¸</td>
+                                            <td>개 사료 외 1종</td>
+                                            <td>안창호</td>
                                             <td>150,000</td>
                                             <td>2011/04/25</td>
-                                            <td><span class="label label-nowGo">ë°°ì¡ì¤</span></td>
+                                            <td><span class="label label-nowGo">배송중</span></td>
                                         </tr>
                                         <tr>
                                             <td>000001</td>
-                                            <td>ì¼íì ì¸ 2ì¢</td>
-                                            <td>ìµì°½í¸</td>
+                                            <td>켓타워 외 2종</td>
+                                            <td>최창호</td>
                                             <td>336,000</td>
                                             <td>2008/11/28</td>
-                                            <td><span class="label label-success">ë°°ì¡ìë£</span></td>
+                                            <td><span class="label label-success">배송완료</span></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -438,7 +434,7 @@
                 <!-- !Row -->
             </div><!-- Main Wrapper -->
             <div class="page-footer">
-                <p>ë©ì¸íë¡ì í¸ ë­ë¨¹ë¥ <i class="fa fa-heart"></i> by team4</p>
+                <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
             </div>
         </div><!-- /Page Inner -->
         <div class="page-right-sidebar" id="main-right-sidebar">
@@ -624,14 +620,15 @@
 </div><!-- /Page Container -->
 
 
+
 <script>
     function chartGo() {
         new Chart(document.getElementById("sales_chart_week"), {
             "type": "line",
             "data": {
-                "labels": ["1ì¼", "2ì¼", "3ì¼", "4ì¼", "5ì¼", "6ì¼", "7ì¼", "8ì¼", "9ì¼", "10ì¼", "11ì¼", "12ì¼", "13ì¼", "14ì¼", "15ì¼"],
+                "labels": ["1일", "2일", "3일", "4일", "5일", "6일", "7일", "8일", "9일", "10일", "11일", "12일", "13일", "14일", "15일"],
                 "datasets": [{
-                    "label": "ë°©ë¬¸ì ì",
+                    "label": "방문자 수",
                     "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000, 1000, 2000, 3000],
                     "fill": false,
                     "borderColor": "rgb(93,168,203)",
@@ -643,9 +640,9 @@
         new Chart(document.getElementById("visit_chart_week"), {
             "type": "line",
             "data": {
-                "labels": ["1ì", "2ì", "3ì", "4ì", "5ì", "6ì", "7ì", "8ì", "9ì", "10ì", "11ì", "12ì"],
+                "labels": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
                 "datasets": [{
-                    "label": "ë°©ë¬¸ì ì",
+                    "label": "방문자 수",
                     "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000],
                     "fill": false,
                     "borderColor": "rgb(93,168,203)",
@@ -654,6 +651,7 @@
             },
             "options": {}
         });
+
 
 
     }
@@ -685,7 +683,7 @@
 <script src="assets/js/pages/table-data.js"></script>
 <script src="assets/plugins/datatables/js/jquery.datatables.min.js"></script>
 
-<!-- custom íì´ë¸ ì¤í¬ë¦½í¸ -->
+<!-- custom 테이블 스크립트 -->
 <script src="assets/js/custom/product-table.js"></script>
 
 
