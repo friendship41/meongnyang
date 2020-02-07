@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Start Footer Area -->
         <footer id="htc__footer">
             <!-- Start Footer Widget -->
@@ -41,17 +42,17 @@
     <!-- Placed js at the end of the document so the pages load faster -->
 
     <!-- jquery latest version -->
-    <script src="<c:url value='/client/js/vendor/jquery-3.2.1.min.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/vendor/jquery-3.2.1.min.js'/>"></script>
     <!-- Bootstrap framework js -->
-    <script src="<c:url value='/client/js/bootstrap.min.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/bootstrap.min.js'/>"></script>
     <!-- All js plugins included in this file. -->
-    <script src="<c:url value='/client/js/plugins.js'/>"></script>
-    <script src="<c:url value='/client/js/slick.min.js'/>"></script>
-    <script src="<c:url value='/client/js/owl.carousel.min.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/plugins.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/slick.min.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/owl.carousel.min.js'/>"></script>
     <!-- Waypoints.min.js. -->
-    <script src="<c:url value='/client/js/waypoints.min.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/waypoints.min.js'/>"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
-    <script src="<c:url value='/client/js/main.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/main.js'/>"></script>
 
     
 

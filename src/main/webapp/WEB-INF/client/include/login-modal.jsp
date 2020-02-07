@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 로그인이 뜨는 모달부분 -->
     <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
          aria-hidden="true">
@@ -48,7 +49,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <script src="<c:url value='/client/js/easyResponsiveTabs.js'/>" type="text/javascript"></script>
+                            <script src="<c:url value='/resources/client/js/easyResponsiveTabs.js'/>" type="text/javascript"></script>
                             <script type="text/javascript">
                                 $(document).ready(function () {
                                     $('#horizontalTab').easyResponsiveTabs({

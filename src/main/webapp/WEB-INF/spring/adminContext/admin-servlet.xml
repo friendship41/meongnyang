@@ -15,7 +15,6 @@
 	<!-- resources mapping -->
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
 	<mvc:resources mapping="/admin/css/**" location="/resources/admin/css/"/>
-	<mvc:resources mapping="/admin/img/**" location="/resources/admin/images/"/>
 	<mvc:resources mapping="/admin/js/**" location="/resources/admin/js/"/>
 	<mvc:resources mapping="/admin/plugins/**" location="/resources/admin/plugins/" />
 	

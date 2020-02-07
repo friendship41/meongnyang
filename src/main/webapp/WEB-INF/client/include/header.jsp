@@ -11,29 +11,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/client/images/favicon.ico'/>">
-    <link rel="apple-touch-icon" href="<c:url value='/client/apple-touch-icon.png'/>">
+    <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/client/images/favicon.ico'/>">
+    <link rel="apple-touch-icon" href="<c:url value='/resources/client/apple-touch-icon.png'/>">
 
     <!-- All css files are included here. -->
     <!-- Bootstrap fremwork main css -->
-    <link rel="stylesheet" href="<c:url value='/client/css/bootstrap.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/client/css/bootstrap.min.css'/>">
     <!-- Owl Carousel min css -->
-    <link rel="stylesheet" href="<c:url value='/client/css/owl.carousel.min.css'/>">
-    <link rel="stylesheet" href="<c:url value='/client/css/owl.theme.default.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/client/css/owl.carousel.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/client/css/owl.theme.default.min.css'/>">
     <!-- This core.css file contents all plugings css file. -->
-    <link rel="stylesheet" href="<c:url value='/client/css/core.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/client/css/core.css'/>">
     <!-- Theme shortcodes/elements style -->
-    <link rel="stylesheet" href="<c:url value='/client/css/shortcode/shortcodes.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/client/css/shortcode/shortcodes.css'/>">
     <!-- Theme main style -->
-    <link rel="stylesheet" href="<c:url value='/client/css/style.css'/>">
+    <link rel="stylesheet" href="<c:url value="/resources/client/css/style.css"/>">
     <!-- Responsive css -->
-    <link rel="stylesheet" href="<c:url value='/client/css/responsive.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/client/css/responsive.css'/>">
     <!-- User style -->
-    <link rel="stylesheet" href="<c:url value='/client/css/custom.css'/>">
+    <link rel="stylesheet" href="<c:url value='/resources/client/css/custom.css'/>">
 
 
     <!-- Modernizr JS -->
-    <script src="<c:url value='/client/js/vendor/modernizr-3.5.0.min.js'/>"></script>
+    <script src="<c:url value='/resources/client/js/vendor/modernizr-3.5.0.min.js'/>"></script>
 
     <script>
         function loginModal() {

@@ -19,11 +19,11 @@
 	
 	
 	<!-- resources mapping -->
-	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
-	<mvc:resources mapping="/client/css/**" location="/resources/client/css/, classpath=/resources/client/css/"/>
+<!--	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+	<mvc:resources mapping="/client/css/**" location="/resources/client/css/"/>
 	<mvc:resources mapping="/client/fonts/**" location="/resources/client/fonts/"/>
 	<mvc:resources mapping="/client/img/**" location="/resources/client/images/"/>
-	<mvc:resources mapping="/client/js/**" location="/resources/client/js/, classpath=/resources/client/js/"/>
+	<mvc:resources mapping="/client/js/**" location="/resources/client/js/"/>
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
 	
 	
