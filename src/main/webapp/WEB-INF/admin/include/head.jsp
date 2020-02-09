@@ -38,9 +38,8 @@
     <link href="/resources/admin/plugins/gridgallery/css/component.css" rel="stylesheet">
 
 
-    <link href="../assets/plugins/dropzone/dropzone.min.css" rel="stylesheet">
-    <link href="../assets/plugins/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet"
-          type="text/css"/>
+    <link href="/resources/admin/plugins/dropzone/dropzone.min.css" rel="stylesheet">
+    <link href="/resources/admin/plugins/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet" type="text/css"/>
 
 
     <!-- Theme Styles -->

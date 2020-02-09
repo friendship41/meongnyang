@@ -51,7 +51,6 @@
 <script src="/resources/admin/plugins/plupload/js/plupload.full.min.js"></script>
 <script src="/resources/admin/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
 
-
 <!-- custom 테이블 스크립트 -->
 <script src="/resources/admin/js/custom/product-table.js"></script>
 

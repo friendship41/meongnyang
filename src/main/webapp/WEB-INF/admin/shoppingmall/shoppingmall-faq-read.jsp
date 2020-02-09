@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: stage
   Date: 2020-02-09
-  Time: 오후 9:21
+  Time: 오후 9:38
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -25,52 +25,40 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">상품 추가</h3>
+                <h3 class="breadcrumb-header">FAQ 읽기</h3>
             </div>
-            <!-- Main Wrapper -->
             <div id="main-wrapper">
                 <!-- Row -->
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
                                 <form class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">카테고리</label>
+                                        <label for="noticeTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <select style="margin-bottom:15px;" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="noticeTitle">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">상품명</label>
+                                        <label for="noticeContent" class="col-sm-2 control-label">내용</label>
                                         <div class="col-sm-10">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control">
-                                                <span class="input-group-btn">
-                                                    <input type="file" class="btn btn-success">
-                                                </span>
-                                            </div>
+                                            <textarea rows="10" class="form-control" id="noticeContent"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-10">
-                                        <button class="btn btn-primary">상품등록</button>
+                                    <div class="form-group" style="margin-top: 50px">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-10">
+                                            <button type="submit" class="btn btn-primary">수정</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- !Row -->
-            </div>
-            <!-- !Main Wrapper -->
+            </div><!-- Main Wrapper -->
             <div class="page-footer">
                 <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
             </div>
@@ -85,6 +73,5 @@
 
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
-
 </body>
 </html>
