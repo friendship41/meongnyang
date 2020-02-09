@@ -126,7 +126,7 @@
                 <!-- Row -->
             </div><!-- Main Wrapper -->
             <div class="page-footer">
-                <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
+                <p>메인프로젝트 뭐멍냥 <i class="fa fa-heart"></i> by team4</p>
             </div>
         </div>
         <!-- /Page Inner -->

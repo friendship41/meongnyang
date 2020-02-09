@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: stage
   Date: 2020-02-09
-  Time: 오후 6:54
+  Time: 오후 7:22
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -25,52 +25,63 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">상품 분석</h3>
+                <h3 class="breadcrumb-header">정책 관리</h3>
             </div>
             <div id="main-wrapper">
                 <!-- Row -->
                 <div class="row">
-                    <div class="col-lg-12 col-md-12">
+                    <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">새 프로모션 등록</h4>
+                                <h4 class="panel-title">약관 작성/수정</h4>
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal">
                                     <div class="form-group">
-                                        <label for="promotionName" class="col-sm-2 control-label">프로모션 이름</label>
+                                        <label for="termNumber" class="col-sm-2 control-label">약관번호</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="promotionName">
+                                            <input type="text" class="form-control" id="termNumber">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="promotionDetail" class="col-sm-2 control-label">프로모션 내용</label>
+                                        <label for="termName" class="col-sm-2 control-label">약관명</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="promotionDetail"></textarea>
+                                            <input type="text" class="form-control" id="termName">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">시작일</label>
+                                        <label for="termDetail" class="col-sm-2 control-label">약관상세</label>
+                                        <div class="col-sm-10">
+                                            <textarea rows="10" class="form-control" id="termDetail"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">필수여부</label>
+                                        <div class="col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox">필수
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">만료일</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control date-picker">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">종료일</label>
+                                        <label class="col-sm-2 control-label">정책적용일</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control date-picker">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="allProductDiscount" class="col-sm-2 control-label">전체 할인율</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="allProductDiscount">
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">작성</button>
+                                            <!--                                                이 버튼 누르면 수정이 확일합니까 확인알럿이 뜨고 컨펌하면 ㄱ-->
                                         </div>
                                     </div>
 

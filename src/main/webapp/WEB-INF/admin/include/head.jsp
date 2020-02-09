@@ -30,7 +30,10 @@
 
     <link href="/resources/admin/plugins/datatables/css/jquery.datatables.min.css" rel="stylesheet" type="text/css"/>
     <link href="/resources/admin/plugins/datatables/css/jquery.datatables_themeroller.css" rel="stylesheet" type="text/css"/>
+
+
     <link href="/resources/admin/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
+
 
     <link href="/resources/admin/plugins/gridgallery/css/component.css" rel="stylesheet">
 

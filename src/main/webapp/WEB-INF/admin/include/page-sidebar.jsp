@@ -9,7 +9,7 @@
 <!-- Page Sidebar -->
 <div class="page-sidebar">
     <a class="logo-box" href="index.html">
-        <span>뭐먹냥</span>
+        <span>오늘뭐멍냥</span>
         <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
         <i class="icon-close" id="sidebar-toggle-button-close"></i>
     </a>
@@ -40,6 +40,8 @@
                     <ul class="sub-menu">
                         <li><a href="product/product-overview.html">상세현황</a></li>
                         <li><a href="product/product-add.html">상품등록</a></li>
+                        <li><a href="product/product-add.html">카테고리</a></li>
+                        <li><a href="product/product-add.html">상품이미지</a></li>
                         <li><a href="product/product-analysis.html">상품분석</a></li>
                         <li><a href="product/product-stock.html">재고관리</a></li>
                     </ul>

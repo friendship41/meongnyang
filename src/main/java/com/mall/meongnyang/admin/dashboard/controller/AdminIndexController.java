@@ -35,4 +35,28 @@ public class AdminIndexController
     {
         return "marketing/promotion-write";
     }
+
+    @RequestMapping("/memberManage.ado")
+    public String memberManagePage()
+    {
+        return "member/member-manage";
+    }
+
+    @RequestMapping("/memberOverview.ado")
+    public String memberOverviewPage()
+    {
+        return "member/member-overview";
+    }
+
+    @RequestMapping("/termManage.ado")
+    public String termManagePage()
+    {
+        return "member/term-manage";
+    }
+
+    @RequestMapping("/termWrite.ado")
+    public String termWritePage()
+    {
+        return "member/term-write";
+    }
 }

@@ -22,8 +22,7 @@
 
 
     <link href="../assets/plugins/dropzone/dropzone.min.css" rel="stylesheet">
-    <link href="../assets/plugins/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet"
-          type="text/css"/>
+    <link href="../assets/plugins/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet" type="text/css"/>
 
     <!-- Theme Styles -->
     <link href="../assets/css/ecaps.min.css" rel="stylesheet">
@@ -43,7 +42,7 @@
     <!-- Page Sidebar -->
     <div class="page-sidebar">
         <a class="logo-box" href="../index.html">
-            <span>뭐먹냥</span>
+            <span>오늘뭐멍냥</span>
             <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
             <i class="icon-close" id="sidebar-toggle-button-close"></i>
         </a>
@@ -74,6 +73,8 @@
                         <ul class="sub-menu">
                             <li><a href="../product/product-overview.html">상세현황</a></li>
                             <li><a href="../product/product-add.html">상품등록</a></li>
+                            <li><a href="../product/product-add.html">카테고리</a></li>
+                            <li><a href="../product/product-add.html">상품이미지</a></li>
                             <li><a href="../product/product-analysis.html">상품분석</a></li>
                             <li><a href="../product/product-stock.html">재고관리</a></li>
                         </ul>
@@ -125,8 +126,8 @@
                         <input type="text" name="search" class="form-control search-input"
                                placeholder="Type something...">
                         <span class="input-group-btn">
-                                    <button class="btn btn-default" id="close-search" type="button"><i
-                                            class="icon-close"></i></button>
+                                <button class="btn btn-default" id="close-search" type="button"><i
+                                        class="icon-close"></i></button>
                                 </span>
                     </div>
                 </form>
@@ -171,29 +172,29 @@
                                                 <a href="#"><span class="notification-badge bg-primary"><i
                                                         class="fa fa-photo"></i></span>
                                                     <span class="notification-info">Finished uploading photos to gallery <b>"South Africa"</b>.
-                                                                <small class="notification-date">20:00</small>
-                                                            </span></a>
+                                                                    <small class="notification-date">20:00</small>
+                                                                </span></a>
                                             </li>
                                             <li>
                                                 <a href="#"><span class="notification-badge bg-primary"><i
                                                         class="fa fa-at"></i></span>
                                                     <span class="notification-info"><b>John Doe</b> mentioned you in a post "Update v1.5".
-                                                                <small class="notification-date">06:07</small>
-                                                            </span></a>
+                                                                        <small class="notification-date">06:07</small>
+                                                                    </span></a>
                                             </li>
                                             <li>
                                                 <a href="#"><span class="notification-badge bg-danger"><i
                                                         class="fa fa-bolt"></i></span>
                                                     <span class="notification-info">4 new special offers from the apps you follow!
-                                                                <small class="notification-date">Yesterday</small>
-                                                            </span></a>
+                                                                            <small class="notification-date">Yesterday</small>
+                                                                        </span></a>
                                             </li>
                                             <li>
                                                 <a href="#"><span class="notification-badge bg-success"><i
                                                         class="fa fa-bullhorn"></i></span>
                                                     <span class="notification-info">There is a meeting with <b>Ethan</b> in 15 minutes!
-                                                                <small class="notification-date">Yesterday</small>
-                                                            </span></a>
+                                                                                <small class="notification-date">Yesterday</small>
+                                                                            </span></a>
                                             </li>
                                         </ul>
                                     </li>
@@ -222,7 +223,7 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">상품 추가</h3>
+                <h3 class="breadcrumb-header">이미지 추가</h3>
             </div>
             <!-- Main Wrapper -->
             <div id="main-wrapper">
@@ -233,26 +234,46 @@
                             <div class="panel-body">
                                 <form class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">카테고리</label>
+                                        <label for="productName" class="col-sm-2 control-label">상품명</label>
                                         <div class="col-sm-10">
-                                            <select style="margin-bottom:15px;" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="productName">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">상품명</label>
+                                        <label class="col-sm-2 control-label">등록된 이미지</label>
                                         <div class="col-sm-10">
-                                            <input type="file" class="form-control">
+                                            <div class="insert-image">
+                                                <img src="dogcat.png" width="50" height="100">
+                                                <button type="button" class="btn btn-danger">삭제</button>
+                                            </div>
+                                            <div class="insert-image">
+                                                <img src="dogcat.png" width="50" height="100">
+                                                <button type="button" class="btn btn-danger">삭제</button>
+                                            </div>
+                                            <div class="insert-image">
+                                                <img src="dogcat.png" width="50" height="100">
+                                                <button type="button" class="btn btn-danger">삭제</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">상품이미지</label>
+                                        <div class="col-sm-10">
+                                            <div class="panel panel-white">
+                                                <div class="panel-heading clearfix">
+                                                    <h4 class="panel-title">Plupload</h4>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div id="uploader">
+                                                        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10">
-                                        <button class="btn btn-primary">상품등록</button>
+                                        <button class="btn btn-primary">이미지 등록</button>
                                     </div>
                                 </form>
                             </div>
@@ -264,7 +285,7 @@
             </div>
             <!-- !Main Wrapper -->
             <div class="page-footer">
-                <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
+                <p>메인프로젝트 오늘뭐멍냥 <i class="fa fa-heart"></i> by team4</p>
             </div>
         </div>
         <!-- /Page Inner -->

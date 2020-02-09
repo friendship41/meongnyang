@@ -22,8 +22,7 @@
 
 
     <link href="../assets/plugins/dropzone/dropzone.min.css" rel="stylesheet">
-    <link href="../assets/plugins/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet"
-          type="text/css"/>
+    <link href="../assets/plugins/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet" type="text/css"/>
 
     <!-- Theme Styles -->
     <link href="../assets/css/ecaps.min.css" rel="stylesheet">
@@ -43,7 +42,7 @@
     <!-- Page Sidebar -->
     <div class="page-sidebar">
         <a class="logo-box" href="../index.html">
-            <span>뭐먹냥</span>
+            <span>오늘뭐멍냥</span>
             <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
             <i class="icon-close" id="sidebar-toggle-button-close"></i>
         </a>
@@ -74,6 +73,8 @@
                         <ul class="sub-menu">
                             <li><a href="../product/product-overview.html">상세현황</a></li>
                             <li><a href="../product/product-add.html">상품등록</a></li>
+                            <li><a href="../product/product-add.html">카테고리</a></li>
+                            <li><a href="../product/product-add.html">상품이미지</a></li>
                             <li><a href="../product/product-analysis.html">상품분석</a></li>
                             <li><a href="../product/product-stock.html">재고관리</a></li>
                         </ul>
@@ -222,7 +223,7 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">상품 추가</h3>
+                <h3 class="breadcrumb-header">카테고리 추가</h3>
             </div>
             <!-- Main Wrapper -->
             <div id="main-wrapper">
@@ -245,14 +246,27 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">상품명</label>
+                                        <label for="productName" class="col-sm-2 control-label">최상위 카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="file" class="form-control">
+                                            <input type="text" class="form-control" id="productName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">중위 카테고리</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">최하위 카테고리</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10">
-                                        <button class="btn btn-primary">상품등록</button>
+                                        <button class="btn btn-primary">카테고리 등록</button>
+                                        <button class="btn btn-primary">카테고리 수정</button>
                                     </div>
                                 </form>
                             </div>
@@ -264,7 +278,7 @@
             </div>
             <!-- !Main Wrapper -->
             <div class="page-footer">
-                <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
+                <p>메인프로젝트 오늘뭐멍냥 <i class="fa fa-heart"></i> by team4</p>
             </div>
         </div>
         <!-- /Page Inner -->
