@@ -81,7 +81,7 @@
                         <a class="fr__btn" href="#">수정</a>
                     </div>
                     <div class="ht__comment__form">
-                        <h4 class="title__line--5">연락처 등록</h4>
+                        <h4 class="title__line--5">연락처 등록 및 수정</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
                                 <input type="text" placeholder="연락처를 입력하세요">
@@ -92,7 +92,7 @@
                         </div>
                     </div>
                     <div class="ht__comment__form">
-                        <h4 class="title__line--5">*회원 탈퇴*</h4>
+                        <h4 class="title__line--5">회원 탈퇴</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
                                 <input type="password" placeholder="현재 비밀번호 *">
@@ -109,27 +109,5 @@
 </div>
 <!-- cart-main-area end -->
 
-<!-- Start Brand Area -->
-<div class="htc__brand__area bg__cat--4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="ht__brand__inner">
-                    <ul class="brand__list owl-carousel clearfix">
-                        <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/3.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/4.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/5.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/1.png" alt="brand images"></a></li>
-                        <li><a href="#"><img src="images/brand/2.png" alt="brand images"></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Brand Area -->
 
 <jsp:include page="../include/footer.jsp" />
