@@ -32,5 +32,19 @@
 <script src="/resources/admin/js/pages/table-data.js"></script>
 <script src="/resources/admin/plugins/datatables/js/jquery.datatables.min.js"></script>
 
+
+<script src="/resources/admin/plugins/gridgallery/js/imagesloaded.pkgd.min.js"></script>
+<script src="/resources/admin/plugins/gridgallery/js/masonry.pkgd.min.js"></script>
+<script src="/resources/admin/plugins/gridgallery/js/classie.js"></script>
+<script src="/resources/admin/plugins/gridgallery/js/cbpgridgallery.js"></script>
+<script src="/resources/admin/js/pages/gallery.js"></script>
+
+
+<script src="/resources/admin/plugins/summernote-master/summernote.min.js"></script>
+<script src="/resources/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/resources/admin/js/pages/form-elements.js"></script>
+
+
 <!-- custom 테이블 스크립트 -->
 <script src="/resources/admin/js/custom/product-table.js"></script>
+

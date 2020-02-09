@@ -16,7 +16,7 @@
     <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>ecaps - Responsive Admin Dashboard Template</title>
+    <title>뭐멍냥 - 관리자 페이지</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -30,7 +30,9 @@
 
     <link href="/resources/admin/plugins/datatables/css/jquery.datatables.min.css" rel="stylesheet" type="text/css"/>
     <link href="/resources/admin/plugins/datatables/css/jquery.datatables_themeroller.css" rel="stylesheet" type="text/css"/>
+    <link href="/resources/admin/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css"/>
 
+    <link href="/resources/admin/plugins/gridgallery/css/component.css" rel="stylesheet">
 
     <!-- Theme Styles -->
     <link href="/resources/admin/css/ecaps.min.css" rel="stylesheet">
