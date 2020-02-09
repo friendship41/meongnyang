@@ -42,7 +42,14 @@
 
 <script src="/resources/admin/plugins/summernote-master/summernote.min.js"></script>
 <script src="/resources/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/resources/admin/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 <script src="/resources/admin/js/pages/form-elements.js"></script>
+
+
+<script src="/resources/admin/js/pages/form-file-upload.js"></script>
+<script src="/resources/admin/plugins/dropzone/dropzone.min.js"></script>
+<script src="/resources/admin/plugins/plupload/js/plupload.full.min.js"></script>
+<script src="/resources/admin/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
 
 
 <!-- custom 테이블 스크립트 -->
