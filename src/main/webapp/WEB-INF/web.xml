@@ -58,7 +58,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/adminContext/admin-servlet.xml
-				<!-- 아래와 같이 각 팀원들이 만들 컨텍스트를 등록하면 됩니다. 
+				<!-- 아래와 같이 각 팀원들이 만들 컨텍스트를 등록하면 됩니다.
 				/WEB-INF/spring/adminContext/adminPageContext.xml -->
 			</param-value>
 		</init-param>
@@ -67,6 +67,25 @@
 	<servlet-mapping>
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.ado</url-pattern>
+	</servlet-mapping>
+
+
+
+	<!-- TEST context -->
+	<servlet>
+		<servlet-name>test</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				/WEB-INF/spring/testContext/test-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>test</servlet-name>
+		<url-pattern>*.tdo</url-pattern>
 	</servlet-mapping>
 
 </web-app>
