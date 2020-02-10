@@ -196,8 +196,16 @@
 		    <artifactId>javax.mail-api</artifactId>
 		    <version>1.6.2</version>
 		</dependency>
-		
-		
+
+		<!-- 스프링 암호화 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.2.2.RELEASE</version>
+		</dependency>
+
+
 		<!-- 스프링 테스트 -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
