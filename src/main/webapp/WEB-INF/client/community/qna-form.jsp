@@ -101,7 +101,4 @@
 		<!-- cart-main-area end -->
 		
 <jsp:include page="../include/footer.jsp"/>
-</body>
-
-</html>
 
