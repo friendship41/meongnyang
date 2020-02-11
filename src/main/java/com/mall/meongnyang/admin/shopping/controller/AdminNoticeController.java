@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -37,9 +36,8 @@ public class AdminNoticeController
     }
 
     @RequestMapping(value = "/shoppingmall-notice-write.ado", method = RequestMethod.GET)
-    public String noticeWriteForm(HttpSession session)
+    public String noticeWriteForm()
     {
-        session.setAttribute("id", "admin");
         return "shoppingmall/shoppingmall-notice-write";
     }
 

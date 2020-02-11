@@ -9,8 +9,10 @@
     </settings>
     <typeAliases>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO" alias="adminNotice"/>
+        <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminFaqVO" alias="faq"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappings/notice-mapping.xml"/>
+        <mapper resource="mappings/faq-mapping.xml"/>
     </mappers>
 </configuration>
