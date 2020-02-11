@@ -36,4 +36,12 @@ public class AdminProductCategoryController
     {
         return adminSelectProductCategoryService.selectCategory(adminProductCategoryVO);
     }
+
+    @RequestMapping(value = "/product-category-insert.ado", method = RequestMethod.POST)
+    public String insertCategory(AdminProductCategoryVO adminProductCategoryVO)
+    {
+        adminInsertProductCategoryService.insertCategory(adminProductCategoryVO);
+
+        return "redirect:product-category-list.ado";
+    }
 }

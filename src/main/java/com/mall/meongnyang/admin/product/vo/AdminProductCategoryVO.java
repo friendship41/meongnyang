@@ -7,6 +7,17 @@ public class AdminProductCategoryVO
     private String productCategoryTbMedian;
     private String productCategoryTbSub;
 
+    @Override
+    public String toString()
+    {
+        return "AdminProductCategoryVO{" +
+                "productCategoryTbNo=" + productCategoryTbNo +
+                ", productCategoryTbParent='" + productCategoryTbParent + '\'' +
+                ", productCategoryTbMedian='" + productCategoryTbMedian + '\'' +
+                ", productCategoryTbSub='" + productCategoryTbSub + '\'' +
+                '}';
+    }
+
     public int getProductCategoryTbNo()
     {
         return productCategoryTbNo;

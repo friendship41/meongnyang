@@ -36,7 +36,7 @@
                         <div class="panel panel-white">
                             <div class="panel-body">
 
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" id="formToController" action="product-category-insert.ado" method="post">
                                     <input type="hidden" id="productCategoryTbNo">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
@@ -44,7 +44,7 @@
                                             <select style="margin-bottom:15px;" class="form-control" id="categorySelectBox">
                                                 <option value="thisIsInsert">카테고리 추가할시 선택해주세요</option>
                                                 <c:forEach var="category" items="${productCategoryList}">
-                                                    <option value="${category.productCategoryTbNo}">${category.productCategoryTbSub}</option>
+                                                    <option value="${category.productCategoryTbNo}">${category.productCategoryTbParent}-${category.productCategoryTbMedian}-${category.productCategoryTbSub}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -52,19 +52,19 @@
                                     <div class="form-group">
                                         <label for="productCategoryTbParent" class="col-sm-2 control-label">최상위 카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productCategoryTbParent" required>
+                                            <input type="text" class="form-control" id="productCategoryTbParent" name="productCategoryTbParent" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">중위 카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productCategoryTbMedian" required>
+                                            <input type="text" class="form-control" id="productCategoryTbMedian" name="productCategoryTbMedian" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">최하위 카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productCategoryTbSub" required>
+                                            <input type="text" class="form-control" id="productCategoryTbSub" name="productCategoryTbSub" required>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
@@ -109,6 +109,7 @@
                 $("#productCategoryTbParent").removeAttr("value");
                 $("#productCategoryTbMedian").removeAttr("value");
                 $("#productCategoryTbSub").removeAttr("value");
+                $("#formToController").attr("action", "product-category-insert.ado");
             }
             else
             {
@@ -127,6 +128,9 @@
                         $("#productCategoryTbSub").attr("value", json.productCategoryTbSub);
                         $("#categorySubmitButton").html('카테고리 수정');
                         $("#deleteCategoryBtn").show();
+                        var deleteUrl = "/product-category-delete.ado?productCategoryTbNo="+json.productCategoryTbNo;
+                        $("#deleteCategoryBtn").attr("href", deleteUrl);
+                        $("#formToController").attr("action", "product-category-update.ado");
                     })
                     .fail(function (xhr, status, errorThrown) {
                         alert(errorThrown);
