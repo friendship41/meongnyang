@@ -33,23 +33,23 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="shoppingmall-notice-write.ado" method="post">
                                     <div class="form-group">
                                         <label for="noticeTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="noticeTitle">
+                                            <input type="text" class="form-control" id="noticeTitle" name="noticeTbTitle">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="noticeWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="noticeWriter" readonly>
+                                            <input type="text" class="form-control" id="noticeWriter" name="adminsTbId" readonly value="${sessionScope.id}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="noticeContent" class="col-sm-2 control-label">내용</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="noticeContent"></textarea>
+                                            <textarea rows="10" class="form-control" id="noticeContent" name="noticeTbContent"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
@@ -58,7 +58,6 @@
                                             <button type="submit" class="btn btn-primary">작성</button>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
