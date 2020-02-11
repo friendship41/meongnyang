@@ -32,9 +32,12 @@
                 <!-- Row -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
+                     <div>
+               		 <button class="btn btn-success" style="margin-bottom:14px;">삭제</button>
+                	 </div>
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h2 class="panel-title">${promotion.promotionTbName }</h2>
+                                <h2 class="panel-title">${promotion.promotionTbName }</h2>                                
                             </div>
                             <div class="panel-body">
                                 <div>
@@ -45,6 +48,7 @@
                     </div>
                 </div>
                 <!-- Row -->
+  
                 <!-- Row -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
