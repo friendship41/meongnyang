@@ -14,6 +14,6 @@ public class AdminUpdateProductCategoryServiceImpl implements AdminUpdateProduct
     @Override
     public void updateCategory(AdminProductCategoryVO adminProductCategoryVO)
     {
-
+        adminProductCategoryDAO.updateProductCategory(adminProductCategoryVO);
     }
 }

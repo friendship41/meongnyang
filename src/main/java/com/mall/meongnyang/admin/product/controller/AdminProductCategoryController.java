@@ -44,4 +44,12 @@ public class AdminProductCategoryController
 
         return "redirect:product-category-list.ado";
     }
+
+    @RequestMapping(value = "/product-category-update.ado", method = RequestMethod.POST)
+    public String updateCategory(AdminProductCategoryVO adminProductCategoryVO)
+    {
+        adminUpdateProductCategoryService.updateCategory(adminProductCategoryVO);
+
+        return "redirect:product-category-list.ado";
+    }
 }
