@@ -9,7 +9,6 @@ public class AdminPromotionVO {
 	private Date promotionTbStartDate;
 	private Date promotionTbEndDate;
 	private int promotionTbDiscountRate;
-	
 	public int getPromotionTbCode() {
 		return promotionTbCode;
 	}
@@ -46,6 +45,7 @@ public class AdminPromotionVO {
 	public void setPromotionTbDiscountRate(int promotionTbDiscountRate) {
 		this.promotionTbDiscountRate = promotionTbDiscountRate;
 	}
+	
 	
 	
 }

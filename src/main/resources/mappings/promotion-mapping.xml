@@ -15,14 +15,14 @@
 	</select>
 
 	<insert id="insertPromotion" parameterType="promotion">
-		INSERT INTO tablename1 
+		INSERT INTO promotion
 		(promotion_tb_code,
 		promotion_tb_name,
 		promotion_tb_content,
 		promotion_tb_start_date,
 		promotion_tb_end_date,
 		promotion_tb_discount_rate)
-		VALUES(promotion_seq.nextval, #{promotionTbName}, #{promotionTbContnet}, #{promotionTbStartDate}, #{promotionTbEndDate}, #{promotionTbDiscountRate})
+		VALUES(promotion_seq.nextval, #{promotionTbName}, #{promotionTbContent}, #{promotionTbStartDate}, #{promotionTbEndDate}, #{promotionTbDiscountRate})
 	</insert>
 
 	<update id="updatePromotion" parameterType="promotion">
