@@ -37,7 +37,7 @@
                             <div class="panel-body">
 
                                 <form class="form-horizontal" id="formToController" action="product-category-insert.ado" method="post">
-                                    <input type="hidden" name="productCategoryTbNo" id="productCategoryTbNo">
+                                    <input type="hidden" name="productCategoryTbNo" id="productCategoryTbNo" value="0">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">
@@ -105,7 +105,7 @@
             {
                 $("#categorySubmitButton").html('카테고리 추가');
                 $("#deleteCategoryBtn").hide();
-                $("#productCategoryTbNo").removeAttr("value");
+                $("#productCategoryTbNo").attr("value", 0);
                 $("#productCategoryTbParent").removeAttr("value");
                 $("#productCategoryTbMedian").removeAttr("value");
                 $("#productCategoryTbSub").removeAttr("value");

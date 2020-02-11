@@ -52,4 +52,14 @@ public class AdminProductCategoryController
 
         return "redirect:product-category-list.ado";
     }
+
+    @RequestMapping(value = "/product-category-delete.ado", method = RequestMethod.GET)
+    public String deleteCategory(AdminProductCategoryVO adminProductCategoryVO)
+    {
+        System.out.println(adminProductCategoryVO);
+
+        adminDeleteProductCategoryService.deleteCategory(adminProductCategoryVO);
+
+        return "redirect:product-category-list.ado";
+    }
 }
