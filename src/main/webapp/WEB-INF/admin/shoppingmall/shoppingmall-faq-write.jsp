@@ -33,17 +33,17 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="shoppingmall-faq-write.ado" method="post">
                                     <div class="form-group">
                                         <label for="noticeTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="noticeTitle">
+                                            <input name="faqTbTitle" type="text" class="form-control" id="noticeTitle">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="noticeContent" class="col-sm-2 control-label">내용</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="noticeContent"></textarea>
+                                            <textarea name="faqTbContent" rows="10" class="form-control" id="noticeContent"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
