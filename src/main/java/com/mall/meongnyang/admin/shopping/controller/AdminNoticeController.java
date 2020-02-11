@@ -60,5 +60,12 @@ public class AdminNoticeController
         return "shoppingmall/shoppingmall-notice-read";
     }
 
+    @RequestMapping(value = "/shoppingmall-notice-read.ado", method = RequestMethod.POST)
+    public String noticeUpdate(AdminNoticeVO adminNoticeVO)
+    {
+        adminUpdateNoticeService.updateNotice(adminNoticeVO);
+
+        return "redirect:/shoppingmall-notice-list.ado";
+    }
 
 }

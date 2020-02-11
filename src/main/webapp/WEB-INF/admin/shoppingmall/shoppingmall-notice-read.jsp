@@ -33,7 +33,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="shoppingmall-notice-read.ado" method="post">
                                     <div class="form-group">
                                         <label for="noticeNum" class="col-sm-2 control-label">글번호</label>
                                         <div class="col-sm-10">
