@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-import com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO;
 import com.mall.meongnyang.client.community.service.ClientSelectNoticeListService;
 import com.mall.meongnyang.client.community.service.ClientSelectNoticeService;
 import com.mall.meongnyang.client.community.vo.ClientNoticeVO;
@@ -28,19 +27,24 @@ public class ClientNoticeController {
 	    public String noticeList(Model model)
 	    {
 	        List<ClientNoticeVO> clientNoticeList = clientSelectNoticeListService.selectNoticeList(new ClientNoticeVO());
-
+//	        if(clientNoticeList!=null) {
+//	        System.out.println("값이 들어있습니다~~");
+//	        	
+//	        }else {
+//	        	System.out.println("값이 없음 ㅜ ");
+//	        }
 	        model.addAttribute("clientNoticeList", clientNoticeList);
 
 	        return "community/notice";
 	    }
 	    
-	    @RequestMapping(value = "/notice.read.do", method = RequestMethod.GET)
+	    @RequestMapping(value = "/notice-read.do", method = RequestMethod.GET)
 	    public String noticeRead(ClientNoticeVO clientNoticeVO, Model model)
 	    {
 	        ClientNoticeVO tempVO = clientSelectNoticeService.selectNotice(clientNoticeVO);
-
-	        model.addAttribute("adminNoticeVO", tempVO);
-
+	       
+	        model.addAttribute("clientNoticeVO", tempVO);
+	      	        
 	        return "community/notice-read";
 	    }
 	    

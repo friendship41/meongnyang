@@ -43,5 +43,16 @@
         FROM notice
         WHERE notice_tb_no=#{noticeTbNo}
     </select>
+    
+    <select id="selectClientNotice" parameterType="clientNotice" resultType="clientNotice">
+        SELECT
+            notice_tb_no,
+            admins_tb_id,
+            notice_tb_title,
+            notice_tb_content,
+            notice_tb_reg_date
+        FROM notice
+        WHERE notice_tb_no=#{noticeTbNo}
+    </select>
 
 </mapper>

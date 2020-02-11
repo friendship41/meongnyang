@@ -48,18 +48,18 @@
                             <h4 class="title__line--5"> 공지사항 </h4>
                             <div class="ht__comment__form__inner">
                                 <div class="comment__forms">
-                                    <input type="text" value="이름" readonly>
-                                    <input type="text" value="제목" readonly>
+                                    <input type="text" class="form-control" id="noticeWriter" name="adminsTbId" value="${clientNoticeVO.adminsTbId}" readonly>
+                                    <input type="text" class="form-control" id="noticeTitle" name="noticeTbTitle" value="${clientNoticeVO.noticeTbTitle}" readonly>
                                 </div>
                             </div>
                             <div class="ht__comment__form__inner">
                                 <div class="comment__forms messages">
-                                    <textarea name="message" readonly></textarea>
+                                    <textarea class="form-control" id="noticeContent" name="noticeTbContent" readonly>${clientNoticeVO.noticeTbContent}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
-                            <a class="fr__btns" href="#">목록보기</a>
+                            <a class="fr__btns" href="/notice.do">목록보기</a>
                         </div>
                     </div>
                     <!-- End comment Form -->

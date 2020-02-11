@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO;
 import com.mall.meongnyang.client.community.vo.ClientNoticeVO;
 
 @Repository("ClientNoticeDAO")
@@ -17,14 +16,14 @@ public class ClientNoticeDAOImpl implements ClientNoticeDAO{
 
 	@Override
 	public List<ClientNoticeVO> selectNoticeList(ClientNoticeVO clientNoticeVO) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlSessionTemplate.selectList("NoticeDAO.selectNoticeList", clientNoticeVO);
 	}
 
 	@Override
 	public ClientNoticeVO selectNotice(ClientNoticeVO clientNoticeVO) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlSessionTemplate.selectOne("NoticeDAO.selectClientNotice", clientNoticeVO);
 	}
 
 	 
