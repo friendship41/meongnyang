@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -77,20 +78,15 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
+                                        <c:forEach items="${promotionList }" var="promotion">
                                         <tr>
-                                            <td>000001</td>
-                                            <td><a class="f-bold" href="promotion-read.html">겨울세일</a></td>
-                                            <td>20/01/01</td>
-                                            <td>20/03/01</td>
-                                            <td>50%</td>
+                                            <td>${promotion.promotionTbCode }</td>
+                                            <td><a class="f-bold" href="promotion-read.ado?promotionTbCode=${promotion.promotionTbCode}">${promotion.promotionTbName}</a></td>
+                                            <td>${promotion.promotionTbStartDate }</td>
+                                            <td>${promotion.promotionTbEndDate }</td>
+                                            <td>${promotion.promotionTbDiscountRate }%</td>
                                         </tr>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td><a class="f-bold" href="promotion-read.html">설날세일</a></td>
-                                            <td>20/01/24</td>
-                                            <td>20/01/27</td>
-                                            <td>80%</td>
-                                        </tr>
+                                        </c:forEach>                          
                                         </tbody>
                                     </table>
                                 </div>

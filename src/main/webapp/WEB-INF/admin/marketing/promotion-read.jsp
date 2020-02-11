@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -33,12 +34,11 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h2 class="panel-title">겨울세일(프로모션명)</h2>
+                                <h2 class="panel-title">${promotion.promotionTbName }</h2>
                             </div>
                             <div class="panel-body">
                                 <div>
-                                    프로모션에 대한 상세 내용이 이곳에 쓰여집니다아아아
-                                    흐으으ㅡ으으으으으음...
+                                    ${promotion.promotionTbContent}
                                 </div>
                             </div>
                         </div>
