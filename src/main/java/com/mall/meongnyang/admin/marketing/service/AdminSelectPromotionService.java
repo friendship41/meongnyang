@@ -1,5 +1,7 @@
 package com.mall.meongnyang.admin.marketing.service;
 
-public interface AdminSelectPromotionService {
+import com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO;
 
+public interface AdminSelectPromotionService {
+	AdminPromotionVO selectPromotion(int promotionTbCode);
 }

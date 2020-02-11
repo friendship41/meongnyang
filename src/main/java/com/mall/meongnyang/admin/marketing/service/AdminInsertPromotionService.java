@@ -1,5 +1,7 @@
 package com.mall.meongnyang.admin.marketing.service;
 
-public interface AdminInsertPromotionService {
+import com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO;
 
+public interface AdminInsertPromotionService {
+	void insertPromotion(AdminPromotionVO adminPromotionVO);
 }

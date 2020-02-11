@@ -1,5 +1,9 @@
 package com.mall.meongnyang.admin.marketing.service;
 
-public interface AdminSelectPromotionListService {
+import java.util.List;
 
+import com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO;
+
+public interface AdminSelectPromotionListService {
+	List<AdminPromotionVO> selectPromotionList();
 }
