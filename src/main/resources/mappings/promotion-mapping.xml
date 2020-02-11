@@ -20,8 +20,9 @@
 		promotion_tb_name,
 		promotion_tb_content,
 		promotion_tb_start_date,
-		promotion_tb_end_date)
-		VALUES(promotion_seq.nextval, #{promotionTbName}, #{promotionTbContnet}, #{promotionTbStartDate}, #{promotionTbEndDate})
+		promotion_tb_end_date,
+		promotion_tb_discount_rate)
+		VALUES(promotion_seq.nextval, #{promotionTbName}, #{promotionTbContnet}, #{promotionTbStartDate}, #{promotionTbEndDate}, #{promotionTbDiscountRate})
 	</insert>
 
 	<update id="updatePromotion" parameterType="promotion">
@@ -31,6 +32,7 @@
 		promotion_tb_content = #{promotionTbContent},
 		promotion_tb_start_date = #{promotionTbStartDate},
 		promotion_tb_end_date = #{promotionTbEndDate}
+		promotion_tb_discount_rate = #{promotionTbDiscountRate}
 		WHERE
 		promotion_tb_code = #{promotionTbCode}
 	</update>
