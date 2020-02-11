@@ -68,4 +68,12 @@ public class AdminNoticeController
         return "redirect:/shoppingmall-notice-list.ado";
     }
 
+    @RequestMapping(value = "/shoppingmall-notice-delete.ado", method = RequestMethod.GET)
+    public String noticeDelete(AdminNoticeVO adminNoticeVO)
+    {
+        adminDeleteNoticeService.deleteNotice(adminNoticeVO);
+
+        return "redirect:/shoppingmall-notice-list.ado";
+    }
+
 }

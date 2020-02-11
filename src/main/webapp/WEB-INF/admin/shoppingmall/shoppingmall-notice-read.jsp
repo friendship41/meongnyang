@@ -66,11 +66,11 @@
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-2">
                                             <button type="submit" class="btn btn-primary">수정</button>
+                                            <a class="btn btn-primary" href="shoppingmall-notice-delete.ado?noticeTbNo=${adminNoticeVO.noticeTbNo}">삭제</a>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
