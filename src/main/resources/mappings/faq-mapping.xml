@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminFaqDAO">
+
+	<select id="selectFaq" parameterType="int" resultType="faq">
+		SELECT *
+		FROM faq
+		WHERE faq_tb_no = ${num}
+	</select>
+
+	<select id="selectFaqList" resultType="faq">
+		SELECT * FROM faq ORDER BY faq_tb_no DESC
+	</select>
+
+	<insert id="insertFaq" parameterType="faq">
+		INSERT INTO faq (faq_tb_no, faq_tb_title, faq_tb_content)
+		VALUES(faq_seq.nextval, #{faqTbTitle},#{faqTbContent})
+	</insert>
+
+	<update id="updateFaq" parameterType="faq">
+		UPDATE faq
+		SET
+		faq_tb_title = #{faqTbTitle}, faq_tb_content = #{faqTbContent}
+		WHERE
+		faq_tb_no = #{faqTbNo}
+	</update>
+
+</mapper>
