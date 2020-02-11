@@ -29,9 +29,9 @@ public class AdminNoticeController
     @RequestMapping(value = "/shoppingmall-notice-list.ado", method = RequestMethod.GET)
     public String noticeList(Model model)
     {
-        List<AdminNoticeVO> list = adminSelectNoticeListService.selectNoticeList(new AdminNoticeVO());
+        List<AdminNoticeVO> adminNoticeList = adminSelectNoticeListService.selectNoticeList(new AdminNoticeVO());
 
-        model.addAttribute("adminNoticeList", list);
+        model.addAttribute("adminNoticeList", adminNoticeList);
 
         return "shoppingmall/shoppingmall-notice-list";
     }

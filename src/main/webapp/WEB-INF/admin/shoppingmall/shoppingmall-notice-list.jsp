@@ -58,7 +58,6 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&공지글 상세보기 해 놓고 다시 수정&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
                                         <c:forEach var="noticeList" items="${adminNoticeList}">
                                             <tr>
                                                 <td>${noticeList.noticeTbNo}</td>
