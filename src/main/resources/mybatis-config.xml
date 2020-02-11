@@ -5,9 +5,9 @@
 <configuration>
     <properties resource="db.properties"/>
     <typeAliases>
-
+        <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO" alias="adminNotice"/>
     </typeAliases>
     <mappers>
-
+        <mapper resource="mappings/notice-mapping.xml"/>
     </mappers>
 </configuration>

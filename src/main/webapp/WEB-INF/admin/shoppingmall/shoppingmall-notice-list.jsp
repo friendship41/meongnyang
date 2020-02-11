@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -57,22 +58,21 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a class="f-bold" href="shoppingmall-notice-read.html">환영합니다</a></td>
-                                            <td>관리자</td>
-                                            <td>20/02/01</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a class="f-bold" href="shoppingmall-notice-read.html">임시점검</a></td>
-                                            <td>관리자</td>
-                                            <td>20/03/01</td>
-                                        </tr>
+                                        <!-- &&&&&&&&&&&&&&&&&&&&&&&&&&&&공지글 상세보기 해 놓고 다시 수정&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& -->
+                                        <c:forEach var="noticeList" items="${adminNoticeList}">
+                                            <tr>
+                                                <td>${noticeList.noticeTbNo}</td>
+                                                <td><a class="f-bold" href="#">${noticeList.noticeTbTitle}</a></td>
+                                                <td>${noticeList.adminsTbId}</td>
+                                                <td>${noticeList.noticeTbRegDate}</td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                     <div>
-                                        <button class="btn btn-primary" onclick="location.href='shoppingmall-notice-write.html'">공지 작성</button>
+                                        <button class="btn btn-primary" onclick="location.href='/shoppingmall-notice-write.ado'">
+                                            공지 작성
+                                        </button>
                                     </div>
                                 </div>
                             </div>
