@@ -14,5 +14,6 @@
     <mappers>
         <mapper resource="mappings/notice-mapping.xml"/>
         <mapper resource="mappings/faq-mapping.xml"/>
+        <mapper resource="mappings/login-mapping.xml"/>
     </mappers>
 </configuration>

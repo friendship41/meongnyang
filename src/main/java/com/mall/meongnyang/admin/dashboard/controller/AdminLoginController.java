@@ -10,4 +10,6 @@ public class AdminLoginController {
 	
 	@Autowired
 	private AdminSelectLoginService adminSelectLoginService;
+	
+	
 }
