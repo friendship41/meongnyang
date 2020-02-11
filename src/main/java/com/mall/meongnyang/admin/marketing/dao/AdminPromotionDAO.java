@@ -1,5 +1,5 @@
 package com.mall.meongnyang.admin.marketing.dao;
 
-public interface Temp {
+public interface AdminPromotionDAO {
 
 }
