@@ -61,7 +61,7 @@
                                         <c:forEach var="noticeList" items="${adminNoticeList}">
                                             <tr>
                                                 <td>${noticeList.noticeTbNo}</td>
-                                                <td><a class="f-bold" href="#">${noticeList.noticeTbTitle}</a></td>
+                                                <td><a class="f-bold" href="/shoppingmall-notice-read.ado?noticeTbNo=${noticeList.noticeTbNo}">${noticeList.noticeTbTitle}</a></td>
                                                 <td>${noticeList.adminsTbId}</td>
                                                 <td>${noticeList.noticeTbRegDate}</td>
                                             </tr>

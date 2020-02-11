@@ -50,5 +50,15 @@ public class AdminNoticeController
         return "redirect:/shoppingmall-notice-list.ado";
     }
 
+    @RequestMapping(value = "/shoppingmall-notice-read.ado", method = RequestMethod.GET)
+    public String noticeRead(AdminNoticeVO adminNoticeVO, Model model)
+    {
+        AdminNoticeVO tempVO = adminSelectNoticeService.selectNotice(adminNoticeVO);
+
+        model.addAttribute("adminNoticeVO", tempVO);
+
+        return "shoppingmall/shoppingmall-notice-read";
+    }
+
 
 }
