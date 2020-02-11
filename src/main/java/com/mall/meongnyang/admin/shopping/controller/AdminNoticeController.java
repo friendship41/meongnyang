@@ -46,7 +46,7 @@ public class AdminNoticeController
     @RequestMapping(value = "/shoppingmall-notice-write.ado", method = RequestMethod.POST)
     public String noticeWriteProc(AdminNoticeVO adminNoticeVO)
     {
-
+        adminInsertNoticeService.insertNotice(adminNoticeVO);
         return "redirect:/shoppingmall-notice-list.ado";
     }
 
