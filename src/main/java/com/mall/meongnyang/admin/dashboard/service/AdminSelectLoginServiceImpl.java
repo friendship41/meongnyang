@@ -15,7 +15,7 @@ public class AdminSelectLoginServiceImpl implements AdminSelectLoginService{
 	@Override
 	public AdminLoginVO selectLogin(AdminLoginVO adminLoginVO) {
 		
-		return null;
+		return adminLoginDAO.selectLogin(adminLoginVO);
 	}
 
 }

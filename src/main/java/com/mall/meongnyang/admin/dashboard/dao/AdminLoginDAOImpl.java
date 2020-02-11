@@ -13,9 +13,9 @@ public class AdminLoginDAOImpl implements AdminLoginDAO{
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public void selectLogin(AdminLoginVO adminLoginvo) {
+	public AdminLoginVO selectLogin(AdminLoginVO adminLoginVO) {
 		
-		
+		return sqlSessionTemplate.selectOne("AdminLoginDAO.selectLogin", adminLoginVO); 
 	}
 	
 }

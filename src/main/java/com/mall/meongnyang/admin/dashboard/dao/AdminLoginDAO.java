@@ -5,5 +5,5 @@ import com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO;
 public interface AdminLoginDAO {
 
 	//select
-	public void selectLogin(AdminLoginVO adminLoginvo);
+	public AdminLoginVO selectLogin(AdminLoginVO adminLoginVO);
 }

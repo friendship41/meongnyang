@@ -29,7 +29,6 @@
                             <input type="password" class="form-control" id="exampleInputPassword1">
                         </div>
                         <a href="../index.html" class="btn btn-primary">로그인</a><br>
-                        <a href="../index.html" class="forgot-link">Forgot password?</a>
                     </form>
                 </div>
             </div>

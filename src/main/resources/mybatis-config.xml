@@ -10,6 +10,7 @@
     <typeAliases>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO" alias="adminNotice"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminFaqVO" alias="faq"/>
+        <typeAlias type="com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO" alias="login"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappings/notice-mapping.xml"/>
