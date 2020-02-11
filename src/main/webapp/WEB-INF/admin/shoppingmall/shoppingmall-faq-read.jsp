@@ -33,23 +33,25 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="shoppingmall-faq-update.ado" method="post">
+                                	<input type="hidden" name="faqTbNo" value="${param.num}">
                                     <div class="form-group">
                                         <label for="noticeTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="noticeTitle">
+                                            <input name="faqTbTitle" type="text" class="form-control" id="noticeTitle" value="${faq.faqTbTitle }">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="noticeContent" class="col-sm-2 control-label">내용</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="noticeContent"></textarea>
+                                            <textarea name="faqTbContent" rows="10" class="form-control" id="noticeContent">${faq.faqTbContent}</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">수정</button>
+                                            <a href="javascript:history.back();" class="btn btn-primary">목록</a>
                                         </div>
                                     </div>
                                 </form>

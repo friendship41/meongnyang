@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -44,14 +45,18 @@
                                             <th>FAQ</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody>                                                               
+                                        <c:forEach items="${faqList }" var="faq">
                                         <tr>
-                                            <td><span class="label label-warning" style="margin-right: 10px">Q</span><a class="f-bold" href="shoppingmall-faq-read.html">환불은 어떻게 해야하나요?</a></td>
+                                            <td>                  
+                                            <span class="label label-warning" style="margin-right: 10px">Q</span><a class="f-bold" href="shoppingmall-faq-read.ado?num=${faq.faqTbNo}">${faq.faqTbTitle }</a>
+                                            </td>
                                         </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                     <div>
-                                        <button class="btn btn-primary" onclick="location.href='shoppingmall-faq-write.html'">신규 FAQ 작성</button>
+                                        <button class="btn btn-primary" onclick="location.href='shoppingmall-faq-write.ado'">신규 FAQ 작성</button>
                                     </div>
                                 </div>
                             </div>
