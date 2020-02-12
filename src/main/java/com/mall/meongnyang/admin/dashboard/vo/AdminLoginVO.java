@@ -31,6 +31,17 @@ public class AdminLoginVO {
 	public void setAdminsTbEmploymentStatus(String adminsTbEmploymentStatus) {
 		this.adminsTbEmploymentStatus = adminsTbEmploymentStatus;
 	}
+	@Override
+	public String toString() {
+		return "AdminLoginVO [adminsTbId=" + adminsTbId + ", adminsTbPassword=" + adminsTbPassword
+				+ ", adminsTbPosition=" + adminsTbPosition + ", adminsTbEmploymentStatus=" + adminsTbEmploymentStatus
+				+ ", getAdminsTbId()=" + getAdminsTbId() + ", getAdminsTbPassword()=" + getAdminsTbPassword()
+				+ ", getAdminsTbPosition()=" + getAdminsTbPosition() + ", getAdminsTbEmploymentStatus()="
+				+ getAdminsTbEmploymentStatus() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
+	}
+	
+	
 	
 	
 }

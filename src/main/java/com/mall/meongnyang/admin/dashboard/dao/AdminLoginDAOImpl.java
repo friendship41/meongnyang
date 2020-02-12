@@ -8,14 +8,25 @@ import com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO;
 
 @Repository("AdminLoginDAO")
 public class AdminLoginDAOImpl implements AdminLoginDAO{
-
+	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	@Override
-	public AdminLoginVO selectLogin(AdminLoginVO adminLoginVO) {
-		
-		return sqlSessionTemplate.selectOne("AdminLoginDAO.selectLogin", adminLoginVO); 
+	public AdminLoginVO selectLoginCheck(AdminLoginVO adminLoginVO) {
+		AdminLoginVO tempVO = sqlSessionTemplate.selectOne("AdminLoginDAO.selectLoginCheck", adminLoginVO);
+				
+		return tempVO; 
 	}
+
+	
+
+	@Override
+	public AdminLoginVO logout(AdminLoginVO adminLoginVO) {
+		AdminLoginVO tempVO = sqlSessionTemplate.selectOne("AdminLoginDAO.selectLoginCheck", adminLoginVO);
+		return tempVO;
+	}
+
+	
 	
 }
