@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -34,27 +35,28 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="product-add-page.ado" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">
-                                            <select style="margin-bottom:15px;" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <select style="margin-bottom:15px;" class="form-control" name="productCategoryTbNo">
+                                                <c:forEach var="category" items="${categoryList}">
+                                                    <option value="${category.productCategoryTbNo}">${category.productCategoryTbParent}-${category.productCategoryTbMedian}-${category.productCategoryTbSub}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">상품명</label>
+                                        <label for="productTbName" class="col-sm-2 control-label">상품명</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="productTbName" name="productTbName" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="uploadFile" class="col-sm-2 control-label">상품상세</label>
                                         <div class="col-sm-10">
                                             <div class="input-group">
-                                                <input type="text" class="form-control">
-                                                <span class="input-group-btn">
-                                                    <input type="file" class="btn btn-success">
-                                                </span>
+                                                <input type="file" id="uploadFile" name="uploadFile" required>
                                             </div>
                                         </div>
                                     </div>

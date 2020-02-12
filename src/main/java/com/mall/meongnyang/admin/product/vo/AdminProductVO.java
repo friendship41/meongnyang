@@ -1,5 +1,7 @@
 package com.mall.meongnyang.admin.product.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.sql.Date;
 
 public class AdminProductVO
@@ -9,6 +11,8 @@ public class AdminProductVO
     private String productTbName;
     private Date productTbRegDate;
     private String productTbDetail;
+
+    private MultipartFile uploadFile;
 
     public String getProductTbCode()
     {
@@ -58,5 +62,15 @@ public class AdminProductVO
     public void setProductTbDetail(String productTbDetail)
     {
         this.productTbDetail = productTbDetail;
+    }
+
+    public MultipartFile getUploadFile()
+    {
+        return uploadFile;
+    }
+
+    public void setUploadFile(MultipartFile uploadFile)
+    {
+        this.uploadFile = uploadFile;
     }
 }
