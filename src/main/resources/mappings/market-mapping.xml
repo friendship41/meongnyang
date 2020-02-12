@@ -4,6 +4,18 @@
 
 <mapper namespace="marketDAO">
 
+	<!-- 전체 글수 가져오기 -->
+	<select id="selectCountMarket" resultType="int">
+		SELECT COUNT(*) FROM market
+	</select>
+	
+	<!-- 게시글 조회수 증가 -->
+	<update id="updateReadCount" parameterType="int">
+		UPDATE market
+		SET market_tb_read_count = market_tb_read_count + 1
+		WHERE market_tb_no = #{marketTbNo}
+	</update>
+
 	<select id="selectMarket" parameterType="int" resultType="market">
 		SELECT
 		market_tb_no,
