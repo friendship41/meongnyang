@@ -23,7 +23,7 @@
                                 <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="#" method="post">
+                                            <form action="#" method="post"><!-- 로그인 -->
                                                 <input name="Email" placeholder="Email Address" type="text" required="">
                                                 <input name="Password" placeholder="Password" type="password"
                                                        required="">
@@ -37,7 +37,7 @@
                                 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="#" method="post">
+                                            <form action="#" method="post"><!-- 회원가입 -->
                                                 <input placeholder="Name" name="Name" type="text" required="">
                                                 <input placeholder="Email Address" name="Email" type="email"
                                                        required="">
