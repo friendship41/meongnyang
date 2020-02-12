@@ -5,13 +5,26 @@
 <mapper namespace="promotionDAO">
 
 	<select id="selectPromotion" parameterType="int" resultType="promotion">
-		SELECT *
+		SELECT 
+		promotion_tb_code,
+		promotion_tb_name,
+		promotion_tb_content,
+		promotion_tb_start_date,
+		promotion_tb_end_date,
+		promotion_tb_discount_rate
 		FROM promotion
 		WHERE promotion_tb_code = #{promotionTbCode}
 	</select>
 
 	<select id="selectPromotionList" resultType="promotion">
-		SELECT * FROM promotion
+		SELECT 
+		promotion_tb_code,
+		promotion_tb_name,
+		promotion_tb_content,
+		promotion_tb_start_date,
+		promotion_tb_end_date,
+		promotion_tb_discount_rate
+		FROM promotion
 	</select>
 
 	<insert id="insertPromotion" parameterType="promotion">
