@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductDAO">
+
+	<insert id="insertProduct" parameterType="product">
+        INSERT INTO product
+        VALUES(#{productTbCode}, #{productCategoryTbNo}, #{productTbName}, SYSDATE, #{productTbDetail})
+    </insert>
+
+    <delete id="deleteProduct" parameterType="product">
+        DELETE FROM product
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </delete>
+
+    <select id="selectProductList" parameterType="product" resultType="product">
+        SELECT
+            PRODUCT_TB_CODE,
+            PRODUCT_CATEGORY_TB_NO,
+            PRODUCT_TB_NAME,
+            PRODUCT_TB_REG_DATE,
+            PRODUCT_TB_DETAIL
+        FROM product
+    </select>
+
+    <select id="selectProduct" parameterType="product" resultType="product">
+        SELECT
+            PRODUCT_TB_CODE,
+            PRODUCT_CATEGORY_TB_NO,
+            PRODUCT_TB_NAME,
+            PRODUCT_TB_REG_DATE,
+            PRODUCT_TB_DETAIL
+        FROM product
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </select>
+
+</mapper>

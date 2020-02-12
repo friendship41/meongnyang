@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NoticeDAO">
+
+    <resultMap id="adminNoticeResult" type="adminNotice">
+
+    </resultMap>
+
+	<insert id="insertNotice" parameterType="adminNotice">
+        INSERT INTO notice
+        VALUES(notice_seq.nextval, #{adminsTbId}, #{noticeTbTitle}, #{noticeTbContent}, SYSDATE)
+    </insert>
+
+    <update id="updateNotice" parameterType="adminNotice">
+        UPDATE notice SET notice_tb_title=#{noticeTbTitle}, notice_tb_content=#{noticeTbContent}
+        WHERE notice_tb_no=#{noticeTbNo}
+    </update>
+
+    <delete id="deleteNotice" parameterType="adminNotice">
+        DELETE FROM notice
+        WHERE notice_tb_no=#{noticeTbNo}
+    </delete>
+
+    <select id="selectNoticeList" parameterType="adminNotice" resultType="adminNotice">
+        SELECT
+            notice_tb_no,
+            admins_tb_id,
+            notice_tb_title,
+            notice_tb_reg_date
+        FROM notice
+        ORDER BY notice_tb_no DESC
+    </select>
+
+    <select id="selectNotice" parameterType="adminNotice" resultType="adminNotice">
+        SELECT
+            notice_tb_no,
+            admins_tb_id,
+            notice_tb_title,
+            notice_tb_content,
+            notice_tb_reg_date
+        FROM notice
+        WHERE notice_tb_no=#{noticeTbNo}
+    </select>
+
+</mapper>

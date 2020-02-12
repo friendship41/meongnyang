@@ -54,7 +54,8 @@
 <script src="<c:url value='/resources/client/js/waypoints.min.js'/>"></script>
 <!-- Main js file that contents all jQuery plugins activation. -->
 <script src="<c:url value='/resources/client/js/main.js'/>"></script>
-
+<!-- review image 추가 js -->
+<script src="<c:url value='resources/client/js/review-image.js'/>"/></script>
 
 <script src="<c:url value='/resources/client/js/easyResponsiveTabs.js'/>" type="text/javascript"></script>
 <script type="text/javascript">
