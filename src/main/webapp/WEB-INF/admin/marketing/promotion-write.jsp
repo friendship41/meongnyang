@@ -36,35 +36,35 @@
                                 <h4 class="panel-title">새 프로모션 등록</h4>
                             </div>
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="promotion-write.ado" method="post">
                                     <div class="form-group">
                                         <label for="promotionName" class="col-sm-2 control-label">프로모션 이름</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="promotionName">
+                                            <input name="promotionTbName" type="text" class="form-control" id="promotionName">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="promotionDetail" class="col-sm-2 control-label">프로모션 내용</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="promotionDetail"></textarea>
+                                            <textarea name="promotionTbContent" rows="10" class="form-control" id="promotionDetail"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">시작일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker">
+                                            <input name="promotionTbStartDate" type="text" class="form-control date-picker">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">종료일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker">
+                                            <input name="promotionTbEndDate" type="text" class="form-control date-picker">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="allProductDiscount" class="col-sm-2 control-label">전체 할인율</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="allProductDiscount">
+                                            <input name="promotionTbDiscountRate" type="number" class="form-control" id="allProductDiscount">
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">

@@ -1,0 +1,13 @@
+package com.mall.meongnyang.admin.product.dao;
+
+import com.mall.meongnyang.admin.product.vo.AdminProductVO;
+
+import java.util.List;
+
+public interface AdminProductDAO
+{
+    public void insertProduct(AdminProductVO adminProductVO);
+    public void deleteProduct(AdminProductVO adminProductVO);
+    public List<AdminProductVO> selectProductList(AdminProductVO adminProductVO);
+    public AdminProductVO selectProduct(AdminProductVO adminProductVO);
+}

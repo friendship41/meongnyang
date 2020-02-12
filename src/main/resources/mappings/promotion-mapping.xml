@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="promotionDAO">
+
+	<select id="selectPromotion" parameterType="int" resultType="promotion">
+		SELECT 
+		promotion_tb_code,
+		promotion_tb_name,
+		promotion_tb_content,
+		promotion_tb_start_date,
+		promotion_tb_end_date,
+		promotion_tb_discount_rate
+		FROM promotion
+		WHERE promotion_tb_code = #{promotionTbCode}
+	</select>
+
+	<select id="selectPromotionList" resultType="promotion">
+		SELECT 
+		promotion_tb_code,
+		promotion_tb_name,
+		promotion_tb_content,
+		promotion_tb_start_date,
+		promotion_tb_end_date,
+		promotion_tb_discount_rate
+		FROM promotion
+	</select>
+
+	<insert id="insertPromotion" parameterType="promotion">
+		INSERT INTO promotion
+		(promotion_tb_code,
+		promotion_tb_name,
+		promotion_tb_content,
+		promotion_tb_start_date,
+		promotion_tb_end_date,
+		promotion_tb_discount_rate)
+		VALUES(promotion_seq.nextval, #{promotionTbName}, #{promotionTbContent}, #{promotionTbStartDate}, #{promotionTbEndDate}, #{promotionTbDiscountRate})
+	</insert>
+
+	<update id="updatePromotion" parameterType="promotion">
+		UPDATE promotion
+		SET
+		promotion_tb_name = #{promotionTbName},
+		promotion_tb_content = #{promotionTbContent},
+		promotion_tb_start_date = #{promotionTbStartDate},
+		promotion_tb_end_date = #{promotionTbEndDate}
+		promotion_tb_discount_rate = #{promotionTbDiscountRate}
+		WHERE
+		promotion_tb_code = #{promotionTbCode}
+	</update>
+	
+	<delete id="deletePromotion" parameterType="int">
+		DELETE FROM promotion
+		WHERE promotion_tb_code = #{promotionTbCode}
+	</delete>
+
+</mapper>
