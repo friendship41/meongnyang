@@ -24,8 +24,10 @@
 <!--	<mvc:resources mapping="/client/img/**" location="/resources/client/images/"/>-->
 <!--	<mvc:resources mapping="/client/js/**" location="/resources/client/js/"/>-->
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
-	
-	
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000"/><!-- 10M -->
+	</bean>
 
 
 	<!-- View Resolver(제일 밑으로 유지) -->

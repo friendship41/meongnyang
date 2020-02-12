@@ -12,11 +12,13 @@
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminFaqVO" alias="faq"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductVO" alias="product"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO" alias="category"/>
+        <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO" alias="promotion"/>
     </typeAliases>
     <mappers>
-        <mapper resource="mappings/notice-mapping.xml"/>
         <mapper resource="mappings/faq-mapping.xml"/>
-        <mapper resource="mappings/product-mapping.xml"/>
+        <mapper resource="mappings/notice-mapping.xml"/>
         <mapper resource="mappings/product-category-mapping.xml"/>
+        <mapper resource="mappings/product-mapping.xml"/>
+        <mapper resource="mappings/promotion-mapping.xml"/>
     </mappers>
 </configuration>
