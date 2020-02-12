@@ -5,13 +5,13 @@
 <mapper namespace="AdminFaqDAO">
 
 	<select id="selectFaq" parameterType="int" resultType="faq">
-		SELECT *
+		SELECT faq_tb_no, faq_tb_title, faq_tb_content
 		FROM faq
 		WHERE faq_tb_no = ${num}
 	</select>
 
 	<select id="selectFaqList" resultType="faq">
-		SELECT * FROM faq ORDER BY faq_tb_no DESC
+		SELECT faq_tb_no, faq_tb_title, faq_tb_content FROM faq ORDER BY faq_tb_no DESC
 	</select>
 
 	<insert id="insertFaq" parameterType="faq">
