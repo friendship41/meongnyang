@@ -2,6 +2,8 @@ package com.mall.meongnyang.client.market.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ClientMarketVO {
 	
 	private int marketTbNo;
@@ -12,6 +14,8 @@ public class ClientMarketVO {
 	private int marketTbReadCount;
 	private String marketTbSellOrBuy;
 	private String marketTbImgPath;
+	
+	private MultipartFile uploadFile;
 	
 	public int getMarketTbNo() {
 		return marketTbNo;
@@ -60,6 +64,19 @@ public class ClientMarketVO {
 	}
 	public void setMarketTbImgPath(String marketTbImgPath) {
 		this.marketTbImgPath = marketTbImgPath;
+	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+	@Override
+	public String toString() {
+		return "ClientMarketVO [marketTbNo=" + marketTbNo + ", customerTbNo=" + customerTbNo + ", marketTbTitle="
+				+ marketTbTitle + ", marketTbContent=" + marketTbContent + ", marketTbRegDate=" + marketTbRegDate
+				+ ", marketTbReadCount=" + marketTbReadCount + ", marketTbSellOrBuy=" + marketTbSellOrBuy
+				+ ", marketTbImgPath=" + marketTbImgPath + ", uploadFile=" + uploadFile + "]";
 	}
 
 }

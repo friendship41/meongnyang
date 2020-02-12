@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="marketDAO">
+<mapper namespace="MarketDAO">
 
 	<!-- 전체 글수 가져오기 -->
 	<select id="selectCountMarket" resultType="int">
@@ -53,12 +53,11 @@
 		market_tb_img_path)
 		VALUES 
 		(market_seq.nextval,
-		#{marketTbNo}, 
 		#{customerTbNo}, 
 		#{marketTbTitle}, 
-		#{marketTbContent}, 
+		#{marketTbContent},
 		#{marketTbSellOrBuy},
-		#{marketTbImgPath})
+		#{marketTbImgPath, jdbcType=VARCHAR})
 	</insert>
 
 	<update id="updateMarket" parameterType="market">

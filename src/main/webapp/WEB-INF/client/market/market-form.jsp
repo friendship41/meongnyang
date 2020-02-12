@@ -30,13 +30,13 @@
 				<div class="htc__blog__details__wrap">
 					<div class="ht__comment__form">
 						<h4 class="title__line--5">글쓰기</h4>
-						<form class="form-horizontal">
+						<form class="form-horizontal" method="post" action="market-form.do" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="selector" class="col-sm-2 control-label"></label>
 								<div class="col-sm-8">
-									<select name="selector" id="selector" class="form-control1">
-										<option>판매</option>
-										<option>구매</option>
+									<select name="marketTbSellOrBuy" id="selector" class="form-control1">
+										<option value="sell">판매</option>
+										<option value="buy">구매</option>
 									</select>
 								</div>
 							</div>
@@ -57,19 +57,25 @@
 								<label for="filename"
 									class="col-sm-2 control-label label-input-sm">첨부파일</label>
 								<div class="col-sm-8">
-									<input type="file" id="filename" name="filename">
+									<input name="uploadFile" type="file" id="filename">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="message" class="col-sm-2 control-label">제목</label>
+								<div class="col-sm-8">
+									<input type="text" name="marketTbTitle" placeholder="">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="message" class="col-sm-2 control-label">내용</label>
 								<div class="col-sm-8">
-									<textarea name="message" id="message" placeholder="Context *"></textarea>
+									<textarea name="marketTbContent" id="message" placeholder="Context *"></textarea>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-2"></div>
 								<div class="ht__comment__btn--2 mt--50 col-sm-8">
-									<a class="fr__btn" href="#">확인</a> <a class="fr__btn" href="#">취소</a>
+									<input type="submit" class="fr__btn" value="등록"> <input type="button" class="fr__btn" src="/market-list.do" value="취소">
 								</div>
 							</div>
 						</form>
