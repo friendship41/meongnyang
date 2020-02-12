@@ -1,5 +1,5 @@
 package com.mall.meongnyang.client.member.dao;
 
-public interface Temp {
+public interface ClientRegistryDAO {
 
 }
