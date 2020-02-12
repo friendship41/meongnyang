@@ -48,7 +48,8 @@ public class AdminLoginController {
 	
 	@RequestMapping(value = "/logout.ado", method = RequestMethod.GET)
 	public String logoutProc(AdminLoginVO adminLoginVO, HttpSession session) {
-				
+		
+		//session.invalidate();
 		session.setAttribute("adminId", null);;
 		System.out.println("세션 널값줬음");
 		return "admin-page/login";

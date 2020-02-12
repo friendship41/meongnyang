@@ -77,3 +77,50 @@
         </div>
     </div>
 </div>
+<!--jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#deleteCategoryBtn").hide();
+
+        $("#categorySelectBox").change(function () {
+            var selectedValue = $("#categorySelectBox option:selected").val();
+            console.log(selectedValue);
+            if(selectedValue === 'thisIsInsert')
+            {
+                $("#categorySubmitButton").html('카테고리 추가');
+                $("#deleteCategoryBtn").hide();
+                $("#productCategoryTbNo").attr("value", 0);
+                $("#productCategoryTbParent").removeAttr("value");
+                $("#productCategoryTbMedian").removeAttr("value");
+                $("#productCategoryTbSub").removeAttr("value");
+                $("#formToController").attr("action", "product-category-insert.ado");
+            }
+            else
+            {
+                var ajaxUrl = "/product-category-single-ajax.ado?productCategoryTbNo="+selectedValue;
+                $.ajax({
+                    url: ajaxUrl,
+                    type: "GET",
+                    data: {},
+                    dataType: "json"
+                })
+                    .done(function(json) {
+                        console.log(json);
+                        $("#productCategoryTbNo").attr("value", json.productCategoryTbNo);
+                        $("#productCategoryTbParent").attr("value", json.productCategoryTbParent);
+                        $("#productCategoryTbMedian").attr("value", json.productCategoryTbMedian);
+                        $("#productCategoryTbSub").attr("value", json.productCategoryTbSub);
+                        $("#categorySubmitButton").html('카테고리 수정');
+                        $("#deleteCategoryBtn").show();
+                        var deleteUrl = "/product-category-delete.ado?productCategoryTbNo="+json.productCategoryTbNo;
+                        $("#deleteCategoryBtn").attr("href", deleteUrl);
+                        $("#formToController").attr("action", "product-category-update.ado");
+                    })
+                    .fail(function (xhr, status, errorThrown) {
+                        alert(errorThrown);
+                    });
+            }
+        });
+    })
+</script>

@@ -27,14 +27,21 @@ public class ClientLoginController {
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 		
 		if(tempVO!=null && (tempVO.getCustomerTbPassword()).equals(clientCustomerVO.getCustomerTbPassword())) {
-			session.setAttribute("ClientId", tempVO.getCustomerTbNo());
+			session.setAttribute("clientId", tempVO.getCustomerTbNo());
 			
 			return "index";
 		} else {
-			return "include/login-modal";
+			return "index";
 		}
 	}
 	
+	@RequestMapping(value = "/logout.do", method = RequestMethod.POST)
+	public String logoutProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
+		
+		//session.invalidate();
+		session.setAttribute("clientId", null);
+		return "index";
+	}
 	
 	
 }

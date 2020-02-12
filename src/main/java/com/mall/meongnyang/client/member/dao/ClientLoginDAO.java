@@ -6,4 +6,6 @@ public interface ClientLoginDAO {
 	public ClientCustomerVO selectLoginCheck(ClientCustomerVO clientCustomerVO);
 	
 	public ClientCustomerVO logout(ClientCustomerVO clientCustomerVO);
+	
+	public int insertRegistry(ClientCustomerVO clientCustomerVO);
 }

@@ -25,6 +25,14 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 		return tempVO;
 	}
 
+	@Override
+	public int insertRegistry(ClientCustomerVO clientCustomerVO) {
+		int result = sqlSessionTemplate.insert("ClientLoginDAO.insertRegistry", clientCustomerVO);
+		return result;
+	}
+
+	
+
 	
 
 }
