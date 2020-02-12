@@ -38,6 +38,5 @@ public class ClientInsertMarketServiceImpl implements ClientInsertMarketService 
 			}
 		}
 		clientMarketDAO.insertMarket(clientMarketVO);
-		System.out.println("서비스 " + clientMarketVO.toString());
 	}
 }
