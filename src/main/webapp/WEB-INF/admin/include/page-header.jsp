@@ -99,7 +99,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">Account Settings</a></li>
-                            <li><a href="admin-page/login.html">Log Out</a></li>
+                            <li><a href="logout.ado">Log Out</a></li>
                         </ul>
                     </li>
                 </ul>
