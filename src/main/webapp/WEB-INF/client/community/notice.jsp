@@ -56,19 +56,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="product-remove"> 2 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-success">Q</span> 배송문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객2 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="product-remove"> 1 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-warning">A</span> 구매문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객1 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
-                                            </tr>
+                                              
+                                        <c:forEach var="noticeList" items="${clientNoticeList}"> 
+                                           <tr>
+                                              <td>${noticeList.noticeTbNo}</td>
+                                              <td><a class="f-bold" href="/notice-read.do?noticeTbNo=${noticeList.noticeTbNo}">${noticeList.noticeTbTitle}</a></td>
+                                              <td>${noticeList.adminsTbId}</td>
+                                              <td>${noticeList.noticeTbRegDate}</td>
+                                        </c:forEach>
+                     
                                         </tbody>
+                                        
                                     </table>
                                 </div>
                             </form>
