@@ -23,9 +23,9 @@
                                 <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="#" method="post"><!-- 로그인 -->
-                                                <input name="Email" placeholder="Email Address" type="text" required="">
-                                                <input name="Password" placeholder="Password" type="password"
+                                            <form action="index.do" method="post"><!-- 로그인 -->
+                                                <input name="customerTbEmail" placeholder="Email Address" type="text" required="">
+                                                <input name="customerTbPassword" placeholder="Password" type="password"
                                                        required="">
                                                 <div class="sign-up">
                                                     <input type="submit" value="Sign in"/>
@@ -37,11 +37,11 @@
                                 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="#" method="post"><!-- 회원가입 -->
-                                                <input placeholder="Name" name="Name" type="text" required="">
-                                                <input placeholder="Email Address" name="Email" type="email"
+                                            <form action="registry.do" method="post"><!-- 회원가입 -->
+                                                <input placeholder="Name" name="customerTbName" type="text" required="">
+                                                <input placeholder="Email Address" name="customerTbEmail" type="email"
                                                        required="">
-                                                <input placeholder="Password" name="Password" type="password"
+                                                <input placeholder="Password" name="customerTbPassword" type="password"
                                                        required="">
                                                 <input placeholder="Confirm Password" name="Password" type="password"
                                                        required="">

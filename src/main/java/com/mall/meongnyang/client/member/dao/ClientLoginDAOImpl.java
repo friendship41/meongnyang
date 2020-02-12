@@ -1,20 +1,28 @@
 package com.mall.meongnyang.client.member.dao;
 
-import com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 
+@Repository("ClientLoginDAO")
 public class ClientLoginDAOImpl implements ClientLoginDAO {
 
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
 	@Override
 	public ClientCustomerVO selectLoginCheck(ClientCustomerVO clientCustomerVO) {
-		// TODO Auto-generated method stub
-		return null;
+		ClientCustomerVO tempVO = sqlSessionTemplate.selectOne("ClientLoginDAO.selectClientLoginCheck", clientCustomerVO);
+		
+		return tempVO;
 	}
 
 	@Override
 	public ClientCustomerVO logout(ClientCustomerVO clientCustomerVO) {
-		// TODO Auto-generated method stub
-		return null;
+		ClientCustomerVO tempVO = sqlSessionTemplate.selectOne("ClientLoginDAO.selectClientLoginCheck", clientCustomerVO);
+		return tempVO;
 	}
 
 	
