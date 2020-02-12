@@ -3,9 +3,8 @@ package com.mall.meongnyang.client.community.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO;
 import com.mall.meongnyang.client.community.dao.ClientNoticeDAO;
-import com.mall.meongnyang.client.community.vo.ClientNoticeVO;
 
 @Service("ClientSelectNoticeService")
 public class ClientSelectNoticeServiceImpl implements ClientSelectNoticeService{
@@ -14,9 +13,9 @@ public class ClientSelectNoticeServiceImpl implements ClientSelectNoticeService{
 	 private ClientNoticeDAO clientNoticeDAO;
 	
 	@Override
-	public ClientNoticeVO selectNotice(ClientNoticeVO clientNoticeVO) {
+	public AdminNoticeVO selectNotice(AdminNoticeVO adminNoticeVO) {
 		
-		return clientNoticeDAO.selectNotice(clientNoticeVO);
+		return clientNoticeDAO.selectNotice(adminNoticeVO);
 	}
 	
 

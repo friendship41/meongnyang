@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO;
 import com.mall.meongnyang.client.community.service.ClientSelectNoticeListService;
 import com.mall.meongnyang.client.community.service.ClientSelectNoticeService;
-import com.mall.meongnyang.client.community.vo.ClientNoticeVO;
+
 
 @Controller
 public class ClientNoticeController {
@@ -26,7 +26,7 @@ public class ClientNoticeController {
 	    @RequestMapping(value = "/notice.do", method = RequestMethod.GET)
 	    public String noticeList(Model model)
 	    {
-	        List<ClientNoticeVO> clientNoticeList = clientSelectNoticeListService.selectNoticeList(new ClientNoticeVO());
+	        List<AdminNoticeVO> clientNoticeList = clientSelectNoticeListService.selectNoticeList(new AdminNoticeVO());
 //	        if(clientNoticeList!=null) {
 //	        System.out.println("값이 들어있습니다~~");
 //	        	
@@ -39,9 +39,9 @@ public class ClientNoticeController {
 	    }
 	    
 	    @RequestMapping(value = "/notice-read.do", method = RequestMethod.GET)
-	    public String noticeRead(ClientNoticeVO clientNoticeVO, Model model)
+	    public String noticeRead(AdminNoticeVO adminNoticeVO, Model model)
 	    {
-	        ClientNoticeVO tempVO = clientSelectNoticeService.selectNotice(clientNoticeVO);
+	        AdminNoticeVO tempVO = clientSelectNoticeService.selectNotice(adminNoticeVO);
 	       
 	        model.addAttribute("clientNoticeVO", tempVO);
 	      	        
