@@ -2,43 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="#package.#mapperinterfacename">
+<mapper namespace="marketDAO">
 
-	<select id="getSomething" parameterType="int" resultType="#package.#modelname">
+	<select id="selectMarket" parameterType="int" resultType="market">
 		SELECT
-		columnname1,
-		columnname2,
-		columnname3
-		FROM tablename1
-		WHERE columnname1 = #{value}
+		market_tb_no,
+		customer_tb_no,
+		market_tb_title,
+		market_tb_content,
+		market_tb_reg_date,
+		market_tb_read_count,
+		market_tb_sell_or_buy,
+		market_tb_img_path
+		FROM market
+		WHERE market_tb_no = #{marketTbNo}
 	</select>
 
-	<resultMap type="#modelname" id="YourResultSet">
-		<id property="param1" column="columnname1" />
-		<result property="param2" column="columnname2" />
-		<result property="param3" column="columnname3" />
-	</resultMap>
-
-	<select id="getAll" resultMap="YourResultSet">
-		SELECT * FROM tablename1
+	<select id="selectMarketList" resultType="market">
+		SELECT 
+		market_tb_no,
+		customer_tb_no,
+		market_tb_title,
+		market_tb_content,
+		market_tb_reg_date,
+		market_tb_read_count,
+		market_tb_sell_or_buy,
+		market_tb_img_path 
+		FROM market
 	</select>
 
-	<insert id="insertSomething" parameterType="#modelname">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
+	<insert id="insertMarket" parameterType="market">
+		INSERT INTO market
+		(market_tb_no,
+		customer_tb_no,
+		market_tb_title,
+		market_tb_content,
+		market_tb_sell_or_buy,
+		market_tb_img_path)
+		VALUES 
+		(market_seq.nextval,
+		#{marketTbNo}, 
+		#{customerTbNo}, 
+		#{marketTbTitle}, 
+		#{marketTbContent}, 
+		#{marketTbSellOrBuy},
+		#{marketTbImgPath})
 	</insert>
 
-	<update id="updateSomething" parameterType="#modelname">
-		UPDATE tablename1
+	<update id="updateMarket" parameterType="market">
+		UPDATE market
 		SET
-		columnname1=#{param1}
+		market_tb_title,
+		market_tb_content,
+		market_tb_sell_or_buy,
+		market_tb_img_path		
 		WHERE
-		columnname2 = #{param2}
+		market_tb_no = #{marketTbNo}
 	</update>
 
-	<delete id="deleteSomething" parameterType="int">
-		DELETE FROM tablename1 WHERE
-		columnname1 = #{param1}
+	<delete id="deleteMarket" parameterType="int">
+		DELETE FROM market WHERE
+		market_tb_no = #{marketTbNo}
 	</delete>
 
 </mapper>
