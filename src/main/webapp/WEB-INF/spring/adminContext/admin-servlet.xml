@@ -21,7 +21,9 @@
 	<!-- 관리자 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.mall.meongnyang.admin"/>
 	
-	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000"/><!-- 10M -->
+	</bean>
 	
 	
 

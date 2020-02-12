@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -34,41 +35,42 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
+
+                                <form class="form-horizontal" id="formToController" action="product-category-insert.ado" method="post">
+                                    <input type="hidden" name="productCategoryTbNo" id="productCategoryTbNo" value="0">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">
-                                            <select style="margin-bottom:15px;" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <select style="margin-bottom:15px;" class="form-control" id="categorySelectBox">
+                                                <option value="thisIsInsert">카테고리 추가할시 선택해주세요</option>
+                                                <c:forEach var="category" items="${productCategoryList}">
+                                                    <option value="${category.productCategoryTbNo}">${category.productCategoryTbParent}-${category.productCategoryTbMedian}-${category.productCategoryTbSub}</option>
+                                                </c:forEach>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="productName" class="col-sm-2 control-label">최상위 카테고리</label>
+                                        <label for="productCategoryTbParent" class="col-sm-2 control-label">최상위 카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productName">
+                                            <input type="text" class="form-control" id="productCategoryTbParent" name="productCategoryTbParent" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">중위 카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="productCategoryTbMedian" name="productCategoryTbMedian" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">최하위 카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" id="productCategoryTbSub" name="productCategoryTbSub" required>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-10">
-                                        <button class="btn btn-primary">카테고리 등록</button>
-                                        <button class="btn btn-primary">카테고리 수정</button>
+                                    <div class="col-md-10" id="formButtonsHere">
+                                        <button id="categorySubmitButton" class="btn btn-primary">카테고리 등록</button>
+                                        <a href="#" class="btn btn-primary" id="deleteCategoryBtn">카테고리 삭제</a>
                                     </div>
                                 </form>
                             </div>
@@ -90,6 +92,53 @@
 </div>
 <!-- /Page Container -->
 
+<!-- 기본 jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#deleteCategoryBtn").hide();
+
+        $("#categorySelectBox").change(function () {
+            var selectedValue = $("#categorySelectBox option:selected").val();
+            console.log(selectedValue);
+            if(selectedValue === 'thisIsInsert')
+            {
+                $("#categorySubmitButton").html('카테고리 추가');
+                $("#deleteCategoryBtn").hide();
+                $("#productCategoryTbNo").attr("value", 0);
+                $("#productCategoryTbParent").removeAttr("value");
+                $("#productCategoryTbMedian").removeAttr("value");
+                $("#productCategoryTbSub").removeAttr("value");
+                $("#formToController").attr("action", "product-category-insert.ado");
+            }
+            else
+            {
+                var ajaxUrl = "/product-category-single-ajax.ado?productCategoryTbNo="+selectedValue;
+                $.ajax({
+                    url: ajaxUrl,
+                    type: "GET",
+                    data: {},
+                    dataType: "json"
+                })
+                    .done(function(json) {
+                        console.log(json);
+                        $("#productCategoryTbNo").attr("value", json.productCategoryTbNo);
+                        $("#productCategoryTbParent").attr("value", json.productCategoryTbParent);
+                        $("#productCategoryTbMedian").attr("value", json.productCategoryTbMedian);
+                        $("#productCategoryTbSub").attr("value", json.productCategoryTbSub);
+                        $("#categorySubmitButton").html('카테고리 수정');
+                        $("#deleteCategoryBtn").show();
+                        var deleteUrl = "/product-category-delete.ado?productCategoryTbNo="+json.productCategoryTbNo;
+                        $("#deleteCategoryBtn").attr("href", deleteUrl);
+                        $("#formToController").attr("action", "product-category-update.ado");
+                    })
+                    .fail(function (xhr, status, errorThrown) {
+                        alert(errorThrown);
+                    });
+            }
+        });
+    })
+</script>
 
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
