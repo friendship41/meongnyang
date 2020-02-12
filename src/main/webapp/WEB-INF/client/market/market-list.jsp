@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../include/header.jsp" />
 
 
@@ -29,8 +30,9 @@
 <div class="htc__grid__top__market__list">
 	<div class="htc__select__option">
 		<select class="ht__select">
-			<option>구매</option>
-			<option>판매</option>
+			<option value="all">전체</option>
+			<option value="sell">구매</option>
+			<option value="buy">판매</option>
 		</select>
 	</div>
 </div>
@@ -41,33 +43,42 @@
 			<div class="ht__blog__wrap blog--page clearfix">
 				<!-- 글쓰기 버튼 추가 -->
 				<div class="write__market__list">
-					<a href="market-form.html">글쓰기</a>
+					<a href="/market-form.do">글쓰기</a>
 				</div>
 				<!-- Start Single Blog -->
-				<div class="col-md-6 col-lg-4 col-sm-12 col-xs-12">
-					<div class="blog">
-						<div class="blog__thumb">
-							<a href="blog-details.html"> <img
-								src="images/blog/blog-img/1.jpg" alt="blog images">
-							</a>
-						</div>
-						<div class="blog__details">
-							<div class="bl__date">
-								<span>March 22, 2016</span>
-							</div>
-							<h2>
-								<a href="blog-details.html">Lorem ipsum dolor sit amet,
-									consec tetur adipisicing elit</a>
-							</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisici elit,
-								sed do eiusmod tempor incididunt ut labore et dolore magna
-								aliqua.</p>
-							<div class="blog__btn">
-								<a href="blog-details.html">Read More</a>
+				<c:forEach items="${marketList}" var="market">
+					<div class="col-md-6 col-lg-4 col-sm-12 col-xs-12">
+						<div class="blog">
+							<c:if test="${market.marketTbImgPath == null}">
+								<div class="blog__thumb">
+									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">
+										<img src="/resources/image/market/unnamed.png" alt="maket images"
+										width="400" height="287">
+									</a>
+								</div>
+							</c:if>
+							<c:if test="${market.marketTbImgPath != null}">
+								<div class="blog__thumb">
+									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">
+										<img src="/${market.marketTbImgPath}" alt="maket images"
+										width="400" height="287">
+									</a>
+								</div>
+							</c:if>
+							<div class="blog__details">
+								<div class="bl__date">
+									<span>${market.marketTbRegDate}</span>
+								</div>
+								<h2>
+									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">${market.marketTbTitle}</a>
+								</h2>
+								<div class="blog__btn">
+									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">더보기</a>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</c:forEach>
 				<!-- End Single Blog -->
 			</div>
 		</div>
@@ -82,7 +93,8 @@
 					<li><a href="#">4</a></li>
 					<li><a href="#"><i class="zmdi zmdi-more"></i></a></li>
 					<li><a href="#">19</a></li>
-					<li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+					<li class="active"><a href="#"><i
+							class="zmdi zmdi-chevron-right"></i></a></li>
 				</ul>
 			</div>
 		</div>

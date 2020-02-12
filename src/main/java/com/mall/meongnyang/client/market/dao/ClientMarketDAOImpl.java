@@ -16,37 +16,37 @@ public class ClientMarketDAOImpl implements ClientMarketDAO {
 	
 	@Override
 	public void insertMarket(ClientMarketVO clientMarketVO) {
-		sqlSessionTemplate.insert("marketDAO.insertMarket", clientMarketVO);		
+		sqlSessionTemplate.insert("MarketDAO.insertMarket", clientMarketVO);		
 	}
 
 	@Override
 	public void updateMarket(ClientMarketVO clientMarketVO) {
-		sqlSessionTemplate.update("marketDAO.updateMarket", clientMarketVO);
+		sqlSessionTemplate.update("MarketDAO.updateMarket", clientMarketVO);
 	}
 
 	@Override
 	public void deleteMarket(int marketTbNo) {
-		sqlSessionTemplate.delete("marketDAO.deleteMarket", marketTbNo);
+		sqlSessionTemplate.delete("MarketDAO.deleteMarket", marketTbNo);
 	}
 
 	@Override
 	public ClientMarketVO selectMarket(int marketTbNo) {
-		return sqlSessionTemplate.selectOne("marketDAO.selectMarket", marketTbNo);
+		return sqlSessionTemplate.selectOne("MarketDAO.selectMarket", marketTbNo);
 	}
 
 	@Override
 	public List<ClientMarketVO> selectMarketList() {
-		return sqlSessionTemplate.selectList("marketDAO.selectMarketList");
+		return sqlSessionTemplate.selectList("MarketDAO.selectMarketList");
 	}
 
 	@Override
 	public int selectCountMarket() {
-		return sqlSessionTemplate.selectOne("marketDAO.selectCountMarket");
+		return sqlSessionTemplate.selectOne("MarketDAO.selectCountMarket");
 	}
 
 	@Override
 	public void updateReadCount(int marketTbNo) {
-		sqlSessionTemplate.update("marketDAO.updateReadCount", marketTbNo);
+		sqlSessionTemplate.update("MarketDAO.updateReadCount", marketTbNo);
 	}
 
 }

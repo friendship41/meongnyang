@@ -1,16 +1,17 @@
 package com.mall.meongnyang.client.market.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mall.meongnyang.client.market.service.ClientDeleteMarketService;
 import com.mall.meongnyang.client.market.service.ClientInsertMarketService;
 import com.mall.meongnyang.client.market.service.ClientSelectMarketListService;
-import com.mall.meongnyang.client.market.service.ClientUpdateMarketService;
 import com.mall.meongnyang.client.market.vo.ClientMarketVO;
 
 @Controller
@@ -36,9 +37,10 @@ public class ClientMarketController {
 	}
 	
 	@RequestMapping(value = "/market-list.do")
-	public String marketList() {
+	public String marketList(Model model) {
 		
-		clientSelectMarketListService.
+		List<ClientMarketVO> marketList = clientSelectMarketListService.selectMarketList();
+		model.addAttribute("marketList", marketList);
 		
 		return "market/market-list";
 	}
