@@ -51,7 +51,7 @@ public class AdminLoginController {
 		
 		//session.invalidate();
 		session.setAttribute("adminId", null);;
-		System.out.println("세션 널값줬음");
+		
 		return "admin-page/login";
 	}
 }

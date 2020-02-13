@@ -7,7 +7,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            
+            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            
+            	
+            
                 <h4 class="modal-title" id="myModalLabel">로그인 / 회원가입</h4>
             </div>
             <div class="modal-body modal-body-sub">
@@ -23,12 +27,12 @@
                                 <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="index.do" method="post"><!-- 로그인 -->
+                                            <form action="/index.do" method="post"><!-- 로그인 -->
                                                 <input name="customerTbEmail" placeholder="Email Address" type="text" required="">
                                                 <input name="customerTbPassword" placeholder="Password" type="password"
                                                        required="">
                                                 <div class="sign-up">
-                                                    <input type="submit" value="Sign in"/>
+                                                	<input type="submit" value="Sign in"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -46,7 +50,10 @@
                                                 <input placeholder="Confirm Password" name="Password" type="password"
                                                        required="">
                                                 <div class="sign-up">
-                                                    <input type="submit" value="Create Account"/>
+                                                
+                                                
+                                                	<input type="submit" value="Create Account" id="CreateAccount"/>
+                                               
                                                 </div>
                                             </form>
                                         </div>
@@ -77,50 +84,4 @@
         </div>
     </div>
 </div>
-<!--jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#deleteCategoryBtn").hide();
 
-        $("#categorySelectBox").change(function () {
-            var selectedValue = $("#categorySelectBox option:selected").val();
-            console.log(selectedValue);
-            if(selectedValue === 'thisIsInsert')
-            {
-                $("#categorySubmitButton").html('카테고리 추가');
-                $("#deleteCategoryBtn").hide();
-                $("#productCategoryTbNo").attr("value", 0);
-                $("#productCategoryTbParent").removeAttr("value");
-                $("#productCategoryTbMedian").removeAttr("value");
-                $("#productCategoryTbSub").removeAttr("value");
-                $("#formToController").attr("action", "product-category-insert.ado");
-            }
-            else
-            {
-                var ajaxUrl = "/product-category-single-ajax.ado?productCategoryTbNo="+selectedValue;
-                $.ajax({
-                    url: ajaxUrl,
-                    type: "GET",
-                    data: {},
-                    dataType: "json"
-                })
-                    .done(function(json) {
-                        console.log(json);
-                        $("#productCategoryTbNo").attr("value", json.productCategoryTbNo);
-                        $("#productCategoryTbParent").attr("value", json.productCategoryTbParent);
-                        $("#productCategoryTbMedian").attr("value", json.productCategoryTbMedian);
-                        $("#productCategoryTbSub").attr("value", json.productCategoryTbSub);
-                        $("#categorySubmitButton").html('카테고리 수정');
-                        $("#deleteCategoryBtn").show();
-                        var deleteUrl = "/product-category-delete.ado?productCategoryTbNo="+json.productCategoryTbNo;
-                        $("#deleteCategoryBtn").attr("href", deleteUrl);
-                        $("#formToController").attr("action", "product-category-update.ado");
-                    })
-                    .fail(function (xhr, status, errorThrown) {
-                        alert(errorThrown);
-                    });
-            }
-        });
-    })
-</script>

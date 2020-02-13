@@ -136,9 +136,18 @@
                                 <div class="header__search search search__open">
                                     <a href="#"><i class="icon-magnifier icons"></i></a>
                                 </div>
+                                <c:choose>
+                                <c:when test="${sessionScope.id == null }">
                                 <div class="header__account">
                                     <a href="#"><i class="icon-user icons" onclick="loginModal()"></i></a>
                                 </div>
+                                </c:when>
+                                <c:otherwise>
+                                <div class="header__account">
+                                    <a href="#"><i class="icon-user icons" onclick="location.href='/myinfo.do'"></i></a>
+                                </div>
+                                </c:otherwise>
+                                </c:choose>
                                 <div class="htc__shopping__cart">
                                     <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a>
                                     <a class="cart__menu" href="#"><span class="htc__qua">2</span></a>
