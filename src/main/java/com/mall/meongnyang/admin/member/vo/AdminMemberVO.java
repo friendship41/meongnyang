@@ -1,14 +1,15 @@
 package com.mall.meongnyang.admin.member.vo;
 
+import java.sql.Date;
+
 import javax.xml.crypto.Data;
 
 public class AdminMemberVO {
 
 	private String customerTbEmail; 
 	private String customerTbName;
-	private Data customerTbLastLogin;
+	private Date customerTbLastLogin;
 	private String customerTbState;
-	
 	public String getCustomerTbEmail() {
 		return customerTbEmail;
 	}
@@ -21,10 +22,10 @@ public class AdminMemberVO {
 	public void setCustomerTbName(String customerTbName) {
 		this.customerTbName = customerTbName;
 	}
-	public Data getCustomerTbLastLogin() {
+	public Date getCustomerTbLastLogin() {
 		return customerTbLastLogin;
 	}
-	public void setCustomerTbLastLogin(Data customerTbLastLogin) {
+	public void setCustomerTbLastLogin(Date customerTbLastLogin) {
 		this.customerTbLastLogin = customerTbLastLogin;
 	}
 	public String getCustomerTbState() {
@@ -33,6 +34,8 @@ public class AdminMemberVO {
 	public void setCustomerTbState(String customerTbState) {
 		this.customerTbState = customerTbState;
 	}
+	
+	
 	
 
 }

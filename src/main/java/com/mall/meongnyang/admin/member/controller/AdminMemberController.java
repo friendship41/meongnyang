@@ -25,16 +25,18 @@ public class AdminMemberController {
 	
 	
 	
-	    @RequestMapping(value = "/memberManage.ado", method = RequestMethod.GET)
+	    @RequestMapping(value = "/member-Manage.ado", method = RequestMethod.GET)
 	    public String memberList(Model model)
 	    {
 	    	List<AdminMemberVO> adminMemberList = adminSelectMemberListService.selectMemberList(new AdminMemberVO());
 	    	
 	    	model.addAttribute("adminMemberList", adminMemberList);
+	    	
+	    	
 	        return "member/member-manage";
 	    }
 	    
-	    @RequestMapping(value = "/memberManage.ado", method = RequestMethod.POST)
+	    @RequestMapping(value = "/member-Manage.ado", method = RequestMethod.POST)
 	    public String memberUpdate(AdminMemberVO adminMemberVO)
 	    {
 	        adminUpdateMemberService.updateMember(adminMemberVO);

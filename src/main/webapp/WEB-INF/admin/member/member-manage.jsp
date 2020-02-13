@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -58,6 +59,17 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
+                                        
+                                        <c:forEach var="memberList" items= "${adminMemberList}" > 
+                   
+                                           <tr>
+                                              <td>${memberList.customerTbEmail}</td>
+                                              <td>${memberList.customerTbName}</td>
+                                              <td>${memberList.customerTbLastLogin}</td>
+                                              <td>${memberList.customerTbState}</td>
+                                        	</tr>	        
+                                        </c:forEach>
+                                        <!--  
                                         <tr>
                                             <td>stage41@nate.com</td>
                                             <td>최창호</td>
@@ -85,15 +97,7 @@
                                                 <button class="btn btn-rounded btn-danger">블랙</button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>stage41@nate.com</td>
-                                            <td>최창호</td>
-                                            <td>20/01/14</td>
-                                            <td><span class="label label-success">정상</span></td>
-                                            <td>
-                                                <button class="btn btn-rounded btn-danger">블랙</button>
-                                            </td>
-                                        </tr>
+                                        -->
                                         </tbody>
                                     </table>
                                 </div>
