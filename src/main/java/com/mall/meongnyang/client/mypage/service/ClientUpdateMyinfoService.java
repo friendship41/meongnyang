@@ -1,5 +1,7 @@
 package com.mall.meongnyang.client.mypage.service;
 
-public interface ClientUpdateMyinfoService {
+import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 
+public interface ClientUpdateMyinfoService {
+	public ClientCmAddressVO updateMyinfo(ClientCmAddressVO clientCmAddressVO);
 }
