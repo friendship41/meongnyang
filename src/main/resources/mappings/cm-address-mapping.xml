@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ClientMyinfoDAO">
+	<select id="selectMyinfo" parameterType="clientMyinfo" resultType="clientMyinfo">
+		SELECT
+			cm_address_tb_no,
+			customer_tb_no,
+			cm_address_tb_nickname,
+			cm_address_tb_postcode,
+			cm_address_tb_address1,
+			cm_address_tb_address2,
+			cm_address_tb_phone
+		FROM cm_address
+		WHERE customer_tb_no=#{customerTbNo}
+	</select>
+	
+	
+</mapper>

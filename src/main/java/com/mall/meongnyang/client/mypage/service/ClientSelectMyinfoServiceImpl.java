@@ -19,8 +19,8 @@ public class ClientSelectMyinfoServiceImpl implements ClientSelectMyinfoService 
 	
 	@Override
 	public ClientCmAddressVO selectMyinfo(ClientCmAddressVO clientCmAddressVO) {
-		
-		return null;
+		ClientCmAddressVO tempVO = clientMyinfoDAO.selectMyinfo(clientCmAddressVO);
+		return tempVO;
 	}
 
 }

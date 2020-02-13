@@ -15,8 +15,9 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 	
 	@Override
 	public ClientCmAddressVO selectMyinfo(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
-		return null;
+		ClientCmAddressVO tempVO 
+				= sqlSessionTemplate.selectOne("ClientMyinfoDAO.selectMyinfo", clientCmAddressVO);
+		return tempVO;
 	}
 
 	@Override

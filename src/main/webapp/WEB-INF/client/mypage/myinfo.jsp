@@ -54,8 +54,8 @@
                                     <option>주소2</option>
                                     <option>주소3</option>
                                 </select>
-                                <input id="postcode1" value="" type="text" placeholder=" 주소 *">
-                                <input id="postcode2" value="" type="text" placeholder="상세 주소 *">
+                                <input id="postcode1" value="" type="text" placeholder=" 주소 *" name="cmAddressTbAddress1">
+                                <input id="postcode2" value="" type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2">
                                 <div class="ht__comment__btn--2 mt--30">
                                     <a class="fr__btn" href="#">수정</a>
                                     <a class="fr__btn" href="#">삭제</a>
@@ -71,7 +71,7 @@
                     <h4 class="title__line--5">비밀번호 변경</h4>
                     <div class="ht__comment__form__inner">
                         <div class="comment__form">
-                            <input type="text" placeholder="현재 비밀번호 *">
+                            <input type="text" placeholder="현재 비밀번호 *" name="customerTbPassword">
                             <input type="text" placeholder="새 비밀번호 *">
                             <input type="text" placeholder="비밀번호 확인">
                         </div>
@@ -84,7 +84,7 @@
                         <h4 class="title__line--5">연락처 등록 및 수정</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
-                                <input type="text" placeholder="연락처를 입력하세요">
+                                <input type="text" placeholder="연락처를 입력하세요" name="customerTbPhone">
                             </div>
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
@@ -95,7 +95,7 @@
                         <h4 class="title__line--5">회원 탈퇴</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
-                                <input type="password" placeholder="현재 비밀번호 *">
+                                <input type="password" placeholder="현재 비밀번호 *" name="customerTbPassword">
                             </div>
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
