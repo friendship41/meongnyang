@@ -780,7 +780,7 @@
                                             <td>20,000</td>
                                             <td><a href="product-image-add.ado?productTbCode=ec5a51e7a4564e6181d2&resultMessage=none" class="btn btn-default btn-xs">N</a></td>
                                             <td>미등록</td>
-                                            <td><button class="btn btn-success" onclick="location.href='product-sale.html'">판매등록</button></td>
+                                            <td><button class="btn btn-success" onclick="location.href='/insertProductSale.ado?productTbCode=1833b5eab9e8471582b4'">판매등록</button></td>
                                         </tr>
                                         </tbody>
                                     </table>

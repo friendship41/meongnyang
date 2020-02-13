@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductSaleDAO">
+
+	<insert id="insertProductSale" parameterType="productSale">
+        INSERT INTO pd_sale
+        VALUES(
+            pd_sale_seq.NEXTVAL,
+            #{productTbCode},
+            <if test="promotionTbCode != -1">
+                #{promotionTbCode},
+            </if>
+            #{pdSaleTbProductName},
+            #{pdSaleTbReceivedPrice},
+            #{pdSaleTbSalesPrice},
+            #{pdSaleTbReceivedAmount},
+            #{pdSaleTbRemainingAmount},
+            #{pdSaleTbLimitAmount},
+            #{pdSaleTbStartDay},
+            <if test="pdSaleTbExpireDay != null">
+                #{pdSaleTbExpireDay},
+            </if>
+            #{pdSaleTbSize},
+            0,
+            0,
+            #{pdSaleTbDiscountRate}
+        )
+    </insert>
+
+</mapper>

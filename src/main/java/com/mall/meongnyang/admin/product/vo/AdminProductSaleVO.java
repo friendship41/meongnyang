@@ -169,4 +169,26 @@ public class AdminProductSaleVO
     {
         this.pdSaleTbDiscountRate = pdSaleTbDiscountRate;
     }
+
+    @Override
+    public String toString()
+    {
+        return "AdminProductSaleVO{" +
+                "pdSaleTbNo=" + pdSaleTbNo +
+                ", productTbCode='" + productTbCode + '\'' +
+                ", promotionTbCode=" + promotionTbCode +
+                ", pdSaleTbProductName='" + pdSaleTbProductName + '\'' +
+                ", pdSaleTbReceivedPrice=" + pdSaleTbReceivedPrice +
+                ", pdSaleTbSalesPrice=" + pdSaleTbSalesPrice +
+                ", pdSaleTbReceivedAmount=" + pdSaleTbReceivedAmount +
+                ", pdSaleTbRemainingAmount=" + pdSaleTbRemainingAmount +
+                ", pdSaleTbLimitAmount=" + pdSaleTbLimitAmount +
+                ", pdSaleTbStartDay=" + pdSaleTbStartDay +
+                ", pdSaleTbExpireDay=" + pdSaleTbExpireDay +
+                ", pdSaleTbSize='" + pdSaleTbSize + '\'' +
+                ", pdSaleTbReadCount=" + pdSaleTbReadCount +
+                ", pdSaleTbRating=" + pdSaleTbRating +
+                ", pdSaleTbDiscountRate=" + pdSaleTbDiscountRate +
+                '}';
+    }
 }

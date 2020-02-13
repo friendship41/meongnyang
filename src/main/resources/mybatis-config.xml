@@ -17,6 +17,7 @@
         <typeAlias type="com.mall.meongnyang.client.member.vo.ClientCustomerVO" alias="clientLogin"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductImageVO" alias="productImage"/>
         <typeAlias type="com.mall.meongnyang.client.market.vo.ClientMarketVO" alias="market"/>
+        <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductSaleVO" alias="productSale"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappings/faq-mapping.xml"/>
@@ -28,5 +29,6 @@
         <mapper resource="mappings/clientLogin-mapping.xml"/>
         <mapper resource="mappings/product-image-mapping.xml"/>
         <mapper resource="mappings/market-mapping.xml"/>
+        <mapper resource="mappings/product-sale-mapping.xml"/>
     </mappers>
 </configuration>

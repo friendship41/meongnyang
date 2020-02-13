@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -34,73 +35,84 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="insertProductSale.ado" method="post">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">제품코드</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" readonly>
+                                            <input type="text" class="form-control" name="productTbCode" value="${product.productTbCode}" readonly required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">이름</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" readonly>
+                                            <input type="text" class="form-control" name="pdSaleTbProductName" value="${product.productTbName}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">프로모션코드</label>
                                         <div class="col-sm-10">
-                                            <select style="margin-bottom:15px;" class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
+                                            <select id="promotionSelectBox" class="form-control" name="promotionTbCode">
+                                                <option value="-1">선택 없음</option>
+                                                <c:forEach var="promotion" items="${promotionList}">
+                                                    <option value="${promotion.promotionTbCode}">${promotion.promotionTbName}</option>
+                                                </c:forEach>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">판매가격</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">수량</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">판매개시일</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">입고가격</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="number" class="form-control" name="pdSaleTbReceivedPrice" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">판매가격</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" name="pdSaleTbSalesPrice" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">입고수량</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" name="pdSaleTbReceivedAmount" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">수량</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" name="pdSaleTbRemainingAmount" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">통보수량</label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" name="pdSaleTbLimitAmount" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">판매개시일</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="saleStartDateInput" class="form-control date-picker" name="pdSaleTbStartDay" required>
                                         </div>
                                     </div>
                                     <!-- 먹거리면 유통기한 -->
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">유통기한</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker">
+                                            <input type="text" class="form-control date-picker" name="pdSaleTbExpireDay">
                                         </div>
                                     </div>
                                     <!-- 옷이면 사이즈 먹거리면 용량 -->
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">사이즈</label>
+                                        <label class="col-sm-2 control-label">사이즈/용량</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" class="form-control" name="pdSaleTbSize" placeholder="S/M/L, xxg, xxKg" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">통보수량</label>
+                                        <label class="col-sm-2 control-label">할인율</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control">
+                                            <input type="text" id="discountInput" class="form-control" name="pdSaleTbDiscountRate" placeholder="2자리 할인율을 적어주세요">
                                         </div>
                                     </div>
 
@@ -129,7 +141,38 @@
 </div>
 <!-- /Page Container -->
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#promotionSelectBox").change(function () {
+            var selectedValue = $("#promotionSelectBox option:selected").val();
+            console.log(selectedValue);
+            if(selectedValue === '-1')
+            {
+                $("#discountInput").attr("value","");
+                $("#saleStartDateInput").attr("value","");
+            }
+            else
+            {
+                var ajaxUrl = "/promotionSelectAjax.ado?promotionTbCode="+selectedValue;
+                $.ajax({
+                    url: ajaxUrl,
+                    type: "GET",
+                    data: {},
+                    dataType: "json"
+                })
+                    .done(function(json) {
+                        console.log(json);
+                        $("#discountInput").attr("value", json.promotionTbDiscountRate);
+                        $("#saleStartDateInput").attr("value", json.promotionTbStartDate);
+                    })
+                    .fail(function (xhr, status, errorThrown) {
+                        alert(errorThrown);
+                    });
+            }
+        });
+    })
+</script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
 

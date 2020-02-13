@@ -1,12 +1,16 @@
 package com.mall.meongnyang.admin.marketing.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 
 public class AdminPromotionVO {
 	private int promotionTbCode;
 	private String promotionTbName;
 	private String promotionTbContent;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date promotionTbStartDate;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date promotionTbEndDate;
 	private int promotionTbDiscountRate;
 	public int getPromotionTbCode() {
