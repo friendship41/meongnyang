@@ -83,21 +83,26 @@
                     </div>
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">연락처 등록 및 수정</h4>
+                        <form action="/myinfo-insert-phone.do" method="POST">
                         <div class="ht__comment__form__inner">
+                           
                             <div class="comment__form">
                             	<input type="text" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone">
                             </div>
-                        </div>		
+                        </div>
+                        	
                         <div class="ht__comment__btn--2 mt--30">
-                            <a class="fr__btn" href="/myinfo-insert-phone.do">등록</a>
-                        </div>    
+                            <button class="fr__btn" type="submit">등록</button>
+                        </div>
+                        </form>	    
                     </div>
+                    
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">회원 탈퇴</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
                                 <input type="password" placeholder="현재 비밀번호 *" name="customerTbPassword">
-                            </div>
+                            </div> 
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
                             <a class="fr__btn" href="#">탈퇴</a>

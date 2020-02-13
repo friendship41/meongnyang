@@ -28,13 +28,12 @@
 		#{customerTbEmail})
 			
 	</insert>
-	<insert id="insertMyinfoPhone" parameterType="clientMyinfo">
-		INSERT 
-		INTO
-			customer (customer_tb_phone)
-		VALUES(#{customerTbPhone})
-		WHERE customer_tb_no=#{customerTbNo}
-	</insert>
+	<update id="updateMyinfoPhone" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_phone = #{customerTbPhone}
+		WHERE customer_tb_no = #{customerTbNo}
+	</update>
 
 
 

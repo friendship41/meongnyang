@@ -1,5 +1,6 @@
 package com.mall.meongnyang.client.mypage.dao;
 
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 
 public interface ClientMyinfoDAO {
@@ -7,5 +8,5 @@ public interface ClientMyinfoDAO {
 	public ClientCmAddressVO selectMyinfo(ClientCmAddressVO clientCmAddressVO);
 	
 	//핸드폰 넣기
-	public ClientCmAddressVO insertMyinfoPhone(ClientCmAddressVO clientCmAddressVO);
+	public void updateMyinfoPhone(ClientCustomerVO clientCustomerVO);
 }
