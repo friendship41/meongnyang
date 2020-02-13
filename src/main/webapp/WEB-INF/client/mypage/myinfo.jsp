@@ -34,7 +34,7 @@
                                 <li><a href="#">주문내역</a></li>
                                 <li><a href="#">wishlist</a></li>
                                 <li><a href="#">내정보</a></li>
-                                <li><a href="#">Logout</a></li>
+                                <li><a href="/logout.do">Logout</a></li>
                             </ul>
                         </div>
                     </div>
