@@ -56,7 +56,8 @@ public class ClientMyinfoController {
 					= clientUpdateMyinfoPasswordService.selectMyinfoPassword(clientCustomerVO);
 		BCryptPasswordEncoder encoder 
 					= new BCryptPasswordEncoder();
-		System.out.println(DBVO.getCustomerTbPassword());
+		
+		//사용자가 적은 값 암호화시킴
 		String securePw = encoder.encode(clientCustomerVO.getCustomerTbPassword());
 		clientCustomerVO.setCustomerTbPassword(securePw);
 		//사용자가 적은 암호화된 값(성공)
