@@ -136,9 +136,10 @@
                                 <div class="header__search search search__open">
                                     <a href="#"><i class="icon-magnifier icons"></i></a>
                                 </div>
+                                
                                 <c:choose>
                                 <c:when test="${sessionScope.id eq null }">
-                                <div class="header__account">
+                                 <div class="header__account">
                                     <a href="#"><i class="icon-user icons" onclick="loginModal()"></i></a>
                                 </div>
                                 </c:when>

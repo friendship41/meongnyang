@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mall.meongnyang.admin.dashboard.dao.AdminLoginDAO;
 import com.mall.meongnyang.admin.dashboard.service.AdminLogoutService;
 import com.mall.meongnyang.admin.dashboard.service.AdminSelectLoginCheckService;
 import com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO;
