@@ -12,11 +12,15 @@
 
 	<!-- 어노테이션 활성화 -->
 	<mvc:annotation-driven/>
-	
+
 
 	<!-- 클라이언트 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.mall.meongnyang.client"/>
-	
+
+
+	<!-- 메일 서비스 -->
+	<bean id="mailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
+
 	
 	<!-- resources mapping -->
 <!--	<mvc:resources mapping="/client/css/**" location="/resources/client/css/"/>-->
