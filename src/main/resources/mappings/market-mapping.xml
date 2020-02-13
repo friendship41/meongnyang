@@ -40,7 +40,7 @@
 		market_tb_read_count,
 		market_tb_sell_or_buy,
 		market_tb_img_path 
-		FROM market
+		FROM market ORDER BY market_tb_no DESC
 	</select>
 
 	<insert id="insertMarket" parameterType="market">

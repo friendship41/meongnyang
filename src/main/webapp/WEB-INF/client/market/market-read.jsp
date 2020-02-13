@@ -54,7 +54,7 @@
 					<div class="bl__dtl">
 						<%-- <c:if test="${market.customerTbNo eq customer.customerTbNo }"> --%>
 						<div class="reply__btn">
-							<a href="market-delete.do?marketTbNo=${market.marketTbNo}">글삭제</a> <a href="market-update.do?marketTbNo=${market.marketTbNo}">글수정</a>
+							<a href="#" onclick="deleteMarket()">글삭제</a> <a href="market-update.do?marketTbNo=${market.marketTbNo}">글수정</a>
 						</div>
 						<%-- </c:if> --%>
 						<br>
@@ -144,5 +144,10 @@
 </div>
 <!-- cart-main-area end -->
 
-
 <jsp:include page="../include/footer.jsp" />
+<script>
+	function deleteMarket() {
+		alert("정말로 삭제 하시겠습니까? ");
+		document.location.href="market-delete.do?marketTbNo=" + ${market.marketTbNo};
+	}
+</script>

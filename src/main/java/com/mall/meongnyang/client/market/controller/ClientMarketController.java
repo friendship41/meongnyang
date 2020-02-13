@@ -74,4 +74,12 @@ public class ClientMarketController {
 		
 		return "redirect: market-read.do?marketTbNo=" + clientMarketVO.getMarketTbNo();
 	}
+	
+	@RequestMapping("/market-delete.do")
+	public String marketDelete(int marketTbNo) {
+		
+		clientDeleteMarketService.deleteMarket(marketTbNo);
+		
+		return "redirect: market-list.do";
+	}
 }
