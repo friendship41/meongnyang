@@ -6,10 +6,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
-
+<script>
+function confirmter(){
+	if(confirm("수정하시겠습니까?")){
+		location.href='./term-manage.ado'
+	}
+}
+</script>
 <body>
 
 <!-- Page Container -->
@@ -37,24 +44,23 @@
                                 <h4 class="panel-title">약관 작성/수정</h4>
                             </div>
                             <div class="panel-body">
-                                <form class="form-horizontal" action="term-write.ado" method="post">
-                   	                        <!-- <input type="hidden" name="adminsTbId" value="${sessionScope.id}">  -->                                    
+                                <form class="form-horizontal" action="term-read.ado" method="post">
                                     <div class="form-group">
                                         <label for="termNumber" class="col-sm-2 control-label">약관번호</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="termsTbNo" id="termNumber">
+                                            <input type="text" class="form-control" id="termNumber" name="termsTbNo" value="${terms.termsTbNo}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="termName" class="col-sm-2 control-label">약관명</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="termsTbTitle" id="termName">
+                                            <input type="text" class="form-control" id="termName" name="termsTbTitle" value="${terms.termsTbTitle}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="termDetail" class="col-sm-2 control-label">약관상세</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" name="termsTbContent" id="termDetail"></textarea>
+                                            <textarea rows="10" class="form-control" id="termDetail" name="termsTbContent" >${terms.termsTbContent }</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -62,7 +68,12 @@
                                         <div class="col-sm-10">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="termsTbNecessary" value="true" >필수
+                                                <c:if test="${terms.termsTbNecessary eq 'Y' }">                                                 	                                               
+                                                    <input type="checkbox" name="termsTbNecessary" value="true" checked>필수
+                                                </c:if>
+                                                <c:if test="${terms.termsTbNecessary eq 'N' }">                                                 	                                               
+                                                    <input type="checkbox" name="termsTbNecessary" value="true">필수
+                                                </c:if>
                                                 </label>
                                             </div>
                                         </div>
@@ -70,22 +81,23 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">만료일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="termsTbExpireDate">
+                                            <input type="text" class="form-control date-picker" name="termsTbExpireDate" value="${terms.termsTbExpireDate }" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">정책적용일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="termsTbApplyDate">
+                                            <input type="text" class="form-control date-picker" name="termsTbApplyDate" value="${terms.termsTbApplyDate}">
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">작성</button>
-                                          
+                                            <button type="submit" class="btn btn-primary" onclick="confirmter();">작성</button>
+                                            <!--                                                이 버튼 누르면 수정이 확일합니까 확인알럿이 뜨고 컨펌하면 ㄱ-->
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>
@@ -107,4 +119,3 @@
 
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
-
