@@ -14,7 +14,7 @@ public class AdminUpdateMemberServiceImpl implements AdminUpdateMemberService{
 	
 	@Override
 	public void updateMember(AdminMemberVO adminMemberVO) {
-		
+	
 		adminMemberDAO.updateMember(adminMemberVO);
 	}
 

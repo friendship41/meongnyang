@@ -36,12 +36,14 @@ public class AdminMemberController {
 	        return "member/member-manage";
 	    }
 	    
-	    @RequestMapping(value = "/member-Manage.ado", method = RequestMethod.POST)
+	    @RequestMapping(value = "/memberStateUpdate.ado", method = {RequestMethod.GET, RequestMethod.POST})
 	    public String memberUpdate(AdminMemberVO adminMemberVO)
 	    {
+	    	
 	        adminUpdateMemberService.updateMember(adminMemberVO);
+	        
 
-	        return "member/member-manage";
+	        return "redirect:member-Manage.ado";
 	    }
 
 	   

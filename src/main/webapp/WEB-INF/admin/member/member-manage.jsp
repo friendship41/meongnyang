@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -67,6 +68,9 @@
                                               <td>${memberList.customerTbName}</td>
                                               <td>${memberList.customerTbLastLogin}</td>
                                               <td>${memberList.customerTbState}</td>
+                                        	  <td>
+                                                <a class="btn btn-rounded btn-danger" href="/memberStateUpdate.ado?customerTbNo=${memberList.customerTbNo}">블랙</a>
+                                            </td>	
                                         	</tr>	        
                                         </c:forEach>
                                         <!--  
