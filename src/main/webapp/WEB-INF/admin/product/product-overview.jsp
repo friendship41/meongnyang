@@ -605,7 +605,7 @@
                                             <td>10%</td>
                                             <td>100,000</td>
                                             <td>4.8</td>
-                                            <td><button class="btn btn-primary">판매중지</button></td>
+                                            <td><button id="saleStartStopBtn-saleNo" class="btn btn-primary" onclick="saleStartStop()">판매중지</button></td>
                                             <td>등록됨</td>
                                             <td><button class="btn btn-danger">배너해제</button></td>
                                         </tr>
@@ -617,7 +617,7 @@
                                             <td>10%</td>
                                             <td>200,000</td>
                                             <td>4.7</td>
-                                            <td><button class="btn btn-primary">판매중지</button></td>
+                                            <td><button class="btn btn-primary" onclick="saleStartStop()">판매재등록</button></td>
                                             <td>등록됨</td>
                                             <td><button class="btn btn-danger">배너해제</button></td>
                                         </tr>
@@ -767,7 +767,7 @@
                                         <tr>
                                             <td>000001</td>
                                             <td>개-먹거리</td>
-                                            <td>개 사료1</td>
+                                            <td><a href="updateProduct.ado?productTbCode=1833b5eab9e8471582b4" style="color: #4646ff">개 사료1</a></td>
                                             <td>10,000</td>
                                             <td><a href="product-image-add.ado?productTbCode=1833b5eab9e8471582b4&resultMessage=none" class="btn btn-default btn-xs">3</a></td>
                                             <td>등록중</td>
@@ -778,9 +778,9 @@
                                             <td>고양이-먹거리</td>
                                             <td>고양이 사료1</td>
                                             <td>20,000</td>
-                                            <td><a href="product-image-add.ado?productTbCode=ec5a51e7a4564e6181d2" class="btn btn-default btn-xs">N</a></td>
+                                            <td><a href="product-image-add.ado?productTbCode=ec5a51e7a4564e6181d2&resultMessage=none" class="btn btn-default btn-xs">N</a></td>
                                             <td>미등록</td>
-                                            <td><button class="btn btn-success" onclick="location.href='product-sale.html'">판매등록</button></td>
+                                            <td><button class="btn btn-success" onclick="location.href='/insertProductSale.ado?productTbCode=1833b5eab9e8471582b4'">판매등록</button></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -792,9 +792,7 @@
                 <!-- !Row -->
             </div>
             <!-- Main Wrapper -->
-            <div class="page-footer">
-                <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
-            </div>
+            <jsp:include page="../include/page-footer.jsp"/>
         </div>
         <!-- /Page Inner -->
         <jsp:include page="../include/right-sidebar.jsp"/>
@@ -803,7 +801,20 @@
 </div>
 <!-- /Page Container -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function saleStartStop() {
+        //판매 중지면 판매중지, 아니면 판매 재등록
 
+        //판매재개 페이지로
+        location.href='restartSaleProduct.ado?pdSaleTbNo=5';
+
+        //판매중지처리
+        // location.href='stopSaleProduct.ado?pdSaleTbNo=5';
+
+    }
+
+</script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
 </body>

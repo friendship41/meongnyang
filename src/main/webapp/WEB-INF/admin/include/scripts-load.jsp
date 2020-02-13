@@ -20,12 +20,11 @@
 <script src="/resources/admin/plugins/flot/jquery.flot.resize.min.js"></script>
 <script src="/resources/admin/plugins/flot/jquery.flot.tooltip.min.js"></script>
 <script src="/resources/admin/plugins/flot/jquery.flot.pie.min.js"></script>
-<script src="/resources/admin/plugins/chartjs/chart.min.js"></script>
 <script src="/resources/admin/js/ecaps.min.js"></script>
 <script src="/resources/admin/js/pages/dashboard.js"></script>
 
 
-<script src="/resources/admin/js/pages/chart.js"></script>
+<%--<script src="/resources/admin/js/pages/chart.js"></script>--%>
 <script src="/resources/admin/plugins/chartjs/chart.min.js"></script>
 
 
@@ -50,6 +49,10 @@
 <script src="/resources/admin/plugins/dropzone/dropzone.min.js"></script>
 <script src="/resources/admin/plugins/plupload/js/plupload.full.min.js"></script>
 <script src="/resources/admin/plugins/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+
+<!-- 그냥 있는 스크립트 -->
+<script src="/resources/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
+
 
 <!-- custom 테이블 스크립트 -->
 <script src="/resources/admin/js/custom/product-table.js"></script>

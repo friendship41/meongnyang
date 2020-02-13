@@ -38,10 +38,9 @@
                             class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="product/product-overview.html">상세현황</a></li>
-                        <li><a href="product/product-add.html">상품등록</a></li>
-                        <li><a href="product/product-add.html">카테고리</a></li>
-                        <li><a href="product/product-add.html">상품이미지</a></li>
+                        <li><a href="product-overview.ado">상세현황</a></li>
+                        <li><a href="product-add-page.ado">상품등록</a></li>
+                        <li><a href="product-category-list.ado">카테고리</a></li>
                         <li><a href="product/product-analysis.html">상품분석</a></li>
                         <li><a href="product/product-stock.html">재고관리</a></li>
                     </ul>

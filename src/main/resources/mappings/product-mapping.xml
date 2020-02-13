@@ -35,4 +35,15 @@
         WHERE PRODUCT_TB_CODE=#{productTbCode}
     </select>
 
+    <update id="updateProduct" parameterType="product">
+        UPDATE product
+        SET
+            PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo},
+            PRODUCT_TB_NAME=#{productTbName}
+            <if test="productTbDetail != null">
+                ,PRODUCT_TB_DETAIL=#{productTbDetail}
+            </if>
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </update>
+
 </mapper>
