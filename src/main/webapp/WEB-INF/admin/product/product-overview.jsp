@@ -605,7 +605,7 @@
                                             <td>10%</td>
                                             <td>100,000</td>
                                             <td>4.8</td>
-                                            <td><button class="btn btn-primary">판매중지</button></td>
+                                            <td><button id="saleStartStopBtn-saleNo" class="btn btn-primary" onclick="saleStartStop()">판매중지</button></td>
                                             <td>등록됨</td>
                                             <td><button class="btn btn-danger">배너해제</button></td>
                                         </tr>
@@ -617,7 +617,7 @@
                                             <td>10%</td>
                                             <td>200,000</td>
                                             <td>4.7</td>
-                                            <td><button class="btn btn-primary">판매중지</button></td>
+                                            <td><button class="btn btn-primary" onclick="saleStartStop()">판매재등록</button></td>
                                             <td>등록됨</td>
                                             <td><button class="btn btn-danger">배너해제</button></td>
                                         </tr>
@@ -803,7 +803,20 @@
 </div>
 <!-- /Page Container -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function saleStartStop() {
+        //판매 중지면 판매중지, 아니면 판매 재등록
 
+        //판매재개 페이지로
+        location.href='restartSaleProduct.ado?pdSaleTbNo=5';
+
+        //판매중지처리
+        location.href='stopSaleProduct.ado?pdSaleTbNo=5';
+
+    }
+
+</script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
 </body>

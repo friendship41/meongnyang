@@ -16,4 +16,10 @@ public class AdminProductSaleDAOImpl implements AdminProductSaleDAO
     {
         sqlSessionTemplate.insert("ProductSaleDAO.insertProductSale", adminProductSaleVO);
     }
+
+    @Override
+    public void updateProductSale(AdminProductSaleVO adminProductSaleVO)
+    {
+        sqlSessionTemplate.update("ProductSaleDAO.updateProductSale", adminProductSaleVO);
+    }
 }

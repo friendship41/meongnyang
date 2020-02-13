@@ -19,6 +19,7 @@ public class AdminProductSaleVO
     private int pdSaleTbReadCount;
     private int pdSaleTbRating;
     private int pdSaleTbDiscountRate;
+    private String pdSaleTbState;
 
     public int getPdSaleTbNo()
     {
@@ -168,6 +169,16 @@ public class AdminProductSaleVO
     public void setPdSaleTbDiscountRate(int pdSaleTbDiscountRate)
     {
         this.pdSaleTbDiscountRate = pdSaleTbDiscountRate;
+    }
+
+    public String getPdSaleTbState()
+    {
+        return pdSaleTbState;
+    }
+
+    public void setPdSaleTbState(String pdSaleTbState)
+    {
+        this.pdSaleTbState = pdSaleTbState;
     }
 
     @Override

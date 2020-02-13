@@ -25,8 +25,16 @@
             #{pdSaleTbSize},
             0,
             0,
-            #{pdSaleTbDiscountRate}
+            #{pdSaleTbDiscountRate},
+            'Y'
         )
     </insert>
+
+    <update id="updateProductSale" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+            PD_SALE_TB_STATE='N'
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
 
 </mapper>

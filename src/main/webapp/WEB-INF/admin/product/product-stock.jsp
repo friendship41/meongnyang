@@ -69,7 +69,8 @@
                                             <th>상품명</th>
                                             <th>현재수량</th>
                                             <th>통보수량</th>
-                                            <th colspan="2">재고수정</th>
+                                            <th>신규입고수량</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
