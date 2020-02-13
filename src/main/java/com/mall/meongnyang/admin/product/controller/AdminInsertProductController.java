@@ -32,12 +32,6 @@ public class AdminInsertProductController
     public String insertProduct(AdminProductVO adminProductVO, HttpServletRequest request)
     {
         adminInsertProductService.insertProduct(adminProductVO, request);
-        return "product/product-overview";
-    }
-
-    @RequestMapping("/imageTest.ado")
-    public String tempdd()
-    {
-        return "temp";
+        return "redirect:product/product-overview";
     }
 }

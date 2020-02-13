@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductImageDAO">
+
+	<insert id="insertProductImage" parameterType="productImage">
+        INSERT INTO pd_image
+        VALUES(PD_IMAGE_SEQ.NEXTVAL, #{productTbCode}, #{pdImageTbPath}, #{pdImageTbFileName}, #{pdImageTbExtention}, 'N')
+    </insert>
+
+    <delete id="deleteProductImage" parameterType="productImage">
+        DELETE FROM pd_image
+        WHERE PD_IMAGE_TB_NO=#{pdImageTbNo}
+    </delete>
+
+
+    <select id="selectProductImages" parameterType="productImage" resultType="productImage">
+        SELECT
+            PD_IMAGE_TB_NO,
+            PRODUCT_TB_CODE,
+            PD_IMAGE_TB_PATH,
+            PD_IMAGE_TB_FILE_NAME,
+            PD_IMAGE_TB_EXTENTION,
+            PD_IMAGE_TB_REPRESENTATIVE
+        FROM pd_image
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </select>
+
+    <select id="selectProductImageCount" parameterType="productImage" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM pd_image
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </select>
+
+    <select id="selectProductImageRepY" parameterType="productImage" resultType="productImage">
+        SELECT
+            PD_IMAGE_TB_NO
+        FROM pd_image
+        WHERE PRODUCT_TB_CODE=#{productTbCode} AND PD_IMAGE_TB_REPRESENTATIVE='Y'
+    </select>
+
+    <update id="updateProductImageRep" parameterType="productImage">
+        UPDATE pd_image
+        SET
+            PD_IMAGE_TB_REPRESENTATIVE=#{pdImageTbRepresentative}
+        WHERE PD_IMAGE_TB_NO=#{pdImageTbNo}
+    </update>
+
+
+</mapper>

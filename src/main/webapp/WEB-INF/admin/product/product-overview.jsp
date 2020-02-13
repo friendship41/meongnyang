@@ -769,7 +769,7 @@
                                             <td>개-먹거리</td>
                                             <td>개 사료1</td>
                                             <td>10,000</td>
-                                            <td><a href="product-addimage.html" class="btn btn-default btn-xs">3</a></td>
+                                            <td><a href="product-image-add.ado?productTbCode=1833b5eab9e8471582b4&resultMessage=none" class="btn btn-default btn-xs">3</a></td>
                                             <td>등록중</td>
                                             <td>-</td>
                                         </tr>
@@ -778,7 +778,7 @@
                                             <td>고양이-먹거리</td>
                                             <td>고양이 사료1</td>
                                             <td>20,000</td>
-                                            <td><a href="product-addimage.html" class="btn btn-default btn-xs">N</a></td>
+                                            <td><a href="product-image-add.ado?productTbCode=ec5a51e7a4564e6181d2" class="btn btn-default btn-xs">N</a></td>
                                             <td>미등록</td>
                                             <td><button class="btn btn-success" onclick="location.href='product-sale.html'">판매등록</button></td>
                                         </tr>

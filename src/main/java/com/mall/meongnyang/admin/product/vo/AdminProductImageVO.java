@@ -1,5 +1,8 @@
 package com.mall.meongnyang.admin.product.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.web.multipart.MultipartFile;
+
 public class AdminProductImageVO
 {
     private int pdImageTbNo;
@@ -8,6 +11,20 @@ public class AdminProductImageVO
     private String pdImageTbFileName;
     private String pdImageTbExtention;
     private String pdImageTbRepresentative;
+
+    @JsonIgnore
+    private MultipartFile uploadedImage;
+
+
+    public MultipartFile getUploadedImage()
+    {
+        return uploadedImage;
+    }
+
+    public void setUploadedImage(MultipartFile uploadedImage)
+    {
+        this.uploadedImage = uploadedImage;
+    }
 
     public int getPdImageTbNo()
     {
@@ -67,5 +84,18 @@ public class AdminProductImageVO
     public void setPdImageTbRepresentative(String pdImageTbRepresentative)
     {
         this.pdImageTbRepresentative = pdImageTbRepresentative;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "AdminProductImageVO{" +
+                "pdImageTbNo=" + pdImageTbNo +
+                ", productTbCode='" + productTbCode + '\'' +
+                ", pdImageTbPath='" + pdImageTbPath + '\'' +
+                ", pdImageTbFileName='" + pdImageTbFileName + '\'' +
+                ", pdImageTbExtention='" + pdImageTbExtention + '\'' +
+                ", pdImageTbRepresentative='" + pdImageTbRepresentative + '\'' +
+                '}';
     }
 }
