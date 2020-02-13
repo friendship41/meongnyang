@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -58,33 +59,21 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
+                                        <c:forEach items="${termsList }" var="termsList">
                                         <tr>
-                                            <td>1조1항</td>
-                                            <td><a class="f-bold" href="term-write.html">총칙</a></td>
-                                            <td>Y</td>
-                                            <td>20/02/01</td>
-                                            <td>21/02/01</td>
+                                            <td>${termsList.termsTbNo}</td>
+                                            <td><a class="f-bold" href="term-read.ado?termsTbNo=${termsList.termsTbNo }">${termsList.termsTbTitle }</a></td>
+                                            <td>${termsList.termsTbNecessary }</td>
+                                            <td>${termsList.termsTbChangeDate }</td>
+                                            <td>${termsList.termsTbExpireDate }</td>
                                         </tr>
-                                        <tr>
-                                            <td>1조2항</td>
-                                            <td><a class="f-bold" href="term-write.html">쇼핑</a></td>
-                                            <td>Y</td>
-                                            <td>20/02/01</td>
-                                            <td>21/02/01</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1조3항</td>
-                                            <td><a class="f-bold" href="term-write.html">개인정보</a></td>
-                                            <td>Y</td>
-                                            <td>20/02/01</td>
-                                            <td>21/02/01</td>
-                                        </tr>
+                                        </c:forEach>                                    
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div>
-                                <button class="btn btn-primary">신규 약관 작성</button>
+                                <button class="btn btn-primary" onclick="location.href='/term-write.ado'">신규 약관 작성</button>
                             </div>
                         </div>
                     </div>
