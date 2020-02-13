@@ -1,6 +1,5 @@
 package com.mall.meongnyang.client.member.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +43,15 @@ public class ClientLoginController {
 	public String logoutProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
 		
 		//session.invalidate();
-		session.setAttribute("clientId", null);
-		System.out.println(session.getAttribute("clientId"));
+		session.setAttribute("customer", null);
+		System.out.println(session.getAttribute("clientId")+"세션해제");
 		return "index";
 	}
 	
 	//로그인 후 세션있을시 모달클릭하면 myinfo 페이지로 이동하는 처리
 	
 	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
-	public String loginModalProc() {
+	public String loginModalProc(HttpSession session) {
 		
 		return "mypage/myinfo";
 	}
