@@ -61,7 +61,8 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table id="stockProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="stockProductTable" class="display table"
+                                           style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -81,7 +82,9 @@
                                             <td><span class="label label-danger">4</span></td>
                                             <td>5</td>
                                             <td><input type="number" class="form-control"></td>
-                                            <td><button class="btn btn-primary">수정</button></td>
+                                            <td>
+                                                <button class="btn btn-primary">수정</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
@@ -90,7 +93,9 @@
                                             <td><span class="label label-danger">7</span></td>
                                             <td>10</td>
                                             <td><input type="number" class="form-control"></td>
-                                            <td><button class="btn btn-primary">수정</button></td>
+                                            <td>
+                                                <button class="btn btn-primary">수정</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>1</td>
@@ -99,7 +104,9 @@
                                             <td><span class="label label-success">50</span></td>
                                             <td>10</td>
                                             <td><input type="number" class="form-control"></td>
-                                            <td><button class="btn btn-primary">수정</button></td>
+                                            <td>
+                                                <button class="btn btn-primary">수정</button>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -142,7 +149,8 @@
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table id="expirationProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="expirationProductTable" class="display table"
+                                           style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -158,21 +166,27 @@
                                             <td>000001</td>
                                             <td>개밥</td>
                                             <td><span class="label label-danger">20/02/05</span></td>
-                                            <td><button class="btn btn-danger">폐기</button></td>
+                                            <td>
+                                                <button class="btn btn-danger">폐기</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>000002</td>
                                             <td>냥이밥</td>
                                             <td><span class="label label-warning">20/05/04</span></td>
-                                            <td><button class="btn btn-danger">폐기</button></td>
+                                            <td>
+                                                <button class="btn btn-danger">폐기</button>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>000003</td>
                                             <td>동물밥</td>
                                             <td><span class="label label-success">21/12/25</span></td>
-                                            <td><button class="btn btn-danger">폐기</button></td>
+                                            <td>
+                                                <button class="btn btn-danger">폐기</button>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -183,13 +197,12 @@
                 </div>
                 <!-- !Row -->
             </div>
-        </div><!-- Main Wrapper -->
-        <div class="page-footer">
-            <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
+            <!-- Main Wrapper -->
+            <jsp:include page="../include/page-footer.jsp"/>
         </div>
+        <!-- /Page Inner -->
+        <jsp:include page="../include/right-sidebar.jsp"/>
     </div>
-    <!-- /Page Inner -->
-    <jsp:include page="../include/right-sidebar.jsp"/>
 </div>
 <!-- /Page Content -->
 </div>

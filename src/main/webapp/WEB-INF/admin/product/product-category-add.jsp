@@ -81,9 +81,7 @@
                 <!-- !Row -->
             </div>
             <!-- !Main Wrapper -->
-            <div class="page-footer">
-                <p>메인프로젝트 오늘뭐멍냥 <i class="fa fa-heart"></i> by team4</p>
-            </div>
+            <jsp:include page="../include/page-footer.jsp"/>
         </div>
         <!-- /Page Inner -->
         <jsp:include page="../include/right-sidebar.jsp"/>
