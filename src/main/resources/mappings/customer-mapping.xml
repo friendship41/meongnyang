@@ -35,6 +35,14 @@
 			customer_tb_phone = #{customerTbPhone}
 		WHERE customer_tb_no = #{customerTbNo}
 	</update>
+	<select id="selectMyinfoPassword" parameterType="clientLogin" resultType="clientLogin">
+		SELECT 
+			customer_tb_password
+		FROM
+			customer
+		WHERE 
+			customer_tb_password = #{customerTbPassword}
+	</select>
 	<update id="updateMyinfoPassword" parameterType="clientLogin">
 		UPDATE customer
 		SET

@@ -18,4 +18,10 @@ public class ClientUpdateMyinfoPasswordServiceImpl implements ClientUpdateMyinfo
 		
 	}
 
+	@Override
+	public ClientCustomerVO selectMyinfoPassword(ClientCustomerVO clientCustomerVO) {
+		ClientCustomerVO tempVO = clientMyinfoDAO.selectMyinfoPassword(clientCustomerVO);
+		return tempVO;
+	}
+
 }

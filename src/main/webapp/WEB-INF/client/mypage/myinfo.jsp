@@ -70,24 +70,22 @@
                    </div>
                    
                    <div class="ht__comment__form">
-                   <form action="" method="POST">
                     <h4 class="title__line--5">비밀번호 변경</h4>
+                    <form action="/myinfo-update-password.do" method="POST">
                     <div class="ht__comment__form__inner">
                         <div class="comment__form">
-                            <input type="text" placeholder="현재 비밀번호 *" name="customerTbPassword">
-                            <input type="text" placeholder="새 비밀번호 *">
-                            <input type="text" placeholder="비밀번호 확인">
-                        </div>
-                       
+                            <input type="password" placeholder="현재 비밀번호 *" name="customerTbPassword">
+                            <input type="password" placeholder="새 비밀번호 *">
+                            <input type="password" placeholder="비밀번호 확인">
+                        </div>   
                     </div>
-                    
                     <div class="ht__comment__btn--2 mt--30">
                         <button class="fr__btn" type="submit">수정</button>
                     </div>
                     </form> 
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">연락처 등록 및 수정</h4>
-                        <form action="/myinfo-insert-phone.do" method="POST">
+                        <form action="/myinfo-update-phone.do" method="POST">
                         <div class="ht__comment__form__inner">
                            
                             <div class="comment__form">

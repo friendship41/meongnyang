@@ -36,6 +36,13 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 	}
 
 
+	@Override
+	public ClientCustomerVO selectMyinfoPassword(ClientCustomerVO clientCustomerVO) {
+		ClientCustomerVO tempVO = sqlSessionTemplate.selectOne("ClientLoginDAO.selectMyinfoPassword", clientCustomerVO);
+		return tempVO;
+	}
+
+
 	
 
 	
