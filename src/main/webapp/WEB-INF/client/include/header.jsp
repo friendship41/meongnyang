@@ -138,7 +138,7 @@
                                 </div>
                                 
                                 <c:choose>
-                                <c:when test="${sessionScope.id eq null }">
+                                <c:when test="${sessionScope.customer eq null }">
                                  <div class="header__account">
                                     <a href="#"><i class="icon-user icons" onclick="loginModal()"></i></a>
                                 </div>
