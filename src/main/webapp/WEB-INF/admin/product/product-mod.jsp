@@ -79,6 +79,7 @@
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10">
                                         <button class="btn btn-primary">상품수정</button>
+                                        <span onclick="deleteProduct()" class="btn btn-primary">상품삭제</span>
                                     </div>
                                 </form>
                             </div>
@@ -100,9 +101,18 @@
 </div>
 <!-- /Page Container -->
 
-
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
+<script>
+    function deleteProduct() {
+        var really = confirm("정말로 삭제하시겠습니까?");
+        if(really === true)
+        {
+            location.href = "deleteProduct.ado?productTbCode=${product.productTbCode}";
+        }
+    }
+</script>
+
 
 </body>
 </html>
