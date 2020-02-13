@@ -15,7 +15,7 @@
         <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO" alias="promotion"/>
         <typeAlias type="com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO" alias="login"/>
         <typeAlias type="com.mall.meongnyang.client.member.vo.ClientCustomerVO" alias="clientLogin"/>
-        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientMyinfoVO" alias="clientMyinfo"/>
+        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO" alias="clientMyinfo"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappings/faq-mapping.xml"/>

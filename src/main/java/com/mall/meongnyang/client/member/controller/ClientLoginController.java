@@ -48,11 +48,7 @@ public class ClientLoginController {
 		return "index";
 	}
 	
-	//로그인 후 세션있을시 모달클릭하면 myinfo 페이지로 이동하는 처리
 	
-	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
-	public String loginModalProc(HttpSession session) {
-		
-		return "mypage/myinfo";
-	}
+	
+	
 }

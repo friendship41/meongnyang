@@ -6,6 +6,6 @@ public interface ClientMyinfoDAO {
 	//정보 얻어오기
 	public ClientCmAddressVO selectMyinfo(ClientCmAddressVO clientCmAddressVO);
 	
-	//정보 수정
-	public ClientCmAddressVO updateMyinfo(ClientCmAddressVO clientCmAddressVO);
+	//핸드폰 넣기
+	public ClientCmAddressVO insertMyinfoPhone(ClientCmAddressVO clientCmAddressVO);
 }

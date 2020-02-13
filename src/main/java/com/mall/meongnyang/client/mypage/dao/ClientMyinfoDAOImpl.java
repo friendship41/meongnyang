@@ -20,10 +20,14 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 		return tempVO;
 	}
 
+
 	@Override
-	public ClientCmAddressVO updateMyinfo(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
-		return null;
+	public ClientCmAddressVO insertMyinfoPhone(ClientCmAddressVO clientCmAddressVO) {
+		ClientCmAddressVO tempVO
+				= sqlSessionTemplate.selectOne("ClientMyinfoDAO.insertMyinfoPhone", clientCmAddressVO);
+		return tempVO;
 	}
+
+	
 
 }
