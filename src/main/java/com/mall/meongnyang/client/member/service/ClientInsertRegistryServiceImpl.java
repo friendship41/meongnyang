@@ -17,11 +17,11 @@ public class ClientInsertRegistryServiceImpl implements ClientInsertRegistryServ
 	public int insertRegistry(ClientCustomerVO clientCustomerVO) {
 		BCryptPasswordEncoder encoder 
 			= new BCryptPasswordEncoder();
-		System.out.println("전에 암호" + clientCustomerVO.getCustomerTbPassword());
+		
 		String securePw = encoder.encode(clientCustomerVO.getCustomerTbPassword());
 		clientCustomerVO.setCustomerTbPassword(securePw);
 		
-		System.out.println("암호화 후 " + securePw);
+		
 		
 		int result = clientLoginDAO.insertRegistry(clientCustomerVO);
 		return result;

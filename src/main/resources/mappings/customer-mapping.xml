@@ -10,6 +10,7 @@
 			customer_tb_name,
 			customer_tb_password,
 			customer_tb_email,
+			
 			customer_tb_phone,
 			customer_tb_join_date,
 			customer_tb_point,
@@ -34,7 +35,12 @@
 			customer_tb_phone = #{customerTbPhone}
 		WHERE customer_tb_no = #{customerTbNo}
 	</update>
-
+	<update id="updateMyinfoPassword" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_password = #{customerTbPassword}, customer_tb_pw_change = #{sysdate}
+		WHERE customer_tb_no = #{customerTbNo}
+	</update>
 
 
 </mapper>

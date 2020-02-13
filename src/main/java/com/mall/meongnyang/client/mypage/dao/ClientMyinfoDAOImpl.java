@@ -29,6 +29,13 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 	}
 
 
+	@Override
+	public void updateMyinfoPassword(ClientCustomerVO clientCustomerVO) {
+		sqlSessionTemplate.update("ClientLoginDAO.updateMyinfoPassword", clientCustomerVO);
+		
+	}
+
+
 	
 
 	
