@@ -27,7 +27,7 @@
                                 <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="/index.do" method="post"><!-- 로그인 -->
+                                            <form action="/login.do" method="post"><!-- 로그인 -->
                                                 <input name="customerTbEmail" placeholder="Email Address" type="text" required="">
                                                 <input name="customerTbPassword" placeholder="Password" type="password"
                                                        required="">

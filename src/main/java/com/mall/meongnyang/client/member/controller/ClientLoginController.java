@@ -23,17 +23,18 @@ public class ClientLoginController {
 	
 	
 	//로그인처리
-	@RequestMapping(value = "/index.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();		
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 		
 		if(tempVO!=null && (encoder.matches(clientCustomerVO.getCustomerTbPassword(), tempVO.getCustomerTbPassword()))) {
 			session.setAttribute("clientId", tempVO.getCustomerTbNo());
-			return "mypage/myinfo";
+			
+			return "redirect:index.do";
 		} else {
 			System.out.println("로그인실패");
-			return "index";
+			return "redirect:index.do";
 		}
 	}
 	

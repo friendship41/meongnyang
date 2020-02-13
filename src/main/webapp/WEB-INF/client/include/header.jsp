@@ -137,14 +137,14 @@
                                     <a href="#"><i class="icon-magnifier icons"></i></a>
                                 </div>
                                 <c:choose>
-                                <c:when test="${sessionScope.id == null }">
+                                <c:when test="${sessionScope.id eq null }">
                                 <div class="header__account">
                                     <a href="#"><i class="icon-user icons" onclick="loginModal()"></i></a>
                                 </div>
                                 </c:when>
                                 <c:otherwise>
                                 <div class="header__account">
-                                    <a href="#"><i class="icon-user icons" onclick="location.href='/myinfo.do'"></i></a>
+                                    <a href="/myinfo.do"><i class="icon-user icons"></i></a>
                                 </div>
                                 </c:otherwise>
                                 </c:choose>

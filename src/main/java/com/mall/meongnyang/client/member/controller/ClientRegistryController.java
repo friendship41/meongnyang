@@ -18,7 +18,7 @@ public class ClientRegistryController {
 	public String registryProc(ClientCustomerVO clientCustomerVO) {
 		
 		int result = clientInsertRegistryService.insertRegistry(clientCustomerVO);
-		System.out.println(result + "행 추가");
+		
 		// 나중에 오류 나는지 확인
 		return "index";
 	}
