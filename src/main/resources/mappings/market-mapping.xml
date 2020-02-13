@@ -63,10 +63,12 @@
 	<update id="updateMarket" parameterType="market">
 		UPDATE market
 		SET
-		market_tb_title,
-		market_tb_content,
-		market_tb_sell_or_buy,
-		market_tb_img_path		
+		market_tb_title = #{marketTbTitle},
+		market_tb_content = #{marketTbContent},
+		market_tb_sell_or_buy = #{marketTbSellOrBuy}
+		<if test='marketTbImgPath != null'>
+		, market_tb_img_path = #{marketTbImgPath}
+		</if>
 		WHERE
 		market_tb_no = #{marketTbNo}
 	</update>
