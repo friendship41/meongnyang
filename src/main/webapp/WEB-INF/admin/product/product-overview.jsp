@@ -812,7 +812,7 @@
         location.href='restartSaleProduct.ado?pdSaleTbNo=5';
 
         //판매중지처리
-        location.href='stopSaleProduct.ado?pdSaleTbNo=5';
+        // location.href='stopSaleProduct.ado?pdSaleTbNo=5';
 
     }
 

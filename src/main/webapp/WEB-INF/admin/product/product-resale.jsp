@@ -26,7 +26,7 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">판매 등록</h3>
+                <h3 class="breadcrumb-header">판매 재등록</h3>
             </div>
             <!-- Main Wrapper -->
             <div id="main-wrapper">
@@ -35,17 +35,12 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal" action="insertProductSale.ado" method="post">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">제품코드</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="productTbCode" value="${product.productTbCode}" readonly required>
-                                        </div>
-                                    </div>
+                                <form class="form-horizontal" action="restartSaleProduct.ado" method="post">
+                                    <input type="hidden" name="pdSaleTbNo" value="${productSale.pdSaleTbNo}">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">이름</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="pdSaleTbProductName" value="${product.productTbName}" readonly>
+                                            <input type="text" class="form-control" name="pdSaleTbProductName" value="${productSale.pdSaleTbProductName}" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -54,7 +49,14 @@
                                             <select id="promotionSelectBox" class="form-control" name="promotionTbCode">
                                                 <option value="-1">선택 없음</option>
                                                 <c:forEach var="promotion" items="${promotionList}">
-                                                    <option value="${promotion.promotionTbCode}">${promotion.promotionTbName}</option>
+                                                    <c:choose>
+                                                        <c:when test="${promotion.promotionTbCode eq productSale.promotionTbCode}">
+                                                            <option value="${promotion.promotionTbCode}" selected>${promotion.promotionTbName}</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="${promotion.promotionTbCode}">${promotion.promotionTbName}</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </c:forEach>
                                             </select>
                                         </div>
@@ -62,31 +64,31 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">입고가격</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="pdSaleTbReceivedPrice" required>
+                                            <input type="number" class="form-control" name="pdSaleTbReceivedPrice" value="${productSale.pdSaleTbReceivedPrice}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">판매가격</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="pdSaleTbSalesPrice" required>
+                                            <input type="number" class="form-control" name="pdSaleTbSalesPrice" value="${productSale.pdSaleTbSalesPrice}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">입고수량</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="pdSaleTbReceivedAmount" required>
+                                            <input type="number" class="form-control" name="pdSaleTbReceivedAmount" value="${productSale.pdSaleTbReceivedAmount}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">수량</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="pdSaleTbRemainingAmount" required>
+                                            <input type="number" class="form-control" name="pdSaleTbRemainingAmount" value="${productSale.pdSaleTbRemainingAmount}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">통보수량</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="pdSaleTbLimitAmount" required>
+                                            <input type="number" class="form-control" name="pdSaleTbLimitAmount" value="${productSale.pdSaleTbLimitAmount}" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -99,28 +101,19 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">유통기한</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="pdSaleTbExpireDay">
-                                        </div>
-                                    </div>
-                                    <!-- 옷이면 사이즈 먹거리면 용량 -->
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">사이즈/용량</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="pdSaleTbSize" placeholder="S/M/L, xxg, xxKg" required>
+                                            <input type="text" class="form-control date-picker" name="pdSaleTbExpireDay" value="${productSale.pdSaleTbExpireDay}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">할인율</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="discountInput" class="form-control" name="pdSaleTbDiscountRate" placeholder="2자리 할인율을 적어주세요" required>
+                                            <input type="number" id="discountInput" class="form-control" name="pdSaleTbDiscountRate" placeholder="2자리 할인율을 적어주세요" value='${productSale.pdSaleTbDiscountRate}' required>
                                         </div>
                                     </div>
-
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10">
-                                        <button class="btn btn-primary">판매등록</button>
+                                        <button class="btn btn-primary">판매재등록</button>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -149,8 +142,7 @@
             console.log(selectedValue);
             if(selectedValue === '-1')
             {
-                $("#discountInput").attr("value","");
-                $("#saleStartDateInput").attr("value","");
+                $("#discountInput").attr("value","0");
             }
             else
             {
@@ -164,7 +156,6 @@
                     .done(function(json) {
                         console.log(json);
                         $("#discountInput").attr("value", json.promotionTbDiscountRate);
-                        $("#saleStartDateInput").attr("value", json.promotionTbStartDate);
                     })
                     .fail(function (xhr, status, errorThrown) {
                         alert(errorThrown);

@@ -14,6 +14,12 @@ public class AdminUpdateProductSaleServiceImpl implements AdminUpdateProductSale
     @Override
     public void stopSale(AdminProductSaleVO adminProductSaleVO)
     {
+        adminProductSaleDAO.updateProductSaleState(adminProductSaleVO);
+    }
+
+    @Override
+    public void restartSale(AdminProductSaleVO adminProductSaleVO)
+    {
         adminProductSaleDAO.updateProductSale(adminProductSaleVO);
     }
 }

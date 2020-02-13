@@ -4,6 +4,7 @@ import com.mall.meongnyang.admin.marketing.service.AdminSelectPromotionListServi
 import com.mall.meongnyang.admin.marketing.service.AdminSelectPromotionService;
 import com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO;
 import com.mall.meongnyang.admin.product.service.AdminInsertProductSaleService;
+import com.mall.meongnyang.admin.product.service.AdminSelectProductSaleService;
 import com.mall.meongnyang.admin.product.service.AdminSelectProductService;
 import com.mall.meongnyang.admin.product.service.AdminUpdateProductSaleService;
 import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
@@ -30,6 +31,8 @@ public class AdminProductSaleController
     private AdminInsertProductSaleService adminInsertProductSaleService;
     @Autowired
     private AdminUpdateProductSaleService adminUpdateProductSaleService;
+    @Autowired
+    private AdminSelectProductSaleService adminSelectProductSaleService;
 
     @RequestMapping(value = "/insertProductSale.ado", method = RequestMethod.GET)
     public String insertProductSalePage(AdminProductVO adminProductVO, Model model)
@@ -62,6 +65,26 @@ public class AdminProductSaleController
     public String stopSaleProduct(AdminProductSaleVO adminProductSaleVO)
     {
         adminUpdateProductSaleService.stopSale(adminProductSaleVO);
+        return "redirect:product-overview.ado";
+    }
+
+    @RequestMapping(value = "/restartSaleProduct.ado", method = RequestMethod.GET)
+    public String restartSaleProductPage(AdminProductSaleVO adminProductSaleVO, Model model)
+    {
+        AdminProductSaleVO productSale = adminSelectProductSaleService.selectProductSale(adminProductSaleVO);
+        model.addAttribute("productSale", productSale);
+
+        List<AdminPromotionVO> promotionList = adminSelectPromotionListService.selectPromotionList();
+        model.addAttribute("promotionList", promotionList);
+
+        return "product/product-resale";
+    }
+
+    @RequestMapping(value = "/restartSaleProduct.ado", method = RequestMethod.POST)
+    public String restartSaleProductProc(AdminProductSaleVO adminProductSaleVO)
+    {
+        System.out.println(adminProductSaleVO);
+        adminUpdateProductSaleService.restartSale(adminProductSaleVO);
         return "redirect:product-overview.ado";
     }
 }

@@ -25,16 +25,55 @@
             #{pdSaleTbSize},
             0,
             0,
-            #{pdSaleTbDiscountRate},
+            #{pdSaleTbDiscountRate, jdbcType=INTEGER},
             'Y'
         )
     </insert>
 
-    <update id="updateProductSale" parameterType="productSale">
+    <update id="updateProductSaleState" parameterType="productSale">
         UPDATE pd_sale
         SET
             PD_SALE_TB_STATE='N'
         WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
     </update>
+
+    <update id="updateProductSale" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+        <if test="promotionTbCode != -1">
+            PROMOTION_TB_CODE=#{promotionTbCode},
+        </if>
+        PD_SALE_TB_PRODUCT_NAME=#{pdSaleTbProductName},
+        PD_SALE_TB_RECEIVED_PRICE=#{pdSaleTbReceivedPrice},
+        PD_SALE_TB_SALES_PRICE=#{pdSaleTbSalesPrice},
+        PD_SALE_TB_RECEIVED_AMOUNT=#{pdSaleTbReceivedAmount},
+        PD_SALE_TB_REMAINING_AMOUNT=#{pdSaleTbRemainingAmount},
+        PD_SALE_TB_LIMIT_AMOUNT=#{pdSaleTbLimitAmount},
+        PD_SALE_TB_START_DAY=#{pdSaleTbStartDay},
+        <if test="pdSaleTbExpireDay != null">
+            PD_SALE_TB_EXPIRE_DAY=#{pdSaleTbExpireDay},
+        </if>
+        PD_SALE_TB_DISCOUNT_RATE=#{pdSaleTbDiscountRate, jdbcType=INTEGER},
+        PD_SALE_TB_STATE='Y'
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
+
+    <select id="selectProductSale" parameterType="productSale" resultType="productSale">
+        SELECT
+            PD_SALE_TB_NO,
+            PRODUCT_TB_CODE,
+            PROMOTION_TB_CODE,
+            PD_SALE_TB_PRODUCT_NAME,
+            PD_SALE_TB_RECEIVED_PRICE,
+            PD_SALE_TB_SALES_PRICE,
+            PD_SALE_TB_RECEIVED_AMOUNT,
+            PD_SALE_TB_REMAINING_AMOUNT,
+            PD_SALE_TB_LIMIT_AMOUNT,
+            PD_SALE_TB_EXPIRE_DAY,
+            PD_SALE_TB_SIZE,
+            PD_SALE_TB_DISCOUNT_RATE
+        FROM pd_sale
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </select>
 
 </mapper>
