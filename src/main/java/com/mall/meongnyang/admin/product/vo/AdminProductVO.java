@@ -1,5 +1,6 @@
 package com.mall.meongnyang.admin.product.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Date;
@@ -12,6 +13,7 @@ public class AdminProductVO
     private Date productTbRegDate;
     private String productTbDetail;
 
+    @JsonIgnore
     private MultipartFile uploadFile;
 
     public String getProductTbCode()
