@@ -84,26 +84,19 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	var check = "${loginCheckSubmit}"
-	if(check !== null) {
-		if(check === 'success') {
-			alert("로그인 성공")
-		} else {
-			alert("로그인 실패")
-		}
-		
-	} 
-	
-})
-	
-	
 
-	
-	
-		
+<c:if test="${loginCheckSubmit eq true}">
+<script type="text/javascript"> 
+	alert("로그인 성공하셨습니다.")
+</script>
+</c:if>
+<c:if test="${loginCheckSubmit eq false}">
+<script type="text/javascript"> 
+	alert("로그인 실패 하셨습니다.")
+</script>
+</c:if>
+
+<script type="text/javascript">
 	function registryCheck() {
 		var pw1 = document.getElementById('password1').value;
 		var pw2 = document.getElementById('password2').value;

@@ -35,9 +35,10 @@ public class ClientLoginController {
 		
 		if(tempVO!=null && (encoder.matches(clientCustomerVO.getCustomerTbPassword(), tempVO.getCustomerTbPassword()))) {
 			session.setAttribute("customer", tempVO);
-			model.addAttribute("loginCheckSubmit", "success");
+			model.addAttribute("loginCheckSubmit", true);
 			return "redirect:index.do";
 		} else {
+			model.addAttribute("loginCheckSubmit", false);
 			return "redirect:index.do";
 		}
 	}
