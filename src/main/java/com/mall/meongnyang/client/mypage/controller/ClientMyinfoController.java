@@ -46,6 +46,14 @@ public class ClientMyinfoController {
 		ClientCustomerVO tempVO = (ClientCustomerVO) session.getAttribute("customer");
 		int no = tempVO.getCustomerTbNo();
 		clientCustomerVO.setCustomerTbNo(no);
+		
+		StringBuffer phone = new StringBuffer(clientCustomerVO.getCustomerTbPhone());
+		phone.insert(3, "-");
+		phone.insert(8, "-");
+		
+		clientCustomerVO.setCustomerTbPhone(phone.toString());
+		
+		
 		clientUpdateMyinfoPhoneService.updateMyinfoPhone(clientCustomerVO);
 
 		return "mypage/myinfo";
