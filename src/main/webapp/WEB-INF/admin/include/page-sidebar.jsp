@@ -17,7 +17,7 @@
         <div class="page-sidebar-menu">
             <ul class="accordion-menu">
                 <li class="active-page">
-                    <a href="index.html">
+                    <a href="index.ado">
                         <i class="menu-icon icon-home4"></i><span>대시보드</span>
                     </a>
                 </li>
@@ -27,9 +27,9 @@
                             class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="member/member-overview.html">상세현황</a></li>
-                        <li><a href="member/member-manage.html">회원관리</a></li>
-                        <li><a href="member/term-manage.html">정책관리</a></li>
+                        <li><a href="memberOverview.ado">상세현황</a></li>
+                        <li><a href="member-Manage.ado">회원관리</a></li>
+                        <li><a href="term-manage.ado">정책관리</a></li>
                     </ul>
                 </li>
                 <li>
@@ -51,9 +51,9 @@
                             class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="shoppingmall/shoppingmall-notice-list.html">공지관리</a></li>
+                        <li><a href="shoppingmall-notice-list.ado">공지관리</a></li>
                         <li><a href="shoppingmall/shoppingmall-qna-list.html">Q&A</a></li>
-                        <li><a href="shoppingmall/shoppingmall-faq-list.html">FAQ</a></li>
+                        <li><a href="shoppingmall-faq-list.ado">FAQ</a></li>
                     </ul>
                 </li>
                 <li>
@@ -62,8 +62,8 @@
                             class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="marketing/promotion-overview.html">프로모션 현황</a></li>
-                        <li><a href="marketing/promotion-write.html">프로모션 등록</a></li>
+                        <li><a href="promotion-overview.ado">프로모션 현황</a></li>
+                        <li><a href="promotion-write.ado">프로모션 등록</a></li>
                     </ul>
                 </li>
                 <li>
