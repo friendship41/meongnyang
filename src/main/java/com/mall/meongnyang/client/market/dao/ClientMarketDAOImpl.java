@@ -35,8 +35,8 @@ public class ClientMarketDAOImpl implements ClientMarketDAO {
 	}
 
 	@Override
-	public List<ClientMarketVO> selectMarketList() {
-		return sqlSessionTemplate.selectList("MarketDAO.selectMarketList");
+	public List<ClientMarketVO> selectMarketList(ClientMarketVO clientMarketVO) {
+		return sqlSessionTemplate.selectList("MarketDAO.selectMarketList", clientMarketVO);
 	}
 
 	@Override

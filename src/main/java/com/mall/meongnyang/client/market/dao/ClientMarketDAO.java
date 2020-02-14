@@ -10,7 +10,7 @@ public interface ClientMarketDAO {
 	void updateMarket(ClientMarketVO clientMarketVO);
 	void deleteMarket(int marketTbNo);
 	ClientMarketVO selectMarket(int marketTbNo);
-	List<ClientMarketVO> selectMarketList();
+	List<ClientMarketVO> selectMarketList(ClientMarketVO clientMarketVO);
 	int selectCountMarket(); //마켓 전체 글수
 	void updateReadCount(int marketTbNo); //게시글 조회 수 증가
 }
