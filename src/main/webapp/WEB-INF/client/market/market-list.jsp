@@ -86,15 +86,15 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<ul class="htc__pagenation">
+				<c:if test="${paging.prev == true}">
 					<li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#"><i class="zmdi zmdi-more"></i></a></li>
-					<li><a href="#">19</a></li>
-					<li class="active"><a href="#"><i
-							class="zmdi zmdi-chevron-right"></i></a></li>
+					</c:if>
+					<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}" >
+					<li><a href="i">1</a></li>
+					</c:forEach>
+					<c:if test="${paging.next == true}">
+					<li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

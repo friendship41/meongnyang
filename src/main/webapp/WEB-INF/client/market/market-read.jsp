@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <jsp:include page="../include/header.jsp" />
 
 <!-- Start Bradcaump area -->
@@ -40,16 +41,24 @@
 					</table>
 				</div>
 				<div class="htc__blog__details__wrap">
+				<c:if test="${market.marketTbImgPath == null}">
+				
+				</c:if>
+				<c:if test="${market.marketTbImgPath != null}">
 					<div class="ht__bl__thumb">
 						<img src="${market.marketTbImgPath}" alt="market images"
 							width="870" height="450">
 					</div>
+				</c:if>
+				
 					<div class="bl__dtl">
+						<%-- <c:if test="${market.customerTbNo eq customer.customerTbNo }"> --%>
 						<div class="reply__btn">
-							<a href="#">글삭제</a> <a href="#">글수정</a>
+							<a href="#" onclick="deleteMarket()">글삭제</a> <a href="market-update.do?marketTbNo=${market.marketTbNo}">글수정</a>
 						</div>
+						<%-- </c:if> --%>
 						<br>
-						<p>${market.marketTbContent }</p>
+						<pre>${market.marketTbContent }</pre>
 					</div>
 					<!-- Start Comment Area -->
 					<div class="htc__comment__area">
@@ -135,5 +144,10 @@
 </div>
 <!-- cart-main-area end -->
 
-
 <jsp:include page="../include/footer.jsp" />
+<script>
+	function deleteMarket() {
+		alert("정말로 삭제 하시겠습니까? ");
+		document.location.href="market-delete.do?marketTbNo=" + ${market.marketTbNo};
+	}
+</script>
