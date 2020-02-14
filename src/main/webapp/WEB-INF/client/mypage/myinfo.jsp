@@ -42,25 +42,29 @@
                 </div>
 
                 <!-- Start comment Form --> <!--여기부터다시수정하면됨!!!!!-->
-
+				
                 <div class="col-lg-8">
+                <form id="formToController" action="myinfo-address-insert.do" method="post">
+             <!-- 	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0"> -->
                     <div class="ht__comment__form">
+                    	
                         <h4 class="title__line--5">배송지 목록</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-                                <select class="ht__select">
-                                    <option>선택하세요</option>
-                                    <option>주소1</option>
-                                    <option>주소2</option>
-                                    <option>주소3</option>
+                                
+                                <select class="ht__select" id="selectBox">
+                                	<option value="thisiIsInsert">선택하세요</option>
+                                    <c:forEach var="address" items="${customerTbNo }">
+                                    <option value="${customerTbAddress1 }"></option>
+                                    </c:forEach>
                                 </select>
                                 <input id="postcode3" value="" type="text" placeholder="" name="cmAddressTbPostcode">
                                 <input id="postcode1" value="" type="text" placeholder=" 주소 *" name="cmAddressTbAddress1">
                                 <input id="postcode2" value="" type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2">
                                 <div class="ht__comment__btn--2 mt--30">
-                                    <a class="fr__btn" href="#">수정</a>
-                                    <a class="fr__btn" href="#">삭제</a>
+                                	<a class="fr__btn" href="#" id="modifyBtn">수정</a>
+                                    <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
                                 </div>
                             </div>
                             <div class="ht__comment__btn--2 mt--30">
@@ -69,7 +73,7 @@
                            </div>
                        </div>
                    </div>
-                   
+                   </form>
                    <div class="ht__comment__form">
                     <h4 class="title__line--5">비밀번호 변경</h4>
                     <form action="/myinfo-update-password.do" method="POST">
@@ -121,3 +125,47 @@
 
 
 <jsp:include page="../include/footer.jsp" />
+<!--jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#modifyBtn").hide();
+        $("#deleteBtn").hide();
+
+        $("#selectBox").change(function () {
+            var selectedValue = $("#selectBox option:selected").val();
+            console.log(selectedValue);
+            if(selectedValue === 'thisIsInsert')
+            {
+                $("#modifyBtn").html('추가');
+                $("#deleteBtn").hide();
+                $("#customerTbNo").attr("value", 0);
+                $("#customerTbAddress1").removeAttr("value");
+                $("#formToController").attr("action", "myinfo-address-insert.do");
+            }
+            else
+            {
+                var ajaxUrl = "/myinfo-address-single-ajax.do?customerTbNo="+selectedValue;
+                $.ajax({
+                    url: ajaxUrl,
+                    type: "GET",
+                    data: {},
+                    dataType: "json"
+                })
+                    .done(function(json) {
+                        console.log(json);
+                        $("#customerTbNo").attr("value", json.customerTbNo);
+ 						$("#address1").attr("value", json.productCategoryTbSub);
+                        $("#modifyBtn").html('수정');
+                        $("#deleteBtn").show();
+                        var deleteUrl = "/myinfo-address-delete.ado?customerTbNo="+json.customerTbNo;
+                        $("#deleteBtn").attr("href", deleteUrl);
+                        $("#formToController").attr("action", "myinfo-address-update.ado");
+                    })
+                    .fail(function (xhr, status, errorThrown) {
+                        alert(errorThrown);
+                    });
+            }
+        });
+    })
+</script>

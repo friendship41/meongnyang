@@ -15,6 +15,15 @@
 		FROM cm_address
 		WHERE customer_tb_no=#{customerTbNo}
 	</select>
+	<insert id="insertMyinfoAddress" parameterType="clientMyinfo">
+		INSERT 
+		INTO 
+			cm_address_mapping (cm_address_tb_no, cm_address_tb_postcode, 
+							cm_address_tb_address1, cm_address_tb_address2)
+		VALUES(cm_address_seq.nextval, #{cmAddressTbPostcode} 
+		#{cmAddressTbAddress1}, #{cmAddressTbAddress2})					
+		
+	</insert>
 	
 	
 </mapper>
