@@ -27,12 +27,12 @@
                                 <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="/login.do" method="post"><!-- 로그인 -->
+                                            <form name="loginForm" action="/login.do" method="post"><!-- 로그인 -->
                                                 <input name="customerTbEmail" placeholder="Email Address" type="text" required="">
                                                 <input name="customerTbPassword" placeholder="Password" type="password"
                                                        required="">
                                                 <div class="sign-up">
-                                                	<input type="submit" value="Sign in"/>
+                                                	<input type="submit" value="Sign in" onclick="loginCheck()"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -41,18 +41,18 @@
                                 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                     <div class="facts">
                                         <div class="register">
-                                            <form action="registry.do" method="post"><!-- 회원가입 -->
+                                            <form name="registryForm" action="registry.do" method="post"><!-- 회원가입 -->
                                                 <input placeholder="Name" name="customerTbName" type="text" required="">
                                                 <input placeholder="Email Address" name="customerTbEmail" type="email"
                                                        required="">
                                                 <input placeholder="Password" name="customerTbPassword" type="password"
-                                                       required="">
+                                                       required="" id="password1">
                                                 <input placeholder="Confirm Password" name="Password" type="password"
-                                                       required="">
+                                                       required="" id="password2">
                                                 <div class="sign-up">
                                                 
                                                 
-                                                	<input type="submit" value="Create Account" id="CreateAccount"/>
+                                                	<input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
                                                
                                                 </div>
                                             </form>
@@ -84,4 +84,36 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	
+})
+	
+	
+
+	
+	
+		
+	function registryCheck() {
+		var pw1 = document.getElementById('password1').value;
+		var pw2 = document.getElementById('password2').value;
+		if(pw1 != pw2) {
+			alert("비밀번호가 일치하지 않습니다.");
+		}
+	}
+	function loginCheck() {
+		var loginForm = document.loginForm;
+		var userId = loginForm.customerTbEmail.value;
+		var password = loginForm.customerTbPassword.value;
+		
+		if(!userId || !password) {
+			alert("모두 입력해주세요")
+		} else {
+			loginForm.submit();
+		}
+	}
+	
+	
+</script>
 
