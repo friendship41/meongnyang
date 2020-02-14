@@ -58,7 +58,7 @@
 						</div>
 						<%-- </c:if> --%>
 						<br>
-						<p>${market.marketTbContent }</p>
+						<pre>${market.marketTbContent }</pre>
 					</div>
 					<!-- Start Comment Area -->
 					<div class="htc__comment__area">

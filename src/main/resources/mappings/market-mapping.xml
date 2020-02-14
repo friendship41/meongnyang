@@ -30,8 +30,10 @@
 		WHERE market_tb_no = #{marketTbNo}
 	</select>
 
-	<select id="selectMarketList" resultType="market">
-		SELECT 
+	<select id="selectMarketList" resultType="market" parameterType="market">
+		SELECT * FROM
+		(SELECT 
+		ROWNUM rnum,
 		market_tb_no,
 		customer_tb_no,
 		market_tb_title,
@@ -40,7 +42,8 @@
 		market_tb_read_count,
 		market_tb_sell_or_buy,
 		market_tb_img_path 
-		FROM market ORDER BY market_tb_no DESC
+		FROM (SELECT * FROM market ORDER BY market_tb_no DESC))
+		<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
 	</select>
 
 	<insert id="insertMarket" parameterType="market">

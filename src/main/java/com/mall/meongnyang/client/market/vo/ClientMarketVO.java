@@ -17,6 +17,10 @@ public class ClientMarketVO {
 	
 	private MultipartFile uploadFile;
 	
+	
+	private int startRow; //현재페이지의 시작글번호
+	private int endRow; //현재페이지의 끝 글번호
+	
 	public int getMarketTbNo() {
 		return marketTbNo;
 	}
@@ -71,6 +75,20 @@ public class ClientMarketVO {
 	public void setUploadFile(MultipartFile uploadFile) {
 		this.uploadFile = uploadFile;
 	}
+
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+
 	@Override
 	public String toString() {
 		return "ClientMarketVO [marketTbNo=" + marketTbNo + ", customerTbNo=" + customerTbNo + ", marketTbTitle="
@@ -78,5 +96,4 @@ public class ClientMarketVO {
 				+ ", marketTbReadCount=" + marketTbReadCount + ", marketTbSellOrBuy=" + marketTbSellOrBuy
 				+ ", marketTbImgPath=" + marketTbImgPath + ", uploadFile=" + uploadFile + "]";
 	}
-
 }

@@ -15,9 +15,16 @@ public class ClientSelectMarketListServiceImpl implements ClientSelectMarketList
 	private ClientMarketDAO clientMarketDAO;
 	
 	@Override
-	public List<ClientMarketVO> selectMarketList() {
-
-		return clientMarketDAO.selectMarketList();
+	public List<ClientMarketVO> selectMarketList(ClientMarketVO clientMarketVO) {
+		
+		return clientMarketDAO.selectMarketList(clientMarketVO);
 	}
+
+	@Override
+	public int selectCountMarket() {
+		return clientMarketDAO.selectCountMarket();
+	}
+	
+	
 
 }
