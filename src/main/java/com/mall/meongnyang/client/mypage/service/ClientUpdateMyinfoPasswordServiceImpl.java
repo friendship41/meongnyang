@@ -24,4 +24,6 @@ public class ClientUpdateMyinfoPasswordServiceImpl implements ClientUpdateMyinfo
 		return tempVO;
 	}
 
+	
+
 }

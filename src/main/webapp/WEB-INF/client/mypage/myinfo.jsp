@@ -55,6 +55,7 @@
                                     <option>주소2</option>
                                     <option>주소3</option>
                                 </select>
+                                <input id="postcode3" value="" type="text" placeholder="" name="cmAddressTbPostcode">
                                 <input id="postcode1" value="" type="text" placeholder=" 주소 *" name="cmAddressTbAddress1">
                                 <input id="postcode2" value="" type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2">
                                 <div class="ht__comment__btn--2 mt--30">
@@ -75,8 +76,8 @@
                     <div class="ht__comment__form__inner">
                         <div class="comment__form">
                             <input type="password" placeholder="현재 비밀번호 *" name="customerTbPassword">
-                            <input type="password" placeholder="새 비밀번호 *">
-                            <input type="password" placeholder="비밀번호 확인">
+                            <input type="password" placeholder="새 비밀번호 *" name="newPassword1">
+                            <input type="password" placeholder="비밀번호 확인" name="newPassword2">
                         </div>   
                     </div>
                     <div class="ht__comment__btn--2 mt--30">
@@ -98,7 +99,7 @@
                         </div>
                         </form>	    
                     </div>
-                    
+                    <form action="/myinfo-delete-customer.do" method="POST">
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">회원 탈퇴</h4>
                         <div class="ht__comment__form__inner">
@@ -107,9 +108,10 @@
                             </div> 
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
-                            <a class="fr__btn" href="#">탈퇴</a>
+                            <button class="fr__btn" type="submit">탈퇴</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

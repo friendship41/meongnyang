@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mall.meongnyang.client.member.service.ClientLogoutService;
 import com.mall.meongnyang.client.member.service.ClientSelectLoginService;
+import com.mall.meongnyang.client.member.service.ClientUpdateJoinDateService;
+import com.mall.meongnyang.client.member.service.ClientUpdateLastLoginService;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 
 @Controller
@@ -18,9 +20,15 @@ public class ClientLoginController {
 	@Autowired
 	private ClientSelectLoginService clientSelectLoginService;
 	
+	//필요없음 로그아웃은
 	@Autowired
 	private ClientLogoutService clientLogoutService;
 	
+	@Autowired
+	private ClientUpdateLastLoginService clientUpdateLastLoginService;
+	
+	@Autowired
+	private ClientUpdateJoinDateService clientUpdateJoinDateService;
 	
 	//로그인처리
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)

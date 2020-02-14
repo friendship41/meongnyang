@@ -16,5 +16,6 @@ public interface ClientMyinfoDAO {
 	//비밀번호 변경
 	public void updateMyinfoPassword(ClientCustomerVO clientCustomerVO);
 	
-	
+	//회원탈퇴
+	public void deleteMyinfoCustomer(ClientCustomerVO clientCustomerVO);
 }

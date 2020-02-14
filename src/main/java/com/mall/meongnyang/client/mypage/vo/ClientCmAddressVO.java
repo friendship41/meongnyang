@@ -50,6 +50,13 @@ public class ClientCmAddressVO {
 	public void setCmAddressTbPhone(String cmAddressTbPhone) {
 		this.cmAddressTbPhone = cmAddressTbPhone;
 	}
+	@Override
+	public String toString() {
+		return "ClientCmAddressVO [cmAddressTbNo=" + cmAddressTbNo + ", customerTbNo=" + customerTbNo
+				+ ", cmAddressTbNickname=" + cmAddressTbNickname + ", cmAddressTbPostcode=" + cmAddressTbPostcode
+				+ ", cmAddressTbAddress1=" + cmAddressTbAddress1 + ", cmAddressTbAddress2=" + cmAddressTbAddress2
+				+ ", cmAddressTbPhone=" + cmAddressTbPhone + "]";
+	}
 	
 	
 	
