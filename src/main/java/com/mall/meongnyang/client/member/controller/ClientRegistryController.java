@@ -23,7 +23,7 @@ public class ClientRegistryController {
 		
 		int result = clientInsertRegistryService.insertRegistry(clientCustomerVO);
 		if(result == 1) {
-			clientUpdateJoinDateService.updateJoinDate(clientCustomerVO);
+			
 		} else {
 			return "index";
 		}

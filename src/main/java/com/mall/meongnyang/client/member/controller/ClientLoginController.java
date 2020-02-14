@@ -50,7 +50,7 @@ public class ClientLoginController {
 		
 		//session.invalidate();
 		session.setAttribute("customer", null);
-		
+		System.out.println(session.getAttribute("clientId")+"세션해제");
 		return "index";
 	}
 	
