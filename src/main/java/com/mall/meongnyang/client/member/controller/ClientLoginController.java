@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mall.meongnyang.client.member.service.ClientLogoutService;
 import com.mall.meongnyang.client.member.service.ClientSelectLoginService;
-import com.mall.meongnyang.client.member.service.ClientUpdateJoinDateService;
 import com.mall.meongnyang.client.member.service.ClientUpdateLastLoginService;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 
@@ -27,8 +26,7 @@ public class ClientLoginController {
 	@Autowired
 	private ClientUpdateLastLoginService clientUpdateLastLoginService;
 	
-	@Autowired
-	private ClientUpdateJoinDateService clientUpdateJoinDateService;
+	
 	
 	//肺弊牢贸府
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -52,7 +50,7 @@ public class ClientLoginController {
 		
 		//session.invalidate();
 		session.setAttribute("customer", null);
-		System.out.println(session.getAttribute("clientId")+"技记秦力");
+		
 		return "index";
 	}
 	
