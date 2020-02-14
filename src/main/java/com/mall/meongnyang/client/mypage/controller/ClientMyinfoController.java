@@ -67,7 +67,7 @@ public class ClientMyinfoController {
 		System.out.println(customerTbPassword);
 		ClientCustomerVO DBVO = clientUpdateMyinfoPasswordService.selectMyinfoPassword(clientCustomerVO);
 		
-		//DB왔다갔다실패
+		
 		
 		if (encoder.matches(DBVO.getCustomerTbPassword(), clientCustomerVO.getCustomerTbPassword())) {
 			if(newPassword1.equals(newPassword2)) {

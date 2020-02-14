@@ -9,8 +9,7 @@ public interface ClientLoginDAO {
 	
 	public int insertRegistry(ClientCustomerVO clientCustomerVO);
 	
-	//회원가입시 joindate sysdate추가
-	public void updateJoinDate(ClientCustomerVO clientCustomerVO);
+	
 	
 	//로그인시 last login sysdate 추가
 	public void updateLastLogin(ClientCustomerVO clientCustomerVO);

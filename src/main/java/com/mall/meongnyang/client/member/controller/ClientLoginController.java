@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mall.meongnyang.client.member.service.ClientLogoutService;
 import com.mall.meongnyang.client.member.service.ClientSelectLoginService;
-import com.mall.meongnyang.client.member.service.ClientUpdateLastLoginService;
+
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 
 @Controller
@@ -23,8 +23,7 @@ public class ClientLoginController {
 	@Autowired
 	private ClientLogoutService clientLogoutService;
 	
-	@Autowired
-	private ClientUpdateLastLoginService clientUpdateLastLoginService;
+	
 	
 	
 	

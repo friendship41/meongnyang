@@ -31,12 +31,7 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 		return result;
 	}
 
-	@Override
-	public void updateJoinDate(ClientCustomerVO clientCustomerVO) {
-		sqlSessionTemplate.update("ClientLoginDAO.updateClientJoinDate", clientCustomerVO);
-		
-		
-	}
+	
 
 	@Override
 	public void updateLastLogin(ClientCustomerVO clientCustomerVO) {
