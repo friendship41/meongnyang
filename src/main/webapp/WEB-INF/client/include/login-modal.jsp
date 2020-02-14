@@ -87,6 +87,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	var check = "${loginCheckSubmit}"
+	if(check !== null) {
+		if(check === 'success') {
+			alert("로그인 성공")
+		} else {
+			alert("로그인 실패")
+		}
+		
+	} 
 	
 })
 	
