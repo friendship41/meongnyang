@@ -5,10 +5,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.client.market.service.ClientDeleteMarketService;
 import com.mall.meongnyang.client.market.service.ClientInsertMarketService;
@@ -50,16 +52,16 @@ public class ClientMarketController {
 	}
 	
 	@RequestMapping(value = "/market-list.do")
-	public String selectMarketList(ClientMarketVO clientMarketVO, Model model) {
+	public String selectMarketList(@RequestParam(defaultValue = "1") int currentPage, ClientMarketVO clientMarketVO, Model model) {
 		
-		MarketListPaging paging = new MarketListPaging();
+		MarketListPaging paging = new MarketListPaging(currentPage);
 		paging.createPaging(clientSelectMarketListService.selectCountMarket());
 	
 		clientMarketVO.setStartRow(paging.getStartRow());
 		clientMarketVO.setEndRow(paging.getEndRow());
 		
 		List<ClientMarketVO> marketList = clientSelectMarketListService.selectMarketList(clientMarketVO);
-
+		
 		model.addAttribute("marketList", marketList);
 		model.addAttribute("paging", paging);
 		

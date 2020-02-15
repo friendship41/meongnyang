@@ -60,7 +60,7 @@
 							<c:if test="${market.marketTbImgPath != null}">
 								<div class="blog__thumb">
 									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">
-										<img src="/${market.marketTbImgPath}" alt="maket images"
+										<img src="${market.marketTbImgPath}" alt="maket images"
 										width="400" height="287">
 									</a>
 								</div>
@@ -90,7 +90,7 @@
 					<li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
 					</c:if>
 					<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}" >
-					<li><a href="i">1</a></li>
+					<li><a href="/market-list.do?currentPage=${i}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${paging.next == true}">
 					<li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
