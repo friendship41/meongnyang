@@ -39,7 +39,7 @@
     <update id="updateProductSaleState" parameterType="productSale">
         UPDATE pd_sale
         SET
-            PD_SALE_TB_STATE='N'
+            PD_SALE_TB_STATE=#{pdSaleTbState}
         WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
     </update>
 
@@ -52,8 +52,6 @@
         PD_SALE_TB_PRODUCT_NAME=#{pdSaleTbProductName},
         PD_SALE_TB_RECEIVED_PRICE=#{pdSaleTbReceivedPrice},
         PD_SALE_TB_SALES_PRICE=#{pdSaleTbSalesPrice},
-        PD_SALE_TB_RECEIVED_AMOUNT=#{pdSaleTbReceivedAmount},
-        PD_SALE_TB_REMAINING_AMOUNT=#{pdSaleTbRemainingAmount},
         PD_SALE_TB_LIMIT_AMOUNT=#{pdSaleTbLimitAmount},
         PD_SALE_TB_START_DAY=#{pdSaleTbStartDay},
         <if test="pdSaleTbExpireDay != null">

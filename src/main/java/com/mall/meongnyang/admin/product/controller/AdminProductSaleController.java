@@ -56,7 +56,7 @@ public class AdminProductSaleController
     @RequestMapping(value = "/insertProductSale.ado", method = RequestMethod.POST)
     public String insertProductSaleProc(AdminProductSaleVO adminProductSaleVO)
     {
-        System.out.println(adminProductSaleVO);
+        adminProductSaleVO.setPdSaleTbRemainingAmount(adminProductSaleVO.getPdSaleTbReceivedAmount());
         adminInsertProductSaleService.insertProductSale(adminProductSaleVO);
         return "redirect:productOverview.ado";
     }

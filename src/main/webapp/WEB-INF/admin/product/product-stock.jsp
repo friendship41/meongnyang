@@ -171,6 +171,7 @@
         var stockAjaxParam = "/productStockListAjax.ado?dayFrom="+new Date($("#stockFromInput").val()).yyyymmdd()+"&dayTo="+new Date($("#stockToInput").val()).yyyymmdd();
         getDataFromServerAjax(stockAjaxParam);
     }
+
     function searchExpireDate() {
         var expireAjaxParam = "/productExpireListAjax.ado?dayFrom="+new Date($("#expireFromInput").val()).yyyymmdd()+"&dayTo="+new Date($("#expireToInput").val()).yyyymmdd();
         getDataFromServerAjax(expireAjaxParam);
@@ -223,14 +224,14 @@
             var limit = stockList.pdSaleTbLimitAmount;
             if(remain - limit > 0)
             {
-                stockHTML += '<td><span class="label label-success">'+remain+'</span></td>';
+                stockHTML += '<td id="nowStock'+stockList.pdSaleTbNo+'"><span id="nowStockSpan'+stockList.pdSaleTbNo+'" class="label label-success">'+remain+'</span></td>';
             }
             else
             {
-                stockHTML += '<td><span class="label label-danger">'+remain+'</span></td>';
+                stockHTML += '<td id="nowStock'+stockList.pdSaleTbNo+'"><span id="nowStockSpan'+stockList.pdSaleTbNo+'" class="label label-danger">'+remain+'</span></td>';
             }
-            stockHTML += '<td>'+stockList.pdSaleTbLimitAmount+'</td>';
-            stockHTML += '<td><div class="row"><div class="col-lg-8 col-md-6 col-sm-3"><input type="number" class="form-control"></div><button class="btn btn-primary">수정</button></div></td>';
+            stockHTML += '<td id="limitStock'+stockList.pdSaleTbNo+'">'+stockList.pdSaleTbLimitAmount+'</td>';
+            stockHTML += '<td><div class="row"><div class="col-lg-8 col-md-6 col-sm-3"><input id="productStockInput'+stockList.pdSaleTbNo+'" type="number" class="form-control"></div><button onclick="updateProductStock('+stockList.pdSaleTbNo+')" class="btn btn-primary">수정</button></div></td>';
             stockHTML += '</tr>';
 
 
@@ -254,7 +255,7 @@
             // <td><span class="label label-success">21/12/25</span></td>
 
 
-            expireHTML += '<tr>';
+            expireHTML += '<tr id="expireItem'+expireList.pdSaleTbNo+'">';
             expireHTML += '<td>'+expireList.rowNumber+'</td>';
             expireHTML += '<td>'+expireList.productTbCode+'</td>';
             expireHTML += '<td>'+expireList.pdSaleTbProductName+'</td>';
@@ -274,7 +275,7 @@
                 expireHTML += '<td><span class="label label-success">'+expireDay.yyyymmdd()+'</span></td>';
             }
 
-            expireHTML += '<td><button class="btn btn-danger">폐기</button></td>';
+            expireHTML += '<td><button onclick="disposeProduct('+expireList.pdSaleTbNo+')" class="btn btn-danger">폐기</button></td>';
             expireHTML += '</tr>';
 
 
@@ -283,6 +284,71 @@
         $("#expireDayTableBody").empty();
         $("#expireDayTableBody").append(expireHTML);
         $("#expirationProductTable").DataTable();
+    }
+
+    function updateProductStock(saleNum) {
+        var inputStock = "productStockInput"+saleNum;
+        var addNum = document.getElementById(inputStock).value;
+        var updateUrl = "/updateProductStockAjax.ado?pdSaleTbNo="+saleNum+"&pdSaleTbReceivedAmount="+addNum;
+        $.ajax({
+            url: updateUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+
+                if(json.state === "success")
+                {
+                    $("#stockProductTable").DataTable().destroy();
+                    var nowStockBefore = document.getElementById("nowStock"+saleNum).innerText;
+                    // console.log(nowStockBefore);
+                    nowStockBefore *= 1;
+                    addNum *= 1;
+                    var nowStockAfter = nowStockBefore+addNum;
+                    // console.log(nowStockAfter);
+                    var limit = document.getElementById("limitStock"+saleNum).innerText;
+                    limit *= 1;
+                    if(nowStockAfter > limit)
+                    {
+                        document.getElementById("nowStockSpan"+saleNum).setAttribute("class","label label-success");
+                    }
+                    else
+                    {
+                        document.getElementById("nowStockSpan"+saleNum).setAttribute("class","label label-danger");
+                    }
+                    document.getElementById("nowStockSpan"+saleNum).innerHTML = nowStockAfter;
+                    $("#stockProductTable").DataTable();
+                }
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
+
+    function disposeProduct(saleNum) {
+        var updateUrl = "/stopSaleProductAjax.ado?pdSaleTbNo="+saleNum;
+        $.ajax({
+            url: updateUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+
+                if(json.state === "success")
+                {
+                    $("#stockProductTable").DataTable().destroy();
+                    var expireTr = "expireItem"+saleNum;
+                    document.getElementById(expireTr).remove();
+                    $("#expirationProductTable").DataTable();
+                }
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
     }
 
     $(document).ready(function () {

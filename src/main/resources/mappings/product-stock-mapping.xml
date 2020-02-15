@@ -52,4 +52,12 @@
         ]]>
     </select>
 
+    <update id="updateProductStock" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+            PD_SALE_TB_RECEIVED_AMOUNT=(SELECT PD_SALE_TB_RECEIVED_AMOUNT FROM pd_sale WHERE PD_SALE_TB_NO=#{pdSaleTbNo})+#{pdSaleTbReceivedAmount},
+            PD_SALE_TB_REMAINING_AMOUNT=(SELECT PD_SALE_TB_REMAINING_AMOUNT FROM pd_sale WHERE PD_SALE_TB_NO=#{pdSaleTbNo})+#{pdSaleTbReceivedAmount}
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
+
 </mapper>
