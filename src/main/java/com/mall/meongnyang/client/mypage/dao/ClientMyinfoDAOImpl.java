@@ -14,12 +14,7 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	
-	@Override
-	public ClientCmAddressVO selectMyinfo(ClientCmAddressVO clientCmAddressVO) {
-		ClientCmAddressVO tempVO 
-				= sqlSessionTemplate.selectOne("ClientMyinfoDAO.selectMyinfo", clientCmAddressVO);
-		return tempVO;
-	}
+	
 
 
 	@Override

@@ -14,7 +14,7 @@ public class ClientUpdateMyinfoAddressServiceImpl implements ClientUpdateMyinfoA
 	
 	@Override
 	public void updateMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
+		clientMyinfoAddressDAO.updateMyinfoAddress(clientCmAddressVO);
 		
 	}
 

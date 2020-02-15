@@ -45,7 +45,7 @@
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
-             <!-- 	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0"> -->
+            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0">
                     <div class="ht__comment__form">
                     	
                         <h4 class="title__line--5">배송지 목록</h4>
@@ -54,10 +54,11 @@
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
                                 
                                 <select class="ht__select" id="selectBox">
-                                	<option value="thisiIsInsert">선택하세요</option>
-                                    <c:forEach var="address" items="${customerTbNo }">
-                                    <option value="${customerTbAddress1 }"></option>
-                                    </c:forEach>
+                                	<option value="thisIsInsert">선택하세요</option>
+                                	<c:forEach var="address" items="${cmAddressList }">
+ 									<option value="${cmAddressTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }</option>
+ 									</c:forEach>
+                                    
                                 </select>
                                 <input id="postcode3" value="" type="text" placeholder="" name="cmAddressTbPostcode">
                                 <input id="postcode1" value="" type="text" placeholder=" 주소 *" name="cmAddressTbAddress1">
@@ -129,23 +130,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#modifyBtn").hide();
+
         $("#deleteBtn").hide();
 
         $("#selectBox").change(function () {
             var selectedValue = $("#selectBox option:selected").val();
-            console.log(selectedValue);
+            
             if(selectedValue === 'thisIsInsert')
             {
                 $("#modifyBtn").html('추가');
                 $("#deleteBtn").hide();
                 $("#customerTbNo").attr("value", 0);
-                $("#customerTbAddress1").removeAttr("value");
+                $("#cmAddressTbAddress1").removeAttr("value");
+                $("#cmAddressTbAddress2").removeAttr("value");
                 $("#formToController").attr("action", "myinfo-address-insert.do");
             }
             else
             {
-                var ajaxUrl = "/myinfo-address-single-ajax.do?customerTbNo="+selectedValue;
+                var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddrssTbNo="+selectedValue;
                 $.ajax({
                     url: ajaxUrl,
                     type: "GET",
@@ -154,11 +156,12 @@
                 })
                     .done(function(json) {
                         console.log(json);
-                        $("#customerTbNo").attr("value", json.customerTbNo);
- 						$("#address1").attr("value", json.productCategoryTbSub);
+                        $("#cmADdrssTbNo").attr("value", json.cmAddrssTbNo);
+ 						$("#cmAddressTbAddress1").attr("value", json.cmAddressTbAddress1);
+ 						$("#cmAddressTbAddress2").attr("value", json.cmAddressTbAddress2);
                         $("#modifyBtn").html('수정');
                         $("#deleteBtn").show();
-                        var deleteUrl = "/myinfo-address-delete.ado?customerTbNo="+json.customerTbNo;
+                        var deleteUrl = "/myinfo-address-delete.ado?cmAddrssTbNo="+json.cmAddressTbNo;
                         $("#deleteBtn").attr("href", deleteUrl);
                         $("#formToController").attr("action", "myinfo-address-update.ado");
                     })

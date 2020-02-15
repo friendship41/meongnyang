@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoService;
-import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoService;
+import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressService;
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPasswordService;
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPhoneService;
 import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 
 @Controller
 public class ClientMyinfoController {
-
-	@Autowired
-	private ClientSelectMyinfoService clientSelectMyinfoService;
 
 	@Autowired
 	private ClientUpdateMyinfoPhoneService clientUpdateMyinfoPhoneService;
@@ -32,11 +29,13 @@ public class ClientMyinfoController {
 	@Autowired
 	private ClientDeleteMyinfoService clientDeleteMyinfoCustomerService;
 
+	@Autowired
+	private ClientSelectMyinfoAddressService clientSelectMyinfoAddressService;
+	
 	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
 	public String myinfo(ClientCmAddressVO clientCmAddressVO, Model model) {
-		ClientCmAddressVO tempVO = clientSelectMyinfoService.selectMyinfo(clientCmAddressVO);
-
-		model.addAttribute("clientMyinfoVO", tempVO);
+		ClientCmAddressVO tempVO = clientSelectMyinfoAddressService.selectMyinfoAddress(clientCmAddressVO);
+		model.addAttribute("cmAddress", tempVO);
 
 		return "mypage/myinfo";
 	}

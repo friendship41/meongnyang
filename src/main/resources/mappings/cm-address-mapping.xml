@@ -18,12 +18,41 @@
 	<insert id="insertMyinfoAddress" parameterType="clientMyinfo">
 		INSERT 
 		INTO 
-			cm_address_mapping (cm_address_tb_no, cm_address_tb_postcode, 
+			cm_address (cm_address_tb_no, cm_address_tb_postcode, 
 							cm_address_tb_address1, cm_address_tb_address2)
 		VALUES(cm_address_seq.nextval, #{cmAddressTbPostcode} 
 		#{cmAddressTbAddress1}, #{cmAddressTbAddress2})					
 		
 	</insert>
-	
-	
+	<update id="updateMyinfoAddress" parameterType="clientMyinfo">
+		UPDATE cm_address
+		SET cm_address_tb_postcode=#{cmAddressTbPostcode}, cm_address_tb_address1=#{cmAddressTbAddress1},
+			cm_address_tb_address2=#{cmAddressTbAddress2}
+		WHERE cm_address_tb_no = #{cmAddressTbNo}
+	</update>
+	<delete id="deleteMyinfoAddress" parameterType="clientMyinfo">
+		DELETE FROM cm_address
+		WHERE cm_address_tb_no = #{cmAddressTbNo}
+	</delete>
+	<select id="selectMyinfoAddressList" parameterType="clientMyinfo" resultType="clientMyinfo">
+		SELECT
+			cm_address_tb_no,
+			cm_address_tb_nickname,
+			cm_address_tb_postcode,
+			cm_address_tb_address1,
+			cm_address_tb_address2,
+			cm_address_tb_phone
+		FROM cm_address
+	</select>
+	<select id="selectMyinfoAddress" parameterType="clientMyinfo" resultType="clientMyinfo">
+		SELECT
+			cm_address_tb_no,
+			cm_address_tb_nickname,
+			cm_address_tb_postcode,
+			cm_address_tb_address1,
+			cm_address_tb_address2,
+			cm_address_tb_phone
+		FROM cm_address
+		WHERE cm_address_tb_no = #{cmAddressTbNo}
+	</select>
 </mapper>

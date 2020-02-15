@@ -14,7 +14,7 @@ public class ClientDeleteMyinfoAddressServiceImpl implements ClientDeleteMyinfoA
 	
 	@Override
 	public void deleteMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
+		clientMyinfoAddressDAO.deleteMyinfoAddress(clientCmAddressVO);
 		
 	}
 

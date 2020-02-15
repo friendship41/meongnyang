@@ -14,8 +14,7 @@ public class ClientSelectMyinfoAddressServiceImpl implements ClientSelectMyinfoA
 	
 	@Override
 	public ClientCmAddressVO selectMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return clientMyinfoAddressDAO.selectMyinfoAddress(clientCmAddressVO);
 	}
 
 }

@@ -84,17 +84,18 @@
         </div>
     </div>
 </div>
-
-<c:if test="${loginCheckSubmit eq true}">
+<c:choose>
+<c:when test="${loginCheckSubmit eq 'success'}">
 <script type="text/javascript"> 
 	alert("로그인 성공하셨습니다.")
 </script>
-</c:if>
-<c:if test="${loginCheckSubmit eq false}">
+</c:when>
+<c:when test="${loginCheckSubmit eq 'fail'}">
 <script type="text/javascript"> 
 	alert("로그인 실패 하셨습니다.")
 </script>
-</c:if>
+</c:when>
+</c:choose>
 
 <script type="text/javascript">
 	function registryCheck() {

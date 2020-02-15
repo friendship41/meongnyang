@@ -16,32 +16,32 @@ public class ClientMyinfoAddressDAOImpl implements ClientMyinfoAddressDAO {
 	
 	@Override
 	public void insertMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		
+		sqlSessionTemplate.insert("ClientMyinfoDAO.insertMyinfoAddress", clientCmAddressVO);
 		
 	}
 
 	@Override
 	public void updateMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("ClientMyinfoDAO.updateMyinfoAddress", clientCmAddressVO);
 		
 	}
 
 	@Override
 	public void deleteMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.delete("ClientMyinfoDAO.deleteMyinfoAddress", clientCmAddressVO);
 		
 	}
 
 	@Override
 	public List<ClientCmAddressVO> selectMyinfoAddressList(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectList("ClientMyinfoDAO.selectMyinfoAddressList", clientCmAddressVO);
+		
 	}
 
 	@Override
 	public ClientCmAddressVO selectMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectOne("ClientMyinfoDAO.selectMyinfoAddress", clientCmAddressVO);
+		
 	}
 
 }
