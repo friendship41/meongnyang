@@ -59,8 +59,8 @@
                                 
                                 <select class="ht__select" id="selectBox">
                                 	<option value="thisIsInsert">선택하세요</option>
-                                	<c:forEach var="address" items="${cmAddressList }">
- 									<option value="${cmAddressTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }</option>
+                                	<c:forEach var="address" items="${myinfoAddressList }">
+ 									<option value="${cmAddressTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }-${cmAddressTbAddress2 }</option>
  									</c:forEach>
                                     
                                 </select>
@@ -79,9 +79,11 @@
                        </div>
                    </div>
                    </form>
+                   
                    <div class="ht__comment__form">
+                    <form action="/myinfo-update-password.do" method="post">
                     <h4 class="title__line--5">비밀번호 변경</h4>
-                    <form action="/myinfo-update-password.do" method="POST">
+
                     <div class="ht__comment__form__inner">
                         <div class="comment__form">
                             <input type="password" placeholder="현재 비밀번호 *" name="customerTbPassword">
@@ -127,7 +129,28 @@
     </div>
 </div>
 <!-- cart-main-area end -->
-
+<c:choose>
+    <c:when test="${passwordDelete eq false }">
+    <script type="text/javascript">
+    	alert("password가 일치하지 않습니다.");
+    </script>
+    </c:when>
+    <c:when test="${passwordCheck eq false }">
+    <script type="text/javascript">
+    	alert("비밀번호 확인이 일치하지 않습니다.");
+    </script>
+    </c:when>
+    <c:when test="${realPasswordCheck eq false }">
+    <script type="text/javascript">
+    	alert("password가 일치하지 않습니다.");
+    </script>
+    </c:when>
+    <c:when test="${ passwordsuccess eq false }">
+    <script type="text/javascript">
+    	alert("password가 성공적으로 변경되었습니다.");
+    </script>
+   </c:when>
+    </c:choose>
 
 <jsp:include page="../include/footer.jsp" />
 <!--jQuery -->
@@ -140,8 +163,10 @@
         $("#selectBox").change(function () {
             var selectedValue = $("#selectBox option:selected").val();
             
+            alert(selectedValue);
             if(selectedValue === 'thisIsInsert')
             {
+            	
                 $("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
                 $("#customerTbNo").attr("value", 0);
@@ -190,5 +215,6 @@
            
             }).open();
         }
+    
     
 </script>

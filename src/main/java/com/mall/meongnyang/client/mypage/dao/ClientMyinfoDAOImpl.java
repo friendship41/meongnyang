@@ -12,10 +12,6 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-	
-	
-	
-
 
 	@Override
 	public void updateMyinfoPhone(ClientCustomerVO clientCustomerVO) {
@@ -30,19 +26,14 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 		
 	}
 
-
-	@Override
-	public ClientCustomerVO selectMyinfoPassword(ClientCustomerVO clientCustomerVO) {
-		ClientCustomerVO tempVO = sqlSessionTemplate.selectOne("ClientLoginDAO.selectMyinfoPassword", clientCustomerVO);
-		return tempVO;
-	}
-
-
 	@Override
 	public void deleteMyinfoCustomer(ClientCustomerVO clientCustomerVO) {
 		sqlSessionTemplate.delete("ClientLoginDAO.deleteMyinfoCustomer", clientCustomerVO);
 		
 	}
+
+
+
 
 
 	

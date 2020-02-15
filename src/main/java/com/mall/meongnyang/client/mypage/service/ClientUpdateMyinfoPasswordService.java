@@ -6,5 +6,5 @@ public interface ClientUpdateMyinfoPasswordService {
 	
 	public void updateMyinfoPassword(ClientCustomerVO clientCustomerVO);
 	
-	public ClientCustomerVO selectMyinfoPassword(ClientCustomerVO clientCustomerVO);
+	
 }
