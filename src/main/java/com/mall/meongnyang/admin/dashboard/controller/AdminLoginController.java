@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +29,7 @@ public class AdminLoginController {
 	
 	
 	@RequestMapping(value = "/index.ado", method = RequestMethod.POST)
-	public String loginProc(AdminLoginVO adminLoginVO, HttpSession session) {
+	public String loginProc(AdminLoginVO adminLoginVO, HttpSession session, Model model) {
 		
 		AdminLoginVO tempVO = adminSelectLoginCheckService.selectLoginCheck(adminLoginVO);
 				
@@ -39,7 +40,7 @@ public class AdminLoginController {
 			return "index";
 		//½ÇÆÐ
 		} else {
-			
+			model.addAttribute("loginCheckSubmit", false);
 			return "admin-page/login";
 		}
 			

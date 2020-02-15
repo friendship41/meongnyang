@@ -2,6 +2,13 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 로그인이 뜨는 모달부분 -->
+<<c:choose>
+<c:when test="${loginCheckSubmit eq false}">
+<script type="text/javascript"> 
+	alert("로그인 실패 하셨습니다.")
+</script>
+</c:when>
+</c:choose>
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -84,18 +91,9 @@
         </div>
     </div>
 </div>
-<c:choose>
-<c:when test="${loginCheckSubmit eq 'success'}">
-<script type="text/javascript"> 
-	alert("로그인 성공하셨습니다.")
-</script>
-</c:when>
-<c:when test="${loginCheckSubmit eq 'fail'}">
-<script type="text/javascript"> 
-	alert("로그인 실패 하셨습니다.")
-</script>
-</c:when>
-</c:choose>
+
+
+
 
 <script type="text/javascript">
 	function registryCheck() {
