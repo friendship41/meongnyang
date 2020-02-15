@@ -21,6 +21,10 @@ public class AdminProductSaleVO
     private int pdSaleTbDiscountRate;
     private String pdSaleTbState;
 
+    private int rowNumber;
+    private Date dayFrom;
+    private Date dayTo;
+
     public int getPdSaleTbNo()
     {
         return pdSaleTbNo;
@@ -179,6 +183,36 @@ public class AdminProductSaleVO
     public void setPdSaleTbState(String pdSaleTbState)
     {
         this.pdSaleTbState = pdSaleTbState;
+    }
+
+    public int getRowNumber()
+    {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber)
+    {
+        this.rowNumber = rowNumber;
+    }
+
+    public Date getDayFrom()
+    {
+        return dayFrom;
+    }
+
+    public void setDayFrom(Date dayFrom)
+    {
+        this.dayFrom = dayFrom;
+    }
+
+    public Date getDayTo()
+    {
+        return dayTo;
+    }
+
+    public void setDayTo(Date dayTo)
+    {
+        this.dayTo = dayTo;
     }
 
     @Override

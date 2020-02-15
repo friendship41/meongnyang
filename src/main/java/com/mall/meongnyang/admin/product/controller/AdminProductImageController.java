@@ -29,7 +29,7 @@ public class AdminProductImageController
     @Autowired
     private AdminUpdateProductImageService adminUpdateProductImageService;
 
-    @RequestMapping("/product-image-add.ado")
+    @RequestMapping("/productImageAdd.ado")
     public String goToImageAddPage(@RequestParam("productTbCode") String productCode, @RequestParam("resultMessage") String resultMessage, Model model)
     {
 //        상품이름 받아와야함
@@ -52,7 +52,7 @@ public class AdminProductImageController
         return "product/product-image-add";
     }
 
-    @RequestMapping(value = "/product-image-upload.ado", method = RequestMethod.POST)
+    @RequestMapping(value = "/productImageUpload.ado", method = RequestMethod.POST)
     public String imageUpload(AdminProductImageVO adminProductImageVO, HttpServletRequest request, RedirectAttributes redirectAttributesm)
     {
         AdminProductImageVO insertResult = adminInsertProductImageService.insertProductImageReturnImages(adminProductImageVO, request);
@@ -68,17 +68,17 @@ public class AdminProductImageController
             redirectAttributesm.addAttribute("resultMessage", "none");
         }
 
-        return "redirect:/product-image-add.ado";
+        return "redirect:/productImageAdd.ado";
     }
 
-    @RequestMapping(value = "/product-image-delete.ado", method = RequestMethod.GET)
+    @RequestMapping(value = "/productImageDelete.ado", method = RequestMethod.GET)
     @ResponseBody
     public String deleteProductImage(AdminProductImageVO adminProductImageVO)
     {
         return adminDeleteProductImageService.deleteProductImageReturnImages(adminProductImageVO);
     }
 
-    @RequestMapping(value = "/product-image-updateRep.ado", method = RequestMethod.GET)
+    @RequestMapping(value = "/productImageUpdateRep.ado", method = RequestMethod.GET)
     @ResponseBody
     public String updateProductImageRep(AdminProductImageVO adminProductImageVO)
     {

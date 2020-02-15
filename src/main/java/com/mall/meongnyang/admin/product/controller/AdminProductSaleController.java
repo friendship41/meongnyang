@@ -58,14 +58,14 @@ public class AdminProductSaleController
     {
         System.out.println(adminProductSaleVO);
         adminInsertProductSaleService.insertProductSale(adminProductSaleVO);
-        return "redirect:/product-overview.ado";
+        return "redirect:productOverview.ado";
     }
 
     @RequestMapping(value = "/stopSaleProduct.ado", method = RequestMethod.GET)
     public String stopSaleProduct(AdminProductSaleVO adminProductSaleVO)
     {
         adminUpdateProductSaleService.stopSale(adminProductSaleVO);
-        return "redirect:product-overview.ado";
+        return "redirect:productOverview.ado";
     }
 
     @RequestMapping(value = "/restartSaleProduct.ado", method = RequestMethod.GET)
@@ -85,6 +85,6 @@ public class AdminProductSaleController
     {
         System.out.println(adminProductSaleVO);
         adminUpdateProductSaleService.restartSale(adminProductSaleVO);
-        return "redirect:product-overview.ado";
+        return "redirect:productOverview.ado";
     }
 }

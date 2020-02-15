@@ -38,6 +38,6 @@ public class AdminUpdateProductController
     public String updateProduct(AdminProductVO adminProductVO, HttpServletRequest request)
     {
         adminUpdateProductService.updateProduct(adminProductVO, request);
-        return "redirect:/product-overview.ado";
+        return "redirect:productOverview.ado";
     }
 }

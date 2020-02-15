@@ -54,6 +54,7 @@
 <script src="/resources/admin/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 
 
-<!-- custom 테이블 스크립트 -->
+<!-- custom 스크립트 -->
 <script src="/resources/admin/js/custom/product-table.js"></script>
+<script src="/resources/admin/js/custom/yymmdd.js"></script>
 

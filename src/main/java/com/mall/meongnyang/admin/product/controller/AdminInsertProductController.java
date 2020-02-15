@@ -28,7 +28,7 @@ public class AdminInsertProductController
         model.addAttribute("categoryList", categoryList);
         return "product/product-add";
     }
-    @RequestMapping(value = "/product-add-page.ado", method = RequestMethod.POST)
+    @RequestMapping(value = "/productAdd.ado", method = RequestMethod.POST)
     public String insertProduct(AdminProductVO adminProductVO, HttpServletRequest request)
     {
         adminInsertProductService.insertProduct(adminProductVO, request);

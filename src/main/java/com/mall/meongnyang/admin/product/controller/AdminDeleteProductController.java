@@ -17,6 +17,6 @@ public class AdminDeleteProductController
     public String deleteProductProc(AdminProductVO adminProductVO)
     {
         adminDeleteProductService.deleteProduct(adminProductVO);
-        return "redirect:/product-overview.ado";
+        return "redirect:/productOverview.ado";
     }
 }

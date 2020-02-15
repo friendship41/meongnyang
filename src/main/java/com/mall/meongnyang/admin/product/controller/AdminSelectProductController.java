@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AdminSelectProductController
 {
-    @RequestMapping(value = "product-overview.ado", method = RequestMethod.GET)
+    @RequestMapping(value = "productOverview.ado", method = RequestMethod.GET)
     public String goToProductOverviewPage()
     {
 
+
         return "product/product-overview";
     }
+
 
 
 }

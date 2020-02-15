@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -41,20 +42,19 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input type="text" id="stockFromInput" class="date-picker text-center form-control"
                                                            placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input type="text" id="stockToInput" class="date-picker text-center form-control"
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block"
-                                                            style="margin-bottom:14px;">조회
-                                                    </button>
+                                                    <span class="btn btn-success" onclick="searchStock()" style="margin-bottom:14px;">조회
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,43 +71,9 @@
                                             <th>현재수량</th>
                                             <th>통보수량</th>
                                             <th>신규입고수량</th>
-                                            <th></th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>000001</td>
-                                            <td>개밥</td>
-                                            <td><span class="label label-danger">4</span></td>
-                                            <td>5</td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td>
-                                                <button class="btn btn-primary">수정</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>000002</td>
-                                            <td>냥이밥</td>
-                                            <td><span class="label label-danger">7</span></td>
-                                            <td>10</td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td>
-                                                <button class="btn btn-primary">수정</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>000001</td>
-                                            <td>강아지옷1</td>
-                                            <td><span class="label label-success">50</span></td>
-                                            <td>10</td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td>
-                                                <button class="btn btn-primary">수정</button>
-                                            </td>
-                                        </tr>
+                                        <tbody id="stockTableBody">
                                         </tbody>
                                     </table>
                                 </div>
@@ -129,20 +95,18 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input type="text" id="expireFromInput" class="date-picker text-center form-control"
                                                            placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input type="text" id="expireToInput" class="date-picker text-center form-control"
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block"
-                                                            style="margin-bottom:14px;">조회
-                                                    </button>
+                                                    <span class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,7 +124,7 @@
                                             <th>폐기처리</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="expireDayTableBody">
                                         <tr>
                                             <td>1</td>
                                             <td>000001</td>
@@ -204,11 +168,80 @@
         <jsp:include page="../include/right-sidebar.jsp"/>
     </div>
 </div>
+
+<tr>
+    <td>1</td>
+    <td>000001</td>
+    <td>개밥</td>
+    <td><span class="label label-danger">4</span></td>
+    <td>5</td>
+    <td><input type="number" class="form-control"></td>
+    <td>
+        <button class="btn btn-primary">수정</button>
+    </td>
+</tr>
 <!-- /Page Content -->
 </div>
 <!-- /Page Container -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function searchStock() {
+        getProductStockListAjax(new Date($("#stockFromInput").val()).yyyymmdd(), new Date($("#stockToInput").val()).yyyymmdd());
+    }
 
+    function getProductStockListAjax(dayFrom, dayTo) {
+        var stockAjaxUrl = "/productStockListAjax.ado?dayFrom="+dayFrom+"&dayTo="+dayTo;
+        $.ajax({
+            url: stockAjaxUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+                var stockHTML = "";
+
+                for(var i=0; i<json.length; i++)
+                {
+                    var stockList = json[i];
+
+                    stockHTML += '<tr>';
+                    stockHTML += '<td>'+stockList.rowNumber+'</td>';
+                    stockHTML += '<td>'+stockList.productTbCode+'</td>';
+                    stockHTML += '<td>'+stockList.pdSaleTbProductName+'</td>';
+                    var remain = stockList.pdSaleTbRemainingAmount;
+                    var limit = stockList.pdSaleTbLimitAmount;
+                    if(remain - limit > 0)
+                    {
+                        stockHTML += '<td><span class="label label-success">'+remain+'</span></td>';
+                    }
+                    else
+                    {
+                        stockHTML += '<td><span class="label label-danger">'+remain+'</span></td>';
+                    }
+                    stockHTML += '<td>'+stockList.pdSaleTbLimitAmount+'</td>';
+                    stockHTML += '<td><div class="row"><div class="col-lg-8 col-md-6 col-sm-3"><input type="number" class="form-control"></div><button class="btn btn-primary">수정</button></div></td>';
+                    stockHTML += '</tr>';
+
+
+                }
+                $("#stockProductTable").destroy();
+                $("#stockTableBody").empty();
+                $("#stockTableBody").append(stockHTML);
+                $("#stockProductTable").DataTable();
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
+    $(document).ready(function () {
+        var twoMonth = getMonthAgoDate(2);
+        $("#stockFromInput").attr("value", twoMonth.yyyymmdd());
+        $("#stockToInput").attr("value", new Date().yyyymmdd());
+        getProductStockListAjax(twoMonth.yyyymmdd(), new Date().yyyymmdd());
+    })
+</script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
 </body>

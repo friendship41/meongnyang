@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductStockDAO">
+
+    <select id="selectProductStorkList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ROWNUM "ROW_NUMBER",
+                A.PD_SALE_TB_NO,
+                a.PRODUCT_TB_CODE,
+                A.PD_SALE_TB_PRODUCT_NAME,
+                A.PD_SALE_TB_REMAINING_AMOUNT,
+                A.PD_SALE_TB_LIMIT_AMOUNT
+            FROM(
+                SELECT
+                    PD_SALE_TB_NO,
+                    PRODUCT_TB_CODE,
+                    PD_SALE_TB_PRODUCT_NAME,
+                    PD_SALE_TB_REMAINING_AMOUNT,
+                    PD_SALE_TB_LIMIT_AMOUNT
+                FROM PD_SALE
+                WHERE PD_SALE_TB_START_DAY>#{dayFrom} AND PD_SALE_TB_START_DAY<#{dayTo}
+                ORDER BY PD_SALE_TB_START_DAY DESC
+            ) A
+        ]]>
+    </select>
+
+</mapper>
