@@ -3,6 +3,11 @@ function getMonthAgoDate(monthAgo) {
     nowDate.setMonth(nowDate.getMonth()-monthAgo);
     return nowDate;
 }
+function getMonthAfterDate(monthAgo) {
+    var nowDate = new Date();
+    nowDate.setMonth(nowDate.getMonth()+monthAgo);
+    return nowDate;
+}
 
 Date.prototype.yyyymmdd = function() {
     var yyyy = this.getFullYear().toString();

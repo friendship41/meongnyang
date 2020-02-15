@@ -19,4 +19,10 @@ public class AdminProductStockDAOImpl implements AdminProductStockDAO
     {
         return sqlSessionTemplate.selectList("ProductStockDAO.selectProductStorkList", adminProductSaleVO);
     }
+
+    @Override
+    public List<AdminProductSaleVO> selectExpireProductList(AdminProductSaleVO adminProductSaleVO)
+    {
+        return sqlSessionTemplate.selectList("ProductStockDAO.selectExpireProductList", adminProductSaleVO);
+    }
 }

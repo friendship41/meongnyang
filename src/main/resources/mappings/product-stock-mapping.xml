@@ -12,17 +12,42 @@
                 a.PRODUCT_TB_CODE,
                 A.PD_SALE_TB_PRODUCT_NAME,
                 A.PD_SALE_TB_REMAINING_AMOUNT,
-                A.PD_SALE_TB_LIMIT_AMOUNT
+                A.PD_SALE_TB_LIMIT_AMOUNT,
+                PD_SALE_TB_START_DAY
             FROM(
                 SELECT
                     PD_SALE_TB_NO,
                     PRODUCT_TB_CODE,
                     PD_SALE_TB_PRODUCT_NAME,
                     PD_SALE_TB_REMAINING_AMOUNT,
-                    PD_SALE_TB_LIMIT_AMOUNT
+                    PD_SALE_TB_LIMIT_AMOUNT,
+                    PD_SALE_TB_START_DAY
                 FROM PD_SALE
-                WHERE PD_SALE_TB_START_DAY>#{dayFrom} AND PD_SALE_TB_START_DAY<#{dayTo}
+                WHERE PD_SALE_TB_START_DAY>#{dayFrom} AND PD_SALE_TB_START_DAY<#{dayTo} AND PD_SALE_TB_STATE = 'Y'
                 ORDER BY PD_SALE_TB_START_DAY DESC
+            ) A
+        ]]>
+    </select>
+
+    <select id="selectExpireProductList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ROWNUM "ROW_NUMBER",
+                A.PD_SALE_TB_NO,
+                a.PRODUCT_TB_CODE,
+                A.PD_SALE_TB_PRODUCT_NAME,
+                PD_SALE_TB_START_DAY,
+                PD_SALE_TB_EXPIRE_DAY
+            FROM(
+                SELECT
+                    PD_SALE_TB_NO,
+                    PRODUCT_TB_CODE,
+                    PD_SALE_TB_PRODUCT_NAME,
+                    PD_SALE_TB_START_DAY,
+                    PD_SALE_TB_EXPIRE_DAY
+                FROM PD_SALE
+                WHERE PD_SALE_TB_EXPIRE_DAY BETWEEN #{dayFrom} AND #{dayTo} AND PD_SALE_TB_STATE = 'Y'
+                ORDER BY PD_SALE_TB_EXPIRE_DAY DESC
             ) A
         ]]>
     </select>

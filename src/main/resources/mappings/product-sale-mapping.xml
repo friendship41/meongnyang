@@ -9,6 +9,9 @@
         VALUES(
             pd_sale_seq.NEXTVAL,
             #{productTbCode},
+            <if test="promotionTbCode == -1">
+                null,
+            </if>
             <if test="promotionTbCode != -1">
                 #{promotionTbCode},
             </if>
@@ -19,6 +22,9 @@
             #{pdSaleTbRemainingAmount},
             #{pdSaleTbLimitAmount},
             #{pdSaleTbStartDay},
+            <if test="pdSaleTbExpireDay == null">
+                null,
+            </if>
             <if test="pdSaleTbExpireDay != null">
                 #{pdSaleTbExpireDay},
             </if>

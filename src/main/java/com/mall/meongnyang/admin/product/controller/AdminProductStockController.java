@@ -1,5 +1,6 @@
 package com.mall.meongnyang.admin.product.controller;
 
+import com.mall.meongnyang.admin.product.service.AdminSelectProductExpireDateService;
 import com.mall.meongnyang.admin.product.service.AdminSelectProductStockListService;
 import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class AdminProductStockController
 {
     @Autowired
     private AdminSelectProductStockListService adminSelectProductStockListService;
+    @Autowired
+    private AdminSelectProductExpireDateService adminSelectProductExpireDateService;
 
     @RequestMapping(value = "productStock.ado", method = RequestMethod.GET)
     public String goToProductStockPage()
@@ -30,5 +33,12 @@ public class AdminProductStockController
     }
 
 
+    @RequestMapping(value = "/productExpireListAjax.ado", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AdminProductSaleVO> getProductExpireDateListAjax(AdminProductSaleVO adminProductSaleVO)
+    {
+        System.out.println(adminProductSaleVO);
+        return adminSelectProductExpireDateService.selectProductExpireDate(adminProductSaleVO);
+    }
 
 }

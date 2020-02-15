@@ -234,6 +234,10 @@ public class AdminProductSaleVO
                 ", pdSaleTbReadCount=" + pdSaleTbReadCount +
                 ", pdSaleTbRating=" + pdSaleTbRating +
                 ", pdSaleTbDiscountRate=" + pdSaleTbDiscountRate +
+                ", pdSaleTbState='" + pdSaleTbState + '\'' +
+                ", rowNumber=" + rowNumber +
+                ", dayFrom=" + dayFrom +
+                ", dayTo=" + dayTo +
                 '}';
     }
 }

@@ -53,8 +53,7 @@
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <span class="btn btn-success" onclick="searchStock()" style="margin-bottom:14px;">조회
-                                                    </span>
+                                                    <span class="btn btn-success" onclick="searchStock()" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,12 +67,22 @@
                                             <th>#</th>
                                             <th>상품코드</th>
                                             <th>상품명</th>
+                                            <th>판매개시일</th>
                                             <th>현재수량</th>
                                             <th>통보수량</th>
                                             <th>신규입고수량</th>
                                         </tr>
                                         </thead>
                                         <tbody id="stockTableBody">
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -106,7 +115,7 @@
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <span class="btn btn-success" style="margin-bottom:14px;">조회</span>
+                                                    <span onclick="searchExpireDate()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,37 +129,19 @@
                                             <th>#</th>
                                             <th>상품코드</th>
                                             <th>상품명</th>
+                                            <th>판매개시일</th>
                                             <th>유통기한</th>
                                             <th>폐기처리</th>
                                         </tr>
                                         </thead>
                                         <tbody id="expireDayTableBody">
                                         <tr>
-                                            <td>1</td>
-                                            <td>000001</td>
-                                            <td>개밥</td>
-                                            <td><span class="label label-danger">20/02/05</span></td>
-                                            <td>
-                                                <button class="btn btn-danger">폐기</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>000002</td>
-                                            <td>냥이밥</td>
-                                            <td><span class="label label-warning">20/05/04</span></td>
-                                            <td>
-                                                <button class="btn btn-danger">폐기</button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>000003</td>
-                                            <td>동물밥</td>
-                                            <td><span class="label label-success">21/12/25</span></td>
-                                            <td>
-                                                <button class="btn btn-danger">폐기</button>
-                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -169,17 +160,7 @@
     </div>
 </div>
 
-<tr>
-    <td>1</td>
-    <td>000001</td>
-    <td>개밥</td>
-    <td><span class="label label-danger">4</span></td>
-    <td>5</td>
-    <td><input type="number" class="form-control"></td>
-    <td>
-        <button class="btn btn-primary">수정</button>
-    </td>
-</tr>
+
 <!-- /Page Content -->
 </div>
 <!-- /Page Container -->
@@ -187,59 +168,136 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     function searchStock() {
-        getProductStockListAjax(new Date($("#stockFromInput").val()).yyyymmdd(), new Date($("#stockToInput").val()).yyyymmdd());
+        var stockAjaxParam = "/productStockListAjax.ado?dayFrom="+new Date($("#stockFromInput").val()).yyyymmdd()+"&dayTo="+new Date($("#stockToInput").val()).yyyymmdd();
+        getDataFromServerAjax(stockAjaxParam);
+    }
+    function searchExpireDate() {
+        var expireAjaxParam = "/productExpireListAjax.ado?dayFrom="+new Date($("#expireFromInput").val()).yyyymmdd()+"&dayTo="+new Date($("#expireToInput").val()).yyyymmdd();
+        getDataFromServerAjax(expireAjaxParam);
     }
 
-    function getProductStockListAjax(dayFrom, dayTo) {
-        var stockAjaxUrl = "/productStockListAjax.ado?dayFrom="+dayFrom+"&dayTo="+dayTo;
+    function getDataFromServerAjax(urlTo) {
         $.ajax({
-            url: stockAjaxUrl,
+            url: urlTo,
             type: "GET",
             data: {},
             dataType: "json"
         })
             .done(function(json) {
                 console.log(json);
-                var stockHTML = "";
-
-                for(var i=0; i<json.length; i++)
+                if(json.length === 0)
                 {
-                    var stockList = json[i];
-
-                    stockHTML += '<tr>';
-                    stockHTML += '<td>'+stockList.rowNumber+'</td>';
-                    stockHTML += '<td>'+stockList.productTbCode+'</td>';
-                    stockHTML += '<td>'+stockList.pdSaleTbProductName+'</td>';
-                    var remain = stockList.pdSaleTbRemainingAmount;
-                    var limit = stockList.pdSaleTbLimitAmount;
-                    if(remain - limit > 0)
+                    alert("조회된 데이터가 없습니다.");
+                }
+                else
+                {
+                    if(json[0].pdSaleTbExpireDay == null)
                     {
-                        stockHTML += '<td><span class="label label-success">'+remain+'</span></td>';
+                        settingStockTable(json);
                     }
                     else
                     {
-                        stockHTML += '<td><span class="label label-danger">'+remain+'</span></td>';
+                        settingExpireTable(json);
                     }
-                    stockHTML += '<td>'+stockList.pdSaleTbLimitAmount+'</td>';
-                    stockHTML += '<td><div class="row"><div class="col-lg-8 col-md-6 col-sm-3"><input type="number" class="form-control"></div><button class="btn btn-primary">수정</button></div></td>';
-                    stockHTML += '</tr>';
-
-
                 }
-                $("#stockProductTable").destroy();
-                $("#stockTableBody").empty();
-                $("#stockTableBody").append(stockHTML);
-                $("#stockProductTable").DataTable();
             })
             .fail(function (xhr, status, errorThrown) {
                 alert(errorThrown);
             });
     }
+
+    function settingStockTable(json)
+    {
+        var stockHTML = "";
+
+        for(var i=0; i<json.length; i++)
+        {
+            var stockList = json[i];
+
+            stockHTML += '<tr>';
+            stockHTML += '<td>'+stockList.rowNumber+'</td>';
+            stockHTML += '<td>'+stockList.productTbCode+'</td>';
+            stockHTML += '<td>'+stockList.pdSaleTbProductName+'</td>';
+            stockHTML += '<td>'+new Date(stockList.pdSaleTbStartDay).yyyymmdd()+'</td>';
+            var remain = stockList.pdSaleTbRemainingAmount;
+            var limit = stockList.pdSaleTbLimitAmount;
+            if(remain - limit > 0)
+            {
+                stockHTML += '<td><span class="label label-success">'+remain+'</span></td>';
+            }
+            else
+            {
+                stockHTML += '<td><span class="label label-danger">'+remain+'</span></td>';
+            }
+            stockHTML += '<td>'+stockList.pdSaleTbLimitAmount+'</td>';
+            stockHTML += '<td><div class="row"><div class="col-lg-8 col-md-6 col-sm-3"><input type="number" class="form-control"></div><button class="btn btn-primary">수정</button></div></td>';
+            stockHTML += '</tr>';
+
+
+        }
+        $("#stockProductTable").DataTable().clear().destroy();
+        $("#stockTableBody").empty();
+        $("#stockTableBody").append(stockHTML);
+        $("#stockProductTable").DataTable({
+            scrollX: true,
+        });
+    }
+
+    function settingExpireTable(json)
+    {
+        var expireHTML = "";
+
+        for(var i=0; i<json.length; i++)
+        {
+            var expireList = json[i];
+
+            // <td><span class="label label-success">21/12/25</span></td>
+
+
+            expireHTML += '<tr>';
+            expireHTML += '<td>'+expireList.rowNumber+'</td>';
+            expireHTML += '<td>'+expireList.productTbCode+'</td>';
+            expireHTML += '<td>'+expireList.pdSaleTbProductName+'</td>';
+            expireHTML += '<td>'+new Date(expireList.pdSaleTbStartDay).yyyymmdd()+'</td>';
+            var expireDay = new Date(expireList.pdSaleTbExpireDay);
+            var remainExpire = (expireDay-new Date())/1000/60/60/24/30;
+            if(remainExpire < 1)
+            {
+                expireHTML += '<td><span class="label label-danger">'+expireDay.yyyymmdd()+'</span></td>';
+            }
+            else if(remainExpire >= 1 && remainExpire <3)
+            {
+                expireHTML += '<td><span class="label label-warning">'+expireDay.yyyymmdd()+'</span></td>';
+            }
+            else
+            {
+                expireHTML += '<td><span class="label label-success">'+expireDay.yyyymmdd()+'</span></td>';
+            }
+
+            expireHTML += '<td><button class="btn btn-danger">폐기</button></td>';
+            expireHTML += '</tr>';
+
+
+        }
+        $("#expirationProductTable").DataTable().clear().destroy();
+        $("#expireDayTableBody").empty();
+        $("#expireDayTableBody").append(expireHTML);
+        $("#expirationProductTable").DataTable();
+    }
+
     $(document).ready(function () {
         var twoMonth = getMonthAgoDate(2);
+
         $("#stockFromInput").attr("value", twoMonth.yyyymmdd());
         $("#stockToInput").attr("value", new Date().yyyymmdd());
-        getProductStockListAjax(twoMonth.yyyymmdd(), new Date().yyyymmdd());
+        var stockTwoMonthAjaxUrl = "/productStockListAjax.ado?dayFrom="+twoMonth.yyyymmdd()+"&dayTo="+new Date().yyyymmdd();
+        getDataFromServerAjax(stockTwoMonthAjaxUrl);
+
+        var threeMonthAfter = getMonthAfterDate(3);
+        $("#expireFromInput").attr("value", new Date().yyyymmdd());
+        $("#expireToInput").attr("value", threeMonthAfter.yyyymmdd());
+        var expireTwoMonthAjaxUrl = "/productExpireListAjax.ado?dayFrom="+new Date().yyyymmdd()+"&dayTo="+threeMonthAfter.yyyymmdd();
+        getDataFromServerAjax(expireTwoMonthAjaxUrl);
     })
 </script>
 <!-- Javascripts -->
