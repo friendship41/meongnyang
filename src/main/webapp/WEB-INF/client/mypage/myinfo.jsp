@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+ <script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+
+	<script type="text/JavaScript" src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <jsp:include page="../include/header.jsp" />
 
         <!-- Start Bradcaump area -->
@@ -64,7 +68,7 @@
                                 <input id="postcode1" value="" type="text" placeholder=" 주소 *" name="cmAddressTbAddress1">
                                 <input id="postcode2" value="" type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2">
                                 <div class="ht__comment__btn--2 mt--30">
-                                	<a class="fr__btn" href="#" id="modifyBtn">수정</a>
+                                	<button class="fr__btn" id="modifySubmitButton">수정</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
                                 </div>
                             </div>
@@ -138,7 +142,7 @@
             
             if(selectedValue === 'thisIsInsert')
             {
-                $("#modifyBtn").html('추가');
+                $("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
                 $("#customerTbNo").attr("value", 0);
                 $("#cmAddressTbAddress1").removeAttr("value");
@@ -156,10 +160,10 @@
                 })
                     .done(function(json) {
                         console.log(json);
-                        $("#cmADdrssTbNo").attr("value", json.cmAddrssTbNo);
+                        $("#cmAddrssTbNo").attr("value", json.cmAddrssTbNo);
  						$("#cmAddressTbAddress1").attr("value", json.cmAddressTbAddress1);
  						$("#cmAddressTbAddress2").attr("value", json.cmAddressTbAddress2);
-                        $("#modifyBtn").html('수정');
+                        $("#modifySubmitButton").html('수정');
                         $("#deleteBtn").show();
                         var deleteUrl = "/myinfo-address-delete.ado?cmAddrssTbNo="+json.cmAddressTbNo;
                         $("#deleteBtn").attr("href", deleteUrl);
@@ -171,4 +175,20 @@
             }
         });
     })
+     function openDaumZipAddress() {
+            new daum.Postcode({
+            	
+                oncomplete:function(data) {
+                    $("#postcode3").val(data.zonecode);
+                    $("#postcode1").val(data.address)
+                    $("#postcode2").focus();
+                    // $("#zonecode").val(data.zonecode);
+                    // $("#address").val(data.address);
+                    // $("#address_etc").focus();
+                    
+                }
+           
+            }).open();
+        }
+    
 </script>
