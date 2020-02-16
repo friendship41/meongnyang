@@ -46,4 +46,31 @@
         WHERE PRODUCT_TB_CODE=#{productTbCode}
     </update>
 
+    <select id="selectProductOverviewList" parameterType="product" resultType="product">
+        SELECT
+            p.PRODUCT_TB_CODE,
+            p.PRODUCT_CATEGORY_TB_NO,
+            p.PRODUCT_TB_NAME,
+            p.PRODUCT_TB_REG_DATE,
+            p.PRODUCT_TB_DETAIL,
+            pc.PRODUCT_CATEGORY_TB_PARENT,
+            pc.PRODUCT_CATEGORY_TB_MEDIAN,
+            pc.PRODUCT_CATEGORY_TB_SUB,
+            (
+                SELECT
+                    COUNT(*)
+                FROM pd_image pi
+                WHERE p.PRODUCT_TB_CODE = pi.PRODUCT_TB_CODE
+            ) "product_image_count",
+            (
+                SELECT
+                    COUNT(*)
+                FROM pd_sale ps
+                WHERE p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
+            ) "product_sale_count"
+        FROM product p JOIN product_category pc
+        ON p.PRODUCT_CATEGORY_TB_NO = pc.PRODUCT_CATEGORY_TB_NO
+        WHERE PRODUCT_TB_REG_DATE BETWEEN #{dayFrom} AND #{dayTo}
+    </select>
+
 </mapper>

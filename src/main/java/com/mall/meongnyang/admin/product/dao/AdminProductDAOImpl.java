@@ -42,4 +42,10 @@ public class AdminProductDAOImpl implements AdminProductDAO
     {
         sqlSessionTemplate.update("ProductDAO.updateProduct", adminProductVO);
     }
+
+    @Override
+    public List<AdminProductVO> selectProductOverviewList(AdminProductVO adminProductVO)
+    {
+        return sqlSessionTemplate.selectList("ProductDAO.selectProductOverviewList", adminProductVO);
+    }
 }

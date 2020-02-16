@@ -41,6 +41,11 @@
                                     <div class="form-group">
                                         <div class="col-sm-10">
                                             <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5>판매 개시일 검색</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-4">
                                                     <input type="text" id="stockFromInput" class="date-picker text-center form-control"
                                                            placeholder="01/01/2020">
@@ -102,6 +107,11 @@
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <div class="col-sm-10">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5>유통기한 검색</h5>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <input type="text" id="expireFromInput" class="date-picker text-center form-control"

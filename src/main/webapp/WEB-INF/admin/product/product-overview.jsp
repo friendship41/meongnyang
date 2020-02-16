@@ -729,58 +729,49 @@
                                     <div class="form-group">
                                         <div class="col-sm-10">
                                             <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5>상품 등록일 검색</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="allProductDayFrominput" type="text" class="date-picker text-center form-control"
                                                            placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="allProductDayToinput" type="text" class="date-picker text-center form-control"
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block"
-                                                            style="margin-bottom:14px;">조회
-                                                    </button>
+                                                    <span onclick="getProductAllTable()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table id="holdProductTable" class="display table"
-                                           style="width: 100%; cellspacing: 0;">
+                                    <table id="holdProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>상품번호</th>
                                             <th>카테고리</th>
                                             <th>상품이름</th>
-                                            <th>잔량</th>
                                             <th>이미지등록여부</th>
                                             <th>판매등록여부</th>
                                             <th>판매등록</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="holdProductTableBody">
                                         <tr>
-                                            <td>000001</td>
-                                            <td>개-먹거리</td>
-                                            <td><a href="updateProduct.ado?productTbCode=1833b5eab9e8471582b4" style="color: #4646ff">개 사료1</a></td>
-                                            <td>10,000</td>
-                                            <td><a href="productImageAdd.ado?productTbCode=1833b5eab9e8471582b4&resultMessage=none" class="btn btn-default btn-xs">3</a></td>
-                                            <td>등록중</td>
-                                            <td>-</td>
-                                        </tr>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td>고양이-먹거리</td>
-                                            <td>고양이 사료1</td>
-                                            <td>20,000</td>
-                                            <td><a href="productImageAdd.ado?productTbCode=ec5a51e7a4564e6181d2&resultMessage=none" class="btn btn-default btn-xs">N</a></td>
-                                            <td>미등록</td>
-                                            <td><button class="btn btn-success" onclick="location.href='/insertProductSale.ado?productTbCode=1833b5eab9e8471582b4'">판매등록</button></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -814,6 +805,65 @@
 
     }
 
+    function getProductAllTable()
+    {
+        var dayFrom = $("#allProductDayFrominput").val();
+        var dayTo = $("#allProductDayToinput").val();
+        var url = "/productAllTableAjax.ado?dayFrom="+dayFrom+"&dayTo="+dayTo;
+        getDataFromServerAjax(url);
+    }
+
+    function getDataFromServerAjax(urlTo) {
+        $.ajax({
+            url: urlTo,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+                if(json.length === 0)
+                {
+                    alert("조회된 데이터가 없습니다.");
+                }
+                else
+                {
+                    settingProductAllTable(json);
+                }
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
+    
+    function settingProductAllTable(json) {
+        var productAllHTML = "";
+
+        for(var i=0; i<json.length; i++)
+        {
+            var productSingle = json[i];
+
+            productAllHTML += "<tr>";
+            productAllHTML += "<td>"+productSingle.productTbCode+"</td>";
+            productAllHTML += "<td>"+productSingle.productCategoryTbParent+"-"+productSingle.productCategoryTbMedian+"-"+productSingle.productCategoryTbSub+"</td>";
+            productAllHTML += "<td><a href=\"updateProduct.ado?productTbCode="+productSingle.productTbCode+"\" style=\"color: #0a6aa1; font-weight: bold;\">"+productSingle.productTbName+"</a></td>";
+            productAllHTML += '<td><a href="productImageAdd.ado?productTbCode='+productSingle.productTbCode+'&resultMessage=none" class="btn btn-default btn-xs">'+productSingle.productImageCount+'</a></td>';
+            productAllHTML += '<td>'+productSingle.productSaleCount+'</td>';
+            productAllHTML += "<td><button class=\"btn btn-success\" onclick=\"location.href='/insertProductSale.ado?productTbCode="+productSingle.productTbCode+"'\">판매등록</button></td>";
+            productAllHTML += "</tr>";
+        }
+        $("#holdProductTable").DataTable().clear().destroy();
+        $("#holdProductTableBody").empty();
+        $("#holdProductTableBody").append(productAllHTML);
+        $("#holdProductTable").DataTable();
+    }
+
+
+    $(document).ready(function () {
+        $("#allProductDayFrominput").attr("value", getMonthAgoDate(6).yyyymmdd());
+        $("#allProductDayToinput").attr("value", new Date().yyyymmdd());
+        getProductAllTable();
+    })
 </script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
