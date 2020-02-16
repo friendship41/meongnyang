@@ -5,6 +5,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository("AdminProductSaleDAO")
 public class AdminProductSaleDAOImpl implements AdminProductSaleDAO
 {
@@ -33,5 +35,11 @@ public class AdminProductSaleDAOImpl implements AdminProductSaleDAO
     public void updateProductSale(AdminProductSaleVO adminProductSaleVO)
     {
         sqlSessionTemplate.update("ProductSaleDAO.updateProductSale", adminProductSaleVO);
+    }
+
+    @Override
+    public List<AdminProductSaleVO> selectProductSaleOverviewList(AdminProductSaleVO adminProductSaleVO)
+    {
+        return sqlSessionTemplate.selectList("ProductSaleDAO.selectProductSaleOverviewList", adminProductSaleVO);
     }
 }

@@ -80,4 +80,23 @@
         WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
     </select>
 
+    <select id="selectProductSaleOverviewList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ps.PD_SALE_TB_NO,
+                ps.PRODUCT_TB_CODE,
+                ps.PD_SALE_TB_PRODUCT_NAME,
+                ps.PROMOTION_TB_CODE,
+                ps.PD_SALE_TB_SALES_PRICE,
+                ps.PD_SALE_TB_DISCOUNT_RATE,
+                ps.PD_SALE_TB_REMAINING_AMOUNT,
+                ps.PD_SALE_TB_RATING,
+                ps.PD_SALE_TB_STATE,
+                p.PRODUCT_TB_BANNER_STATE
+            FROM pd_sale ps JOIN product p
+            ON ps.PRODUCT_TB_CODE = p.PRODUCT_TB_CODE
+            WHERE p.PRODUCT_TB_REG_DATE >= #{dayFrom} AND p.PRODUCT_TB_REG_DATE <= #{dayTo}
+        ]]>
+    </select>
+
 </mapper>

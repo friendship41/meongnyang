@@ -6,7 +6,7 @@
 
 	<insert id="insertProduct" parameterType="product">
         INSERT INTO product
-        VALUES(#{productTbCode}, #{productCategoryTbNo}, #{productTbName}, SYSDATE, #{productTbDetail})
+        VALUES(#{productTbCode}, #{productCategoryTbNo}, #{productTbName}, SYSDATE, #{productTbDetail}, 'N')
     </insert>
 
     <delete id="deleteProduct" parameterType="product">

@@ -25,6 +25,8 @@ public class AdminProductSaleVO
     private Date dayFrom;
     private Date dayTo;
 
+    private String productTbBannerState;
+
     public int getPdSaleTbNo()
     {
         return pdSaleTbNo;
@@ -215,6 +217,16 @@ public class AdminProductSaleVO
         this.dayTo = dayTo;
     }
 
+    public String getProductTbBannerState()
+    {
+        return productTbBannerState;
+    }
+
+    public void setProductTbBannerState(String productTbBannerState)
+    {
+        this.productTbBannerState = productTbBannerState;
+    }
+
     @Override
     public String toString()
     {
@@ -238,6 +250,7 @@ public class AdminProductSaleVO
                 ", rowNumber=" + rowNumber +
                 ", dayFrom=" + dayFrom +
                 ", dayTo=" + dayTo +
+                ", productTbBannerState='" + productTbBannerState + '\'' +
                 '}';
     }
 }
