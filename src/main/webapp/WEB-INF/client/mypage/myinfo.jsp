@@ -49,7 +49,9 @@
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
-            	
+            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0">
+            	<input type="hidden" name="cmAddressTbNickname" value="si">
+            	<input type="hidden" name="cmAddressTbPhone" value="010">
                     <div class="ht__comment__form">
                     	
                         <h4 class="title__line--5">배송지 목록</h4>
@@ -57,10 +59,10 @@
                             <div class="comment__form">
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
                                 
-                                <select class="ht__select" id="selectBox">
-                                	<option value="thisIsInsert">선택하세요</option>
+                                <select class="ht__select" id="addressSelectBox">
+                                	<option value="selectPlease">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
- 									<option value="${customerTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }-${cmAddressTbAddress2 }</option>
+ 										<option value="${customerTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }-${cmAddressTbAddress2 }</option>
  									</c:forEach>
                                     
                                 </select>
@@ -70,6 +72,7 @@
                                 <div class="ht__comment__btn--2 mt--30">
                                 	<button class="fr__btn" id="modifySubmitButton">수정</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
+                
                                 </div>
                             </div>
                             <div class="ht__comment__btn--2 mt--30">
@@ -157,17 +160,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-
+		$("registry").show();
         $("#deleteBtn").hide();
 
-        $("#selectBox").change(function () {
-            var selectedValue = $("#selectBox option:selected").val();
-            if(selectedValue === 'thisIsInsert')
+        $("#addressSelectBox").change(function () {
+            var selectedValue = $("#addressSelectBox option:selected").val();
+            if(selectedValue === 'selectPlease')
             {
             	
                 $("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
-                $("#customerTbNo").attr("value", 0);
+                $("#customerTbNo").attr("value", 0); //0번 고객
                 $("#cmAddressTbAddress1").removeAttr("value");
                 $("#cmAddressTbAddress2").removeAttr("value");
                 $("#formToController").attr("action", "myinfo-address-insert.do");

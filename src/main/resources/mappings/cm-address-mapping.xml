@@ -18,8 +18,8 @@
 	<insert id="insertMyinfoAddress" parameterType="clientMyinfo">
 		INSERT 
 		INTO 
-			cm_address (cm_address_tb_no, cm_address_tb_postcode, cm_address_tb_address1, cm_address_tb_address2)
-		VALUES(cm_address_seq.nextval, #{cmAddressTbPostcode}, #{cmAddressTbAddress1}, #{cmAddressTbAddress2})					
+			cm_address 
+		VALUES(cm_address_seq.nextval, #{customerTbNo}, #{cmAddressTbNickname}, #{cmAddressTbPostcode}, #{cmAddressTbAddress1}, #{cmAddressTbAddress2}, #{cmAddressTbPhone})					
 		
 	</insert>
 	<update id="updateMyinfoAddress" parameterType="clientMyinfo">

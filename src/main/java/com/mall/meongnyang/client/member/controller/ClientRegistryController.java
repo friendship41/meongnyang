@@ -19,27 +19,19 @@ public class ClientRegistryController {
 	@Autowired
 	private ClientInsertRegistryService clientInsertRegistryService;
 	
-	@Autowired
-	private MailService mailService;
+
+	
+	
 	
 	@RequestMapping(value = "/registry.do", method = RequestMethod.POST)
 	public String registryProc(ClientCustomerVO clientCustomerVO, Model model) {
 		
+		
 		int result = clientInsertRegistryService.insertRegistry(clientCustomerVO);
-		if(result == 1) {
-			MailVO mailVO = new MailVO();
-			mailVO.setFrom("dlsdyd1245@naver.com");
-			mailVO.setTo("dlsdyd1245@naver.com");
-			mailVO.setSubject("인증메일 요청입니다.");
-			mailVO.setContent("link");
-			mailService.sendMail(mailVO);
-			
-			model.addAttribute("mailSubmit", false);
-		} 
+		 
 		// 나중에 오류 나는지 확인
 		return "index";
 	}
 	
-	
-	
+		
 }

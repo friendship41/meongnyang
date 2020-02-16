@@ -51,7 +51,10 @@ public class ClientMyinfoAddressController {
 	
 	@RequestMapping(value = "/myinfo-address-insert.do", method=RequestMethod.POST)
 	public String insertAddress(ClientCmAddressVO clientCmAddressVO) {
+		
 		clientInsertMyinfoAddressService.insertMyinfoAddress(clientCmAddressVO);
+		
+		
 		return "redirect:myinfo.do";
 	}
 	

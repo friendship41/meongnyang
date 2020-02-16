@@ -18,6 +18,7 @@ public class ClientMyinfoAddressDAOImpl implements ClientMyinfoAddressDAO {
 	public void insertMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
 		sqlSessionTemplate.insert("ClientMyinfoDAO.insertMyinfoAddress", clientCmAddressVO);
 		
+		
 	}
 
 	@Override
