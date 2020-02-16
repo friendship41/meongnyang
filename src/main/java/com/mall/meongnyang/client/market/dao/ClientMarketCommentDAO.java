@@ -11,4 +11,5 @@ public interface ClientMarketCommentDAO {
 	void deleteMarketComment(ClientMarketCommentVO clientMarketCommentVO);
 	ClientMarketCommentVO selectMarketComment(ClientMarketCommentVO clientMarketCommentVO);
 	List<ClientMarketCommentVO> selectMarketCommentList(ClientMarketCommentVO clientMarketCommentVO);
+	int selectCommentCount(ClientMarketCommentVO clientMarketCommentVO);
 }

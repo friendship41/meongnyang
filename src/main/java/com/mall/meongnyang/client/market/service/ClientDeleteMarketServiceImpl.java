@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mall.meongnyang.client.market.dao.ClientMarketDAO;
+import com.mall.meongnyang.client.market.vo.ClientMarketVO;
 
 @Service
 public class ClientDeleteMarketServiceImpl implements ClientDeleteMarketService {
@@ -12,8 +13,8 @@ public class ClientDeleteMarketServiceImpl implements ClientDeleteMarketService 
 	private ClientMarketDAO clientMarketDAO;
 	
 	@Override
-	public void deleteMarket(int marketTbNo) {
-		clientMarketDAO.deleteMarket(marketTbNo);
+	public void deleteMarket(ClientMarketVO clientMarketVO) {
+		clientMarketDAO.deleteMarket(clientMarketVO);
 	}
 
 }

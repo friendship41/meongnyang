@@ -13,7 +13,7 @@ public class ClientMarketCommentDAOImpl implements ClientMarketCommentDAO {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+ 
 	@Override
 	public void insertMarketComment(ClientMarketCommentVO clientMarketCommentVO) {
 		sqlSessionTemplate.insert("commentDAO.insertComment", clientMarketCommentVO);

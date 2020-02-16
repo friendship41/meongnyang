@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,11 +68,11 @@ public class ClientMarketController {
 	}
 	
 	@RequestMapping(value = "/market-update.do", method = RequestMethod.GET)
-	public String updateFormMarket(int marketTbNo, Model model) {
+	public String updateFormMarket(ClientMarketVO clientMarketVO, Model model) {
 		
-		ClientMarketVO clientMarketVO = clientSelectMarketService.selectMarket(marketTbNo);
+		ClientMarketVO clientMarket = clientSelectMarketService.selectMarket(clientMarketVO);
 		
-		model.addAttribute("market", clientMarketVO);
+		model.addAttribute("market", clientMarket);
 		return "market/market-update";
 	}
 	
@@ -86,9 +85,9 @@ public class ClientMarketController {
 	}
 	
 	@RequestMapping("/market-delete.do")
-	public String marketDelete(int marketTbNo) {
+	public String marketDelete(ClientMarketVO clientMarketVO) {
 		
-		clientDeleteMarketService.deleteMarket(marketTbNo);
+		clientDeleteMarketService.deleteMarket(clientMarketVO);
 		
 		return "redirect: market-list.do";
 	}
