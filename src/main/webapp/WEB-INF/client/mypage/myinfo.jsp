@@ -49,7 +49,7 @@
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
-            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0">
+            	
                     <div class="ht__comment__form">
                     	
                         <h4 class="title__line--5">배송지 목록</h4>
@@ -60,7 +60,7 @@
                                 <select class="ht__select" id="selectBox">
                                 	<option value="thisIsInsert">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
- 									<option value="${cmAddressTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }-${cmAddressTbAddress2 }</option>
+ 									<option value="${customerTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }-${cmAddressTbAddress2 }</option>
  									</c:forEach>
                                     
                                 </select>
@@ -162,8 +162,6 @@
 
         $("#selectBox").change(function () {
             var selectedValue = $("#selectBox option:selected").val();
-            
-            alert(selectedValue);
             if(selectedValue === 'thisIsInsert')
             {
             	

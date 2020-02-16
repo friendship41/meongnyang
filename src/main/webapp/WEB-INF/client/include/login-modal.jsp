@@ -8,6 +8,12 @@
 	alert("로그인 실패 하셨습니다.")
 </script>
 </c:when>
+<c:when test="${mailSubmit eq false}">
+<script type="text/javascript"> 
+	alert("인증 메일이 발송되었습니다.")
+	
+</script>
+</c:when>
 </c:choose>
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
