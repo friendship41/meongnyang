@@ -29,8 +29,10 @@
 			cm_address_tb_address1,
 			cm_address_tb_address2,
 			cm_address_tb_phone
-		FROM cm_address
-		WHERE customer_tb_no = #{customerTbNo}
+		FROM 
+			cm_address
+		WHERE 
+			customer_tb_no = #{customerTbNo}
 	</select>
 	<select id="selectMyinfoAddress" parameterType="clientMyinfo" resultType="clientMyinfo">
 		SELECT

@@ -167,9 +167,10 @@
            	console.log(selectedValue);
             if(selectedValue === 'thisIsSelect')
             {
+            	
             	$("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
-                $("#customerTbNo").attr("value", "${customerTbNo}"); //고객넘버에 따른 리스트
+                $("#customerTbNo").attr("value", "${sessionScope.customer.customerTbNo}"); //고객넘버에 따른 리스트
                 $("cmAddressTbAddressPostcode").removeAttr("value");
                 $("#cmAddressTbAddress1").removeAttr("value");
                 $("#cmAddressTbAddress2").removeAttr("value");
@@ -177,6 +178,7 @@
             }
             else
             {
+            	
             	console.log(selectedValue);
                 var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddressTbNo="+selectedValue;
                 $.ajax({

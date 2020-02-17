@@ -1,7 +1,9 @@
 package com.mall.meongnyang.admin.shopping.service;
 
+import java.util.List;
+
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 
 public interface AdminSelectQnaListService {
-	public AdminQnaVO selectQnaList(AdminQnaVO adminQnaVO);
+	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO);
 }

@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mall.meongnyang.client.member.service.ClientInsertRegistryService;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
-import com.mall.meongnyang.util.mail.MailService;
-import com.mall.meongnyang.util.mail.MailVO;
 
 
 
@@ -19,21 +17,21 @@ public class ClientRegistryController {
 	@Autowired
 	private ClientInsertRegistryService clientInsertRegistryService;
 	
-	@Autowired
-	private MailService mailService;
-	
+//	@Autowired
+//	private MailService mailService;
+//	MailVO mailVO = new MailVO();
+//	mailVO.setFrom("Admin (包府磊)");
+//	mailVO.setTo(clientCustomerVO.getCustomerTbEmail());
+//	mailVO.setSubject("牢刘皋老 夸没涝聪促 ( 坷疵 构港成 )");
+//	mailVO.setContent("link");
+//	mailService.sendMail(mailVO);
+//	
+//	model.addAttribute("mailSubmit", false);
 	
 	
 	@RequestMapping(value = "/registry.do", method = RequestMethod.POST)
 	public String registryProc(ClientCustomerVO clientCustomerVO, Model model) {
-		MailVO mailVO = new MailVO();
-		mailVO.setFrom("Admin (包府磊)");
-		mailVO.setTo(clientCustomerVO.getCustomerTbEmail());
-		mailVO.setSubject("牢刘皋老 夸没涝聪促 ( 坷疵 构港成 )");
-		mailVO.setContent("link");
-		mailService.sendMail(mailVO);
 		
-		model.addAttribute("mailSubmit", false);
 		
 		int result = clientInsertRegistryService.insertRegistry(clientCustomerVO);
 		 

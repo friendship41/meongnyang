@@ -14,8 +14,7 @@ public class AdminSelectQnaServiceImpl implements AdminSelectQnaService {
 	
 	@Override
 	public AdminQnaVO selectQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return adminQnaDAO.selectQna(adminQnaVO);
 	}
 
 }

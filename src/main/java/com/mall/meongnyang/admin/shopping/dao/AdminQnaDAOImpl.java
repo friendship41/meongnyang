@@ -16,31 +16,30 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 	
 	@Override
 	public AdminQnaVO selectQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return sqlSessionTemplate.selectOne("AdminQnaDAO.selectQna", adminQnaVO);
 	}
 
 	@Override
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectList("AdminQnaDAO.selectQnaList", adminQnaVO);
 	}
 
 	@Override
 	public void insertQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.insert("AdminQnaDAO.insertQna", adminQnaVO);
 		
 	}
 
 	@Override
 	public void updateQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("AdminQnaDAO.updateQna", adminQnaVO);
 		
 	}
 
 	@Override
 	public void deleteQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.delete("AdminQnaDAO.deleteQna", adminQnaVO);
 		
 	}
 

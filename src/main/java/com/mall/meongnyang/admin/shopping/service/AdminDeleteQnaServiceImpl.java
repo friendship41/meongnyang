@@ -14,7 +14,7 @@ public class AdminDeleteQnaServiceImpl implements AdminDeleteQnaService {
 	
 	@Override
 	public void deleteQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
+		adminQnaDAO.deleteQna(adminQnaVO);
 		
 	}
 

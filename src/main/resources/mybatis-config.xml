@@ -40,5 +40,6 @@
         <mapper resource="mappings/terms-mapping.xml"/>
         <mapper resource="mappings/qna-mapping.xml"/>
         <mapper resource="mappings/qnaType-mapping.xml"/>
+        <mapper resource="mappings/cm-address-mapping.xml"/>
     </mappers>
 </configuration>

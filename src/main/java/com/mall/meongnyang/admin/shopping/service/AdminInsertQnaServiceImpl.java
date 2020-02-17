@@ -14,7 +14,7 @@ public class AdminInsertQnaServiceImpl implements AdminInsertQnaService {
 	
 	@Override
 	public void insertQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
+		adminQnaDAO.insertQna(adminQnaVO);
 		
 	}
 

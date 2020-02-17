@@ -2,8 +2,91 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="#package.#mapperinterfacename">
+<mapper namespace="AdminQnaDAO">
 
+	<!-- 전체 글수 -->
+	<select id="selectCountQna" resultType="int">
+		SELECT COUNT(*) FROM qna
+	</select>
+	<!-- 게시글 조회수 증가 -->
+	<update id="updateReadcount" parameterType="int">
+		UPDATE 
+			qna
+		SET
+			qna_tb_readcount = qna_tb_readcount + 1
+		WHERE qna_tb_no = #{qnaTbReadcount}
+	</update>
 	
+	<select id="selectQna" parameterType="qna" resultType="qna">
+		SELECT
+			qna_tb_no,
+			pd_sale_tb_no,
+			qna_type_tb_no,
+			customer_tb_no,
+			qna_tb_title,
+			qna_tb_content,
+			qna_tb_reg_date,
+			qna_tb_readcount,
+			qna_tb_secret,
+			qna_tb_ref,
+			qna_tb_step,
+			qna_tb_depth,
+			qna_tb_status
+		FROM 
+			qna
+		WHERE 
+			qna_tb_no = #{qnaTbNo}
+	</select>
+	<select id="selectQnaList" resultType="qna" parameterType="qna">
+		SELECT 
+			*
+		FROM
+			(SELECT
+				ROWNUM rnum,
+				qna_tb_no,
+				pd_sale_tb_no,
+				qna_type_tb_no,
+				customer_tb_no,
+				qna_tb_title,
+				qna_tb_content,
+				qna_tb_reg_date,
+				qna_tb_readcount,
+				qna_tb_secret,
+				qna_tb_ref,
+				qna_tb_step,
+				qna_tb_depth,
+				qna_tb_status
+			FROM (SELECT 
+						*
+					FROM
+						qna
+					ORDER BY qna_tb_no DESC))
+			<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
+			
+	</select>
+	
+	<insert id="insertQna" parameterType="qna">
+		INSERT INTO qna
+			(qna_tb_no, pd_sale_tb_no, qna_type_tb_no, customer_tb_no, qna_tb_title,
+			qna_tb_content, qna_tb_reg_date, qna_tb_readcount, qna_tb_secret)
+		VALUES
+			(qna_seq.nextval, pdSaleTbNo, qnaTypeTbNo, customerTbNo, qnaTbTitle,
+			qnaTbContent, qnaTbRegDate, qnaTbReadcount, qnaTbSecret)
+		WHERE qna_tb_no = #{qnaTbNo}
+	</insert>
 
+	<update id="updateQna" parameterType="qna">
+		UPDATE qna
+		SET
+			qna_tb_title = #{qnaTbTitle},
+			qna_tb_content = #{qnaTbContent},
+		
+		WHERE 
+			qna_tb_no = #{qnaTbNo}
+	</update>
+	<delete id="deleteQna" parameterType="qna">
+		DELETE FROM qna 
+		WHERE qna_tb_no = #{qnaTbNo}
+	</delete>
+	
 </mapper>
