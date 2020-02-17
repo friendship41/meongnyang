@@ -49,9 +49,9 @@
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
-            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0">
-            	<input type="hidden" name="cmAddressTbNickname" value="si">
-            	<input type="hidden" name="cmAddressTbPhone" value="010">
+            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0"> <!-- sessionScope.customer.customerTbNo -->
+            	<input type="hidden" name="cmAddressTbNickname" value="si"> <!-- kakao -->
+            	<input type="hidden" name="cmAddressTbPhone" value="010"> <!-- sessionScope.customer.customerTbPhone -->
                     <div class="ht__comment__form">
                     	
                         <h4 class="title__line--5">배송지 목록</h4>
@@ -59,10 +59,10 @@
                             <div class="comment__form">
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
                                 
-                                <select class="ht__select" id="addressSelectBox">
-                                	<option value="selectPlease">선택하세요</option>
+                                <select class="ht__select" id="selectBox">
+                                	<option value="thisIsSelect">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
- 										<option value="${customerTbNo }">${cmAddressTbPostcode } -${cmAddressTbAddress1 }-${cmAddressTbAddress2 }</option>
+ 										<option value="${address.customerTbNo }">${address.cmAddressTbPostcode }&nbsp;&nbsp; ${address.cmAddressTbAddress1 }&nbsp;&nbsp;${address.cmAddressTbAddress2 }</option>
  									</c:forEach>
                                     
                                 </select>
@@ -70,7 +70,7 @@
                                 <input id="postcode1" value="" type="text" placeholder=" 주소 *" name="cmAddressTbAddress1">
                                 <input id="postcode2" value="" type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2">
                                 <div class="ht__comment__btn--2 mt--30">
-                                	<button class="fr__btn" id="modifySubmitButton">수정</button>
+                                	<button id="modifySubmitButton" class="fr__btn" >추가</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
                 
                                 </div>
@@ -157,18 +157,17 @@
 
 <jsp:include page="../include/footer.jsp" />
 <!--jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-		$("registry").show();
-        $("#deleteBtn").hide();
-
-        $("#addressSelectBox").change(function () {
-            var selectedValue = $("#addressSelectBox option:selected").val();
-            if(selectedValue === 'selectPlease')
+	$(document).ready(function () {
+		$("#deleteBtn").hide();
+		
+        $("#selectBox").change(function () {
+            var selectedValue = $("#selectBox option:selected").val();
+           	console.log(selectedValue);
+            if(selectedValue === 'thisIsSelect')
             {
-            	
-                $("#modifySubmitButton").html('추가');
+            	$("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
                 $("#customerTbNo").attr("value", 0); //0번 고객
                 $("#cmAddressTbAddress1").removeAttr("value");
@@ -177,7 +176,8 @@
             }
             else
             {
-                var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddrssTbNo="+selectedValue;
+            	console.log(selectedValue);
+                var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddressTbNo="+selectedValue;
                 $.ajax({
                     url: ajaxUrl,
                     type: "GET",
@@ -187,6 +187,7 @@
                     .done(function(json) {
                         console.log(json);
                         $("#cmAddrssTbNo").attr("value", json.cmAddrssTbNo);
+                        $("#cmAddrssTbPostcode").attr("value", json.cmAddrssTbPostcode);
  						$("#cmAddressTbAddress1").attr("value", json.cmAddressTbAddress1);
  						$("#cmAddressTbAddress2").attr("value", json.cmAddressTbAddress2);
                         $("#modifySubmitButton").html('수정');
@@ -208,12 +209,7 @@
                     $("#postcode3").val(data.zonecode);
                     $("#postcode1").val(data.address)
                     $("#postcode2").focus();
-                    // $("#zonecode").val(data.zonecode);
-                    // $("#address").val(data.address);
-                    // $("#address_etc").focus();
-                    
                 }
-           
             }).open();
         }
     

@@ -2,6 +2,8 @@ package com.mall.meongnyang.client.mypage.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoAddressService;
 import com.mall.meongnyang.client.mypage.service.ClientInsertMyinfoAddressService;
 import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressListService;
@@ -45,7 +48,8 @@ public class ClientMyinfoAddressController {
 	
 	@RequestMapping(value = "/myinfo-address-single-ajax.do", method = RequestMethod.GET)
 	@ResponseBody
-	public ClientCmAddressVO addressListAjax(ClientCmAddressVO clientCmAddressVO) {
+	public ClientCmAddressVO addressListAjax(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
+		System.out.println(clientCmAddressVO);
 		return clientSelectMyinfoAddressService.selectMyinfoAddress(clientCmAddressVO);
 	}
 	
@@ -59,7 +63,8 @@ public class ClientMyinfoAddressController {
 	}
 	
 	@RequestMapping(value = "/myinfo-address-update.do", method=RequestMethod.POST)
-	public String updateAddress(ClientCmAddressVO clientCmAddressVO) {
+	public String updateAddress(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
+		
 		clientUpdateMyinfoAddressService.updateMyinfoAddress(clientCmAddressVO);
 		return "redirect:myinfo.do";
 	}

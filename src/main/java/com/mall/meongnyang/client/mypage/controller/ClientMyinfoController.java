@@ -61,7 +61,7 @@ public class ClientMyinfoController {
 		return "mypage/myinfo";
 	}
 
-	//½ÇÆÐ ¼±»ý´Ô²² ¿©Âåº¸±â
+	
 	@RequestMapping(value = "/myinfo-update-password.do", method = RequestMethod.POST)
 	public String updateMyinfoPasswordProc(@RequestParam String newPassword1, @RequestParam String newPassword2,
 		ClientCustomerVO clientCustomerVO, HttpSession session, Model model) {
