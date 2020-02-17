@@ -36,7 +36,7 @@
                         <div class="panel panel-white">
                             <div class="panel-body">
 
-                                <form class="form-horizontal" id="formToController" action="product-category-insert.ado" method="post">
+                                <form class="form-horizontal" id="formToController" action="productCategoryInsert.ado" method="post">
                                     <input type="hidden" name="productCategoryTbNo" id="productCategoryTbNo" value="0">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
@@ -81,9 +81,7 @@
                 <!-- !Row -->
             </div>
             <!-- !Main Wrapper -->
-            <div class="page-footer">
-                <p>메인프로젝트 오늘뭐멍냥 <i class="fa fa-heart"></i> by team4</p>
-            </div>
+            <jsp:include page="../include/page-footer.jsp"/>
         </div>
         <!-- /Page Inner -->
         <jsp:include page="../include/right-sidebar.jsp"/>
@@ -109,11 +107,11 @@
                 $("#productCategoryTbParent").removeAttr("value");
                 $("#productCategoryTbMedian").removeAttr("value");
                 $("#productCategoryTbSub").removeAttr("value");
-                $("#formToController").attr("action", "product-category-insert.ado");
+                $("#formToController").attr("action", "productCategoryInsert.ado");
             }
             else
             {
-                var ajaxUrl = "/product-category-single-ajax.ado?productCategoryTbNo="+selectedValue;
+                var ajaxUrl = "/productCategorySingleAjax.ado?productCategoryTbNo="+selectedValue;
                 $.ajax({
                     url: ajaxUrl,
                     type: "GET",
@@ -128,9 +126,9 @@
                         $("#productCategoryTbSub").attr("value", json.productCategoryTbSub);
                         $("#categorySubmitButton").html('카테고리 수정');
                         $("#deleteCategoryBtn").show();
-                        var deleteUrl = "/product-category-delete.ado?productCategoryTbNo="+json.productCategoryTbNo;
+                        var deleteUrl = "/productCategoryDelete.ado?productCategoryTbNo="+json.productCategoryTbNo;
                         $("#deleteCategoryBtn").attr("href", deleteUrl);
-                        $("#formToController").attr("action", "product-category-update.ado");
+                        $("#formToController").attr("action", "productCategoryUpdate.ado");
                     })
                     .fail(function (xhr, status, errorThrown) {
                         alert(errorThrown);

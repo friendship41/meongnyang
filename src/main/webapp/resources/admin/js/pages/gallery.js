@@ -2,5 +2,5 @@ $(function(){
     
     "use strict";
     	
-    new CBPGridGallery( document.getElementById( 'grid-gallery' ) );
+    // new CBPGridGallery( document.getElementById( 'grid-gallery' ) );
 });

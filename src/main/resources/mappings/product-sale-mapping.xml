@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductSaleDAO">
+
+	<insert id="insertProductSale" parameterType="productSale">
+        INSERT INTO pd_sale
+        VALUES(
+            pd_sale_seq.NEXTVAL,
+            #{productTbCode},
+            <if test="promotionTbCode == -1">
+                null,
+            </if>
+            <if test="promotionTbCode != -1">
+                #{promotionTbCode},
+            </if>
+            #{pdSaleTbProductName},
+            #{pdSaleTbReceivedPrice},
+            #{pdSaleTbSalesPrice},
+            #{pdSaleTbReceivedAmount},
+            #{pdSaleTbRemainingAmount},
+            #{pdSaleTbLimitAmount},
+            #{pdSaleTbStartDay},
+            <if test="pdSaleTbExpireDay == null">
+                null,
+            </if>
+            <if test="pdSaleTbExpireDay != null">
+                #{pdSaleTbExpireDay},
+            </if>
+            #{pdSaleTbSize},
+            0,
+            0,
+            #{pdSaleTbDiscountRate, jdbcType=INTEGER},
+            'Y'
+        )
+    </insert>
+
+    <update id="updateProductSaleState" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+            PD_SALE_TB_STATE=#{pdSaleTbState}
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
+
+    <update id="updateProductSale" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+        <if test="promotionTbCode != -1">
+            PROMOTION_TB_CODE=#{promotionTbCode},
+        </if>
+        PD_SALE_TB_PRODUCT_NAME=#{pdSaleTbProductName},
+        PD_SALE_TB_RECEIVED_PRICE=#{pdSaleTbReceivedPrice},
+        PD_SALE_TB_SALES_PRICE=#{pdSaleTbSalesPrice},
+        PD_SALE_TB_LIMIT_AMOUNT=#{pdSaleTbLimitAmount},
+        PD_SALE_TB_START_DAY=#{pdSaleTbStartDay},
+        <if test="pdSaleTbExpireDay != null">
+            PD_SALE_TB_EXPIRE_DAY=#{pdSaleTbExpireDay},
+        </if>
+        PD_SALE_TB_DISCOUNT_RATE=#{pdSaleTbDiscountRate, jdbcType=INTEGER},
+        PD_SALE_TB_STATE='Y'
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
+
+    <select id="selectProductSale" parameterType="productSale" resultType="productSale">
+        SELECT
+            PD_SALE_TB_NO,
+            PRODUCT_TB_CODE,
+            PROMOTION_TB_CODE,
+            PD_SALE_TB_PRODUCT_NAME,
+            PD_SALE_TB_RECEIVED_PRICE,
+            PD_SALE_TB_SALES_PRICE,
+            PD_SALE_TB_RECEIVED_AMOUNT,
+            PD_SALE_TB_REMAINING_AMOUNT,
+            PD_SALE_TB_LIMIT_AMOUNT,
+            PD_SALE_TB_EXPIRE_DAY,
+            PD_SALE_TB_SIZE,
+            PD_SALE_TB_DISCOUNT_RATE
+        FROM pd_sale
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </select>
+
+    <select id="selectProductSaleOverviewList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ps.PD_SALE_TB_NO,
+                ps.PRODUCT_TB_CODE,
+                ps.PD_SALE_TB_PRODUCT_NAME,
+                ps.PROMOTION_TB_CODE,
+                ps.PD_SALE_TB_SALES_PRICE,
+                ps.PD_SALE_TB_DISCOUNT_RATE,
+                ps.PD_SALE_TB_REMAINING_AMOUNT,
+                ps.PD_SALE_TB_RATING,
+                ps.PD_SALE_TB_STATE,
+                p.PRODUCT_TB_BANNER_STATE
+            FROM pd_sale ps JOIN product p
+            ON ps.PRODUCT_TB_CODE = p.PRODUCT_TB_CODE
+            WHERE p.PRODUCT_TB_REG_DATE >= #{dayFrom} AND p.PRODUCT_TB_REG_DATE <= #{dayTo}
+        ]]>
+    </select>
+
+</mapper>

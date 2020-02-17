@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="termsDAO">
+	
+	<select id="selectTerms" parameterType="terms" resultType="terms">
+		SELECT
+		terms_tb_no ,
+		admins_tb_id ,
+		terms_tb_title ,
+		terms_tb_content ,
+		terms_tb_necessary ,
+		terms_tb_reg_date ,
+		terms_tb_expire_date ,
+		terms_tb_change_date ,
+		terms_tb_apply_date
+		FROM
+		terms
+		WHERE terms_tb_no = #{termsTbNo}
+	</select>
+
+	<select id="selectTermsList" parameterType="terms" resultType="terms">
+		SELECT
+		terms_tb_no ,
+		admins_tb_id ,
+		terms_tb_title ,
+		terms_tb_content ,
+		terms_tb_necessary ,
+		terms_tb_reg_date ,
+		terms_tb_expire_date ,
+		terms_tb_change_date ,
+		terms_tb_apply_date
+		FROM terms
+	</select>
+	
+	<insert id="insertTerms" parameterType="terms">
+	INSERT INTO terms 
+	VALUES(#{termsTbNo},'admin',#{termsTbTitle}, #{termsTbContent}, #{termsTbNecessary, jdbcType=VARCHAR}, SYSDATE, #{termsTbExpireDate}, SYSDATE, #{termsTbApplyDate})
+	</insert>
+	
+	<update id="updateTerms" parameterType="terms">
+	 UPDATE terms SET 
+	 terms_tb_title=#{termsTbTitle},
+	 terms_tb_content=#{termsTbContent},
+	 terms_tb_necessary=#{termsTbNecessary},
+	 terms_tb_expire_date=#{termsTbExpireDate},
+	 terms_tb_apply_date=#{termsTbApplyDate} 
+	 WHERE terms_tb_no=#{termsTbNo}
+	</update>
+
+
+</mapper>

@@ -64,13 +64,13 @@
                     <div class="menumenu__container clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
                             <div class="logo">
-                                <a href="index.html"><img src="images/logo/4.png" alt="logo images"></a>
+                                <a href="index.do"><img src="/resources/client/images/logo/logo_final.png" alt="logo images"></a>
                             </div>
                         </div>
                         <div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
                             <nav class="main__menu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu">
-                                    <li class="drop"><a href="index.html">Home</a></li>
+                                    <li class="drop"><a href="index.do">Home</a></li>
                                     <li class="drop"><a href="#">Shopping</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
@@ -93,14 +93,14 @@
                                     </li>
                                     <li class="drop"><a href="#">Community</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">공지</a></li>
-                                            <li><a href="#">FAQ</a></li>
-                                            <li><a href="#">Q&A</a></li>
+                                            <li><a href="notice.do">공지</a></li>
+                                            <li><a href="faq.do">FAQ</a></li>
+                                            <li><a href="">Q&A</a></li>
                                             <li><a href="#">리뷰</a></li>
                                             <li><a href="#">Contact</a></li>
                                         </ul>
                                     </li>
-                                    <li class="drop"><a href="#">Market</a>
+                                    <li class="drop"><a href="market-list.do">Market</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -108,7 +108,7 @@
                             <div class="mobile-menu clearfix visible-xs visible-sm">
                                 <nav id="mobile_dropdown">
                                     <ul>
-                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index.do">Home</a></li>
                                         <li><a href="#">Shopping</a>
                                             <ul>
                                                 <li><a href="blog.html">강아지 먹거리</a></li>
@@ -119,14 +119,14 @@
                                         </li>
                                         <li><a href="#">Community</a>
                                             <ul>
-                                                <li><a href="#">공지</a></li>
-                                                <li><a href="#">FAQ</a></li>
+                                                <li><a href="notice.do">공지</a></li>
+                                                <li><a href="faq.do">FAQ</a></li>
                                                 <li><a href="#">Q&A</a></li>
                                                 <li><a href="#">리뷰</a></li>
                                                 <li><a href="#">Contact</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="blog.html">Market</a></li>
+                                        <li><a href="market-list.do">Market</a></li>
                                     </ul>
                                 </nav>
                             </div>

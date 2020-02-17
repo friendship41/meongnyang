@@ -19,7 +19,7 @@ public class SaveImageService
             String fullImagePath = request.getServletContext().getRealPath("resources/image/"+saveFolderName+"/"+fileName);
 //            System.out.println("이미지경로: "+fullImagePath);
             file.transferTo(new File(fullImagePath));
-            return "resources/image/"+saveFolderName+"/"+fileName;
+            return "/resources/image/"+saveFolderName+"/"+fileName;
         }
         else
         {

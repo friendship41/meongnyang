@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberDAO">
+
+    <resultMap id="adminMemberResult" type="adminMember">
+
+    </resultMap>
+
+    <update id="updateMember" parameterType="adminMember">
+        UPDATE customer SET customer_tb_state='B'
+        WHERE customer_tb_no=#{customerTbNo}
+    </update>
+
+  
+
+    <select id="selectMemberList" parameterType="adminMember" resultType="adminMember">
+        SELECT
+            customer_tb_no, 
+			customer_tb_name, 
+			customer_tb_password, 
+			customer_tb_email, 
+			customer_tb_phone, 
+			customer_tb_join_date, 
+			customer_tb_point, 
+			customer_tb_last_login, 
+			customer_tb_pw_change, 
+			customer_tb_join_path, 
+			customer_tb_state 
+        FROM customer
+       
+    </select>
+
+  
+
+</mapper>

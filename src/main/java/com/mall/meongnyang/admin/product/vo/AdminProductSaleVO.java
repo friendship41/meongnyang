@@ -19,6 +19,13 @@ public class AdminProductSaleVO
     private int pdSaleTbReadCount;
     private int pdSaleTbRating;
     private int pdSaleTbDiscountRate;
+    private String pdSaleTbState;
+
+    private int rowNumber;
+    private Date dayFrom;
+    private Date dayTo;
+
+    private String productTbBannerState;
 
     public int getPdSaleTbNo()
     {
@@ -168,5 +175,82 @@ public class AdminProductSaleVO
     public void setPdSaleTbDiscountRate(int pdSaleTbDiscountRate)
     {
         this.pdSaleTbDiscountRate = pdSaleTbDiscountRate;
+    }
+
+    public String getPdSaleTbState()
+    {
+        return pdSaleTbState;
+    }
+
+    public void setPdSaleTbState(String pdSaleTbState)
+    {
+        this.pdSaleTbState = pdSaleTbState;
+    }
+
+    public int getRowNumber()
+    {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber)
+    {
+        this.rowNumber = rowNumber;
+    }
+
+    public Date getDayFrom()
+    {
+        return dayFrom;
+    }
+
+    public void setDayFrom(Date dayFrom)
+    {
+        this.dayFrom = dayFrom;
+    }
+
+    public Date getDayTo()
+    {
+        return dayTo;
+    }
+
+    public void setDayTo(Date dayTo)
+    {
+        this.dayTo = dayTo;
+    }
+
+    public String getProductTbBannerState()
+    {
+        return productTbBannerState;
+    }
+
+    public void setProductTbBannerState(String productTbBannerState)
+    {
+        this.productTbBannerState = productTbBannerState;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "AdminProductSaleVO{" +
+                "pdSaleTbNo=" + pdSaleTbNo +
+                ", productTbCode='" + productTbCode + '\'' +
+                ", promotionTbCode=" + promotionTbCode +
+                ", pdSaleTbProductName='" + pdSaleTbProductName + '\'' +
+                ", pdSaleTbReceivedPrice=" + pdSaleTbReceivedPrice +
+                ", pdSaleTbSalesPrice=" + pdSaleTbSalesPrice +
+                ", pdSaleTbReceivedAmount=" + pdSaleTbReceivedAmount +
+                ", pdSaleTbRemainingAmount=" + pdSaleTbRemainingAmount +
+                ", pdSaleTbLimitAmount=" + pdSaleTbLimitAmount +
+                ", pdSaleTbStartDay=" + pdSaleTbStartDay +
+                ", pdSaleTbExpireDay=" + pdSaleTbExpireDay +
+                ", pdSaleTbSize='" + pdSaleTbSize + '\'' +
+                ", pdSaleTbReadCount=" + pdSaleTbReadCount +
+                ", pdSaleTbRating=" + pdSaleTbRating +
+                ", pdSaleTbDiscountRate=" + pdSaleTbDiscountRate +
+                ", pdSaleTbState='" + pdSaleTbState + '\'' +
+                ", rowNumber=" + rowNumber +
+                ", dayFrom=" + dayFrom +
+                ", dayTo=" + dayTo +
+                ", productTbBannerState='" + productTbBannerState + '\'' +
+                '}';
     }
 }

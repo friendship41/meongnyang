@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
+
 <body>
 
 <!-- Page Container -->
@@ -36,23 +37,24 @@
                                 <h4 class="panel-title">약관 작성/수정</h4>
                             </div>
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="term-write.ado" method="post">
+                   	                        <!-- <input type="hidden" name="adminsTbId" value="${sessionScope.id}">  -->                                    
                                     <div class="form-group">
                                         <label for="termNumber" class="col-sm-2 control-label">약관번호</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="termNumber">
+                                            <input type="text" class="form-control" name="termsTbNo" id="termNumber">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="termName" class="col-sm-2 control-label">약관명</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="termName">
+                                            <input type="text" class="form-control" name="termsTbTitle" id="termName">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="termDetail" class="col-sm-2 control-label">약관상세</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="termDetail"></textarea>
+                                            <textarea rows="10" class="form-control" name="termsTbContent" id="termDetail"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -60,7 +62,7 @@
                                         <div class="col-sm-10">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox">필수
+                                                    <input type="checkbox" name="termsTbNecessary" value="true" >필수
                                                 </label>
                                             </div>
                                         </div>
@@ -68,23 +70,22 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">만료일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker">
+                                            <input type="text" class="form-control date-picker" name="termsTbExpireDate">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">정책적용일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker">
+                                            <input type="text" class="form-control date-picker" name="termsTbApplyDate">
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">작성</button>
-                                            <!--                                                이 버튼 누르면 수정이 확일합니까 확인알럿이 뜨고 컨펌하면 ㄱ-->
+                                          
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -106,5 +107,4 @@
 
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
-</body>
-</html>
+

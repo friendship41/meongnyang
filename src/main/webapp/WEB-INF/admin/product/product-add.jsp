@@ -35,7 +35,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal" action="product-add-page.ado" method="post" enctype="multipart/form-data">
+                                <form class="form-horizontal" action="productAdd.ado" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">
@@ -73,9 +73,7 @@
                 <!-- !Row -->
             </div>
             <!-- !Main Wrapper -->
-            <div class="page-footer">
-                <p>메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4</p>
-            </div>
+            <jsp:include page="../include/page-footer.jsp"/>
         </div>
         <!-- /Page Inner -->
         <jsp:include page="../include/right-sidebar.jsp"/>
