@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,13 +19,17 @@ public class ClientLoginController {
 	@Autowired
 	private ClientSelectLoginService clientSelectLoginService;
 	
+	//필요없음 로그아웃은
 	@Autowired
 	private ClientLogoutService clientLogoutService;
 	
 	
+	
+	
+	
 	//로그인처리
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginProc(ClientCustomerVO clientCustomerVO,  HttpSession session) {
+	public String loginProc(ClientCustomerVO clientCustomerVO,  HttpSession session, Model model) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();		
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 		
@@ -33,8 +38,8 @@ public class ClientLoginController {
 			
 			return "redirect:index.do";
 		} else {
-			System.out.println("로그인실패");
-			return "redirect:index.do";
+			model.addAttribute("loginCheckSubmit", false);
+			return "index";
 		}
 	}
 	
@@ -48,11 +53,7 @@ public class ClientLoginController {
 		return "index";
 	}
 	
-	//로그인 후 세션있을시 모달클릭하면 myinfo 페이지로 이동하는 처리
 	
-	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
-	public String loginModalProc(HttpSession session) {
-		
-		return "mypage/myinfo";
-	}
+	
+	
 }
