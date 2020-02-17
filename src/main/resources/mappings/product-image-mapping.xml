@@ -48,5 +48,11 @@
         WHERE PD_IMAGE_TB_NO=#{pdImageTbNo}
     </update>
 
+    <select id="selectRepCount" parameterType="productImage" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM pd_image
+        WHERE PRODUCT_TB_CODE=#{productTbCode} AND PD_IMAGE_TB_REPRESENTATIVE='Y'
+    </select>
 
 </mapper>

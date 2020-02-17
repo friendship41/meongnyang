@@ -34,6 +34,23 @@
 	</bean>
 
 
+	<!-- shopping 메뉴 세션세팅 인터셉트 -->
+	<bean id="clientMenuDAO" class="com.mall.meongnyang.client.intercepter.menu.ClientMenuDAOImpl">
+		<constructor-arg ref="sqlSessionTemplate"/>
+	</bean>
+	<bean id="clientSelectProductCategoryListService" class="com.mall.meongnyang.client.intercepter.menu.ClientSelectProductCategoryListServiceImpl">
+		<constructor-arg ref="clientMenuDAO"/>
+	</bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<bean class="com.mall.meongnyang.client.intercepter.menu.MenuCheckInterceptor">
+				<constructor-arg ref="clientSelectProductCategoryListService"/>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
 	<!-- View Resolver(제일 밑으로 유지) -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/client/" />

@@ -115,7 +115,7 @@
     setInterval('autoRefresh_div()', 5000); // 5초 후에 div 새로 고침
 
     function deleteImageProc(imgNum) {
-        var ajaxUrl = "/product-image-delete.ado?pdImageTbNo="+imgNum;
+        var ajaxUrl = "/productImageDelete.ado?pdImageTbNo="+imgNum;
         $.ajax({
             url: ajaxUrl,
             type: "GET",
