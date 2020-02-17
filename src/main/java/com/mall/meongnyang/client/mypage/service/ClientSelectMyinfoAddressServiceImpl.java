@@ -14,6 +14,7 @@ public class ClientSelectMyinfoAddressServiceImpl implements ClientSelectMyinfoA
 	
 	@Override
 	public ClientCmAddressVO selectMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
+		System.out.println(clientMyinfoAddressDAO.selectMyinfoAddress(clientCmAddressVO) + "service");
 		return clientMyinfoAddressDAO.selectMyinfoAddress(clientCmAddressVO);
 	}
 

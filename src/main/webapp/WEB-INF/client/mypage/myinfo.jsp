@@ -66,9 +66,9 @@
  									</c:forEach>
                                     
                                 </select>
-                                <input id="postcode3" value="" type="text" placeholder="" name="cmAddressTbPostcode">
-                                <input id="postcode1" value="" type="text" placeholder=" 주소 *" name="cmAddressTbAddress1">
-                                <input id="postcode2" value="" type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2">
+                                <input type="text" placeholder="" name="cmAddressTbPostcode" id="cmAddressTbPostcode">
+                                <input type="text" placeholder=" 주소 *" name="cmAddressTbAddress1" id="cmAddressTbAddress1">
+                                <input type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2" id="cmAddressTbAddress2">
                                 <div class="ht__comment__btn--2 mt--30">
                                 	<button id="modifySubmitButton" class="fr__btn" >추가</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
@@ -169,7 +169,7 @@
             {
             	$("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
-                $("#customerTbNo").attr("value", "${customerTbNo}"); //0번 고객
+                $("#customerTbNo").attr("value", "${customerTbNo}"); //고객넘버에 따른 리스트
                 $("cmAddressTbAddressPostcode").removeAttr("value");
                 $("#cmAddressTbAddress1").removeAttr("value");
                 $("#cmAddressTbAddress2").removeAttr("value");
@@ -193,9 +193,9 @@
  						$("#cmAddressTbAddress2").attr("value", json.cmAddressTbAddress2);
                         $("#modifySubmitButton").html('수정');
                         $("#deleteBtn").show();
-                        var deleteUrl = "/myinfo-address-delete.ado?cmAddressTbNo="+json.cmAddressTbNo;
+                        var deleteUrl = "/myinfo-address-delete.do?cmAddressTbNo="+json.cmAddressTbNo;
                         $("#deleteBtn").attr("href", deleteUrl);
-                        $("#formToController").attr("action", "myinfo-address-update.ado");
+                        $("#formToController").attr("action", "myinfo-address-update.do");
                     })
                     .fail(function (xhr, status, errorThrown) {
                         alert(errorThrown);
@@ -207,9 +207,9 @@
             new daum.Postcode({
             	
                 oncomplete:function(data) {
-                    $("#postcode3").val(data.zonecode);
-                    $("#postcode1").val(data.address)
-                    $("#postcode2").focus();
+                    $("#cmAddressTbPostcode").val(data.zonecode);
+                    $("#cmAddressTbAddress1").val(data.address)
+                    $("#cmAddressTbAddress2").focus();
                 }
             }).open();
         }

@@ -74,6 +74,6 @@ public class ClientMyinfoAddressController {
 		System.out.println(clientCmAddressVO);
 		
 		clientDeleteMyinfoAddressService.deleteMyinfoAddress(clientCmAddressVO);
-		return "redirect:myinfo-address-list.do";
+		return "redirect:myinfo.do";
 	}
 }
