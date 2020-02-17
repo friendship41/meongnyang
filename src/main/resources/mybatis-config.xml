@@ -22,7 +22,7 @@
         <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO" alias="clientMyinfo"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminTermsVO" alias="terms"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminQnaVO" alias="qna"/>
-        <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminQnaVO" alias="qnaType"/>
+        <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO" alias="qnaType"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappings/adminLogin-mapping.xml"/>

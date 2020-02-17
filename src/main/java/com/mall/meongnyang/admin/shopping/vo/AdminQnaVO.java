@@ -15,6 +15,14 @@ public class AdminQnaVO {
 	private int qnaTbRef;
 	private int qnaTbStep;
 	private int qnaTbDepth;
+	private String qnaTbStatus;
+	
+	public String getQnaTbStatus() {
+		return qnaTbStatus;
+	}
+	public void setQnaTbStatus(String qnaTbStatus) {
+		this.qnaTbStatus = qnaTbStatus;
+	}
 	public int getQnaTbNo() {
 		return qnaTbNo;
 	}

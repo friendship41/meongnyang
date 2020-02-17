@@ -1,6 +1,6 @@
 package com.mall.meongnyang.admin.shopping.vo;
 
-public class AdminQnaType {
+public class AdminQnaTypeVO {
 	private int qnaTypeTbNo;
 	private String qnaTypeTbName;
 	public int getQnaTypeTbNo() {

@@ -36,35 +36,22 @@
                         <div class="panel panel-white">
                             <div class="panel-body">
 
-                                <form class="form-horizontal" id="formToController" action="productCategoryInsert.ado" method="post">
-                                    <input type="hidden" name="productCategoryTbNo" id="productCategoryTbNo" value="0">
+                                <form class="form-horizontal" id="formToController" action="qnaCategoryInsert.ado" method="post">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">
-                                            <select style="margin-bottom:15px;" class="form-control" id="categorySelectBox">
+                                            <select style="margin-bottom:15px;" class="form-control" id="selectBox">
                                                 <option value="thisIsInsert">카테고리 추가할시 선택해주세요</option>
-                                                <c:forEach var="category" items="${productCategoryList}">
-                                                    <option value="${category.productCategoryTbNo}">${category.productCategoryTbParent}-${category.productCategoryTbMedian}-${category.productCategoryTbSub}</option>
+                                                <c:forEach var="category" items="${qnaCategoryList}">
+                                                    <option value="${category.qnaTypeTbNo}">${category.qnaTypeTbName}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="productCategoryTbParent" class="col-sm-2 control-label">최상위 카테고리</label>
+                                        <label for="qnaTypeTbName" class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productCategoryTbParent" name="productCategoryTbParent" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">중위 카테고리</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productCategoryTbMedian" name="productCategoryTbMedian" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">최하위 카테고리</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="productCategoryTbSub" name="productCategoryTbSub" required>
+                                            <input type="text" class="form-control" id="qnaTypeTbName" name="qnaTypeTbName" required>
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
@@ -91,27 +78,24 @@
 <!-- /Page Container -->
 
 <!-- 기본 jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
         $("#deleteCategoryBtn").hide();
 
-        $("#categorySelectBox").change(function () {
-            var selectedValue = $("#categorySelectBox option:selected").val();
+        $("#selectBox").change(function () {
+            var selectedValue = $("#selectBox option:selected").val();
             console.log(selectedValue);
             if(selectedValue === 'thisIsInsert')
             {
                 $("#categorySubmitButton").html('카테고리 추가');
                 $("#deleteCategoryBtn").hide();
-                $("#productCategoryTbNo").attr("value", 0);
-                $("#productCategoryTbParent").removeAttr("value");
-                $("#productCategoryTbMedian").removeAttr("value");
-                $("#productCategoryTbSub").removeAttr("value");
-                $("#formToController").attr("action", "productCategoryInsert.ado");
+                $("#qnaTypeTbName").removeAttr("value");
+                $("#formToController").attr("action", "qnaCategoryInsert.ado");
             }
             else
             {
-                var ajaxUrl = "/productCategorySingleAjax.ado?productCategoryTbNo="+selectedValue;
+                var ajaxUrl = "/qnaCategorySingleAjax.ado?qnaTypeTbNo="+selectedValue;
                 $.ajax({
                     url: ajaxUrl,
                     type: "GET",
@@ -120,15 +104,13 @@
                 })
                     .done(function(json) {
                         console.log(json);
-                        $("#productCategoryTbNo").attr("value", json.productCategoryTbNo);
-                        $("#productCategoryTbParent").attr("value", json.productCategoryTbParent);
-                        $("#productCategoryTbMedian").attr("value", json.productCategoryTbMedian);
-                        $("#productCategoryTbSub").attr("value", json.productCategoryTbSub);
+                        $("#qnaTypeTbNo").attr("value", json.qnaTypeTbNo);
+                        $("#qnaTypeTbName").attr("value", json.qnaTypeTbName);
                         $("#categorySubmitButton").html('카테고리 수정');
                         $("#deleteCategoryBtn").show();
-                        var deleteUrl = "/productCategoryDelete.ado?productCategoryTbNo="+json.productCategoryTbNo;
+                        var deleteUrl = "/qnaCategoryDelete.ado?qnaTypeTbNo="+json.qnaTypeTbNo;
                         $("#deleteCategoryBtn").attr("href", deleteUrl);
-                        $("#formToController").attr("action", "productCategoryUpdate.ado");
+                        $("#formToController").attr("action", "qnaCategoryUpdate.ado");
                     })
                     .fail(function (xhr, status, errorThrown) {
                         alert(errorThrown);
