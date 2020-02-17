@@ -2,11 +2,14 @@ package com.mall.meongnyang.client.market.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ClientMarketCommentVO {
 	
 	private int marketCommentTbNo;
 	private int marketTbNo;
 	private String marketCommentTbContent;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Date marketCommentTbRegDate;
 	private int marketCommentTbRef;
 	private int marketCommentTbStep;

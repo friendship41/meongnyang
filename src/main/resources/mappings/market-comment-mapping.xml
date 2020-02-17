@@ -4,6 +4,12 @@
 
 <mapper namespace="commentDAO">
 
+	<update id="updateStep" parameterType="comment">
+		UPDATE market_comment 
+		SET market_commnet_tb_step = market_commnet_tb_step + 1
+		<![CDATA[WHERE market_commnet_tb_ref = ${marketCommentTbRef} AND market_commnet_tb_step > ${marketCommentTbStep}]]>
+	</update>
+
 	<select id="selectCountComment" parameterType="comment" resultType="int">
 		SELECT COUNT(*)
 		FROM market_comment
@@ -23,25 +29,24 @@
 		market_comment_tb_depth,
 		customer_tb_no
 		FROM (SELECT * FROM market_comment 
-		WHERE market_tb_no = ${marketTbNo} AND market_comment_tb_ref DESC AND market_comment_tb_step ASC))
-		<![CDATA[WHERE rnum >= #{startRow} and rnum <= #{endRow}]]>
+		WHERE market_tb_no = ${marketTbNo} ORDER BY market_comment_tb_ref ASC, market_comment_tb_step DESC))
+		<![CDATA[WHERE rnum >= 1 and rnum <= 10]]>
 	</select>
 
 	<insert id="insertComment" parameterType="comment">
 		INSERT INTO market_comment
 		(market_comment_tb_no,
-		market_tb_no ,
-		market_comment_tb_content ,
-		market_comment_tb_reg_date ,
-		market_comment_tb_ref ,
-		market_comment_tb_step ,
-		market_comment_tb_depth ,
+		market_tb_no,
+		market_comment_tb_content,
+		market_comment_tb_ref,
+		market_comment_tb_step,
+		market_comment_tb_depth,
 		customer_tb_no)
 		VALUES 
 		(market_comment_seq.nextval,
 		#{marketTbNo},
 		#{marketCommentTbContent},
-		#{marketCommentTbRef},
+		market_comment_seq.currval,
 		#{marketCommentTbStep},
 		#{marketCommentTbDepth},
 		#{customerTbNo})
