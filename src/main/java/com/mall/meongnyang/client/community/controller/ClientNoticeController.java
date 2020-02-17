@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO;
 import com.mall.meongnyang.client.community.service.ClientSelectNoticeListService;
 import com.mall.meongnyang.client.community.service.ClientSelectNoticeService;
+import com.mall.meongnyang.client.community.vo.NoticeListPaging;
 
 
 @Controller
@@ -24,17 +25,22 @@ public class ClientNoticeController {
 	
 
 	    @RequestMapping(value = "/notice.do", method = RequestMethod.GET)
-	    public String noticeList(Model model)
+	    public String noticeList(AdminNoticeVO adminNoticeVO,Model model)
 	    {
-	        List<AdminNoticeVO> clientNoticeList = clientSelectNoticeListService.selectNoticeList(new AdminNoticeVO());
-//	        if(clientNoticeList!=null) {
-//	        System.out.println("값이 들어있습니다~~");
-//	        	
-//	        }else {
-//	        	System.out.println("값이 없음 ㅜ ");
-//	        }
+	    		
+	    	NoticeListPaging paging = new NoticeListPaging();
+	    	paging.createPaging(clientSelectNoticeListService.selectCountNotice());
+	    	
+	    	adminNoticeVO.setStartRow(paging.getStartRow());
+	    	adminNoticeVO.setEndRow(paging.getEndRow());
+	    	
+	        List<AdminNoticeVO> clientNoticeList = clientSelectNoticeListService.selectNoticeList(adminNoticeVO);
+	        System.out.println(clientNoticeList);
+	       
 	        model.addAttribute("clientNoticeList", clientNoticeList);
 
+	        model.addAttribute("paging", paging);
+	        
 	        return "community/notice";
 	    }
 	    
@@ -47,5 +53,28 @@ public class ClientNoticeController {
 	      	        
 	        return "community/notice-read";
 	    }
+	    
+	    //페이징처리
+//	    @RequestMapping(value= "/notice-paging.do")
+//	    public String selectNoticeList(AdminNoticeVO adminNoticeVO, Model model) {
+//	    	
+//	    	NoticeListPaging paging = new NoticeListPaging();
+//	    	paging.createPaging(clientSelectNoticeListService.selectCountNotice());
+//	    	
+//	    	adminNoticeVO.setStartRow(paging.getStartRow());
+//	    	adminNoticeVO.setEndRow(paging.getEndRow());
+//	    	
+//	    	
+//	    	
+//	    	
+//	    	
+//	    	model.addAttribute("paging", paging);
+//	    	
+//	    	return "community/notice";
+//	    	
+//	    	
+//	    }
+	    
+	    
 	    
 }

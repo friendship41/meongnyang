@@ -74,12 +74,15 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <ul class="htc__pagenation">
+                                        <c:if test="${paging.prev == true}">
                                         <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">3</a></li>
-                                        <li><a href="#">19</a></li>
-                                        <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                    </ul>
+                                        </c:if>
+                                   	    <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+                                   	    <li><a href="/notice.do?currentPage=${i}">${i}</a></li> 
+                                   	    </c:forEach>
+                                   	    <c:if test="${paging.next == true }">
+                                   	    <li class="active"><a href="#"><i class="zmdi zmdi-chevron-right" ></i></a></li>
+                                   	    </c:if>
                                 </div>
                             </div>
                             <!-- End Pagenation -->
