@@ -24,6 +24,7 @@
 	<select id="selectMyinfoAddressList" parameterType="clientMyinfo" resultType="clientMyinfo">
 		SELECT
 			cm_address_tb_no,
+			customer_tb_no,
 			cm_address_tb_nickname,
 			cm_address_tb_postcode,
 			cm_address_tb_address1,
@@ -33,16 +34,20 @@
 			cm_address
 		WHERE 
 			customer_tb_no = #{customerTbNo}
+		
 	</select>
 	<select id="selectMyinfoAddress" parameterType="clientMyinfo" resultType="clientMyinfo">
 		SELECT
 			cm_address_tb_no,
+			customer_tb_no,
 			cm_address_tb_nickname,
 			cm_address_tb_postcode,
 			cm_address_tb_address1,
 			cm_address_tb_address2,
 			cm_address_tb_phone
-		FROM cm_address
-		WHERE cm_address_tb_no = #{cmAddressTbNo}
+		FROM 
+			cm_address
+		WHERE 
+			cm_address_tb_no = #{cmAddressTbNo}
 	</select>
 </mapper>

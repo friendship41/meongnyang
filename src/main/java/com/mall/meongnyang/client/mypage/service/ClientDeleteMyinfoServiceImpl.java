@@ -15,6 +15,7 @@ public class ClientDeleteMyinfoServiceImpl implements ClientDeleteMyinfoService{
 	
 	@Override
 	public void deleteMyinfo(ClientCustomerVO clientCustomerVO) {
+		
 		clientMyinfoDAO.deleteMyinfoCustomer(clientCustomerVO);
 		
 	}

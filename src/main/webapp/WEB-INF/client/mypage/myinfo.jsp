@@ -49,7 +49,7 @@
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
-            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
+            	<input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
             	<input type="hidden" name="cmAddressTbNickname" value="si"> <!-- kakao -->
             	<input type="hidden" name="cmAddressTbPhone" value="010"> <!-- sessionScope.customer.customerTbPhone -->
                     <div class="ht__comment__form">
@@ -64,7 +64,6 @@
                                 	<c:forEach var="address" items="${myinfoAddressList }">
  										<option value="${address.cmAddressTbNo }">${address.cmAddressTbPostcode }&nbsp;&nbsp; ${address.cmAddressTbAddress1 }&nbsp;&nbsp;${address.cmAddressTbAddress2 }</option>
  									</c:forEach>
-                                    
                                 </select>
                                 <input type="text" placeholder="" name="cmAddressTbPostcode" id="cmAddressTbPostcode">
                                 <input type="text" placeholder=" 주소 *" name="cmAddressTbAddress1" id="cmAddressTbAddress1">
@@ -167,11 +166,9 @@
            	console.log(selectedValue);
             if(selectedValue === 'thisIsSelect')
             {
-            	
-            	$("#modifySubmitButton").html('추가');
+				$("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
-                $("#customerTbNo").attr("value", "${sessionScope.customer.customerTbNo}"); //고객넘버에 따른 리스트
-                $("cmAddressTbAddressPostcode").removeAttr("value");
+                $("#cmAddressTbPostcode").removeAttr("value");
                 $("#cmAddressTbAddress1").removeAttr("value");
                 $("#cmAddressTbAddress2").removeAttr("value");
                 $("#formToController").attr("action", "myinfo-address-insert.do");

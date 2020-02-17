@@ -21,12 +21,14 @@ public class ClientMyinfoDAOImpl implements ClientMyinfoDAO {
 
 	@Override
 	public void updateMyinfoPassword(ClientCustomerVO clientCustomerVO) {
+		
 		sqlSessionTemplate.update("ClientLoginDAO.updateMyinfoPassword", clientCustomerVO);
 		
 	}
 
 	@Override
 	public void deleteMyinfoCustomer(ClientCustomerVO clientCustomerVO) {
+	
 		sqlSessionTemplate.delete("ClientLoginDAO.deleteMyinfoCustomer", clientCustomerVO);
 		
 	}

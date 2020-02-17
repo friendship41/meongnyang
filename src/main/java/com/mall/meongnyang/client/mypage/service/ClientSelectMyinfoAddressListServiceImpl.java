@@ -16,6 +16,7 @@ public class ClientSelectMyinfoAddressListServiceImpl implements ClientSelectMyi
 	
 	@Override
 	public List<ClientCmAddressVO> selectMyinfoAddressList(ClientCmAddressVO clientCmAddressVO) {
+		
 		return clientMyinfoAddressDAO.selectMyinfoAddressList(clientCmAddressVO);
 	}
 

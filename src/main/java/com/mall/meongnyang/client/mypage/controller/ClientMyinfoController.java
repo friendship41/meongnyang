@@ -98,20 +98,23 @@ public class ClientMyinfoController {
 
 	@RequestMapping(value = "/myinfo-delete-customer.do", method = RequestMethod.POST)
 	public String deleteMyinfoCustomerProc(HttpSession session, ClientCustomerVO clientCustomerVO, Model model) {
-		ClientCustomerVO tempVO = (ClientCustomerVO) session.getAttribute("customer");
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		ClientCustomerVO sessionVO = (ClientCustomerVO) session.getAttribute("customer");
 		//세션에 있는 no값
-		String password = tempVO.getCustomerTbPassword();
+		String password = sessionVO.getCustomerTbPassword();
 		//vo에 셋팅
 		clientCustomerVO.setCustomerTbPassword(password);
-		if(tempVO.getCustomerTbPassword().equals(clientCustomerVO.getCustomerTbPassword())) {
+		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), sessionVO.getCustomerTbPassword())) {
 			
 			clientDeleteMyinfoCustomerService.deleteMyinfo(clientCustomerVO);
-			
-		} else if(clientCustomerVO.getCustomerTbPassword() == null) {
+			session.setAttribute("customer", null);
+			return "mypage/myinfo";
+		} else  {
 			model.addAttribute("passwordDelete", false);
 			return "mypage/myinfo";
 		}
-		return "mypage/myinfo";
+		
 	}
 	
 	
