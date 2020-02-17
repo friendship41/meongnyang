@@ -35,7 +35,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form id="imageUploadForm" class="form-horizontal" action="product-image-upload.ado" method="post" enctype="multipart/form-data">
+                                <form id="imageUploadForm" class="form-horizontal" action="productImageUpload.ado" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="productName" class="col-sm-2 control-label">상품명</label>
                                         <div class="col-sm-10">
@@ -136,7 +136,7 @@
     }
 
     function updateImageRep(imgNum) {
-        var ajaxUpdateRepUrl = "/product-image-updateRep.ado?pdImageTbNo="+imgNum+"&productTbCode=${productCode}";
+        var ajaxUpdateRepUrl = "/productImageUpdateRep.ado?pdImageTbNo="+imgNum+"&productTbCode=${productCode}";
         $.ajax({
             url: ajaxUpdateRepUrl,
             type: "GET",

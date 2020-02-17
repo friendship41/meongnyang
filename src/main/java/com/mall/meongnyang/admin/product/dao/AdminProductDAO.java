@@ -11,4 +11,5 @@ public interface AdminProductDAO
     public List<AdminProductVO> selectProductList(AdminProductVO adminProductVO);
     public AdminProductVO selectProduct(AdminProductVO adminProductVO);
     public void updateProduct(AdminProductVO adminProductVO);
+    public List<AdminProductVO> selectProductOverviewList(AdminProductVO adminProductVO);
 }

@@ -560,20 +560,18 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="productSaleDayFromInput" type="text" class="date-picker text-center form-control"
                                                            placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="productSaleDayToInput" type="text" class="date-picker text-center form-control"
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block"
-                                                            style="margin-bottom:14px;">조회
-                                                    </button>
+                                                    <span onclick="getProductSaleTable()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -596,42 +594,18 @@
                                             <th>배너등록</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="onSaleProductTableBody">
                                         <tr>
-                                            <td>000001</td>
-                                            <td>개 사료1</td>
-                                            <td>적용</td>
-                                            <td>50,000</td>
-                                            <td>10%</td>
-                                            <td>100,000</td>
-                                            <td>4.8</td>
-                                            <td><button id="saleStartStopBtn-saleNo" class="btn btn-primary" onclick="saleStartStop()">판매중지</button></td>
-                                            <td>등록됨</td>
-                                            <td><button class="btn btn-danger">배너해제</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td>고양이 사료1</td>
-                                            <td>적용</td>
-                                            <td>80,000</td>
-                                            <td>10%</td>
-                                            <td>200,000</td>
-                                            <td>4.7</td>
-                                            <td><button class="btn btn-primary" onclick="saleStartStop()">판매재등록</button></td>
-                                            <td>등록됨</td>
-                                            <td><button class="btn btn-danger">배너해제</button></td>
-                                        </tr>
-                                        <tr>
-                                            <td>000003</td>
-                                            <td>강아지 옷</td>
-                                            <td>미적용</td>
-                                            <td>120,000</td>
-                                            <td>-</td>
-                                            <td>1,000</td>
-                                            <td>3.9</td>
-                                            <td><button class="btn btn-primary">판매중지</button></td>
-                                            <td>미등록</td>
-                                            <td><button class="btn btn-success">배너등록</button></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -729,58 +703,49 @@
                                     <div class="form-group">
                                         <div class="col-sm-10">
                                             <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5>상품 등록일 검색</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="allProductDayFrominput" type="text" class="date-picker text-center form-control"
                                                            placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="allProductDayToinput" type="text" class="date-picker text-center form-control"
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block"
-                                                            style="margin-bottom:14px;">조회
-                                                    </button>
+                                                    <span onclick="getProductAllTable()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table id="holdProductTable" class="display table"
-                                           style="width: 100%; cellspacing: 0;">
+                                    <table id="holdProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>상품번호</th>
                                             <th>카테고리</th>
                                             <th>상품이름</th>
-                                            <th>잔량</th>
                                             <th>이미지등록여부</th>
                                             <th>판매등록여부</th>
                                             <th>판매등록</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="holdProductTableBody">
                                         <tr>
-                                            <td>000001</td>
-                                            <td>개-먹거리</td>
-                                            <td><a href="updateProduct.ado?productTbCode=1833b5eab9e8471582b4" style="color: #4646ff">개 사료1</a></td>
-                                            <td>10,000</td>
-                                            <td><a href="product-image-add.ado?productTbCode=1833b5eab9e8471582b4&resultMessage=none" class="btn btn-default btn-xs">3</a></td>
-                                            <td>등록중</td>
-                                            <td>-</td>
-                                        </tr>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td>고양이-먹거리</td>
-                                            <td>고양이 사료1</td>
-                                            <td>20,000</td>
-                                            <td><a href="product-image-add.ado?productTbCode=ec5a51e7a4564e6181d2&resultMessage=none" class="btn btn-default btn-xs">N</a></td>
-                                            <td>미등록</td>
-                                            <td><button class="btn btn-success" onclick="location.href='/insertProductSale.ado?productTbCode=1833b5eab9e8471582b4'">판매등록</button></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -803,17 +768,134 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    function saleStartStop() {
-        //판매 중지면 판매중지, 아니면 판매 재등록
-
-        //판매재개 페이지로
-        location.href='restartSaleProduct.ado?pdSaleTbNo=5';
-
-        //판매중지처리
-        // location.href='stopSaleProduct.ado?pdSaleTbNo=5';
-
+    function getProductAllTable()
+    {
+        var dayFrom = $("#allProductDayFrominput").val();
+        var dayTo = $("#allProductDayToinput").val();
+        var url = "/productAllTableAjax.ado?dayFrom="+dayFrom+"&dayTo="+dayTo;
+        getDataFromServerAjax(url, 'productTable');
     }
 
+    function getProductSaleTable() {
+        var dayFrom = $("#productSaleDayFromInput").val();
+        var dayTo = $("#productSaleDayToInput").val();
+        var url = "/productSaleOverviewAjax.ado?dayFrom="+dayFrom+"&dayTo="+dayTo;
+        getDataFromServerAjax(url, 'productSaleTable');
+    }
+
+    function getDataFromServerAjax(urlTo, toWhere) {
+        $.ajax({
+            url: urlTo,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+                if(json.length === 0)
+                {
+                    alert("조회된 데이터가 없습니다.");
+                }
+                else
+                {
+                    if(toWhere === 'productTable')
+                    {
+                        settingProductAllTable(json);
+                    }
+                    else if(toWhere === 'productSaleTable')
+                    {
+                        settingProductSaleTable(json);
+                    }
+                }
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
+
+    function settingProductAllTable(json) {
+        var productAllHTML = "";
+
+        for(var i=0; i<json.length; i++)
+        {
+            var productSingle = json[i];
+
+            productAllHTML += "<tr>";
+            productAllHTML += "<td>"+productSingle.productTbCode+"</td>";
+            productAllHTML += "<td>"+productSingle.productCategoryTbParent+"-"+productSingle.productCategoryTbMedian+"-"+productSingle.productCategoryTbSub+"</td>";
+            productAllHTML += "<td><a href=\"updateProduct.ado?productTbCode="+productSingle.productTbCode+"\" style=\"color: #0a6aa1; font-weight: bold;\">"+productSingle.productTbName+"</a></td>";
+            productAllHTML += '<td><a href="productImageAdd.ado?productTbCode='+productSingle.productTbCode+'&resultMessage=none" class="btn btn-default btn-xs">'+productSingle.productImageCount+'</a></td>';
+            productAllHTML += '<td>'+productSingle.productSaleCount+'</td>';
+            productAllHTML += "<td><button class=\"btn btn-success\" onclick=\"location.href='/insertProductSale.ado?productTbCode="+productSingle.productTbCode+"'\">판매등록</button></td>";
+            productAllHTML += "</tr>";
+        }
+        $("#holdProductTable").DataTable().clear().destroy();
+        $("#holdProductTableBody").empty();
+        $("#holdProductTableBody").append(productAllHTML);
+        $("#holdProductTable").DataTable();
+    }
+
+
+    function settingProductSaleTable(json) {
+        var productSaleHTML = "";
+
+        for(var i=0; i<json.length; i++)
+        {
+            var productSaleSingle = json[i];
+
+            productSaleHTML += '<tr>';
+            productSaleHTML += '<td>'+productSaleSingle.productTbCode+'</td>';
+            productSaleHTML += '<td>'+productSaleSingle.pdSaleTbProductName+'</td>';
+            if(productSaleSingle.promotionTbCode === 0)
+            {
+                productSaleHTML += '<td>적용안됨</td>';
+            }
+            else
+            {
+                productSaleHTML += '<td>적용됨</td>';
+            }
+            productSaleHTML += '<td>'+productSaleSingle.pdSaleTbSalesPrice+'</td>';
+            productSaleHTML += '<td>'+productSaleSingle.pdSaleTbDiscountRate+'%</td>';
+            productSaleHTML += '<td>'+productSaleSingle.pdSaleTbRemainingAmount+'</td>';
+            productSaleHTML += '<td>'+productSaleSingle.pdSaleTbRating+'</td>';
+            if(productSaleSingle.pdSaleTbState === 'Y')
+            {
+                productSaleHTML += '<td><button class="btn btn-primary" onclick="location.href=\'stopSaleProduct.ado?pdSaleTbNo='+productSaleSingle.pdSaleTbNo+'\'">판매중지</button></td>';
+            }
+            else
+            {
+                productSaleHTML += '<td><button class="btn btn-primary" onclick="location.href=\'restartSaleProduct.ado?pdSaleTbNo='+productSaleSingle.pdSaleTbNo+'\'">판매재등록</button></td>';
+            }
+            if(productSaleSingle.productTbBannerState === 'N')
+            {
+                productSaleHTML += '<td>미등록</td>';
+                productSaleHTML += '<td><button class="btn btn-success">배너등록</button></td>';
+            }
+            else
+            {
+                productSaleHTML += '<td>등록됨</td>';
+                productSaleHTML += '<td><button class="btn btn-danger">배너해제</button></td>';
+            }
+            productSaleHTML += '</tr>';
+        }
+        $("#onSaleProductTable").DataTable().clear().destroy();
+        $("#onSaleProductTableBody").empty();
+        $("#onSaleProductTableBody").append(productSaleHTML);
+        $("#onSaleProductTable").DataTable({
+            scrollX: true,
+        });
+    }
+
+
+    $(document).ready(function () {
+        $("#allProductDayFrominput").attr("value", getMonthAgoDate(6).yyyymmdd());
+        $("#allProductDayToinput").attr("value", new Date().yyyymmdd());
+        getProductAllTable();
+
+        $("#productSaleDayFromInput").attr("value", getMonthAgoDate(6).yyyymmdd());
+        $("#productSaleDayToInput").attr("value", new Date().yyyymmdd());
+        getProductSaleTable();
+    })
 </script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>

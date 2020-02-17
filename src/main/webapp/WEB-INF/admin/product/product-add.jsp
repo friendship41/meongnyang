@@ -35,7 +35,7 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal" action="product-add-page.ado" method="post" enctype="multipart/form-data">
+                                <form class="form-horizontal" action="productAdd.ado" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">

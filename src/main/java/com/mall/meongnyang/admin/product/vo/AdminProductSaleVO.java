@@ -21,6 +21,12 @@ public class AdminProductSaleVO
     private int pdSaleTbDiscountRate;
     private String pdSaleTbState;
 
+    private int rowNumber;
+    private Date dayFrom;
+    private Date dayTo;
+
+    private String productTbBannerState;
+
     public int getPdSaleTbNo()
     {
         return pdSaleTbNo;
@@ -181,6 +187,46 @@ public class AdminProductSaleVO
         this.pdSaleTbState = pdSaleTbState;
     }
 
+    public int getRowNumber()
+    {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber)
+    {
+        this.rowNumber = rowNumber;
+    }
+
+    public Date getDayFrom()
+    {
+        return dayFrom;
+    }
+
+    public void setDayFrom(Date dayFrom)
+    {
+        this.dayFrom = dayFrom;
+    }
+
+    public Date getDayTo()
+    {
+        return dayTo;
+    }
+
+    public void setDayTo(Date dayTo)
+    {
+        this.dayTo = dayTo;
+    }
+
+    public String getProductTbBannerState()
+    {
+        return productTbBannerState;
+    }
+
+    public void setProductTbBannerState(String productTbBannerState)
+    {
+        this.productTbBannerState = productTbBannerState;
+    }
+
     @Override
     public String toString()
     {
@@ -200,6 +246,11 @@ public class AdminProductSaleVO
                 ", pdSaleTbReadCount=" + pdSaleTbReadCount +
                 ", pdSaleTbRating=" + pdSaleTbRating +
                 ", pdSaleTbDiscountRate=" + pdSaleTbDiscountRate +
+                ", pdSaleTbState='" + pdSaleTbState + '\'' +
+                ", rowNumber=" + rowNumber +
+                ", dayFrom=" + dayFrom +
+                ", dayTo=" + dayTo +
+                ", productTbBannerState='" + productTbBannerState + '\'' +
                 '}';
     }
 }

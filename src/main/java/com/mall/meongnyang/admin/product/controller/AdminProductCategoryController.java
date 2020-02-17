@@ -23,43 +23,43 @@ public class AdminProductCategoryController
     @Autowired
     private AdminSelectProductCategoryService adminSelectProductCategoryService;
 
-    @RequestMapping(value = "/product-category-list.ado", method = RequestMethod.GET)
+    @RequestMapping(value = "/productCategoryList.ado", method = RequestMethod.GET)
     public String categoryList(Model model)
     {
         model.addAttribute("productCategoryList", adminSelectProductCategoryListService.selectCategoryList(new AdminProductCategoryVO()));
 
         return "product/product-category-add";
     }
-    @RequestMapping(value = "/product-category-single-ajax.ado", method = RequestMethod.GET)
+    @RequestMapping(value = "/productCategorySingleAjax.ado", method = RequestMethod.GET)
     @ResponseBody
     public AdminProductCategoryVO categoryListAjax(AdminProductCategoryVO adminProductCategoryVO)
     {
         return adminSelectProductCategoryService.selectCategory(adminProductCategoryVO);
     }
 
-    @RequestMapping(value = "/product-category-insert.ado", method = RequestMethod.POST)
+    @RequestMapping(value = "/productCategoryInsert.ado", method = RequestMethod.POST)
     public String insertCategory(AdminProductCategoryVO adminProductCategoryVO)
     {
         adminInsertProductCategoryService.insertCategory(adminProductCategoryVO);
 
-        return "redirect:product-category-list.ado";
+        return "redirect:productCategoryList.ado";
     }
 
-    @RequestMapping(value = "/product-category-update.ado", method = RequestMethod.POST)
+    @RequestMapping(value = "/productCategoryUpdate.ado", method = RequestMethod.POST)
     public String updateCategory(AdminProductCategoryVO adminProductCategoryVO)
     {
         adminUpdateProductCategoryService.updateCategory(adminProductCategoryVO);
 
-        return "redirect:product-category-list.ado";
+        return "redirect:productCategoryList.ado";
     }
 
-    @RequestMapping(value = "/product-category-delete.ado", method = RequestMethod.GET)
+    @RequestMapping(value = "/productCategoryDelete.ado", method = RequestMethod.GET)
     public String deleteCategory(AdminProductCategoryVO adminProductCategoryVO)
     {
         System.out.println(adminProductCategoryVO);
 
         adminDeleteProductCategoryService.deleteCategory(adminProductCategoryVO);
 
-        return "redirect:product-category-list.ado";
+        return "redirect:productCategoryList.ado";
     }
 }

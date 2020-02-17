@@ -74,15 +74,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">입고수량</label>
-                                        <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="pdSaleTbReceivedAmount" value="${productSale.pdSaleTbReceivedAmount}" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label class="col-sm-2 control-label">수량</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" name="pdSaleTbRemainingAmount" value="${productSale.pdSaleTbRemainingAmount}" required>
+                                            <input type="number" class="form-control" name="pdSaleTbRemainingAmount" value="${productSale.pdSaleTbRemainingAmount}" readonly required>
                                         </div>
                                     </div>
                                     <div class="form-group">

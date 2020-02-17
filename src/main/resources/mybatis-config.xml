@@ -32,6 +32,7 @@
         <mapper resource="mappings/product-image-mapping.xml"/>
         <mapper resource="mappings/product-mapping.xml"/>
         <mapper resource="mappings/product-sale-mapping.xml"/>
+        <mapper resource="mappings/product-stock-mapping.xml"/>
         <mapper resource="mappings/promotion-mapping.xml"/>
         <mapper resource="mappings/terms-mapping.xml"/>
     </mappers>
