@@ -38,18 +38,18 @@ public class ClientMyinfoAddressController {
 	private ClientSelectMyinfoAddressListService clientSelectMyinfoAddressListService;
 	
 	
-	@RequestMapping(value = "/myinfo-address-list.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
 	public String addressList(ClientCmAddressVO clientCmAddressVO ,Model model) {
 		List<ClientCmAddressVO> tempVO = clientSelectMyinfoAddressListService.selectMyinfoAddressList(clientCmAddressVO);
 		model.addAttribute("myinfoAddressList", tempVO);
-		
+		System.out.println(tempVO + " list »Ì¾Æ¿Ã¶§ ");
 		return "mypage/myinfo";
 	}
 	
 	@RequestMapping(value = "/myinfo-address-single-ajax.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ClientCmAddressVO addressListAjax(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
-		System.out.println(clientCmAddressVO);
+		System.out.println(clientCmAddressVO + " ajax select");
 		return clientSelectMyinfoAddressService.selectMyinfoAddress(clientCmAddressVO);
 	}
 	

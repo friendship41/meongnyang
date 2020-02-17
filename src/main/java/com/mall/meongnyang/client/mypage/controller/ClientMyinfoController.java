@@ -35,13 +35,7 @@ public class ClientMyinfoController {
 	
 	
 	
-	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
-	public String myinfo(ClientCmAddressVO clientCmAddressVO, Model model) {
-		ClientCmAddressVO tempVO = clientSelectMyinfoAddressService.selectMyinfoAddress(clientCmAddressVO);
-		model.addAttribute("cmAddress", tempVO);
-
-		return "mypage/myinfo";
-	}
+	
 
 	@RequestMapping(value = "/myinfo-update-phone.do", method = RequestMethod.POST)
 	public String updateMyinfoPhoneProc(ClientCustomerVO clientCustomerVO, HttpSession session) {

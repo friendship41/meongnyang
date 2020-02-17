@@ -49,7 +49,7 @@
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
-            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="0"> <!-- sessionScope.customer.customerTbNo -->
+            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
             	<input type="hidden" name="cmAddressTbNickname" value="si"> <!-- kakao -->
             	<input type="hidden" name="cmAddressTbPhone" value="010"> <!-- sessionScope.customer.customerTbPhone -->
                     <div class="ht__comment__form">
@@ -62,7 +62,7 @@
                                 <select class="ht__select" id="selectBox">
                                 	<option value="thisIsSelect">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
- 										<option value="${address.customerTbNo }">${address.cmAddressTbPostcode }&nbsp;&nbsp; ${address.cmAddressTbAddress1 }&nbsp;&nbsp;${address.cmAddressTbAddress2 }</option>
+ 										<option value="${address.cmAddressTbNo }">${address.cmAddressTbPostcode }&nbsp;&nbsp; ${address.cmAddressTbAddress1 }&nbsp;&nbsp;${address.cmAddressTbAddress2 }</option>
  									</c:forEach>
                                     
                                 </select>
@@ -169,7 +169,8 @@
             {
             	$("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
-                $("#customerTbNo").attr("value", 0); //0번 고객
+                $("#customerTbNo").attr("value", "${customerTbNo}"); //0번 고객
+                $("cmAddressTbAddressPostcode").removeAttr("value");
                 $("#cmAddressTbAddress1").removeAttr("value");
                 $("#cmAddressTbAddress2").removeAttr("value");
                 $("#formToController").attr("action", "myinfo-address-insert.do");
@@ -186,13 +187,13 @@
                 })
                     .done(function(json) {
                         console.log(json);
-                        $("#cmAddrssTbNo").attr("value", json.cmAddrssTbNo);
-                        $("#cmAddrssTbPostcode").attr("value", json.cmAddrssTbPostcode);
+                        $("#cmAddressTbNo").attr("value", json.cmAddressTbNo);
+                        $("#cmAddressTbPostcode").attr("value", json.cmAddressTbPostcode);
  						$("#cmAddressTbAddress1").attr("value", json.cmAddressTbAddress1);
  						$("#cmAddressTbAddress2").attr("value", json.cmAddressTbAddress2);
                         $("#modifySubmitButton").html('수정');
                         $("#deleteBtn").show();
-                        var deleteUrl = "/myinfo-address-delete.ado?cmAddrssTbNo="+json.cmAddressTbNo;
+                        var deleteUrl = "/myinfo-address-delete.ado?cmAddressTbNo="+json.cmAddressTbNo;
                         $("#deleteBtn").attr("href", deleteUrl);
                         $("#formToController").attr("action", "myinfo-address-update.ado");
                     })
