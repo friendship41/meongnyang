@@ -17,32 +17,30 @@ public class AdminQnaTypeDAOImpl implements AdminQnaTypeDAO {
 
 	@Override
 	public void insertQnaType(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.insert("AdminQnaTypeDAO.insertQnaType", adminQnaTypeVO);
 		
 	}
 
 	@Override
 	public void deleteQnaType(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.delete("AdminQnaTypeDAO.deleteQnaType", adminQnaTypeVO);
 		
 	}
 
 	@Override
 	public void updateQnaType(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
+		sqlSessionTemplate.update("AdminQnaTypeDAO.updateQnaType", adminQnaTypeVO);
 		
 	}
 
 	@Override
 	public List<AdminQnaTypeVO> selectQnaTypeList(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectList("AdminQnaTypeDAO.selectQnaTypeList", adminQnaTypeVO);
 	}
 
 	@Override
 	public AdminQnaTypeVO selectQnaType(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSessionTemplate.selectOne("AdminQnaTypeDAO.selectQnaType", adminQnaTypeVO);
 	}
 	
 	

@@ -14,7 +14,7 @@ public class AdminDeleteQnaTypeServiceImpl implements AdminDeleteQnaTypeService 
 	
 	@Override
 	public void deleteQnaType(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
+		adminQnaTypeDAO.deleteQnaType(adminQnaTypeVO);
 		
 	}
 

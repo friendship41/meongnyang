@@ -14,7 +14,7 @@ public class AdminUpdateQnaTypeServiceImpl implements AdminUpdateQnaTypeService 
 	
 	@Override
 	public void updateQnaType(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
+		adminQnaTypeDAO.updateQnaType(adminQnaTypeVO);
 		
 	}
 

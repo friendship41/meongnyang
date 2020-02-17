@@ -14,7 +14,7 @@ public class AdminInsertQnaTypeServiceImpl implements AdminInsertQnaTypeService 
 	
 	@Override
 	public void insertQnaType(AdminQnaTypeVO adminQnaTypeVO) {
-		// TODO Auto-generated method stub
+		adminQnaTypeDAO.insertQnaType(adminQnaTypeVO);
 		
 	}
 
