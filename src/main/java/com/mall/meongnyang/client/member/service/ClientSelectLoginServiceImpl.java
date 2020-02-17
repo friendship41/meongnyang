@@ -15,6 +15,7 @@ public class ClientSelectLoginServiceImpl implements ClientSelectLoginService{
 	@Override
 	public ClientCustomerVO selectLoginCheck(ClientCustomerVO clientCustomerVO) {
 		ClientCustomerVO tempVO = clientLoginDAO.selectLoginCheck(clientCustomerVO);
+		clientLoginDAO.updateLastLogin(clientCustomerVO);
 		return tempVO;
 	}
 

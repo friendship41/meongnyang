@@ -23,12 +23,35 @@
 	
 	<insert id="insertRegistry" parameterType="clientLogin" >
 		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_password,
-								customer_tb_email)
+								customer_tb_email, customer_tb_join_date)
 		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbPassword},
-		#{customerTbEmail})
-			
+		#{customerTbEmail}, sysdate)
 	</insert>
-
-
+	<update id="updateClientLastLogin" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_last_login = sysdate
+		WHERE
+			customer_tb_no = #{customerTbNo}
+	</update>
+	
+	<update id="updateMyinfoPhone" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_phone = #{customerTbPhone}
+		WHERE customer_tb_no = #{customerTbNo}
+	</update>
+	
+	<update id="updateMyinfoPassword" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_password = #{customerTbPassword}, customer_tb_pw_change = sysdate
+		WHERE customer_tb_no = #{customerTbNo}
+	</update>
+	<delete id="deleteMyinfoCustomer" parameterType="clientLogin">
+		DELETE FROM customer
+		WHERE customer_tb_password =#{customerTbPassword}
+	</delete>
+	
 
 </mapper>

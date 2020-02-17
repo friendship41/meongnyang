@@ -33,6 +33,14 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 
 	
 
+	@Override
+	public void updateLastLogin(ClientCustomerVO clientCustomerVO) {
+		sqlSessionTemplate.update("ClientLoginDAO.updateClientLastLogin", clientCustomerVO);
+		
+	}
+
+	
+
 	
 
 }

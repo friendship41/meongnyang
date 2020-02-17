@@ -8,4 +8,9 @@ public interface ClientLoginDAO {
 	public ClientCustomerVO logout(ClientCustomerVO clientCustomerVO);
 	
 	public int insertRegistry(ClientCustomerVO clientCustomerVO);
+	
+	
+	
+	//로그인시 last login sysdate 추가
+	public void updateLastLogin(ClientCustomerVO clientCustomerVO);
 }
