@@ -58,7 +58,7 @@ public class AdminProductStockController
     public String stopSaleProductAjax(AdminProductSaleVO adminProductSaleVO)
     {
         adminUpdateProductSaleService.stopSale(adminProductSaleVO);
-        return "{\"state\":\"success\"}";
+        return "{\"pdSaleTbNo\":\""+adminProductSaleVO.getPdSaleTbNo()+"\"}";
     }
 
 }
