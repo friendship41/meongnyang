@@ -36,13 +36,13 @@ public class AdminQnaTypeController {
 	private AdminSelectQnaTypeService adminSelectQnaTypeService;
 	
 	
-	@RequestMapping(value = "/qnaCategoryList.ado", method = RequestMethod.GET)
+	@RequestMapping(value = "/shoppingmall-qna-category.ado", method = RequestMethod.GET)
     public String qnaCategoryList(AdminQnaTypeVO adminQnaTypeVO, Model model)
     {
 		List<AdminQnaTypeVO> tempVO = adminSelectQnaTypeListService.selectQnaTypeList(adminQnaTypeVO);
         model.addAttribute("qnaCategoryList", tempVO);
 
-        return "shopping/shoppingmall-qna-category";
+        return "shoppingmall/shoppingmall-qna-category";
     }
 	
 	
@@ -81,5 +81,5 @@ public class AdminQnaTypeController {
 
         return "redirect:shoppingmall-qna-category.ado";
     }
-	
+		
 }

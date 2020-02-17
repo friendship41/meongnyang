@@ -37,7 +37,7 @@
                             <div class="panel-body">
 
                                 <form class="form-horizontal" id="formToController" action="qnaCategoryInsert.ado" method="post">
-                                <input type="hidden" name="qnaTypeTbNo" id="qnaTypeTbNo" value="0">
+                              
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">카테고리</label>
                                         <div class="col-sm-10">

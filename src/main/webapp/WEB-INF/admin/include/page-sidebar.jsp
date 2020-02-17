@@ -52,7 +52,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li><a href="shoppingmall-notice-list.ado">공지관리</a></li>
-                        <li><a href="shoppingmall/shoppingmall-qna-list.html">Q&A</a></li>
+                        <li><a href="shoppingmall-qna-category.ado">Q&A</a></li>
                         <li><a href="shoppingmall-faq-list.ado">FAQ</a></li>
                     </ul>
                 </li>
