@@ -35,33 +35,33 @@
                             <div class="panel-body">
                                 <form class="form-horizontal">
                                     <div class="form-group">
-                                        <label for="qnaNum" class="col-sm-2 control-label">글번호</label>
+                                        <label for="qnaTbNo" class="col-sm-2 control-label">글번호</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaNum" readonly>
+                                            <input type="text" class="form-control" id="qnaTbNum" name="qnaTbNum" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="qnaTitle" class="col-sm-2 control-label">제목</label>
+                                        <label for="qnaTbTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTitle">
+                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbNum">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaWriter" readonly>
+                                            <input type="text" class="form-control" id="qnaTbWriter" name="qnaTbNum" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">작성일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" readonly>
+                                            <input type="text" class="form-control date-picker" name="qnaTbRegDate" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="qnaContent" class="col-sm-2 control-label">내용</label>
+                                        <label for="qnaTbContent" class="col-sm-2 control-label">내용</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="qnaContent"></textarea>
+                                            <textarea rows="10" class="form-control" id="qnaTbContent" name="qnaTbContent"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">

@@ -61,7 +61,18 @@
 										<div class="col-sm-8">
 										
 									<select name="qnaTypeTbName" id="qnaTypeTbname" class="form-control1">
-										<option value="thisIsSelect">선택하세요</option>
+										<c:if test="${qnaCategoryList.category.qnaTypeName ==  1}"><!-- 임의값 -->
+										<option value="thisIsSelect">제품문의</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
+										</c:if>
+										<c:if test="${qnaCategoryList.category.qnaTypeName ==  2}">
+										<option value="thisIsSelect">주문문의</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
+										</c:if>
+										<c:if test="${qnaCategoryList.category.qnaTypeName ==  3}">
+										<option value="thisIsSelect">신고</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
+										</c:if>
+										<c:if test="${qnaCategoryList.category.qnaTypeName ==  4}">
+										<option value="thisIsSelect">기타문의</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
+										</c:if>
 										<c:forEach var="category" items="${qnaCategoryList }">
 											<option value="${category.qnaTypeTbNo }">${category.qnaTypeTbName }</option>
 										</c:forEach>
@@ -71,7 +82,7 @@
 										<div class="form-group">
 											<label for="smallinput" class="col-sm-2 control-label label-input-sm">이름</label>
 												<div class="col-sm-8">
-												 	<input type="text" placeholder="Name *" name="qnaTbTitle">
+												 	<input type="text" placeholder="Name *" name="qnaTbTitle" value="${sessionScope.customer.customerTbName }">
 												</div>
 										</div>
 										<div class="form-group">
@@ -82,7 +93,16 @@
 										</div>
 										<div class="form-group">
 											 <label for="message" class="col-sm-2 control-label">내용</label>
-													<div class="col-sm-8"><textarea id="message" placeholder="Context *" name="qnaTbContent"></textarea></div>	
+													<div class="col-sm-8"><textarea id="message" placeholder="Context *" name="qnaTbContent"><c:if test="${qnaCategoryList.category.qnaTypeNo == 5 }"></c:if>
+										<c:if test="${qnaCategoryList.category.qnaTypeNo == 6 }"><!-- 전에 페이지에 따른 content에 값변경 -->
+										
+										</c:if>
+										<c:if test="${qnaCategoryList.category.qnaTypeNo == 7 }">
+										
+										</c:if>
+										<c:if test="${qnaCategoryList.category.qnaTypeNo == 8 }">
+										
+										</c:if></textarea></div>	
 										</div>
 										<div class="form-group">
 										<div align="center" class="ht__comment__btn--2 mt--50 col-sm-10">

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 
 @Repository("ClientQnaDAO")
@@ -43,5 +44,12 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 		
 		return sqlSessionTemplate.selectOne("qnaDAO.selectQna", adminQnaVO);
 	}
+
+	@Override
+	public List<AdminQnaTypeVO> selectQnaTypeList(AdminQnaTypeVO adminQnaTypeVO) {
+		
+		return sqlSessionTemplate.selectList("AdminQnaTypeDAO.selectQnaTypeList", adminQnaTypeVO);
+	}
+	
 	
 }

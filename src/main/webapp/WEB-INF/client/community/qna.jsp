@@ -33,7 +33,7 @@
                                 <ul class="ht__cat__list">
                                     <li><a href="#">공지</a></li>
                                     <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Q&A</a></li>
+                                    <li><a href="qna-list.do">Q&A</a></li>
                                     <li><a href="#">Review</a></li>
                                     <li><a href="#">Contact</a></li>
                                 </ul>
@@ -55,14 +55,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <c:choose>
+                                        <c:when test="${secret == false }">
                                         	<c:forEach var="qnaList" items="${clientQnaList }">
                                             <tr>
                                                 <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
-                                                <td class="product-name"><a href="/qna-read.do?qnaTbNo=${qnaList.qnaTbNo} }" >"${qnaList.qnaTbTitle }</a><span class="badge badge-success"></span></td>
+                                                <td class="product-name"><span class="badge badge-success">(비밀글입니다)${qnaList.qnaTbTitle }</span></td>
                                                 <td class="product-price"><span class="amount"> ${sessionScope.customer.customerTbName } </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock">"${qnaList.qnaTbRegDate }" </span></td>
+                                                <td class="product-stock-status"><span class="wishlist-in-stock">${qnaList.qnaTbRegDate } </span></td>
                                             </tr>
                                             </c:forEach>
+                                         </c:when>
+                                         <c:otherwise>
+                                         <c:forEach var="qnaList" items="${clientQnaList }">
+                                            <tr>
+                                                <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
+                                                <td class="product-name"><span class="badge badge-success"><a href="/qna-read.do?qnaTbNo=${qnaList.qnaTbNo} }" >${qnaList.qnaTbTitle }</a></span></td>
+                                                <td class="product-price"><span class="amount"> ${sessionScope.customer.customerTbName } </span></td>
+                                                <td class="product-stock-status"><span class="wishlist-in-stock">${qnaList.qnaTbRegDate } </span></td>
+                                            </tr>
+                                            </c:forEach>
+                                         </c:otherwise>
+                                         </c:choose>
                                         </tbody>
                                     </table>
                                 </div>

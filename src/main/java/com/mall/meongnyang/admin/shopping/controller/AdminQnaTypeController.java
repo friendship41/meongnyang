@@ -47,8 +47,6 @@ public class AdminQnaTypeController {
 	
 	
 	
-	
-	
     @RequestMapping(value = "/qnaCategorySingleAjax.ado", method = RequestMethod.GET)
     @ResponseBody
     public AdminQnaTypeVO qnaCategoryListAjax(AdminQnaTypeVO adminQnaTypeVO)
