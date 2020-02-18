@@ -2,6 +2,7 @@ package com.mall.meongnyang.client.shopping.controller;
 
 import com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
+import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingDetailService;
 import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingListService;
@@ -58,6 +59,7 @@ public class ClientSelectShoppingController
         Map<String, Object> detailMap = clientSelectShoppingDetailService.selectProductDetail(adminProductVO);
         model.addAttribute("detail", (AdminProductVO)detailMap.get("detail"));
         model.addAttribute("imageList", (List<AdminProductImageVO>)detailMap.get("imageList"));
+        model.addAttribute("saleList", (List<AdminProductSaleVO>)detailMap.get("saleList"));
 
         return "shopping/product-read";
     }

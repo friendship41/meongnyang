@@ -82,16 +82,16 @@
                         <h2>상품명 : ${detail.productTbName}</h2>
                         <h6>평점 : ${detail.pdSaleTbRating}</h6>
                         <ul class="pro__prize">
-                            <li class="old__prize">가격 : 10000원</li>
-                            <li>할인가 : 8000원</li>
+                            <li class="old__prize">가격 : <span id="nowPrice">10000</span>원</li>
+                            <li id="priceLi">할인가 : <span id="nowDiscount">8000</span>원</li>
                         </ul>
                         <div class="ht__pro__desc">
                             <div class="sin__desc align--left">
-                                <p><span>무게</span></p>
-                                <select class="select__size">
-                                    <option>1kg</option>
-                                    <option>2kg</option>
-                                    <option>5kg</option>
+                                <p><span>옵션</span></p>
+                                <select id="optionSelectBox" class="select__size">
+                                    <c:forEach var="singleSale" items="${saleList}">
+                                        <option value="${singleSale.pdSaleTbNo}">${singleSale.pdSaleTbSize}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="sin__desc align--left">
@@ -273,6 +273,43 @@
     </div>
 </section>
 <!-- End Product Description -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var normalPrice = "${saleList.get(0).pdSaleTbSalesPrice}";
+        var discount = "${saleList.get(0).pdSaleTbDiscountRate}";
+        setPrice(normalPrice,discount);
+        $("#optionSelectBox").change(function () {
+            var opNo = $("#optionSelectBox option:selected").val();
+            var optionMap = getOptionMap();
+            var nP = optionMap.get(opNo)[0];
+            var discount = optionMap.get(opNo)[1];
+            setPrice(nP,discount);
+        })
+    });
 
+    function getOptionMap() {
+        var optionMap = new Map();
+        <c:forEach var="sale" items="${saleList}">
+            optionMap.set("${sale.pdSaleTbNo}",["${sale.pdSaleTbSalesPrice}","${sale.pdSaleTbDiscountRate}"]);
+        </c:forEach>
+        return optionMap;
+    }
+
+    function setPrice(normalPrice, discount) {
+        normalPrice *= 1;
+        discount *= 1;
+        var finalPrice = normalPrice*((100-discount)/100);
+        $("#nowPrice").text(normalPrice);
+        if(finalPrice != normalPrice)
+        {
+            $("#priceLi").text("할인가 : "+finalPrice+"원");
+        }
+        else
+        {
+            $("#priceLi").text("");
+        }
+    }
+</script>
 
 <jsp:include page="../include/footer.jsp"/>

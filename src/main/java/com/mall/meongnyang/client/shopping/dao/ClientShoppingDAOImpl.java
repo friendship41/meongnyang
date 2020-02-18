@@ -1,6 +1,7 @@
 package com.mall.meongnyang.client.shopping.dao;
 
 import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
+import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,11 @@ public class ClientShoppingDAOImpl implements ClientShoppingDAO
     public List<AdminProductImageVO> selectProductImages(AdminProductImageVO adminProductImageVO)
     {
         return sqlSessionTemplate.selectList("ProductImageDAO.selectProductImages", adminProductImageVO);
+    }
+
+    @Override
+    public List<AdminProductSaleVO> selectSingleProductSaleList(AdminProductSaleVO adminProductSaleVO)
+    {
+        return sqlSessionTemplate.selectList("ProductSaleDAO.selectSingleProductSaleList", adminProductSaleVO);
     }
 }

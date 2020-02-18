@@ -99,4 +99,14 @@
         ]]>
     </select>
 
+    <select id="selectSingleProductSaleList" parameterType="productSale" resultType="productSale">
+        SELECT
+            PD_SALE_TB_NO,
+            PD_SALE_TB_SALES_PRICE,
+            PD_SALE_TB_DISCOUNT_RATE,
+            PD_SALE_TB_SIZE
+        FROM pd_sale
+        WHERE PRODUCT_TB_CODE = #{productTbCode} AND PD_SALE_TB_STATE = 'Y'
+    </select>
+
 </mapper>

@@ -1,6 +1,7 @@
 package com.mall.meongnyang.client.shopping.service;
 
 import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
+import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import com.mall.meongnyang.client.shopping.dao.ClientShoppingDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class ClientSelectShoppingDetailServiceImpl implements ClientSelectShoppi
         tempImageVO.setProductTbCode(adminProductVO.getProductTbCode());
         List<AdminProductImageVO> imageList = clientShoppingDAO.selectProductImages(tempImageVO);
         tempMap.put("imageList", imageList);
+
+        AdminProductSaleVO adminProductSaleVO = new AdminProductSaleVO();
+        adminProductSaleVO.setProductTbCode(adminProductVO.getProductTbCode());
+        List<AdminProductSaleVO> saleList = clientShoppingDAO.selectSingleProductSaleList(adminProductSaleVO);
+        tempMap.put("saleList", saleList);
 
         return tempMap;
     }
