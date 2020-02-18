@@ -17,12 +17,22 @@ public class ClientSelectMarketListServiceImpl implements ClientSelectMarketList
 	@Override
 	public List<ClientMarketVO> selectMarketList(ClientMarketVO clientMarketVO) {
 		
+		if("sell".equalsIgnoreCase(clientMarketVO.getMarketTbSellOrBuy())) {
+			clientMarketVO.setMarketTbSellOrBuy("S");
+		} else if ("buy".equalsIgnoreCase(clientMarketVO.getMarketTbSellOrBuy())) {
+			clientMarketVO.setMarketTbSellOrBuy("B");
+		} 
 		return clientMarketDAO.selectMarketList(clientMarketVO);
 	}
 
 	@Override
-	public int selectCountMarket() {
-		return clientMarketDAO.selectCountMarket();
+	public int selectCountMarket(ClientMarketVO clientMarketVO) {
+		if("sell".equalsIgnoreCase(clientMarketVO.getMarketTbSellOrBuy())) {
+			clientMarketVO.setMarketTbSellOrBuy("S");
+		} else if ("buy".equalsIgnoreCase(clientMarketVO.getMarketTbSellOrBuy())) {
+			clientMarketVO.setMarketTbSellOrBuy("B");
+		} 
+		return clientMarketDAO.selectCountMarket(clientMarketVO);
 	}
 	
 	

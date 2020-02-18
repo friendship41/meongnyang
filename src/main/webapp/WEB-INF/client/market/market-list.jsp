@@ -29,7 +29,7 @@
 <!-- 구매 판매 버튼 추가 -->
 <div class="htc__grid__top__market__list">
 	<div class="htc__select__option">
-		<select class="ht__select">
+		<select class="ht__select" id="selector">
 			<option value="all">전체</option>
 			<option value="sell">구매</option>
 			<option value="buy">판매</option>
@@ -60,7 +60,7 @@
 							<c:if test="${market.marketTbImgPath != null}">
 								<div class="blog__thumb">
 									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">
-										<img src="/${market.marketTbImgPath}" alt="maket images"
+										<img src="${market.marketTbImgPath}" alt="maket images"
 										width="400" height="287">
 									</a>
 								</div>
@@ -90,7 +90,7 @@
 					<li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
 					</c:if>
 					<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}" >
-					<li><a href="i">1</a></li>
+					<li><a href="/market-list.do?currentPage=${i}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${paging.next == true}">
 					<li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
@@ -103,3 +103,24 @@
 </section>
 <!-- End Blog Area -->
 <jsp:include page="../include/footer.jsp" />
+
+<script>
+$(function() {
+
+	$(document).ready(function() {
+		console.log("${selector}")
+	
+		if("${selector}" == "S"){
+			$("#selector").val("sell");
+		} else if ("${selector}" == "B") {
+			$("#selector").val("buy");
+		}
+	});
+	
+	$("#selector").change(function() {
+		console.log(this.value);
+		document.location.href="/market-list.do?marketTbSellOrBuy=" + this.value;
+	});
+	
+})
+</script>
