@@ -64,7 +64,7 @@
                                     <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                                         <div class="category">
                                             <div class="ht__cat__thumb">
-                                                <a href="product-read.html">
+                                                <a href="shoppingDetail.do?productTbCode=${product.productTbCode}">
                                                     <img src="${product.pdImageTbPath}" alt="product images" width="290" height="385">
                                                 </a>
                                             </div>
@@ -76,7 +76,7 @@
                                                 </ul>
                                             </div>
                                             <div class="fr__product__inner">
-                                                <h4><a href="#">${product.productTbName}</a></h4>
+                                                <h4><a href="shoppingDetail.do?productTbCode=${product.productTbCode}">${product.productTbName}</a></h4>
                                                 <ul class="fr__pro__prize">
                                                     <li class="old__prize">${product.pdSaleTbSalesPrice}</li>
                                                     <li>${product.pdSaleTbDiscountRate}</li>

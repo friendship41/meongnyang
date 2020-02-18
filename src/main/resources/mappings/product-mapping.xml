@@ -170,4 +170,19 @@
         ]]>
     </select>
 
+    <select id="selectProductDetail" parameterType="product" resultType="product">
+        SELECT
+            p.PRODUCT_TB_NAME,
+            p.PRODUCT_TB_DETAIL,
+            ps.PD_SALE_TB_RATING
+        FROM product p JOIN (
+            SELECT
+                PRODUCT_TB_CODE,
+                PD_SALE_TB_RATING
+            FROM pd_sale
+            WHERE PRODUCT_TB_CODE=#{productTbCode} AND ROWNUM=1
+        ) ps
+        ON p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
+    </select>
+
 </mapper>
