@@ -24,13 +24,26 @@
     </delete>
 
     <select id="selectNoticeList" parameterType="adminNotice" resultType="adminNotice">
+     SELECT C.* FROM(
         SELECT
-            notice_tb_no,
-            admins_tb_id,
-            notice_tb_title,
-            notice_tb_reg_date
-        FROM notice
-        ORDER BY notice_tb_no DESC
+    ROWNUM RNUM,
+    B.NOTICE_TB_NO,
+    B.ADMINS_TB_ID,
+    B.NOTICE_TB_TITLE,
+    B.NOTICE_TB_CONTENT,
+    B.NOTICE_TB_REG_DATE
+FROM (
+    SELECT
+        A.NOTICE_TB_NO,
+        A.ADMINS_TB_ID,
+        A.NOTICE_TB_TITLE,
+        A.NOTICE_TB_CONTENT,
+        A.NOTICE_TB_REG_DATE
+    FROM NOTICE A
+    ORDER BY A.NOTICE_TB_NO DESC
+) B ) C
+    <![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
+        
     </select>
 
     <select id="selectNotice" parameterType="adminNotice" resultType="adminNotice">
@@ -43,5 +56,12 @@
         FROM notice
         WHERE notice_tb_no=#{noticeTbNo}
     </select>
+    
+    <select id="selectCountNotice" resultType="int">
+		SELECT COUNT(*) FROM notice
+	</select>
+	
+	
+    
 
 </mapper>

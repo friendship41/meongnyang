@@ -9,4 +9,13 @@ public interface ClientNoticeDAO {
 	public List<AdminNoticeVO> selectNoticeList(AdminNoticeVO adminNoticeVO);
     public AdminNoticeVO selectNotice(AdminNoticeVO adminNoticeVO);
     
+    int selectCountNotice();
+    
+   
+   
+  
+   
+    
+    
+    
 }

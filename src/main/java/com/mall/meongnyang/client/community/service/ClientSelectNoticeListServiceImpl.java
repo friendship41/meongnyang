@@ -20,4 +20,10 @@ public class ClientSelectNoticeListServiceImpl implements ClientSelectNoticeList
 		return clientNoticeDAO.selectNoticeList(adminNoticeVO);
 	}
 
+	@Override
+	public int selectCountNotice() {
+		// TODO Auto-generated method stub
+		return clientNoticeDAO.selectCountNotice();
+	}
+
 }
