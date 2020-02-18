@@ -9,4 +9,5 @@ public interface AdminPromotionDAO {
 	void insertPromotion(AdminPromotionVO adminPromotionVO);
 	List<AdminPromotionVO> selectPromotionList();
 	AdminPromotionVO selectPromotion(int promotionTbCode);
+	List<AdminPromotionVO> selectPromotionAppliedProductList(AdminPromotionVO adminPromotionVO);
 }
