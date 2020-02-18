@@ -105,10 +105,11 @@
                                         <li><a href="index.do">Home</a></li>
                                         <li><a href="#">Shopping</a>
                                             <ul>
-                                                <li><a href="blog.html">강아지 먹거리</a></li>
-                                                <li><a href="blog-details.html">강아지 용품</a></li>
-                                                <li><a href="cart.html">고양이 먹거리</a></li>
-                                                <li><a href="checkout.html">고양이 용품</a></li>
+                                                <c:forEach var="singleMenu" items="${sessionScope.menu.menu}" varStatus="status">
+                                                    <c:forEach var="subMenu" items="${singleMenu.value}" varStatus="status">
+                                                        <li><a href="shopping.do?productCategoryTbNo=${subMenu.key}">${singleMenu.key}-${subMenu.value}</a></li>
+                                                    </c:forEach>
+                                                </c:forEach>
                                             </ul>
                                         </li>
                                         <li><a href="#">Community</a>
