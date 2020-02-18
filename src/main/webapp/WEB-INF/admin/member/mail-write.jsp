@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -35,63 +36,48 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">약관 작성/수정</h4>
+                                <h4 class="panel-title">약관 수정 메일보내기</h4>
                             </div>
                             <div class="panel-body">
-                                <form class="form-horizontal" action="term-read.ado" method="post">
+                                <form class="form-horizontal" action="send.ado" method="post">                   	                                                           
                                     <div class="form-group">
-                                        <label for="termNumber" class="col-sm-2 control-label">약관번호</label>
+                                        <label for="senderName" class="col-sm-2 control-label">발신자이름</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="termNumber" name="termsTbNo" value="${terms.termsTbNo}" readonly>
+                                            <input type="text" class="form-control" name="senderName" id="senderName" value="오늘뭐멍냥 관리자">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="termName" class="col-sm-2 control-label">약관명</label>
+                                        <label for="senderMail" class="col-sm-2 control-label">발신자 이메일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="termName" name="termsTbTitle" value="${terms.termsTbTitle}">
+                                            <input type="text" class="form-control" name="senderMail" id="senderMail" value="kangholee8512@gmail.com">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="termDetail" class="col-sm-2 control-label">약관상세</label>
+                                        <label for="receiveMail" class="col-sm-2 control-label">수신자 이메일</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="termDetail" name="termsTbContent" >${terms.termsTbContent }</textarea>
+                                            <input type="text" class="form-control" name="receiveMail" id="receiveMail" value="전체회원">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">필수여부</label>
+                                        <label for="subject" class="col-sm-2 control-label" >제목</label>
                                         <div class="col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                <c:if test="${terms.termsTbNecessary eq 'Y' }">                                                 	                                               
-                                                    <input type="checkbox" name="termsTbNecessary" value="true" checked>필수
-                                                </c:if>
-                                                <c:if test="${terms.termsTbNecessary eq 'N' }">                                                 	                                               
-                                                    <input type="checkbox" name="termsTbNecessary" value="true">필수
-                                                </c:if>
-                                                </label>
-                                            </div>
+                                            <input type="text" class="form-control" name="subject" id="subject" value="약관 수정 메일">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">만료일</label>
+                                        <label for="message" class="col-sm-2 control-label">수정 후 약관상세</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="termsTbExpireDate" value="${terms.termsTbExpireDate }" >
+                                            <textarea rows="10" class="form-control" name="message" id="message" value="${content.termsTbContent }">${content.termsTbContent }</textarea>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label">정책적용일</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="termsTbApplyDate" value="${terms.termsTbApplyDate}">
-                                        </div>
-                                    </div>
+                                    </div>                            
+                                   
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary" >작성</button>
-                                            <!--                                                이 버튼 누르면 수정이 확일합니까 확인알럿이 뜨고 컨펌하면 ㄱ-->
+                                            <button type="submit" class="btn btn-primary" >보내기</button>
+                                          
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -114,3 +100,4 @@
 <!-- Javascripts -->
 
 <jsp:include page="../include/scripts-load.jsp"/>
+
