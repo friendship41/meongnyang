@@ -188,61 +188,33 @@
                 <div class="offsetmenu__close__btn">
                     <a href="#"><i class="zmdi zmdi-close"></i></a>
                 </div>
-                <div class="shp__cart__wrap">
-                    <div class="shp__single__product">
-                        <div class="shp__pro__thumb">
-                            <a href="#">
-                                <img src="images/product-2/sm-smg/1.jpg" alt="product images">
-                            </a>
+                <div id="cartWrapDiv" class="shp__cart__wrap">
+                    <c:set var="subtotalPrice" value="0"/>
+                    <c:forEach var="item" items="${sessionScope.cartList}">
+                        <div class="shp__single__product">
+                            <div class="shp__pro__thumb">
+                                <a href="shoppingDetail.do?productTbCode=${item.productTbCode}">
+                                    <img src="${item.cartImage}" alt="product images" width="99" height="119">
+                                </a>
+                            </div>
+                            <div class="shp__pro__details">
+                                <h2><a href="shoppingDetail.do?productTbCode=${item.productTbCode}">${item.pdSaleTbProductName}</a></h2>
+                                <span class="quantity">수량: ${item.ordersDetialTbAmount}</span>
+                                <span class="shp__price">${item.pdSaleTbSalesPrice}원</span>
+                            </div>
+                            <div class="remove__btn">
+                                <a onclick="removeCartItem(${item.productTbCode})" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                            </div>
                         </div>
-                        <div class="shp__pro__details">
-                            <h2><a href="product-details.html">BO&Play Wireless Speaker</a></h2>
-                            <span class="quantity">QTY: 1</span>
-                            <span class="shp__price">$105.00</span>
-                        </div>
-                        <div class="remove__btn">
-                            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                        </div>
-                    </div>
-                    <div class="shp__single__product">
-                        <div class="shp__pro__thumb">
-                            <a href="#">
-                                <img src="images/product-2/sm-smg/1.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="shp__pro__details">
-                            <h2><a href="product-details.html">BO&Play Wireless Speaker</a></h2>
-                            <span class="quantity">QTY: 1</span>
-                            <span class="shp__price">$105.00</span>
-                        </div>
-                        <div class="remove__btn">
-                            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                        </div>
-                    </div>
-                    <div class="shp__single__product">
-                        <div class="shp__pro__thumb">
-                            <a href="#">
-                                <img src="images/product-2/sm-smg/2.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="shp__pro__details">
-                            <h2><a href="product-details.html">Brone Candle</a></h2>
-                            <span class="quantity">QTY: 1</span>
-                            <span class="shp__price">$25.00</span>
-                        </div>
-                        <div class="remove__btn">
-                            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                        </div>
-                    </div>
-                </div>
+                        <c:set var="subtotalPrice" value="${subtotalPrice + item.pdSaleTbSalesPrice}"/>
+                    </c:forEach>
                 <ul class="shoping__total">
-                    <li class="subtotal">Subtotal:</li>
-                    <li class="total__price">$130.00</li>
+                    <li class="subtotal">합 계:</li>
+                    <li id="cartSubtotal" class="total__price" value="0">${subtotalPrice}원</li>
                 </ul>
-                <ul class="shopping__btn">
-                    <li><a href="cart.html">View Cart</a></li>
-                    <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
-                </ul>
+                    <ul class="shopping__btn">
+                        <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
+                    </ul>
             </div>
         </div>
         <!-- End Cart Panel -->

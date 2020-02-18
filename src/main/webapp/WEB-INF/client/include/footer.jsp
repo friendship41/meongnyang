@@ -66,6 +66,11 @@
             fit: true   // 100% fit in a container
         });
     });
+    function removeCartItem(itemId) {
+        var item = "pCart-"+itemId
+        console.log(item);
+        document.getElementById(item).remove();
+    }
 </script>
 
 

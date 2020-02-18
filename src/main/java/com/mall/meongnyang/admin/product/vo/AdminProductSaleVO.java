@@ -27,6 +27,9 @@ public class AdminProductSaleVO
 
     private String productTbBannerState;
 
+    private int ordersDetialTbAmount;
+    private String cartImage;
+
     public int getPdSaleTbNo()
     {
         return pdSaleTbNo;
@@ -227,6 +230,26 @@ public class AdminProductSaleVO
         this.productTbBannerState = productTbBannerState;
     }
 
+    public int getOrdersDetialTbAmount()
+    {
+        return ordersDetialTbAmount;
+    }
+
+    public void setOrdersDetialTbAmount(int ordersDetialTbAmount)
+    {
+        this.ordersDetialTbAmount = ordersDetialTbAmount;
+    }
+
+    public String getCartImage()
+    {
+        return cartImage;
+    }
+
+    public void setCartImage(String cartImage)
+    {
+        this.cartImage = cartImage;
+    }
+
     @Override
     public String toString()
     {
@@ -251,6 +274,8 @@ public class AdminProductSaleVO
                 ", dayFrom=" + dayFrom +
                 ", dayTo=" + dayTo +
                 ", productTbBannerState='" + productTbBannerState + '\'' +
+                ", ordersDetialTbAmount=" + ordersDetialTbAmount +
+                ", cartImage='" + cartImage + '\'' +
                 '}';
     }
 }

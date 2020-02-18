@@ -99,7 +99,8 @@
                 b.PD_IMAGE_TB_PATH,
                 b.PD_SALE_TB_SALES_PRICE,
                 b.PD_SALE_TB_DISCOUNT_RATE,
-                b.PD_SALE_TB_RATING
+                b.PD_SALE_TB_RATING,
+                b.PD_SALE_TB_PRODUCT_NAME
             FROM
                 (SELECT
                     rownum rnum,
@@ -108,7 +109,8 @@
                     a.PD_IMAGE_TB_PATH,
                     a.PD_SALE_TB_SALES_PRICE,
                     a.PD_SALE_TB_DISCOUNT_RATE,
-                    a.PD_SALE_TB_RATING
+                    a.PD_SALE_TB_RATING,
+                    a.PD_SALE_TB_PRODUCT_NAME
                 FROM
                     (SELECT
                         p.PRODUCT_TB_CODE,
@@ -116,7 +118,8 @@
                         pi.PD_IMAGE_TB_PATH,
                         ps.PD_SALE_TB_SALES_PRICE,
                         ps.PD_SALE_TB_DISCOUNT_RATE,
-                        ps.PD_SALE_TB_RATING
+                        ps.PD_SALE_TB_RATING,
+                        ps.PD_SALE_TB_PRODUCT_NAME
                     FROM product p JOIN (
                         SELECT PRODUCT_TB_CODE, PD_IMAGE_TB_PATH FROM pd_image WHERE PD_IMAGE_TB_REPRESENTATIVE = 'Y'
                     ) pi
@@ -128,7 +131,8 @@
                             psd.PD_SALE_TB_SALES_PRICE,
                             psd.PD_SALE_TB_DISCOUNT_RATE,
                             psd.PD_SALE_TB_START_DAY,
-                            psd.PD_SALE_TB_RATING
+                            psd.PD_SALE_TB_RATING,
+                            psd.PD_SALE_TB_PRODUCT_NAME
                         FROM (
                             SELECT
                                 MAX(PD_SALE_TB_NO) "PD_SALE_TB_NO"
@@ -172,6 +176,7 @@
 
     <select id="selectProductDetail" parameterType="product" resultType="product">
         SELECT
+            p.PRODUCT_TB_CODE,
             p.PRODUCT_TB_NAME,
             p.PRODUCT_TB_DETAIL,
             ps.PD_SALE_TB_RATING
