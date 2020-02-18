@@ -44,4 +44,9 @@ public class ClientMarketCommentDAOImpl implements ClientMarketCommentDAO {
 		return sqlSessionTemplate.selectOne("commentDAO.selectCountComment", clientMarketCommentVO);
 	}
 
+	@Override
+	public void updateStep(ClientMarketCommentVO clientMarketCommentVO) {
+		sqlSessionTemplate.update("commentDAO.updateStep", clientMarketCommentVO);
+	}
+
 }

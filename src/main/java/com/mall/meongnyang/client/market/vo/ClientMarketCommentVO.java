@@ -13,8 +13,11 @@ public class ClientMarketCommentVO {
 	private Date marketCommentTbRegDate;
 	private int marketCommentTbRef;
 	private int marketCommentTbStep;
-	private int marketCommentTbDepth;
+	private String marketCommentTbState;
 	private int customerTbNo;
+	
+	private String customerTbName;
+	
 	
 	public int getMarketCommentTbNo() {
 		return marketCommentTbNo;
@@ -52,11 +55,11 @@ public class ClientMarketCommentVO {
 	public void setMarketCommentTbStep(int marketCommentTbStep) {
 		this.marketCommentTbStep = marketCommentTbStep;
 	}
-	public int getMarketCommentTbDepth() {
-		return marketCommentTbDepth;
+	public String getMarketCommentTbState() {
+		return marketCommentTbState;
 	}
-	public void setMarketCommentTbDepth(int marketCommentTbDepth) {
-		this.marketCommentTbDepth = marketCommentTbDepth;
+	public void setMarketCommentTbState(String marketCommentTbState) {
+		this.marketCommentTbState = marketCommentTbState;
 	}
 	public int getCustomerTbNo() {
 		return customerTbNo;
@@ -64,13 +67,19 @@ public class ClientMarketCommentVO {
 	public void setCustomerTbNo(int customerTbNo) {
 		this.customerTbNo = customerTbNo;
 	}
-
+	public String getCustomerTbName() {
+		return customerTbName;
+	}
+	public void setCustomerTbName(String customerTbName) {
+		this.customerTbName = customerTbName;
+	}
 	@Override
 	public String toString() {
 		return "ClientMarketCommentVO [marketCommentTbNo=" + marketCommentTbNo + ", marketTbNo=" + marketTbNo
 				+ ", marketCommentTbContent=" + marketCommentTbContent + ", marketCommentTbRegDate="
 				+ marketCommentTbRegDate + ", marketCommentTbRef=" + marketCommentTbRef + ", marketCommentTbStep="
-				+ marketCommentTbStep + ", marketCommentTbDepth=" + marketCommentTbDepth + ", customerTbNo="
+				+ marketCommentTbStep + ", marketCommentTbState=" + marketCommentTbState + ", customerTbNo="
 				+ customerTbNo + "]";
 	}
+
 }

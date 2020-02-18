@@ -142,6 +142,7 @@ function deleteMarket() {
 //start jqury
 $(function() {
 	var marketNo = $("#marketTbNo").val();
+	var state = false;
 	
 	getComment();
 	
@@ -161,12 +162,24 @@ $(function() {
 					str += '<div class="ht__comment__details">'
 					+ '<input type="hidden" name="marketCommentTbRef" value="'+ this.marketCommentTbRef+'" >'
 					+ '<input type="hidden" name="marketCommentTbStep" value="'+ this.marketCommentTbStep+'">'
+					+ '<input type="hidden" name="marketCommentTbNo" value="'+ this.marketCommentTbNo+'">'
 					+ '<div class="ht__comment__title">'
-					+ '<h2><a href="#">' + this.customerTbNo + '</a></h2>'
-					+ '<div class="reply__btn"><a href="javascript:void(0);" name="replyBtn">reply</a></div>'
-					+ '</div>'
-					+ '<span>' + this.marketCommentTbRegDate + '</span>'
-			    	+ '<p>' + this.marketCommentTbContent + '</p>'
+					if(this.marketCommentTbState === 'N'){
+						str += '<h2><a href="#">' + this.customerTbName + '</a></h2>'
+						+ '<div class="reply__btn"><a href="javascript:void(0);" name="replyBtn" style="margin-left:10px;">reply</a></div>'
+						+ '<div class="reply__btn"><a href="javascript:void(0);" name="updateBtn" style="margin-left:10px;">update</a></div>'
+						+ '<div class="reply__btn"><a href="javascript:void(0);" name="deleteBtn" style="margin-left:10px;">delete</a></div>'
+						+ '</div>'
+						+ '<span>' + this.marketCommentTbRegDate + '</span>'	
+					} else if(this.marketCommentTbState === 'D'){
+						str += '<h2> </h2>'
+						+ '<div class="reply__btn"></div>'
+						+ '<div class="reply__btn"></div>'
+						+ '<div class="reply__btn"></div>'
+						+ '</div>'
+						+ '<span></span>'	
+						}
+			    	str += '<p>' + this.marketCommentTbContent + '</p>'
 					+ '</div></div>'
 					+ '<hr>';
 			});
@@ -178,8 +191,8 @@ $(function() {
 	//코멘트 저장하기
 	$("#addcomment-btn").click(function(e) {
 		
-		const cusNo = $("input[name='customerTbNo']").val();
-		const comment = $("input[name='marketCommentTbContent']").val();
+		const cusNo = $("#customerTbNo").val();
+		const comment = $("#marketCommentTbContent").val();
 		
 		const clientMarketComment = {
 			marketTbNo : marketNo,
@@ -209,10 +222,47 @@ $(function() {
 		});
 	});
 	
+	//코맨트 삭제
+	$(document).on("click", "a[name='deleteBtn']", function(e) {
+		
+		var commentNo = $(this).parent().parent().parent().children("input[name='marketCommentTbNo']").val();
+		console.log(commentNo);
+		var state = "D";
+		
+		var clientMarketComment = {
+			marketCommentTbNo : commentNo,
+			marketCommentTbState : state
+		};
+		
+		$.ajax({
+			type: "POST",
+			url: "/deleteReply.do",
+			headers: {
+	        	"Content-Type": "application/json"
+	        },
+	        dataType: "text",
+			data: JSON.stringify(clientMarketComment),
+			success: function(result) {
+				if(result === "deleteSuccess"){
+					getComment();
+				} else{
+					alert("삭제 실패");
+				}
+			},
+			error: function(){
+				console.log("통신실패");
+			}
+		});
+	});
+	
 	//대댓글 작성창
 	$(document).on("click", "a[name='replyBtn']", function() {
-		var ref = $("input[name='marketCommentTbRef']").val();
-		var step = $("input[name='marketCommentTbStep']").val();
+		
+		if(!state){
+		var ref = $(this).parent().parent().parent().children("input[name='marketCommentTbRef']").val();
+		console.log(ref);
+		var step = $(this).parent().parent().parent().children("input[name='marketCommentTbStep']").val();
+		console.log(step);
 		
 		var replyAdd = $(this).parent().parent().next().next();
 		var str = "";
@@ -230,13 +280,17 @@ $(function() {
 			+ '<input type="email" placeholder="이메일 *" readonly="readonly" value="${customer.customerTbEmail}">'
 			+ '</div>'
 			+ '<div class="comment__form message">'
-			+ '<textarea name="marketCommentTbContent" id="marketCommentTbContent" placeholder="내용"></textarea>'
+			+ '<textarea name="commentReplyContent" id="commentReplyContent" placeholder="내용"></textarea>'
 			+ '</div></div></form>'
 			+ '<div class="ht__comment__btn--2 mt--30">'
 			+ '<a href="javascript:void(0);" class="fr__btn" id="addreply-btn">댓글 등록</a></div></div>';
 
 			replyAdd.after(str);
 			$(this).parent().html('<a href="javascript:void(0);" name="cancle">cancle</a>');
+			state = true;
+		} else {
+			alert("열려있는 reply 입력창을 닫아주세요.");
+		}
 	});
 	
 	//대댓글 작성창 없애기
@@ -247,27 +301,28 @@ $(function() {
     });
 	
 	//대댓글 저장하기
-	$("#addreply-btn").click(function(e) {
-		const cusNo = $("input[name='customerTbNo']").val();
-		const comment = $("input[name='marketCommentTbContent']").val();
-		const commentNo = $("input[name='marketCommentTbNo']").val();
+	$(document).on("click", "#addreply-btn",function(e) {
+		
+		const cusNo = "${customer.customerTbNo}";
+		const comment = $("#commentReplyContent").val();
 		const ref = $("input[name='commentTbRef']").val();
 		const step = $("input[name='commentTbStep']").val();
 		console.log(cusNo);
 		console.log(comment);
-		console.log(commentNo);
 		console.log(ref);
 		console.log(step);
+		
 		const clientMarketComment = {
 			marketTbNo : marketNo,
 			marketCommentTbContent : comment,
 			marketCommentTbRef : ref,
+			marketCommentTbStep : step,
 			customerTbNo : cusNo
 		};
 		
 		$.ajax({
 			type: "POST", //서버에 전송하는 HTTP요청 방식
-            url: "/insertComment.do", //서버 요청 URI
+            url: "/insertReply.do", //서버 요청 URI
             headers: {
                "Content-Type": "application/json"
             }, //요청 헤더 정보
@@ -281,7 +336,8 @@ $(function() {
                   alert("댓글등록 실패");
                }
             }, //통신 성공시 처리할 내용들을 함수 내부에 작성.
-            error: function() {
+            error: function(request,status,error) {
+            	
                console.log("통신 실패!");
             } //통신 실패 시 처리할 내용들을 함수 내부에 작성.
 		});

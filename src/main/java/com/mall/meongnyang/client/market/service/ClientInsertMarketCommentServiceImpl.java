@@ -14,14 +14,13 @@ public class ClientInsertMarketCommentServiceImpl implements ClientInsertMarketC
 	
 	@Override
 	public void insertComment(ClientMarketCommentVO clientMarketCommentVO) {
-		
+	
 		if(clientMarketCommentVO.getMarketCommentTbRef() > 0) {
-			clientMarketCommentVO.setMarketCommentTbStep(0);
-		} else {
-			clientMarketCommentVO.setMarketCommentTbStep(0);
-		}
-		clientMarketCommentVO.setMarketCommentTbDepth(0);
-		clientMarketCommentVO.setCustomerTbNo(1);
+			clientMarketCommentDAO.updateStep(clientMarketCommentVO);
+			clientMarketCommentVO.setMarketCommentTbStep(clientMarketCommentVO.getMarketCommentTbStep() + 1);
+		} 
+		clientMarketCommentVO.setCustomerTbNo(26);
+		
 		clientMarketCommentDAO.insertMarketComment(clientMarketCommentVO);		
 	}
 
