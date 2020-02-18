@@ -72,12 +72,13 @@ public class AdminProductSaleController
         return "redirect:productOverview.ado";
     }
 
-    @RequestMapping(value = "/stopSaleProduct.ado", method = RequestMethod.GET)
-    public String stopSaleProduct(AdminProductSaleVO adminProductSaleVO)
-    {
-        adminUpdateProductSaleService.stopSale(adminProductSaleVO);
-        return "redirect:productOverview.ado";
-    }
+//    @RequestMapping(value = "/stopSaleProductAjax.ado", method = RequestMethod.GET)
+//    @ResponseBody
+//    public String stopSaleProduct(AdminProductSaleVO adminProductSaleVO)
+//    {
+//        adminUpdateProductSaleService.stopSale(adminProductSaleVO);
+//        return "{\"pdSaleTbNo\":\""+adminProductSaleVO.getPdSaleTbNo()+"\"}";
+//    }
 
     @RequestMapping(value = "/restartSaleProduct.ado", method = RequestMethod.GET)
     public String restartSaleProductPage(AdminProductSaleVO adminProductSaleVO, Model model)

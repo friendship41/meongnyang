@@ -806,6 +806,10 @@
                     {
                         settingProductSaleTable(json);
                     }
+                    else if(toWhere === 'stopSale')
+                    {
+                        settingStopSaleResult(json);
+                    }
                 }
             })
             .fail(function (xhr, status, errorThrown) {
@@ -835,7 +839,6 @@
         $("#holdProductTable").DataTable();
     }
 
-
     function settingProductSaleTable(json) {
         var productSaleHTML = "";
 
@@ -860,11 +863,11 @@
             productSaleHTML += '<td>'+productSaleSingle.pdSaleTbRating+'</td>';
             if(productSaleSingle.pdSaleTbState === 'Y')
             {
-                productSaleHTML += '<td><button class="btn btn-primary" onclick="location.href=\'stopSaleProduct.ado?pdSaleTbNo='+productSaleSingle.pdSaleTbNo+'\'">판매중지</button></td>';
+                productSaleHTML += '<td><button id="productSaleBtn'+productSaleSingle.pdSaleTbNo+'" class="btn btn-primary" onclick="stopSale('+productSaleSingle.pdSaleTbNo+')">판매중지</button></td>';
             }
             else
             {
-                productSaleHTML += '<td><button class="btn btn-primary" onclick="location.href=\'restartSaleProduct.ado?pdSaleTbNo='+productSaleSingle.pdSaleTbNo+'\'">판매재등록</button></td>';
+                productSaleHTML += '<td><button id="productSaleBtn'+productSaleSingle.pdSaleTbNo+'" class="btn btn-primary" onclick="location.href=\'restartSaleProduct.ado?pdSaleTbNo='+productSaleSingle.pdSaleTbNo+'\'">판매재등록</button></td>';
             }
             if(productSaleSingle.productTbBannerState === 'N')
             {
@@ -886,6 +889,20 @@
         });
     }
 
+    function stopSale(pdSaleTbNo){
+        var url = "/stopSaleProductAjax.ado?pdSaleTbNo="+pdSaleTbNo;
+        getDataFromServerAjax(url,"stopSale");
+    }
+
+    function settingStopSaleResult(json){
+        var saleBtn = "productSaleBtn"+json.pdSaleTbNo;
+        console.log(saleBtn);
+        $("#onSaleProductTable").DataTable().destroy();
+        document.getElementById(saleBtn).setAttribute("onclick", "location.href='restartSaleProduct.ado?pdSaleTbNo="+json.pdSaleTbNo+"'");
+        document.getElementById(saleBtn).innerText = "판매재등록";
+        //document.getElementById(saleTd).innerHTML = '<button class="btn btn-primary" onclick="location.href=\'restartSaleProduct.ado?pdSaleTbNo='+json.pdSaleTbNo+'\'">판매재등록</button>';
+        $("#onSaleProductTable").DataTable();
+    }
 
     $(document).ready(function () {
         $("#allProductDayFrominput").attr("value", getMonthAgoDate(6).yyyymmdd());
