@@ -38,10 +38,13 @@ public class AdminPromotionController {
 	}
 	
 	@RequestMapping("/promotion-read.ado")
-	public String selectPromotion(int promotionTbCode, Model model) {
+	public String selectPromotion(AdminPromotionVO adminPromotionVO, Model model) {
 		
-		AdminPromotionVO adminPromotionVO = adminSelectPromotionService.selectPromotion(promotionTbCode);
-		model.addAttribute("promotion", adminPromotionVO);
+		AdminPromotionVO adminPromotion = adminSelectPromotionService.selectPromotion(adminPromotionVO.getPromotionTbCode());
+		List<AdminPromotionVO> productList = adminSelectPromotionService.selectPromotionAppliedProductList(adminPromotionVO);
+		
+		model.addAttribute("promotion", adminPromotion);
+		model.addAttribute("promotionProductList", productList);
 		
 		return "marketing/promotion-read";
 	}
@@ -57,6 +60,14 @@ public class AdminPromotionController {
 		adminInsertPromotionService.insertPromotion(adminPromotionVO);
 		
 		return "redirect: promotion-overview.ado";
+	}
+	
+	@RequestMapping("/deletePromotion.ado")
+	public String deletePromotion(int promotionTbCode) {
+		adminDeletePromotionService.deletePromotion(promotionTbCode);
+		
+		return "redirect: promotion-overview.ado";
+		
 	}
 	
 }

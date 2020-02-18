@@ -32,9 +32,11 @@
                 <!-- Row -->
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
+                    <c:if test="${promotionProductList.size() == 0 }">
                      <div>
-               		 <button class="btn btn-success" style="margin-bottom:14px;">삭제</button>
+               		 <button class="btn btn-success" style="margin-bottom:14px;" onclick="location.href='/deletePromotion.ado?promotionTbCode=${promotion.promotionTbCode}'">삭제</button>
                 	 </div>
+                	 </c:if>
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
                                 <h2 class="panel-title">${promotion.promotionTbName }</h2>                                
@@ -81,7 +83,7 @@
                                     <table id="readCountProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
-                                            <th>삼품코드</th>
+                                            <th>상품코드</th>
                                             <th>상품이름</th>
                                             <th>카테고리</th>
                                             <th>판매가격</th>
@@ -92,7 +94,7 @@
                                         </thead>
                                         <tfoot>
                                         <tr>
-                                            <th>삼품코드</th>
+                                            <th>상품코드</th>
                                             <th>상품이름</th>
                                             <th>카테고리</th>
                                             <th>판매가격</th>
@@ -102,24 +104,17 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
+                                        <c:forEach items="${promotionProductList}" var="list">
                                         <tr>
-                                            <td>000001</td>
-                                            <td>개 - 사료</td>
-                                            <td>좋은사료1</td>
-                                            <td>100000</td>
-                                            <td>500000</td>
-                                            <td>500000</td>
-                                            <td>90%</td>
+                                            <td>${list.productTbCode}</td>
+                                            <td>${list.pdSaleTbProductName}</td>
+                                            <td>${list.category}</td>
+                                            <td>${list.pdSaleTbSalesPrice} 원</td>
+                                            <td>${list.pdSaleTbReceivedAmount - list.pdSaleTbRemainingAmount}</td>
+                                            <td>${list.pdSaleTbRemainingAmount}</td>
+                                            <td>${list.pdSaleTbDiscountRate} %</td>
                                         </tr>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td>고양이 - 사료</td>
-                                            <td>좋은사료2</td>
-                                            <td>100000</td>
-                                            <td>500000</td>
-                                            <td>500000</td>
-                                            <td>90%</td>
-                                        </tr>
+                                        </c:forEach>                 
                                         </tbody>
                                     </table>
                                 </div>
@@ -143,6 +138,8 @@
 
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
+<script type="text/javascript">
 
+</script>
 </body>
 </html>
