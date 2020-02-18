@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO;
 import com.mall.meongnyang.client.community.service.ClientSelectNoticeListService;
@@ -25,18 +26,25 @@ public class ClientNoticeController {
 	
 
 	    @RequestMapping(value = "/notice.do", method = RequestMethod.GET)
-	    public String noticeList(AdminNoticeVO adminNoticeVO,Model model)
-	    {
-	    		
-	    	NoticeListPaging paging = new NoticeListPaging();
+	    public String noticeList(@RequestParam(defaultValue = "1") int currentPage, AdminNoticeVO adminNoticeVO, Model model)
+	    {		
+	    	
+	    	NoticeListPaging paging = new NoticeListPaging(currentPage);
+	    	    	
 	    	paging.createPaging(clientSelectNoticeListService.selectCountNotice());
 	    	
 	    	adminNoticeVO.setStartRow(paging.getStartRow());
+	    	
 	    	adminNoticeVO.setEndRow(paging.getEndRow());
 	    	
+	    	
+	    	
+	       
 	        List<AdminNoticeVO> clientNoticeList = clientSelectNoticeListService.selectNoticeList(adminNoticeVO);
 	        System.out.println(clientNoticeList);
 	       
+	        
+	        
 	        model.addAttribute("clientNoticeList", clientNoticeList);
 
 	        model.addAttribute("paging", paging);
@@ -54,23 +62,7 @@ public class ClientNoticeController {
 	        return "community/notice-read";
 	    }
 	    
-	    //페이징처리
-//	    @RequestMapping(value= "/notice-paging.do")
-//	    public String selectNoticeList(AdminNoticeVO adminNoticeVO, Model model) {
-//	    	
-//	    	NoticeListPaging paging = new NoticeListPaging();
-//	    	paging.createPaging(clientSelectNoticeListService.selectCountNotice());
-//	    	
-//	    	adminNoticeVO.setStartRow(paging.getStartRow());
-//	    	adminNoticeVO.setEndRow(paging.getEndRow());
-//	    	
-//	    	
-//	    	
-//	    	
-//	    	
-//	    	model.addAttribute("paging", paging);
-//	    	
-//	    	return "community/notice";
+	    
 //	    	
 //	    	
 //	    }

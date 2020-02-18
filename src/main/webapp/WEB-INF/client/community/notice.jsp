@@ -97,4 +97,4 @@
 </body>
 
 </html>
-<jsp:include page="../include/footer.jsp"></jsp:include>
+<jsp:include page="../include/footer.jsp" flush="false"></jsp:include>

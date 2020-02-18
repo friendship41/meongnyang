@@ -12,24 +12,23 @@ public class NoticeListPaging {
 	private boolean prev;
 	private boolean next;
 	
-	public NoticeListPaging() {
-		this.pageSize = 9;
-		this.currentPage = 1;
+	public NoticeListPaging(int currentPage) {
+		this.pageSize = 10;
+		this.currentPage = currentPage;
 		
 	}
 	
 	public void createPaging(int countList) {
-		int lastPage = (int) Math.ceil(countList/(double) pageBlock);
+		int lastPage = (int) Math.ceil(countList/(double) pageSize);
 		this.startRow = (currentPage -1)*pageSize +1; 
 		this.endRow = startRow * pageSize;
 		this.startPage = (int) ((currentPage -1)/pageBlock)* pageBlock +1;
-		this.endPage = startPage + pageBlock;
+		this.endPage = startPage + pageBlock-1;
 		this.prev = false;
 		this.next = false;
 		
 		if(endPage>lastPage) {
 			this.endPage = lastPage;
-	
 		}
 		
 		if(startPage !=1) {
@@ -57,6 +56,7 @@ public class NoticeListPaging {
 
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
+		
 	}
 
 	public int getStartRow() {
