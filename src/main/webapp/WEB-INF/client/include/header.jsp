@@ -95,7 +95,7 @@
                                         <ul class="dropdown">
                                             <li><a href="notice.do">공지</a></li>
                                             <li><a href="faq.do">FAQ</a></li>
-                                            <li><a href="">Q&A</a></li>
+                                            <li><a href="qna-list.do">Q&A</a></li>
                                             <li><a href="#">리뷰</a></li>
                                             <li><a href="#">Contact</a></li>
                                         </ul>
@@ -121,7 +121,7 @@
                                             <ul>
                                                 <li><a href="notice.do">공지</a></li>
                                                 <li><a href="faq.do">FAQ</a></li>
-                                                <li><a href="#">Q&A</a></li>
+                                                <li><a href="qna-list.do">Q&A</a></li>
                                                 <li><a href="#">리뷰</a></li>
                                                 <li><a href="#">Contact</a></li>
                                             </ul>

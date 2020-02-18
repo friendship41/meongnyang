@@ -41,9 +41,12 @@ public class AdminQnaTypeController {
     {
 		List<AdminQnaTypeVO> tempVO = adminSelectQnaTypeListService.selectQnaTypeList(adminQnaTypeVO);
         model.addAttribute("qnaCategoryList", tempVO);
-
+        
         return "shoppingmall/shoppingmall-qna-category";
     }
+	
+	
+	
 	
 	
     @RequestMapping(value = "/qnaCategorySingleAjax.ado", method = RequestMethod.GET)

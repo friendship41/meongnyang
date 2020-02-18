@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 		<!-- Start Bradcaump area -->
 		<div class="ht__bradcaump__area"
@@ -34,7 +34,7 @@
                                 <ul class="ht__cat__list">
                                     <li><a href="#">공지</a></li>
                                     <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Q&A</a></li>
+                                    <li><a href="qna-list.do">Q&A</a></li>
                                     <li><a href="#">Review</a></li>
                                     <li><a href="#">Contact</a></li>
                                 </ul>
@@ -47,48 +47,47 @@
                                 <h4 class="title__line--5">글쓰기</h4>
                                 
                                   <form class="form-horizontal">
+                                  <input type="hidden" id="YN" name="qnaTbSecret">
+                                  <input type="hidden" name="pdSaleTbNo" ><!-- 상품번호 value값 추가 -->
+                                  <input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }">
 										<div class="form-group">
 											<label for="checkbox" class="col-sm-2 control-label"></label>
 												<div class="col-sm-8">
-													<div class="checkbox"><label><input type="checkbox"> 비밀글</label></div>													
+													<div class="checkbox"><label><input type="checkbox" id="CHECK_YN" name="CHECK_YN"> 비밀글</label></div>													
 												</div>
 										</div>
 										<div class="form-group">
-											<label for="selector" class="col-sm-2 control-label"></label>
-										<div class="col-sm-8"><select name="selector" id="selector" class="form-control1">
-											<option>상품문의</option>
-											<option>배송문의</option>
-											<option>환불/교환</option>
-										</select></div>
+											<label for="qnaTypeTbName" class="col-sm-2 control-label"></label>
+										<div class="col-sm-8">
+										
+									<select name="qnaTypeTbName" id="qnaTypeTbname" class="form-control1">
+										<option value="thisIsSelect">선택하세요</option>
+										<c:forEach var="category" items="${qnaCategoryList }">
+											<option value="${category.qnaTypeTbNo }">${category.qnaTypeTbName }</option>
+										</c:forEach>
+											</select>
+										</div>
 										</div>
 										<div class="form-group">
 											<label for="smallinput" class="col-sm-2 control-label label-input-sm">이름</label>
 												<div class="col-sm-8">
-												 	<input type="text" placeholder="Name *">
+												 	<input type="text" placeholder="Name *" name="qnaTbTitle">
 												</div>
 										</div>
 										<div class="form-group">
 											<label for="email" class="col-sm-2 control-label label-input-sm">이메일</label>
 												<div class="col-sm-8">
-												 	<input type="email" id="email" placeholder="Email *">
-												</div>
+												 	<input type="email" id="email" placeholder="Email *" value="${sessionScope.customer.customerTbEmail }" readonly>
+												</div>													<!-- 세션을 갖고 있기때문에 가능하다. value로 띄어지는지 확인 -->
 										</div>
 										<div class="form-group">
-											<label for="password" class="col-sm-2 control-label label-input-sm">비밀번호</label>
-												<div class="col-sm-8">
-												 	<input type="password" id="password" placeholder="Password *">
-												</div>
-										</div>
-										<div class="form-group">
-											 
-												<label for="message" class="col-sm-2 control-label">내용</label>
-													<div class="col-sm-8"><textarea name="message" id="message" placeholder="Context *"></textarea></div>
-											
+											 <label for="message" class="col-sm-2 control-label">내용</label>
+													<div class="col-sm-8"><textarea id="message" placeholder="Context *" name="qnaTbContent"></textarea></div>	
 										</div>
 										<div class="form-group">
 										<div align="center" class="ht__comment__btn--2 mt--50 col-sm-10">
-                                    		<a class="fr__btns" href="#">확인</a>
-                                    		<a class="fr__btns" href="#">취소</a>
+                                    		<a class="fr__btns" href="qna-insert.do">확인</a>
+                                    		<a class="fr__btns" href="qna-list.do">취소</a>
                                 		</div>
                                 		</div>
 								</form>                                                                                                       
@@ -101,4 +100,19 @@
 		<!-- cart-main-area end -->
 		
 <jsp:include page="../include/footer.jsp"/>
+<!-- script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$("#CHECK_YN").change(
+		function() {
+			if($("#CHECK_YN").is(":checked")) {
+				$("YN").val('Y');
+			} else {
+				$("YN").val('N')
+			}
+		}
+		);
+</script>
+
+
 

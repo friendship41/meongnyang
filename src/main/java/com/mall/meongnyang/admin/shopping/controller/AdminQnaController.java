@@ -39,6 +39,8 @@ public class AdminQnaController {
 		return "shoppingmall/shoppingmall-qna-list";
 	}
 	
+	
+	
 	@RequestMapping(value = "/qna-insert.ado", method = RequestMethod.POST)
 	public String insertQna(AdminQnaVO adminQnaVO) {
 		adminInsertQnaService.insertQna(adminQnaVO);

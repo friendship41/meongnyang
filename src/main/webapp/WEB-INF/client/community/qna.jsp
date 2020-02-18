@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <jsp:include page="../include/header.jsp"/>
         <!-- Start Bradcaump area -->
@@ -54,18 +55,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        	<c:forEach var="qnaList" items="${clientQnaList }">
                                             <tr>
-                                                <td class="product-remove"> 2 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-success">Q</span> 배송문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객2 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
+                                                <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
+                                                <td class="product-name"><a href="/qna-read.do?qnaTbNo=${qnaList.qnaTbNo} }" >"${qnaList.qnaTbTitle }</a><span class="badge badge-success"></span></td>
+                                                <td class="product-price"><span class="amount"> ${sessionScope.customer.customerTbName } </span></td>
+                                                <td class="product-stock-status"><span class="wishlist-in-stock">"${qnaList.qnaTbRegDate }" </span></td>
                                             </tr>
-                                            <tr>
-                                                <td class="product-remove"> 1 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-warning">A</span> 구매문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객1 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
-                                            </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

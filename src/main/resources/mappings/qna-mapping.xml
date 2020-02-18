@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="AdminQnaDAO">
+<mapper namespace="qnaDAO">
 
 	<!-- 전체 글수 -->
 	<select id="selectCountQna" resultType="int">
@@ -17,7 +17,7 @@
 		WHERE qna_tb_no = #{qnaTbReadcount}
 	</update>
 	
-	<select id="selectQna" parameterType="qna" resultType="qna">
+	<select id="clientSelectQna" parameterType="qna" resultType="qna">
 		SELECT
 			qna_tb_no,
 			pd_sale_tb_no,
@@ -31,7 +31,8 @@
 			qna_tb_ref,
 			qna_tb_step,
 			qna_tb_depth,
-			qna_tb_status
+			qna_tb_status,
+			pd_order_tb_no
 		FROM 
 			qna
 		WHERE 
@@ -55,7 +56,8 @@
 				qna_tb_ref,
 				qna_tb_step,
 				qna_tb_depth,
-				qna_tb_status
+				qna_tb_status,
+				pd_order_tb_no
 			FROM (SELECT 
 						*
 					FROM
@@ -68,10 +70,10 @@
 	<insert id="insertQna" parameterType="qna">
 		INSERT INTO qna
 			(qna_tb_no, pd_sale_tb_no, qna_type_tb_no, customer_tb_no, qna_tb_title,
-			qna_tb_content, qna_tb_reg_date, qna_tb_readcount, qna_tb_secret)
+			qna_tb_content, qna_tb_reg_date, qna_tb_secret)
 		VALUES
 			(qna_seq.nextval, pdSaleTbNo, qnaTypeTbNo, customerTbNo, qnaTbTitle,
-			qnaTbContent, qnaTbRegDate, qnaTbReadcount, qnaTbSecret)
+			qnaTbContent, sysdate, qnaTbSecret)
 		WHERE qna_tb_no = #{qnaTbNo}
 	</insert>
 
@@ -89,4 +91,25 @@
 		WHERE qna_tb_no = #{qnaTbNo}
 	</delete>
 	
+	<select id="selectQna" parameterType="qna">
+		SELECT
+			qna_tb_no,
+			pd_sale_tb_no,
+			qna_type_tb_no,
+			customer_tb_no,
+			qna_tb_title,
+			qna_tb_content,
+			qna_tb_reg_date,
+			qna_tb_readcount,
+			qna_tb_secret,
+			qna_tb_ref,
+			qna_tb_step,
+			qna_tb_depth,
+			qna_tb_status,
+			pd_order_tb_no
+		FROM
+			qna
+		WHERE 
+			qna_tb_no = #{qnaTbNo}
+	</select>
 </mapper>
