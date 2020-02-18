@@ -51,9 +51,9 @@ public class AdminTermsController {
 	}
 	
 	@RequestMapping(value="/term-read.ado", method=RequestMethod.POST)
-	public String updateTerms(AdminTermsVO admintermsVO) {
-		adminUpdateTermsService.updateTerms(admintermsVO);		
-		return "redirect:/term-manage.ado";
+	public String updateTerms(AdminTermsVO admintermsVO, Model model) {
+		adminUpdateTermsService.updateTerms(admintermsVO);
+		return "redirect:/mail-write.ado?TermsTbNo="+ admintermsVO.getTermsTbNo();
 	}
 	
 	
