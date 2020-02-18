@@ -49,5 +49,11 @@ public class AdminProductImageDAOImpl implements AdminProductImageDAO
         sqlSessionTemplate.update("ProductImageDAO.updateProductImageRep", adminProductImageVO);
     }
 
+    @Override
+    public int selectProductImageRepCount(AdminProductImageVO adminProductImageVO)
+    {
+        return sqlSessionTemplate.selectOne("ProductImageDAO.selectRepCount", adminProductImageVO);
+    }
+
 
 }

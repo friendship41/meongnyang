@@ -3,10 +3,8 @@ package com.mall.meongnyang.admin.product.controller;
 import com.mall.meongnyang.admin.marketing.service.AdminSelectPromotionListService;
 import com.mall.meongnyang.admin.marketing.service.AdminSelectPromotionService;
 import com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO;
-import com.mall.meongnyang.admin.product.service.AdminInsertProductSaleService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductSaleService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductService;
-import com.mall.meongnyang.admin.product.service.AdminUpdateProductSaleService;
+import com.mall.meongnyang.admin.product.service.*;
+import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +31,23 @@ public class AdminProductSaleController
     private AdminUpdateProductSaleService adminUpdateProductSaleService;
     @Autowired
     private AdminSelectProductSaleService adminSelectProductSaleService;
+    @Autowired
+    private AdminSelectProductImageRepCountService adminSelectProductImageRepCountService;
 
     @RequestMapping(value = "/insertProductSale.ado", method = RequestMethod.GET)
     public String insertProductSalePage(AdminProductVO adminProductVO, Model model)
     {
+        AdminProductImageVO adminProductImageVO = new AdminProductImageVO();
+        adminProductImageVO.setProductTbCode(adminProductVO.getProductTbCode());
+        if(adminSelectProductImageRepCountService.checkRepSetOrNot(adminProductImageVO))
+        {
+            model.addAttribute("repCheck", true);
+        }
+        else
+        {
+            model.addAttribute("repCheck", false);
+        }
+
         AdminProductVO product = adminSelectProductService.selectSingleProduct(adminProductVO);
         model.addAttribute("product", product);
 
@@ -61,12 +72,13 @@ public class AdminProductSaleController
         return "redirect:productOverview.ado";
     }
 
-    @RequestMapping(value = "/stopSaleProduct.ado", method = RequestMethod.GET)
-    public String stopSaleProduct(AdminProductSaleVO adminProductSaleVO)
-    {
-        adminUpdateProductSaleService.stopSale(adminProductSaleVO);
-        return "redirect:productOverview.ado";
-    }
+//    @RequestMapping(value = "/stopSaleProductAjax.ado", method = RequestMethod.GET)
+//    @ResponseBody
+//    public String stopSaleProduct(AdminProductSaleVO adminProductSaleVO)
+//    {
+//        adminUpdateProductSaleService.stopSale(adminProductSaleVO);
+//        return "{\"pdSaleTbNo\":\""+adminProductSaleVO.getPdSaleTbNo()+"\"}";
+//    }
 
     @RequestMapping(value = "/restartSaleProduct.ado", method = RequestMethod.GET)
     public String restartSaleProductPage(AdminProductSaleVO adminProductSaleVO, Model model)

@@ -37,9 +37,7 @@ public class AdminSelectProductController
     @ResponseBody
     public List<AdminProductSaleVO> getProductSaleOverviewAjax(AdminProductSaleVO adminProductSaleVO)
     {
-        System.out.println("param"+adminProductSaleVO);
         List<AdminProductSaleVO> productSaleList = adminSelectProductSaleOverviewListService.selectProductSaleOverview(adminProductSaleVO);
-        System.out.println("from db: "+productSaleList);
         return productSaleList;
     }
 

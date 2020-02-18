@@ -1660,7 +1660,7 @@
 }
 .price--output input {
     padding-left: 10px;
-    width: 70%;
+    width: 100%;
 }
 .price--output input {
     border: medium none;
@@ -2029,7 +2029,7 @@ select.select__size {
     color: #afafaf;
     height: 20px;
     margin-left: 10px;
-    width: 41px;
+    width: 100px;
     padding: 0 4px;
 }
 
@@ -2038,7 +2038,7 @@ select.select__size {
     -moz-appearance: none;
     -ms-appearance: none;
     -o-appearance: none;
-    background: rgba(0, 0, 0, 0) url("images/icons/select-option.png") no-repeat scroll 87% 7px / 10px 5px;
+    background: rgba(0, 0, 0, 0) url("/resources/client/images/icons/select-option.png") no-repeat scroll 87% 7px / 10px 5px;
     padding-right: 16px;
 }
 

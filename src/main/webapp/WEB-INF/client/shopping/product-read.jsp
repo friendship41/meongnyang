@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 
 
@@ -19,9 +20,7 @@
                         <nav class="bradcaump-inner">
                             <a class="breadcrumb-item" href="index.html">Home</a>
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <a class="breadcrumb-item" href="product-grid.html">강아지먹거리</a>
-                            <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <span class="breadcrumb-item active">사료</span>
+                            <span class="breadcrumb-item active">상품 상세</span>
                         </nav>
                     </div>
                 </div>
@@ -41,55 +40,58 @@
                         <!-- Start Product Big Images -->
                         <div class="product__big__images">
                             <div class="portfolio-full-image tab-content">
-                                <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
-                                    <img src="../images/product-2/big-img/1.jpg" alt="full-image">
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="img-tab-2">
-                                    <img src="../images/product-2/big-img/2.jpg" alt="full-image">
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="img-tab-3">
-                                    <img src="../images/product-2/big-img/3.jpg" alt="full-image">
-                                </div>
+                                <c:forEach var="singleImage" items="${imageList}">
+                                    <c:if test="${singleImage.pdImageTbRepresentative eq 'Y'}">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="img-tab-${singleImage.pdImageTbNo}">
+                                            <img src="${singleImage.pdImageTbPath}" alt="full-image" width="510" height="677">
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${singleImage.pdImageTbRepresentative eq 'N'}">
+                                        <div role="tabpanel" class="tab-pane fade" id="img-tab-${singleImage.pdImageTbNo}">
+                                            <img src="${singleImage.pdImageTbPath}" alt="full-image" width="510" height="677">
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
                         <!-- End Product Big Images -->
                         <!-- Start Small images -->
                         <ul class="product__small__images" role="tablist">
-                            <li role="presentation" class="pot-small-img active">
-                                <a href="#img-tab-1" role="tab" data-toggle="tab">
-                                    <img src="../images/product-2/sm-img-3/3.jpg" alt="small-image">
-                                </a>
-                            </li>
-                            <li role="presentation" class="pot-small-img">
-                                <a href="#img-tab-2" role="tab" data-toggle="tab">
-                                    <img src="../images/product-2/sm-img-3/1.jpg" alt="small-image">
-                                </a>
-                            </li>
-                            <li role="presentation" class="pot-small-img">
-                                <a href="#img-tab-3" role="tab" data-toggle="tab">
-                                    <img src="../images/product-2/sm-img-3/2.jpg" alt="small-image">
-                                </a>
-                            </li>
+                            <c:forEach var="singleImage" items="${imageList}">
+                                <c:if test="${singleImage.pdImageTbRepresentative eq 'Y'}">
+                                    <li role="presentation" class="pot-small-img active">
+                                        <a href="#img-tab-${singleImage.pdImageTbNo}" role="tab" data-toggle="tab">
+                                            <img src="${singleImage.pdImageTbPath}" alt="small-image" width="80" height="106">
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${singleImage.pdImageTbRepresentative eq 'N'}">
+                                    <li role="presentation" class="pot-small-img">
+                                        <a href="#img-tab-${singleImage.pdImageTbNo}" role="tab" data-toggle="tab">
+                                            <img src="${singleImage.pdImageTbPath}" alt="small-image" width="80" height="106">
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
                         </ul>
                         <!-- End Small images -->
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
                     <div class="ht__product__dtl">
-                        <h2>상품명 : 사료</h2>
-                        <h6>평점 : 4.3</h6>
+                        <h2>상품명 : ${detail.productTbName}</h2>
+                        <h6>평점 : ${detail.pdSaleTbRating}</h6>
                         <ul class="pro__prize">
-                            <li class="old__prize">가격 : 10000원</li>
-                            <li>할인가 : 8000원</li>
+                            <li class="old__prize">가격 : <span id="nowPrice">10000</span>원</li>
+                            <li id="priceLi">할인가 : <span id="nowDiscount">8000</span>원</li>
                         </ul>
-                        <p class="pro__info">맛있는 사료 입니다</p>
                         <div class="ht__pro__desc">
                             <div class="sin__desc align--left">
-                                <p><span>무게</span></p>
-                                <select class="select__size">
-                                    <option>1kg</option>
-                                    <option>2kg</option>
-                                    <option>5kg</option>
+                                <p><span>옵션</span></p>
+                                <select id="optionSelectBox" class="select__size">
+                                    <c:forEach var="singleSale" items="${saleList}">
+                                        <option value="${singleSale.pdSaleTbNo}">${singleSale.pdSaleTbSize}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="sin__desc align--left">
@@ -138,12 +140,8 @@
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
                         <div class="pro__tab__content__inner">
-                            <p>Formfitting clothing is all about a sweet spot. That elusive place where an item is tight but not clingy, sexy but not cloying, cool but not over the top. Alexandra Alvarez’s label, Alix, hits that mark with its range of comfortable, minimal, and neutral-hued bodysuits.</p>
-                            <h4 class="ht__pro__title">Description</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                            <h4 class="ht__pro__title">Standard Featured</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in</p>
+                            <h4 class="ht__pro__title">상품 설명</h4>
+                            <img src="${detail.productTbDetail}" alt="product-detail">
                         </div>
                     </div>
                     <!-- End Single Content -->
@@ -275,6 +273,43 @@
     </div>
 </section>
 <!-- End Product Description -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var normalPrice = "${saleList.get(0).pdSaleTbSalesPrice}";
+        var discount = "${saleList.get(0).pdSaleTbDiscountRate}";
+        setPrice(normalPrice,discount);
+        $("#optionSelectBox").change(function () {
+            var opNo = $("#optionSelectBox option:selected").val();
+            var optionMap = getOptionMap();
+            var nP = optionMap.get(opNo)[0];
+            var discount = optionMap.get(opNo)[1];
+            setPrice(nP,discount);
+        })
+    });
 
+    function getOptionMap() {
+        var optionMap = new Map();
+        <c:forEach var="sale" items="${saleList}">
+            optionMap.set("${sale.pdSaleTbNo}",["${sale.pdSaleTbSalesPrice}","${sale.pdSaleTbDiscountRate}"]);
+        </c:forEach>
+        return optionMap;
+    }
+
+    function setPrice(normalPrice, discount) {
+        normalPrice *= 1;
+        discount *= 1;
+        var finalPrice = normalPrice*((100-discount)/100);
+        $("#nowPrice").text(normalPrice);
+        if(finalPrice != normalPrice)
+        {
+            $("#priceLi").text("할인가 : "+finalPrice+"원");
+        }
+        else
+        {
+            $("#priceLi").text("");
+        }
+    }
+</script>
 
 <jsp:include page="../include/footer.jsp"/>

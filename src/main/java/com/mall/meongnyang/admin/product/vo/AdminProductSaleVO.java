@@ -17,7 +17,7 @@ public class AdminProductSaleVO
     private Date pdSaleTbExpireDay;
     private String pdSaleTbSize;
     private int pdSaleTbReadCount;
-    private int pdSaleTbRating;
+    private double pdSaleTbRating;
     private int pdSaleTbDiscountRate;
     private String pdSaleTbState;
 
@@ -157,12 +157,12 @@ public class AdminProductSaleVO
         this.pdSaleTbReadCount = pdSaleTbReadCount;
     }
 
-    public int getPdSaleTbRating()
+    public double getPdSaleTbRating()
     {
         return pdSaleTbRating;
     }
 
-    public void setPdSaleTbRating(int pdSaleTbRating)
+    public void setPdSaleTbRating(double pdSaleTbRating)
     {
         this.pdSaleTbRating = pdSaleTbRating;
     }

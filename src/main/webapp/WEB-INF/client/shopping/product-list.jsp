@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <jsp:include page="../include/header.jsp"/>
 
 
@@ -17,9 +19,9 @@
                 <div class="col-xs-12">
                     <div class="bradcaump__inner">
                         <nav class="bradcaump-inner">
-                            <a class="breadcrumb-item" href="index.html">Home</a>
+                            <a class="breadcrumb-item" href="index.do">Home</a>
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <span class="breadcrumb-item active">강아지먹거리</span>
+                            <span class="breadcrumb-item active">쇼핑</span>
                         </nav>
                     </div>
                 </div>
@@ -36,16 +38,15 @@
                 <div class="htc__product__rightidebar">
                     <div class="htc__grid__top">
                         <div class="htc__select__option">
-                            <select class="ht__select">
-                                <option>정렬 방식</option>
-                                <option>인기순</option>
-                                <option>최신순</option>
-                                <option>판매순</option>
+                            <select class="ht__select" name="orderMethod" id="orderMethod">
+                                <option value="none">정렬 방식</option>
+                                <option value="popularity">인기순</option>
+                                <option value="recent">최신순</option>
                             </select>
 
                         </div>
                         <div class="ht__pro__qun">
-                            <span>pages 1-12 of 1033 총갯수</span>
+                            <span>pages ${pageInfo.startBlock}-${pageInfo.allBlockCnt} of ${pageInfo.pageCnt}</span>
                         </div>
                         <!-- Start List And Grid View -->
                         <ul class="view__mode" role="tablist">
@@ -59,409 +60,56 @@
                         <div class="shop__grid__view__wrap">
                             <div role="tabpanel" id="grid-view" class="single-grid-view tab-pane fade in active clearfix">
                                 <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/1.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
+                                <c:forEach var="product" items="${productList}">
+                                    <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                                        <div class="category">
+                                            <div class="ht__cat__thumb">
+                                                <a href="shoppingDetail.do?productTbCode=${product.productTbCode}">
+                                                    <img src="${product.pdImageTbPath}" alt="product images" width="290" height="385">
+                                                </a>
+                                            </div>
+                                            <div class="fr__hover__info">
+                                                <ul class="product__action">
+                                                    <li><a href="#"><i class="icon-heart icons"></i></a></li>
 
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Largest Water Pot</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
+                                                    <li><a href="#"><i class="icon-handbag icons"></i></a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="fr__product__inner">
+                                                <h4><a href="shoppingDetail.do?productTbCode=${product.productTbCode}">${product.productTbName}</a></h4>
+                                                <ul class="fr__pro__prize">
+                                                    <li class="old__prize">${product.pdSaleTbSalesPrice}</li>
+                                                    <li>${product.pdSaleTbDiscountRate}</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/2.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Chair collection</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/3.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">dummy Product name</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/4.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Largest Water Pot</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/5.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Largest Water Pot</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/6.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Special Wood Basket</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/7.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Largest Water Pot</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/8.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">donec ac tempus nrb</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/9.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">nemo enim ipsam</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/10.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">dummy Product name</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/11.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Chair collection</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Single Product -->
-                                <!-- Start Single Product -->
-                                <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
-                                    <div class="category">
-                                        <div class="ht__cat__thumb">
-                                            <a href="product-read.html">
-                                                <img src="images/product/1.jpg" alt="product images">
-                                            </a>
-                                        </div>
-                                        <div class="fr__hover__info">
-                                            <ul class="product__action">
-                                                <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                                <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-                                                <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="fr__product__inner">
-                                            <h4><a href="product-read.html">Largest Water Pot</a></h4>
-                                            <ul class="fr__pro__prize">
-                                                <li class="old__prize">$30.3</li>
-                                                <li>$25.9</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                </c:forEach>
                                 <!-- End Single Product -->
                             </div>
                             <div role="tabpanel" id="list-view" class="single-grid-view tab-pane fade clearfix">
                                 <div class="col-xs-12">
                                     <div class="ht__list__wrap">
                                         <!-- Start List Product -->
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-read.html"><img src="images/product-2/pro-1/1.jpg" alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-read.html">Product Title Here </a></h2>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <h6>평점 : 4.6</h6>
-
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
+                                        <c:forEach var="product" items="${productList}">
+                                            <div class="ht__list__product">
+                                                <div class="ht__list__thumb">
+                                                    <a href="product-read.html"><img src="${product.pdImageTbPath}" alt="product images" width="290" height="385"></a>
+                                                </div>
+                                                <div class="htc__list__details">
+                                                    <h2><a href="product-read.html">${product.productTbName}</a></h2>
+                                                    <ul  class="pro__prize">
+                                                        <li class="old__prize">${product.pdSaleTbSalesPrice}</li>
+                                                        <li>${product.pdSaleTbDiscountRate}</li>
+                                                    </ul>
+                                                    <h6>평점 : ${product.pdSaleTbRating}</h6>
+                                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                                    <div class="fr__list__btn">
+                                                        <a class="fr__btn" href="cart.html">카트 추가</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- End List Product -->
-                                        <!-- Start List Product -->
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-read.html"><img src="images/product-2/pro-1/2.jpg" alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-read.html">Product Title Here </a></h2>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <h6>평점 : 4.6</h6>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End List Product -->
-                                        <!-- Start List Product -->
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-read.html"><img src="images/product-2/pro-1/3.jpg" alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-read.html">Product Title Here </a></h2>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <h6>평점 : 4.6</h6>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- End List Product -->
-                                        <!-- Start List Product -->
-                                        <div class="ht__list__product">
-                                            <div class="ht__list__thumb">
-                                                <a href="product-read.html"><img src="images/product-2/pro-1/4.jpg" alt="product images"></a>
-                                            </div>
-                                            <div class="htc__list__details">
-                                                <h2><a href="product-read.html">Product Title Here </a></h2>
-                                                <ul  class="pro__prize">
-                                                    <li class="old__prize">$82.5</li>
-                                                    <li>$75.2</li>
-                                                </ul>
-                                                <h6>평점 : 4.6</h6>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisLorem ipsum dolor sit amet, consec adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqul Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                <div class="fr__list__btn">
-                                                    <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        </c:forEach>
                                         <!-- End List Product -->
                                     </div>
                                 </div>
@@ -474,11 +122,20 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="htc__pagenation">
-                            <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">3</a></li>
-                            <li><a href="#">19</a></li>
-                            <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                            <c:if test="${pageInfo.nowPage > 10}">
+                                <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                            </c:if>
+                            <c:forEach var="i" begin="${pageInfo.startBlock}" end="${pageInfo.endBlock}" step="1">
+                                <c:if test="${i eq pageInfo.nowPage}">
+                                    <li class="active"><a href="#">${i}</a></li>
+                                </c:if>
+                                <c:if test="${i ne pageInfo.nowPage}">
+                                    <li><a href="#">${i}</a></li>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${pageInfo.endBlock < pageInfo.allBlockCnt}">
+                                <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -491,15 +148,17 @@
                         <h4 class="title__line--4">Price</h4>
                         <div class="content-shopby">
                             <div class="price_filter s-filter clear">
-                                <form action="#" method="GET">
+                                <form action="shopping.do" method="GET">
+                                    <input type="hidden" id="minPrice" value="${pageInfo.minPrice}">
+                                    <input type="hidden" id="maxPrice" value="${pageInfo.maxPrice}">
                                     <div id="slider-range"></div>
                                     <div class="slider__range--output">
                                         <div class="price__output--wrap">
                                             <div class="price--output">
-                                                <span>Price :</span><input type="text" id="amount" readonly>
+                                                <input type="text" id="amount" readonly>
                                             </div>
                                             <div class="price--filter">
-                                                <a href="#">Filter</a>
+                                                <span onclick="priceFilter()">검색</span>
                                             </div>
                                         </div>
                                     </div>
@@ -510,11 +169,11 @@
                     <!-- End Prize Range -->
                     <!-- Start Category Area -->
                     <div class="htc__category">
-                        <h4 class="title__line--4">먹거리</h4>
+                        <h4 class="title__line--4">${categoryList.get(0).productCategoryTbParent}-${categoryList.get(0).productCategoryTbMedian}</h4>
                         <ul class="ht__cat__list">
-                            <li><a href="#">사료</a></li>
-                            <li><a href="#">간식</a></li>
-
+                            <c:forEach var="subCate" items="${categoryList}">
+                                <li><a href="shopping.do?productCategoryTbNo=${subCate.productCategoryTbNo}">${subCate.productCategoryTbSub}</a></li>
+                            </c:forEach>
                         </ul>
                     </div>
                     <!-- End Category Area -->
@@ -530,20 +189,22 @@
 </section>
 <!-- End Product Grid -->
 
-<!-- Start Banner Area -->
-<div class="htc__banner__area">
-    <ul class="banner__list owl-carousel owl-theme clearfix">
-        <li><a href="product-read.html"><img src="images/banner/bn-3/1.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/2.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/3.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/4.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/5.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/6.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/1.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/2.jpg" alt="banner images"></a></li>
-    </ul>
-</div>
-<!-- End Banner Area -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#orderMethod").change(function () {
+            var selectedValue = $("#orderMethod option:selected").val();
+            console.log(selectedValue);
 
+            var filterPrice = $("#amount").val();
+            location.href="shopping.do?productCategoryTbNo=${nowCategory}&filterPrice="+filterPrice+"&orderMethod="+selectedValue;
+        })
+    })
+
+    function priceFilter() {
+        var filterPrice = $("#amount").val();
+        location.href="shopping.do?productCategoryTbNo=${nowCategory}&filterPrice="+filterPrice;
+    }
+</script>
 
 <jsp:include page="../include/footer.jsp"/>
