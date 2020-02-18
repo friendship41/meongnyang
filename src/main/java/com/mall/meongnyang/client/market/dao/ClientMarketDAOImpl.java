@@ -40,8 +40,8 @@ public class ClientMarketDAOImpl implements ClientMarketDAO {
 	}
 
 	@Override
-	public int selectCountMarket() {
-		return sqlSessionTemplate.selectOne("MarketDAO.selectCountMarket");
+	public int selectCountMarket(ClientMarketVO clientMarketVO) {
+		return sqlSessionTemplate.selectOne("MarketDAO.selectCountMarket", clientMarketVO);
 	}
 
 	@Override

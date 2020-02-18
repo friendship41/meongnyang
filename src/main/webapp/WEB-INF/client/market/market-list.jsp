@@ -29,7 +29,7 @@
 <!-- 구매 판매 버튼 추가 -->
 <div class="htc__grid__top__market__list">
 	<div class="htc__select__option">
-		<select class="ht__select">
+		<select class="ht__select" id="selector">
 			<option value="all">전체</option>
 			<option value="sell">구매</option>
 			<option value="buy">판매</option>
@@ -103,3 +103,24 @@
 </section>
 <!-- End Blog Area -->
 <jsp:include page="../include/footer.jsp" />
+
+<script>
+$(function() {
+
+	$(document).ready(function() {
+		console.log("${selector}")
+	
+		if("${selector}" == "S"){
+			$("#selector").val("sell");
+		} else if ("${selector}" == "B") {
+			$("#selector").val("buy");
+		}
+	});
+	
+	$("#selector").change(function() {
+		console.log(this.value);
+		document.location.href="/market-list.do?marketTbSellOrBuy=" + this.value;
+	});
+	
+})
+</script>

@@ -54,8 +54,9 @@ public class ClientMarketController {
 	public String selectMarketList(@RequestParam(defaultValue = "1") int currentPage, ClientMarketVO clientMarketVO, Model model) {
 		
 		MarketListPaging paging = new MarketListPaging(currentPage);
-		paging.createPaging(clientSelectMarketListService.selectCountMarket());
-	
+		paging.createPaging(clientSelectMarketListService.selectCountMarket(clientMarketVO));
+		System.out.println(clientSelectMarketListService.selectCountMarket(clientMarketVO));
+		
 		clientMarketVO.setStartRow(paging.getStartRow());
 		clientMarketVO.setEndRow(paging.getEndRow());
 		
@@ -63,7 +64,7 @@ public class ClientMarketController {
 		
 		model.addAttribute("marketList", marketList);
 		model.addAttribute("paging", paging);
-		
+		model.addAttribute("selector", clientMarketVO.getMarketTbSellOrBuy());
 		return "market/market-list";
 	}
 	

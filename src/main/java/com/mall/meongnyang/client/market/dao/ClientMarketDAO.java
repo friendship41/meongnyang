@@ -11,6 +11,6 @@ public interface ClientMarketDAO {
 	void deleteMarket(ClientMarketVO clientMarketVO);
 	ClientMarketVO selectMarket(ClientMarketVO clientMarketVO);
 	List<ClientMarketVO> selectMarketList(ClientMarketVO clientMarketVO);
-	int selectCountMarket(); //마켓 전체 글수
+	int selectCountMarket(ClientMarketVO clientMarketVO); //마켓 전체 글수
 	void updateReadCount(ClientMarketVO clientMarketVO); //게시글 조회 수 증가
 }
