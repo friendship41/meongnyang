@@ -70,7 +70,7 @@
 	<update id="updateComment" parameterType="comment">
 		UPDATE market_comment
 		SET
-		<if test='marketCommentTbState == "N"'>
+		<if test='marketCommentTbState != "D"'>
 		market_comment_tb_content = #{marketCommentTbContent}
 		</if>
 		<if test='marketCommentTbState == "D"'>

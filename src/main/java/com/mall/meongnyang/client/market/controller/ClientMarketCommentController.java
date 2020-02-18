@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.mall.meongnyang.client.market.service.ClientDeleteMarketCommentService;
 import com.mall.meongnyang.client.market.service.ClientInsertMarketCommentService;
 import com.mall.meongnyang.client.market.service.ClientSelectMarketCommentListService;
+import com.mall.meongnyang.client.market.service.ClientUpdateMarketCommentService;
 import com.mall.meongnyang.client.market.vo.ClientMarketCommentVO;
 
 @Controller
@@ -26,6 +27,9 @@ public class ClientMarketCommentController {
 	
 	@Autowired
 	private ClientDeleteMarketCommentService deleteMarketCommentService;
+	
+	@Autowired
+	private ClientUpdateMarketCommentService clientUpdateMarketCommentService;
 	
 	@RequestMapping("/commentList.do")
 	public ResponseEntity<List<ClientMarketCommentVO>> commentList(ClientMarketCommentVO clientMarketComment) {
@@ -69,4 +73,13 @@ public class ClientMarketCommentController {
 		return "deleteSuccess";
 	}
 
+	
+	@RequestMapping("/updateReply.do")
+	@ResponseBody
+	public String updateReply(@RequestBody ClientMarketCommentVO clientMarketCommentVO) {
+		
+		clientUpdateMarketCommentService.updateComment(clientMarketCommentVO);
+		
+		return "updateSuccess";
+	}
 }

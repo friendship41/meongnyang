@@ -15,7 +15,7 @@ public class ClientDeleteMarketCommentServiceImpl implements ClientDeleteMarketC
 	@Override
 	public void deleteComment(ClientMarketCommentVO clientMarketCommentVO) {
 		clientMarketCommentVO.setMarketCommentTbContent("삭제된 댓글 입니다.");
-		System.out.println(clientMarketCommentVO.toString());
+//		System.out.println(clientMarketCommentVO.toString());
 		clientMarketCommentDAO.updateMarketComment(clientMarketCommentVO);
 	}
 

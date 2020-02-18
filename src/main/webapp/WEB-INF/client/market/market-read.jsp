@@ -59,45 +59,13 @@
 						<%-- </c:if> --%>
 						<br>
 						<pre>${market.marketTbContent }</pre>
+						<a class="reply__btn" href="/qna-form.do?qnaTypeTbNo=7" style="margin-left: 95%;">신고</a>
 					</div>
 					<!-- Start Comment Area -->
 					<div class="htc__comment__area">
 						<h4 class="title__line--5">HAVE ${commentCnt} COMMENTS</h4>
 						<div class="ht__comment__content" id="comment-content">
-							<!-- Start Single Comment -->
-						<!-- 	<div class="comment">
-								<div class="ht__comment__details">
-									<div class="ht__comment__title">
-										<h2>
-											<a href="#">JOHN NGUYEN</a>
-										</h2>
-										<div class="reply__btn">
-											<a href="#">reply</a>
-										</div>
-									</div>
-									<span>July 15, 2016 at 2:39 am</span>
-									<p>Exercitation photo booth stumptown tote bag Banksy, elit
-										small batch freegan sed.</p>
-								</div>
-							</div> -->
-							<!-- End Single Comment -->
-							<!-- Start Single Comment -->
-						<!-- 	<div class="comment comment--reply">
-								<div class="ht__comment__details">
-									<div class="ht__comment__title">
-										<h2>
-											<a href="#">JOHN NGUYEN</a>
-										</h2>
-										<div class="reply__btn">
-											<a href="#">reply</a>
-										</div>
-									</div>
-									<span>July 15, 2016 at 2:39 am</span>
-									<p>Exercitation photo booth stumptown tote bag Banksy, elit
-										small batch freegan sed.</p>
-								</div>
-							</div> -->
-							<!-- End Single Comment -->
+						
 						</div>
 					</div>
 					<!-- End Comment Area -->
@@ -143,7 +111,7 @@ function deleteMarket() {
 $(function() {
 	var marketNo = $("#marketTbNo").val();
 	var state = false;
-	
+
 	getComment();
 	
 	//코멘트 불러오기
@@ -223,7 +191,7 @@ $(function() {
 	});
 	
 	//코맨트 삭제
-	$(document).on("click", "a[name='deleteBtn']", function(e) {
+	$(document).on("click", "a[name='deleteBtn']", function() {
 		
 		var commentNo = $(this).parent().parent().parent().children("input[name='marketCommentTbNo']").val();
 		console.log(commentNo);
@@ -253,6 +221,56 @@ $(function() {
 				console.log("통신실패");
 			}
 		});
+	});
+	
+	//코멘트 수정창 띄우기
+	$(document).on("click", "a[name='updateBtn']", function() {
+		var addupdate = $(this).parent().parent().next().next()
+		var content = addupdate.text();
+		console.log(content);
+		addupdate.html("<div><input type='text' id='updateReply' value='" + content + "'><a id='updateReplyBtn'>수정</a>&nbsp;<a id='cancleUpReply'>취소</a></div>");	
+	});
+	
+	//코멘트 수정창 취소
+	$(document).on("click", "#cancleUpReply", function(){
+		var content = $("#updateReply").val();
+		console.log(content);
+		$("#updateReply").parent().text(content);
+		$("#updateReply").parent().remove();
+	});
+	
+	//코멘트 수정요청
+	$(document).on("click", "#updateReplyBtn", function(){
+		var commentNo = $(this).parents("div .ht__comment__details").children("input[name='marketCommentTbNo']").val();
+		console.log(commentNo);
+		var commentContent = $("#updateReply").val();
+		console.log(commentContent);
+
+		var clientMarketComment = {
+			marketCommentTbNo : commentNo,
+			marketCommentTbContent : commentContent,
+		}
+		
+		$.ajax({
+			type : "POST",
+			url : "/updateReply.do",
+			headers: {
+	        	"Content-Type": "application/json"
+	        },
+	        dataType: "text",
+			data: JSON.stringify(clientMarketComment),
+			success: function(result) {
+				if(result === "updateSuccess"){
+					getComment();
+				} else {
+					alert("수정 실패");
+				}
+			},
+			error: function() {
+				console.log("통신 실패");
+			}
+		});
+		
 	});
 	
 	//대댓글 작성창
