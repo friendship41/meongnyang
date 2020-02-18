@@ -21,14 +21,13 @@ public class ClientSelectShoppingController
     private ClientSelectShoppingListService clientSelectShoppingListService;
 
     @RequestMapping(value = "/shopping.do", method = RequestMethod.GET)
-    public String goToShoppingPage(AdminProductCategoryVO adminProductCategoryVO, Model model)
+    public String goToShoppingPage(AdminProductCategoryVO adminProductCategoryVO, AdminProductVO adminProductVO, Model model)
     {
-        System.out.println(adminProductCategoryVO);
+        model.addAttribute("nowCategory",adminProductCategoryVO.getProductCategoryTbNo());
+
         List<AdminProductCategoryVO> categoryList = clientSelectProductCategoryService.getSelectedProductCategory(adminProductCategoryVO);
-        System.out.println(categoryList);
         model.addAttribute("categoryList", categoryList);
 
-        AdminProductVO adminProductVO = new AdminProductVO();
         adminProductVO.setProductCategoryTbNo(adminProductCategoryVO.getProductCategoryTbNo());
         List<AdminProductVO> productList = clientSelectShoppingListService.selectShoppingList(adminProductVO);
         int listSize = productList.size();

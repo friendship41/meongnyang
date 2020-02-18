@@ -27,7 +27,6 @@ public class ClientSelectShoppingProductCategoryServiceImpl implements ClientSel
                 list.add(tempCate);
             }
         }
-        System.out.println(list);
         return list;
     }
 }

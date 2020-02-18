@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <jsp:include page="../include/header.jsp"/>
 
 
@@ -37,10 +38,10 @@
                 <div class="htc__product__rightidebar">
                     <div class="htc__grid__top">
                         <div class="htc__select__option">
-                            <select class="ht__select">
-                                <option>정렬 방식</option>
-                                <option>인기순</option>
-                                <option>최신순</option>
+                            <select class="ht__select" name="orderMethod" id="orderMethod">
+                                <option value="none">정렬 방식</option>
+                                <option value="popularity">인기순</option>
+                                <option value="recent">최신순</option>
                             </select>
 
                         </div>
@@ -147,15 +148,17 @@
                         <h4 class="title__line--4">Price</h4>
                         <div class="content-shopby">
                             <div class="price_filter s-filter clear">
-                                <form action="#" method="GET">
+                                <form action="shopping.do" method="GET">
+                                    <input type="hidden" id="minPrice" value="${pageInfo.minPrice}">
+                                    <input type="hidden" id="maxPrice" value="${pageInfo.maxPrice}">
                                     <div id="slider-range"></div>
                                     <div class="slider__range--output">
                                         <div class="price__output--wrap">
                                             <div class="price--output">
-                                                <span>Price :</span><input type="text" id="amount" readonly>
+                                                <input type="text" id="amount" readonly>
                                             </div>
                                             <div class="price--filter">
-                                                <a href="#">Filter</a>
+                                                <span onclick="priceFilter()">검색</span>
                                             </div>
                                         </div>
                                     </div>
@@ -186,20 +189,22 @@
 </section>
 <!-- End Product Grid -->
 
-<!-- Start Banner Area -->
-<div class="htc__banner__area">
-    <ul class="banner__list owl-carousel owl-theme clearfix">
-        <li><a href="product-read.html"><img src="images/banner/bn-3/1.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/2.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/3.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/4.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/5.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/6.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/1.jpg" alt="banner images"></a></li>
-        <li><a href="product-read.html"><img src="images/banner/bn-3/2.jpg" alt="banner images"></a></li>
-    </ul>
-</div>
-<!-- End Banner Area -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#orderMethod").change(function () {
+            var selectedValue = $("#orderMethod option:selected").val();
+            console.log(selectedValue);
 
+            var filterPrice = $("#amount").val();
+            location.href="shopping.do?productCategoryTbNo=${nowCategory}&filterPrice="+filterPrice+"&orderMethod="+selectedValue;
+        })
+    })
+
+    function priceFilter() {
+        var filterPrice = $("#amount").val();
+        location.href="shopping.do?productCategoryTbNo=${nowCategory}&filterPrice="+filterPrice;
+    }
+</script>
 
 <jsp:include page="../include/footer.jsp"/>

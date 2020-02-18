@@ -26,6 +26,10 @@ public class AdminProductVO
     private String orderMethod;
     private String SearchWord;
 
+    private String filterPrice;
+    private int minPrice;
+    private int maxPrice;
+
     private int nowPage;
     private int startNum;
     private int endNum;
@@ -305,6 +309,37 @@ public class AdminProductVO
         this.allBlockCnt = allBlockCnt;
     }
 
+    public int getMinPrice()
+    {
+        return minPrice;
+    }
+
+    public void setMinPrice(int minPrice)
+    {
+        this.minPrice = minPrice;
+    }
+
+    public int getMaxPrice()
+    {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(int maxPrice)
+    {
+        this.maxPrice = maxPrice;
+    }
+
+    public String getFilterPrice()
+    {
+        return filterPrice;
+    }
+
+    public void setFilterPrice(String filterPrice)
+    {
+        this.filterPrice = filterPrice;
+    }
+
+
     @Override
     public String toString()
     {
@@ -323,6 +358,9 @@ public class AdminProductVO
                 ", dayTo=" + dayTo +
                 ", orderMethod='" + orderMethod + '\'' +
                 ", SearchWord='" + SearchWord + '\'' +
+                ", filterPrice='" + filterPrice + '\'' +
+                ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
                 ", nowPage=" + nowPage +
                 ", startNum=" + startNum +
                 ", endNum=" + endNum +

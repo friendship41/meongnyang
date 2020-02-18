@@ -51,6 +51,19 @@ public class ClientSelectShoppingListServiceImpl implements ClientSelectShopping
             }
             adminProductVO.setEndBlock(endBlock);
         }
+
+        String filterText = adminProductVO.getFilterPrice();
+        if(filterText == null || filterText.equals(""))
+        {
+            adminProductVO.setMaxPrice(1000000);
+        }
+        else
+        {
+            String[] fs = filterText.split(" - ");
+            adminProductVO.setMinPrice(Integer.parseInt(fs[0].substring(0,fs[0].length()-1)));
+            adminProductVO.setMaxPrice(Integer.parseInt(fs[1].substring(0,fs[1].length()-1)));
+        }
+
         List<AdminProductVO> productList = clientShoppingDAO.selectShoppingList(adminProductVO);
 
         for(int i=0; i<productList.size(); i++)
@@ -58,7 +71,6 @@ public class ClientSelectShoppingListServiceImpl implements ClientSelectShopping
             int discount = productList.get(i).getPdSaleTbDiscountRate();
             productList.get(i).setPdSaleTbDiscountRate((int)(productList.get(i).getPdSaleTbSalesPrice()*((100-discount)/100.0)));
         }
-        System.out.println(adminProductVO);
         productList.add(adminProductVO);
         return productList;
     }

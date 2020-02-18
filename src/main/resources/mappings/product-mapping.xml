@@ -136,10 +136,35 @@
                             WHERE PD_SALE_TB_STATE='Y'
                             GROUP BY PRODUCT_TB_CODE) a JOIN pd_sale psd
                         ON a.PD_SALE_TB_NO = psd.PD_SALE_TB_NO
+                        WHERE psd.PD_SALE_TB_SALES_PRICE BETWEEN ${minPrice} AND #{maxPrice}
                     ) ps
                     on p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
+                    LEFT OUTER JOIN (
+                        SELECT
+                            PRODUCT_TB_CODE,
+                            COUNT(*) "PD_ORDER_CNT"
+                        FROM orders_detail
+                        GROUP BY PRODUCT_TB_CODE
+                    ) od
+                    ON p.PRODUCT_TB_CODE = od.PRODUCT_TB_CODE
                     WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
-                    ORDER BY ps.PD_SALE_TB_START_DAY DESC) a
+        ]]>
+                    <if test="orderMethod == null">
+                        ORDER BY ps.PD_SALE_TB_START_DAY DESC
+                    </if>
+                    <if test="orderMethod != null">
+                        <if test='orderMethod.equals("none")'>
+                            ORDER BY ps.PD_SALE_TB_START_DAY DESC
+                        </if>
+                        <if test='orderMethod.equals("recent")'>
+                            ORDER BY ps.PD_SALE_TB_START_DAY DESC
+                        </if>
+                        <if test='orderMethod.equals("popularity")'>
+                            ORDER BY od.PD_ORDER_CNT DESC
+                        </if>
+                    </if>
+        <![CDATA[
+                    ) a
                 ) b
             WHERE b.rnum>=#{startNum} AND b.rnum <#{endNum}
         ]]>
