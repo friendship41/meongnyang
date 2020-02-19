@@ -6,6 +6,22 @@ public class AdminOverviewVisitorVO {
 	int userCountTbVisitors;
 	int userCountTbJoiners;
 	
+	String StartDate; //시작선택일
+	String EndDate;//마지막선택일 
+	
+	
+	public String getStartDate() {
+		return StartDate;
+	}
+	public void setStartDate(String startDate) {
+		StartDate = startDate;
+	}
+	public String getEndDate() {
+		return EndDate;
+	}
+	public void setEndDate(String endDate) {
+		EndDate = endDate;
+	}
 	public String getUserCountTbDate() {
 		return userCountTbDate;
 	}

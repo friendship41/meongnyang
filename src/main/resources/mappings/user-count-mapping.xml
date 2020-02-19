@@ -17,8 +17,8 @@
 	 	 user_count_tb_visitors;
 	 	 user_count_tb_joiners;            
         FROM user_count
-       
-       	
+        WHERE user_count_tb_date BETWEEN ${StartDate} and ${EndDate}
+        	
     </select>
 
   
