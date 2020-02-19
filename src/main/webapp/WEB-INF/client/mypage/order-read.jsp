@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
+    pageEncoding="UTF-8"%>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <jsp:include page="../include/header.jsp" />
         <!-- Start Bradcaump area -->
         <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/client/images/bg/order-read.jpg) no-repeat scroll center center / cover ;">
@@ -46,46 +48,44 @@
                         <div class="order-details">
                             <h5 class="order-details__title_big">주문 상세</h5>
                             <div class="order-details__item">
+                            <c:set var="sumPrice" value="0"/>
+                            <c:forEach items="${detailList}" var="detail">
                                 <div class="single-item">
                                     <div class="single-item__thumb">
-                                        <img src="../images/cart/1.png" alt="ordered item">
+                                        <img src="${detail.pdImageTbPath}" alt="ordered item" width="58px" height="70">
                                     </div>
                                     <div class="single-item__content">
-                                        <a href="#">Vue.js 2 Cookbook</a>
-                                        <span class="price">35000 원</span>
+                                        <a href="#">${detail.pdSaleTbProductName}</a>
+                                        <span class="price"><fmt:formatNumber value="${detail.ordersDetailTbPrice}"/> 원</span>
+                                        <c:set var="sumPrice" value="${sumPrice + detail.ordersDetailTbPrice}" />
                                     </div>
                                 </div>
-                                <div class="single-item">
-                                    <div class="single-item__thumb">
-                                        <img src="../images/cart/2.png" alt="ordered item">
-                                    </div>
-                                    <div class="single-item__content">
-                                        <a href="#">미움받을 용기</a>
-                                        <span class="price">25000 원</span>
-                                    </div>
-                                </div>
+                            </c:forEach>
+                            <c:out value="sumPrice" />                                                  
                             </div>
                             <div class="order-details__count">
                                 <div class="order-details__count__single">
                                     <h5>소 계</h5>
-                                    <span class="price">60000 원</span>
+                                    <span class="price"><fmt:formatNumber value="${sumPrice}"/> 원</span>
                                 </div>
                                 <div class="order-details__count__single">
-                                    <h5>할인</h5>
-                                    <span class="price">8000 원</span>
+                                    <h5>사용 포인트</h5>
+                                    <span class="price"><fmt:formatNumber value="${order.pdOrderTbUsedPoint }"/> 원</span>
                                 </div>
                                 <div class="order-details__count__single">
                                     <h5>배송비</h5>
-                                    <span class="price">3000 원</span>
+                                    <span class="price"><fmt:formatNumber value="${order.pdOrderTbDelivertyFee }"/> 원</span>
                                 </div>
                             </div>
                             <div class="ordre-details__total">
-                                <h5>총 계</h5>
-                                <span class="price">55000 원</span>
+                                <h5>결제 금액</h5>
+                                <span class="price"><fmt:formatNumber value="${order.pdOrderTbPayment }"/> 원</span>
                             </div>
                             <div class="ordre-details__total1">
                                 <h5>Address</h5>
-                                <span class="price">경기도 수원시 팔달구 우만동 522-1 202호</span>
+                                <span class="price">${order.pdOrderTbAddress}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <h5>수령인</h5>
+                                <span class="price">${order.pdOrderTbReceiver}</span>
                             </div>
                         </div>
                     </div>

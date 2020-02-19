@@ -22,5 +22,10 @@ public class ClientProductOrderDAOImpl implements ClientProductOrderDAO {
 	@Override
 	public int selectOrderCount(ClientProductOrderVO clientProductOrderVO) {
 		return sqlSessionTemplate.selectOne("orderDAO.selectOrderCount", clientProductOrderVO);
+	}
+
+	@Override
+	public ClientProductOrderVO selectProductOrder(ClientProductOrderVO clientProductOrderVO) {
+		return sqlSessionTemplate.selectOne("orderDAO.selectOrder", clientProductOrderVO);
 	}	
 }

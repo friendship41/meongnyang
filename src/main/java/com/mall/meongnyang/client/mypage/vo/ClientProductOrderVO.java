@@ -7,12 +7,12 @@ public class ClientProductOrderVO {
     private int customerTbNo;
     private Date pdOrderTbOrderDate;
     private int pdOrderTbPayment;
-    private String  pdOrderTbState;
-    private String  pdOrderTbAddress;
+    private String pdOrderTbState;
+    private String pdOrderTbAddress;
     private String pdOrderTbAdCity;
-    private String  pdOrderTbReceiver;
+    private String pdOrderTbReceiver;
     private Date pdOrderTbPaymentDate;
-    private String  pdOrderTbPhone;
+    private String pdOrderTbPhone;
     private int pdOrderTbDelivertyFee;
     private int pdOrderTbUsedPoint;
     

@@ -64,7 +64,7 @@
                                         <c:forEach items="${orderList}" var="order">                                      
                                         <tr>
                                             <td class="product-remove">${order.pdOrderTbNo}</td>
-                                            <td class="product-name"><a href="/orderDetail.do?pdOrderTbNo=${order.pdOrderTbNo}">${order.pdSaleTbProductName}<c:if test="${order.orderProductCount > 1}"> 외 ${order.orderProductCount - 1}개</c:if></a></td>
+                                            <td class="product-name"><a href="/orderRead.do?pdOrderTbNo=${order.pdOrderTbNo}">${order.pdSaleTbProductName}<c:if test="${order.orderProductCount > 1}"> 외 ${order.orderProductCount - 1}개</c:if></a></td>
                                             <td class="product-price"><span class="amount">${order.pdOrderTbPayment}</span></td>
                                             <c:if test="${order.pdOrderTbState eq 'P'}">
                                             <td class="product-stock-status"><span class="badge badge-payComp">결제완료</span></td>

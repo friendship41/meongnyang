@@ -7,6 +7,24 @@
 	<select id="selectOrderCount" parameterType="order" resultType="int">
 		SELECT COUNT(*) FROM pd_order WHERE customer_tb_no = #{customerTbNo}
 	</select>
+	
+	<select id="selectOrder" parameterType="order" resultType="order">
+		SELECT
+    		PD_ORDER_TB_NO ,
+			CUSTOMER_TB_NO ,
+			PD_ORDER_TB_ORDER_DATE ,
+			PD_ORDER_TB_PAYMENT ,
+			PD_ORDER_TB_STATE ,
+			PD_ORDER_TB_ADDRESS ,
+			PD_ORDER_TB_AD_CITY ,
+			PD_ORDER_TB_RECEIVER ,
+			PD_ORDER_TB_PAYMENT_DATE ,
+			PD_ORDER_TB_PHONE ,
+			PD_ORDER_TB_DELIVERY_FEE ,
+			PD_ORDER_TB_USED_POINT 
+		FROM pd_order
+		WHERE pd_order_tb_no = #{pdOrderTbNo}
+	</select>
 
 	<select id="selectOrderList" parameterType="order" resultType="order">
 		SELECT

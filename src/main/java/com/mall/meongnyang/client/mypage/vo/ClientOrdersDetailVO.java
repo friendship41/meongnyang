@@ -8,10 +8,9 @@ public class ClientOrdersDetailVO {
     private int pdSaleTbNo;
     private int ordersDetailTbAmount;
     private String pdOrderTbNo;
-
+    private	int ordersDetailTbPrice;
+    
     private String pdSaleTbProductName;
-    private int pdSaleTbSalesPrice;
-    private int pdSaleTbDiscountRate;
     private Date pdOrderTbOrderDate;
     
     private int pdOrderTbPayment;
@@ -52,17 +51,12 @@ public class ClientOrdersDetailVO {
 	public void setPdSaleTbProductName(String pdSaleTbProductName) {
 		this.pdSaleTbProductName = pdSaleTbProductName;
 	}
-	public int getPdSaleTbSalesPrice() {
-		return pdSaleTbSalesPrice;
+
+	public int getOrdersDetailTbPrice() {
+		return ordersDetailTbPrice;
 	}
-	public void setPdSaleTbSalesPrice(int pdSaleTbSalesPrice) {
-		this.pdSaleTbSalesPrice = pdSaleTbSalesPrice;
-	}
-	public int getPdSaleTbDiscountRate() {
-		return pdSaleTbDiscountRate;
-	}
-	public void setPdSaleTbDiscountRate(int pdSaleTbDiscountRate) {
-		this.pdSaleTbDiscountRate = pdSaleTbDiscountRate;
+	public void setOrdersDetailTbPrice(int ordersDetailTbPrice) {
+		this.ordersDetailTbPrice = ordersDetailTbPrice;
 	}
 	public Date getPdOrderTbOrderDate() {
 		return pdOrderTbOrderDate;
@@ -106,9 +100,5 @@ public class ClientOrdersDetailVO {
 	public void setPdImageTbPath(String pdImageTbPath) {
 		this.pdImageTbPath = pdImageTbPath;
 	}
-	@Override
-	public String toString() {
-		return "ClientOrdersDetailVO [ordersDetailTbNo=" + ordersDetailTbNo + ", pdSaleTbNo=" + pdSaleTbNo
-				+ ", ordersDetailTbAmount=" + ordersDetailTbAmount + ", pdOrderTbNo=" + pdOrderTbNo + "]";
-	}
+	
 }
