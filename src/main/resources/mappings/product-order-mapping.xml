@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="orderDAO">
+
+	<select id="selectOrderCount" parameterType="order" resultType="int">
+		SELECT COUNT(*) FROM pd_order WHERE customer_tb_no = #{customerTbNo}
+	</select>
+	
+	<select id="selectOrder" parameterType="order" resultType="order">
+		SELECT
+    		PD_ORDER_TB_NO ,
+			CUSTOMER_TB_NO ,
+			PD_ORDER_TB_ORDER_DATE ,
+			PD_ORDER_TB_PAYMENT ,
+			PD_ORDER_TB_STATE ,
+			PD_ORDER_TB_ADDRESS ,
+			PD_ORDER_TB_AD_CITY ,
+			PD_ORDER_TB_RECEIVER ,
+			PD_ORDER_TB_PAYMENT_DATE ,
+			PD_ORDER_TB_PHONE ,
+			PD_ORDER_TB_DELIVERY_FEE ,
+			PD_ORDER_TB_USED_POINT 
+		FROM pd_order
+		WHERE pd_order_tb_no = #{pdOrderTbNo}
+	</select>
+
+	<select id="selectOrderList" parameterType="order" resultType="order">
+		SELECT
+		*
+		FROM (
+		    SELECT
+		    ROWNUM rnum,
+		    pd_order_tb_no ,
+		    customer_tb_no ,
+		    pd_order_tb_order_date ,
+		    pd_order_tb_payment ,
+		    pd_order_tb_state ,
+		    pd_order_tb_address ,
+		    pd_order_tb_ad_city ,
+		    pd_order_tb_receiver ,
+		    pd_order_tb_payment_date ,
+		    pd_order_tb_phone ,
+		    pd_order_tb_delivery_fee ,
+		    pd_order_tb_used_point,
+		    pd_sale_tb_product_name,
+		    order_product_count
+		    FROM (
+		        SELECT 
+		        po.PD_ORDER_TB_NO ,
+		        po.CUSTOMER_TB_NO ,
+		        po.PD_ORDER_TB_ORDER_DATE ,
+		        po.PD_ORDER_TB_PAYMENT ,
+		        po.PD_ORDER_TB_STATE ,
+		        po.PD_ORDER_TB_ADDRESS ,
+		        po.PD_ORDER_TB_AD_CITY ,
+		        po.PD_ORDER_TB_RECEIVER ,
+		        po.PD_ORDER_TB_PAYMENT_DATE ,
+		        po.PD_ORDER_TB_PHONE ,
+		        po.PD_ORDER_TB_DELIVERY_FEE ,
+		        po.PD_ORDER_TB_USED_POINT,
+		        odn.pd_sale_tb_product_name,
+		        odc.order_product_count
+		        FROM pd_order po, 
+		            (SELECT 
+		             pd_sale_tb_product_name
+		             FROM pd_sale
+		             WHERE pd_sale_tb_no = 
+		                 (SELECT
+		                  MIN(od.pd_sale_tb_no)
+		                  KEEP(DENSE_RANK LAST ORDER BY od.orders_detail_tb_no DESC)
+		                  FROM pd_order po, orders_detail od
+		                  WHERE po.pd_order_tb_no = od.pd_order_tb_no)) odn,
+		            (SELECT
+		            po.pd_order_tb_no,
+		            COUNT(*) order_product_count
+		            FROM pd_order po, orders_detail od
+		            WHERE po.pd_order_tb_no = od.pd_order_tb_no AND po.customer_tb_no = #{customerTbNo}
+		            GROUP BY po.pd_order_tb_no) odc        
+       			WHERE customer_tb_no = #{customerTbNo} AND po.pd_order_tb_no = odc.pd_order_tb_no  		                  
+		        ORDER BY pd_order_tb_no DESC))
+		<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
+	</select>
+
+	<insert id="insertOrder" parameterType="order">
+		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
+		VALUES(#{value1},#{value2},#{value3})
+	</insert>
+
+</mapper>
