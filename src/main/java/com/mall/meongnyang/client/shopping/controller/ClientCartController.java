@@ -29,4 +29,23 @@ public class ClientCartController
 
         return adminProductSaleVO;
     }
+
+    @RequestMapping(value = "/removeCartAjax.do", method = RequestMethod.GET)
+    @ResponseBody
+    public AdminProductSaleVO removeCartAjax(HttpSession session, AdminProductSaleVO adminProductSaleVO)
+    {
+        List<AdminProductSaleVO> cartList = (List<AdminProductSaleVO>)session.getAttribute("cartList");
+        if(cartList != null)
+        {
+            for(AdminProductSaleVO item : cartList)
+            {
+                if(item.getProductTbCode().equals(adminProductSaleVO.getProductTbCode()))
+                {
+                    cartList.remove(item);
+                    return item;
+                }
+            }
+        }
+        return null;
+    }
 }

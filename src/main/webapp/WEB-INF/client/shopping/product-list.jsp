@@ -70,14 +70,14 @@
                                             <div class="fr__hover__info">
                                                 <ul class="product__action">
                                                     <li><a href="#"><i class="icon-heart icons"></i></a></li>
-                                                    <li><a href="#"><i class="icon-handbag icons"></i></a></li>
+                                                    <li><a onclick="addCart('${product.productTbCode}', '${product.pdSaleTbSize}')" style="cursor: pointer"><i class="icon-handbag icons"></i></a></li>
                                                 </ul>
                                             </div>
                                             <div class="fr__product__inner">
                                                 <h4><a href="shoppingDetail.do?productTbCode=${product.productTbCode}">${product.productTbName}</a></h4>
                                                 <ul class="fr__pro__prize">
                                                     <li class="old__prize">${product.pdSaleTbSalesPrice}원</li>
-                                                    <li>${product.pdSaleTbDiscountRate}원</li>
+                                                    <li><c:if test="${product.pdSaleTbDiscountRate != product.pdSaleTbSalesPrice}">${product.pdSaleTbDiscountRate}원</c:if></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -92,18 +92,18 @@
                                         <c:forEach var="product" items="${productList}">
                                             <div class="ht__list__product">
                                                 <div class="ht__list__thumb">
-                                                    <a href="product-read.html"><img src="${product.pdImageTbPath}" alt="product images" width="290" height="385"></a>
+                                                    <a href="shoppingDetail.do?productTbCode=${product.productTbCode}"><img id="productImg-${product.productTbCode}" src="${product.pdImageTbPath}" alt="product images" width="290" height="385"></a>
                                                 </div>
                                                 <div class="htc__list__details">
-                                                    <h2><a href="product-read.html">${product.productTbName}</a></h2>
+                                                    <h2><a id="productName-${product.productTbCode}" href="shoppingDetail.do?productTbCode=${product.productTbCode}">${product.productTbName}</a></h2>
                                                     <ul  class="pro__prize">
-                                                        <li class="old__prize">${product.pdSaleTbSalesPrice}원</li>
-                                                        <li>${product.pdSaleTbDiscountRate}원</li>
+                                                        <li id="nowPrice-${product.productTbCode}" class="old__prize">${product.pdSaleTbSalesPrice}원</li>
+                                                        <li id="nowDiscount-${product.productTbCode}"><c:if test="${product.pdSaleTbDiscountRate != product.pdSaleTbSalesPrice}">${product.pdSaleTbDiscountRate}원</c:if></li>
                                                     </ul>
                                                     <h6>평점 : ${product.pdSaleTbRating}</h6>
                                                     <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                                                     <div class="fr__list__btn">
-                                                        <a class="fr__btn" href="cart.html">카트 추가</a>
+                                                        <a class="fr__btn" onclick="addCart('${product.productTbCode}', '${product.pdSaleTbSize}')" style="cursor: pointer">카트 추가</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,6 +202,84 @@
     function priceFilter() {
         var filterPrice = $("#amount").val();
         location.href="shopping.do?productCategoryTbNo=${nowCategory}&filterPrice="+filterPrice;
+    }
+
+
+
+    function addCart(productTbCode, pSize) {
+        var params ="?pdSaleTbSalesPrice=";
+
+        var amount = 1;
+
+        var normalPrice = "nowPrice-"+productTbCode;
+        var discountPrice = "nowDiscount-"+productTbCode;
+        var nowPrice = document.getElementById(normalPrice).innerText;
+        var nowDiscount = document.getElementById(discountPrice).innerText;
+        nowPrice = nowPrice.substring(0, nowPrice.length-1);
+        console.log(nowDiscount);
+        if(nowDiscount == null || nowDiscount === '' || nowDiscount == 0 || nowDiscount === '0')
+        {
+            params += nowPrice;
+        }
+        else
+        {
+            nowDiscount = nowDiscount.substring(0, nowDiscount.length-1);
+            params += nowDiscount;
+        }
+
+        var name = document.getElementById("productName-"+productTbCode).innerText;
+        params += "&pdSaleTbProductName=";
+        params += (name+"-");
+        params += pSize;
+        params += "&ordersDetialTbAmount=";
+        params += amount;
+        params += "&cartImage=";
+        var imgPath = document.getElementById("productImg-"+productTbCode).getAttribute("src");
+        params += imgPath;
+        params += '&productTbCode=';
+        params += productTbCode;
+
+        var ajaxUrl = "addCartAjax.do"+params;
+
+        $.ajax({
+            url: ajaxUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+
+                var cartItemHTML = '<div class="shp__single__product" id="pCart-'+json.productTbCode+'">\n' +
+                    '                        <div class="shp__pro__thumb">\n' +
+                    '                            <a href="shoppingDetail.do?productTbCode='+json.productTbCode+'">\n' +
+                    '                                <img src="'+json.cartImage+'" alt="product images" width="99" height="119">\n' +
+                    '                            </a>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="shp__pro__details">\n' +
+                    '                            <h2><a href="shoppingDetail.do?productTbCode='+json.productTbCode+'">'+json.pdSaleTbProductName+'</a></h2>\n' +
+                    '                            <span class="quantity">수량: '+json.ordersDetialTbAmount+'</span>\n' +
+                    '                            <span class="shp__price">'+json.pdSaleTbSalesPrice+'원</span>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="remove__btn">\n' +
+                    '                            <a onclick="removeCartItem(\''+json.productTbCode+'\')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>\n' +
+                    '                        </div>\n' +
+                    '                    </div>';
+
+                $("#cartWrapDiv").prepend(cartItemHTML);
+                var subtotal = $("#cartSubtotal").val();
+                subtotal *= 1;
+                var newItemPrice = json.pdSaleTbSalesPrice;
+                newItemPrice *= 1;
+                subtotal += newItemPrice;
+                $("#cartSubtotal").val(subtotal);
+                $("#cartSubtotal").text(subtotal+"원");
+
+                alert("상품이 카트에 추가되었습니다.");
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
     }
 </script>
 

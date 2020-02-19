@@ -367,7 +367,7 @@
                     '                            <span class="shp__price">'+json.pdSaleTbSalesPrice+'원</span>\n' +
                     '                        </div>\n' +
                     '                        <div class="remove__btn">\n' +
-                    '                            <a onclick="removeCartItem('+json.productTbCode+')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>\n' +
+                    '                            <a onclick="removeCartItem(\''+json.productTbCode+'\')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>\n' +
                     '                        </div>\n' +
                     '                    </div>';
 

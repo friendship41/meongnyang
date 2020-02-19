@@ -67,9 +67,27 @@
         });
     });
     function removeCartItem(itemId) {
-        var item = "pCart-"+itemId
-        console.log(item);
-        document.getElementById(item).remove();
+        var ajaxUrl = "/removeCartAjax.do?productTbCode="+itemId;
+        $.ajax({
+            url: ajaxUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                var item = "pCart-"+itemId
+                document.getElementById(item).remove();
+                var subtotal = $("#cartSubtotal").val();
+                subtotal *= 1;
+                var newItemPrice = json.pdSaleTbSalesPrice;
+                newItemPrice *= 1;
+                subtotal -= newItemPrice;
+                $("#cartSubtotal").val(subtotal);
+                $("#cartSubtotal").text(subtotal+"원");
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
     }
 </script>
 

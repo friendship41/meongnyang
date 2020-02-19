@@ -191,7 +191,7 @@
                 <div id="cartWrapDiv" class="shp__cart__wrap">
                     <c:set var="subtotalPrice" value="0"/>
                     <c:forEach var="item" items="${sessionScope.cartList}">
-                        <div class="shp__single__product">
+                        <div class="shp__single__product" id="pCart-${item.productTbCode}">
                             <div class="shp__pro__thumb">
                                 <a href="shoppingDetail.do?productTbCode=${item.productTbCode}">
                                     <img src="${item.cartImage}" alt="product images" width="99" height="119">
@@ -203,14 +203,14 @@
                                 <span class="shp__price">${item.pdSaleTbSalesPrice}원</span>
                             </div>
                             <div class="remove__btn">
-                                <a onclick="removeCartItem(${item.productTbCode})" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                                <a onclick="removeCartItem('${item.productTbCode}')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
                             </div>
                         </div>
                         <c:set var="subtotalPrice" value="${subtotalPrice + item.pdSaleTbSalesPrice}"/>
                     </c:forEach>
                 <ul class="shoping__total">
                     <li class="subtotal">합 계:</li>
-                    <li id="cartSubtotal" class="total__price" value="0">${subtotalPrice}원</li>
+                    <li id="cartSubtotal" class="total__price" value="${subtotalPrice}">${subtotalPrice}원</li>
                 </ul>
                     <ul class="shopping__btn">
                         <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>

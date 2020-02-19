@@ -100,7 +100,8 @@
                 b.PD_SALE_TB_SALES_PRICE,
                 b.PD_SALE_TB_DISCOUNT_RATE,
                 b.PD_SALE_TB_RATING,
-                b.PD_SALE_TB_PRODUCT_NAME
+                b.PD_SALE_TB_PRODUCT_NAME,
+                b.PD_SALE_TB_SIZE
             FROM
                 (SELECT
                     rownum rnum,
@@ -110,7 +111,8 @@
                     a.PD_SALE_TB_SALES_PRICE,
                     a.PD_SALE_TB_DISCOUNT_RATE,
                     a.PD_SALE_TB_RATING,
-                    a.PD_SALE_TB_PRODUCT_NAME
+                    a.PD_SALE_TB_PRODUCT_NAME,
+                    a.PD_SALE_TB_SIZE
                 FROM
                     (SELECT
                         p.PRODUCT_TB_CODE,
@@ -119,36 +121,39 @@
                         ps.PD_SALE_TB_SALES_PRICE,
                         ps.PD_SALE_TB_DISCOUNT_RATE,
                         ps.PD_SALE_TB_RATING,
-                        ps.PD_SALE_TB_PRODUCT_NAME
+                        ps.PD_SALE_TB_PRODUCT_NAME,
+                        ps.PD_SALE_TB_SIZE
                     FROM product p JOIN (
                         SELECT PRODUCT_TB_CODE, PD_IMAGE_TB_PATH FROM pd_image WHERE PD_IMAGE_TB_REPRESENTATIVE = 'Y'
                     ) pi
                     ON p.PRODUCT_TB_CODE = pi.PRODUCT_TB_CODE
                     JOIN (
                         SELECT
-                            psd.PD_SALE_TB_NO,
+                            k.PD_SALE_TB_NO,
                             psd.PRODUCT_TB_CODE,
                             psd.PD_SALE_TB_SALES_PRICE,
                             psd.PD_SALE_TB_DISCOUNT_RATE,
                             psd.PD_SALE_TB_START_DAY,
                             psd.PD_SALE_TB_RATING,
-                            psd.PD_SALE_TB_PRODUCT_NAME
+                            psd.PD_SALE_TB_PRODUCT_NAME,
+                            psd.PD_SALE_TB_SIZE
                         FROM (
                             SELECT
-                                MAX(PD_SALE_TB_NO) "PD_SALE_TB_NO"
-                            FROM PD_SALE
-                            WHERE PD_SALE_TB_STATE='Y'
-                            GROUP BY PRODUCT_TB_CODE) a JOIN pd_sale psd
-                        ON a.PD_SALE_TB_NO = psd.PD_SALE_TB_NO
+                                MAX(s.PD_SALE_TB_NO) "PD_SALE_TB_NO"
+                            FROM PD_SALE s
+                            WHERE s.PD_SALE_TB_STATE='Y'
+                            GROUP BY s.PRODUCT_TB_CODE) k JOIN pd_sale psd
+                        ON k.PD_SALE_TB_NO = psd.PD_SALE_TB_NO
                         WHERE psd.PD_SALE_TB_SALES_PRICE BETWEEN ${minPrice} AND #{maxPrice}
                     ) ps
                     on p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
                     LEFT OUTER JOIN (
                         SELECT
-                            PRODUCT_TB_CODE,
+                            ss.PRODUCT_TB_CODE,
                             COUNT(*) "PD_ORDER_CNT"
-                        FROM orders_detail
-                        GROUP BY PRODUCT_TB_CODE
+                        FROM orders_detail dd JOIN pd_sale ss
+                        ON dd.PD_SALE_TB_NO = ss.PD_SALE_TB_NO
+                        GROUP BY ss.PRODUCT_TB_CODE
                     ) od
                     ON p.PRODUCT_TB_CODE = od.PRODUCT_TB_CODE
                     WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
