@@ -22,4 +22,10 @@ public class AdminOverviewDAOImpl implements AdminOverviewDAO{
 		
 	}
 
+	@Override
+	public List<AdminOverviewVisitorVO> selectOverveiwListMonth(AdminOverviewVisitorVO adminOverviewVisitorVO) {
+		
+		return sqlSessionTemplate.selectList("OverviewDAO.selectOverviewListMonth", adminOverviewVisitorVO);
+	}
+
 }

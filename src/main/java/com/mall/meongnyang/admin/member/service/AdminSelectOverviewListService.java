@@ -9,6 +9,7 @@ public interface AdminSelectOverviewListService {
 	public List<AdminOverviewVisitorVO> selectOverviewList(AdminOverviewVisitorVO adminOverviewVisitorVO);
 
 	
+	public List<AdminOverviewVisitorVO> selectOverveiwListMonth(AdminOverviewVisitorVO adminOverviewVisitorVO);
 
 	
 	

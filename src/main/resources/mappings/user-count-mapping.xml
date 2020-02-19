@@ -4,23 +4,49 @@
 
 <mapper namespace="OverviewDAO">
 
-    <resultMap id="adminOverviewResult" type="adminOverview">
+	<resultMap id="adminOverviewResult" type="adminOverview">
 
-    </resultMap>
+	</resultMap>
 
-  
-  
 
-    <select id="selectOverviewList" parameterType="adminOverview" resultType="adminOverview">
-        SELECT
-		TO_CHAR(user_count_tb_date,'dd') "user_count_tb_date",
-	 	 user_count_tb_visitors,
-	 	 user_count_tb_joiners           
-        FROM user_count
-        WHERE user_count_tb_date BETWEEN '${StartDate}' and '${EndDate}'
-        	
-    </select>
 
-  
+
+	<select id="selectOverviewList" parameterType="adminOverview"
+		resultType="adminOverview">
+		SELECT
+		TO_CHAR(user_count_tb_date,'dd')
+		"user_count_tb_date",
+		user_count_tb_visitors,
+		user_count_tb_joiners
+		FROM
+		user_count
+		WHERE user_count_tb_date BETWEEN '${StartDate}' and
+		'${EndDate}'
+
+	</select>
+
+	<select id="selectOverviewListMonth"
+		parameterType="adminOverview" resultType="adminOverview">
+
+		
+    SELECT
+		 K.USER_COUNT_TB_DATE,
+		 SUM(USER_COUNT_TB_VISITORS) "userCountTbVisitors",
+		 SUM(USER_COUNT_TB_JOINERS) "userCountTbJoiners"
+		FROM(
+		SELECT
+		TO_CHAR(USER_COUNT_TB_DATE,'MM') "USER_COUNT_TB_DATE",
+		 USER_COUNT_TB_VISITORS,
+		 USER_COUNT_TB_JOINERS
+		FROM USER_COUNT
+		) K
+		GROUP BY K.USER_COUNT_TB_DATE
+		ORDER BY K.USER_COUNT_TB_DATE ASC
+
+
+	</select>
+
+
+
 
 </mapper>

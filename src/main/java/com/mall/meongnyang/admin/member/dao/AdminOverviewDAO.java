@@ -9,5 +9,6 @@ import com.mall.meongnyang.admin.member.vo.AdminOverviewVisitorVO;
 public interface AdminOverviewDAO {
 
 	public List<AdminOverviewVisitorVO> selectOverviewList(AdminOverviewVisitorVO adminOverviewVisitorVO);
+	public List<AdminOverviewVisitorVO> selectOverveiwListMonth(AdminOverviewVisitorVO adminOverviewVisitorVO);
 	
 }

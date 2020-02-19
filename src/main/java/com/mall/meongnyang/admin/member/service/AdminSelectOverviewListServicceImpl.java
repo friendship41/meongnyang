@@ -20,6 +20,12 @@ public class AdminSelectOverviewListServicceImpl implements AdminSelectOverviewL
 		return adminOverviewDAO.selectOverviewList(adminOverviewVisitorVO);
 	}
 
+	@Override
+	public List<AdminOverviewVisitorVO> selectOverveiwListMonth(AdminOverviewVisitorVO adminOverviewVisitorVO) {
+		
+		return adminOverviewDAO.selectOverveiwListMonth(adminOverviewVisitorVO);
+	}
+
 	
 	
 }
