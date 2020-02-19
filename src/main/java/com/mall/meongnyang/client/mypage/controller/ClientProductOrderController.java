@@ -1,4 +1,4 @@
-package com.mall.meongnyang.client.market.controller;
+package com.mall.meongnyang.client.mypage.controller;
 
 import java.util.List;
 

@@ -6,11 +6,40 @@
 
 	<select id="selectOrderDetail" parameterType="orderDetail" resultType="orderDetail">
 		SELECT
-		columnname1,
-		columnname2,
-		columnname3
-		FROM tablename1
-		WHERE columnname1 = #{value}
+		op.orders_detail_tb_no,
+		op.pd_sale_tb_no,
+		op.orders_detail_tb_amount,
+		op.pd_order_tb_no,
+		op.pd_sale_tb_product_name,
+		op.pd_sale_tb_sales_price,
+		op.pd_sale_tb_discount_rate,
+		op.pd_order_tb_order_date,
+		op.pd_order_tb_payment,
+		op.pd_order_tb_address,
+		op.pd_order_tb_receiver,
+		op.pd_order_tb_delivery_fee,
+		op.pd_order_tb_used_point, 
+		pi.pd_image_tb_path
+		FROM pd_image pi, 
+		    (SELECT 
+		    od.orders_detail_tb_no,
+		    od.pd_sale_tb_no,
+		    od.orders_detail_tb_amount,
+		    od.pd_order_tb_no,
+		    ps.product_tb_code,
+		    ps.pd_sale_tb_product_name,
+		    ps.pd_sale_tb_sales_price,
+		    ps.pd_sale_tb_discount_rate,
+		    pd.pd_order_tb_order_date,
+		    pd.pd_order_tb_payment,
+		    pd.pd_order_tb_address,
+		    pd.pd_order_tb_receiver,
+		    pd.pd_order_tb_delivery_fee,
+		    pd.pd_order_tb_used_point 
+		    FROM pd_sale ps, orders_detail od, pd_order pd
+		    WHERE ps.pd_sale_tb_no = od.pd_sale_tb_no AND od.pd_order_tb_no = #{pdOrderTbNo} AND pd.pd_order_tb_no = #{pdOrderTbNo}) op
+		WHERE pi.product_tb_code =  op.product_tb_code AND pi.pd_image_tb_representative = 'Y'
+		ORDER BY op.orders_detail_tb_no;		
 	</select>
 
 	<insert id="insertOrderDetail" parameterType="orderDetail">
