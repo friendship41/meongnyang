@@ -380,6 +380,11 @@
                 $("#cartSubtotal").val(subtotal);
                 $("#cartSubtotal").text(subtotal+"원");
 
+                var nowSize = $("#cartListSize").text();
+                nowSize *= 1;
+                nowSize += 1;
+                $("#cartListSize").text(nowSize);
+
                 alert("상품이 카트에 추가되었습니다.");
             })
             .fail(function (xhr, status, errorThrown) {

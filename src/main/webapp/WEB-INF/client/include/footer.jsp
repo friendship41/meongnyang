@@ -84,6 +84,11 @@
                 subtotal -= newItemPrice;
                 $("#cartSubtotal").val(subtotal);
                 $("#cartSubtotal").text(subtotal+"원");
+
+                var nowSize = $("#cartListSize").text();
+                nowSize *= 1;
+                nowSize -= 1;
+                $("#cartListSize").text(nowSize);
             })
             .fail(function (xhr, status, errorThrown) {
                 alert(errorThrown);

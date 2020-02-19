@@ -146,7 +146,7 @@
                                 </c:choose>
                                 <div class="htc__shopping__cart">
                                     <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a>
-                                    <a class="cart__menu" href="#"><span class="htc__qua">2</span></a>
+                                    <a class="cart__menu" href="#"><span id="cartListSize" class="htc__qua">${sessionScope.cartList.size()}</span></a>
                                 </div>
                             </div>
                         </div>
