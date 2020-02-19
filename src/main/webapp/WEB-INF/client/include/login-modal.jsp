@@ -41,11 +41,11 @@
                                     <div class="facts">
                                         <div class="register">
                                             <form name="loginForm" action="/login.do" method="post"><!-- 로그인 -->
-                                                <input name="customerTbEmail" placeholder="Email Address" type="text" required="">
-                                                <input name="customerTbPassword" placeholder="Password" type="password"
+                                                <input name="customerTbEmail"  placeholder="Email Address" type="text" required="">
+                                                <input name="customerTbPassword"  placeholder="Password" type="password"
                                                        required="">
                                                 <div class="sign-up">
-                                                	<input type="submit" value="Sign in" onclick="loginCheck()"/>
+                                                	<input type="submit" id="loginCheck" value="Sign in" onclick="loginCheck()"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -57,7 +57,7 @@
                                             <form name="registryForm" action="registry.do" method="post"><!-- 회원가입 -->
                                                 <input placeholder="Name" name="customerTbName" type="text" required="">
                                                 <input placeholder="Email Address" name="customerTbEmail" type="email"
-                                                       required="">
+                                                       required="" oninput="checkEmail()" id="customerTbEmail">
                                                 <input placeholder="Password" name="customerTbPassword" type="password"
                                                        required="" id="password1">
                                                 <input placeholder="Confirm Password" name="Password" type="password"
@@ -65,8 +65,8 @@
                                                 <div class="sign-up">
                                                 
                                                 
-                                                	<input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
-                                               
+                                                	<input type="submit" value="Create Account" id="CreateAccount" disabled="disabled" onclick="registryCheck()"/>
+                                               		
                                                 </div>
                                             </form>
                                         </div>
@@ -100,7 +100,7 @@
 
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function registryCheck() {
 		var pw1 = document.getElementById('password1').value;
@@ -109,6 +109,7 @@
 			alert("비밀번호가 일치하지 않습니다.");
 		}
 	}
+		
 	function loginCheck() {
 		var loginForm = document.loginForm;
 		var userId = loginForm.customerTbEmail.value;
@@ -121,6 +122,31 @@
 		}
 	}
 	
+	var registryCheck;
+	function checkEmail() {
+		var inputed = $("#customerTbEmail").val();
+		console.log(inputed);
+		$.ajax({
+			data : {
+				customerTbEmail : inputed
+			},
+			url : "/loginAjaxSingle.do",
+			success : function(data) {
+				if(inputed=="" && data=='0') {
+					$("#customerTbEmail").css("color", "#red");
+					$("#CreateAccount").prop("disabled", true);
+					$("#CreateAccount").css("background-color", "#FFFFFF");
+					$("#customerTbEmail").css("background-color", "#FFCECE");
+					registryCheck = 0;
+				} else if( data == '0') {
+					
+					$("#customerTbEmail").css("background-color", "#B0F6AC");
+					
+				}
+			}
+			});
+		}
+		
 	
 </script>
 
