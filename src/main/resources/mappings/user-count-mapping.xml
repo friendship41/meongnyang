@@ -13,11 +13,11 @@
 
     <select id="selectOverviewList" parameterType="adminOverview" resultType="adminOverview">
         SELECT
-		 user_count_tb_date;
-	 	 user_count_tb_visitors;
-	 	 user_count_tb_joiners;            
+		TO_CHAR(user_count_tb_date,'dd') "user_count_tb_date",
+	 	 user_count_tb_visitors,
+	 	 user_count_tb_joiners           
         FROM user_count
-        WHERE user_count_tb_date BETWEEN ${StartDate} and ${EndDate}
+        WHERE user_count_tb_date BETWEEN '${StartDate}' and '${EndDate}'
         	
     </select>
 

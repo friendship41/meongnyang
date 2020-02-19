@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class AdminOverviewChartVO {
 
 	String type="line";
-	AdminOverviewDataSetVO[] datasets ;
+	AdminOverviewDataVO data ;
 	String options ="{}";
 	
 	public String getType() {
@@ -14,11 +14,14 @@ public class AdminOverviewChartVO {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public AdminOverviewDataSetVO[] getDatasets() {
-		return datasets;
+	
+	
+	
+	public AdminOverviewDataVO getData() {
+		return data;
 	}
-	public void setDatasets(AdminOverviewDataSetVO[] datasets) {
-		this.datasets = datasets;
+	public void setData(AdminOverviewDataVO data) {
+		this.data = data;
 	}
 	public String getOptions() {
 		return options;

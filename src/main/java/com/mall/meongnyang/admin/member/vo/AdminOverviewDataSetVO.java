@@ -4,16 +4,17 @@ import java.util.Arrays;
 
 public class AdminOverviewDataSetVO {
 
-	String[] label;
+	String label;
 	int[] data;
 	boolean fill;
 	String borderColor;
 	double lineTension;
 	
-	public String[] getLabel() {
+	
+	public String getLabel() {
 		return label;
 	}
-	public void setLabel(String[] label) {
+	public void setLabel(String label) {
 		this.label = label;
 	}
 	public int[] getData() {
@@ -48,11 +49,7 @@ public class AdminOverviewDataSetVO {
 //		this.borderColor = borderColor;
 //		this.lineTension = lineTension;
 //	}
-	@Override
-	public String toString() {
-		return "AdminOverviewDataSetVO [label=" + Arrays.toString(label) + ", data=" + Arrays.toString(data) + ", fill="
-				+ fill + ", borderColor=" + borderColor + ", lineTension=" + lineTension + "]";
-	}
+	
 	
 	
 }
