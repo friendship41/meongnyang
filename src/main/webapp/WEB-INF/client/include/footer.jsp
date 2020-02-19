@@ -66,6 +66,34 @@
             fit: true   // 100% fit in a container
         });
     });
+    function removeCartItem(itemId) {
+        var ajaxUrl = "/removeCartAjax.do?productTbCode="+itemId;
+        $.ajax({
+            url: ajaxUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                var item = "pCart-"+itemId
+                document.getElementById(item).remove();
+                var subtotal = $("#cartSubtotal").val();
+                subtotal *= 1;
+                var newItemPrice = json.pdSaleTbSalesPrice;
+                newItemPrice *= 1;
+                subtotal -= newItemPrice;
+                $("#cartSubtotal").val(subtotal);
+                $("#cartSubtotal").text(subtotal+"원");
+
+                var nowSize = $("#cartListSize").text();
+                nowSize *= 1;
+                nowSize -= 1;
+                $("#cartListSize").text(nowSize);
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
 </script>
 
 

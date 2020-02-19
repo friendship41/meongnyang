@@ -96,11 +96,11 @@
                             </div>
                             <div class="sin__desc align--left">
                                 <p><span>수량</span></p>&nbsp;&nbsp;
-                                <input type="number" value="1" style="text-align: right; height: 20px;" min="1" max="99">
+                                <input type="number" value="1" style="text-align: right; height: 20px;" min="1" max="99" id="ordersDetialTbAmount">
                             </div>
                             <div class="sin__desc align--left">
-                                <ul class="shopping__btn" style="">
-                                    <li><a href="#"> Add Cart </a></li>
+                                <ul class="shopping__btn">
+                                    <li><a onclick="addCart()" style="cursor: pointer"> Add Cart </a></li>
                                     <li class="shp__checkout"><a href="checkout.html">Check Out</a></li>
                                 </ul>
                             </div>
@@ -301,14 +301,95 @@
         discount *= 1;
         var finalPrice = normalPrice*((100-discount)/100);
         $("#nowPrice").text(normalPrice);
-        if(finalPrice != normalPrice)
+        if(finalPrice !== normalPrice)
         {
-            $("#priceLi").text("할인가 : "+finalPrice+"원");
+            finalPrice /= 10;
+            finalPrice = Math.floor(finalPrice);
+            finalPrice *= 10;
+            $("#priceLi").html("할인가 : <span id=\"nowDiscount\">"+finalPrice+"</span>원");
         }
         else
         {
-            $("#priceLi").text("");
+            $("#priceLi").html("<span id=\"nowDiscount\"></span>");
         }
+    }
+
+    function addCart() {
+        var params ="?pdSaleTbSalesPrice=";
+
+        var amount = $("#ordersDetialTbAmount").val();
+        amount *= 1;
+
+        var normalPrice = $("#nowPrice").text();
+        var discountPrice = $("#nowDiscount").text();
+        if(discountPrice == null || discountPrice === '')
+        {
+            normalPrice *= amount;
+            params += normalPrice;
+        }
+        else
+        {
+            discountPrice *= amount;
+            params += discountPrice;
+        }
+
+        var opText = $("#optionSelectBox option:selected").text();
+        params += "&pdSaleTbProductName=";
+        params += "${detail.productTbName}-";
+        params += opText;
+        params += "&ordersDetialTbAmount=";
+        params += amount;
+        params += "&cartImage=";
+        params += '${imageList.get(0).pdImageTbPath}';
+        params += '&productTbCode=';
+        params += '${detail.productTbCode}';
+
+        var ajaxUrl = "addCartAjax.do"+params;
+
+        $.ajax({
+            url: ajaxUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+
+                var cartItemHTML = '<div class="shp__single__product" id="pCart-'+json.productTbCode+'">\n' +
+                    '                        <div class="shp__pro__thumb">\n' +
+                    '                            <a href="shoppingDetail.do?productTbCode='+json.productTbCode+'">\n' +
+                    '                                <img src="'+json.cartImage+'" alt="product images" width="99" height="119">\n' +
+                    '                            </a>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="shp__pro__details">\n' +
+                    '                            <h2><a href="shoppingDetail.do?productTbCode='+json.productTbCode+'">'+json.pdSaleTbProductName+'</a></h2>\n' +
+                    '                            <span class="quantity">수량: '+json.ordersDetialTbAmount+'</span>\n' +
+                    '                            <span class="shp__price">'+json.pdSaleTbSalesPrice+'원</span>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="remove__btn">\n' +
+                    '                            <a onclick="removeCartItem(\''+json.productTbCode+'\')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>\n' +
+                    '                        </div>\n' +
+                    '                    </div>';
+
+                $("#cartWrapDiv").prepend(cartItemHTML);
+                var subtotal = $("#cartSubtotal").val();
+                subtotal *= 1;
+                var newItemPrice = json.pdSaleTbSalesPrice;
+                newItemPrice *= 1;
+                subtotal += newItemPrice;
+                $("#cartSubtotal").val(subtotal);
+                $("#cartSubtotal").text(subtotal+"원");
+
+                var nowSize = $("#cartListSize").text();
+                nowSize *= 1;
+                nowSize += 1;
+                $("#cartListSize").text(nowSize);
+
+                alert("상품이 카트에 추가되었습니다.");
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
     }
 </script>
 
