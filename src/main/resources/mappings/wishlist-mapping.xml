@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clientWishlistDAO">
+
+	<!-- 
+	<insert id="insertWishlist" parameterType="wishlist"> 
+		<![CDATA[ 
+		INSERT 
+		into wishlist(wishlist_tb_no, customer_tb_no, pd_sale_tb_no) 
+		VALUES(wishlist_seq.nextval, #{customerTbNo}, #{pdSaleTbNo}) 
+		]]> 
+	</insert> 
+		-->
+
+	<select id="selectWishlist" parameterType="wishlist" resultType="wishlist">		
+		SELECT 
+		w.WISHLIST_TB_NO,
+		w.CUSTOMER_TB_NO,
+		w.PD_SALE_TB_NO,		
+		ps.PD_SALE_TB_PRODUCT_NAME,			
+		ps.PD_SALE_TB_SALES_PRICE,
+		ps.PD_SALE_TB_REMAINING_AMOUNT			
+		FROM wishlist w JOIN pd_sale ps
+		ON w.PD_SALE_TB_NO = ps.PD_SALE_TB_NO		
+		<!-- WHERE w.CUSTOMER_TB_NO = #{customerTbNo} -->
+	</select>
+	
+	<delete id="deleteWishlist" parameterType="wishlist">
+		DELETE
+		FROM wishlist
+		WHERE pd_sale_tb_no = #{pdSaleTbNo}
+	</delete>
+</mapper>
