@@ -33,29 +33,24 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="qnaTbNo" class="col-sm-2 control-label">글번호</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTbNum" name="qnaTbNum" readonly>
-                                        </div>
-                                    </div>
+                                <form class="form-horizontal" action="shoppingmall-qna-write.ado" method="post">
+                                    
                                     <div class="form-group">
                                         <label for="qnaTbTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbNum">
+                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbTitle" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTbWriter" name="qnaTbNum" readonly>
+                                            <input type="text" class="form-control" id="qnaTbWriter" value="${sessionScope.adminId }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">작성일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="qnaTbRegDate" readonly>
+                                            <input type="text" class="form-control" name="qnaTbRegDate" value="${adminSelectQna.qnaTbRegDate }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -68,6 +63,7 @@
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
                                             <button type="submit" class="btn btn-primary">답변작성</button>
+                                            
                                         </div>
                                     </div>
                                 </form>

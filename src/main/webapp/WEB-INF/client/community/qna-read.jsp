@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <jsp:include page="../include/header.jsp"/>
         <!-- Start Bradcaump area -->
@@ -32,34 +33,37 @@
                                 <ul class="ht__cat__list">
                                     <li><a href="#">공지</a></li>
                                     <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Q&A</a></li>
+                                    <li><a href="qna-list.do">Q&A</a></li>
                                     <li><a href="#">Review</a></li>
                                     <li><a href="#">Contact</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    <form action="qna-update.do" method="post">
+                    <input type="hidden" name="qnaTbNo" value="${clientQnaVO.qnaTbNo }">
                     <div class="col-lg-8">
                         <div class="ht__comment__form">
                             <h4 class="title__line--5"> Q & A </h4>
                             <div class="ht__comment__form__inner">
                                 <div class="comment__forms">
-                                    <input type="text" value="이름" readonly>
-                                    <input type="text" value="이메일" readonly>
-                                    <input type="text" value="제목" readonly>
+                                    <input type="text" name="customerTbName" value="이름" readonly>
+                                    <input type="text" name="customerTbEmail" value="이메일" readonly>
+                                    <input type="text" name="qnaTbTitle" value="${clientQnaVO.qnaTbTitle }">
                                 </div>
                             </div>
                             <div class="ht__comment__form__inner">
                                 <div class="comment__forms messages">
-                                    <textarea name="message" readonly></textarea>
+                                    <textarea name="qnaTbContent">${clientQnaVO.qnaTbContent }</textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
-                            <a class="fr__btns" href="#">목록보기</a>
-                            <a class="fr__btns" href="#">수정하기</a>
+                            <a class="fr__btns" href="qna-delete.do?qnaTbNo=${clientQnaVO.qnaTbNo }">삭제</a>
+                            <button class="fr__btns" type="submit">수정</button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

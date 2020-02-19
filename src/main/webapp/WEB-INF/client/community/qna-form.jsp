@@ -46,33 +46,24 @@
 							<div class="ht__comment__form">
                                 <h4 class="title__line--5">글쓰기</h4>
                                 
-                                  <form class="form-horizontal">
-                                  <input type="hidden" id="YN" name="qnaTbSecret">
-                                  <input type="hidden" name="pdSaleTbNo" ><!-- 상품번호 value값 추가 -->
+                                  <form class="form-horizontal" action="qna-insert.do" method="post">
+                                  <input type="hidden" id="YN" name="qnaTbSecret" value="N">
+                                  <input type="hidden" name="pdSaleTbNo" value="0"><!-- 상품번호 value값 추가 -->
+                                  <input type="hidden" name="pdOrderTbNo" value="0"><!-- order번호 -->
                                   <input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }">
+                                  <input type="hidden" name="qnaTypeTbNo" value="5"><!-- qna카테리고리 값 -->
 										<div class="form-group">
 											<label for="checkbox" class="col-sm-2 control-label"></label>
 												<div class="col-sm-8">
-													<div class="checkbox"><label><input type="checkbox" id="CHECK_YN" name="CHECK_YN"> 비밀글</label></div>													
+													<div class="checkbox"><label><input type="checkbox" id="CHECK_YN">비밀글</label></div>													
 												</div>
 										</div>
 										<div class="form-group">
 											<label for="qnaTypeTbName" class="col-sm-2 control-label"></label>
 										<div class="col-sm-8">
 										
-									<select name="qnaTypeTbName" id="qnaTypeTbname" class="form-control1">
-										<c:if test="${qnaCategoryList.category.qnaTypeName ==  1}"><!-- 임의값 -->
-										<option value="thisIsSelect">제품문의</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
-										</c:if>
-										<c:if test="${qnaCategoryList.category.qnaTypeName ==  2}">
-										<option value="thisIsSelect">주문문의</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
-										</c:if>
-										<c:if test="${qnaCategoryList.category.qnaTypeName ==  3}">
-										<option value="thisIsSelect">신고</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
-										</c:if>
-										<c:if test="${qnaCategoryList.category.qnaTypeName ==  4}">
-										<option value="thisIsSelect">기타문의</option><!-- 카테고리 값에 따른 셀렉트 선정 -->
-										</c:if>
+										
+										<select name="qnaTypeTbName" id="qnaTypeTbname" class="form-control1">
 										<c:forEach var="category" items="${qnaCategoryList }">
 											<option value="${category.qnaTypeTbNo }">${category.qnaTypeTbName }</option>
 										</c:forEach>
@@ -80,33 +71,24 @@
 										</div>
 										</div>
 										<div class="form-group">
-											<label for="smallinput" class="col-sm-2 control-label label-input-sm">이름</label>
+											<label for="smallinput" class="col-sm-2 control-label label-input-sm">제목</label>
 												<div class="col-sm-8">
-												 	<input type="text" placeholder="Name *" name="qnaTbTitle" value="${sessionScope.customer.customerTbName }">
+												 	<input type="text" placeholder="Title *" name="qnaTbTitle" id="qnaTbTitle">
 												</div>
 										</div>
 										<div class="form-group">
 											<label for="email" class="col-sm-2 control-label label-input-sm">이메일</label>
 												<div class="col-sm-8">
-												 	<input type="email" id="email" placeholder="Email *" value="${sessionScope.customer.customerTbEmail }" readonly>
-												</div>													<!-- 세션을 갖고 있기때문에 가능하다. value로 띄어지는지 확인 -->
+												 	<input type="text" id="email" placeholder="Email *" value="${sessionScope.customer.customerTbEmail }" readonly>
+												</div>													
 										</div>
 										<div class="form-group">
 											 <label for="message" class="col-sm-2 control-label">내용</label>
-													<div class="col-sm-8"><textarea id="message" placeholder="Context *" name="qnaTbContent"><c:if test="${qnaCategoryList.category.qnaTypeNo == 5 }"></c:if>
-										<c:if test="${qnaCategoryList.category.qnaTypeNo == 6 }"><!-- 전에 페이지에 따른 content에 값변경 -->
-										
-										</c:if>
-										<c:if test="${qnaCategoryList.category.qnaTypeNo == 7 }">
-										
-										</c:if>
-										<c:if test="${qnaCategoryList.category.qnaTypeNo == 8 }">
-										
-										</c:if></textarea></div>	
+													<div class="col-sm-8"><textarea id="qnaTbContent" placeholder="Context *" name="qnaTbContent"></textarea></div>	
 										</div>
 										<div class="form-group">
 										<div align="center" class="ht__comment__btn--2 mt--50 col-sm-10">
-                                    		<a class="fr__btns" href="qna-insert.do">확인</a>
+                                    		<button class="fr__btns" type="submit">작성</button>
                                     		<a class="fr__btns" href="qna-list.do">취소</a>
                                 		</div>
                                 		</div>
@@ -123,16 +105,24 @@
 <!-- script -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-$("#CHECK_YN").change(
+$("#CHECK_YN").click(
 		function() {
 			if($("#CHECK_YN").is(":checked")) {
-				$("YN").val('Y');
+				$("#YN").val('Y');
 			} else {
-				$("YN").val('N')
+				$("#YN").val('N');
 			}
 		}
 		);
-</script>
+	
 
+</script>
+<c:choose>
+<c:when test="${inputFail eq false }">
+<script type="text/javascript">
+	alert("빈칸으로 제출할 수 없습니다.");
+</script>
+</c:when>
+</c:choose>	
 
 

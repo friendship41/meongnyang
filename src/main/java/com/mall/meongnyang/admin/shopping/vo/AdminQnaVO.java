@@ -17,6 +17,21 @@ public class AdminQnaVO {
 	private int qnaTbDepth;
 	private String qnaTbStatus;
 	
+	private int startRow; //현재페이지의 시작글번호
+	private int endRow; //현재페이지의 끝 글번호
+	
+	public int getStartRow() {
+		return startRow;
+	}
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+	public int getEndRow() {
+		return endRow;
+	}
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
 	public String getQnaTbStatus() {
 		return qnaTbStatus;
 	}
@@ -94,6 +109,14 @@ public class AdminQnaVO {
 	}
 	public void setQnaTbDepth(int qnaTbDepth) {
 		this.qnaTbDepth = qnaTbDepth;
+	}
+	@Override
+	public String toString() {
+		return "AdminQnaVO [qnaTbNo=" + qnaTbNo + ", pdSaleTbNo=" + pdSaleTbNo + ", qnaTypeTbNo=" + qnaTypeTbNo
+				+ ", customerTbNo=" + customerTbNo + ", qnaTbTitle=" + qnaTbTitle + ", qnaTbContent=" + qnaTbContent
+				+ ", qnaTbRegDate=" + qnaTbRegDate + ", qnaTbReadcount=" + qnaTbReadcount + ", qnaTbSecret="
+				+ qnaTbSecret + ", qnaTbRef=" + qnaTbRef + ", qnaTbStep=" + qnaTbStep + ", qnaTbDepth=" + qnaTbDepth
+				+ ", qnaTbStatus=" + qnaTbStatus + "]";
 	}
 	
 	

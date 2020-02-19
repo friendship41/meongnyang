@@ -14,4 +14,6 @@ public interface ClientQnaDAO {
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO);
 	public AdminQnaVO selectQna(AdminQnaVO adminQnaVO);
 	public List<AdminQnaTypeVO> selectQnaTypeList(AdminQnaTypeVO adminQnaTypeVO);
+	public int selectCountQna();
+	public void updateReadcountQna(int qnaTbNo);
 }

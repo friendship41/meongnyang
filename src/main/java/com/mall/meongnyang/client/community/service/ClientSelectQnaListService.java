@@ -6,4 +6,5 @@ import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 
 public interface ClientSelectQnaListService {
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO);
+	public int selectCountQna();
 }

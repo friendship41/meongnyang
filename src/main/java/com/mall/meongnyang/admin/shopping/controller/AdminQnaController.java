@@ -33,43 +33,48 @@ public class AdminQnaController {
 	@Autowired
 	private AdminSelectQnaService adminSelectQnaService;
 	
+	
 	@RequestMapping(value = "/shoppingmall-qna-list.ado", method = RequestMethod.GET)
-	public String qnaForm(AdminQnaVO adminQnaVO) {
-				
-		return "shoppingmall/shoppingmall-qna-list";
-	}
-	
-	
-	
-	@RequestMapping(value = "/qna-insert.ado", method = RequestMethod.POST)
-	public String insertQna(AdminQnaVO adminQnaVO) {
-		adminInsertQnaService.insertQna(adminQnaVO);
-		return "redirect:shoppingmall-qna-list.ado";
-	}
-	
-	@RequestMapping(value = "/qna-list.ado")
 	public String selectQnaList(AdminQnaVO adminQnaVO, Model model) {
 		List<AdminQnaVO> adminQnaList = adminSelectQnaListService.selectQnaList(adminQnaVO);
 		model.addAttribute("adminQnaList", adminQnaList);
-		return "redirect:shoppingmall-qna-list";
+		return "shoppingmall/shoppingmall-qna-list";
 	}
 	
-	@RequestMapping(value = "/qna-update.ado", method = RequestMethod.GET)
+	@RequestMapping(value = "/qna-write.ado", method = RequestMethod.GET)
+	public String writeForm(AdminQnaVO adminQnaVO) {
+		
+		return "shoppingmall/shoppingmall-qna-write";
+	}
+	
+	@RequestMapping(value = "/shoppingmall-qna-read.ado", method = RequestMethod.GET)
 	public String updateFormQna(AdminQnaVO adminQnaVO, Model model) {
+		
 		AdminQnaVO tempVO = adminSelectQnaService.selectQna(adminQnaVO);
 		
 		model.addAttribute("adminSelectQna", tempVO);
-		return "redirect:shoppingmall-qna-list";
+		return "shoppingmall/shoppingmall-qna-read";
 	}
 	
-	@RequestMapping(value = "/qna-update.ado", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/shoppingmall-qna-write.ado", method = RequestMethod.POST)
+	public String qnaInsert(AdminQnaVO adminQnaVO) {
+		adminInsertQnaService.insertQna(adminQnaVO);
+		
+		return "redirect:shoppingmall-qna-list.ado";
+	}
+
+	
+	@RequestMapping(value = "/shoppingmall-qna-update.ado", method = RequestMethod.POST)
 	public String updateQna(AdminQnaVO adminQnaVO) {
+		
 		adminUpdateQnaService.updateQna(adminQnaVO);
 		return "redirect:shoppingmall-qna-list.ado";
 	}
 	
-	@RequestMapping("/qna-delete.ado")
+	@RequestMapping(value = "/shoppingmall-qna-delete.ado", method = RequestMethod.GET)
 	public String deleteQna(AdminQnaVO adminQnaVO) {
+		
 		adminDeleteQnaService.deleteQna(adminQnaVO);
 		return "redirect:shoppingmall-qna-list.ado";
 	}

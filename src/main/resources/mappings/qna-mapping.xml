@@ -8,13 +8,14 @@
 	<select id="selectCountQna" resultType="int">
 		SELECT COUNT(*) FROM qna
 	</select>
+	
 	<!-- 게시글 조회수 증가 -->
 	<update id="updateReadcount" parameterType="int">
 		UPDATE 
 			qna
 		SET
 			qna_tb_readcount = qna_tb_readcount + 1
-		WHERE qna_tb_no = #{qnaTbReadcount}
+		WHERE qna_tb_no = #{qnaTbNo}
 	</update>
 	
 	<select id="clientSelectQna" parameterType="qna" resultType="qna">
@@ -39,6 +40,7 @@
 			qna_tb_no = #{qnaTbNo}
 	</select>
 	<select id="selectQnaList" resultType="qna" parameterType="qna">
+		
 		SELECT 
 			*
 		FROM
@@ -62,8 +64,10 @@
 						*
 					FROM
 						qna
-					ORDER BY qna_tb_no DESC))
+					ORDER BY 
+						ref DESC, step ASC))
 			<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
+			
 			
 	</select>
 	
@@ -72,17 +76,16 @@
 			(qna_tb_no, pd_sale_tb_no, qna_type_tb_no, customer_tb_no, qna_tb_title,
 			qna_tb_content, qna_tb_reg_date, qna_tb_secret)
 		VALUES
-			(qna_seq.nextval, pdSaleTbNo, qnaTypeTbNo, customerTbNo, qnaTbTitle,
-			qnaTbContent, sysdate, qnaTbSecret)
-		WHERE qna_tb_no = #{qnaTbNo}
+			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
+			#{qnaTbContent}, sysdate, #{qnaTbSecret})
+		
 	</insert>
 
 	<update id="updateQna" parameterType="qna">
 		UPDATE qna
 		SET
 			qna_tb_title = #{qnaTbTitle},
-			qna_tb_content = #{qnaTbContent},
-		
+			qna_tb_content = #{qnaTbContent}
 		WHERE 
 			qna_tb_no = #{qnaTbNo}
 	</update>
@@ -91,7 +94,7 @@
 		WHERE qna_tb_no = #{qnaTbNo}
 	</delete>
 	
-	<select id="selectQna" parameterType="qna">
+	<select id="selectQna" parameterType="qna" resultType="qna">
 		SELECT
 			qna_tb_no,
 			pd_sale_tb_no,

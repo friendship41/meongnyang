@@ -14,7 +14,7 @@ public class ClientUpdateQnaServiceImpl implements ClientUpdateQnaService {
 	
 	@Override
 	public void updateQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
+		clientQnaDAO.updateQna(adminQnaVO);
 		
 	}
 

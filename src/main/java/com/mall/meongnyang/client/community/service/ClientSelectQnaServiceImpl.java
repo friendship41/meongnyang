@@ -14,9 +14,7 @@ public class ClientSelectQnaServiceImpl implements ClientSelectQnaService {
 	
 	@Override
 	public AdminQnaVO selectQna(AdminQnaVO adminQnaVO) {
-		
-		
-		
+		clientQnaDAO.updateReadcountQna(adminQnaVO.getQnaTbNo());
 		return clientQnaDAO.selectQna(adminQnaVO);
 	}
 

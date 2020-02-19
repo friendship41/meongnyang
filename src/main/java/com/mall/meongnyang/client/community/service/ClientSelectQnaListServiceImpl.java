@@ -16,8 +16,14 @@ public class ClientSelectQnaListServiceImpl implements ClientSelectQnaListServic
 	
 	@Override
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
-		
 		return clientQnaDAO.selectQnaList(adminQnaVO);
 	}
+
+	@Override
+	public int selectCountQna() {
+		return clientQnaDAO.selectCountQna();
+	}
+
+	
 
 }

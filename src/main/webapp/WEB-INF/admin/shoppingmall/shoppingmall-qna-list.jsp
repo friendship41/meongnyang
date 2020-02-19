@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -58,20 +59,17 @@
                                         </tr>
                                         </tfoot>
                                         <tbody>
+                                        <c:forEach var="qnaList" items="${adminQnaList }">
                                         <tr>
-                                            <td>1</td>
-                                            <td><span class="label label-warning" style="margin-right: 10px">Q</span><a class="f-bold" href="shoppingmall-qna-read.html">질문입니다</a></td>
-                                            <td>사용자1</td>
-                                            <td>20/02/01</td>
-                                            <td>5000</td>
+                                            <td>${qnaList.qnaTbNo }</td>
+                                            <td><span class="label label-success" style="margin-right: 10px">A</span><a class="f-bold" href="/shoppingmall-qna-read.ado?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                            <td>${sessionScope.adminId }</td>
+                                            <td>${qnaList.qnaTbRegDate }</td>
+                                            <td>${qnaList.qnaTbReadcount }</td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><span class="label label-success" style="margin-right: 10px">A</span><a class="f-bold" href="shoppingmall-qna-read.html">답변입니다</a></td>
-                                            <td>관리자</td>
-                                            <td>20/03/01</td>
-                                            <td>3000</td>
-                                        </tr>
+                                        </c:forEach>
+                                        
+                                        
                                         </tbody>
                                     </table>
                                 </div>

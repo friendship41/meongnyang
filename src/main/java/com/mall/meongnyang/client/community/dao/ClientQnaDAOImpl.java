@@ -17,6 +17,7 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 
 	@Override
 	public void insertQna(AdminQnaVO adminQnaVO) {
+		
 		sqlSessionTemplate.insert("qnaDAO.insertQna", adminQnaVO);
 		
 	}
@@ -45,10 +46,23 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 		return sqlSessionTemplate.selectOne("qnaDAO.selectQna", adminQnaVO);
 	}
 
+	//카테고리 값 주기위한 select
 	@Override
 	public List<AdminQnaTypeVO> selectQnaTypeList(AdminQnaTypeVO adminQnaTypeVO) {
 		
 		return sqlSessionTemplate.selectList("AdminQnaTypeDAO.selectQnaTypeList", adminQnaTypeVO);
+	}
+
+	@Override
+	public int selectCountQna() {
+		
+		return sqlSessionTemplate.selectOne("qnaDAO.selectCountQna");
+	}
+
+	@Override
+	public void updateReadcountQna(int qnaTbNo) {
+		sqlSessionTemplate.update("qnaDAO.updateReadcount", qnaTbNo);
+		
 	}
 	
 	

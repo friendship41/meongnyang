@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mall.meongnyang.admin.shopping.service.AdminSelectQnaTypeListService;
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 import com.mall.meongnyang.client.community.service.ClientDeleteQnaService;
@@ -19,7 +18,7 @@ import com.mall.meongnyang.client.community.service.ClientSelectQnaListService;
 import com.mall.meongnyang.client.community.service.ClientSelectQnaService;
 import com.mall.meongnyang.client.community.service.ClientSelectQnaTypeListService;
 import com.mall.meongnyang.client.community.service.ClientUpdateQnaService;
-import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.community.vo.ClientQnaListPaging;
 
 @Controller
 public class ClientQnaController {
@@ -38,15 +37,30 @@ public class ClientQnaController {
 	
 	@Autowired
 	private ClientSelectQnaListService clientSelectQnaListService;
-	
-	
-	
+
 	@Autowired
 	private ClientSelectQnaTypeListService clientSelectQnaTypeListService;
 	
 	
 	
+	@RequestMapping(value = "/qna-list.do", method = RequestMethod.GET)
+	public String qna(AdminQnaVO adminQnaVO, Model model, HttpSession session) {
+		
+		ClientQnaListPaging paging = new ClientQnaListPaging();
+		paging.createPaging(clientSelectQnaListService.selectCountQna());
+		
+		adminQnaVO.setStartRow(paging.getStartRow());
+		adminQnaVO.setEndRow(paging.getEndRow());
+		
+		List<AdminQnaVO> tempVO = clientSelectQnaListService.selectQnaList(adminQnaVO);
 	
+		model.addAttribute("paging", paging);
+		model.addAttribute("clientQnaList", tempVO);
+		
+		return "community/qna";
+	}
+	
+	//카테고리 값 받을수있게
 	@RequestMapping(value = "/qna-form.do", method = RequestMethod.GET)
     public String qnaCategoryList(AdminQnaTypeVO adminQnaTypeVO, Model model)
     {
@@ -54,52 +68,40 @@ public class ClientQnaController {
         model.addAttribute("qnaCategoryList", tempVO);
                 
         return "community/qna-form";
-    }
+    }	
 	
-	
-	@RequestMapping("/qna-insert.do")
-	public String qnaInsert(AdminQnaVO adminQnaVO) {
+	@RequestMapping(value = "/qna-insert.do", method = RequestMethod.POST)
+	public String qnaInsert(AdminQnaVO adminQnaVO, HttpSession session, Model model) {
+		
 		clientInsertQnaService.insertQna(adminQnaVO);
-		return "redirect:qna-list.do";
-	}
-	
-	@RequestMapping("/qna-list.do")
-	public String qna(AdminQnaVO adminQnaVO, Model model, HttpSession session) {
-		List<AdminQnaVO> tempVO = clientSelectQnaListService.selectQnaList(adminQnaVO);
-		ClientCustomerVO sessionVO = (ClientCustomerVO)session.getAttribute("customer");
-		
-		int no = sessionVO.getCustomerTbNo();
-		
-		for(AdminQnaVO vo : tempVO) { //게시글리스트
-			if(vo.getQnaTbSecret().equals("Y")) { //비밀글일경우
-				if(no != vo.getCustomerTbNo()) { //비밀글이고 사용자가 남일때
-					model.addAttribute("secret", false);
-				} 
-			} else {
-				model.addAttribute("clientQnaList", tempVO);
-			}
+		if(adminQnaVO.getQnaTbTitle() == null || adminQnaVO.getQnaTbContent() == null) {
+			model.addAttribute("inputFail", false);
+			return "community/qna-form";
 		}
-		
 		return "redirect:qna-list.do";
 	}
 		
-	@RequestMapping("/qna-read.do")
-	public String qnaRead(AdminQnaVO adminQnaVO, HttpSession session) {
+	@RequestMapping(value = "/qna-read.do", method = RequestMethod.GET)
+	public String qnaRead(AdminQnaVO adminQnaVO, Model model) {
 		
-		clientSelectQnaService.selectQna(adminQnaVO);
+		
+		AdminQnaVO tempVO = clientSelectQnaService.selectQna(adminQnaVO);
+				
+		model.addAttribute("clientQnaVO", tempVO);
 		return "community/qna-read";
 	}
 	
-	@RequestMapping("/qna-update.do")
+	
+	@RequestMapping(value = "/qna-update.do", method = RequestMethod.POST)
 	public String qnaUpdate(AdminQnaVO adminQnaVO) {
 		
 		clientUpdateQnaService.updateQna(adminQnaVO);
 		return "redirect:qna-list.do";
 	}
 	
-	@RequestMapping("/qna-delete.do")
+	@RequestMapping(value = "/qna-delete.do", method = RequestMethod.GET)
 	public String qnaDelete(AdminQnaVO adminQnaVO) {
-		
+		adminQnaVO.setQnaTbStatus("D");
 		clientDeleteQnaService.deleteQna(adminQnaVO);
 		return "redirect:qna-list.do";
 	}

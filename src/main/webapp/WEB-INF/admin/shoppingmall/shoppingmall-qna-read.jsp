@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -33,47 +34,48 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal" action="shoppingmall-qna-write.html">
+                                <form class="form-horizontal">
                                     <div class="form-group">
                                         <label for="qnaNum" class="col-sm-2 control-label">글번호</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaNum" readonly>
+                                            <input type="text" class="form-control" id="qnaTbNo" name="qnaTbNo" value="${adminSelectQna.qnaTbNo }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTitle" readonly>
+                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbTitle" value="${adminSelectQna.qnaTbTitle }">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaWriter" readonly>
+                                           <input type="text" class="form-control" id="customerTbId" ><!-- 몰겟음 -->
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">작성일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" readonly>
+                                            <input type="text" class="form-control" name="qnaTbRegDate" value="${adminSelectQna.qnaTbRegDate }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaReadCnt" class="col-sm-2 control-label">조회수</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaReadCnt" readonly>
+                                            <input type="text" class="form-control" id="qnaReadCnt" name="qnaTbReadcount" value="${adminSelectQna.qnaTbReadcount }">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaContent" class="col-sm-2 control-label">내용</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="qnaContent" readonly></textarea>
+                                            <textarea rows="10" class="form-control" id="qnaContent" name="qnaTbContent">${adminSelectQna.qnaTbContent }</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">답변쓰기</button>
+                                            <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminSelectQna.qnaTbNo }">삭제</a>
+                                            <a class="btn btn-primary" href="shoppingmall-qna-write.ado">답글작성</a>
                                         </div>
                                     </div>
                                 </form>
