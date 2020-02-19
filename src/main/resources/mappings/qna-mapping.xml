@@ -65,7 +65,7 @@
 					FROM
 						qna
 					ORDER BY 
-						ref DESC, step ASC))
+						qna_tb_ref DESC, qna_tb_step ASC))
 			<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
 			
 			

@@ -89,7 +89,7 @@
                                         <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
                                         </c:if>
                                         <c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
-                                        <li><a href="i">1</a></li>
+                                        <li><a href="/qna-list.do?currentPage=${i}">${i}</a></li>
                                         </c:forEach>
                                         <c:if test="${paging.next == true }">
                                         <li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
