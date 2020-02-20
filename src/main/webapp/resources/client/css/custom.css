@@ -817,6 +817,11 @@ h3.other-nw {
     font-weight: 600;
     transition: 0.4s;
     text-align: center;
+    cursor: pointer;
+}
+
+.checkout__purchase_a:hover{
+    background: #c43b68 none repeat scroll 0 0;
 }
 
 /*가격필터 버튼*/

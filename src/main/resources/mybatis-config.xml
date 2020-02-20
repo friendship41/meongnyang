@@ -22,6 +22,9 @@
         <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO" alias="clientMyinfo"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminTermsVO" alias="terms"/>
         <typeAlias type="com.mall.meongnyang.client.market.vo.ClientMarketCommentVO" alias="comment"/>
+        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientWishlistVO" alias="wishlist"/>
+
+
     </typeAliases>
     <mappers>
         <mapper resource="mappings/adminMember-mapping.xml"/>
@@ -32,12 +35,15 @@
         <mapper resource="mappings/market-comment-mapping.xml"/>
         <mapper resource="mappings/market-mapping.xml"/>
         <mapper resource="mappings/notice-mapping.xml"/>
+
         <mapper resource="mappings/product-category-mapping.xml"/>
         <mapper resource="mappings/product-image-mapping.xml"/>
         <mapper resource="mappings/product-mapping.xml"/>
+
         <mapper resource="mappings/product-sale-mapping.xml"/>
         <mapper resource="mappings/product-stock-mapping.xml"/>
         <mapper resource="mappings/promotion-mapping.xml"/>
         <mapper resource="mappings/terms-mapping.xml"/>
+        <mapper resource="mappings/wishlist-mapping.xml"/>
     </mappers>
 </configuration>

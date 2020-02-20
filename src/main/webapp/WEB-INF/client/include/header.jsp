@@ -213,7 +213,7 @@
                     <li id="cartSubtotal" class="total__price" value="${subtotalPrice}">${subtotalPrice}원</li>
                 </ul>
                     <ul class="shopping__btn">
-                        <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
+                        <li class="shp__checkout"><a href="checkout.do">Checkout</a></li>
                     </ul>
             </div>
         </div>
