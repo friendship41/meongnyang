@@ -178,16 +178,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2019">
+                                                    <input type="text" id="dayIncDecPickerOne" class="date-picker text-center form-control" placeholder="01/01/2019">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
+                                                    <input type="text" id="dayIncDecPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <sapn onclick="getDayIncDec()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</sapn>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,16 +208,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2019">
+                                                    <input type="text" id="monthInDecPickerOne" class="date-picker text-center form-control" placeholder="01/01/2019">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
+                                                    <input type="text" id="monthInDecPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span onclick="getMonthInDec()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -471,6 +471,60 @@ function getMonthMemberNumber(){
 			alert(errorThrown);	
 		});
 	}
+	
+function getDayIncDec(){
+	
+	var date1 = $("#dayIncDecPickerOne").val();
+	var date2 = $("#dayIncDecPickerTwo").val();
+	date1+="";
+	date2+="";
+	var ajaxUrl = "/memberOverviewDayAjax.ado?StartDate="+date1+"&EndDate="+date2;
+	
+	$.ajax({
+	
+		url: ajaxUrl,
+		type: "GET",
+		data: {},
+		dataType: "json"
+	
+	})
+	
+	.done(function (json){
+		console.log(json);
+		new Chart(document.getElementById("join_chart_day"),json);
+		
+	})
+	.fail(function (xhr, status, errorThrown){
+		alert(errorThrown);	
+	});
+}
+
+function getMonthInDec(){
+	
+	var date1 = $("#monthInDecPickerOne").val();
+	var date2 = $("#monthInDecPickerTwo").val();
+	date1+="";
+	date2+="";
+	var ajaxUrl = "/memberOverviewMonthAjax.ado?StartDate="+date1+"&EndDate="+date2;
+	
+	$.ajax({
+	
+		url: ajaxUrl,
+		type: "GET",
+		data: {},
+		dataType: "json"
+	
+	})
+	
+	.done(function (json){
+		console.log(json);
+		new Chart(document.getElementById("join_chart_month"),json);
+		
+	})
+	.fail(function (xhr, status, errorThrown){
+		alert(errorThrown);	
+	});
+}
 	
 	
 	

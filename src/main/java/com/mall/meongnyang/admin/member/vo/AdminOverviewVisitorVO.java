@@ -7,11 +7,18 @@ public class AdminOverviewVisitorVO {
 	String userCountTbDate;
 	int userCountTbVisitors;
 	int userCountTbJoiners;
+	int userCountTbOutcount;
 	
 	Date StartDate; //시작선택일
 	Date EndDate;//마지막선택일 
 	
 	
+	public int getUserCountTbOutcount() {
+		return userCountTbOutcount;
+	}
+	public void setUserCountTbOutcount(int userCountTbOutcount) {
+		this.userCountTbOutcount = userCountTbOutcount;
+	}
 	public Date getStartDate() {
 		return StartDate;
 	}
