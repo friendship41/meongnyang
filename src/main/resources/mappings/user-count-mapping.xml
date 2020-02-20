@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OverviewDAO">
+
+	<resultMap id="adminOverviewResult" type="adminOverview">
+
+	</resultMap>
+
+
+
+
+	<select id="selectOverviewList" parameterType="adminOverview"
+		resultType="adminOverview">
+		SELECT
+		TO_CHAR(user_count_tb_date,'dd')
+		"user_count_tb_date",
+		user_count_tb_visitors,
+		user_count_tb_joiners,
+		user_count_tb_outcount
+		FROM
+		user_count
+		WHERE user_count_tb_date BETWEEN '${StartDate}' and
+		'${EndDate}'
+
+	</select>
+
+	<select id="selectOverviewListMonth"
+		parameterType="adminOverview" resultType="adminOverview">
+
+		
+    SELECT
+		 K.USER_COUNT_TB_DATE,
+		 SUM(USER_COUNT_TB_VISITORS) "userCountTbVisitors",
+		 SUM(USER_COUNT_TB_JOINERS) "userCountTbJoiners",
+		 SUM(USER_COUNT_TB_OUTCOUNT) "userCountTbOutcount"
+		FROM(
+		SELECT
+		TO_CHAR(USER_COUNT_TB_DATE,'MM') "USER_COUNT_TB_DATE",
+		 USER_COUNT_TB_VISITORS,
+		 USER_COUNT_TB_JOINERS,
+		 USER_COUNT_TB_OUTCOUNT
+		FROM USER_COUNT
+		) K
+		GROUP BY K.USER_COUNT_TB_DATE
+		ORDER BY K.USER_COUNT_TB_DATE ASC
+
+	
+
+	</select>
+
+
+
+
+
+</mapper>
