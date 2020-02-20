@@ -130,7 +130,7 @@ public class AdminMemberOverViewController {
 		AdminOverviewDataSetVO adminOverviewDataSetVO = new AdminOverviewDataSetVO();
 		adminOverviewDataSetVO.setLabel("일별 가입자");
 		adminOverviewDataSetVO.setFill(false);
-		adminOverviewDataSetVO.setBorderColor("rgb(99, 203, 137)");
+		adminOverviewDataSetVO.setBorderColor("rgb(93,168,203)");
 		adminOverviewDataSetVO.setLineTension(0.2);
 		
 		String[] tempLabel = new String[adminOverviewVisitorList.size()];
@@ -176,7 +176,7 @@ public class AdminMemberOverViewController {
 		AdminOverviewDataSetVO adminOverviewDataSetVO = new AdminOverviewDataSetVO();
 		adminOverviewDataSetVO.setLabel("월별 회원수");
 		adminOverviewDataSetVO.setFill(false);
-		adminOverviewDataSetVO.setBorderColor("rgb(99, 203, 137)");
+		adminOverviewDataSetVO.setBorderColor("rgb(93,168,203)");
 		adminOverviewDataSetVO.setLineTension(0.2);
 		
 		String[] tempLabel = new String[selectOverveiwListMonth.size()];
