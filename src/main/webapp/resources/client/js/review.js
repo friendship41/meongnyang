@@ -1,4 +1,11 @@
 $(document).ready(function() {
+	$('.starRev span').click(function(){
+	    $(this).parent().children('span').removeClass('on');
+	    $(this).addClass('on').prevAll('span').addClass('on');
+	    $(this).parent().children('span').first().removeClass('on');
+	    return false;
+	});
+	
     var fileTarget = $('.file__box .file-upload');
     fileTarget.on('change', function() { // 값이 변경되면
         if (window.FileReader) { // modern browser
@@ -10,6 +17,8 @@ $(document).ready(function() {
     });
 });
 
+
+//미리보기 나오게
 var imgTarget = $('.preview-image .file-upload');
 
 imgTarget.on('change', function() {
@@ -35,3 +44,4 @@ imgTarget.on('change', function() {
         img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\"" + imgSrc + "\")";
     }
 });
+

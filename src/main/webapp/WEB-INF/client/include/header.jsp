@@ -45,6 +45,7 @@
 <body>
 
 <jsp:include page="login-modal.jsp"/>
+<jsp:include page="review-modal.jsp"/>
 <%--<%@include file="login-modal.jsp"%>--%>
 
 <!--[if lt IE 8]>
@@ -90,7 +91,7 @@
                                             <li><a href="notice.do">공지</a></li>
                                             <li><a href="faq.do">FAQ</a></li>
                                             <li><a href="#">Q&A</a></li>
-                                            <li><a href="#">리뷰</a></li>
+                                            <li><a href="reviewList.do">리뷰</a></li>
                                             <li><a href="#">Contact</a></li>
                                         </ul>
                                     </li>
@@ -117,7 +118,7 @@
                                                 <li><a href="notice.do">공지</a></li>
                                                 <li><a href="faq.do">FAQ</a></li>
                                                 <li><a href="#">Q&A</a></li>
-                                                <li><a href="#">리뷰</a></li>
+                                                <li><a href="reviewList.do">리뷰</a></li>
                                                 <li><a href="#">Contact</a></li>
                                             </ul>
                                         </li>

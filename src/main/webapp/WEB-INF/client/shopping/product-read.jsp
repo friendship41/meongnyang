@@ -153,8 +153,15 @@
                                 <h4 class="title__line--5">Review 남기기</h4>
                                 <div class="ht__comment__form__inner">
                                     <div class="comment__form">
-                                        <input type="text" placeholder="Name *">
-                                        <input type="email" placeholder="Email *">
+                                        <input type="text" id="reviewTbWriter" readonly="readonly" value="${customer.customerTbName}">
+                                    	<div class="starRev" id="reviewTbRating">
+                                    		<span>평점</span>
+										    <span class="starR on">★</span>
+										    <span class="starR">★</span>
+										    <span class="starR">★</span>
+										    <span class="starR">★</span>
+										    <span class="starR">★</span>
+										</div>
                                         <div class="file__box preview-image">
                                             <input class="file__name" readonly="readonly" value="file">
                                             <label for="review-file">업로드</label>
@@ -162,11 +169,11 @@
                                         </div>
                                     </div>
                                     <div class="comment__form message">
-                                        <textarea name="message" placeholder="Your Comment"></textarea>
+                                        <textarea id="reviewTbContent" placeholder="Your Comment"></textarea>
                                     </div>
                                 </div>
                                 <div class="ht__comment__btn--2 mt--30">
-                                    <a class="fr__btn" href="#">Send</a>
+                                    <a class="fr__btn" href="javascript:void(0);" id="addReview">Send</a>
                                 </div>
                             </div>
                             <!-- End comment Form -->
@@ -393,4 +400,40 @@
     }
 </script>
 
+<script>
+$(function() {
+	
+	//리뷰 등록하기
+	$("#addReview").click(function() {
+		
+		var customerNo = "${customer.customerTbNo}";
+		var productCode = "${detail.productTbCode}";
+		var content = $("#reviewTbContent").val();
+		var writer = $("#reviewTbWriter").val();
+		var rating = $(".on").length;
+		var file = $("#review-file").val();
+		
+		var review = {
+			customerTbNo : customerNo,
+			productTbCode : productCode, 
+			reviewTbContent : content,
+			reviewTbWriter : writer,
+			reviewTbRating : rating,
+			reviewTbImgPath : file
+		}
+		
+		$.ajax({
+			type : "POST",
+			url: "/insertReview.do", //서버 요청 URI
+            dataType: "text", //응답받을 데이터의 형태
+            data: JSON.stringify(review),
+			success: function(result) {
+				if(result === "insertReviewSuccess"){
+					console.log('저장성공')
+				}
+			}
+		});		
+	})
+});
+</script>
 <jsp:include page="../include/footer.jsp"/>

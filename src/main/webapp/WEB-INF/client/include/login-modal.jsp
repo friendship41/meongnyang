@@ -2,7 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 로그인이 뜨는 모달부분 -->
-<<c:choose>
+<c:choose>
 <c:when test="${loginCheckSubmit eq false}">
 <script type="text/javascript"> 
 	alert("로그인 실패 하셨습니다.")

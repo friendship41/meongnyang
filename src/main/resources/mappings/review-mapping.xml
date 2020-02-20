@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewDAO">
+
+	<select id="selectReviewCount" parameterType="review">
+		SELECT COUNT(*)
+		FROM review
+		<if test="productTbCode != null">
+		WHERE product_tb_code = #{productTbCode}
+		</if>
+	</select>
+
+	<select id="selectReview" parameterType="review" resultType="review">
+		SELECT
+		review_tb_no ,
+		customer_tb_no ,
+		product_tb_code ,
+		review_tb_content ,
+		review_tb_writer ,
+		review_tb_reg_date ,
+		review_tb_rating ,
+		review_tb_img_path 
+		FROM review
+		WHERE review_tb_no = #{reviewTbNo}
+	</select>
+
+	<select id="selectReviewList" parameterType="review" resultType="review">
+		SELECT
+		    *
+		FROM
+		    (SELECT
+			ROWNUM rnum,
+			re.review_tb_no ,
+			re.customer_tb_no ,
+			re.product_tb_code ,
+			re.review_tb_content ,
+			re.review_tb_writer ,
+			re.review_tb_reg_date ,
+			re.review_tb_rating ,
+			re.review_tb_img_path,
+			pd.PRODUCT_TB_NAME
+			FROM review re, product pd
+			WHERE re.product_tb_code = pd.product_tb_code
+			ORDER BY review_tb_no DESC)
+		<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>		
+	</select>
+
+	<insert id="insertReview" parameterType="review">
+		INSERT INTO review 
+		(REVIEW_TB_NO,
+		CUSTOMER_TB_NO,
+		PRODUCT_TB_CODE,
+		REVIEW_TB_CONTENT,
+		REVIEW_TB_WRITER,
+		REVIEW_TB_RATING,
+		REVIEW_TB_IMG_PATH)
+		VALUES 
+		(review_seq.nextval,
+		#{customerTbNo},
+		#{productTbCode},
+		#{reviewTbContent},
+		#{reviewTbWriter},
+		#{reviewTbRating},
+		#{reviewTbImgPath})
+	</insert>
+
+	<update id="updateReview" parameterType="review">
+		UPDATE tablename1
+		SET
+		columnname1=#{param1}
+		WHERE
+		columnname2 = #{param2}
+	</update>
+
+	<delete id="deleteReview" parameterType="review">
+		DELETE FROM tablename1 WHERE
+		columnname1 = #{param1}
+	</delete>
+
+</mapper>

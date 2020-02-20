@@ -603,7 +603,10 @@ h3.other-nw {
     font-size: 15px;
     padding: 5px 15px;
     transition: 0.3s;
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
     cursor: pointer;
 }
 .comment__form label:hover {
@@ -710,6 +713,31 @@ h3.other-nw {
     color: #fff;
 }
 
+/* 평점 */
+.starRev {
+    border: 1px solid #e2e2e2;
+    color: #666666;
+    font-size: 16px;
+    height: 40px;
+    padding: 10px 20px;
+    margin-top: 20px;
+}
+
+.starRev :first-child {
+    margin-right: 10px;
+}
+
+.starR {
+    width: 30px;
+    height: 30px;
+    color: #ccc;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starR.on{
+    color: #777;
+}
 
 /*인용씨 코드*/
 
