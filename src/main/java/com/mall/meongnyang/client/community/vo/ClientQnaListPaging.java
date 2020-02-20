@@ -11,20 +11,21 @@ public class ClientQnaListPaging {
 	private boolean prev;
 	private boolean next;
 	
-	public ClientQnaListPaging() {
+	public ClientQnaListPaging(int currentPage) {
 		this.pageSize = 9;
-		this.currentPage = 1;
+		this.currentPage = currentPage;
 	}
 	
 	public void createPaging(int countList) {
 		int lastPage = (int)Math.ceil(countList / (double) pageBlock);
+		
 		this.startRow = (currentPage - 1) * pageSize + 1 ; //현재페이지 시작글
 		this.endRow = startRow * pageSize; //현재페이지 끝 번호
 		//currentPage를 기준으로 하는 블럭의 시작페이지와 끝페이지를 계산
-		this.startPage =  (int) ((currentPage - 1)/pageBlock) * pageBlock + 1;
-		this.endPage = startPage + pageBlock; 
-		this.prev = false;
-		this.next = false;
+		this.startPage =  (int) ((currentPage - 1)/pageBlock) * pageBlock + 1; //페이지 단락의 시작
+		this.endPage = startPage + pageBlock - 1; //페이지 끝 시작 
+		this.prev = false; //이전페이지 활성화
+		this.next = false; //다음페이지 활성화
 		
 		if(endPage > lastPage) {
 			this.endPage = lastPage;

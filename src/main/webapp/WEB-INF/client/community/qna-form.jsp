@@ -84,7 +84,7 @@
 										</div>
 										<div class="form-group">
 											 <label for="message" class="col-sm-2 control-label">내용</label>
-													<div class="col-sm-8"><textarea id="qnaTbContent" placeholder="Context *" name="qnaTbContent"></textarea></div>	
+													<div class="col-sm-8"><textarea id="qnaTbContent" placeholder="Context *" name="qnaTbContent"><!-- if 제품카테고리면 상품번호 --><!-- if 배송이면 배송번호 --></textarea></div>	
 										</div>
 										<div class="form-group">
 										<div align="center" class="ht__comment__btn--2 mt--50 col-sm-10">

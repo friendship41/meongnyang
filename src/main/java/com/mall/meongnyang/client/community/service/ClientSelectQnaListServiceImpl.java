@@ -16,6 +16,10 @@ public class ClientSelectQnaListServiceImpl implements ClientSelectQnaListServic
 	
 	@Override
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
+		
+		
+		List<AdminQnaVO> tempVO = clientQnaDAO.selectQnaList(adminQnaVO);
+		
 		return clientQnaDAO.selectQnaList(adminQnaVO);
 	}
 

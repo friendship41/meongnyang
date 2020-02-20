@@ -15,6 +15,7 @@ public class AdminInsertQnaServiceImpl implements AdminInsertQnaService {
 	@Override
 	public void insertQna(AdminQnaVO adminQnaVO) {
 		adminQnaDAO.insertQna(adminQnaVO);
+		adminQnaDAO.updateStep(adminQnaVO);
 		
 	}
 

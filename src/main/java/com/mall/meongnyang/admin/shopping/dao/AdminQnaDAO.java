@@ -11,4 +11,5 @@ public interface AdminQnaDAO {
 	public void insertQna(AdminQnaVO adminQnaVO);
 	public void updateQna(AdminQnaVO adminQnaVO);
 	public void deleteQna(AdminQnaVO adminQnaVO);
+	public void updateStep(AdminQnaVO adminQnaVO);
 }

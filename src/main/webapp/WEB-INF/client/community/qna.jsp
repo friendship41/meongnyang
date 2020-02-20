@@ -55,28 +55,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <c:choose>
-                                        <c:when test="${secret == false }">
+                                        
+                                        
                                         	<c:forEach var="qnaList" items="${clientQnaList }">
                                             <tr>
                                                 <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
-                                                <td class="product-name"><span class="badge badge-success">(비밀글입니다)${qnaList.qnaTbTitle }</span></td>
-                                                <td class="product-price"><span class="amount"> ${sessionScope.customer.customerTbName } </span></td>
+                                                
+                                                <c:if test="${qnaList.qnaTbSecret == 'Y'}">
+                                                <c:choose>
+                                                <c:when test="${qnaList.customerTbNo == sessionScope.customer.customerTbNo}">
+                                                <td class="product-name"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <td class="product-name"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span>${qnaList.qnaTbTitle }</td>
+                                                </c:otherwise>
+                                                </c:choose>
+                                                </c:if>
+                                                <c:if test="${qnaList.qnaTbSecret == 'N' }">
+                                                <td class="product-name"><span class="badge badge-success"></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                </c:if>
+                                                
+                                                <td class="product-price"><span class="amount"> ${qnaList.customerTbNo }번고객 </span></td>
                                                 <td class="product-stock-status"><span class="wishlist-in-stock">${qnaList.qnaTbRegDate } </span></td>
                                             </tr>
                                             </c:forEach>
-                                         </c:when>
-                                         <c:otherwise>
-                                         <c:forEach var="qnaList" items="${clientQnaList }">
-                                            <tr>
-                                                <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
-                                                <td class="product-name"><span class="badge badge-success">Q</span><a href="/qna-read.do?qnaTbNo=${qnaList.qnaTbNo}" >${qnaList.qnaTbTitle }</a></td>
-                                                <td class="product-price"><span class="amount"> ${sessionScope.customer.customerTbName } </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock">${qnaList.qnaTbRegDate } </span></td>
-                                            </tr>
-                                            </c:forEach>
-                                         </c:otherwise>
-                                         </c:choose>
+                                        
                                         </tbody>
                                     </table>
                                 </div>

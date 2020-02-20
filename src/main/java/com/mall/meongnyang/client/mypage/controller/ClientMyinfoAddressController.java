@@ -55,7 +55,6 @@ public class ClientMyinfoAddressController {
 	@ResponseBody
 	public ClientCmAddressVO addressListAjax(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
 		
-		
 		return clientSelectMyinfoAddressService.selectMyinfoAddress(clientCmAddressVO);
 	}
 	
@@ -70,7 +69,8 @@ public class ClientMyinfoAddressController {
 	}
 	
 	@RequestMapping(value = "/myinfo-address-update.do", method=RequestMethod.POST)
-	public String updateAddress(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
+	public String updateAddress(ClientCmAddressVO clientCmAddressVO) {
+		
 		
 		clientUpdateMyinfoAddressService.updateMyinfoAddress(clientCmAddressVO);
 		return "redirect:myinfo.do";

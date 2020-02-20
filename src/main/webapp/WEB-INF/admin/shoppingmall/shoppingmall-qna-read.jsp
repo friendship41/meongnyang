@@ -75,7 +75,7 @@
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
                                             <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminSelectQna.qnaTbNo }">삭제</a>
-                                            <a class="btn btn-primary" href="shoppingmall-qna-write.ado">답글작성</a>
+                                            <a class="btn btn-primary" href="qna-write.ado">답글작성</a>
                                         </div>
                                     </div>
                                 </form>

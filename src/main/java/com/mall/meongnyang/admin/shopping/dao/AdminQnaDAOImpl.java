@@ -43,4 +43,12 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 		
 	}
 
+	@Override
+	public void updateStep(AdminQnaVO adminQnaVO) {
+		sqlSessionTemplate.update("qnaDAO.updateStep", adminQnaVO);
+		
+	}
+
+	
+
 }

@@ -65,8 +65,8 @@
                                                 <div class="sign-up">
                                                 
                                                 
-                                                	<input type="submit" value="Create Account" id="CreateAccount" disabled="disabled" onclick="registryCheck()"/>
-                                               		
+                                                	<input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
+                                               		<a class="fr__btns" href="emailConfirm.do" value="emailSend">Email인증</a>
                                                 </div>
                                             </form>
                                         </div>
@@ -132,17 +132,16 @@
 			},
 			url : "/loginAjaxSingle.do",
 			success : function(data) {
-				if(inputed=="" && data=='0') {
-					$("#customerTbEmail").css("color", "#red");
+				if(data=='1') {
+					
 					$("#CreateAccount").prop("disabled", true);
-					$("#CreateAccount").css("background-color", "#FFFFFF");
-					$("#customerTbEmail").css("background-color", "#FFCECE");
+					$("#customerTbEmail").attr("style", "background-color: red");
+					alert('중복된아이디가 있습니다.');
 					registryCheck = 0;
-				} else if( data == '0') {
-					
-					$("#customerTbEmail").css("background-color", "#B0F6AC");
-					
-				}
+					if(registryCheck == 0) {
+						$("#CreateAccount").prop("disabled", false);
+					}
+				} 
 			}
 			});
 		}

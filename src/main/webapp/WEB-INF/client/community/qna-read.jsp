@@ -47,8 +47,8 @@
                             <h4 class="title__line--5"> Q & A </h4>
                             <div class="ht__comment__form__inner">
                                 <div class="comment__forms">
-                                    <input type="text" name="customerTbName" value="이름" readonly>
-                                    <input type="text" name="customerTbEmail" value="이메일" readonly>
+                                    <input type="text" name="customerTbName" value="${clientQnaVO.qnaTbNo }번고객 이름" readonly>
+                                    <input type="text" name="customerTbEmail" value="${clientQnaVO.qnaTbNo }번고객 이메일" readonly>
                                     <input type="text" name="qnaTbTitle" value="${clientQnaVO.qnaTbTitle }">
                                 </div>
                             </div>

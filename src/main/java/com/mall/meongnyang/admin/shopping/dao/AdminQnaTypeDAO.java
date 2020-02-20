@@ -11,4 +11,5 @@ public interface AdminQnaTypeDAO {
 	public void updateQnaType(AdminQnaTypeVO adminQnaTypeVO);
 	public List<AdminQnaTypeVO> selectQnaTypeList(AdminQnaTypeVO adminQnaTypeVO);
 	public AdminQnaTypeVO selectQnaType(AdminQnaTypeVO adminQnaTypeVO);
+	
 }

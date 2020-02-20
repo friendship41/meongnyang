@@ -45,13 +45,13 @@
                     </div>
                 </div>
 
-                <!-- Start comment Form --> <!--여기부터다시수정하면됨!!!!!-->
+                <!-- Start comment Form --> 
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
             	<input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
-            	<input type="hidden" name="cmAddressTbNickname" value="si"> <!-- kakao -->
-            	<input type="hidden" name="cmAddressTbPhone" value="010"> <!-- sessionScope.customer.customerTbPhone -->
+            	<input type="hidden" name="cmAddressTbPhone" value="010">
+            	
                     <div class="ht__comment__form">
                     	
                         <h4 class="title__line--5">배송지 목록</h4>
@@ -59,17 +59,18 @@
                             <div class="comment__form">
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
                                 
-                                <select class="ht__select" id="selectBox">
+                                <select class="ht__select" id="selectBox" name="cmAddressTbNo">
                                 	<option value="thisIsSelect">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
- 										<option value="${address.cmAddressTbNo }">${address.cmAddressTbPostcode }&nbsp;&nbsp; ${address.cmAddressTbAddress1 }&nbsp;&nbsp;${address.cmAddressTbAddress2 }</option>
+ 										<option value="${address.cmAddressTbNo }">${address.cmAddressTbNickname }</option>
  									</c:forEach>
                                 </select>
-                                <input type="text" placeholder="" name="cmAddressTbPostcode" id="cmAddressTbPostcode">
+                                <input type="text" placeholder="우편 번호 * " name="cmAddressTbPostcode" id="cmAddressTbPostcode">
                                 <input type="text" placeholder=" 주소 *" name="cmAddressTbAddress1" id="cmAddressTbAddress1">
                                 <input type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2" id="cmAddressTbAddress2">
+                                <input type="text" placeholder="주소 별칭 *" name="cmAddressTbNickname" id="cmAddressTbNickname">
                                 <div class="ht__comment__btn--2 mt--30">
-                                	<button id="modifySubmitButton" class="fr__btn" >추가</button>
+                                	<button id="modifySubmitButton" class="fr__btn">추가</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
                 
                                 </div>
@@ -171,6 +172,7 @@
                 $("#cmAddressTbPostcode").removeAttr("value");
                 $("#cmAddressTbAddress1").removeAttr("value");
                 $("#cmAddressTbAddress2").removeAttr("value");
+                $("#cmAddressTbNickname").removeAttr("value");
                 $("#formToController").attr("action", "myinfo-address-insert.do");
             }
             else
@@ -186,10 +188,12 @@
                 })
                     .done(function(json) {
                         console.log(json);
+                       
                         $("#cmAddressTbNo").attr("value", json.cmAddressTbNo);
                         $("#cmAddressTbPostcode").attr("value", json.cmAddressTbPostcode);
  						$("#cmAddressTbAddress1").attr("value", json.cmAddressTbAddress1);
  						$("#cmAddressTbAddress2").attr("value", json.cmAddressTbAddress2);
+ 						$("#cmAddressTbNickname").attr("value", json.cmAddressTbNickname);
                         $("#modifySubmitButton").html('수정');
                         $("#deleteBtn").show();
                         var deleteUrl = "/myinfo-address-delete.do?cmAddressTbNo="+json.cmAddressTbNo;

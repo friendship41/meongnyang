@@ -18,6 +18,19 @@
 		WHERE qna_tb_no = #{qnaTbNo}
 	</update>
 	
+	<!-- 답변글 -->
+	<update id="updateStep" parameterType="qna">
+		UPDATE
+			qna
+		SET
+			qna_tb_step = qna_tb_step + 1 
+		WHERE
+			
+			qna_tb_ref = #{qnaTbRef} AND qna_tb_step > #{qnaTbStep}
+		
+	</update>
+	
+	
 	<select id="clientSelectQna" parameterType="qna" resultType="qna">
 		SELECT
 			qna_tb_no,
@@ -39,6 +52,7 @@
 		WHERE 
 			qna_tb_no = #{qnaTbNo}
 	</select>
+	
 	<select id="selectQnaList" resultType="qna" parameterType="qna">
 		
 		SELECT 
@@ -60,13 +74,16 @@
 				qna_tb_depth,
 				qna_tb_status,
 				pd_order_tb_no
+				
 			FROM (SELECT 
 						*
 					FROM
 						qna
 					ORDER BY 
 						qna_tb_ref DESC, qna_tb_step ASC))
-			<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
+			
+			<!-- <![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>  -->
+			
 			
 			
 	</select>
@@ -74,10 +91,10 @@
 	<insert id="insertQna" parameterType="qna">
 		INSERT INTO qna
 			(qna_tb_no, pd_sale_tb_no, qna_type_tb_no, customer_tb_no, qna_tb_title,
-			qna_tb_content, qna_tb_reg_date, qna_tb_secret)
+			qna_tb_content, qna_tb_reg_date, qna_tb_secret, qna_tb_ref, qna_tb_depth, qna_tb_step)
 		VALUES
 			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
-			#{qnaTbContent}, sysdate, #{qnaTbSecret})
+			#{qnaTbContent}, sysdate, #{qnaTbSecret}, #{qnaTbRef}, #{qnaTbDepth}, #{qnaTbStep})
 		
 	</insert>
 

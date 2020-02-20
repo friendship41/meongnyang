@@ -39,8 +39,4 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 		
 	}
 
-	
-
-	
-
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
@@ -19,6 +20,7 @@ import com.mall.meongnyang.client.community.service.ClientSelectQnaService;
 import com.mall.meongnyang.client.community.service.ClientSelectQnaTypeListService;
 import com.mall.meongnyang.client.community.service.ClientUpdateQnaService;
 import com.mall.meongnyang.client.community.vo.ClientQnaListPaging;
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 
 @Controller
 public class ClientQnaController {
@@ -44,19 +46,23 @@ public class ClientQnaController {
 	
 	
 	@RequestMapping(value = "/qna-list.do", method = RequestMethod.GET)
-	public String qna(AdminQnaVO adminQnaVO, Model model, HttpSession session) {
+	public String qna(@RequestParam(defaultValue = "1") int currentPage, AdminQnaVO adminQnaVO, Model model, HttpSession session) {
 		
-		ClientQnaListPaging paging = new ClientQnaListPaging();
+		ClientQnaListPaging paging = new ClientQnaListPaging(currentPage);
 		paging.createPaging(clientSelectQnaListService.selectCountQna());
 		
 		adminQnaVO.setStartRow(paging.getStartRow());
 		adminQnaVO.setEndRow(paging.getEndRow());
+		ClientCustomerVO sessionVO = (ClientCustomerVO)session.getAttribute("customer");
+		int no = sessionVO.getCustomerTbNo();
+		
 		
 		List<AdminQnaVO> tempVO = clientSelectQnaListService.selectQnaList(adminQnaVO);
-	
+		
 		model.addAttribute("paging", paging);
 		model.addAttribute("clientQnaList", tempVO);
 		
+			
 		return "community/qna";
 	}
 	
@@ -93,9 +99,11 @@ public class ClientQnaController {
 	
 	
 	@RequestMapping(value = "/qna-update.do", method = RequestMethod.POST)
-	public String qnaUpdate(AdminQnaVO adminQnaVO) {
+	public String qnaUpdate(AdminQnaVO adminQnaVO, HttpSession session) {
 		
-		clientUpdateQnaService.updateQna(adminQnaVO);
+			clientUpdateQnaService.updateQna(adminQnaVO);	
+		
+		
 		return "redirect:qna-list.do";
 	}
 	

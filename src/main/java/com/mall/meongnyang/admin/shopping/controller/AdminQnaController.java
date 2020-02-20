@@ -36,13 +36,20 @@ public class AdminQnaController {
 	
 	@RequestMapping(value = "/shoppingmall-qna-list.ado", method = RequestMethod.GET)
 	public String selectQnaList(AdminQnaVO adminQnaVO, Model model) {
+		
 		List<AdminQnaVO> adminQnaList = adminSelectQnaListService.selectQnaList(adminQnaVO);
 		model.addAttribute("adminQnaList", adminQnaList);
+		
 		return "shoppingmall/shoppingmall-qna-list";
 	}
 	
 	@RequestMapping(value = "/qna-write.ado", method = RequestMethod.GET)
-	public String writeForm(AdminQnaVO adminQnaVO) {
+	public String writeForm(AdminQnaVO adminQnaVO, Model model) {
+		AdminQnaVO tempVO = adminSelectQnaService.selectQna(adminQnaVO);
+		tempVO.setQnaTbRef(tempVO.getQnaTbNo());
+		tempVO.setQnaTbStep(0);
+		tempVO.setQnaTbDepth(0);
+		model.addAttribute("stair", tempVO);
 		
 		return "shoppingmall/shoppingmall-qna-write";
 	}
@@ -55,6 +62,8 @@ public class AdminQnaController {
 		model.addAttribute("adminSelectQna", tempVO);
 		return "shoppingmall/shoppingmall-qna-read";
 	}
+	
+	
 	
 	
 	@RequestMapping(value = "/shoppingmall-qna-write.ado", method = RequestMethod.POST)

@@ -7,15 +7,17 @@
 	<insert id="insertMyinfoAddress" parameterType="clientMyinfo">
 		INSERT 
 		INTO 
-			cm_address 
+			cm_address
 		VALUES(cm_address_seq.nextval, #{customerTbNo}, #{cmAddressTbNickname}, #{cmAddressTbPostcode}, #{cmAddressTbAddress1}, #{cmAddressTbAddress2}, #{cmAddressTbPhone})					
 		
 	</insert>
 	<update id="updateMyinfoAddress" parameterType="clientMyinfo">
 		UPDATE cm_address
-		SET cm_address_tb_postcode=#{cmAddressTbPostcode}, cm_address_tb_address1=#{cmAddressTbAddress1},
-			cm_address_tb_address2=#{cmAddressTbAddress2}
-		WHERE cm_address_tb_no = #{cmAddressTbNo}
+		SET 
+			cm_address_tb_nickname=#{cmAddressTbNickname}, cm_address_tb_postcode=#{cmAddressTbPostcode}, 
+			cm_address_tb_address1=#{cmAddressTbAddress1}, cm_address_tb_address2=#{cmAddressTbAddress2} 
+		WHERE 
+			cm_address_tb_no = #{cmAddressTbNo}
 	</update>
 	<delete id="deleteMyinfoAddress" parameterType="clientMyinfo">
 		DELETE FROM cm_address
