@@ -108,7 +108,6 @@
 $(function() {
 
 	$(document).ready(function() {
-		console.log("${selector}")
 	
 		if("${selector}" == "S"){
 			$("#selector").val("sell");
@@ -118,7 +117,7 @@ $(function() {
 	});
 	
 	$("#selector").change(function() {
-		console.log(this.value);
+
 		document.location.href="/market-list.do?marketTbSellOrBuy=" + this.value;
 	});
 	
