@@ -104,6 +104,7 @@
 	<update  id="updateProductOrderPay" parameterType="orderProc">
 		UPDATE PD_ORDER
 		SET
+			PD_ORDER_TB_PAYMENT_DATE=SYSDATE,
 			PD_ORDER_TB_STATE='P'
 		WHERE PD_ORDER_TB_NO=#{pdOrderTbNo}
 	</update>

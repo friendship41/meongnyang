@@ -53,5 +53,10 @@
 		WHERE customer_tb_password =#{customerTbPassword}
 	</delete>
 	
-
+	<update id="updatePointUse" parameterType="orderProc">
+		UPDATE CUSTOMER
+		SET
+			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT-#{pdOrderTbUsedPoint}
+		WHERE CUSTOMER_TB_NO = #{customerTbNo}
+	</update>
 </mapper>

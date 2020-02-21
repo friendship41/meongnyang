@@ -1,9 +1,7 @@
 package com.mall.meongnyang.client.shopping.controller;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
-import com.mall.meongnyang.client.shopping.service.ClientDeleteOrderService;
-import com.mall.meongnyang.client.shopping.service.ClientInsertOrderService;
-import com.mall.meongnyang.client.shopping.service.ClientUpdateOrderPayService;
+import com.mall.meongnyang.client.shopping.service.*;
 import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import com.mall.meongnyang.util.apiRequest.service.KakaoPayApprovedService;
 import com.mall.meongnyang.util.apiRequest.service.KakaoPayReadyService;
@@ -32,6 +30,10 @@ public class ClientPaymentController
     private ClientUpdateOrderPayService clientUpdateOrderPayService;
     @Autowired
     private ClientDeleteOrderService clientDeleteOrderService;
+    @Autowired
+    private ClientUpdateProductSaleRemainCountService clientUpdateProductSaleRemainCountService;
+    @Autowired
+    private ClientUpdateCustomerPointService clientUpdateCustomerPointService;
 
 
     @RequestMapping(value = "/payment.do", method = RequestMethod.GET)
@@ -49,6 +51,18 @@ public class ClientPaymentController
         clientOrderVO.setPdOrderTbAdCity(clientOrderVO.getPdOrderTbAddress().split(" ")[0]);
 
 
+        boolean remainCntResult = clientUpdateProductSaleRemainCountService.updateproductRemain(clientOrderVO);
+        if(!remainCntResult)
+        {
+            return "redirect:index.do";
+        }
+
+
+        clientUpdateCustomerPointService.reducePoint(clientOrderVO);
+        user.setCustomerTbPoint(user.getCustomerTbPoint()-clientOrderVO.getPdOrderTbUsedPoint());
+        session.setAttribute("customer", user);
+
+
         KakaoPayReadyResponseVO responseVO = kakaoPayReadyService.kakaoPayReady(clientOrderVO);
         session.setAttribute("ready", responseVO);
 
@@ -60,6 +74,7 @@ public class ClientPaymentController
 
         System.out.println(clientOrderVO);
         clientInsertOrderService.insertOrderAndDetail(clientOrderVO);
+
 
 
         return "shopping/payment";

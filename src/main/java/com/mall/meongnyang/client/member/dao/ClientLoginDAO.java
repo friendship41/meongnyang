@@ -1,6 +1,7 @@
 package com.mall.meongnyang.client.member.dao;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 
 public interface ClientLoginDAO {
 	public ClientCustomerVO selectLoginCheck(ClientCustomerVO clientCustomerVO);
@@ -11,6 +12,10 @@ public interface ClientLoginDAO {
 	
 	
 	
-	//·Î±×ÀÎ½Ã last login sysdate Ãß°¡
+	//ï¿½Î±ï¿½ï¿½Î½ï¿½ last login sysdate ï¿½ß°ï¿½
 	public void updateLastLogin(ClientCustomerVO clientCustomerVO);
+
+
+
+	public void updatePointUse(ClientOrderVO clientOrderVO);
 }
