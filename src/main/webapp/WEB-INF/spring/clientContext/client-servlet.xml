@@ -19,9 +19,15 @@
 
 
 	<!-- 메일 서비스 -->
-	<bean id="mailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
+	<bean id="MailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
 
-	
+	<!-- API 서버 요청 클래스, 그 외 필요한 클라스 -->
+	<bean id="KakaoPayReadyService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayReadyServiceImpl"/>
+	<bean id="KakaoPayApprovedService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayApprovedServiceImpl"/>
+	<bean id="ParamMapToString" class="com.mall.meongnyang.util.apiRequest.service.ParamMapToString"/>
+	<bean id="RequestVOFactory" class="com.mall.meongnyang.util.apiRequest.voFactory.RequestVOFactoryImpl"/>
+
+
 	<!-- resources mapping -->
 <!--	<mvc:resources mapping="/client/css/**" location="/resources/client/css/"/>-->
 <!--	<mvc:resources mapping="/client/fonts/**" location="/resources/client/fonts/"/>-->

@@ -43,6 +43,7 @@ public class AdminProductVO
     private int pdSaleTbDiscountRate;
     private double pdSaleTbRating;
     private String pdSaleTbSize;
+    private int pdSaleTbNo;
 
 
 
@@ -350,6 +351,15 @@ public class AdminProductVO
         this.pdSaleTbSize = pdSaleTbSize;
     }
 
+    public int getPdSaleTbNo()
+    {
+        return pdSaleTbNo;
+    }
+
+    public void setPdSaleTbNo(int pdSaleTbNo)
+    {
+        this.pdSaleTbNo = pdSaleTbNo;
+    }
 
     @Override
     public String toString()
@@ -384,6 +394,7 @@ public class AdminProductVO
                 ", pdSaleTbDiscountRate=" + pdSaleTbDiscountRate +
                 ", pdSaleTbRating=" + pdSaleTbRating +
                 ", pdSaleTbSize='" + pdSaleTbSize + '\'' +
+                ", pdSaleTbNo=" + pdSaleTbNo +
                 ", uploadFile=" + uploadFile +
                 '}';
     }

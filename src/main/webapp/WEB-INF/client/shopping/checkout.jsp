@@ -104,17 +104,16 @@
             <div class="col-md-4">
                 <div class="order-details">
                     <h5 class="order-details__title">금액</h5>
-                    <div class="order-details__item">
+                    <div id="checkoutItems" class="order-details__item">
                         <c:set var="subtotalPrice" value="0"/>
-                        <c:forEach var="item" items="${sessionScope.cartList}">
-
+                        <c:forEach var="item" items="${sessionScope.cartList}" varStatus="i">
                             <div class="single-item" id="pCheckout-${item.productTbCode}">
-                                <div class="single-item__thumb">
+                                <div class="single-item__thumb" id="${item.pdSaleTbNo}">
                                     <img src="${item.cartImage}" alt="ordered item" width="99" height="119">
                                 </div>
                                 <div class="single-item__content">
                                     <a href="shoppingDetail.do?productTbCode=${item.productTbCode}">${item.pdSaleTbProductName} / ${item.ordersDetialTbAmount}</a>
-                                    <span class="price">${item.pdSaleTbSalesPrice}원</span>
+                                    <span class="price">${item.pdSaleTbSalesPrice} 원</span>
                                 </div>
                                 <div class="single-item__remove">
                                     <a onclick="removeCheckoutItem('${item.productTbCode}')"><i class="zmdi zmdi-delete"></i></a>
@@ -146,7 +145,7 @@
                         <span id="mileage" class="price">${(subtotalPrice+2500)*0.01} 점</span>
                     </div>
                     <div class="ordre-details__total_c">
-                        <a class="checkout__purchase_a" href="market-form.html">결제하기</a>
+                        <a class="checkout__purchase_a" onclick="submitToPay()">결제하기</a>
                     </div>
                 </div>
             </div>
@@ -283,6 +282,106 @@
             .fail(function (xhr, status, errorThrown) {
                 alert(errorThrown);
             });
+    }
+
+    function submitToPay() {
+        var form = document.createElement("form");
+        form.setAttribute("charset", "UTF-8");
+        form.setAttribute("method", "Post");
+        form.setAttribute("action", "/paymentReady.do");
+
+        var pdOrderTbPayment = $("#totalMoney").text();
+        pdOrderTbPayment = pdOrderTbPayment.substring(0, pdOrderTbPayment.length-2);
+        var pdOrderTbAddress = $("#address1").val()+" "+$("#address2").val();
+        var pdOrderTbReceiver = $("#receivePerson").val();
+        var pdOrderTbPhone = $("#phoneNum").val();
+        var pdOrderTbUsedPoint = $("#usePoint").val();
+
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pdOrderTbPayment");
+        hiddenField.setAttribute("value", pdOrderTbPayment);
+        form.appendChild(hiddenField);
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pdOrderTbAddress");
+        hiddenField.setAttribute("value", pdOrderTbAddress);
+        form.appendChild(hiddenField);
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pdOrderTbReceiver");
+        hiddenField.setAttribute("value", pdOrderTbReceiver);
+        form.appendChild(hiddenField);
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pdOrderTbPhone");
+        hiddenField.setAttribute("value", pdOrderTbPhone);
+        form.appendChild(hiddenField);
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "pdOrderTbUsedPoint");
+        hiddenField.setAttribute("value", pdOrderTbUsedPoint);
+        form.appendChild(hiddenField);
+
+        var orderRepProductName = '${sessionScope.cartList.get(0).pdSaleTbProductName}';
+
+        hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", "orderRepProductName");
+        hiddenField.setAttribute("value", orderRepProductName);
+        form.appendChild(hiddenField);
+
+        var itemsLength = document.getElementById("checkoutItems").childElementCount;
+        var itemSingle;
+        var singleSaleNo;
+        var singleAmount;
+        var singlePrice;
+        for(var i=0; i<itemsLength; i++)
+        {
+            itemSingle = $("#checkoutItems").children().eq(i);
+
+            singleSaleNo = itemSingle.children().eq(0).attr("id");
+
+            singleAmount = itemSingle.children().eq(1).children().eq(0).text().split(" / ")[1];
+
+            singlePrice = itemSingle.children().eq(1).children().eq(1).text();
+            singlePrice = singlePrice.substring(0, singlePrice.length-2);
+
+            hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "orderDetailVOList["+i+"].pdSaleTbNo");
+            hiddenField.setAttribute("value", singleSaleNo);
+            form.appendChild(hiddenField);
+
+            hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", "orderDetailVOList["+i+"].ordersDetailTbAmount");
+            hiddenField.setAttribute("value", singleAmount);
+            form.appendChild(hiddenField);
+
+            hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", ("orderDetailVOList["+i+"].ordersDetailTbPrice"));
+            hiddenField.setAttribute("value", singlePrice);
+            form.appendChild(hiddenField);
+        }
+
+
+
+
+
+
+
+
+        document.body.appendChild(form);
+
+        form.submit();
+
+        // var hiddenField = document.createElement("input");
+        // hiddenField.setAttribute("type", "hidden");
+        // hiddenField.setAttribute("name", "");
+        // hiddenField.setAttribute("value", );
+        // form.appendChild(hiddenField);
     }
 </script>
 

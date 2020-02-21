@@ -1,5 +1,7 @@
 package com.mall.meongnyang.util.codeGen;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 public class GenerateCode
@@ -32,6 +34,12 @@ public class GenerateCode
         code.deleteCharAt(12);
         code.deleteCharAt(16);
         code.deleteCharAt(20);
-        return code.substring(0,20);
+
+        Date todayDate = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String today = sdf.format(todayDate);
+
+        code.insert(0, today);
+        return code.substring(0,12);
     }
 }
