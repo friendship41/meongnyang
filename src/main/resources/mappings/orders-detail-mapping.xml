@@ -28,9 +28,20 @@
 		ORDER BY op.orders_detail_tb_no		
 	</select>
 
-	<insert id="insertOrderDetail" parameterType="orderDetail">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
+	<insert id="insertOrderDetail" parameterType="orderDetilProc">
+		INSERT INTO ORDERS_DETAIL
+		VALUES(
+			ORDERS_DETAIL_SEQ.NEXTVAL,
+			${pdSaleTbNo},
+			${ordersDetailTbAmount},
+			${pdOrderTbNo},
+			${ordersDetailTbPrice}
+		)
 	</insert>
+
+	<delete id="deleteOrderDetailByNo" parameterType="orderProc">
+		DELETE FROM ORDERS_DETAIL
+		WHERE PD_ORDER_TB_NO = ${pdOrderTbNo}
+	</delete>
 
 </mapper>
