@@ -40,15 +40,15 @@
                             </div>
                         </div>
                     </div>
-                    <form action="qna-update.do" method="post">
-                    <input type="hidden" name="qnaTbNo" value="${clientQnaVO.qnaTbNo }">
+                    <form action="qna-form2.do" method="post">
+                    
                     <div class="col-lg-8">
                         <div class="ht__comment__form">
                             <h4 class="title__line--5"> Q & A </h4>
                             <div class="ht__comment__form__inner">
                                 <div class="comment__forms">
-                                    <input type="text" name="customerTbName" value="${clientQnaVO.qnaTbNo }번고객 이름" readonly>
-                                    <input type="text" name="customerTbEmail" value="${clientQnaVO.qnaTbNo }번고객 이메일" readonly>
+                                    <input type="text" name="customerTbName" value="${clientQnaVO.customerTbNo }번고객 이름" readonly>
+                                    <input type="text" name="customerTbEmail" value="${clientQnaVO.customerTbNo }번고객 이메일" readonly>
                                     <input type="text" name="qnaTbTitle" value="${clientQnaVO.qnaTbTitle }">
                                 </div>
                             </div>
@@ -59,8 +59,15 @@
                             </div>
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
-                            <a class="fr__btns" href="qna-delete.do?qnaTbNo=${clientQnaVO.qnaTbNo }">삭제</a>
-                            <button class="fr__btns" type="submit">수정</button>
+                            <a class="fr__btns" href="qna-delete.do?qnaTbNo=${clientQnaVO.qnaTbNo }&qnaTbStatus=${'D'}">삭제</a>
+                            <c:if test="${clientQnaVO.qnaTbDepth == 0  }"><!-- depth가 0이면 내글이다 -->
+                            
+                            </c:if>
+                            <c:if test="${clientQnaVO.qnaTbDepth != 0  }">
+                            <button class="fr__btns" type="submit">답글</button>
+                            </c:if>
+                            
+                            <a class="fr__btns" href="qna-update.do?qnaTbNo=${clientQnaVO.qnaTbNo }">수정</a>
                         </div>
                     </div>
                     </form>

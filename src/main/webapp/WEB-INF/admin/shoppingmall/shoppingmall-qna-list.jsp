@@ -63,7 +63,7 @@
                                         <tr>
                                             <td>${qnaList.qnaTbNo }</td>
                                             <c:if test="${qnaList.qnaTbDepth > 0 }">
-                                            <td><span class="label label-success" style="margin-right: 10px">A</span><img src="" width="${5 * qnaList.qnaTbDepth }"><a class="f-bold" href="/shoppingmall-qna-read.ado?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                            <td><span class="label label-success" style="margin-right: 10px">A</span><a class="f-bold" href="/shoppingmall-qna-read.ado?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
                                             </c:if>
                                             <c:if test="${qnaList.qnaTbDepth == 0 }">
                                             <td><span class="label label-success" style="margin-right: 10px">Q</span><a class="f-bold" href="/shoppingmall-qna-read.ado?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>

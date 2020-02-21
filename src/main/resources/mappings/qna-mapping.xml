@@ -18,16 +18,56 @@
 		WHERE qna_tb_no = #{qnaTbNo}
 	</update>
 	
+	<insert id="insertNewQna" parameterType="qna">
+		INSERT INTO qna
+			(qna_tb_no, pd_sale_tb_no, qna_type_tb_no, customer_tb_no, qna_tb_title,
+			qna_tb_content, qna_tb_reg_date, qna_tb_secret, qna_tb_ref)
+		VALUES
+			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
+			#{qnaTbContent}, sysdate, #{qnaTbSecret}, qna_seq.nextval)
+		
+	</insert>
+	
 	<!-- 답변글 -->
+	<insert id="insertQna" parameterType="qna">
+		INSERT INTO qna
+			(qna_tb_no, pd_sale_tb_no, qna_type_tb_no, customer_tb_no, qna_tb_title,
+			qna_tb_content, qna_tb_reg_date, qna_tb_secret, qna_tb_ref)
+		VALUES
+			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
+			#{qnaTbContent}, sysdate, #{qnaTbSecret}, #{qnaTbRef})
+		
+	</insert>
 	<update id="updateStep" parameterType="qna">
 		UPDATE
 			qna
 		SET
-			qna_tb_step = qna_tb_step + 1 
+			qna_tb_step = qna_tb_step + 1
 		WHERE
-			
-			qna_tb_ref = #{qnaTbRef} AND qna_tb_step > #{qnaTbStep}
-		
+			qna_tb_ref = #{qnaTbRef} AND qna_tb_step > #{qnaTbStep}	
+	</update>
+	<update id="updateStepDepth" parameterType="qna">
+		UPDATE
+			qna
+		SET
+			qna_tb_step = qna_tb_step + 1,
+			qna_tb_depth = qna_tb_depth +1  
+		WHERE 
+			qna_tb_no = 
+			(SELECT
+				c.qna_tb_no
+			FROM
+				(SELECT
+					ROWNUM RNUM,
+					b.qna_tb_no
+				FROM
+				(SELECT
+					A.qna_tb_no
+				FROM qna a
+				WHERE qna_tb_ref = #{qnaTbRef} AND qna_tb_step = #{qnaTbStep}
+				ORDER BY qna_tb_no) b ) c 
+				WHERE c.rnum = 2)
+	
 	</update>
 	
 	
@@ -82,33 +122,56 @@
 					ORDER BY 
 						qna_tb_ref DESC, qna_tb_step ASC))
 			
-			<!-- <![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>  -->
+			 <![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>  
+	</select>
+	<select id="adminSelectQnaList" resultType="qna" parameterType="qna">
+		
+		SELECT 
+			*
+		FROM
+			(SELECT
+				ROWNUM rnum,
+				qna_tb_no,
+				pd_sale_tb_no,
+				qna_type_tb_no,
+				customer_tb_no,
+				qna_tb_title,
+				qna_tb_content,
+				qna_tb_reg_date,
+				qna_tb_readcount,
+				qna_tb_secret,
+				qna_tb_ref,
+				qna_tb_step,
+				qna_tb_depth,
+				qna_tb_status,
+				pd_order_tb_no
+				
+			FROM (SELECT 
+						*
+					FROM
+						qna
+					ORDER BY 
+						qna_tb_ref DESC, qna_tb_step ASC))
 			
-			
-			
+			   
 	</select>
 	
-	<insert id="insertQna" parameterType="qna">
-		INSERT INTO qna
-			(qna_tb_no, pd_sale_tb_no, qna_type_tb_no, customer_tb_no, qna_tb_title,
-			qna_tb_content, qna_tb_reg_date, qna_tb_secret, qna_tb_ref, qna_tb_depth, qna_tb_step)
-		VALUES
-			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
-			#{qnaTbContent}, sysdate, #{qnaTbSecret}, #{qnaTbRef}, #{qnaTbDepth}, #{qnaTbStep})
-		
-	</insert>
 
 	<update id="updateQna" parameterType="qna">
 		UPDATE qna
 		SET
 			qna_tb_title = #{qnaTbTitle},
-			qna_tb_content = #{qnaTbContent}
+			qna_tb_content = #{qnaTbContent},
+			
 		WHERE 
 			qna_tb_no = #{qnaTbNo}
 	</update>
 	<delete id="deleteQna" parameterType="qna">
-		DELETE FROM qna 
-		WHERE qna_tb_no = #{qnaTbNo}
+		UPDATE qna
+		SET
+			qna_tb_status = #{qnaTbStatus}
+		WHERE 
+			qna_tb_no = #{qnaTbNo}
 	</delete>
 	
 	<select id="selectQna" parameterType="qna" resultType="qna">

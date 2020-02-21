@@ -46,13 +46,16 @@
 							<div class="ht__comment__form">
                                 <h4 class="title__line--5">글쓰기</h4>
                                 
-                                  <form class="form-horizontal" action="qna-insert2.do" method="post">
+                                  <form class="form-horizontal" action="qna-insert.do" method="post">
                                   <input type="hidden" id="YN" name="qnaTbSecret" value="N">
                                   <input type="hidden" name="pdSaleTbNo" value="0"><!-- 상품번호 value값 추가 -->
                                   <input type="hidden" name="pdOrderTbNo" value="0"><!-- order번호 -->
                                   <input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }">
                                   <input type="hidden" name="qnaTypeTbNo" value="5"><!-- qna카테리고리 값 -->
-                                  
+                                  <input type="hidden" name="qnaTbRef" value="${stair.qnaTbNo }">
+                                  <input type="hidden" name="qnaTbStep" value="${stair.qnaTbStep }">
+                                  <input type="hidden" name="qnaTbDepth" value="${stair.qnaTbDepth }">
+                                
                                   
 										<div class="form-group">
 											<label for="checkbox" class="col-sm-2 control-label"></label>
@@ -127,5 +130,3 @@ $("#CHECK_YN").click(
 </script>
 </c:when>
 </c:choose>	
-
-

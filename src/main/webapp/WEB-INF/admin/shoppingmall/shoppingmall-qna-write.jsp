@@ -37,6 +37,8 @@
                                     <input type="hidden" name="qnaTbRef" value="${stair.qnaTbRef }">
                                     <input type="hidden" name="qnaTbStep" value="${stair.qnaTbStep }">
                                     <input type="hidden" name="qnaTbDepth" value="${stair.qnaTbDepth }">
+                                    <input type="hidden" name="qnaTbSecret" value="Y">
+                                    
                                     <div class="form-group">
                                         <label for="qnaTbTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
@@ -52,7 +54,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">작성일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="qnaTbRegDate" readonly>
+                                            <input type="text" class="form-control date-picker" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">

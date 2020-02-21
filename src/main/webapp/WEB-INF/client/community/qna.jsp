@@ -60,19 +60,21 @@
                                         	<c:forEach var="qnaList" items="${clientQnaList }">
                                             <tr>
                                                 <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
-                                                
                                                 <c:if test="${qnaList.qnaTbSecret == 'Y'}">
                                                 <c:choose>
+                                                <c:when test="${qnaList.qnaTbStatus == 'D' }">
+                                                <td><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>삭제된 글입니다.</td>
+                                                </c:when>
                                                 <c:when test="${qnaList.customerTbNo == sessionScope.customer.customerTbNo}">
-                                                <td class="product-name"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                <td><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
                                                 </c:when>
                                                 <c:otherwise>
-                                                <td class="product-name"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span>${qnaList.qnaTbTitle }</td>
+                                                <td><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span>${qnaList.qnaTbTitle }</td>
                                                 </c:otherwise>
                                                 </c:choose>
                                                 </c:if>
                                                 <c:if test="${qnaList.qnaTbSecret == 'N' }">
-                                                <td class="product-name"><span class="badge badge-success"></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                <td><span class="badge badge-success"></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
                                                 </c:if>
                                                 
                                                 <td class="product-price"><span class="amount"> ${qnaList.customerTbNo }번고객 </span></td>

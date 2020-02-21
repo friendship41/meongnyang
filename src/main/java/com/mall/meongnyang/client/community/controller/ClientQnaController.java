@@ -46,18 +46,18 @@ public class ClientQnaController {
 	
 	
 	@RequestMapping(value = "/qna-list.do", method = RequestMethod.GET)
-	public String qna(@RequestParam(defaultValue = "1") int currentPage, AdminQnaVO adminQnaVO, Model model, HttpSession session) {
+	public String qna(@RequestParam(defaultValue = "1") int currentPage, AdminQnaVO adminQnaVO, Model model) {
 		
 		ClientQnaListPaging paging = new ClientQnaListPaging(currentPage);
 		paging.createPaging(clientSelectQnaListService.selectCountQna());
 		
 		adminQnaVO.setStartRow(paging.getStartRow());
 		adminQnaVO.setEndRow(paging.getEndRow());
-		ClientCustomerVO sessionVO = (ClientCustomerVO)session.getAttribute("customer");
-		int no = sessionVO.getCustomerTbNo();
+		
 		
 		
 		List<AdminQnaVO> tempVO = clientSelectQnaListService.selectQnaList(adminQnaVO);
+		
 		
 		model.addAttribute("paging", paging);
 		model.addAttribute("clientQnaList", tempVO);
@@ -68,24 +68,52 @@ public class ClientQnaController {
 	
 	//카테고리 값 받을수있게
 	@RequestMapping(value = "/qna-form.do", method = RequestMethod.GET)
-    public String qnaCategoryList(AdminQnaTypeVO adminQnaTypeVO, Model model)
+    public String qnaCategoryList(AdminQnaTypeVO adminQnaTypeVO, Model model, AdminQnaVO adminQnaVO)
     {
 		List<AdminQnaTypeVO> tempVO = clientSelectQnaTypeListService.selectQnaTypeList(adminQnaTypeVO);
         model.addAttribute("qnaCategoryList", tempVO);
-                
+        
         return "community/qna-form";
     }	
 	
-	@RequestMapping(value = "/qna-insert.do", method = RequestMethod.POST)
-	public String qnaInsert(AdminQnaVO adminQnaVO, HttpSession session, Model model) {
+	@RequestMapping(value = "/qna-form.do", method = RequestMethod.POST)
+	public String qnaForm(AdminQnaVO adminQnaVO, Model model) {
+		AdminQnaVO tempVO = clientSelectQnaService.selectQna(adminQnaVO);
+		model.addAttribute("stair", tempVO);
+		System.out.println(tempVO);
+		return "community/qna-form";
+	}
+	
+	@RequestMapping(value = "/qna-form2.do", method = RequestMethod.POST)
+	public String qnaForm2(AdminQnaVO adminQnaVO, Model model) {
+		AdminQnaVO tempVO = clientSelectQnaService.selectQna(adminQnaVO);
+		model.addAttribute("stair", tempVO);
+		System.out.println(tempVO);
+		return "community/qna-form2";
+	}
+	
+	@RequestMapping(value = "/qna-insert2.do", method = RequestMethod.POST)
+	public String qnaInsert2(AdminQnaVO adminQnaVO, HttpSession session, Model model) {
 		
-		clientInsertQnaService.insertQna(adminQnaVO);
+		
 		if(adminQnaVO.getQnaTbTitle() == null || adminQnaVO.getQnaTbContent() == null) {
 			model.addAttribute("inputFail", false);
 			return "community/qna-form";
 		}
+		
+		clientInsertQnaService.insertQna2(adminQnaVO);
 		return "redirect:qna-list.do";
 	}
+	
+	@RequestMapping(value = "/qna-insert.do", method = RequestMethod.POST)
+	public String qnaInsert2(AdminQnaVO adminQnaVO) {
+		
+		clientInsertQnaService.insertQna(adminQnaVO);
+		
+		return "redirect:qna-list.do";
+	}
+	
+	
 		
 	@RequestMapping(value = "/qna-read.do", method = RequestMethod.GET)
 	public String qnaRead(AdminQnaVO adminQnaVO, Model model) {
@@ -108,9 +136,10 @@ public class ClientQnaController {
 	}
 	
 	@RequestMapping(value = "/qna-delete.do", method = RequestMethod.GET)
-	public String qnaDelete(AdminQnaVO adminQnaVO) {
-		adminQnaVO.setQnaTbStatus("D");
+	public String qnaDelete(AdminQnaVO adminQnaVO, Model model) {
+		
 		clientDeleteQnaService.deleteQna(adminQnaVO);
+		
 		return "redirect:qna-list.do";
 	}
 }

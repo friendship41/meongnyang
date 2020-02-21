@@ -30,7 +30,7 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 
 	@Override
 	public void deleteQna(AdminQnaVO adminQnaVO) {
-		sqlSessionTemplate.delete("qnaDAO.deleteQna", adminQnaVO);
+		sqlSessionTemplate.update("qnaDAO.deleteQna", adminQnaVO);
 		
 	}
 
@@ -62,6 +62,24 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 	@Override
 	public void updateReadcountQna(int qnaTbNo) {
 		sqlSessionTemplate.update("qnaDAO.updateReadcount", qnaTbNo);
+		
+	}
+
+	@Override
+	public void updateStepDepth(AdminQnaVO adminQnaVO) {
+		sqlSessionTemplate.update("qnaDAO.updateStepDepth", adminQnaVO);
+		
+	}
+
+	@Override
+	public void updateStep(AdminQnaVO adminQnaVO) {
+		sqlSessionTemplate.update("qnaDAO.updateStep", adminQnaVO);
+		
+	}
+
+	@Override
+	public void insertNewQna(AdminQnaVO adminQnaVO) {
+		sqlSessionTemplate.insert("qnaDAO.insertNewQna", adminQnaVO);
 		
 	}
 	
