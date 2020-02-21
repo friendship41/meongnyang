@@ -4,18 +4,31 @@ import java.sql.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ClientReviewVO {
 
 	private int reviewTbNo;
 	private int customerTbNo;
 	private String productTbCode;
 	private String reviewTbContent;
-	private String reviewTbWriter;
+	private String reviewTbWriter;	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
 	private Date reviewTbRegDate;
 	private double reviewTbRating;
 	private String reviewTbImgPath;
 	
 	private String productTbName;
+	private int count;
+	
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	@JsonIgnore
 	private MultipartFile file;
 	
 	private int startRow = 1;
@@ -93,5 +106,12 @@ public class ClientReviewVO {
 	public void setProductTbName(String productTbName) {
 		this.productTbName = productTbName;
 	}
-	
+	@Override
+	public String toString() {
+		return "ClientReviewVO [reviewTbNo=" + reviewTbNo + ", customerTbNo=" + customerTbNo + ", productTbCode="
+				+ productTbCode + ", reviewTbContent=" + reviewTbContent + ", reviewTbWriter=" + reviewTbWriter
+				+ ", reviewTbRegDate=" + reviewTbRegDate + ", reviewTbRating=" + reviewTbRating + ", reviewTbImgPath="
+				+ reviewTbImgPath + ", productTbName=" + productTbName + ", count=" + count + ", file=" + file
+				+ ", startRow=" + startRow + ", endRow=" + endRow + "]";
+	}
 }

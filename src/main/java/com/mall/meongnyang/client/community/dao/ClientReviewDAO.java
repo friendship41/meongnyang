@@ -12,4 +12,5 @@ public interface ClientReviewDAO {
 	void updateReview(ClientReviewVO clientReviewVO);
 	void deleteReview(ClientReviewVO clientReviewVO);
 	int selectReveiwCount(ClientReviewVO clientReviewVO);
+	int selectCount(ClientReviewVO clientReviewVO);
 }

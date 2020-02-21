@@ -128,7 +128,7 @@
                 <!-- Start List And Grid View -->
                 <ul class="pro__details__tab" role="tablist">
                     <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">상품상세</a></li>
-                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review(2)</a></li>
+                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab" id="reviewTap">review</a></li>
                     <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">Q&A(2)</a></li>
                 </ul>
                 <!-- End List And Grid View -->
@@ -153,7 +153,7 @@
                                 <h4 class="title__line--5">Review 남기기</h4>
                                 <div class="ht__comment__form__inner">
                                     <div class="comment__form">
-                                        <input type="text" id="reviewTbWriter" readonly="readonly" value="${customer.customerTbName}">
+                                        <input type="text" id="reviewTbWriter" placeholder="이름" readonly="readonly" value="${customer.customerTbName}">
                                     	<div class="starRev" id="reviewTbRating">
                                     		<span>평점</span>
 										    <span class="starR on">★</span>
@@ -169,7 +169,7 @@
                                         </div>
                                     </div>
                                     <div class="comment__form message">
-                                        <textarea id="reviewTbContent" placeholder="Your Comment"></textarea>
+                                        <textarea id="reviewTbContent" placeholder="review 내용"></textarea>
                                     </div>
                                 </div>
                                 <div class="ht__comment__btn--2 mt--30">
@@ -177,7 +177,7 @@
                                 </div>
                             </div>
                             <!-- End comment Form -->
-                            <h4 class="title__line--5">총 2개의 리뷰가 있습니다.</h4>
+                            <h4 class="title__line--5" id="reviewcnt"></h4>
                             <div class="ht__comment__content">
                                 <!-- Start Single Comment -->
                                 <div class="comment_c">
@@ -192,21 +192,7 @@
                                         <p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed.</p>
                                     </div>
                                 </div>
-                                <!-- End Single Comment -->
-                                <!-- Start Single Comment -->
-                                <div class="comment">
-                                    <div class="comment__thumb">
-                                        <img src="../images/comment/3.png" alt="comment images">
-                                    </div>
-                                    <div class="ht__comment__details">
-                                        <div class="ht__comment__title">
-                                            <h2><a href="#">JOHN NGUYEN</a></h2>
-                                        </div>
-                                        <span>July 15, 2016 at 2:39 am</span>
-                                        <p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed.</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Comment -->
+                                <!-- End Single Comment -->                               
                                 <!-- Start Pagenation -->
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -403,37 +389,125 @@
 <script>
 $(function() {
 	
+	getReviewList();
+	
+	function getReviewList() {
+		var productTbCode = '${detail.productTbCode}';
+		var url = "/productReviewList.do?productTbCode=" + productTbCode;
+		
+		$.getJSON(url, function(data) {
+			var str = "";
+			
+			var reviewCount = data.reviewCount;
+			
+			$("#reviewTap").text('review(' + reviewCount +')');
+			$("#reviewcnt").text('총 ' + reviewCount + '개의 review가 있습니다');
+			
+			$(data.reviewList).each(function() {
+				var num = this.customerTbNo;
+				
+				str += '<div class="comment_c">'
+                    +		'<div class="comment__thumb">';
+                    		if(this.reviewTbImgPath != null){
+                				str +=	'<img src="' + this.reviewTbImgPath + '" alt="review images" width="119px" height="141px">';
+                    		}
+            	str	+=		'</div>'
+            		+		'<div class="ht__comment__details">'
+	                +			'<div class="ht__comment__title">'
+	                +			'<input type="hidden" name="reviewTbNo" value="' + this.reviewTbNo + '">'
+	                +   		 	'<h2>'+ this.reviewTbWriter+'</h2>';
+	                		if((${customer != null}) && ('${customer.customerTbNo}' == num)) {	                			
+	               				str +=	'<div class="reply__btn"><a href="javascript:void(0);" name="deleteBtn">delete</a></div>'
+	                		}
+	            str +=			'</div>'
+	               	+			'<span>' + this.reviewTbRegDate + '</span>'
+	               	+			'<p>평점 : ' + this.reviewTbRating + '</p>'
+	                +			'<p>' + this.reviewTbContent + '</p>'
+	            	+		'</div>'
+        			+	'</div><hr>'	;
+			});
+			$(".ht__comment__content").html(str);
+		});
+	}
+	
 	//리뷰 등록하기
-	$("#addReview").click(function() {
-		
-		var customerNo = "${customer.customerTbNo}";
-		var productCode = "${detail.productTbCode}";
-		var content = $("#reviewTbContent").val();
-		var writer = $("#reviewTbWriter").val();
-		var rating = $(".on").length;
-		var file = $("#review-file").val();
-		
-		var review = {
-			customerTbNo : customerNo,
-			productTbCode : productCode, 
-			reviewTbContent : content,
-			reviewTbWriter : writer,
-			reviewTbRating : rating,
-			reviewTbImgPath : file
-		}
-		
-		$.ajax({
-			type : "POST",
-			url: "/insertReview.do", //서버 요청 URI
-            dataType: "text", //응답받을 데이터의 형태
-            data: JSON.stringify(review),
-			success: function(result) {
-				if(result === "insertReviewSuccess"){
-					console.log('저장성공')
-				}
+	$("#addReview").click(function() { 
+		if(!(${customer == null})) {
+			var data = new FormData();
+			
+			var customerNo = "${customer.customerTbNo}";
+			var productCode = "${detail.productTbCode}";
+			var content = $("#reviewTbContent").val();
+			var writer = $("#reviewTbWriter").val();
+			var rating = $(".on").length;
+			var file = $("#review-file")[0].files[0];
+			
+			data.append("customerTbNo", customerNo);
+			data.append("productTbCode", productCode);
+			data.append("reviewTbContent", content);
+			data.append("reviewTbWriter", writer);
+			data.append("reviewTbRating", rating);
+			if(file != null) {
+				data.append("file", file);					
 			}
-		});		
-	})
+	
+			$.ajax({
+				type : "POST",
+				url: "/insertReview.do", //서버 요청 URI
+				processData: false,
+				contentType: false,
+	            dataType: "text", //응답받을 데이터의 형태
+	            data: data,
+				success: function(result) {
+					if(result === "reviewInsertSuccess") {
+						$('.starRev span').parent().children('span').removeClass('on');
+						$('.starRev span').parent().children('span').first().addClass('on');					
+					    $('.file__box .file-upload').siblings('.file__name').val("");
+					    $('.preview-image .file-upload').remove();
+						$("#reviewTbContent").val("");
+						getReviewList();
+						/* console.log('저장성공'); */
+					} else if(result === "reviewInsertFail"){
+						alert("구매고객만 리뷰를 남길 수 있습니다.");
+						$('.starRev span').parent().children('span').removeClass('on');
+						$('.starRev span').parent().children('span').first().addClass('on');					
+					    $('.file__box .file-upload').siblings('.file__name').val("");
+					    $('.preview-image .file-upload').remove();
+						$("#reviewTbContent").val("");
+					}
+				}
+			});	
+		} else {
+			alert("로그인 후 이용 가능합니다");
+		}
+	});
+	
+	//리뷰 삭제하기
+	$(document).on("click", "a[name='deleteBtn']", function() {	
+		
+		var result = confirm("정말로 삭제하시겠습니까?");
+		var reviewNo = $(this).parents().children("input[name='reviewTbNo']").val();
+		
+		if(result) {
+			
+			$.ajax({
+				type : "POST",
+				url : "/deleteReview.do?reviewTbNo=" + reviewNo,
+				data : {},
+				dataType : "TEXT",
+				success : function(result) {
+					if(result === "deleteSuccess") {
+						getReviewList();
+					}
+				}
+			});
+			
+		} else {
+			return false;
+		}
+	
+	});
+	
 });
 </script>
 <jsp:include page="../include/footer.jsp"/>

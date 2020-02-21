@@ -44,4 +44,9 @@ public class ClientReviewDAOImpl implements ClientReviewDAO {
 		return sessionTemplate.selectOne("reviewDAO.selectReviewCount", clientReviewVO);
 	}
 
+	@Override
+	public int selectCount(ClientReviewVO clientReviewVO) {
+		return sessionTemplate.selectOne("reviewDAO.cntProduct", clientReviewVO);
+	}
+
 }

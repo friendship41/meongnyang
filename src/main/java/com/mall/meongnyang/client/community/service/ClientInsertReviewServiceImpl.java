@@ -19,6 +19,7 @@ public class ClientInsertReviewServiceImpl implements ClientInsertReviewService 
 
 	@Override
 	public void insertReview(ClientReviewVO clientReviewVO, HttpServletRequest request) {
+		
 		if (clientReviewVO.getFile() != null) {
 			try {
 				String fileName = new SaveImageService().saveImage("review", clientReviewVO.getFile(), request);
@@ -27,7 +28,13 @@ public class ClientInsertReviewServiceImpl implements ClientInsertReviewService 
 				e.printStackTrace();
 			}
 		}
+		
 		clientReviewDAO.insertReview(clientReviewVO);
+	}
+
+	@Override
+	public int selectCount(ClientReviewVO clientReviewVO) {
+		return clientReviewDAO.selectCount(clientReviewVO);
 	}
 
 }

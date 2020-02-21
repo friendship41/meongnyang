@@ -19,5 +19,10 @@ public class ClientSelectReviewListServiceImpl implements ClientSelectReviewList
 		return clientReviewDAO.selectReviewList(clientReviewVO);
 	}
 
+	@Override
+	public int selectReveiwCount(ClientReviewVO clientReviewVO) {
+		return clientReviewDAO.selectReveiwCount(clientReviewVO);
+	}
+
 	
 }

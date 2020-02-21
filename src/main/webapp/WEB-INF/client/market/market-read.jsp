@@ -103,8 +103,12 @@
 <jsp:include page="../include/footer.jsp" />
 <script>
 function deleteMarket() {
-	alert("정말로 삭제 하시겠습니까? ");
-	document.location.href="market-delete.do?marketTbNo=" + ${market.marketTbNo};
+	var result = confirm("정말로 삭제 하시겠습니까? ");
+	if(result){
+		document.location.href="market-delete.do?marketTbNo=" + ${market.marketTbNo};		
+	} else {
+		return false;
+	}
 }
 
 //start jqury

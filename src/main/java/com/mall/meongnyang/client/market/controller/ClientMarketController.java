@@ -55,7 +55,6 @@ public class ClientMarketController {
 		
 		MarketListPaging paging = new MarketListPaging(currentPage);
 		paging.createPaging(clientSelectMarketListService.selectCountMarket(clientMarketVO));
-		System.out.println(clientSelectMarketListService.selectCountMarket(clientMarketVO));
 		
 		clientMarketVO.setStartRow(paging.getStartRow());
 		clientMarketVO.setEndRow(paging.getEndRow());
