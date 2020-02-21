@@ -343,6 +343,8 @@
         params += '${imageList.get(0).pdImageTbPath}';
         params += '&productTbCode=';
         params += '${detail.productTbCode}';
+        params += '&pdSaleTbNo=';
+        params += $("#optionSelectBox option:selected").val();
 
         var ajaxUrl = "addCartAjax.do"+params;
 

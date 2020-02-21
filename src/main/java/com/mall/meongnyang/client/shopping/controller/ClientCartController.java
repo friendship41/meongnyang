@@ -24,7 +24,6 @@ public class ClientCartController
         }
 
         cartList.add(adminProductSaleVO);
-        System.out.println(cartList);
         session.setAttribute("cartList", cartList);
 
         return adminProductSaleVO;
