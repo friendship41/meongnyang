@@ -71,14 +71,15 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="htc__pagenation">
-                           <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                           <li><a href="#">1</a></li>
-                           <li><a href="#">2</a></li>
-                           <li><a href="#">3</a></li>
-                           <li><a href="#">4</a></li>
-                           <li><a href="#"><i class="zmdi zmdi-more"></i></a></li>
-                           <li><a href="#">19</a></li>
-                           <li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                           <c:if test="${page.prev}">
+                           <li><a href="/reviewList.do?currentPage=${page.startPage - page.pageBlock}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                           </c:if>
+                           <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
+                           <li><a href="/reviewList.do?currentPage=${i}">${i}</a></li>
+                           </c:forEach>
+                           <c:if test="${page.next}">
+                           <li class="active"><a href="/reviewList.do?currentPage=${page.endPage + 1}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                           </c:if>
                         </ul>
                     </div>
                 </div>

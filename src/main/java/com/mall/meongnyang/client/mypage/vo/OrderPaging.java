@@ -19,9 +19,9 @@ public class OrderPaging {
 	}
 	
 	public void createPage(int orderCount) {
-		int lastPage = (orderCount - 1 / pageSize) + 1;
+		int lastPage = ((orderCount - 1) / pageSize) + 1;
 		startRow = (currentPage - 1)*pageSize + 1;
-		endRow = startRow*pageSize;
+		endRow = currentPage*pageSize;
 		
 		startBlock = ((currentPage - 1)/pageBlock)*pageBlock + 1;
 		endBlock = startBlock + pageBlock - 1;

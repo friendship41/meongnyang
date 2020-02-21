@@ -180,33 +180,18 @@
                             <h4 class="title__line--5" id="reviewcnt"></h4>
                             <div class="ht__comment__content">
                                 <!-- Start Single Comment -->
-                                <div class="comment_c">
-                                    <div class="comment__thumb">
-                                        <img src="../images/comment/1.png" alt="comment images">
-                                    </div>
-                                    <div class="ht__comment__details">
-                                        <div class="ht__comment__title">
-                                            <h2><a href="#">JOHN NGUYEN</a></h2>
-                                        </div>
-                                        <span>July 15, 2016 at 2:39 am</span>
-                                        <p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed.</p>
-                                    </div>
-                                </div>
+                                
                                 <!-- End Single Comment -->                               
-                                <!-- Start Pagenation -->
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <ul class="htc__pagenation">
-                                            <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li class="active"><a href="#">3</a></li>
-                                            <li><a href="#">19</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- End Pagenation -->
                             </div>
+                                <!-- Start Pagenation -->
+							<div class="row">
+								<div class="col-xs-12">
+									<ul class="htc__pagenation" id="reviewPaging">
+										
+									</ul>
+								</div>
+							</div>
+							<!-- End Pagenation -->
                         </div>
                     </div>
                     <!-- End Single Content -->
@@ -389,16 +374,20 @@
 <script>
 $(function() {
 	
+	var customer = '${customer}';
+	
 	getReviewList();
 	
 	function getReviewList() {
 		var productTbCode = '${detail.productTbCode}';
 		var url = "/productReviewList.do?productTbCode=" + productTbCode;
+		var curr = "&currentPage=";
 		
 		$.getJSON(url, function(data) {
 			var str = "";
 			
 			var reviewCount = data.reviewCount;
+			var page = data.page;
 			
 			$("#reviewTap").text('review(' + reviewCount +')');
 			$("#reviewcnt").text('총 ' + reviewCount + '개의 review가 있습니다');
@@ -416,7 +405,7 @@ $(function() {
 	                +			'<div class="ht__comment__title">'
 	                +			'<input type="hidden" name="reviewTbNo" value="' + this.reviewTbNo + '">'
 	                +   		 	'<h2>'+ this.reviewTbWriter+'</h2>';
-	                		if((${customer != null}) && ('${customer.customerTbNo}' == num)) {	                			
+	                		if((customer != null) && ('${customer.customerTbNo}' == num)) {	                			
 	               				str +=	'<div class="reply__btn"><a href="javascript:void(0);" name="deleteBtn">delete</a></div>'
 	                		}
 	            str +=			'</div>'
@@ -427,12 +416,27 @@ $(function() {
         			+	'</div><hr>'	;
 			});
 			$(".ht__comment__content").html(str);
+			
+			var p = "";
+			
+			if(page.prev == true) {
+				p += '<li><a href="'+ url + curr + (page.startPage - page.pageBlock)+'"><i class="zmdi zmdi-chevron-left"></i></a></li>';
+			}
+			for(var i = page.startPage; i < page.endPage+1; i++) {
+				p += '<li><a href="'+ url + curr + i +'">'+i+'</a></li>';
+			}
+			if(page.next == true) {
+			    p += '<li class="active"><a href="'+ url + curr +(page.endPage + 1)+'"><i class="zmdi zmdi-chevron-right"></i></a></li>';				
+			}	  
+			console.log(p);
+		    
+			$("#reviewPaging").html(p);
 		});
 	}
 	
 	//리뷰 등록하기
 	$("#addReview").click(function() { 
-		if(!(${customer == null})) {
+		if(!(customer == null)) {
 			var data = new FormData();
 			
 			var customerNo = "${customer.customerTbNo}";

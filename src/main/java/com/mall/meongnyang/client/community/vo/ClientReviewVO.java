@@ -31,8 +31,8 @@ public class ClientReviewVO {
 	@JsonIgnore
 	private MultipartFile file;
 	
-	private int startRow = 1;
-	private int endRow = 9;
+	private int startRow;
+	private int endRow;
 	
 	public MultipartFile getFile() {
 		return file;

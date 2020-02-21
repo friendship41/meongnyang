@@ -1,10 +1,10 @@
 package com.mall.meongnyang.client.community.vo;
 
-public class NoticeListPaging {
+public class ReviewPaging {
 	
-	private int pageSize;
 	private int currentPage;
-	private final int pageBlock=10;
+	private int pageSize;
+	private final int pageBlock = 10;
 	private int startRow;
 	private int endRow;
 	private int startPage;
@@ -12,42 +12,31 @@ public class NoticeListPaging {
 	private boolean prev;
 	private boolean next;
 	
-	public NoticeListPaging(int currentPage) {
-		this.pageSize = 10;
+	public ReviewPaging(int currentPage) {
 		this.currentPage = currentPage;
-		
+		this.pageSize = 9;
 	}
 	
-	public void createPaging(int countList) {
-		int lastPage = (int) Math.ceil(countList/(double) pageSize);
-		this.startRow = (currentPage -1)*pageSize +1; 
-		this.endRow = currentPage * pageSize;
-		this.startPage = (int) ((currentPage -1)/pageBlock)* pageBlock +1;
-		this.endPage = startPage + pageBlock-1;
-		this.prev = false;
-		this.next = false;
+	public void creatPage(int reviewCount) {
+		int lastPage = ((reviewCount - 1) / pageSize) + 1;
 		
-		if(endPage>lastPage) {
-			this.endPage = lastPage;
+		startRow = (currentPage-1) * pageSize + 1;
+		endRow = currentPage * pageSize;
+		startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1; 
+		endPage = startPage + pageBlock - 1;
+		prev = false;
+		next = false;
+		
+		if(endPage > lastPage) {
+			endPage = lastPage;
 		}
 		
-		if(startPage !=1) {
-			this.prev = true;
+		if(startPage > 1) {
+			prev = true;
 		}
-		
-		if(endPage<lastPage) {
-			this.next = true;
+		if(endPage < lastPage) {
+			next = true;
 		}
-		
-				
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
 	}
 
 	public int getCurrentPage() {
@@ -56,7 +45,14 @@ public class NoticeListPaging {
 
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
-		
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	public int getStartRow() {
@@ -110,6 +106,5 @@ public class NoticeListPaging {
 	public int getPageBlock() {
 		return pageBlock;
 	}
-
 
 }
