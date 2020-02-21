@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -62,12 +61,12 @@ public class ClientPaymentController
         System.out.println(clientOrderVO);
         clientInsertOrderService.insertOrderAndDetail(clientOrderVO);
 
-        System.out.println("결제대기 완료");
+
         return "shopping/payment";
     }
 
     @RequestMapping(value = "/kakaoPayApproval.do", method = RequestMethod.GET)
-    public String kakaoPayApprove(HttpSession session, @RequestParam("pg_token")String pg_token, HttpServletResponse response)
+    public String kakaoPayApprove(HttpSession session, @RequestParam("pg_token")String pg_token, Model model)
     {
         ClientOrderVO clientOrderVO = (ClientOrderVO)session.getAttribute("orderInfo");
         clientOrderVO.setPg_token(pg_token);
@@ -81,18 +80,22 @@ public class ClientPaymentController
         session.setAttribute("ready", null);
         session.setAttribute("orderInfo", null);
 
-        System.out.println("결제성공");
+
+        session.setAttribute("cartList", null);
+
+
+        model.addAttribute("message", "결제가 완료되엇습니다.");
         return "shopping/payment-success";
     }
 
-    @RequestMapping(value = "/kakaoPayFail.do")
-    public String failToPay(HttpSession session)
+    @RequestMapping(value = {"/kakaoPayCancel.do","/kakaoPayFail.do"})
+    public String failToPay(HttpSession session, Model model)
     {
         clientDeleteOrderService.deleteOrder((ClientOrderVO)session.getAttribute("orderInfo"));
         session.setAttribute("ready", null);
         session.setAttribute("orderInfo", null);
 
-        System.out.println("결제실패");
-        return "redirect:index.do";
+        model.addAttribute("message", "처음부터 다시 해주세요.");
+        return "shopping/payment-success";
     }
 }

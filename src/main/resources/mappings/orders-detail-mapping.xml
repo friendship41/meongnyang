@@ -32,16 +32,16 @@
 		INSERT INTO ORDERS_DETAIL
 		VALUES(
 			ORDERS_DETAIL_SEQ.NEXTVAL,
-			${pdSaleTbNo},
-			${ordersDetailTbAmount},
-			${pdOrderTbNo},
-			${ordersDetailTbPrice}
+			#{pdSaleTbNo},
+			#{ordersDetailTbAmount},
+			#{pdOrderTbNo},
+			#{ordersDetailTbPrice}
 		)
 	</insert>
 
 	<delete id="deleteOrderDetailByNo" parameterType="orderProc">
 		DELETE FROM ORDERS_DETAIL
-		WHERE PD_ORDER_TB_NO = ${pdOrderTbNo}
+		WHERE PD_ORDER_TB_NO = #{pdOrderTbNo}
 	</delete>
 
 </mapper>

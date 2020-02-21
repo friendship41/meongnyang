@@ -9,7 +9,7 @@
 <html>
 <script type="text/javascript">
     function goToMom() {
-        alert('결제가 완료되었습니다!');
+        alert('${message}');
         window.opener.location.href = "index.do";
         window.close();
     }
