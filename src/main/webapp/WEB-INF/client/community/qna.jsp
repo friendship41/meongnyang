@@ -63,18 +63,18 @@
                                                 <c:if test="${qnaList.qnaTbSecret == 'Y'}">
                                                 <c:choose>
                                                 <c:when test="${qnaList.qnaTbStatus == 'D' }">
-                                                <td><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>삭제된 글입니다.</td>
+                                                <td style="text-align: left;"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>삭제된 글입니다.</td>
                                                 </c:when>
-                                                <c:when test="${qnaList.customerTbNo == sessionScope.customer.customerTbNo}">
-                                                <td><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                <c:when test="${qnaList.customerTbNo == sessionScope.customer.customerTbNo || qnaList.qnaTbDepth > 0}">
+                                                <td style="text-align: left;"><c:forEach begin="1" end="${5 * qnaList.qnaTbDepth}">&nbsp;</c:forEach><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }" onclick="inCheck()">${qnaList.qnaTbTitle }</a></td>
                                                 </c:when>
                                                 <c:otherwise>
-                                                <td><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i> Q</span>${qnaList.qnaTbTitle }</td>
+                                                <td style="text-align: left;"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>${qnaList.qnaTbTitle }</td>
                                                 </c:otherwise>
                                                 </c:choose>
                                                 </c:if>
                                                 <c:if test="${qnaList.qnaTbSecret == 'N' }">
-                                                <td><span class="badge badge-success"></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                <td style="text-align: left;"><span class="badge badge-success"></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
                                                 </c:if>
                                                 
                                                 <td class="product-price"><span class="amount"> ${qnaList.customerTbNo }번고객 </span></td>
@@ -111,3 +111,8 @@
 
 
 <jsp:include page="../include/footer.jsp"/>
+<script type="text/javascript">
+	function inCheck() {
+		
+	}
+</script>

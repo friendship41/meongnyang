@@ -42,6 +42,7 @@
                                            style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
+                                        	
                                             <th>글번호</th>
                                             <th>제목</th>
                                             <th>글쓴이</th>
@@ -51,6 +52,7 @@
                                         </thead>
                                         <tfoot>
                                         <tr>
+                                        	
                                             <th>글번호</th>
                                             <th>제목</th>
                                             <th>글쓴이</th>
@@ -61,13 +63,16 @@
                                         <tbody>
                                         <c:forEach var="qnaList" items="${adminQnaList }">
                                         <tr>
-                                            <td>${qnaList.qnaTbNo }</td>
+                                        	
+                                            <td>${qnaList.qnaTbNo}</td>
+                                            <c:if test="${qnaList.qnaTbStatus == 'D' }">
+                                            <td>삭제된 글입니다.</td>
+                                            </c:if>
+                                            
                                             <c:if test="${qnaList.qnaTbDepth > 0 }">
-                                            <td><span class="label label-success" style="margin-right: 10px">A</span><a class="f-bold" href="/shoppingmall-qna-read.ado?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                            <td><c:forEach begin="1" end="${5 * qnaList.qnaTbDepth}">&nbsp;</c:forEach><span class="label label-success" style="margin-right: 10px">A</span><a class="f-bold" href="/shoppingmall-qna-read.ado?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
                                             </c:if>
-                                            <c:if test="${qnaList.qnaTbDepth == 0 }">
-                                            <td><span class="label label-success" style="margin-right: 10px">Q</span><a class="f-bold" href="/shoppingmall-qna-read.ado?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
-                                            </c:if>
+                                            
                                             <td>${qnaList.customerTbNo}</td>
                                             <td>${qnaList.qnaTbRegDate }</td>
                                             <td>${qnaList.qnaTbReadcount }</td>
@@ -99,4 +104,7 @@
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
 </body>
+
 </html>
+
+

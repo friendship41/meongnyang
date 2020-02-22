@@ -55,6 +55,16 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 		
 	}
 
+	@Override
+	public AdminQnaVO selectInfoQna(AdminQnaVO adminQnaVO) {
+		// TODO Auto-generated method stub
+		return sqlSessionTemplate.selectOne("qnaDAO.selectInfoQna", adminQnaVO);
+	}
+
+	
+
+	
+
 	
 
 	

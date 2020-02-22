@@ -3,12 +3,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="qnaDAO">
+	
+	<select id="selectInfoQna" parameterType="qna" resultType="qna">
+		SELECT 
+			customer.customer_tb_no, customer.customer_tb_name, customer.customer_tb_email
+		FROM 
+			customer, qna
+		WHERE 
+			customer.customer_tb_no = qna.customer_tb_no and rownum = 1
+	</select>
+
 
 	<!-- 전체 글수 -->
 	<select id="selectCountQna" resultType="int">
 		SELECT COUNT(*) FROM qna
 	</select>
-	
 	<!-- 게시글 조회수 증가 -->
 	<update id="updateReadcount" parameterType="int">
 		UPDATE 
@@ -114,7 +123,6 @@
 				qna_tb_depth,
 				qna_tb_status,
 				pd_order_tb_no
-				
 			FROM (SELECT 
 						*
 					FROM

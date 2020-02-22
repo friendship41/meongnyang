@@ -44,13 +44,13 @@
                                     <div class="form-group">
                                         <label for="qnaTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbTitle" value="${adminSelectQna.qnaTbTitle }">
+                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbTitle" value="${adminSelectQna.qnaTbTitle }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                           <input type="text" class="form-control" id="customerTbId" value="${adminSelectQna.customerTbNo }번 고객"><!-- 몰겟음 -->
+                                           <input type="text" class="form-control" id="customerTbName" name="customerTbName" value="${adminSelectQna.customerTbName }" readonly><!-- 몰겟음 -->
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -62,7 +62,7 @@
                                     <div class="form-group">
                                         <label for="qnaReadCnt" class="col-sm-2 control-label">조회수</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaReadCnt" name="qnaTbReadcount" value="${adminSelectQna.qnaTbReadcount }">
+                                            <input type="text" class="form-control" id="qnaReadCnt" name="qnaTbReadcount" value="${adminSelectQna.qnaTbReadcount }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -74,7 +74,7 @@
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
-                                            <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminSelectQna.qnaTbNo }">삭제</a>
+                                            <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminSelectQna.qnaTbNo }&qnaTbStatus=${'D'}">삭제</a>
                                             <button class="btn btn-primary" type="submit">답글작성</button>
                                         </div>
                                     </div>

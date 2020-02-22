@@ -16,9 +16,31 @@ public class AdminQnaVO {
 	private int qnaTbStep;
 	private int qnaTbDepth;
 	private String qnaTbStatus;
+	private int rnum;
+	private String customerTbEmail;
+	private String customerTbName;
 	
-	private int startRow; //현재페이지의 시작글번호
-	private int endRow; //현재페이지의 끝 글번호
+	
+	public String getCustomerTbEmail() {
+		return customerTbEmail;
+	}
+	public void setCustomerTbEmail(String customerTbEmail) {
+		this.customerTbEmail = customerTbEmail;
+	}
+	public String getCustomerTbName() {
+		return customerTbName;
+	}
+	public void setCustomerTbName(String customerTbName) {
+		this.customerTbName = customerTbName;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	private int startRow; 
+	private int endRow; 
 	
 	public int getStartRow() {
 		return startRow;
@@ -110,14 +132,17 @@ public class AdminQnaVO {
 	public void setQnaTbDepth(int qnaTbDepth) {
 		this.qnaTbDepth = qnaTbDepth;
 	}
+	
 	@Override
 	public String toString() {
 		return "AdminQnaVO [qnaTbNo=" + qnaTbNo + ", pdSaleTbNo=" + pdSaleTbNo + ", qnaTypeTbNo=" + qnaTypeTbNo
 				+ ", customerTbNo=" + customerTbNo + ", qnaTbTitle=" + qnaTbTitle + ", qnaTbContent=" + qnaTbContent
 				+ ", qnaTbRegDate=" + qnaTbRegDate + ", qnaTbReadcount=" + qnaTbReadcount + ", qnaTbSecret="
 				+ qnaTbSecret + ", qnaTbRef=" + qnaTbRef + ", qnaTbStep=" + qnaTbStep + ", qnaTbDepth=" + qnaTbDepth
-				+ ", qnaTbStatus=" + qnaTbStatus + "]";
+				+ ", qnaTbStatus=" + qnaTbStatus + ", rnum=" + rnum + ", customerTbEmail=" + customerTbEmail
+				+ ", customerTbName=" + customerTbName + ", startRow=" + startRow + ", endRow=" + endRow + "]";
 	}
+	
 	
 	
 }

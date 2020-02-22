@@ -36,8 +36,10 @@ public class AdminQnaController {
 	
 	@RequestMapping(value = "/shoppingmall-qna-list.ado", method = RequestMethod.GET)
 	public String selectQnaList(AdminQnaVO adminQnaVO, Model model) {
+		//사용자 이름 이메일
 		
 		List<AdminQnaVO> adminQnaList = adminSelectQnaListService.selectQnaList(adminQnaVO);
+		
 		model.addAttribute("adminQnaList", adminQnaList);
 		
 		return "shoppingmall/shoppingmall-qna-list";
@@ -54,10 +56,13 @@ public class AdminQnaController {
 	}
 	
 	@RequestMapping(value = "/shoppingmall-qna-read.ado", method = RequestMethod.GET)
-	public String updateFormQna(AdminQnaVO adminQnaVO, Model model) {
-		
+	public String readFormQna(AdminQnaVO adminQnaVO, Model model) {
+		AdminQnaVO tempVO2 = adminSelectQnaService.selectQnaInfo(adminQnaVO);
+		String email = tempVO2.getCustomerTbEmail();
+		String name = tempVO2.getCustomerTbName();
 		AdminQnaVO tempVO = adminSelectQnaService.selectQna(adminQnaVO);
-		
+		tempVO.setCustomerTbEmail(email);
+		tempVO.setCustomerTbName(name);
 		model.addAttribute("adminSelectQna", tempVO);
 		return "shoppingmall/shoppingmall-qna-read";
 	}

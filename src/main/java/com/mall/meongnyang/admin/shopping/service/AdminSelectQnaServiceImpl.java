@@ -14,7 +14,16 @@ public class AdminSelectQnaServiceImpl implements AdminSelectQnaService {
 	
 	@Override
 	public AdminQnaVO selectQna(AdminQnaVO adminQnaVO) {
+		
 		return adminQnaDAO.selectQna(adminQnaVO);
+	}
+
+	@Override
+	public AdminQnaVO selectQnaInfo(AdminQnaVO adminQnaVO) {
+		AdminQnaVO tempVO = adminQnaDAO.selectInfoQna(adminQnaVO);
+		
+		
+		return tempVO;
 	}
 
 }

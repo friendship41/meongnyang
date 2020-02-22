@@ -82,6 +82,8 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 		sqlSessionTemplate.insert("qnaDAO.insertNewQna", adminQnaVO);
 		
 	}
+
+	
 	
 	
 }
