@@ -37,7 +37,7 @@
                             <h4 class="title__line--4">My Page</h4>
                             <ul class="ht__cat__list">
                                 <li><a href="#">주문내역</a></li>
-                                <li><a href="#">wishlist</a></li>
+                                <li><a href="/wishlistSelect.do">wishlist</a></li>
                                 <li><a href="#">내정보</a></li>
                                 <li><a href="/logout.do">Logout</a></li>
                             </ul>
