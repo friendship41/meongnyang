@@ -21,7 +21,7 @@ public class NoticeListPaging {
 	public void createPaging(int countList) {
 		int lastPage = (int) Math.ceil(countList/(double) pageSize);
 		this.startRow = (currentPage -1)*pageSize +1; 
-		this.endRow = startRow * pageSize;
+		this.endRow = currentPage * pageSize;
 		this.startPage = (int) ((currentPage -1)/pageBlock)* pageBlock +1;
 		this.endPage = startPage + pageBlock-1;
 		this.prev = false;

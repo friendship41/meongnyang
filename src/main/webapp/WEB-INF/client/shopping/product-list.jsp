@@ -90,6 +90,7 @@
                                     <div class="ht__list__wrap">
                                         <!-- Start List Product -->
                                         <c:forEach var="product" items="${productList}">
+                                            <input type="hidden" id="psNo-${product.productTbCode}" value="${product.pdSaleTbNo}">
                                             <div class="ht__list__product">
                                                 <div class="ht__list__thumb">
                                                     <a href="shoppingDetail.do?productTbCode=${product.productTbCode}"><img id="productImg-${product.productTbCode}" src="${product.pdImageTbPath}" alt="product images" width="290" height="385"></a>
@@ -238,6 +239,11 @@
         params += imgPath;
         params += '&productTbCode=';
         params += productTbCode;
+
+        var psNo = document.getElementById("psNo-"+productTbCode).value;
+        params += '&pdSaleTbNo=';
+        params += psNo;
+
 
         var ajaxUrl = "addCartAjax.do"+params;
 

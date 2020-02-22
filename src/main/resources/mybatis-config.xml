@@ -8,20 +8,24 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
     <typeAliases>
-        <typeAlias type="com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO" alias="login"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminMemberVO" alias="adminMember"/>
+        <typeAlias type="com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO" alias="login"/>
+        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO" alias="clientMyinfo"/>
         <typeAlias type="com.mall.meongnyang.client.member.vo.ClientCustomerVO" alias="clientLogin"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminFaqVO" alias="faq"/>
+        <typeAlias type="com.mall.meongnyang.client.market.vo.ClientMarketCommentVO" alias="comment"/>
         <typeAlias type="com.mall.meongnyang.client.market.vo.ClientMarketVO" alias="market"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO" alias="adminNotice"/>
+        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientOrdersDetailVO" alias="orderDetail"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO" alias="category"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductImageVO" alias="productImage"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductVO" alias="product"/>
+        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO" alias="order"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductSaleVO" alias="productSale"/>
         <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO" alias="promotion"/>
-        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO" alias="clientMyinfo"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminTermsVO" alias="terms"/>
-        <typeAlias type="com.mall.meongnyang.client.market.vo.ClientMarketCommentVO" alias="comment"/>
+        <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminOverviewVisitorVO" alias = "adminOverview"/>
+        <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientWishlistVO" alias="wishlist"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappings/adminMember-mapping.xml"/>
@@ -32,12 +36,16 @@
         <mapper resource="mappings/market-comment-mapping.xml"/>
         <mapper resource="mappings/market-mapping.xml"/>
         <mapper resource="mappings/notice-mapping.xml"/>
+        <mapper resource="mappings/orders-detail-mapping.xml"/>
         <mapper resource="mappings/product-category-mapping.xml"/>
         <mapper resource="mappings/product-image-mapping.xml"/>
         <mapper resource="mappings/product-mapping.xml"/>
+        <mapper resource="mappings/product-order-mapping.xml"/>
         <mapper resource="mappings/product-sale-mapping.xml"/>
         <mapper resource="mappings/product-stock-mapping.xml"/>
         <mapper resource="mappings/promotion-mapping.xml"/>
         <mapper resource="mappings/terms-mapping.xml"/>
+        <mapper resource="mappings/user-count-mapping.xml"/>
+        <mapper resource="mappings/wishlist-mapping.xml"/>
     </mappers>
 </configuration>

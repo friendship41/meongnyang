@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../include/header.jsp"/>
         <!-- Start Bradcaump area -->
@@ -32,10 +33,10 @@
                             <div class="htc__category">
                                 <h4 class="title__line--4">My Page</h4>
                                 <ul class="ht__cat__list">
-                                    <li><a href="#">주문내역</a></li>
-                                    <li><a href="/wishlistSelect.do">wishlist</a></li>
-                                    <li><a href="#">내정보</a></li>
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="/orderList.do">주문내역</a></li>
+                                    <li><a href="#">wishlist</a></li>
+                                    <li><a href="/myinfo.do">내정보</a></li>
+                                  <li><a href="/logout.do">Logout</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -55,50 +56,39 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <c:if test="${orderList.size() == 0 }">
                                         <tr>
-                                            <td class="product-remove"><a href="#">4</a></td>
-                                            <td class="product-name"><a href="#">초코하임 외 2건</a></td>
-                                            <td class="product-price"><span class="amount">15000 원</span></td>
-                                            <td class="product-stock-status"><span class="badge badge-cancel">취소됨</span></td>
-                                            <td class="product-add-to-cart"></td>
+                                        	<td colspan="5">주문 내역이 존재 하지 않습니다.</td>
                                         </tr>
+                                        </c:if>
+                                        <c:forEach items="${orderList}" var="order">                                      
                                         <tr>
-                                            <td class="product-remove"><a href="#">3</a></td>
-                                            <td class="product-name"><a href="#">Vue.js 2 Cookbook 외 1건</a></td>
-                                            <td class="product-price"><span class="amount">55000 원</span></td>
-                                            <td class="product-stock-status"><span class="badge badge-complete">배송완료</span></td>
-                                            <td class="product-add-to-cart"><a href="#">리뷰작성</a><a href="#">환불반품</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-remove"><a href="#">2</a></td>
-                                            <td class="product-name"><a href="#">스프링 레시피</a></td>
-                                            <td class="product-price"><span class="amount">40000 원</span></td>
-                                            <td class="product-stock-status"><span class="badge badge-nowGo">배송중</span></td>
-                                            <td class="product-add-to-cart"><a href="#">배송조회</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-remove"><a href="#">1</a></td>
-                                            <td class="product-name"><a href="#">BBQ 황금올리브 외 2건</a></td>
-                                            <td class="product-price"><span class="amount">40000 원</span></td>
+                                            <td class="product-remove">${order.pdOrderTbNo}</td>
+                                            <td class="product-name"><a href="/orderRead.do?pdOrderTbNo=${order.pdOrderTbNo}">${order.pdSaleTbProductName}<c:if test="${order.orderProductCount > 1}"> 외 ${order.orderProductCount - 1}개</c:if></a></td>
+                                            <td class="product-price"><span class="amount">${order.pdOrderTbPayment}</span></td>
+                                            <c:if test="${order.pdOrderTbState eq 'P'}">
                                             <td class="product-stock-status"><span class="badge badge-payComp">결제완료</span></td>
                                             <td class="product-add-to-cart"><a href="#">주문취소</a></td>
+                                            </c:if>
+                                            <c:if test="${order.pdOrderTbState eq 'D'}">
+                                            <td class="product-stock-status"><span class="badge badge-nowGo">배송중</span></td>
+                                            <td class="product-add-to-cart"><a href="#">배송조회</a></td>
+                                            </c:if>
+                                            <c:if test="${order.pdOrderTbState eq 'A'}">
+                                            <td class="product-stock-status"><span class="badge badge-complete">배송완료</span></td>
+                                            <td class="product-add-to-cart"><a href="#">리뷰작성</a><a href="#">환불반품</a></td>
+                                            </c:if>
+                                            <c:if test="${order.pdOrderTbState eq 'C'}">
+                                            <td class="product-stock-status"><span class="badge badge-cancel">취소됨</span></td>
+                                            <td class="product-add-to-cart"></td>
+                                            </c:if>
                                         </tr>
+                                        </c:forEach>                                     
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <td colspan="6">
-                                                <div class="wishlist-share">
-                                                    <h4 class="wishlist-share-title">Share on:</h4>
-                                                    <div class="social-icon">
-                                                        <ul>
-                                                            <li><a href="#"><i class="zmdi zmdi-rss"></i></a></li>
-                                                            <li><a href="#"><i class="zmdi zmdi-vimeo"></i></a></li>
-                                                            <li><a href="#"><i class="zmdi zmdi-tumblr"></i></a></li>
-                                                            <li><a href="#"><i class="zmdi zmdi-pinterest"></i></a></li>
-                                                            <li><a href="#"><i class="zmdi zmdi-linkedin"></i></a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                            <td colspan="6">                                              
+                                            <h4 class="wishlist-share-title">1</h4>                                                
                                             </td>
                                         </tr>
                                         </tfoot>
@@ -111,4 +101,4 @@
             </div>
         </div>
         <!-- cart-main-area end -->
-<jsp:include page="../include/footer.jsp" />    
+<jsp:include page="../include/footer.jsp" />   

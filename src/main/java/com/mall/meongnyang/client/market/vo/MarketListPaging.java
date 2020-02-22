@@ -21,7 +21,7 @@ public class MarketListPaging {
 		int lastPage = (int) Math.ceil(countList /(double) pageSize);
 
 		this.startRow = (currentPage - 1) * pageSize + 1; //현재페이지의 시작글번호
-		this.endRow = startRow * pageSize; //현재페이지의 끝 글번호
+		this.endRow = currentPage * pageSize; //현재페이지의 끝 글번호
 		this.startPage = (int) ((currentPage - 1)/pageBlock) * pageBlock + 1; //페이지 단락의 시작
 		this.endPage = startPage + pageBlock-1; //페이지 끝 시작
 		this.prev = false; //이전페이지 활성

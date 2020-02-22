@@ -101,7 +101,8 @@
                 b.PD_SALE_TB_DISCOUNT_RATE,
                 b.PD_SALE_TB_RATING,
                 b.PD_SALE_TB_PRODUCT_NAME,
-                b.PD_SALE_TB_SIZE
+                b.PD_SALE_TB_SIZE,
+                b.PD_SALE_TB_NO
             FROM
                 (SELECT
                     rownum rnum,
@@ -112,7 +113,8 @@
                     a.PD_SALE_TB_DISCOUNT_RATE,
                     a.PD_SALE_TB_RATING,
                     a.PD_SALE_TB_PRODUCT_NAME,
-                    a.PD_SALE_TB_SIZE
+                    a.PD_SALE_TB_SIZE,
+                    a.PD_SALE_TB_NO
                 FROM
                     (SELECT
                         p.PRODUCT_TB_CODE,
@@ -122,7 +124,8 @@
                         ps.PD_SALE_TB_DISCOUNT_RATE,
                         ps.PD_SALE_TB_RATING,
                         ps.PD_SALE_TB_PRODUCT_NAME,
-                        ps.PD_SALE_TB_SIZE
+                        ps.PD_SALE_TB_SIZE,
+                        ps.PD_SALE_TB_NO
                     FROM product p JOIN (
                         SELECT PRODUCT_TB_CODE, PD_IMAGE_TB_PATH FROM pd_image WHERE PD_IMAGE_TB_REPRESENTATIVE = 'Y'
                     ) pi

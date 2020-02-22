@@ -44,16 +44,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2020">
+                                                    <input type="text" id=datePickerOne class="date-picker text-center form-control" placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom:14px;">
+                                                    <input type="text" id=datePickerTwo class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span  onclick="getMemberTabeOne()"  class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -74,16 +74,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2019">
+                                                    <input type="text" id="monthPickerOne" class="date-picker text-center form-control" placeholder="01/01/2019">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
+                                                    <input type="text" id="monthPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span onclick="getMemberTableTwo()"  class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,16 +111,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2019">
+                                                    <input type="text" id="memberDayPickerOne" class="date-picker text-center form-control" placeholder="01/01/2019">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
+                                                    <input type="text" id="memberDayPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span onclick="getDayMemberNumber()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -141,16 +141,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2019">
+                                                    <input type="text" id="monthMemberPickerOne" class="date-picker text-center form-control" placeholder="01/01/2019">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
+                                                    <input type="text" id="monthMemberPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span onclick="getMonthMemberNumber()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -178,16 +178,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2019">
+                                                    <input type="text" id="dayIncDecPickerOne" class="date-picker text-center form-control" placeholder="01/01/2019">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
+                                                    <input type="text" id="dayIncDecPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <sapn onclick="getDayIncDec()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</sapn>
                                                 </div>
                                             </div>
                                         </div>
@@ -208,16 +208,16 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2019">
+                                                    <input type="text" id="monthInDecPickerOne" class="date-picker text-center form-control" placeholder="01/01/2019">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
+                                                    <input type="text" id="monthInDecPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span onclick="getMonthInDec()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -357,8 +357,180 @@
 </div>
 <!-- /Page Container -->
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+	
+	function getMemberTabeOne(){
+		
+		var date1 = $("#datePickerOne").val();
+		var date2 = $("#datePickerTwo").val();
+		date1+="";
+		date2+="";
+		var ajaxUrl = "/memberOverviewAjax.ado?StartDate="+date1+"&EndDate="+date2;
+		
+		$.ajax({
+		
+			url: ajaxUrl,
+			type: "GET",
+			data: {},
+			dataType: "json"
+		
+		})
+		
+		.done(function (json){
+			console.log(json);
+			new Chart(document.getElementById("visit_chart_day"),json);
+			
+		})
+		.fail(function (xhr, status, errorThrown){
+			alert(errorThrown);	
+		});
+		
+			
+		}
+	
+	
+	function getMemberTableTwo(){
+		
+		var date1 = $("#monthPickerOne").val();
+		var date2 = $("#monthPickerTwo").val();
+		date1+="";
+		date2+="";
+		var ajaxUrl = "/memberOverviewTwoAjax.ado?StartDate="+date1+"&EndDate="+date2;
+		
+		$.ajax({
+		
+			url: ajaxUrl,
+			type: "GET",
+			data: {},
+			dataType: "json"
+		
+		})
+		
+		.done(function (json){
+			console.log(json);
+			new Chart(document.getElementById("visit_chart_month"),json);
+			
+		})
+		.fail(function (xhr, status, errorThrown){
+			alert(errorThrown);	
+		});
+	}
+	
+
+	function getDayMemberNumber(){
+		
+		var date1 = $("#memberDayPickerOne").val();
+		var date2 = $("#memberDayPickerTwo").val();
+		date1+="";
+		date2+="";
+		var ajaxUrl = "/memberOverviewThreeAjax.ado?StartDate="+date1+"&EndDate="+date2;
+		
+		$.ajax({
+		
+			url: ajaxUrl,
+			type: "GET",
+			data: {},
+			dataType: "json"
+		
+		})
+		
+		.done(function (json){
+			console.log(json);
+			new Chart(document.getElementById("member_chart_day"),json);
+			
+		})
+		.fail(function (xhr, status, errorThrown){
+			alert(errorThrown);	
+		});
+	}
+	
+function getMonthMemberNumber(){
+		
+		var date1 = $("#monthMemberPickerOne").val();
+		var date2 = $("#monthMemberPickerTwo").val();
+		date1+="";
+		date2+="";
+		var ajaxUrl = "/memberOverviewFourAjax.ado?StartDate="+date1+"&EndDate="+date2;
+		
+		$.ajax({
+		
+			url: ajaxUrl,
+			type: "GET",
+			data: {},
+			dataType: "json"
+		
+		})
+		
+		.done(function (json){
+			console.log(json);
+			new Chart(document.getElementById("member_chart_month"),json);
+			
+		})
+		.fail(function (xhr, status, errorThrown){
+			alert(errorThrown);	
+		});
+	}
+	
+function getDayIncDec(){
+	
+	var date1 = $("#dayIncDecPickerOne").val();
+	var date2 = $("#dayIncDecPickerTwo").val();
+	date1+="";
+	date2+="";
+	var ajaxUrl = "/memberOverviewDayAjax.ado?StartDate="+date1+"&EndDate="+date2;
+	
+	$.ajax({
+	
+		url: ajaxUrl,
+		type: "GET",
+		data: {},
+		dataType: "json"
+	
+	})
+	
+	.done(function (json){
+		console.log(json);
+		new Chart(document.getElementById("join_chart_day"),json);
+		
+	})
+	.fail(function (xhr, status, errorThrown){
+		alert(errorThrown);	
+	});
+}
+
+function getMonthInDec(){
+	
+	var date1 = $("#monthInDecPickerOne").val();
+	var date2 = $("#monthInDecPickerTwo").val();
+	date1+="";
+	date2+="";
+	var ajaxUrl = "/memberOverviewMonthAjax.ado?StartDate="+date1+"&EndDate="+date2;
+	
+	$.ajax({
+	
+		url: ajaxUrl,
+		type: "GET",
+		data: {},
+		dataType: "json"
+	
+	})
+	
+	.done(function (json){
+		console.log(json);
+		new Chart(document.getElementById("join_chart_month"),json);
+		
+	})
+	.fail(function (xhr, status, errorThrown){
+		alert(errorThrown);	
+	});
+}
+	
+	
+	
+	
+	
+
     function go() {
         new Chart(document.getElementById("join_chart_day"),{"type":"line","data":{"labels":["1일","2일","3일","4일","5일","6일","7일","8일","9일","10일","11일","12일","13일","14일","15일"],"datasets":[{"label":"회원가입수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000,1000,2000,3000],"fill":false,"borderColor":"rgb(99, 203, 137)","lineTension":0.2},{"label":"회원탈퇴수","data":[1000,500,1000,500,2000,100,600,210,3000,1000,2000,2000,0,1000,2000],"fill":false,"borderColor":"rgb(203,36,45)","lineTension":0.2},{"label":"회원증감","data":[4000,1500,2000,3500,3000,400,3000,3000,5000,1000,8000,10000,1000,1000,1000],"fill":false,"borderColor":"rgb(42,94,203)","lineTension":0.2}]},"options":{}});
         new Chart(document.getElementById("join_chart_month"),{"type":"line","data":{"labels":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"datasets":[{"label":"회원가입수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000],"fill":false,"borderColor":"rgb(99, 203, 137)","lineTension":0.2},{"label":"회원탈퇴수","data":[1000,500,1000,500,2000,100,600,210,3000,1000,2000,2000],"fill":false,"borderColor":"rgb(203,36,45)","lineTension":0.2},{"label":"회원증감","data":[4000,1500,2000,3500,3000,400,3000,3000,5000,1000,8000,10000],"fill":false,"borderColor":"rgb(42,94,203)","lineTension":0.2}]},"options":{}});

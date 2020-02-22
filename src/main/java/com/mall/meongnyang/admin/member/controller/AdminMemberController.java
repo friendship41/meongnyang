@@ -69,12 +69,7 @@ public class AdminMemberController {
 	    	return "member/member-Manage.ado";
 	    }
 	    
-	    
-	    @RequestMapping(value="/memberOverview.ado")
-	    public String memberOverviewPage()
-	    {
-	        return "member/member-overview";
-	    }
+	   
 	   
 	    
 	
