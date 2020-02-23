@@ -83,9 +83,35 @@
 		<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
 	</select>
 
-	<insert id="insertOrder" parameterType="order">
-		INSERT INTO tablename1 (columnname1, columnname2, columnname3)
-		VALUES(#{value1},#{value2},#{value3})
+	<insert id="insertProductOrder" parameterType="orderProc">
+		INSERT INTO pd_order
+		VALUES(
+			#{pdOrderTbNo},
+			#{customerTbNo},
+			SYSDATE,
+			#{pdOrderTbPayment},
+			'W',
+			#{pdOrderTbAddress},
+			#{pdOrderTbAdCity},
+			#{pdOrderTbReceiver},
+			NULL,
+			#{pdOrderTbPhone},
+			2500,
+			#{pdOrderTbUsedPoint}
+		)
 	</insert>
+
+	<update  id="updateProductOrderPay" parameterType="orderProc">
+		UPDATE PD_ORDER
+		SET
+			PD_ORDER_TB_PAYMENT_DATE=SYSDATE,
+			PD_ORDER_TB_STATE='P'
+		WHERE PD_ORDER_TB_NO=#{pdOrderTbNo}
+	</update>
+
+	<delete id="deleteProductOrder" parameterType="orderProc">
+		DELETE FROM PD_ORDER
+		WHERE PD_ORDER_TB_NO=#{pdOrderTbNo}
+	</delete>
 
 </mapper>

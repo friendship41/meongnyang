@@ -17,10 +17,12 @@
         <typeAlias type="com.mall.meongnyang.client.market.vo.ClientMarketVO" alias="market"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminNoticeVO" alias="adminNotice"/>
         <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientOrdersDetailVO" alias="orderDetail"/>
+        <typeAlias type="com.mall.meongnyang.client.shopping.vo.ClientOrderDetailVO" alias="orderDetilProc"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO" alias="category"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductImageVO" alias="productImage"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductVO" alias="product"/>
         <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO" alias="order"/>
+        <typeAlias type="com.mall.meongnyang.client.shopping.vo.ClientOrderVO" alias="orderProc"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductSaleVO" alias="productSale"/>
         <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO" alias="promotion"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminTermsVO" alias="terms"/>

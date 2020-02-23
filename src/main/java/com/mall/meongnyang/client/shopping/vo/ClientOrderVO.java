@@ -13,7 +13,7 @@ public class ClientOrderVO
     private String pdOrderTbAddress;
     private String pdOrderTbAdCity;
     private String pdOrderTbReceiver;
-    private Date  pdOrderTbPaymentDate;
+    private Date pdOrderTbPaymentDate;
     private String pdOrderTbPhone;
     private int pdOrderTbDeliveryFee;
     private int pdOrderTbUsedPoint;

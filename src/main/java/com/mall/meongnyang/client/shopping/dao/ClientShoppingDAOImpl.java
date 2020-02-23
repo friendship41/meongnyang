@@ -3,6 +3,8 @@ package com.mall.meongnyang.client.shopping.dao;
 import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductVO;
+import com.mall.meongnyang.client.shopping.vo.ClientOrderDetailVO;
+import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -44,5 +46,23 @@ public class ClientShoppingDAOImpl implements ClientShoppingDAO
     public List<AdminProductSaleVO> selectSingleProductSaleList(AdminProductSaleVO adminProductSaleVO)
     {
         return sqlSessionTemplate.selectList("ProductSaleDAO.selectSingleProductSaleList", adminProductSaleVO);
+    }
+
+    @Override
+    public int updateProductRemainCount(ClientOrderDetailVO clientOrderDetailVO)
+    {
+        return sqlSessionTemplate.update("ProductSaleDAO.updateProductRemainCount", clientOrderDetailVO);
+    }
+
+    @Override
+    public void updateProductStateWhenZero(ClientOrderVO clientOrderVO)
+    {
+        sqlSessionTemplate.update("ProductSaleDAO.updateSaleStateWhenZero", clientOrderVO);
+    }
+
+    @Override
+    public void updateRollbackProductRemainCount(ClientOrderDetailVO clientOrderDetailVO)
+    {
+        sqlSessionTemplate.update("ProductSaleDAO.updateRollbackProductRemainCount", clientOrderDetailVO);
     }
 }

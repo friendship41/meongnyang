@@ -367,21 +367,9 @@
         }
 
 
-
-
-
-
-
-
         document.body.appendChild(form);
 
         form.submit();
-
-        // var hiddenField = document.createElement("input");
-        // hiddenField.setAttribute("type", "hidden");
-        // hiddenField.setAttribute("name", "");
-        // hiddenField.setAttribute("value", );
-        // form.appendChild(hiddenField);
     }
 </script>
 

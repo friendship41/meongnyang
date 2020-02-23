@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: stage
-  Date: 2020-02-21
-  Time: 오전 10:09
+  Date: 2020-02-23
+  Time: 오후 6:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,8 +10,7 @@
 <script type="text/javascript">
     function goToMom() {
         alert('${message}');
-        window.opener.location.href = "index.do";
-        window.close();
+        history.back();
     }
 </script>
 <body onload="goToMom()">
