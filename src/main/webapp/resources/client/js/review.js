@@ -28,7 +28,7 @@ imgTarget.on('change', function() {
     parent.children('.upload-display').remove();
 
     if (window.FileReader) { //image 파일만
-        if (!$(this)[0].files[0].type.match(/image\//)) return;
+        if (!$(this)[0].files[0].type.match(/image\//)) return false;
         var reader = new FileReader();
         reader.onload = function(e) {
             var src = e.target.result;

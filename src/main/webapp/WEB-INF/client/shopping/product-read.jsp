@@ -430,7 +430,6 @@ $(function() {
 			if(page.next == true) {
 			    p += '<li class="active"><a href="'+ url + curr +(page.endPage + 1)+'"><i class="zmdi zmdi-chevron-right"></i></a></li>';				
 			}	  
-			console.log(p);
 		    
 			$("#reviewPaging").html(p);
 		});
@@ -438,7 +437,7 @@ $(function() {
 	
 	//리뷰 등록하기
 	$("#addReview").click(function() { 
-		if(!(customer == null)) {
+		if((customer != '')) {
 			var data = new FormData();
 			
 			var customerNo = "${customer.customerTbNo}";
@@ -467,18 +466,18 @@ $(function() {
 				success: function(result) {
 					if(result === "reviewInsertSuccess") {
 						$('.starRev span').parent().children('span').removeClass('on');
-						$('.starRev span').parent().children('span').first().addClass('on');					
+						$('.starRev span').parent().children('.starR').first().addClass('on');					
 					    $('.file__box .file-upload').siblings('.file__name').val("");
-					    $('.preview-image .file-upload').remove();
+					    $('.preview-image .upload-display').remove();
 						$("#reviewTbContent").val("");
 						getReviewList();
 						/* console.log('저장성공'); */
 					} else if(result === "reviewInsertFail"){
 						alert("구매고객만 리뷰를 남길 수 있습니다.");
 						$('.starRev span').parent().children('span').removeClass('on');
-						$('.starRev span').parent().children('span').first().addClass('on');					
-					    $('.file__box .file-upload').siblings('.file__name').val("");
-					    $('.preview-image .file-upload').remove();
+						$('.starRev span').parent().children('.starR').first().addClass('on');					
+					    $('.file__box .file-upload').siblings('.file__name').val('file');
+					    $('.preview-image .upload-display').remove();
 						$("#reviewTbContent").val("");
 					}
 				}
