@@ -1,5 +1,7 @@
 package com.mall.meongnyang.admin.member.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mall.meongnyang.admin.member.service.AdminSelectMemberListService;
 import com.mall.meongnyang.admin.member.service.AdminSelectTermsService;
 import com.mall.meongnyang.admin.member.service.AdminTermsMailService;
+import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
 import com.mall.meongnyang.admin.member.vo.AdminTermsMailVO;
 import com.mall.meongnyang.admin.member.vo.AdminTermsVO;
 
@@ -22,20 +26,24 @@ public class AdminTermsMailController {
 	private AdminTermsMailService mailService;
 	@Autowired
 	private AdminSelectTermsService adminSelectTermsService;
-		
-	
-	@RequestMapping(value="/mail-write.ado")
+	@Autowired
+	private AdminSelectMemberListService adminSelectMemberListService;
+
+	@RequestMapping(value = "/mail-write.ado")
 	public String write(AdminTermsVO adminTermsVO, Model model) {
-				
+
+		
+		
 		model.addAttribute("content", adminSelectTermsService.selectTerms(adminTermsVO));
+		
 		return "member/mail-write";
 	}
 
 	@RequestMapping(value = "/send.ado", method = RequestMethod.POST)
-	public String send(@ModelAttribute AdminTermsMailVO mailVO, Model model ) {
+	public String send(@ModelAttribute AdminTermsMailVO mailVO, AdminMemberVO adminMemberVO, Model model) {
 		try {
-
-			mailService.send(mailVO);
+			List<AdminMemberVO> memberList = adminSelectMemberListService.selectMemberList(adminMemberVO);
+			mailService.send(mailVO, memberList);
 			model.addAttribute("message", "이메일이 발송되었습니다.");
 
 		} catch (Exception e) {
