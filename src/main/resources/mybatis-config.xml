@@ -25,6 +25,7 @@
         <typeAlias type="com.mall.meongnyang.client.shopping.vo.ClientOrderVO" alias="orderProc"/>
         <typeAlias type="com.mall.meongnyang.admin.product.vo.AdminProductSaleVO" alias="productSale"/>
         <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO" alias="promotion"/>
+        <typeAlias type="com.mall.meongnyang.client.community.vo.ClientReviewVO" alias="review"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminTermsVO" alias="terms"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminOverviewVisitorVO" alias = "adminOverview"/>
         <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientWishlistVO" alias="wishlist"/>
@@ -46,6 +47,7 @@
         <mapper resource="mappings/product-sale-mapping.xml"/>
         <mapper resource="mappings/product-stock-mapping.xml"/>
         <mapper resource="mappings/promotion-mapping.xml"/>
+        <mapper resource="mappings/review-mapping.xml"/>
         <mapper resource="mappings/terms-mapping.xml"/>
         <mapper resource="mappings/user-count-mapping.xml"/>
         <mapper resource="mappings/wishlist-mapping.xml"/>
