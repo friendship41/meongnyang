@@ -16,4 +16,6 @@ public interface ClientShoppingDAO
     public List<AdminProductImageVO> selectProductImages(AdminProductImageVO adminProductImageVO);
     public List<AdminProductSaleVO> selectSingleProductSaleList(AdminProductSaleVO adminProductSaleVO);
     public int updateProductRemainCount(ClientOrderDetailVO clientOrderDetailVO);
+    public void updateProductStateWhenZero(ClientOrderVO clientOrderVO);
+    public void updateRollbackProductRemainCount(ClientOrderDetailVO clientOrderDetailVO);
 }

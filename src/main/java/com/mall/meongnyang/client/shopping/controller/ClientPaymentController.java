@@ -34,6 +34,14 @@ public class ClientPaymentController
     private ClientUpdateProductSaleRemainCountService clientUpdateProductSaleRemainCountService;
     @Autowired
     private ClientUpdateCustomerPointService clientUpdateCustomerPointService;
+    @Autowired
+    private ClientUpdateSaleStateWhenZeroService clientUpdateSaleStateWhenZeroService;
+    @Autowired
+    private ClientUpdateRollbackProductRemainService clientUpdateRollbackProductRemainService;
+    @Autowired
+    private ClientUpdateRollbackPointService clientUpdateRollbackPointService;
+    @Autowired
+    private ClientUpdatePointGetService clientUpdatePointGetService;
 
 
     @RequestMapping(value = "/payment.do", method = RequestMethod.GET)
@@ -51,18 +59,22 @@ public class ClientPaymentController
         clientOrderVO.setPdOrderTbAdCity(clientOrderVO.getPdOrderTbAddress().split(" ")[0]);
 
 
+//        구매후 남은 수량 업데이트 (여기서 SQL에러뜨면 재고가 부족한 것)
         boolean remainCntResult = clientUpdateProductSaleRemainCountService.updateproductRemain(clientOrderVO);
         if(!remainCntResult)
         {
-            return "redirect:index.do";
+            model.addAttribute("message", "재고가 부족합니다... 확인후 다시 시도해 주새요");
+            return "shopping/message-and-go-back";
         }
 
 
+//        포인트 줄여주는 곳
         clientUpdateCustomerPointService.reducePoint(clientOrderVO);
         user.setCustomerTbPoint(user.getCustomerTbPoint()-clientOrderVO.getPdOrderTbUsedPoint());
         session.setAttribute("customer", user);
 
 
+//        카카오로 결제준비 세팅해달라고 함 (URL등등을 받음)
         KakaoPayReadyResponseVO responseVO = kakaoPayReadyService.kakaoPayReady(clientOrderVO);
         session.setAttribute("ready", responseVO);
 
@@ -87,15 +99,20 @@ public class ClientPaymentController
         clientOrderVO.setPg_token(pg_token);
         KakaoPayApprovedResponseVO responseVO = kakaoPayApprovedService.kakaopayapproved(clientOrderVO);
 
-
+//        결제완료 상태로 업데이트
         clientUpdateOrderPayService.updateOrderPay(clientOrderVO);
+
+//        재고가 0인 상품 상태 업데이트(상품내리기)
+        clientUpdateSaleStateWhenZeroService.updateSaleStateWhenZero(clientOrderVO);
+
+//        결제된 금액의 1%만큼 포인트
+        clientUpdatePointGetService.updatePointGetService(clientOrderVO);
+
 
 
         System.out.println(responseVO.getPartner_user_id());
         session.setAttribute("ready", null);
         session.setAttribute("orderInfo", null);
-
-
         session.setAttribute("cartList", null);
 
 
@@ -106,7 +123,16 @@ public class ClientPaymentController
     @RequestMapping(value = {"/kakaoPayCancel.do","/kakaoPayFail.do"})
     public String failToPay(HttpSession session, Model model)
     {
-        clientDeleteOrderService.deleteOrder((ClientOrderVO)session.getAttribute("orderInfo"));
+        ClientOrderVO orderInfo = (ClientOrderVO)session.getAttribute("orderInfo");
+
+//        상품들 재고 내렸던거 돌려주기
+        clientUpdateRollbackProductRemainService.ClientUpdateRollbackProductRemain(orderInfo);
+
+//        포인트 깎았던거 롤백
+        clientUpdateRollbackPointService.updatePointRollback(orderInfo);
+
+//        주문넣었던것들 다 지우기
+        clientDeleteOrderService.deleteOrder(orderInfo);
         session.setAttribute("ready", null);
         session.setAttribute("orderInfo", null);
 

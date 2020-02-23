@@ -8,33 +8,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("ClientUpdateProductSaleRemainCountService")
-public class ClientUpdateProductSaleRemainCountServiceImpl implements ClientUpdateProductSaleRemainCountService
+@Service("ClientUpdateRollbackProductRemainService")
+public class ClientUpdateRollbackProductRemainServiceImpl implements ClientUpdateRollbackProductRemainService
 {
     @Autowired
     private ClientShoppingDAO clientShoppingDAO;
 
-
     @Override
-    public boolean updateproductRemain(ClientOrderVO clientOrderVO)
+    public void ClientUpdateRollbackProductRemain(ClientOrderVO clientOrderVO)
     {
         List<ClientOrderDetailVO> detailList = clientOrderVO.getOrderDetailVOList();
-        int a = 0;
         for(ClientOrderDetailVO detail : detailList)
         {
-            try
-            {
-                a = clientShoppingDAO.updateProductRemainCount(detail);
-                if(a == 0)
-                {
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+            clientShoppingDAO.updateRollbackProductRemainCount(detail);
         }
-        return true;
     }
 }

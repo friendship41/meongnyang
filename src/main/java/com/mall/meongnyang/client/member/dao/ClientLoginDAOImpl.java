@@ -48,4 +48,16 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 	{
 		sqlSessionTemplate.update("ClientLoginDAO.updatePointUse", clientOrderVO);
 	}
+
+	@Override
+	public void updatePointRollback(ClientOrderVO clientOrderVO)
+	{
+		sqlSessionTemplate.update("ClientLoginDAO.updatePointRollback", clientOrderVO);
+	}
+
+	@Override
+	public void updatePointPlus(ClientOrderVO clientOrderVO)
+	{
+		sqlSessionTemplate.update("ClientLoginDAO.updatePointPlus", clientOrderVO);
+	}
 }

@@ -27,6 +27,7 @@
 		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbPassword},
 		#{customerTbEmail}, sysdate)
 	</insert>
+
 	<update id="updateClientLastLogin" parameterType="clientLogin">
 		UPDATE customer
 		SET
@@ -48,6 +49,7 @@
 			customer_tb_password = #{customerTbPassword}, customer_tb_pw_change = sysdate
 		WHERE customer_tb_no = #{customerTbNo}
 	</update>
+
 	<delete id="deleteMyinfoCustomer" parameterType="clientLogin">
 		DELETE FROM customer
 		WHERE customer_tb_password =#{customerTbPassword}
@@ -58,5 +60,19 @@
 		SET
 			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT-#{pdOrderTbUsedPoint}
 		WHERE CUSTOMER_TB_NO = #{customerTbNo}
+	</update>
+
+	<update id="updatePointRollback" parameterType="orderProc">
+		UPDATE CUSTOMER
+		SET
+			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT+#{pdOrderTbUsedPoint}
+		WHERE CUSTOMER_TB_NO = #{customerTbNo}
+	</update>
+
+	<update id="updatePointPlus" parameterType="orderProc">
+		UPDATE CUSTOMER
+		SET
+			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT+ROUND(#{pdOrderTbPayment}/100, 0)
+		WHERE CUSTOMER_TB_NO = ${customerTbNo}
 	</update>
 </mapper>
