@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!-- Page Sidebar -->
 <div class="page-sidebar">
-    <a class="logo-box" href="index.html">
+    <a class="logo-box" href="index.ado">
         <span>오늘뭐멍냥</span>
         <i class="icon-radio_button_unchecked" id="fixed-sidebar-toggle-button"></i>
         <i class="icon-close" id="sidebar-toggle-button-close"></i>

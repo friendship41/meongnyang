@@ -35,7 +35,7 @@ public class AdminNoticeDAOImpl implements AdminNoticeDAO
     @Override
     public List<AdminNoticeVO> selectNoticeList(AdminNoticeVO adminNoticeVO)
     {
-        return sqlSessionTemplate.selectList("NoticeDAO.selectNoticeList", adminNoticeVO);
+        return sqlSessionTemplate.selectList("NoticeDAO.selectNoticeAllList", adminNoticeVO);
     }
 
     @Override

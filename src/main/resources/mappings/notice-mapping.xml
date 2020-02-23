@@ -23,6 +23,17 @@
         WHERE notice_tb_no=#{noticeTbNo}
     </delete>
 
+    <select id="selectNoticeAllList" parameterType="adminNotice" resultType="adminNotice">
+     SELECT
+        NOTICE_TB_NO,
+        ADMINS_TB_ID,
+        NOTICE_TB_TITLE,
+        NOTICE_TB_CONTENT,
+        NOTICE_TB_REG_DATE
+    FROM NOTICE
+
+    </select>
+
     <select id="selectNoticeList" parameterType="adminNotice" resultType="adminNotice">
      SELECT C.* FROM(
         SELECT
