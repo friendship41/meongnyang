@@ -199,7 +199,9 @@
                     <div role="tabpanel" id="shipping" class="pro__single__content tab-pane fade">
                         <div class="pro__tab__content__inner">
                             <div class="wishlist-content">
-                                <form action="#">
+                                <form action="qna-form.do" method="get">
+                                    <input type="hidden" name="pdSaleTbNo" value="${saleList.get(0).pdSaleTbNo}">
+                                    <input type="hidden" name="qnaTypeTbNo" value="5">
                                     <div class="wishlist-table table-responsive">
                                         <table>
                                             <thead>
@@ -225,7 +227,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <input type="button" class="qna-write-btn" value="글쓰기" onclick="javascript:location.href='../community/qna-form.html'">
+                                        <input type="submit" class="qna-write-btn" value="글쓰기">
                                     </div>
                                 </form>
                                 <!-- Start Pagenation -->

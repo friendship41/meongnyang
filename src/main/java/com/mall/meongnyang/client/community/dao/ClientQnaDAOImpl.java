@@ -1,13 +1,12 @@
 package com.mall.meongnyang.client.community.dao;
 
-import java.util.List;
-
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
-import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+import java.util.List;
 
 @Repository("ClientQnaDAO")
 public class ClientQnaDAOImpl implements ClientQnaDAO {
@@ -19,8 +18,21 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 	public void insertQna(AdminQnaVO adminQnaVO) {
 		
 		sqlSessionTemplate.insert("qnaDAO.insertQna", adminQnaVO);
-		
 	}
+	@Override
+	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
+
+		return sqlSessionTemplate.selectList("qnaDAO.selectQnaList", adminQnaVO);
+	}
+	@Override
+	public int selectCountQna() {
+		return sqlSessionTemplate.selectOne("qnaDAO.selectCountQna");
+	}
+
+
+
+
+
 
 	@Override
 	public void updateQna(AdminQnaVO adminQnaVO) {
@@ -34,11 +46,7 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 		
 	}
 
-	@Override
-	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
-		
-		return sqlSessionTemplate.selectList("qnaDAO.selectQnaList", adminQnaVO);
-	}
+
 
 	@Override
 	public AdminQnaVO selectQna(AdminQnaVO adminQnaVO) {
@@ -46,18 +54,14 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 		return sqlSessionTemplate.selectOne("qnaDAO.selectQna", adminQnaVO);
 	}
 
-	//Ä«Å×°í¸® °ª ÁÖ±âÀ§ÇÑ select
+	//Ä«ï¿½×°ï¿½ ï¿½ï¿½ ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ select
 	@Override
 	public List<AdminQnaTypeVO> selectQnaTypeList(AdminQnaTypeVO adminQnaTypeVO) {
 		
 		return sqlSessionTemplate.selectList("AdminQnaTypeDAO.selectQnaTypeList", adminQnaTypeVO);
 	}
 
-	@Override
-	public int selectCountQna() {
-		
-		return sqlSessionTemplate.selectOne("qnaDAO.selectCountQna");
-	}
+
 
 	@Override
 	public void updateReadcountQna(int qnaTbNo) {
