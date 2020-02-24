@@ -2,16 +2,17 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 로그인이 뜨는 모달부분 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <c:choose>
 <c:when test="${loginCheckSubmit eq false}">
 <script type="text/javascript"> 
-	alert("로그인 실패 하셨습니다.")
+   alert("로그인 실패 하셨습니다.")
 </script>
 </c:when>
 <c:when test="${mailSubmit eq false}">
 <script type="text/javascript"> 
-	alert("인증 메일이 발송되었습니다.")
-	
+   alert("인증 메일이 발송되었습니다.")
+   
 </script>
 </c:when>
 </c:choose>
@@ -21,9 +22,9 @@
         <div class="modal-content">
             <div class="modal-header">
             
-            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             
-            	
+               
             
                 <h4 class="modal-title" id="myModalLabel">로그인 / 회원가입</h4>
             </div>
@@ -45,7 +46,7 @@
                                                 <input name="customerTbPassword" placeholder="Password" type="password"
                                                        required="">
                                                 <div class="sign-up">
-                                                	<input type="submit" value="Sign in" onclick="loginCheck()"/>
+                                                   <input type="submit" value="Sign in" onclick="loginCheck()"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -65,7 +66,7 @@
                                                 <div class="sign-up">
                                                 
                                                 
-                                                	<input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
+                                                   <input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
                                                
                                                 </div>
                                             </form>
@@ -86,7 +87,7 @@
                                 <ul class="social">
                                     <li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
                                     <li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
-                                    <li class="social_twitter"><a href="#" class="entypo-twitter"></a></li>
+                                    <li class="social_twitter"><a href="#" id="kakao-login-btn" class="entypo-twitter"></a></li>
                                     <li class="social_behance"><a href="#" class="entypo-behance"></a></li>
                                 </ul>
                             </div>
@@ -98,29 +99,43 @@
     </div>
 </div>
 
-
+<script type='text/javascript'>
+        //<![CDATA[
+        // 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('cf594d89d29be838ddb9e59e4d3ce712');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function (authObj) {
+                alert(JSON.stringify(authObj));
+            },
+            fail: function (err) {
+                alert(JSON.stringify(err));
+            }
+        });
+      //]]>
+    </script>
 
 
 <script type="text/javascript">
-	function registryCheck() {
-		var pw1 = document.getElementById('password1').value;
-		var pw2 = document.getElementById('password2').value;
-		if(pw1 != pw2) {
-			alert("비밀번호가 일치하지 않습니다.");
-		}
-	}
-	function loginCheck() {
-		var loginForm = document.loginForm;
-		var userId = loginForm.customerTbEmail.value;
-		var password = loginForm.customerTbPassword.value;
-		
-		if(!userId || !password) {
-			alert("모두 입력해주세요")
-		} else {
-			loginForm.submit();
-		}
-	}
-	
-	
+   function registryCheck() {
+      var pw1 = document.getElementById('password1').value;
+      var pw2 = document.getElementById('password2').value;
+      if(pw1 != pw2) {
+         alert("비밀번호가 일치하지 않습니다.");
+      }
+   }
+   function loginCheck() {
+      var loginForm = document.loginForm;
+      var userId = loginForm.customerTbEmail.value;
+      var password = loginForm.customerTbPassword.value;
+      
+      if(!userId || !password) {
+         alert("모두 입력해주세요")
+      } else {
+         loginForm.submit();
+      }
+   }
+   
+   
 </script>
-
