@@ -28,6 +28,8 @@
 	<bean id="RequestVOFactory" class="com.mall.meongnyang.util.apiRequest.voFactory.RequestVOFactoryImpl"/>
 
 
+
+
 	<!-- resources mapping -->
 <!--	<mvc:resources mapping="/client/css/**" location="/resources/client/css/"/>-->
 <!--	<mvc:resources mapping="/client/fonts/**" location="/resources/client/fonts/"/>-->
@@ -47,11 +49,18 @@
 	<bean id="clientSelectProductCategoryListService" class="com.mall.meongnyang.client.intercepter.menu.ClientSelectProductCategoryListServiceImpl">
 		<constructor-arg ref="clientMenuDAO"/>
 	</bean>
+	<bean id="visitCounter" class="com.mall.meongnyang.client.intercepter.visitCount.VisitCounter"/>
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*.do"/>
 			<bean class="com.mall.meongnyang.client.intercepter.menu.MenuCheckInterceptor">
 				<constructor-arg ref="clientSelectProductCategoryListService"/>
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<bean class="com.mall.meongnyang.client.intercepter.visitCount.VisitCountInterceptor">
+				<constructor-arg ref="visitCounter"/>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
