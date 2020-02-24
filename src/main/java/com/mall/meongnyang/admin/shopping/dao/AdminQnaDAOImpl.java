@@ -21,7 +21,7 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 
 	@Override
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
-		return sqlSessionTemplate.selectList("qnaDAO.adminSelectQnaList", adminQnaVO);
+		return sqlSessionTemplate.selectList("qnaDAO.selectAdminQnaList", adminQnaVO);
 	}
 
 	@Override
@@ -51,6 +51,12 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 	@Override
 	public void updateStepDepth(AdminQnaVO adminQnaVO) {
 		sqlSessionTemplate.update("qnaDAO.updateStepDepth", adminQnaVO);
+		
+	}
+
+	@Override
+	public void insertAdminQnaReply(AdminQnaVO adminQnaVO) {
+		sqlSessionTemplate.insert("qnaDAO.insertAdminQnaReply", adminQnaVO);
 		
 	}
 

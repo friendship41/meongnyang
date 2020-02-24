@@ -31,7 +31,7 @@ public class AdminQnaController {
 	
 	@RequestMapping(value = "/shoppingmall-qna-list.ado", method = RequestMethod.GET)
 	public String selectQnaList(AdminQnaVO adminQnaVO, Model model) {
-		//사용자 이름 이메일
+		
 		
 		List<AdminQnaVO> adminQnaList = adminSelectQnaListService.selectQnaList(adminQnaVO);
 		
@@ -61,11 +61,16 @@ public class AdminQnaController {
 	@RequestMapping(value = "/shoppingmall-qna-write.ado", method = RequestMethod.POST)
 	public String qnaInsert(AdminQnaVO adminQnaVO) {
 		
-		adminInsertQnaService.insertQna(adminQnaVO);
+		adminInsertQnaService.insertAdminQnaReply(adminQnaVO);
 		
 		return "redirect:shoppingmall-qna-list.ado";
 	}
-	
+	@RequestMapping(value = "/shoppingmall-qna-delete.ado", method = RequestMethod.GET)
+	public String deleteQna(AdminQnaVO adminQnaVO) {
+		
+		adminDeleteQnaService.deleteQna(adminQnaVO);
+		return "redirect:shoppingmall-qna-list.ado";
+	}
 	
 	
 	
@@ -82,11 +87,6 @@ public class AdminQnaController {
 		return "redirect:shoppingmall-qna-list.ado";
 	}
 	
-	@RequestMapping(value = "/shoppingmall-qna-delete.ado", method = RequestMethod.GET)
-	public String deleteQna(AdminQnaVO adminQnaVO) {
-		
-		adminDeleteQnaService.deleteQna(adminQnaVO);
-		return "redirect:shoppingmall-qna-list.ado";
-	}
+	
 	
 }

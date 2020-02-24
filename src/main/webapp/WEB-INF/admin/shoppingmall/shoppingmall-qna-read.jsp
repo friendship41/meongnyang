@@ -34,7 +34,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal" action="qna-write.ado" method="post">
+                                <form class="form-horizontal" id="mainForm" action="qna-write.ado" method="post">
                                 <input type="hidden" name="qnaTbNo" value="${adminQnaVO.qnaTbNo}">
                 				
                 				
@@ -79,6 +79,7 @@
                                         <div class="col-sm-10">
                                             <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminQnaVO.qnaTbNo }&qnaTbStatus=${'D'}">삭제</a>
                                             <button class="btn btn-primary" type="submit">답글작성</button>
+                                            <span class="fr__btns" onclick="modArticle()">수정</span>
                                         </div>
                                     </div>
                                 </form>
@@ -100,7 +101,13 @@
 <!-- /Page Container -->
 
 
-<!-- Javascripts -->
+<!-- JavaScripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
+ <script type="text/javascript">
+ function modArticle() {
+        $("#mainForm").attr("action", "qna-update.do");
+        $("#mainForm").submit();
+    }
+ </script>
 </body>
 </html>

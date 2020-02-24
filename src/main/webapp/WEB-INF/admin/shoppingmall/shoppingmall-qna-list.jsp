@@ -60,11 +60,11 @@
 													<th>조회수</th>
 												</tr>
 											</tfoot>
-											<tbody>
+											<tbody id="qnaTbody">
 												<c:forEach var="qna" items="${adminQnaList }">
 													<tr>
-
-														<td>${qna.qnaTbNo}</td>
+														<input type="hidden" value="${qna.qnaTbDepth }">
+														<td>${qna.rnum}</td>
 														<c:if test="${qna.qnaTbStatus eq 'N'}">
 															<!-- 정상글 -->
 															<td style="text-align: left;"><span class="label label-success" style="margin-right: 10px">
@@ -86,12 +86,14 @@
                                                                     </c:if>
 															</span>삭제된 글입니다.</td>
 														</c:if>
-														
-
-
-														<td>${qnaList.customerTbName}</td>
-														<td>${qnaList.qnaTbRegDate }</td>
-														<td>${qnaList.qnaTbReadcount }</td>
+														<c:if test="${qna.customerTbNo eq null }">
+														<td>${qna.adminsTbId}</td>
+														</c:if>
+														<c:if test="${qna.customerTbNo ne null }">
+														<td>${qna.customerTbName}</td>
+														</c:if>
+														<td>${qna.qnaTbRegDate }</td>
+														<td>${qna.qnaTbReadcount }</td>
 													</tr>
 												</c:forEach>
 
@@ -122,6 +124,23 @@
 
 	<!-- Javascripts -->
 	<jsp:include page="../include/scripts-load.jsp" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var listSize = '${adminQnaList.size()}';
+		listSize *= 1;
+		for(var i=0; i<listSize; i++) {
+			var tr = $("#qnaTbody").children().eq(i);
+			var depth = tr.children().eq(0).val();
+			depth *=1;
+			if(depth != 0) {
+				for(var j=0; j<depth; j++) {
+					tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+				}
+			}
+		}
+	});
+</script>
 </body>
 
 </html>
