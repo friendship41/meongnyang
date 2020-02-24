@@ -35,13 +35,13 @@ public class ClientMyinfoAddressDAOImpl implements ClientMyinfoAddressDAO {
 
 	@Override
 	public List<ClientCmAddressVO> selectMyinfoAddressList(ClientCmAddressVO clientCmAddressVO) {
+		
 		return sqlSessionTemplate.selectList("ClientMyinfoDAO.selectMyinfoAddressList", clientCmAddressVO);
 		
 	}
 
 	@Override
 	public ClientCmAddressVO selectMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
-		System.out.println(sqlSessionTemplate.selectOne("ClientMyinfoDAO.selectMyinfoAddress", clientCmAddressVO) + "dao");
 		return sqlSessionTemplate.selectOne("ClientMyinfoDAO.selectMyinfoAddress", clientCmAddressVO);
 		
 	}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <jsp:include page="../include/header.jsp"/>
         <!-- Start Bradcaump area -->
@@ -32,7 +33,7 @@
                                 <ul class="ht__cat__list">
                                     <li><a href="#">공지</a></li>
                                     <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Q&A</a></li>
+                                    <li><a href="qna-list.do">Q&A</a></li>
                                     <li><a href="#">Review</a></li>
                                     <li><a href="#">Contact</a></li>
                                 </ul>
@@ -54,18 +55,33 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        
+                                        
+                                        	<c:forEach var="qnaList" items="${clientQnaList }">
                                             <tr>
-                                                <td class="product-remove"> 2 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-success">Q</span> 배송문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객2 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
+                                                <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
+                                                <c:if test="${qnaList.qnaTbSecret == 'Y'}">
+                                                <c:choose>
+                                                <c:when test="${qnaList.qnaTbStatus == 'D' }">
+                                                <td style="text-align: left;"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>삭제된 글입니다.</td>
+                                                </c:when>
+                                                <c:when test="${qnaList.customerTbNo == sessionScope.customer.customerTbNo || qnaList.qnaTbDepth > 0}">
+                                                <td style="text-align: left;"><c:forEach begin="1" end="${5 * qnaList.qnaTbDepth}">&nbsp;</c:forEach><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }" onclick="inCheck()">${qnaList.qnaTbTitle }</a></td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                <td style="text-align: left;"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>${qnaList.qnaTbTitle }</td>
+                                                </c:otherwise>
+                                                </c:choose>
+                                                </c:if>
+                                                <c:if test="${qnaList.qnaTbSecret == 'N' }">
+                                                <td style="text-align: left;"><span class="badge badge-success"></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                </c:if>
+                                                
+                                                <td class="product-price"><span class="amount"> ${qnaList.customerTbNo }번고객 </span></td>
+                                                <td class="product-stock-status"><span class="wishlist-in-stock">${qnaList.qnaTbRegDate } </span></td>
                                             </tr>
-                                            <tr>
-                                                <td class="product-remove"> 1 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-warning">A</span> 구매문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객1 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
-                                            </tr>
+                                            </c:forEach>
+                                        
                                         </tbody>
                                     </table>
                                 </div>
@@ -74,11 +90,15 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <ul class="htc__pagenation">
+                                    <c:if test="${paging.prev == true }">
                                         <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">3</a></li>
-                                        <li><a href="#">19</a></li>
-                                        <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                                        </c:if>
+                                        <c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
+                                        <li><a href="/qna-list.do?currentPage=${i}">${i}</a></li>
+                                        </c:forEach>
+                                        <c:if test="${paging.next == true }">
+                                        <li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                                        </c:if>
                                     </ul>
                                 </div>
                             </div>
@@ -91,3 +111,8 @@
 
 
 <jsp:include page="../include/footer.jsp"/>
+<script type="text/javascript">
+	function inCheck() {
+		
+	}
+</script>

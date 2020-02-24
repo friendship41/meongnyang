@@ -52,7 +52,7 @@
 
 	<delete id="deleteMyinfoCustomer" parameterType="clientLogin">
 		DELETE FROM customer
-		WHERE customer_tb_password =#{customerTbPassword}
+		WHERE customer_tb_password = #{customerTbPassword}
 	</delete>
 	
 	<update id="updatePointUse" parameterType="orderProc">

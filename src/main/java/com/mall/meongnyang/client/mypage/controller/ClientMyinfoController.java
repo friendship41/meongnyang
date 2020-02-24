@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoService;
-import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressService;
-
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPasswordService;
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPhoneService;
-import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 
 @Controller
 public class ClientMyinfoController {
@@ -30,8 +27,7 @@ public class ClientMyinfoController {
 	@Autowired
 	private ClientDeleteMyinfoService clientDeleteMyinfoCustomerService;
 
-	@Autowired
-	private ClientSelectMyinfoAddressService clientSelectMyinfoAddressService;
+	
 	
 	
 	
@@ -64,8 +60,7 @@ public class ClientMyinfoController {
 		ClientCustomerVO SessionVO = (ClientCustomerVO) session.getAttribute("customer");
 		String no = SessionVO.getCustomerTbPassword();
 		
-		System.out.println(no + "암호화 된 암호(DB)");
-		System.out.println(clientCustomerVO.getCustomerTbPassword()+ " : DB값과 일치하는 사용자가 적은값");
+		
 		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), SessionVO.getCustomerTbPassword())) {
 			if(newPassword1.equals(newPassword2)) {
 			
@@ -74,8 +69,7 @@ public class ClientMyinfoController {
 			
 			//새로운 패스워드값 셋팅
 			clientCustomerVO.setCustomerTbPassword(securePw);
-			System.out.println(newPassword1 + " : 새로운 비번");
-			System.out.println(securePw + " : 암호화된 새로운 비번");	
+			
 			int id = SessionVO.getCustomerTbNo();
 			clientCustomerVO.setCustomerTbNo(id);
 			clientUpdateMyinfoPasswordService.updateMyinfoPassword(clientCustomerVO);
@@ -98,20 +92,22 @@ public class ClientMyinfoController {
 
 	@RequestMapping(value = "/myinfo-delete-customer.do", method = RequestMethod.POST)
 	public String deleteMyinfoCustomerProc(HttpSession session, ClientCustomerVO clientCustomerVO, Model model) {
-		ClientCustomerVO tempVO = (ClientCustomerVO) session.getAttribute("customer");
-		//세션에 있는 no값
-		String password = tempVO.getCustomerTbPassword();
-		//vo에 셋팅
-		clientCustomerVO.setCustomerTbPassword(password);
-		if(tempVO.getCustomerTbPassword().equals(clientCustomerVO.getCustomerTbPassword())) {
-			
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		ClientCustomerVO sessionVO = (ClientCustomerVO) session.getAttribute("customer");
+		
+		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), sessionVO.getCustomerTbPassword())) {
+			String password = sessionVO.getCustomerTbPassword();
+			clientCustomerVO.setCustomerTbPassword(password);
 			clientDeleteMyinfoCustomerService.deleteMyinfo(clientCustomerVO);
-			
-		} else if(clientCustomerVO.getCustomerTbPassword() == null) {
+			session.setAttribute("customer", null);
+			return "redirect:index.do";
+		} else  {
 			model.addAttribute("passwordDelete", false);
 			return "mypage/myinfo";
 		}
-		return "mypage/myinfo";
+		
 	}
 	
 	

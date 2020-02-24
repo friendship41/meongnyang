@@ -40,10 +40,9 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 		
 	}
 
-
-
-
-	@Override
+  
+  
+  @Override
 	public void updatePointUse(ClientOrderVO clientOrderVO)
 	{
 		sqlSessionTemplate.update("ClientLoginDAO.updatePointUse", clientOrderVO);

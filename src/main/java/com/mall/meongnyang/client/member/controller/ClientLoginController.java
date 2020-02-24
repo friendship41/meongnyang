@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mall.meongnyang.client.member.service.ClientLogoutService;
 import com.mall.meongnyang.client.member.service.ClientSelectLoginService;
@@ -42,6 +43,8 @@ public class ClientLoginController {
 			return "index";
 		}
 	}
+	
+	
 	
 	//로그아웃처리
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
