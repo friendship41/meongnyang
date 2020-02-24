@@ -4,7 +4,27 @@ import java.sql.Date;
 
 public class AdminNoticeVO
 {
-    private int noticeTbNo;
+	private int startRow;//현재페이지의 시작글번호
+	private int endRow;//현재페이지의 끝번호 
+	
+    public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
+	}
+
+	public int getEndRow() {
+		return endRow;
+	}
+
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
+	}
+
+	private int rnum;
+	private int noticeTbNo;
     private String adminsTbId;
     private String noticeTbTitle;
     private String noticeTbContent;
@@ -59,4 +79,23 @@ public class AdminNoticeVO
     {
         this.noticeTbRegDate = noticeTbRegDate;
     }
+
+	@Override
+	public String toString() {
+		return "AdminNoticeVO [startRow=" + startRow + ", endRow=" + endRow + ", noticeTbNo=" + noticeTbNo
+				+ ", adminsTbId=" + adminsTbId + ", noticeTbTitle=" + noticeTbTitle + ", noticeTbContent="
+				+ noticeTbContent + ", noticeTbRegDate=" + noticeTbRegDate + "]";
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
+	
+    
+    
 }

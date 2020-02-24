@@ -143,7 +143,7 @@
     padding-left: 24px;
 }
 .section__title::before {
-    background: rgba(0, 0, 0, 0) url("images/others/shape/3.png") repeat scroll 0 0 / cover ;
+    background: rgba(0, 0, 0, 0) url("/resources/client/images/others/shape/3.png") repeat scroll 0 0 / cover ;
     bottom: 0;
     content: "";
     height: 160px;
@@ -214,7 +214,7 @@
 
 
 .cat__hover__inner::before {
-    background: rgba(0, 0, 0, 0) url("images/others/shape/4.png") repeat scroll 0 0 / cover ;
+    background: rgba(0, 0, 0, 0) url("/resources/client/images/others/shape/4.png") repeat scroll 0 0 / cover ;
     bottom: 0;
     content: "";
     height: 160px;
@@ -1442,7 +1442,7 @@
     text-transform: uppercase;
 }
 .title__line--3::before {
-    background: rgba(0, 0, 0, 0) url("images/others/shape/5.png") no-repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("/resources/client/images/others/shape/5.png") no-repeat scroll 0 0;
     bottom: 0;
     content: "";
     height: 4px;
@@ -1660,7 +1660,7 @@
 }
 .price--output input {
     padding-left: 10px;
-    width: 70%;
+    width: 100%;
 }
 .price--output input {
     border: medium none;
@@ -1796,7 +1796,7 @@ select.ht__select {
     -moz-appearance: none;
     -ms-appearance: none;
     -o-appearance: none;
-    background-image: url("images/icons/select-option.png");
+    background-image: url("/resources/client/images/icons/select-option.png");
     background-position: right 7% center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -2029,7 +2029,7 @@ select.select__size {
     color: #afafaf;
     height: 20px;
     margin-left: 10px;
-    width: 41px;
+    width: 100px;
     padding: 0 4px;
 }
 
@@ -2038,7 +2038,7 @@ select.select__size {
     -moz-appearance: none;
     -ms-appearance: none;
     -o-appearance: none;
-    background: rgba(0, 0, 0, 0) url("images/icons/select-option.png") no-repeat scroll 87% 7px / 10px 5px;
+    background: rgba(0, 0, 0, 0) url("/resources/client/images/icons/select-option.png") no-repeat scroll 87% 7px / 10px 5px;
     padding-right: 16px;
 }
 

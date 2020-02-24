@@ -23,6 +23,31 @@ public class AdminProductVO
     private Date dayFrom;
     private Date dayTo;
 
+    private String orderMethod;
+    private String SearchWord;
+
+    private String filterPrice;
+    private int minPrice;
+    private int maxPrice;
+
+    private int nowPage;
+    private int startNum;
+    private int endNum;
+    private int startBlock;
+    private int endBlock;
+    private int pageCnt;
+    private int allBlockCnt;
+
+    private String pdImageTbPath;
+    private int pdSaleTbSalesPrice;
+    private int pdSaleTbDiscountRate;
+    private double pdSaleTbRating;
+    private String pdSaleTbSize;
+    private int pdSaleTbNo;
+
+
+
+
     @JsonIgnore
     private MultipartFile uploadFile;
 
@@ -156,6 +181,186 @@ public class AdminProductVO
         this.dayTo = dayTo;
     }
 
+    public String getOrderMethod()
+    {
+        return orderMethod;
+    }
+
+    public void setOrderMethod(String orderMethod)
+    {
+        this.orderMethod = orderMethod;
+    }
+
+    public String getSearchWord()
+    {
+        return SearchWord;
+    }
+
+    public void setSearchWord(String searchWord)
+    {
+        SearchWord = searchWord;
+    }
+
+    public int getStartNum()
+    {
+        return startNum;
+    }
+
+    public void setStartNum(int startNum)
+    {
+        this.startNum = startNum;
+    }
+
+    public int getEndNum()
+    {
+        return endNum;
+    }
+
+    public void setEndNum(int endNum)
+    {
+        this.endNum = endNum;
+    }
+
+    public String getPdImageTbPath()
+    {
+        return pdImageTbPath;
+    }
+
+    public void setPdImageTbPath(String pdImageTbPath)
+    {
+        this.pdImageTbPath = pdImageTbPath;
+    }
+
+    public int getPdSaleTbSalesPrice()
+    {
+        return pdSaleTbSalesPrice;
+    }
+
+    public void setPdSaleTbSalesPrice(int pdSaleTbSalesPrice)
+    {
+        this.pdSaleTbSalesPrice = pdSaleTbSalesPrice;
+    }
+
+    public int getPdSaleTbDiscountRate()
+    {
+        return pdSaleTbDiscountRate;
+    }
+
+    public void setPdSaleTbDiscountRate(int pdSaleTbDiscountRate)
+    {
+        this.pdSaleTbDiscountRate = pdSaleTbDiscountRate;
+    }
+
+    public double getPdSaleTbRating()
+    {
+        return pdSaleTbRating;
+    }
+
+    public void setPdSaleTbRating(double pdSaleTbRating)
+    {
+        this.pdSaleTbRating = pdSaleTbRating;
+    }
+
+    public int getNowPage()
+    {
+        return nowPage;
+    }
+
+    public void setNowPage(int nowPage)
+    {
+        this.nowPage = nowPage;
+    }
+
+    public int getStartBlock()
+    {
+        return startBlock;
+    }
+
+    public void setStartBlock(int startBlock)
+    {
+        this.startBlock = startBlock;
+    }
+
+    public int getEndBlock()
+    {
+        return endBlock;
+    }
+
+    public void setEndBlock(int endBlock)
+    {
+        this.endBlock = endBlock;
+    }
+
+    public int getPageCnt()
+    {
+        return pageCnt;
+    }
+
+    public void setPageCnt(int pageCnt)
+    {
+        this.pageCnt = pageCnt;
+    }
+
+    public int getAllBlockCnt()
+    {
+        return allBlockCnt;
+    }
+
+    public void setAllBlockCnt(int allBlockCnt)
+    {
+        this.allBlockCnt = allBlockCnt;
+    }
+
+    public int getMinPrice()
+    {
+        return minPrice;
+    }
+
+    public void setMinPrice(int minPrice)
+    {
+        this.minPrice = minPrice;
+    }
+
+    public int getMaxPrice()
+    {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(int maxPrice)
+    {
+        this.maxPrice = maxPrice;
+    }
+
+    public String getFilterPrice()
+    {
+        return filterPrice;
+    }
+
+    public void setFilterPrice(String filterPrice)
+    {
+        this.filterPrice = filterPrice;
+    }
+
+    public String getPdSaleTbSize()
+    {
+        return pdSaleTbSize;
+    }
+
+    public void setPdSaleTbSize(String pdSaleTbSize)
+    {
+        this.pdSaleTbSize = pdSaleTbSize;
+    }
+
+    public int getPdSaleTbNo()
+    {
+        return pdSaleTbNo;
+    }
+
+    public void setPdSaleTbNo(int pdSaleTbNo)
+    {
+        this.pdSaleTbNo = pdSaleTbNo;
+    }
+
     @Override
     public String toString()
     {
@@ -172,6 +377,24 @@ public class AdminProductVO
                 ", productSaleCount=" + productSaleCount +
                 ", dayFrom=" + dayFrom +
                 ", dayTo=" + dayTo +
+                ", orderMethod='" + orderMethod + '\'' +
+                ", SearchWord='" + SearchWord + '\'' +
+                ", filterPrice='" + filterPrice + '\'' +
+                ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
+                ", nowPage=" + nowPage +
+                ", startNum=" + startNum +
+                ", endNum=" + endNum +
+                ", startBlock=" + startBlock +
+                ", endBlock=" + endBlock +
+                ", pageCnt=" + pageCnt +
+                ", allBlockCnt=" + allBlockCnt +
+                ", pdImageTbPath='" + pdImageTbPath + '\'' +
+                ", pdSaleTbSalesPrice=" + pdSaleTbSalesPrice +
+                ", pdSaleTbDiscountRate=" + pdSaleTbDiscountRate +
+                ", pdSaleTbRating=" + pdSaleTbRating +
+                ", pdSaleTbSize='" + pdSaleTbSize + '\'' +
+                ", pdSaleTbNo=" + pdSaleTbNo +
                 ", uploadFile=" + uploadFile +
                 '}';
     }

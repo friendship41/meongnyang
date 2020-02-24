@@ -129,7 +129,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-rounded btn-success">전체메일 보내기</button>
+                                        <a class="btn btn-rounded btn-success" href="/memberMail.ado">전체메일 보내기</a>
+                                        
                                     </div>
                                 </form>
                             </div>

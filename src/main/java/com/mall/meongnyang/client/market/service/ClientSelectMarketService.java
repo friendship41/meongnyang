@@ -4,5 +4,5 @@ import com.mall.meongnyang.client.market.vo.ClientMarketVO;
 
 public interface ClientSelectMarketService {
 
-	ClientMarketVO selectMarket(int marketTbNo);
+	ClientMarketVO selectMarket(ClientMarketVO clientMarketVO);
 }

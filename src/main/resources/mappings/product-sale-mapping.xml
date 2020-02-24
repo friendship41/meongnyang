@@ -99,4 +99,37 @@
         ]]>
     </select>
 
+    <select id="selectSingleProductSaleList" parameterType="productSale" resultType="productSale">
+        SELECT
+            PD_SALE_TB_NO,
+            PD_SALE_TB_SALES_PRICE,
+            PD_SALE_TB_DISCOUNT_RATE,
+            PD_SALE_TB_SIZE
+        FROM pd_sale
+        WHERE PRODUCT_TB_CODE = #{productTbCode} AND PD_SALE_TB_STATE = 'Y'
+    </select>
+
+    <update id="updateProductRemainCount" parameterType="orderDetilProc">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_REMAINING_AMOUNT = PD_SALE_TB_REMAINING_AMOUNT - #{ordersDetailTbAmount}
+        WHERE PD_SALE_TB_NO = #{pdSaleTbNo}
+    </update>
+    
+    <update id="updateSaleStateWhenZero" parameterType="orderProc">
+        UPDATE PD_SALE
+        SET PD_SALE_TB_STATE =
+            CASE
+                WHEN PD_SALE_TB_REMAINING_AMOUNT=0 THEN 'N'
+                ELSE 'Y'
+            END
+    </update>
+
+    <update id="updateRollbackProductRemainCount" parameterType="orderDetilProc">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_REMAINING_AMOUNT = PD_SALE_TB_REMAINING_AMOUNT + #{ordersDetailTbAmount}
+        WHERE PD_SALE_TB_NO = #{pdSaleTbNo}
+    </update>
+
 </mapper>

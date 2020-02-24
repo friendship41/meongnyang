@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.admin.member.service.AdminInsertTermsService;
 import com.mall.meongnyang.admin.member.service.AdminSelectTermsListService;
@@ -26,9 +27,10 @@ public class AdminTermsController {
 	private AdminUpdateTermsService adminUpdateTermsService; 
 	
 	@RequestMapping(value="/term-manage.ado", method=RequestMethod.GET)
-	public String selectTermsList(Model model) {
+	public String selectTermsList(@RequestParam("message") String message  ,Model model) {
 		List<AdminTermsVO> termsList = adminSelectTermsListService.selectTermsList(new AdminTermsVO());
-		model.addAttribute("termsList", termsList);		
+		model.addAttribute("termsList", termsList);
+		model.addAttribute("message", message);
 		return "member/term-manage";
 	}
 	
@@ -51,9 +53,9 @@ public class AdminTermsController {
 	}
 	
 	@RequestMapping(value="/term-read.ado", method=RequestMethod.POST)
-	public String updateTerms(AdminTermsVO admintermsVO) {
-		adminUpdateTermsService.updateTerms(admintermsVO);		
-		return "redirect:/term-manage.ado";
+	public String updateTerms(AdminTermsVO admintermsVO, Model model) {
+		adminUpdateTermsService.updateTerms(admintermsVO);
+		return "redirect:/mail-write.ado?TermsTbNo="+ admintermsVO.getTermsTbNo();
 	}
 	
 	

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="clientWishlistDAO">
+
+
+	<insert id="insertWishlist" parameterType="wishlist">
+		INSERT
+		into
+		wishlist(wishlist_tb_no, customer_tb_no, pd_sale_tb_no)
+		VALUES(wishlist_seq.nextval, #{customerTbNo}, #{pdSaleTbNo})
+	</insert>
+
+	<select id="selectAdminProductSaleVO" parameterType="productSale" resultType="productSale">
+		SELECT
+		pd_sale_tb_no
+		FROM pd_sale
+		where product_tb_code = #{productTbCode} AND pd_sale_tb_size = #{pdSaleTbSize}
+	</select>
+
+	<select id="selectWishlist" parameterType="wishlist" resultType="wishlist">
+		SELECT
+		w.WISHLIST_TB_NO,
+		w.CUSTOMER_TB_NO,
+		w.PD_SALE_TB_NO,
+		ps.PRODUCT_TB_CODE,
+		ps.PROMOTION_TB_CODE,
+		ps.PD_SALE_TB_PRODUCT_NAME,
+		ps.PD_SALE_TB_RECEIVED_PRICE,
+		ps.PD_SALE_TB_SALES_PRICE,
+		ps.PD_SALE_TB_RECEIVED_AMOUNT,
+		ps.PD_SALE_TB_REMAINING_AMOUNT,
+		ps.PD_SALE_TB_LIMIT_AMOUNT,
+		ps.PD_SALE_TB_START_DAY,
+		ps.PD_SALE_TB_EXPIRE_DAY,
+		ps.PD_SALE_TB_SIZE,
+		ps.PD_SALE_TB_READ_COUNT,
+		ps.PD_SALE_TB_RATING,
+		ps.PD_SALE_TB_DISCOUNT_RATE,
+		ps.PD_SALE_TB_STATE,
+		pi.PD_IMAGE_TB_NO,
+		pi.PD_IMAGE_TB_PATH,
+		pi.PD_IMAGE_TB_FILE_NAME,
+		pi.PD_IMAGE_TB_EXTENTION,
+		pi.PD_IMAGE_TB_REPRESENTATIVE
+		FROM pd_sale ps JOIN wishlist w
+		ON ps.PD_SALE_TB_NO = w.PD_SALE_TB_NO
+		JOIN pd_image pi
+		ON ps.PRODUCT_TB_CODE = pi.PRODUCT_TB_CODE
+		WHERE w.CUSTOMER_TB_NO = #{customerTbNo} and PD_IMAGE_TB_REPRESENTATIVE = 'Y'
+	</select>
+
+	<delete id="deleteWishlist" parameterType="wishlist">
+		DELETE
+		FROM wishlist
+		WHERE pd_sale_tb_no = #{pdSaleTbNo}
+	</delete>
+</mapper>

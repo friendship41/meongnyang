@@ -10,13 +10,7 @@
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
-<script>
-function confirmter(){
-	if(confirm("수정하시겠습니까?")){
-		location.href='./term-manage.ado'
-	}
-}
-</script>
+
 <body>
 
 <!-- Page Container -->
@@ -93,7 +87,7 @@ function confirmter(){
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary" onclick="confirmter();">작성</button>
+                                            <button type="submit" class="btn btn-primary" >작성</button>
                                             <!--                                                이 버튼 누르면 수정이 확일합니까 확인알럿이 뜨고 컨펌하면 ㄱ-->
                                         </div>
                                     </div>
@@ -118,4 +112,5 @@ function confirmter(){
 
 
 <!-- Javascripts -->
+
 <jsp:include page="../include/scripts-load.jsp"/>

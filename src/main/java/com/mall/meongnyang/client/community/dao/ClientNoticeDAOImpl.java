@@ -27,5 +27,17 @@ public class ClientNoticeDAOImpl implements ClientNoticeDAO{
 		return sqlSessionTemplate.selectOne("NoticeDAO.selectNotice", adminNoticeVO);
 	}
 
+	@Override
+	public int selectCountNotice() {
+		// 메퍼에추가하셈 
+		return sqlSessionTemplate.selectOne("NoticeDAO.selectCountNotice");
+		
+	}
+
+
+
+	
+
+	
 	 
 }

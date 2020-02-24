@@ -331,15 +331,15 @@
 
     $("#slider-range").slider({
           range: true,
-          min: 10,
-          max: 500,
-          values: [110, 400],
+          min: 0,
+          max: 1000000,
+          values: [$("#minPrice").val(), $("#maxPrice").val()],
           slide: function(event, ui) {
-              $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+              $("#amount").val(ui.values[0] + "원 - " + ui.values[1]+"원");
           }
     });
-    $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-      " - $" + $("#slider-range").slider("values", 1));
+    $("#amount").val($("#slider-range").slider("values", 0) + "원" +
+      " - " + $("#slider-range").slider("values", 1) + "원");
 
 
 

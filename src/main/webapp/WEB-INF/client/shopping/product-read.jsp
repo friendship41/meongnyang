@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 
 
@@ -19,9 +20,7 @@
                         <nav class="bradcaump-inner">
                             <a class="breadcrumb-item" href="index.html">Home</a>
                             <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <a class="breadcrumb-item" href="product-grid.html">강아지먹거리</a>
-                            <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                            <span class="breadcrumb-item active">사료</span>
+                            <span class="breadcrumb-item active">상품 상세</span>
                         </nav>
                     </div>
                 </div>
@@ -41,64 +40,67 @@
                         <!-- Start Product Big Images -->
                         <div class="product__big__images">
                             <div class="portfolio-full-image tab-content">
-                                <div role="tabpanel" class="tab-pane fade in active" id="img-tab-1">
-                                    <img src="../images/product-2/big-img/1.jpg" alt="full-image">
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="img-tab-2">
-                                    <img src="../images/product-2/big-img/2.jpg" alt="full-image">
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="img-tab-3">
-                                    <img src="../images/product-2/big-img/3.jpg" alt="full-image">
-                                </div>
+                                <c:forEach var="singleImage" items="${imageList}">
+                                    <c:if test="${singleImage.pdImageTbRepresentative eq 'Y'}">
+                                        <div role="tabpanel" class="tab-pane fade in active" id="img-tab-${singleImage.pdImageTbNo}">
+                                            <img src="${singleImage.pdImageTbPath}" alt="full-image" width="510" height="677">
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${singleImage.pdImageTbRepresentative eq 'N'}">
+                                        <div role="tabpanel" class="tab-pane fade" id="img-tab-${singleImage.pdImageTbNo}">
+                                            <img src="${singleImage.pdImageTbPath}" alt="full-image" width="510" height="677">
+                                        </div>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
                         <!-- End Product Big Images -->
                         <!-- Start Small images -->
                         <ul class="product__small__images" role="tablist">
-                            <li role="presentation" class="pot-small-img active">
-                                <a href="#img-tab-1" role="tab" data-toggle="tab">
-                                    <img src="../images/product-2/sm-img-3/3.jpg" alt="small-image">
-                                </a>
-                            </li>
-                            <li role="presentation" class="pot-small-img">
-                                <a href="#img-tab-2" role="tab" data-toggle="tab">
-                                    <img src="../images/product-2/sm-img-3/1.jpg" alt="small-image">
-                                </a>
-                            </li>
-                            <li role="presentation" class="pot-small-img">
-                                <a href="#img-tab-3" role="tab" data-toggle="tab">
-                                    <img src="../images/product-2/sm-img-3/2.jpg" alt="small-image">
-                                </a>
-                            </li>
+                            <c:forEach var="singleImage" items="${imageList}">
+                                <c:if test="${singleImage.pdImageTbRepresentative eq 'Y'}">
+                                    <li role="presentation" class="pot-small-img active">
+                                        <a href="#img-tab-${singleImage.pdImageTbNo}" role="tab" data-toggle="tab">
+                                            <img src="${singleImage.pdImageTbPath}" alt="small-image" width="80" height="106">
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:if test="${singleImage.pdImageTbRepresentative eq 'N'}">
+                                    <li role="presentation" class="pot-small-img">
+                                        <a href="#img-tab-${singleImage.pdImageTbNo}" role="tab" data-toggle="tab">
+                                            <img src="${singleImage.pdImageTbPath}" alt="small-image" width="80" height="106">
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
                         </ul>
                         <!-- End Small images -->
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 smt-40 xmt-40">
                     <div class="ht__product__dtl">
-                        <h2>상품명 : 사료</h2>
-                        <h6>평점 : 4.3</h6>
+                        <h2>상품명 : ${detail.productTbName}</h2>
+                        <h6>평점 : ${detail.pdSaleTbRating}</h6>
                         <ul class="pro__prize">
-                            <li class="old__prize">가격 : 10000원</li>
-                            <li>할인가 : 8000원</li>
+                            <li class="old__prize">가격 : <span id="nowPrice">10000</span>원</li>
+                            <li id="priceLi">할인가 : <span id="nowDiscount">8000</span>원</li>
                         </ul>
-                        <p class="pro__info">맛있는 사료 입니다</p>
                         <div class="ht__pro__desc">
                             <div class="sin__desc align--left">
-                                <p><span>무게</span></p>
-                                <select class="select__size">
-                                    <option>1kg</option>
-                                    <option>2kg</option>
-                                    <option>5kg</option>
+                                <p><span>옵션</span></p>
+                                <select id="optionSelectBox" class="select__size">
+                                    <c:forEach var="singleSale" items="${saleList}">
+                                        <option value="${singleSale.pdSaleTbNo}">${singleSale.pdSaleTbSize}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                             <div class="sin__desc align--left">
                                 <p><span>수량</span></p>&nbsp;&nbsp;
-                                <input type="number" value="1" style="text-align: right; height: 20px;" min="1" max="99">
+                                <input type="number" value="1" style="text-align: right; height: 20px;" min="1" max="99" id="ordersDetialTbAmount">
                             </div>
                             <div class="sin__desc align--left">
-                                <ul class="shopping__btn" style="">
-                                    <li><a href="#"> Add Cart </a></li>
+                                <ul class="shopping__btn">
+                                    <li><a onclick="addCart()" style="cursor: pointer"> Add Cart </a></li>
                                     <li class="shp__checkout"><a href="checkout.html">Check Out</a></li>
                                 </ul>
                             </div>
@@ -126,7 +128,7 @@
                 <!-- Start List And Grid View -->
                 <ul class="pro__details__tab" role="tablist">
                     <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">상품상세</a></li>
-                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab">review(2)</a></li>
+                    <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab" id="reviewTap">review</a></li>
                     <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">Q&A(2)</a></li>
                 </ul>
                 <!-- End List And Grid View -->
@@ -138,12 +140,8 @@
                     <!-- Start Single Content -->
                     <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
                         <div class="pro__tab__content__inner">
-                            <p>Formfitting clothing is all about a sweet spot. That elusive place where an item is tight but not clingy, sexy but not cloying, cool but not over the top. Alexandra Alvarez’s label, Alix, hits that mark with its range of comfortable, minimal, and neutral-hued bodysuits.</p>
-                            <h4 class="ht__pro__title">Description</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem</p>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
-                            <h4 class="ht__pro__title">Standard Featured</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in</p>
+                            <h4 class="ht__pro__title">상품 설명</h4>
+                            <img src="${detail.productTbDetail}" alt="product-detail">
                         </div>
                     </div>
                     <!-- End Single Content -->
@@ -155,8 +153,15 @@
                                 <h4 class="title__line--5">Review 남기기</h4>
                                 <div class="ht__comment__form__inner">
                                     <div class="comment__form">
-                                        <input type="text" placeholder="Name *">
-                                        <input type="email" placeholder="Email *">
+                                        <input type="text" id="reviewTbWriter" placeholder="이름" readonly="readonly" value="${customer.customerTbName}">
+                                    	<div class="starRev" id="reviewTbRating">
+                                    		<span>평점</span>
+										    <span class="starR on">★</span>
+										    <span class="starR">★</span>
+										    <span class="starR">★</span>
+										    <span class="starR">★</span>
+										    <span class="starR">★</span>
+										</div>
                                         <div class="file__box preview-image">
                                             <input class="file__name" readonly="readonly" value="file">
                                             <label for="review-file">업로드</label>
@@ -164,58 +169,29 @@
                                         </div>
                                     </div>
                                     <div class="comment__form message">
-                                        <textarea name="message" placeholder="Your Comment"></textarea>
+                                        <textarea id="reviewTbContent" placeholder="review 내용"></textarea>
                                     </div>
                                 </div>
                                 <div class="ht__comment__btn--2 mt--30">
-                                    <a class="fr__btn" href="#">Send</a>
+                                    <a class="fr__btn" href="javascript:void(0);" id="addReview">Send</a>
                                 </div>
                             </div>
                             <!-- End comment Form -->
-                            <h4 class="title__line--5">총 2개의 리뷰가 있습니다.</h4>
+                            <h4 class="title__line--5" id="reviewcnt"></h4>
                             <div class="ht__comment__content">
                                 <!-- Start Single Comment -->
-                                <div class="comment_c">
-                                    <div class="comment__thumb">
-                                        <img src="../images/comment/1.png" alt="comment images">
-                                    </div>
-                                    <div class="ht__comment__details">
-                                        <div class="ht__comment__title">
-                                            <h2><a href="#">JOHN NGUYEN</a></h2>
-                                        </div>
-                                        <span>July 15, 2016 at 2:39 am</span>
-                                        <p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed.</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Comment -->
-                                <!-- Start Single Comment -->
-                                <div class="comment">
-                                    <div class="comment__thumb">
-                                        <img src="../images/comment/3.png" alt="comment images">
-                                    </div>
-                                    <div class="ht__comment__details">
-                                        <div class="ht__comment__title">
-                                            <h2><a href="#">JOHN NGUYEN</a></h2>
-                                        </div>
-                                        <span>July 15, 2016 at 2:39 am</span>
-                                        <p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed.</p>
-                                    </div>
-                                </div>
-                                <!-- End Single Comment -->
-                                <!-- Start Pagenation -->
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <ul class="htc__pagenation">
-                                            <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li class="active"><a href="#">3</a></li>
-                                            <li><a href="#">19</a></li>
-                                            <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- End Pagenation -->
+                                
+                                <!-- End Single Comment -->                               
                             </div>
+                                <!-- Start Pagenation -->
+							<div class="row">
+								<div class="col-xs-12">
+									<ul class="htc__pagenation" id="reviewPaging">
+										
+									</ul>
+								</div>
+							</div>
+							<!-- End Pagenation -->
                         </div>
                     </div>
                     <!-- End Single Content -->
@@ -275,6 +251,268 @@
     </div>
 </section>
 <!-- End Product Description -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var normalPrice = "${saleList.get(0).pdSaleTbSalesPrice}";
+        var discount = "${saleList.get(0).pdSaleTbDiscountRate}";
+        setPrice(normalPrice,discount);
+        $("#optionSelectBox").change(function () {
+            var opNo = $("#optionSelectBox option:selected").val();
+            var optionMap = getOptionMap();
+            var nP = optionMap.get(opNo)[0];
+            var discount = optionMap.get(opNo)[1];
+            setPrice(nP,discount);
+        })
+    });
 
+    function getOptionMap() {
+        var optionMap = new Map();
+        <c:forEach var="sale" items="${saleList}">
+            optionMap.set("${sale.pdSaleTbNo}",["${sale.pdSaleTbSalesPrice}","${sale.pdSaleTbDiscountRate}"]);
+        </c:forEach>
+        return optionMap;
+    }
 
+    function setPrice(normalPrice, discount) {
+        normalPrice *= 1;
+        discount *= 1;
+        var finalPrice = normalPrice*((100-discount)/100);
+        $("#nowPrice").text(normalPrice);
+        if(finalPrice !== normalPrice)
+        {
+            finalPrice /= 10;
+            finalPrice = Math.floor(finalPrice);
+            finalPrice *= 10;
+            $("#priceLi").html("할인가 : <span id=\"nowDiscount\">"+finalPrice+"</span>원");
+        }
+        else
+        {
+            $("#priceLi").html("<span id=\"nowDiscount\"></span>");
+        }
+    }
+
+    function addCart() {
+        var params ="?pdSaleTbSalesPrice=";
+
+        var amount = $("#ordersDetialTbAmount").val();
+        amount *= 1;
+
+        var normalPrice = $("#nowPrice").text();
+        var discountPrice = $("#nowDiscount").text();
+        if(discountPrice == null || discountPrice === '')
+        {
+            normalPrice *= amount;
+            params += normalPrice;
+        }
+        else
+        {
+            discountPrice *= amount;
+            params += discountPrice;
+        }
+
+        var opText = $("#optionSelectBox option:selected").text();
+        params += "&pdSaleTbProductName=";
+        params += "${detail.productTbName}-";
+        params += opText;
+        params += "&ordersDetialTbAmount=";
+        params += amount;
+        params += "&cartImage=";
+        params += '${imageList.get(0).pdImageTbPath}';
+        params += '&productTbCode=';
+        params += '${detail.productTbCode}';
+        params += '&pdSaleTbNo=';
+        params += $("#optionSelectBox option:selected").val();
+
+        var ajaxUrl = "addCartAjax.do"+params;
+
+        $.ajax({
+            url: ajaxUrl,
+            type: "GET",
+            data: {},
+            dataType: "json"
+        })
+            .done(function(json) {
+                console.log(json);
+
+                var cartItemHTML = '<div class="shp__single__product" id="pCart-'+json.productTbCode+'">\n' +
+                    '                        <div class="shp__pro__thumb">\n' +
+                    '                            <a href="shoppingDetail.do?productTbCode='+json.productTbCode+'">\n' +
+                    '                                <img src="'+json.cartImage+'" alt="product images" width="99" height="119">\n' +
+                    '                            </a>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="shp__pro__details">\n' +
+                    '                            <h2><a href="shoppingDetail.do?productTbCode='+json.productTbCode+'">'+json.pdSaleTbProductName+'</a></h2>\n' +
+                    '                            <span class="quantity">수량: '+json.ordersDetialTbAmount+'</span>\n' +
+                    '                            <span class="shp__price">'+json.pdSaleTbSalesPrice+'원</span>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="remove__btn">\n' +
+                    '                            <a onclick="removeCartItem(\''+json.productTbCode+'\')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>\n' +
+                    '                        </div>\n' +
+                    '                    </div>';
+
+                $("#cartWrapDiv").prepend(cartItemHTML);
+                var subtotal = $("#cartSubtotal").val();
+                subtotal *= 1;
+                var newItemPrice = json.pdSaleTbSalesPrice;
+                newItemPrice *= 1;
+                subtotal += newItemPrice;
+                $("#cartSubtotal").val(subtotal);
+                $("#cartSubtotal").text(subtotal+"원");
+
+                var nowSize = $("#cartListSize").text();
+                nowSize *= 1;
+                nowSize += 1;
+                $("#cartListSize").text(nowSize);
+
+                alert("상품이 카트에 추가되었습니다.");
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
+</script>
+
+<script>
+$(function() {
+	
+	var customer = '${customer}';
+	
+	getReviewList();
+	
+	function getReviewList() {
+		var productTbCode = '${detail.productTbCode}';
+		var url = "/productReviewList.do?productTbCode=" + productTbCode;
+		var curr = "&currentPage=";
+		
+		$.getJSON(url, function(data) {
+			var str = "";
+			
+			var reviewCount = data.reviewCount;
+			var page = data.page;
+			
+			$("#reviewTap").text('review(' + reviewCount +')');
+			$("#reviewcnt").text('총 ' + reviewCount + '개의 review가 있습니다');
+			
+			$(data.reviewList).each(function() {
+				var num = this.customerTbNo;
+				
+				str += '<div class="comment_c">'
+                    +		'<div class="comment__thumb">';
+                    		if(this.reviewTbImgPath != null){
+                				str +=	'<img src="' + this.reviewTbImgPath + '" alt="review images" width="119px" height="141px">';
+                    		}
+            	str	+=		'</div>'
+            		+		'<div class="ht__comment__details">'
+	                +			'<div class="ht__comment__title">'
+	                +			'<input type="hidden" name="reviewTbNo" value="' + this.reviewTbNo + '">'
+	                +   		 	'<h2>'+ this.reviewTbWriter+'</h2>';
+	                		if((customer != null) && ('${customer.customerTbNo}' == num)) {	                			
+	               				str +=	'<div class="reply__btn"><a href="javascript:void(0);" name="deleteBtn">delete</a></div>'
+	                		}
+	            str +=			'</div>'
+	               	+			'<span>' + this.reviewTbRegDate + '</span>'
+	               	+			'<p>평점 : ' + this.reviewTbRating + '</p>'
+	                +			'<p>' + this.reviewTbContent + '</p>'
+	            	+		'</div>'
+        			+	'</div><hr>'	;
+			});
+			$(".ht__comment__content").html(str);
+			
+			var p = "";
+			
+			if(page.prev == true) {
+				p += '<li><a href="'+ url + curr + (page.startPage - page.pageBlock)+'"><i class="zmdi zmdi-chevron-left"></i></a></li>';
+			}
+			for(var i = page.startPage; i < page.endPage+1; i++) {
+				p += '<li><a href="'+ url + curr + i +'">'+i+'</a></li>';
+			}
+			if(page.next == true) {
+			    p += '<li class="active"><a href="'+ url + curr +(page.endPage + 1)+'"><i class="zmdi zmdi-chevron-right"></i></a></li>';				
+			}	  
+		    
+			$("#reviewPaging").html(p);
+		});
+	}
+	
+	//리뷰 등록하기
+	$("#addReview").click(function() { 
+		if((customer != '')) {
+			var data = new FormData();
+			
+			var customerNo = "${customer.customerTbNo}";
+			var productCode = "${detail.productTbCode}";
+			var content = $("#reviewTbContent").val();
+			var writer = $("#reviewTbWriter").val();
+			var rating = $(".on").length;
+			var file = $("#review-file")[0].files[0];
+			
+			data.append("customerTbNo", customerNo);
+			data.append("productTbCode", productCode);
+			data.append("reviewTbContent", content);
+			data.append("reviewTbWriter", writer);
+			data.append("reviewTbRating", rating);
+			if(file != null) {
+				data.append("file", file);					
+			}
+	
+			$.ajax({
+				type : "POST",
+				url: "/insertReview.do", //서버 요청 URI
+				processData: false,
+				contentType: false,
+	            dataType: "text", //응답받을 데이터의 형태
+	            data: data,
+				success: function(result) {
+					if(result === "reviewInsertSuccess") {
+						$('.starRev span').parent().children('span').removeClass('on');
+						$('.starRev span').parent().children('.starR').first().addClass('on');					
+					    $('.file__box .file-upload').siblings('.file__name').val("");
+					    $('.preview-image .upload-display').remove();
+						$("#reviewTbContent").val("");
+						getReviewList();
+						/* console.log('저장성공'); */
+					} else if(result === "reviewInsertFail"){
+						alert("구매고객만 리뷰를 남길 수 있습니다.");
+						$('.starRev span').parent().children('span').removeClass('on');
+						$('.starRev span').parent().children('.starR').first().addClass('on');					
+					    $('.file__box .file-upload').siblings('.file__name').val('file');
+					    $('.preview-image .upload-display').remove();
+						$("#reviewTbContent").val("");
+					}
+				}
+			});	
+		} else {
+			alert("로그인 후 이용 가능합니다");
+		}
+	});
+	
+	//리뷰 삭제하기
+	$(document).on("click", "a[name='deleteBtn']", function() {	
+		
+		var result = confirm("정말로 삭제하시겠습니까?");
+		var reviewNo = $(this).parents().children("input[name='reviewTbNo']").val();
+		
+		if(result) {
+			
+			$.ajax({
+				type : "POST",
+				url : "/deleteReview.do?reviewTbNo=" + reviewNo,
+				data : {},
+				dataType : "TEXT",
+				success : function(result) {
+					if(result === "deleteSuccess") {
+						getReviewList();
+					}
+				}
+			});
+			
+		} else {
+			return false;
+		}
+	
+	});
+	
+});
+</script>
 <jsp:include page="../include/footer.jsp"/>

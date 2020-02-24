@@ -5,18 +5,21 @@
 <mapper namespace="MarketDAO">
 
 	<!-- 전체 글수 가져오기 -->
-	<select id="selectCountMarket" resultType="int">
+	<select id="selectCountMarket" parameterType="market" resultType="int">
 		SELECT COUNT(*) FROM market
+		<if test='marketTbSellOrBuy == "S" || marketTbSellOrBuy == "B"'>
+		WHERE market_tb_sell_or_buy = #{marketTbSellOrBuy}
+		</if>
 	</select>
 	
 	<!-- 게시글 조회수 증가 -->
-	<update id="updateReadCount" parameterType="int">
+	<update id="updateReadCount" parameterType="market">
 		UPDATE market
 		SET market_tb_read_count = market_tb_read_count + 1
 		WHERE market_tb_no = #{marketTbNo}
 	</update>
 
-	<select id="selectMarket" parameterType="int" resultType="market">
+	<select id="selectMarket" parameterType="market" resultType="market">
 		SELECT
 		market_tb_no,
 		customer_tb_no,
@@ -32,17 +35,21 @@
 
 	<select id="selectMarketList" resultType="market" parameterType="market">
 		SELECT * FROM
-		(SELECT 
-		ROWNUM rnum,
-		market_tb_no,
-		customer_tb_no,
-		market_tb_title,
-		market_tb_content,
-		market_tb_reg_date,
-		market_tb_read_count,
-		market_tb_sell_or_buy,
-		market_tb_img_path 
-		FROM (SELECT * FROM market ORDER BY market_tb_no DESC))
+			(SELECT 
+			ROWNUM rnum,
+			market_tb_no,
+			customer_tb_no,
+			market_tb_title,
+			market_tb_content,
+			market_tb_reg_date,
+			market_tb_read_count,
+			market_tb_sell_or_buy,
+			market_tb_img_path 
+			FROM (SELECT * FROM market
+				<if test='marketTbSellOrBuy == "S" || marketTbSellOrBuy == "B"'>
+				WHERE market_tb_sell_or_buy = #{marketTbSellOrBuy}
+				</if>
+				ORDER BY market_tb_no DESC))
 		<![CDATA[WHERE rnum >= #{startRow} AND rnum <= #{endRow}]]>
 	</select>
 
@@ -76,7 +83,7 @@
 		market_tb_no = #{marketTbNo}
 	</update>
 
-	<delete id="deleteMarket" parameterType="int">
+	<delete id="deleteMarket" parameterType="market">
 		DELETE FROM market WHERE
 		market_tb_no = #{marketTbNo}
 	</delete>

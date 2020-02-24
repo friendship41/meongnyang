@@ -12,4 +12,5 @@ public interface AdminProductImageDAO
     public int selectProductImageCount(AdminProductImageVO adminProductImageVO);
     public AdminProductImageVO selectProductImageRepY(AdminProductImageVO adminProductImageVO);
     public void updateProductImageRep(AdminProductImageVO adminProductImageVO);
+    public int selectProductImageRepCount(AdminProductImageVO adminProductImageVO);
 }

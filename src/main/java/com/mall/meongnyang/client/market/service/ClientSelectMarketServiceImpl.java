@@ -13,9 +13,9 @@ public class ClientSelectMarketServiceImpl implements ClientSelectMarketService 
 	private ClientMarketDAO clientMarketDAO;
 	
 	@Override
-	public ClientMarketVO selectMarket(int marketTbNo) {
-		clientMarketDAO.updateReadCount(marketTbNo);
-		return clientMarketDAO.selectMarket(marketTbNo);
+	public ClientMarketVO selectMarket(ClientMarketVO clientMarketVO) {
+		clientMarketDAO.updateReadCount(clientMarketVO);
+		return clientMarketDAO.selectMarket(clientMarketVO);
 	}
 
 }

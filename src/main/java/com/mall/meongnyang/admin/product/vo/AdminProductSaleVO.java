@@ -17,7 +17,7 @@ public class AdminProductSaleVO
     private Date pdSaleTbExpireDay;
     private String pdSaleTbSize;
     private int pdSaleTbReadCount;
-    private int pdSaleTbRating;
+    private double pdSaleTbRating;
     private int pdSaleTbDiscountRate;
     private String pdSaleTbState;
 
@@ -26,6 +26,9 @@ public class AdminProductSaleVO
     private Date dayTo;
 
     private String productTbBannerState;
+
+    private int ordersDetialTbAmount;
+    private String cartImage;
 
     public int getPdSaleTbNo()
     {
@@ -157,12 +160,12 @@ public class AdminProductSaleVO
         this.pdSaleTbReadCount = pdSaleTbReadCount;
     }
 
-    public int getPdSaleTbRating()
+    public double getPdSaleTbRating()
     {
         return pdSaleTbRating;
     }
 
-    public void setPdSaleTbRating(int pdSaleTbRating)
+    public void setPdSaleTbRating(double pdSaleTbRating)
     {
         this.pdSaleTbRating = pdSaleTbRating;
     }
@@ -227,6 +230,26 @@ public class AdminProductSaleVO
         this.productTbBannerState = productTbBannerState;
     }
 
+    public int getOrdersDetialTbAmount()
+    {
+        return ordersDetialTbAmount;
+    }
+
+    public void setOrdersDetialTbAmount(int ordersDetialTbAmount)
+    {
+        this.ordersDetialTbAmount = ordersDetialTbAmount;
+    }
+
+    public String getCartImage()
+    {
+        return cartImage;
+    }
+
+    public void setCartImage(String cartImage)
+    {
+        this.cartImage = cartImage;
+    }
+
     @Override
     public String toString()
     {
@@ -251,6 +274,8 @@ public class AdminProductSaleVO
                 ", dayFrom=" + dayFrom +
                 ", dayTo=" + dayTo +
                 ", productTbBannerState='" + productTbBannerState + '\'' +
+                ", ordersDetialTbAmount=" + ordersDetialTbAmount +
+                ", cartImage='" + cartImage + '\'' +
                 '}';
     }
 }

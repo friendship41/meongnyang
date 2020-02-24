@@ -34,4 +34,10 @@ public class AdminPromotionDAOImpl implements AdminPromotionDAO {
 		return sqlSessionTemplate.selectOne("promotionDAO.selectPromotion", promotionTbCode);
 	}
 
+	@Override
+	public List<AdminPromotionVO> selectPromotionAppliedProductList(AdminPromotionVO adminPromotionVO) {
+		return sqlSessionTemplate.selectList("promotionDAO.selectPromotionAppliedProductList", adminPromotionVO);
+	}
+	
+
 }

@@ -136,6 +136,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
+        var repCheck = ${repCheck};
+        if(repCheck ===false)
+        {
+            alert("대표이미지가 설정되지 않았습니다.");
+            history.back();
+        }
+
         $("#promotionSelectBox").change(function () {
             var selectedValue = $("#promotionSelectBox option:selected").val();
             console.log(selectedValue);

@@ -1,5 +1,6 @@
 package com.mall.meongnyang.client.member.dao;
 
+import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -39,4 +40,23 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 		
 	}
 
+  
+  
+  @Override
+	public void updatePointUse(ClientOrderVO clientOrderVO)
+	{
+		sqlSessionTemplate.update("ClientLoginDAO.updatePointUse", clientOrderVO);
+	}
+
+	@Override
+	public void updatePointRollback(ClientOrderVO clientOrderVO)
+	{
+		sqlSessionTemplate.update("ClientLoginDAO.updatePointRollback", clientOrderVO);
+	}
+
+	@Override
+	public void updatePointPlus(ClientOrderVO clientOrderVO)
+	{
+		sqlSessionTemplate.update("ClientLoginDAO.updatePointPlus", clientOrderVO);
+	}
 }
