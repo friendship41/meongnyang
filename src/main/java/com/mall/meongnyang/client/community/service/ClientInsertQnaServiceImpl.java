@@ -21,7 +21,7 @@ public class ClientInsertQnaServiceImpl implements ClientInsertQnaService {
 	@Override
 	public void insertQnaReply(AdminQnaVO adminQnaVO)
 	{
-		clientQnaDAO.insertQna(adminQnaVO);
+		clientQnaDAO.insertQnaReply(adminQnaVO);
 		clientQnaDAO.updateStep(adminQnaVO);
 		clientQnaDAO.updateStepDepth(adminQnaVO);
 	}

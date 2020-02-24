@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="qnaTypeTbName" class="col-sm-2 control-label"></label>
                                 <div class="col-sm-8">
-                                    <select name="qnaTypeTbName" id="qnaTypeTbname" class="form-control1">
+                                    <select name="qnaTypeTbNo" id="qnaTypeTbname" class="form-control1">
                                         <c:forEach var="category" items="${qnaCategoryList }">
 											<c:if test="${category.qnaTypeTbNo eq insertInfo.qnaTypeTbNo}">
 												<option value="${category.qnaTypeTbNo }" selected>${category.qnaTypeTbName }</option>

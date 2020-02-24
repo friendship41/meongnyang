@@ -15,9 +15,8 @@ public class ClientQnaDAOImpl implements ClientQnaDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	@Override
-	public void insertQna(AdminQnaVO adminQnaVO) {
-		
-		sqlSessionTemplate.insert("qnaDAO.insertQna", adminQnaVO);
+	public void insertQnaReply(AdminQnaVO adminQnaVO) {
+		sqlSessionTemplate.insert("qnaDAO.insertQnaReply", adminQnaVO);
 	}
 	@Override
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
