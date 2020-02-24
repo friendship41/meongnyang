@@ -169,7 +169,7 @@
 		UPDATE qna
 		SET
 			qna_tb_title = #{qnaTbTitle},
-			qna_tb_content = #{qnaTbContent},
+			qna_tb_content = #{qnaTbContent}
 			
 		WHERE 
 			qna_tb_no = #{qnaTbNo}

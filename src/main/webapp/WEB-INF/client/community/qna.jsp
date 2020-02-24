@@ -91,7 +91,7 @@
                                                                     <c:if test="${qna.adminsTbId ne null}">
                                                                         A
                                                                     </c:if>
-                                                                </span>${qna.qnaTbTitle}
+                                                                </span>삭제된 글입니다.
                                                             </td>
                                                         </c:if>
                                                     </c:if>
@@ -136,7 +136,7 @@
                                                                 <c:if test="${qna.adminsTbId ne null}">
                                                                     A
                                                                 </c:if>
-                                                            </span>${qna.qnaTbTitle}
+                                                            </span>삭제된 글입니다.
                                                         </td>
                                                     </c:if>
                                                 </c:if>

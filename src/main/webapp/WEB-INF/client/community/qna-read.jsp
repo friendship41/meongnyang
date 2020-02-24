@@ -81,7 +81,7 @@
 
 <script>
     function modArticle() {
-        $("#mainForm").attr("action", "/qna-update.do")
+        $("#mainForm").attr("action", "qna-update.do");
         $("#mainForm").submit();
     }
 </script>

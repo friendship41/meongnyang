@@ -26,7 +26,7 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 
 	@Override
 	public void insertQna(AdminQnaVO adminQnaVO) {
-		sqlSessionTemplate.insert("qnaDAO.insertQna", adminQnaVO);
+		sqlSessionTemplate.insert("qnaDAO.insertQnaReply", adminQnaVO);
 		
 	}
 

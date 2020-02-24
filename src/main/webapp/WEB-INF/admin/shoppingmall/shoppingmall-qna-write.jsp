@@ -34,10 +34,13 @@
                         <div class="panel panel-white">
                             <div class="panel-body">
                                 <form class="form-horizontal" action="shoppingmall-qna-write.ado" method="post">
-                                    <input type="hidden" name="qnaTbRef" value="${stair.qnaTbRef }">
-                                    <input type="hidden" name="qnaTbStep" value="${stair.qnaTbStep }">
-                                    <input type="hidden" name="qnaTbDepth" value="${stair.qnaTbDepth }">
+                                    <input type="hidden" name="qnaTbRef" value="${insertInfo.qnaTbRef }">
+                                    <input type="hidden" name="qnaTbStep" value="${insertInfo.qnaTbStep }">
+                                    <input type="hidden" name="qnaTbDepth" value="${insertInfo.qnaTbDepth }">
                                     <input type="hidden" name="qnaTbSecret" value="Y">
+                                    <input type="hidden" name="pdSaleTbNo" value="${replyFrom.pdSaleTbNo}"><!-- 상품번호 value값 추가 -->
+                            		<input type="hidden" name="pdOrderTbNo" value="${replyFrom.pdOrderTbNo}"><!-- order번호 -->
+                            		<input type="hidden" name="adminsTbId" value="${sessionScope.adminId }">
                                     
                                     <div class="form-group">
                                         <label for="qnaTbTitle" class="col-sm-2 control-label">제목</label>
