@@ -198,4 +198,20 @@
         ON p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
     </select>
 
+
+    <update id="updateBannerState" parameterType="product">
+        UPDATE PRODUCT
+        SET
+            PRODUCT_TB_BANNER_STATE = #{productTbBannerState}
+        WHERE PRODUCT_TB_CODE = #{productTbCode}
+    </update>
+
+    <select id="selectBannerImg" parameterType="product" resultType="product">
+        SELECT
+            *
+        FROM PRODUCT P JOIN PD_IMAGE PI
+        ON P.PRODUCT_TB_CODE = PI.PRODUCT_TB_CODE
+        WHERE PRODUCT_TB_BANNER_STATE = 'Y' AND PD_IMAGE_TB_REPRESENTATIVE = 'Y'
+    </select>
+
 </mapper>

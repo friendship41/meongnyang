@@ -783,6 +783,11 @@
         getDataFromServerAjax(url, 'productSaleTable');
     }
 
+    function updateProductBannerState(productTbCode, toStateYN) {
+        var url = "/updateProductBannerStateAjax.ado?productTbCode="+productTbCode+"&productTbBannerState="+toStateYN;
+        getDataFromServerAjax(url, 'updateBannerState')
+    }
+
     function getDataFromServerAjax(urlTo, toWhere) {
         $.ajax({
             url: urlTo,
@@ -809,6 +814,10 @@
                     else if(toWhere === 'stopSale')
                     {
                         settingStopSaleResult(json);
+                    }
+                    else if(toWhere === 'updateBannerState')
+                    {
+                        getProductSaleTable();
                     }
                 }
             })
@@ -872,12 +881,12 @@
             if(productSaleSingle.productTbBannerState === 'N')
             {
                 productSaleHTML += '<td>미등록</td>';
-                productSaleHTML += '<td><button class="btn btn-success">배너등록</button></td>';
+                productSaleHTML += '<td><button class="btn btn-success" onclick="updateProductBannerState(\''+productSaleSingle.productTbCode+'\',\'Y\''+')">배너등록</button></td>';
             }
             else
             {
                 productSaleHTML += '<td>등록됨</td>';
-                productSaleHTML += '<td><button class="btn btn-danger">배너해제</button></td>';
+                productSaleHTML += '<td><button class="btn btn-danger" onclick="updateProductBannerState(\''+productSaleSingle.productTbCode+'\',\'N\''+')">배너해제</button></td>';
             }
             productSaleHTML += '</tr>';
         }
@@ -903,6 +912,7 @@
         //document.getElementById(saleTd).innerHTML = '<button class="btn btn-primary" onclick="location.href=\'restartSaleProduct.ado?pdSaleTbNo='+json.pdSaleTbNo+'\'">판매재등록</button>';
         $("#onSaleProductTable").DataTable();
     }
+
 
     $(document).ready(function () {
         $("#allProductDayFrominput").attr("value", getMonthAgoDate(6).yyyymmdd());

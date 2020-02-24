@@ -12,6 +12,7 @@ public class AdminProductVO
     private String productTbName;
     private Date productTbRegDate;
     private String productTbDetail;
+    private String productTbBannerState;
 
     private String productCategoryTbParent;
     private String productCategoryTbMedian;
@@ -361,6 +362,17 @@ public class AdminProductVO
         this.pdSaleTbNo = pdSaleTbNo;
     }
 
+    public String getProductTbBannerState()
+    {
+        return productTbBannerState;
+    }
+
+    public void setProductTbBannerState(String productTbBannerState)
+    {
+        this.productTbBannerState = productTbBannerState;
+    }
+
+
     @Override
     public String toString()
     {
@@ -370,6 +382,7 @@ public class AdminProductVO
                 ", productTbName='" + productTbName + '\'' +
                 ", productTbRegDate=" + productTbRegDate +
                 ", productTbDetail='" + productTbDetail + '\'' +
+                ", productTbBannerState='" + productTbBannerState + '\'' +
                 ", productCategoryTbParent='" + productCategoryTbParent + '\'' +
                 ", productCategoryTbMedian='" + productCategoryTbMedian + '\'' +
                 ", productCategoryTbSub='" + productCategoryTbSub + '\'' +

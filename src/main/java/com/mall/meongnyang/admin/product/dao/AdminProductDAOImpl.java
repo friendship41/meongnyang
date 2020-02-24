@@ -48,4 +48,10 @@ public class AdminProductDAOImpl implements AdminProductDAO
     {
         return sqlSessionTemplate.selectList("ProductDAO.selectProductOverviewList", adminProductVO);
     }
+
+    @Override
+    public void updateProductBannerState(AdminProductVO adminProductVO)
+    {
+        sqlSessionTemplate.update("ProductDAO.updateBannerState", adminProductVO);
+    }
 }
