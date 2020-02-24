@@ -28,7 +28,6 @@ public class VisitCountInterceptor extends HandlerInterceptorAdapter
             visitCounter.setVisitCount(visitCounter.getVisitCount()+1);
             session.setAttribute("visitCntOk", "o");
         }
-        System.out.println(visitCounter.getVisitCount());
 
         return true;
     }
