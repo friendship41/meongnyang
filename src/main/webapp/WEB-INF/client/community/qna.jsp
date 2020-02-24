@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- 
+
 <jsp:include page="../include/header.jsp"/>
         <!-- Start Bradcaump area -->
         <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/resources/client/images/bg/qna.jpg) no-repeat scroll center center / cover ;">
@@ -31,10 +31,10 @@
                             <div class="htc__category">
                                 <h4 class="title__line--4">Community</h4>
                                 <ul class="ht__cat__list">
-                                    <li><a href="#">공지</a></li>
-                                    <li><a href="#">FAQ</a></li>
+                                    <li><a href="notice.do">공지</a></li>
+                                    <li><a href="faq.do">FAQ</a></li>
                                     <li><a href="qna-list.do">Q&A</a></li>
-                                    <li><a href="#">Review</a></li>
+                                    <li><a href="productReviewList.do">Review</a></li>
                                     <li><a href="#">Contact</a></li>
                                 </ul>
                             </div>
@@ -54,34 +54,98 @@
                                                 <th class="product-stock-stauts"><span class="nobr"> 날짜 </span></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                        
-                                        
-                                        	<c:forEach var="qnaList" items="${clientQnaList }">
+                                        <tbody id="qnaTbody">
+
+                                        	<c:forEach var="qna" items="${clientQnaList}">
                                             <tr>
-                                                <td class="product-remove"> "${qnaList.qnaTbNo }" </td>
-                                                <c:if test="${qnaList.qnaTbSecret == 'Y'}">
-                                                <c:choose>
-                                                <c:when test="${qnaList.qnaTbStatus == 'D' }">
-                                                <td style="text-align: left;"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>삭제된 글입니다.</td>
-                                                </c:when>
-                                                <c:when test="${qnaList.customerTbNo == sessionScope.customer.customerTbNo || qnaList.qnaTbDepth > 0}">
-                                                <td style="text-align: left;"><c:forEach begin="1" end="${5 * qnaList.qnaTbDepth}">&nbsp;</c:forEach><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }" onclick="inCheck()">${qnaList.qnaTbTitle }</a></td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                <td style="text-align: left;"><span class="badge badge-success"><i class="fa fa-lock" aria-hidden="true"></i></span>${qnaList.qnaTbTitle }</td>
-                                                </c:otherwise>
-                                                </c:choose>
+                                                <input type="hidden" value="${qna.qnaTbDepth}">
+                                                <td class="product-remove"> "${qna.qnaTbNo}" </td>
+
+                                                <c:if test="${qna.qnaTbSecret == 'Y'}">
+                                                    <!-- 비밀글 -->
+                                                    <c:if test="${sessionScope.customer.customerTbNo eq qna.customerTbNo}">
+                                                        <!-- 내 글이면 -->
+                                                        <c:if test="${qna.qnaTbStatus eq 'N'}">
+                                                            <!-- 정상글 -->
+                                                            <td style="text-align: left;">
+                                                                <span class="badge badge-success">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                    <c:if test="${qna.adminsTbId eq null}">
+                                                                        Q
+                                                                    </c:if>
+                                                                    <c:if test="${qna.adminsTbId ne null}">
+                                                                        A
+                                                                    </c:if>
+                                                                </span>
+                                                                <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
+                                                            </td>
+                                                        </c:if>
+                                                        <c:if test="${qna.qnaTbStatus eq 'D'}">
+                                                            <!-- 삭제된글 -->
+                                                            <td style="text-align: left;">
+                                                                <span class="badge badge-success">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                    <c:if test="${qna.adminsTbId eq null}">
+                                                                        Q
+                                                                    </c:if>
+                                                                    <c:if test="${qna.adminsTbId ne null}">
+                                                                        A
+                                                                    </c:if>
+                                                                </span>${qna.qnaTbTitle}
+                                                            </td>
+                                                        </c:if>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.customer.customerTbNo ne qna.customerTbNo}">
+                                                        <!-- 내 글이아니면 -->
+                                                        <td style="text-align: left;">
+                                                            <span class="badge badge-success">
+                                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                                    Q
+                                                                </c:if>
+                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                    A
+                                                                </c:if>
+                                                            </span>${qna.qnaTbTitle}
+                                                        </td>
+                                                    </c:if>
                                                 </c:if>
-                                                <c:if test="${qnaList.qnaTbSecret == 'N' }">
-                                                <td style="text-align: left;"><span class="badge badge-success"></span><a href="qna-read.do?qnaTbNo=${qnaList.qnaTbNo }">${qnaList.qnaTbTitle }</a></td>
+                                                <c:if test="${qna.qnaTbSecret == 'N' }">
+                                                    <!-- 그냥 글 -->
+                                                    <c:if test="${qna.qnaTbStatus eq 'N'}">
+                                                        <!-- 정상글 -->
+                                                        <td style="text-align: left;">
+                                                            <span class="badge badge-success">
+                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                                    Q
+                                                                </c:if>
+                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                    A
+                                                                </c:if>
+                                                            </span>
+                                                            <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${qna.qnaTbStatus eq 'D'}">
+                                                        <!-- 삭제된 글 -->
+                                                        <td style="text-align: left;">
+                                                            <span class="badge badge-success">
+                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                                    Q
+                                                                </c:if>
+                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                    A
+                                                                </c:if>
+                                                            </span>${qna.qnaTbTitle}
+                                                        </td>
+                                                    </c:if>
                                                 </c:if>
-                                                
-                                                <td class="product-price"><span class="amount"> ${qnaList.customerTbNo }번고객 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock">${qnaList.qnaTbRegDate } </span></td>
+
+                                                <td class="product-price"><span class="amount">${qna.customerTbName}</span></td>
+                                                <td class="product-stock-status"><span class="wishlist-in-stock">${qna.qnaTbRegDate}</span></td>
                                             </tr>
                                             </c:forEach>
-                                        
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -109,10 +173,24 @@
             </div>
         </div>
 
-
-<jsp:include page="../include/footer.jsp"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-	function inCheck() {
-		
-	}
+    $(document).ready(function () {
+        var listSize = '${clientQnaList.size()}';
+        listSize *=1;
+        for(var i=0; i<listSize; i++)
+        {
+            var tr = $("#qnaTbody").children().eq(i);
+            var depth = tr.children().eq(0).val();
+            depth *= 1;
+            if(depth != 0)
+            {
+                for(var j=0; j<depth; j++)
+                {
+                    tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+                }
+            }
+        }
+    });
 </script>
+<jsp:include page="../include/footer.jsp"/>

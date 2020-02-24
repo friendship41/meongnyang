@@ -1,9 +1,10 @@
 package com.mall.meongnyang.client.community.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+import com.mall.meongnyang.client.community.service.*;
+import com.mall.meongnyang.client.community.vo.ClientQnaListPaging;
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,16 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
-import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
-import com.mall.meongnyang.client.community.service.ClientDeleteQnaService;
-import com.mall.meongnyang.client.community.service.ClientInsertQnaService;
-import com.mall.meongnyang.client.community.service.ClientSelectQnaListService;
-import com.mall.meongnyang.client.community.service.ClientSelectQnaService;
-import com.mall.meongnyang.client.community.service.ClientSelectQnaTypeListService;
-import com.mall.meongnyang.client.community.service.ClientUpdateQnaService;
-import com.mall.meongnyang.client.community.vo.ClientQnaListPaging;
-import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ClientQnaController {
@@ -53,77 +46,67 @@ public class ClientQnaController {
 		
 		adminQnaVO.setStartRow(paging.getStartRow());
 		adminQnaVO.setEndRow(paging.getEndRow());
-		
-		
-		
-		List<AdminQnaVO> tempVO = clientSelectQnaListService.selectQnaList(adminQnaVO);
+
+		List<AdminQnaVO> clientQnaList = clientSelectQnaListService.selectQnaList(adminQnaVO);
 		
 		
 		model.addAttribute("paging", paging);
-		model.addAttribute("clientQnaList", tempVO);
+		model.addAttribute("clientQnaList", clientQnaList);
 		
 			
 		return "community/qna";
 	}
-	
-	//Ä«Å×°í¸® °ª ¹ÞÀ»¼öÀÖ°Ô
+
+	//Ä«ï¿½×°ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½
 	@RequestMapping(value = "/qna-form.do", method = RequestMethod.GET)
-    public String qnaCategoryList(AdminQnaTypeVO adminQnaTypeVO, Model model, AdminQnaVO adminQnaVO)
+    public String qnaCategoryList(Model model, AdminQnaVO adminQnaVO)
     {
-		List<AdminQnaTypeVO> tempVO = clientSelectQnaTypeListService.selectQnaTypeList(adminQnaTypeVO);
+		List<AdminQnaTypeVO> tempVO = clientSelectQnaTypeListService.selectQnaTypeList(new AdminQnaTypeVO());
         model.addAttribute("qnaCategoryList", tempVO);
+        model.addAttribute("insertInfo", adminQnaVO);
         
         return "community/qna-form";
     }	
 	
 	@RequestMapping(value = "/qna-form.do", method = RequestMethod.POST)
-	public String qnaForm(AdminQnaVO adminQnaVO, Model model) {
-		AdminQnaVO tempVO = clientSelectQnaService.selectQna(adminQnaVO);
-		model.addAttribute("stair", tempVO);
-		System.out.println(tempVO);
-		return "community/qna-form";
-	}
-	
-	@RequestMapping(value = "/qna-form2.do", method = RequestMethod.POST)
-	public String qnaForm2(AdminQnaVO adminQnaVO, Model model) {
-		AdminQnaVO tempVO = clientSelectQnaService.selectQna(adminQnaVO);
-		model.addAttribute("stair", tempVO);
-		System.out.println(tempVO);
-		return "community/qna-form2";
-	}
-	
-	@RequestMapping(value = "/qna-insert2.do", method = RequestMethod.POST)
-	public String qnaInsert2(AdminQnaVO adminQnaVO, HttpSession session, Model model) {
-		
-		
-		if(adminQnaVO.getQnaTbTitle() == null || adminQnaVO.getQnaTbContent() == null) {
-			model.addAttribute("inputFail", false);
-			return "community/qna-form";
-		}
-		
-		clientInsertQnaService.insertQna2(adminQnaVO);
+	public String qnaForm(AdminQnaVO adminQnaVO, HttpSession session) {
+		ClientCustomerVO user = (ClientCustomerVO)session.getAttribute("customer");
+		adminQnaVO.setCustomerTbNo(user.getCustomerTbNo());
+		clientInsertQnaService.insertNewQna(adminQnaVO);
 		return "redirect:qna-list.do";
 	}
-	
-	@RequestMapping(value = "/qna-insert.do", method = RequestMethod.POST)
-	public String qnaInsert2(AdminQnaVO adminQnaVO) {
-		
-		clientInsertQnaService.insertQna(adminQnaVO);
-		
-		return "redirect:qna-list.do";
-	}
-	
-	
-		
+
 	@RequestMapping(value = "/qna-read.do", method = RequestMethod.GET)
 	public String qnaRead(AdminQnaVO adminQnaVO, Model model) {
-		
-		
 		AdminQnaVO tempVO = clientSelectQnaService.selectQna(adminQnaVO);
-				
 		model.addAttribute("clientQnaVO", tempVO);
 		return "community/qna-read";
 	}
+	@RequestMapping(value = "/qna-form2.do", method = RequestMethod.GET)
+	public String qnaForm2Page(AdminQnaVO adminQnaVO, Model model) {
+		List<AdminQnaTypeVO> tempVO = clientSelectQnaTypeListService.selectQnaTypeList(new AdminQnaTypeVO());
+		AdminQnaVO replyFrom = clientSelectQnaService.selectQna(adminQnaVO);
+		model.addAttribute("qnaCategoryList", tempVO);
+		model.addAttribute("replyFrom", replyFrom);
+		return "community/qna-form2";
+	}
+	@RequestMapping(value = "/qna-form2.do", method = RequestMethod.POST)
+	public String qnaForm2(AdminQnaVO adminQnaVO) {
+		clientInsertQnaService.insertQnaReply(adminQnaVO);
+		return "redirect:qna-list.do";
+	}
+
+
+
+
+
+	
+
+
+	
+	
+		
+
 	
 	
 	@RequestMapping(value = "/qna-update.do", method = RequestMethod.POST)
@@ -136,10 +119,8 @@ public class ClientQnaController {
 	}
 	
 	@RequestMapping(value = "/qna-delete.do", method = RequestMethod.GET)
-	public String qnaDelete(AdminQnaVO adminQnaVO, Model model) {
-		
+	public String qnaDelete(AdminQnaVO adminQnaVO) {
 		clientDeleteQnaService.deleteQna(adminQnaVO);
-		
 		return "redirect:qna-list.do";
 	}
 }

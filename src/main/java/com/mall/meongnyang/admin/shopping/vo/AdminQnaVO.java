@@ -16,6 +16,9 @@ public class AdminQnaVO {
 	private int qnaTbStep;
 	private int qnaTbDepth;
 	private String qnaTbStatus;
+	private String pdOrderTbNo;
+	private String adminsTbId;
+
 	private int rnum;
 	private String customerTbEmail;
 	private String customerTbName;
@@ -132,17 +135,51 @@ public class AdminQnaVO {
 	public void setQnaTbDepth(int qnaTbDepth) {
 		this.qnaTbDepth = qnaTbDepth;
 	}
-	
-	@Override
-	public String toString() {
-		return "AdminQnaVO [qnaTbNo=" + qnaTbNo + ", pdSaleTbNo=" + pdSaleTbNo + ", qnaTypeTbNo=" + qnaTypeTbNo
-				+ ", customerTbNo=" + customerTbNo + ", qnaTbTitle=" + qnaTbTitle + ", qnaTbContent=" + qnaTbContent
-				+ ", qnaTbRegDate=" + qnaTbRegDate + ", qnaTbReadcount=" + qnaTbReadcount + ", qnaTbSecret="
-				+ qnaTbSecret + ", qnaTbRef=" + qnaTbRef + ", qnaTbStep=" + qnaTbStep + ", qnaTbDepth=" + qnaTbDepth
-				+ ", qnaTbStatus=" + qnaTbStatus + ", rnum=" + rnum + ", customerTbEmail=" + customerTbEmail
-				+ ", customerTbName=" + customerTbName + ", startRow=" + startRow + ", endRow=" + endRow + "]";
+
+	public String getPdOrderTbNo()
+	{
+		return pdOrderTbNo;
 	}
-	
-	
-	
+
+	public void setPdOrderTbNo(String pdOrderTbNo)
+	{
+		this.pdOrderTbNo = pdOrderTbNo;
+	}
+
+	public String getAdminsTbId()
+	{
+		return adminsTbId;
+	}
+
+	public void setAdminsTbId(String adminsTbId)
+	{
+		this.adminsTbId = adminsTbId;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "AdminQnaVO{" +
+				"qnaTbNo=" + qnaTbNo +
+				", pdSaleTbNo=" + pdSaleTbNo +
+				", qnaTypeTbNo=" + qnaTypeTbNo +
+				", customerTbNo=" + customerTbNo +
+				", qnaTbTitle='" + qnaTbTitle + '\'' +
+				", qnaTbContent='" + qnaTbContent + '\'' +
+				", qnaTbRegDate=" + qnaTbRegDate +
+				", qnaTbReadcount=" + qnaTbReadcount +
+				", qnaTbSecret='" + qnaTbSecret + '\'' +
+				", qnaTbRef=" + qnaTbRef +
+				", qnaTbStep=" + qnaTbStep +
+				", qnaTbDepth=" + qnaTbDepth +
+				", qnaTbStatus='" + qnaTbStatus + '\'' +
+				", pdOrderTbNo='" + pdOrderTbNo + '\'' +
+				", adminsTbId='" + adminsTbId + '\'' +
+				", rnum=" + rnum +
+				", customerTbEmail='" + customerTbEmail + '\'' +
+				", customerTbName='" + customerTbName + '\'' +
+				", startRow=" + startRow +
+				", endRow=" + endRow +
+				'}';
+	}
 }

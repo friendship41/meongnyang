@@ -1,8 +1,8 @@
 package com.mall.meongnyang.admin.shopping.dao;
 
-import java.util.List;
-
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+
+import java.util.List;
 
 public interface AdminQnaDAO {
 	
@@ -13,6 +13,5 @@ public interface AdminQnaDAO {
 	public void deleteQna(AdminQnaVO adminQnaVO);
 	public void updateStep(AdminQnaVO adminQnaVO);
 	public void updateStepDepth(AdminQnaVO adminQnaVO);
-	public AdminQnaVO selectInfoQna(AdminQnaVO adminQnaVO);
 	
 }

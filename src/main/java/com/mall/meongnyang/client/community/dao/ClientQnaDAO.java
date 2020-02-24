@@ -1,14 +1,14 @@
 package com.mall.meongnyang.client.community.dao;
 
-import java.util.List;
-
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO;
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+
+import java.util.List;
 
 public interface ClientQnaDAO {
 
 	
-	public void insertQna(AdminQnaVO adminQnaVO);
+	public void insertQnaReply(AdminQnaVO adminQnaVO);
 	public void updateQna(AdminQnaVO adminQnaVO);
 	public void deleteQna(AdminQnaVO adminQnaVO);
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO);

@@ -1,12 +1,11 @@
 package com.mall.meongnyang.admin.shopping.dao;
 
-import java.util.List;
-
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+import java.util.List;
 
 @Repository("AdminQnaDAO")
 public class AdminQnaDAOImpl implements AdminQnaDAO {
@@ -53,12 +52,6 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 	public void updateStepDepth(AdminQnaVO adminQnaVO) {
 		sqlSessionTemplate.update("qnaDAO.updateStepDepth", adminQnaVO);
 		
-	}
-
-	@Override
-	public AdminQnaVO selectInfoQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectOne("qnaDAO.selectInfoQna", adminQnaVO);
 	}
 
 	
