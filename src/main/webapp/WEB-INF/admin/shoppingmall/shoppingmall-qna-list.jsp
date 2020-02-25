@@ -86,10 +86,10 @@
                                                                     </c:if>
 															</span>삭제된 글입니다.</td>
 														</c:if>
-														<c:if test="${qna.customerTbNo eq null }">
+														<c:if test="${qna.adminsTbId ne null }">
 														<td>${qna.adminsTbId}</td>
 														</c:if>
-														<c:if test="${qna.customerTbNo ne null }">
+														<c:if test="${qna.adminsTbId eq null }">
 														<td>${qna.customerTbName}</td>
 														</c:if>
 														<td>${qna.qnaTbRegDate }</td>

@@ -140,8 +140,12 @@
                                                         </td>
                                                     </c:if>
                                                 </c:if>
-
+												<c:if test="${qna.adminsTbId eq null }">
                                                 <td class="product-price"><span class="amount">${qna.customerTbName}</span></td>
+                                                </c:if>
+                                                <c:if test="${qna.adminsTbId ne null }">
+                                                <td class="product-price"><span class="amount">${qna.adminsTbId}</span></td>
+                                                </c:if>
                                                 <td class="product-stock-status"><span class="wishlist-in-stock">${qna.qnaTbRegDate}</span></td>
                                             </tr>
                                             </c:forEach>

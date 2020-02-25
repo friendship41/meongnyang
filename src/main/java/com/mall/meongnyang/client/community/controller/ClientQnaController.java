@@ -82,7 +82,7 @@ public class ClientQnaController {
 		model.addAttribute("clientQnaVO", tempVO);
 		return "community/qna-read";
 	}
-	@RequestMapping(value = "/qna-form2.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qna-writeForm2.do", method = RequestMethod.POST)
 	public String qnaForm2Page(AdminQnaVO adminQnaVO, Model model) {
 		List<AdminQnaTypeVO> tempVO = clientSelectQnaTypeListService.selectQnaTypeList(new AdminQnaTypeVO());
 		AdminQnaVO replyFrom = clientSelectQnaService.selectQna(adminQnaVO);

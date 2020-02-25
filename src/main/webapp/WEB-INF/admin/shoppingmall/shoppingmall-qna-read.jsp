@@ -53,7 +53,7 @@
                                     <div class="form-group">
                                         <label for="qnaWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                           <input type="text" class="form-control" id="customerTbName" name="customerTbName" value="${adminQnaVO.customerTbName }" readonly><!-- 몰겟음 -->
+                                           <input type="text" class="form-control" id="customerTbName" name="customerTbName" value="${adminQnaVO.adminsTbId }" readonly><!-- 몰겟음 -->
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -79,7 +79,9 @@
                                         <div class="col-sm-10">
                                             <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminQnaVO.qnaTbNo }&qnaTbStatus=${'D'}">삭제</a>
                                             <button class="btn btn-primary" type="submit">답글작성</button>
-                                            <span class="fr__btns" onclick="modArticle()">수정</span>
+                                            <c:if test="${adminQnaVO.adminsTbId ne null }">
+                                            <button class="btn btn-primary" onclick="modArticle()">수정</button>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </form>
@@ -105,7 +107,7 @@
 <jsp:include page="../include/scripts-load.jsp"/>
  <script type="text/javascript">
  function modArticle() {
-        $("#mainForm").attr("action", "qna-update.do");
+        $("#mainForm").attr("action", "shoppingmall-qna-update.ado");
         $("#mainForm").submit();
     }
  </script>
