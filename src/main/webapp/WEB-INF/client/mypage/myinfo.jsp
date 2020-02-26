@@ -104,7 +104,7 @@
                         <div class="ht__comment__form__inner">
                            
                             <div class="comment__form">
-                            	<input type="text" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone">
+                            	<input type="text" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone" maxlength="11">
                             </div>
                         </div>
                         	

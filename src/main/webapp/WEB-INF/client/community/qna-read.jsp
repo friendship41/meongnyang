@@ -77,10 +77,10 @@
                     <div class="ht__comment__btn--2 mt--30">
                         <button class="fr__btns" type="submit">답글</button>
 
-                        <c:if test="${clientQnaVO.adminsTbId != null}">
+                        <c:if test="${clientQnaVO.adminsTbId ne null || sessionScope.customer.customerTbNo != clientQnaVO.customerTbNo}">
                             
                         </c:if>
-                        <c:if test="${clientQnaVO.adminsTbId == null}">
+                        <c:if test="${clientQnaVO.adminsTbId eq null && sessionScope.customer.customerTbNo == clientQnaVO.customerTbNo}">
                         <a class="fr__btns" href="qna-delete.do?qnaTbNo=${clientQnaVO.qnaTbNo}&qnaTbStatus=${'D'}">삭제</a>
                         <button class="fr__btns" onclick="modArticle()">수정</button>
                         </c:if>

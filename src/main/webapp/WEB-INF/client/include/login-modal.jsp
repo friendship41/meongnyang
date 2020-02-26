@@ -66,7 +66,7 @@
                                                 
                                                 
                                                 	<input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
-                                               		<a class="fr__btns" href="emailConfirm.do" value="emailSend">Email인증</a>
+                                               		
                                                 </div>
                                             </form>
                                         </div>

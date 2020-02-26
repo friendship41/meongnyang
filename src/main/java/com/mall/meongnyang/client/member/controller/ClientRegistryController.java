@@ -40,7 +40,7 @@ public class ClientRegistryController {
 		 
 		
 		
-		// ³ªÁß¿¡ ¿À·ù ³ª´ÂÁö È®ÀÎ
+		// ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 		return "index";
 	}
 	
@@ -50,11 +50,11 @@ public class ClientRegistryController {
 		int result=0;
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 		if(tempVO != null) {
-			System.out.println("¾ÆÀÌµð »ç¿ëºÒ°¡");
+			
 			result = 1;
 			return result;
 		} else {
-			System.out.println("¾ÆÀÌµð »ç¿ë°¡´É");
+			
 			return result;
 		}
 		
