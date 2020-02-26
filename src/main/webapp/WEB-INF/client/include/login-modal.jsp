@@ -99,20 +99,45 @@
     </div>
 </div>
 
+
+
 <script type='text/javascript'>
         //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('사용자키값');
+        Kakao.init('76344ccbd913c5d48822d124bf00ba28');
         // 카카오 로그인 버튼을 생성합니다.
-        Kakao.Auth.createLoginButton({
-            container: '#kakao-login-btn',
-            success: function (authObj) {
-                alert(JSON.stringify(authObj));
-            },
-            fail: function (err) {
-                alert(JSON.stringify(err));
-            }
-        });
+       Kakao.Auth.createLoginButton({
+        container: '#kakao-login-btn',
+        success: function(authObj) {
+            console.log(JSON.stringify(authObj.access_token));
+            console.log(JSON.stringify(authObj.token_type));
+            console.log(JSON.stringify(authObj.refresh_token));
+            console.log(JSON.stringify(authObj.expires_in));
+            console.log(JSON.stringify(authObj.scope));
+            console.log(JSON.stringify(authObj.refresh_token_expires_in));
+
+            Kakao.API.request({
+                url: '/v2/user/me',
+                success: function(res) {
+                    console.log(JSON.stringify(res.kakao_account.profile.nickname));
+                    if (res.kakao_account.has_email === true) {
+                        console.log(JSON.stringify(res.kakao_account.email));
+                    }
+
+                    if (res.kakao_account.has_gender === true) {
+                        console.log(JSON.stringify(res.kakao_account.gender));
+                    }
+
+                },
+                fail: function(error) {
+                    console.log(JSON.stringify(error));
+                }
+            });
+        },
+        fail: function(err) {
+            console.log(JSON.stringify(err));
+        }
+    });
       //]]>
     </script>
 

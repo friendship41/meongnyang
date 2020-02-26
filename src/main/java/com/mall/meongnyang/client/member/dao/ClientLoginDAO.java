@@ -10,7 +10,7 @@ public interface ClientLoginDAO {
 	
 	public int insertRegistry(ClientCustomerVO clientCustomerVO);
 	
-	
+	public void insertKakao(ClientCustomerVO clientCustomerVO); //카카오아이디집어넣기 
 	
 	//�α��ν� last login sysdate �߰�
 	public void updateLastLogin(ClientCustomerVO clientCustomerVO);
