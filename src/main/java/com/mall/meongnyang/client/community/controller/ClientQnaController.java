@@ -82,7 +82,7 @@ public class ClientQnaController {
 		model.addAttribute("clientQnaVO", tempVO);
 		return "community/qna-read";
 	}
-	@RequestMapping(value = "/qna-form2.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/qna-writeForm2.do", method = RequestMethod.POST)
 	public String qnaForm2Page(AdminQnaVO adminQnaVO, Model model) {
 		List<AdminQnaTypeVO> tempVO = clientSelectQnaTypeListService.selectQnaTypeList(new AdminQnaTypeVO());
 		AdminQnaVO replyFrom = clientSelectQnaService.selectQna(adminQnaVO);
@@ -96,7 +96,11 @@ public class ClientQnaController {
 		return "redirect:qna-list.do";
 	}
 
-
+	@RequestMapping(value = "/qna-delete.do", method = RequestMethod.GET)
+	public String qnaDelete(AdminQnaVO adminQnaVO) {
+		clientDeleteQnaService.deleteQna(adminQnaVO);
+		return "redirect:qna-list.do";
+	}
 
 
 
@@ -110,7 +114,7 @@ public class ClientQnaController {
 	
 	
 	@RequestMapping(value = "/qna-update.do", method = RequestMethod.POST)
-	public String qnaUpdate(AdminQnaVO adminQnaVO, HttpSession session) {
+	public String qnaUpdate(AdminQnaVO adminQnaVO) {
 		
 			clientUpdateQnaService.updateQna(adminQnaVO);	
 		
@@ -118,9 +122,5 @@ public class ClientQnaController {
 		return "redirect:qna-list.do";
 	}
 	
-	@RequestMapping(value = "/qna-delete.do", method = RequestMethod.GET)
-	public String qnaDelete(AdminQnaVO adminQnaVO) {
-		clientDeleteQnaService.deleteQna(adminQnaVO);
-		return "redirect:qna-list.do";
-	}
+	
 }

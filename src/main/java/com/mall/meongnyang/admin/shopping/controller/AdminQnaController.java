@@ -31,7 +31,7 @@ public class AdminQnaController {
 	
 	@RequestMapping(value = "/shoppingmall-qna-list.ado", method = RequestMethod.GET)
 	public String selectQnaList(AdminQnaVO adminQnaVO, Model model) {
-		//사용자 이름 이메일
+		
 		
 		List<AdminQnaVO> adminQnaList = adminSelectQnaListService.selectQnaList(adminQnaVO);
 		
@@ -40,35 +40,31 @@ public class AdminQnaController {
 		return "shoppingmall/shoppingmall-qna-list";
 	}
 	
-	@RequestMapping(value = "/qna-write.ado", method = RequestMethod.POST)
-	public String writeForm(AdminQnaVO adminQnaVO, Model model) {
-		AdminQnaVO tempVO = adminSelectQnaService.selectQna(adminQnaVO);
-		
-		
-		model.addAttribute("stair", tempVO);
-		
-		return "shoppingmall/shoppingmall-qna-write";
-	}
-	
 	@RequestMapping(value = "/shoppingmall-qna-read.ado", method = RequestMethod.GET)
 	public String readFormQna(AdminQnaVO adminQnaVO, Model model) {
 		AdminQnaVO tempVO = adminSelectQnaService.selectQna(adminQnaVO);
-		model.addAttribute("adminSelectQna", tempVO);
+		model.addAttribute("adminQnaVO", tempVO);
 		return "shoppingmall/shoppingmall-qna-read";
 	}
 	
 	
-	
+	@RequestMapping(value = "/qna-write.ado", method = RequestMethod.POST)
+	public String writeForm(AdminQnaVO adminQnaVO, Model model) {
+		AdminQnaVO insertInfo = adminSelectQnaService.selectQna(adminQnaVO);
+		
+		
+		model.addAttribute("insertInfo", insertInfo);
+		
+		return "shoppingmall/shoppingmall-qna-write";
+	}
 	
 	@RequestMapping(value = "/shoppingmall-qna-write.ado", method = RequestMethod.POST)
 	public String qnaInsert(AdminQnaVO adminQnaVO) {
 		
-		adminInsertQnaService.insertQna(adminQnaVO);
+		adminInsertQnaService.insertAdminQnaReply(adminQnaVO);
 		
 		return "redirect:shoppingmall-qna-list.ado";
 	}
-
-	
 	@RequestMapping(value = "/shoppingmall-qna-update.ado", method = RequestMethod.POST)
 	public String updateQna(AdminQnaVO adminQnaVO) {
 		
@@ -82,5 +78,7 @@ public class AdminQnaController {
 		adminDeleteQnaService.deleteQna(adminQnaVO);
 		return "redirect:shoppingmall-qna-list.ado";
 	}
+	
+	
 	
 }

@@ -12,9 +12,11 @@ public class AdminInsertQnaServiceImpl implements AdminInsertQnaService {
 	@Autowired
 	private AdminQnaDAO adminQnaDAO;
 	
+	
+
 	@Override
-	public void insertQna(AdminQnaVO adminQnaVO) {
-		adminQnaDAO.insertQna(adminQnaVO);
+	public void insertAdminQnaReply(AdminQnaVO adminQnaVO) {
+		adminQnaDAO.insertAdminQnaReply(adminQnaVO);
 		adminQnaDAO.updateStep(adminQnaVO);
 		adminQnaDAO.updateStepDepth(adminQnaVO);
 		

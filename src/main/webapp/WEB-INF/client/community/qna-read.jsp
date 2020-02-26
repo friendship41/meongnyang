@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <form action="qna-form2.do" method="get" id="mainForm">
+            <form action="qna-writeForm2.do" id="mainForm" method="post">
                 <input type="hidden" name="qnaTbNo" value="${clientQnaVO.qnaTbNo}">
                 <input type="hidden" name="qnaTypeTbNo" value="${clientQnaVO.qnaTypeTbNo}">
                 <input type="hidden" name="pdSaleTbNo" value="${clientQnaVO.pdSaleTbNo}">
@@ -51,9 +51,19 @@
                         <h4 class="title__line--5"> Q & A </h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__forms">
+                            	<c:if test="${clientQnaVO.adminsTbId eq null }">
                                 <input type="text" name="customerTbName" value="${clientQnaVO.customerTbName}" readonly>
+                                </c:if>
+                                <c:if test="${clientQnaVO.adminsTbId ne null }">
+                                <input type="text" name="adminsTbId" value="${clientQnaVO.adminsTbId}" readonly>
+                                </c:if>
+                                <c:if test="${clientQnaVO.adminsTbId eq null }">
                                 <input type="text" name="customerTbEmail" value="${clientQnaVO.customerTbEmail}"
                                        readonly>
+                                </c:if>
+                                <c:if test="${clientQnaVO.adminsTbId ne null }">
+                                 
+                                </c:if>
                                 <input type="text" name="qnaTbTitle" value="${clientQnaVO.qnaTbTitle}">
 
                             </div>
@@ -67,10 +77,14 @@
                     <div class="ht__comment__btn--2 mt--30">
                         <button class="fr__btns" type="submit">답글</button>
 
-                        <c:if test="${sessionScope.customer.customerTbNo eq clientQnaVO.customerTbNo}">
-                            <a class="fr__btns" href="qna-delete.do?qnaTbNo=${clientQnaVO.qnaTbNo}&qnaTbStatus=${'D'}">삭제</a>
-                            <span class="fr__btns" onclick="modArticle()">수정</span>
+                        <c:if test="${clientQnaVO.adminsTbId != null}">
+                            
                         </c:if>
+                        <c:if test="${clientQnaVO.adminsTbId == null}">
+                        <a class="fr__btns" href="qna-delete.do?qnaTbNo=${clientQnaVO.qnaTbNo}&qnaTbStatus=${'D'}">삭제</a>
+                        <button class="fr__btns" onclick="modArticle()">수정</button>
+                        </c:if>
+                        
                     </div>
                 </div>
             </form>
@@ -81,7 +95,7 @@
 
 <script>
     function modArticle() {
-        $("#mainForm").attr("action", "/qna-update.do")
+        $("#mainForm").attr("action", "qna-update.do");
         $("#mainForm").submit();
     }
 </script>
