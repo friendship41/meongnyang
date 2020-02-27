@@ -22,6 +22,23 @@ public class ClientProductOrderVO {
     private String pdSaleTbProductName;
     private int orderProductCount;
     
+    private Date startDate;
+    private Date endDate;
+    
+    private String pdOrderTbPaymentDateStr;
+    
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
 	public String getPdOrderTbNo() {
 		return pdOrderTbNo;
 	}
@@ -90,6 +107,12 @@ public class ClientProductOrderVO {
 	}
 	public int getPdOrderTbUsedPoint() {
 		return pdOrderTbUsedPoint;
+	}
+	public String getPdOrderTbPaymentDateStr() {
+		return pdOrderTbPaymentDateStr;
+	}
+	public void setPdOrderTbPaymentDateStr(String pdOrderTbPaymentDateStr) {
+		this.pdOrderTbPaymentDateStr = pdOrderTbPaymentDateStr;
 	}
 	public void setPdOrderTbUsedPoint(int pdOrderTbUsedPoint) {
 		this.pdOrderTbUsedPoint = pdOrderTbUsedPoint;
