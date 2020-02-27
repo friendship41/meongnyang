@@ -20,7 +20,7 @@ public class ClientLoginController {
 	@Autowired
 	private ClientSelectLoginService clientSelectLoginService;
 	
-	//ÇÊ¿ä¾øÀ½ ·Î±×¾Æ¿ôÀº
+	//í•„ìš”ì—†ìŒ
 	@Autowired
 	private ClientLogoutService clientLogoutService;
 	
@@ -28,7 +28,7 @@ public class ClientLoginController {
 	
 	
 	
-	//·Î±×ÀÎÃ³¸®
+	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginProc(ClientCustomerVO clientCustomerVO,  HttpSession session, Model model) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();		
@@ -46,13 +46,13 @@ public class ClientLoginController {
 	
 	
 	
-	//·Î±×¾Æ¿ôÃ³¸®
+	//ï¿½Î±×¾Æ¿ï¿½Ã³ï¿½ï¿½
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logoutProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
 		
 		//session.invalidate();
 		session.setAttribute("customer", null);
-		System.out.println(session.getAttribute("clientId")+"¼¼¼ÇÇØÁ¦");
+		
 		return "index";
 	}
 	

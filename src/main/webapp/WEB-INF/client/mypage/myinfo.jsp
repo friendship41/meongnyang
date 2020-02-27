@@ -60,7 +60,7 @@
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
                                 
                                 <select class="ht__select" id="selectBox" name="cmAddressTbNo">
-                                	<option value="thisIsSelect">선택하세요</option>
+                                	<option id="addOption" value="-1">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
  										<option value="${address.cmAddressTbNo }">${address.cmAddressTbNickname }</option>
  									</c:forEach>
@@ -104,7 +104,7 @@
                         <div class="ht__comment__form__inner">
                            
                             <div class="comment__form">
-                            	<input type="text" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone">
+                            	<input type="text" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone" maxlength="11">
                             </div>
                         </div>
                         	
@@ -167,6 +167,7 @@
            	console.log(selectedValue);
             if(selectedValue === 'thisIsSelect')
             {
+                $("#addOption").attr("value", -1);
 				$("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
                 $("#cmAddressTbPostcode").removeAttr("value");
@@ -188,7 +189,8 @@
                 })
                     .done(function(json) {
                         console.log(json);
-                       
+
+                        $("#addOption").attr("value", 'thisIsSelect');
                         $("#cmAddressTbNo").attr("value", json.cmAddressTbNo);
                         $("#cmAddressTbPostcode").attr("value", json.cmAddressTbPostcode);
  						$("#cmAddressTbAddress1").attr("value", json.cmAddressTbAddress1);

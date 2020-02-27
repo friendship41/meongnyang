@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:c="http://www.springframework.org/schema/c"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-4.3.xsd">
 
 
 	<!-- 어노테이션 활성화 -->
@@ -18,6 +21,12 @@
 	<context:component-scan base-package="com.mall.meongnyang.client"/>
 
 
+	<!-- 스케줄러 세팅 -->
+	<task:annotation-driven/>
+
+
+
+
 	<!-- 메일 서비스 -->
 	<bean id="MailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
 
@@ -26,6 +35,8 @@
 	<bean id="KakaoPayApprovedService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayApprovedServiceImpl"/>
 	<bean id="ParamMapToString" class="com.mall.meongnyang.util.apiRequest.service.ParamMapToString"/>
 	<bean id="RequestVOFactory" class="com.mall.meongnyang.util.apiRequest.voFactory.RequestVOFactoryImpl"/>
+
+
 
 
 	<!-- resources mapping -->
@@ -40,18 +51,25 @@
 	</bean>
 
 
-	<!-- shopping 메뉴 세션세팅 인터셉트 -->
+	<!-- shopping 메뉴 세션세팅 인터셉트, 방문자수 카운팅 인터셉트 -->
 	<bean id="clientMenuDAO" class="com.mall.meongnyang.client.intercepter.menu.ClientMenuDAOImpl">
 		<constructor-arg ref="sqlSessionTemplate"/>
 	</bean>
 	<bean id="clientSelectProductCategoryListService" class="com.mall.meongnyang.client.intercepter.menu.ClientSelectProductCategoryListServiceImpl">
 		<constructor-arg ref="clientMenuDAO"/>
 	</bean>
+	<bean id="VisitCounter" class="com.mall.meongnyang.client.intercepter.visitCount.VisitCounter"/>
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*.do"/>
 			<bean class="com.mall.meongnyang.client.intercepter.menu.MenuCheckInterceptor">
 				<constructor-arg ref="clientSelectProductCategoryListService"/>
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<bean class="com.mall.meongnyang.client.intercepter.visitCount.VisitCountInterceptor">
+				<constructor-arg ref="VisitCounter"/>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

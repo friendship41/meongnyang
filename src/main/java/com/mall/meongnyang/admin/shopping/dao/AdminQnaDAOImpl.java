@@ -1,12 +1,11 @@
 package com.mall.meongnyang.admin.shopping.dao;
 
-import java.util.List;
-
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+import java.util.List;
 
 @Repository("AdminQnaDAO")
 public class AdminQnaDAOImpl implements AdminQnaDAO {
@@ -22,12 +21,12 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 
 	@Override
 	public List<AdminQnaVO> selectQnaList(AdminQnaVO adminQnaVO) {
-		return sqlSessionTemplate.selectList("qnaDAO.adminSelectQnaList", adminQnaVO);
+		return sqlSessionTemplate.selectList("qnaDAO.selectAdminQnaList", adminQnaVO);
 	}
 
 	@Override
 	public void insertQna(AdminQnaVO adminQnaVO) {
-		sqlSessionTemplate.insert("qnaDAO.insertQna", adminQnaVO);
+		sqlSessionTemplate.insert("qnaDAO.insertQnaReply", adminQnaVO);
 		
 	}
 
@@ -56,9 +55,9 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 	}
 
 	@Override
-	public AdminQnaVO selectInfoQna(AdminQnaVO adminQnaVO) {
-		// TODO Auto-generated method stub
-		return sqlSessionTemplate.selectOne("qnaDAO.selectInfoQna", adminQnaVO);
+	public void insertAdminQnaReply(AdminQnaVO adminQnaVO) {
+		sqlSessionTemplate.insert("qnaDAO.insertAdminQnaReply", adminQnaVO);
+		
 	}
 
 	

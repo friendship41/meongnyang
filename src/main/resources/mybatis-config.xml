@@ -30,6 +30,7 @@
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminQnaVO" alias="qna"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO" alias="qnaType"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminOverviewVisitorVO" alias = "adminOverview"/>
+        <typeAlias type="com.mall.meongnyang.client.scheduler.todaycount.ClientUserCountVO" alias="userCount"/>
         <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientWishlistVO" alias="wishlist"/>
     </typeAliases>
     <mappers>

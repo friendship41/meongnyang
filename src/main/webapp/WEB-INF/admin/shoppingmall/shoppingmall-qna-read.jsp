@@ -34,48 +34,54 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal" action="qna-write.ado" method="post">
+                                <form class="form-horizontal" id="mainForm" action="qna-write.ado" method="post">
+                                <input type="hidden" name="qnaTbNo" value="${adminQnaVO.qnaTbNo}">
+                				
+                				
                                     <div class="form-group">
                                         <label for="qnaNum" class="col-sm-2 control-label">글번호</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTbNo" name="qnaTbNo" value="${adminSelectQna.qnaTbNo }" readonly>
+                                            <input type="text" class="form-control" id="qnaTbNo" name="qnaTbNo" value="${adminQnaVO.qnaTbNo }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaTitle" class="col-sm-2 control-label">제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbTitle" value="${adminSelectQna.qnaTbTitle }" readonly>
+                                            <input type="text" class="form-control" id="qnaTbTitle" name="qnaTbTitle" value="${adminQnaVO.qnaTbTitle }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                           <input type="text" class="form-control" id="customerTbName" name="customerTbName" value="${adminSelectQna.customerTbName }" readonly><!-- 몰겟음 -->
+                                           <input type="text" class="form-control" id="customerTbName" name="customerTbName" value="${adminQnaVO.adminsTbId }" readonly><!-- 몰겟음 -->
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">작성일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="qnaTbRegDate" value="${adminSelectQna.qnaTbRegDate }" readonly>
+                                            <input type="text" class="form-control" name="qnaTbRegDate" value="${adminQnaVO.qnaTbRegDate }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaReadCnt" class="col-sm-2 control-label">조회수</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="qnaReadCnt" name="qnaTbReadcount" value="${adminSelectQna.qnaTbReadcount }" readonly>
+                                            <input type="text" class="form-control" id="qnaReadCnt" name="qnaTbReadcount" value="${adminQnaVO.qnaTbReadcount }" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qnaContent" class="col-sm-2 control-label">내용</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" id="qnaContent" name="qnaTbContent">${adminSelectQna.qnaTbContent }</textarea>
+                                            <textarea rows="10" class="form-control" id="qnaContent" name="qnaTbContent">${adminQnaVO.qnaTbContent }</textarea>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
-                                            <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminSelectQna.qnaTbNo }&qnaTbStatus=${'D'}">삭제</a>
+                                            <a class="btn btn-primary" href="shoppingmall-qna-delete.ado?qnaTbNo=${adminQnaVO.qnaTbNo }&qnaTbStatus=${'D'}">삭제</a>
                                             <button class="btn btn-primary" type="submit">답글작성</button>
+                                            <c:if test="${adminQnaVO.adminsTbId ne null }">
+                                            <button class="btn btn-primary" onclick="modArticle()">수정</button>
+                                            </c:if>
                                         </div>
                                     </div>
                                 </form>
@@ -97,7 +103,13 @@
 <!-- /Page Container -->
 
 
-<!-- Javascripts -->
+<!-- JavaScripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
+ <script type="text/javascript">
+ function modArticle() {
+        $("#mainForm").attr("action", "shoppingmall-qna-update.ado");
+        $("#mainForm").submit();
+    }
+ </script>
 </body>
 </html>
