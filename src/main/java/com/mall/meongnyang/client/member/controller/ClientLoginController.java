@@ -41,6 +41,7 @@ public class ClientLoginController {
 			
 			return "redirect:index.do";
 		} else {
+			
 			model.addAttribute("loginCheckSubmit", false);
 			return "index";
 		}
@@ -55,7 +56,7 @@ public class ClientLoginController {
 		//session.invalidate();
 		session.setAttribute("customer", null);
 		System.out.println(session.getAttribute("clientId")+"��������");
-		return "index";
+		return "redirect:index.do";
 	}
 	
 	

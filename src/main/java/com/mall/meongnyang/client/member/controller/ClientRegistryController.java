@@ -1,7 +1,5 @@
 package com.mall.meongnyang.client.member.controller;
 
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,21 +29,23 @@ public class ClientRegistryController {
 
 	@RequestMapping(value = "/registry.do", method = RequestMethod.POST)
 	public String registryProc(ClientCustomerVO clientCustomerVO, Model model) {
-
+		
+		clientInsertRegistryService.insertRegistry(clientCustomerVO);
+		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
+		
 		// Mail 보내기
 		MailVO mailVO = new MailVO();
 		mailVO.setFrom("dlsdyd1245@naver.com"); // 관리자아이디
 		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // 회원가입 아이디
 		mailVO.setSubject("회원가입 인증 요청입니다.");
 		mailVO.setContent("<h1>메일인증</h1>" 
-						  + "<a href='localhost:8080/WEB-INF/client/index.do?customerTbNo="
-						  +clientCustomerVO.getCustomerTbNo() 
-						  +"&customerTbState=N"
+						  //base64 url암호화
+						  + "<a href='localhost:8080/index.do?customerTbNo=tempVO.getCustomerTbNo()&customerTbState=N"
 						  + "' >이메일 인증 확인</a>");
 		model.addAttribute("emailSend", true);
 		mailService.sendMail(mailVO);
 
-		clientInsertRegistryService.insertRegistry(clientCustomerVO);
+		
 		
 
 		return "index";
