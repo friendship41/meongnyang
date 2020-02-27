@@ -1,63 +1,74 @@
 package com.mall.meongnyang.client.member.controller;
 
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mall.meongnyang.client.member.service.ClientInsertRegistryService;
-
 import com.mall.meongnyang.client.member.service.ClientSelectLoginService;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.util.mail.MailService;
 import com.mall.meongnyang.util.mail.MailVO;
 
-
-
 @Controller
 public class ClientRegistryController {
-	
+
 	@Autowired
 	private ClientInsertRegistryService clientInsertRegistryService;
-	
-	
+
 	@Autowired
 	private ClientSelectLoginService clientSelectLoginService;
-	
-	
+
+	@Autowired
+	private MailService mailService;
 
 	
-	
-	
-	
+
 	@RequestMapping(value = "/registry.do", method = RequestMethod.POST)
 	public String registryProc(ClientCustomerVO clientCustomerVO, Model model) {
-			
+
+		// Mail ë³´ë‚´ê¸°
+		MailVO mailVO = new MailVO();
+		mailVO.setFrom("dlsdyd1245@naver.com"); // ê´€ë¦¬ìì•„ì´ë””
+		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // íšŒì›ê°€ì… ì•„ì´ë””
+		mailVO.setSubject("íšŒì›ê°€ì… ì¸ì¦ ìš”ì²­ì…ë‹ˆë‹¤.");
+		mailVO.setContent("<h1>ë©”ì¼ì¸ì¦</h1>" 
+						  + "<a href='localhost:8080/WEB-INF/client/index.do?customerTbNo="
+						  +clientCustomerVO.getCustomerTbNo() 
+						  +"&customerTbState=N"
+						  + "' >ì´ë©”ì¼ ì¸ì¦ í™•ì¸</a>");
+		model.addAttribute("emailSend", true);
+		mailService.sendMail(mailVO);
+
 		clientInsertRegistryService.insertRegistry(clientCustomerVO);
-		 
 		
-		
-		// ³ªÁß¿¡ ¿À·ù ³ª´ÂÁö È®ÀÎ
+
 		return "index";
 	}
 	
+	
+	
+	
+
 	@RequestMapping(value = "/loginAjaxSingle.do")
 	@ResponseBody
 	public int idCheck(Model model, ClientCustomerVO clientCustomerVO) {
-		int result=0;
+		int result = 0;
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
-		if(tempVO != null) {
-			System.out.println("¾ÆÀÌµğ »ç¿ëºÒ°¡");
+		if (tempVO != null) {
+
 			result = 1;
 			return result;
 		} else {
-			System.out.println("¾ÆÀÌµğ »ç¿ë°¡´É");
+
 			return result;
 		}
-		
+
 	}
-		
+
 }

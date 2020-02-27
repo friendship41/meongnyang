@@ -14,7 +14,16 @@ public class ClientCustomerVO {
 	private Date customerTbPwChange;
 	private String customerTbJoinWait;
 	private String customerTbJoinPath;
+	private String customerTbState;
 	
+	
+	
+	public String getCustomerTbState() {
+		return customerTbState;
+	}
+	public void setCustomerTbState(String customerTbState) {
+		this.customerTbState = customerTbState;
+	}
 	public int getCustomerTbNo() {
 		return customerTbNo;
 	}

@@ -20,7 +20,7 @@ public class ClientLoginController {
 	@Autowired
 	private ClientSelectLoginService clientSelectLoginService;
 	
-	//ÇÊ¿ä¾øÀ½ ·Î±×¾Æ¿ôÀº
+
 	@Autowired
 	private ClientLogoutService clientLogoutService;
 	
@@ -28,13 +28,15 @@ public class ClientLoginController {
 	
 	
 	
-	//·Î±×ÀÎÃ³¸®
+	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginProc(ClientCustomerVO clientCustomerVO,  HttpSession session, Model model) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();		
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 		
-		if(tempVO!=null && (encoder.matches(clientCustomerVO.getCustomerTbPassword(), tempVO.getCustomerTbPassword()))) {
+		if(tempVO!=null 
+				&& (encoder.matches(clientCustomerVO.getCustomerTbPassword(), tempVO.getCustomerTbPassword()))
+				&& tempVO.getCustomerTbState().equals("N")) {
 			session.setAttribute("customer", tempVO);
 			
 			return "redirect:index.do";
@@ -46,13 +48,13 @@ public class ClientLoginController {
 	
 	
 	
-	//·Î±×¾Æ¿ôÃ³¸®
+	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logoutProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
 		
 		//session.invalidate();
 		session.setAttribute("customer", null);
-		System.out.println(session.getAttribute("clientId")+"¼¼¼ÇÇØÁ¦");
+		System.out.println(session.getAttribute("clientId")+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		return "index";
 	}
 	
