@@ -4,6 +4,18 @@
 
 <mapper namespace="orderDAO">
 
+	<!-- 일별 매출 현황 -->
+	<select id="selectSalesPayment" parameterType="order" resultType="order">
+		SELECT 
+		TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'dd') "PD_ORDER_TB_PAYMENT_DATE_STR",
+		SUM(PD_ORDER_TB_PAYMENT)
+		FROM pd_order
+		<![CDATA[WHERE PD_ORDER_TB_PAYMENT_DATE >= #{startDate} AND PD_ORDER_TB_PAYMENT_DATE <= #{endDate}]]>
+		AND NOT PD_ORDER_TB_PAYMENT_DATE IS NULL
+		GROUP BY TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'dd')
+		ORDER BY PD_ORDER_TB_PAYMENT_DATE_STR ASC
+	</select>
+
 	<select id="selectOrderCount" parameterType="order" resultType="int">
 		SELECT COUNT(*) FROM pd_order WHERE customer_tb_no = #{customerTbNo}
 	</select>
