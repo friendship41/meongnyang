@@ -58,6 +58,7 @@
 <script src="<c:url value='/resources/client/js/review.js'/>"></script>
 
 <script src="<c:url value='/resources/client/js/easyResponsiveTabs.js'/>" type="text/javascript"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#horizontalTab').easyResponsiveTabs({
@@ -121,6 +122,12 @@
             .fail(function (xhr, status, errorThrown) {
                 alert(errorThrown);
             });
+    }
+    Kakao.init('56d66fb708db72842c6c188e866a48f7');
+    function kakaoChat() {
+        Kakao.Channel.chat({
+            channelPublicId: '_hNrsxb'
+        });
     }
 </script>
 

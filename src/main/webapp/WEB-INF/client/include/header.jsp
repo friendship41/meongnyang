@@ -55,6 +55,12 @@
 
 <!-- Body main wrapper start -->
 <div class="wrapper">
+    
+    <!-- 카카오톡 상담문의 -->
+    <a href="javascript:void kakaoChat()">
+        <img src="/resources/client/images/question_small_yellow_pc.png" style="position: fixed; bottom: 80px; right: 20px; z-index: 2147483647;">
+    </a>
+    
     <!-- Start Header Style -->
     <header id="htc__header" class="htc__header__area header--one">
         <!-- Start Mainmenu Area -->
