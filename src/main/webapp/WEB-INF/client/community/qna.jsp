@@ -59,7 +59,7 @@
                                         	<c:forEach var="qna" items="${clientQnaList}">
                                             <tr>
                                                 <input type="hidden" value="${qna.qnaTbDepth}">
-                                                <td class="product-remove"> "${qna.qnaTbNo}" </td>
+                                                <td class="product-remove"> "${qna.rnum}" </td>
 
                                                 <c:if test="${qna.qnaTbSecret == 'Y'}">
                                                     <!-- 비밀글 -->

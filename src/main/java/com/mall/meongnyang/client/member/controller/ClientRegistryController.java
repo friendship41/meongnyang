@@ -35,7 +35,7 @@ public class ClientRegistryController {
 		
 		// Mail 보내기
 		MailVO mailVO = new MailVO();
-		mailVO.setFrom("dlsdyd1245@naver.com"); // 관리자아이디
+		mailVO.setFrom("admin@naver.com"); // 관리자아이디
 		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // 회원가입 아이디
 		mailVO.setSubject("회원가입 인증 요청입니다.");
 		mailVO.setContent("<h1>메일인증</h1>" 
