@@ -176,20 +176,18 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="popularDayFrom" type="text" class="date-picker text-center form-control"
                                                            placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control"
+                                                    <input id="popularDayTo" class="date-picker text-center form-control"
                                                            placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block"
-                                                            style="margin-bottom:14px;">조회
-                                                    </button>
+                                                    <span onclick="getpopularProductList()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -197,40 +195,7 @@
                                 </form>
                                 <div id="grid-gallery" class="grid-gallery">
                                     <section class="grid-wrap">
-                                        <ul class="grid">
-                                            <li class="grid-sizer"></li>
-                                            <li>
-                                                <figure>
-                                                    <img src="http://via.placeholder.com/674x800" alt="img03"/>
-                                                    <figcaption><h3>Brunch semiotics</h3>
-                                                        <p>Ex disrupt cray yr, butcher pour-over magna umami kitsch
-                                                            before they sold out commodo.</p></figcaption>
-                                                </figure>
-                                            </li>
-                                            <li>
-                                                <figure>
-                                                    <img src="http://via.placeholder.com/674x800" alt="img03"/>
-                                                    <figcaption><h3>Brunch semiotics</h3>
-                                                        <p>Ex disrupt cray yr, butcher pour-over magna umami kitsch
-                                                            before they sold out commodo.</p></figcaption>
-                                                </figure>
-                                            </li>
-                                            <li>
-                                                <figure>
-                                                    <img src="http://via.placeholder.com/674x800" alt="img03"/>
-                                                    <figcaption><h3>Brunch semiotics</h3>
-                                                        <p>Ex disrupt cray yr, butcher pour-over magna umami kitsch
-                                                            before they sold out commodo.</p></figcaption>
-                                                </figure>
-                                            </li>
-                                            <li>
-                                                <figure>
-                                                    <img src="http://via.placeholder.com/674x800" alt="img03"/>
-                                                    <figcaption><h3>Brunch semiotics</h3>
-                                                        <p>Ex disrupt cray yr, butcher pour-over magna umami kitsch
-                                                            before they sold out commodo.</p></figcaption>
-                                                </figure>
-                                            </li>
+                                        <ul id="popularUl" class="grid">
                                         </ul>
                                     </section>
                                 </div>
@@ -331,6 +296,13 @@
         getDataFromServerAjax(url, 'productTable');
     }
 
+    function getpopularProductList() {
+        var dayFrom = $("#popularDayFrom").val();
+        var dayTo = $("#popularDayTo").val();
+        var url = "/popularProductOverview.ado?dayFrom="+dayFrom+"&dayTo="+dayTo;
+        getDataFromServerAjax(url, 'popularList');
+    }
+
     function getProductSaleTable() {
         var dayFrom = $("#productSaleDayFromInput").val();
         var dayTo = $("#productSaleDayToInput").val();
@@ -377,6 +349,10 @@
                     else if(toWhere === 'productOrderTable')
                     {
                         settingProductOrderTable(json);
+                    }
+                    else if(toWhere === 'popularList')
+                    {
+                        settingPopularProductList(json);
                     }
                 }
             })
@@ -469,6 +445,25 @@
         $("#holdProductTable").DataTable();
     }
 
+    function settingPopularProductList(json) {
+        var popularHTML = '<li class="grid-sizer"></li>';
+
+        for (var i = 0; i < json.length; i++) {
+            var singlePopular = json[i];
+
+            popularHTML += '<li>';
+            popularHTML += '<figure>';
+            popularHTML += '<img src="'+singlePopular.pdImageTbPath+'" alt="이미지" width="674px" height="500px"/>';
+            popularHTML += '<figcaption><h3>'+singlePopular.productTbName+'</h3></figcaption>';
+            popularHTML += '</figure>';
+            popularHTML += '</li>';
+        }
+
+        $("#popularUl").empty();
+        $("#popularUl").append(popularHTML);
+
+    }
+
     function settingProductSaleTable(json) {
         var productSaleHTML = "";
 
@@ -543,6 +538,10 @@
         $("#productSaleDayFromInput").attr("value", getMonthAgoDate(6).yyyymmdd());
         $("#productSaleDayToInput").attr("value", new Date().yyyymmdd());
         getProductSaleTable();
+
+        $("#popularDayFrom").attr("value", getMonthAgoDate(6).yyyymmdd());
+        $("#popularDayTo").attr("value", new Date().yyyymmdd());
+        getpopularProductList();
 
         $("#productOrderDayFrom").attr("value", getMonthAgoDate(6).yyyymmdd());
         $("#productOrderDayTo").attr("value", new Date().yyyymmdd());

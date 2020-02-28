@@ -1,5 +1,6 @@
 package com.mall.meongnyang.admin.product.controller;
 
+import com.mall.meongnyang.admin.product.service.AdminSelectPopularProductListService;
 import com.mall.meongnyang.admin.product.service.AdminSelectProductOrderOverviewService;
 import com.mall.meongnyang.admin.product.service.AdminSelectProductOverviewListService;
 import com.mall.meongnyang.admin.product.service.AdminSelectProductSaleOverviewListService;
@@ -23,6 +24,10 @@ public class AdminSelectProductController
     private AdminSelectProductSaleOverviewListService adminSelectProductSaleOverviewListService;
     @Autowired
     private AdminSelectProductOrderOverviewService adminSelectProductOrderOverviewService;
+    @Autowired
+    private AdminSelectPopularProductListService adminSelectPopularProductListService;
+
+
 
     @RequestMapping(value = "productOverview.ado", method = RequestMethod.GET)
     public String goToProductOverviewPage()
@@ -41,16 +46,21 @@ public class AdminSelectProductController
     @ResponseBody
     public List<AdminProductSaleVO> getProductSaleOverviewAjax(AdminProductSaleVO adminProductSaleVO)
     {
-        List<AdminProductSaleVO> productSaleList = adminSelectProductSaleOverviewListService.selectProductSaleOverview(adminProductSaleVO);
-        return productSaleList;
+        return adminSelectProductSaleOverviewListService.selectProductSaleOverview(adminProductSaleVO);
     }
 
     @RequestMapping(value = "/productOrderOverviewAjax.ado", method = RequestMethod.GET)
     @ResponseBody
     public List<ClientProductOrderVO> getProductOrderOverviewAjax(ClientProductOrderVO clientProductOrderVO)
     {
-        List<ClientProductOrderVO> productOrderList =adminSelectProductOrderOverviewService.selectProductOrderList(clientProductOrderVO);
-        return productOrderList;
+        return adminSelectProductOrderOverviewService.selectProductOrderList(clientProductOrderVO);
+    }
+
+    @RequestMapping(value = "/popularProductOverview.ado", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AdminProductVO> getPopularProductOverviewAjax(AdminProductVO adminProductVO)
+    {
+        return adminSelectPopularProductListService.getPopularProductList(adminProductVO);
     }
 
 }
