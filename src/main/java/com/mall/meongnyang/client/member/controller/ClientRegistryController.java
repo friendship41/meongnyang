@@ -40,7 +40,9 @@ public class ClientRegistryController {
 		mailVO.setSubject("회원가입 인증 요청입니다.");
 		mailVO.setContent("<h1>메일인증</h1>" 
 						  //base64 url암호화
-						  + "<a href='localhost:8080/index.do?customerTbNo=tempVO.getCustomerTbNo()&customerTbState=N"
+						  + "<a href='localhost:8080/index.do?customerTbNo="
+						  + tempVO.getCustomerTbNo()
+						  +	"&customerTbState=N"
 						  + "' >이메일 인증 확인</a>");
 		model.addAttribute("emailSend", true);
 		mailService.sendMail(mailVO);
