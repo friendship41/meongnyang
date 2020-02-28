@@ -50,15 +50,12 @@
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
             	<input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
-            	<input type="hidden" name="cmAddressTbPhone" value="010">
-            	
+            	<input type="hidden" name="cmAddressTbPhone" value="010">	
                     <div class="ht__comment__form">
-                    	
                         <h4 class="title__line--5">배송지 목록</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-                                
                                 <select class="ht__select" id="selectBox" name="cmAddressTbNo">
                                 	<option id="addOption" value="-1">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
@@ -72,7 +69,6 @@
                                 <div class="ht__comment__btn--2 mt--30">
                                 	<button id="modifySubmitButton" class="fr__btn">추가</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
-                
                                 </div>
                             </div>
                             <div class="ht__comment__btn--2 mt--30">
@@ -82,7 +78,6 @@
                        </div>
                    </div>
                    </form>
-                   
                    <div class="ht__comment__form">
                     <form action="/myinfo-update-password.do" method="post">
                     <h4 class="title__line--5">비밀번호 변경</h4>
@@ -100,16 +95,14 @@
                     </form> 
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">연락처 등록 및 수정</h4>
-                        <form action="/myinfo-update-phone.do" method="POST">
+                        <form action="/myinfo-update-phone.do" id="phoneForm" method="POST">
                         <div class="ht__comment__form__inner">
-                           
                             <div class="comment__form">
-                            	<input type="text" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone" maxlength="11">
+                            	<input type="text" id="customerTbPhone" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone" maxlength="11">
                             </div>
-                        </div>
-                        	
+                        </div>	
                         <div class="ht__comment__btn--2 mt--30">
-                            <button class="fr__btn" type="submit">등록</button>
+                            <button type="button" class="fr__btn" onclick="phoneCheck()" type="submit">등록</button>
                         </div>
                         </form>	    
                     </div>
@@ -218,6 +211,18 @@
                 }
             }).open();
         }
-    
-    
+	
+	function phoneCheck() {
+	var phone = $("#customerTbPhone").val();
+	var phoneSu = phone.length;
+	console.log(phoneSu);
+	if(phoneSu < 11) {
+		alert("전화번호를 다시한번 확인해주세요.");	
+	} else if(phone.indexOf("-") != -1) {
+		alert("-를 제거해주세요");	
+	} else {
+		$("#phoneForm").submit();
+	}
+
+	}
 </script>

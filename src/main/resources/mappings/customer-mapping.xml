@@ -75,4 +75,11 @@
 			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT+ROUND(#{pdOrderTbPayment}/100, 0)
 		WHERE CUSTOMER_TB_NO = ${customerTbNo}
 	</update>
+	<update id="updateState" parameterType="clientLogin">
+		UPDATE CUSTOMER
+		SET
+			customer_tb_state = #{customerTbState}
+		WHERE customer_Tb_no = #{customerTbNo}
+			
+	</update>
 </mapper>
