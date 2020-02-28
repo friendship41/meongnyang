@@ -19,6 +19,7 @@ public class InsertVisitMemberCountSchedulerService
         ClientUserCountVO clientUserCountVO = new ClientUserCountVO();
         clientUserCountVO.setUserCountTbVisitors(visitCounter.getVisitCount());
         clientUserCountDAO.insertUserCount(clientUserCountVO);
+        visitCounter.setVisitCount(0);
     }
 
 }

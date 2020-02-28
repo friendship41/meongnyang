@@ -49,7 +49,6 @@ public class ClientRegistryController {
 
 		
 		
-
 		return "index";
 	}
 	
@@ -67,7 +66,6 @@ public class ClientRegistryController {
 			result = 1;
 			return result;
 		} else {
-
 			return result;
 		}
 

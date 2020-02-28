@@ -20,7 +20,6 @@ public class ClientLoginController {
 	@Autowired
 	private ClientSelectLoginService clientSelectLoginService;
 	
-
 	@Autowired
 	private ClientLogoutService clientLogoutService;
 	
@@ -49,13 +48,11 @@ public class ClientLoginController {
 	
 	
 	
-	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logoutProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
 		
 		//session.invalidate();
 		session.setAttribute("customer", null);
-		System.out.println(session.getAttribute("clientId")+"��������");
 		return "redirect:index.do";
 	}
 	
