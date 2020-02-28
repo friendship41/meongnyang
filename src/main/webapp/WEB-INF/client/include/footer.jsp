@@ -9,6 +9,7 @@
             <div class="row">
                 <!-- Start Single Footer Widget -->
                 <div class="col-md-12">
+
                     <div class="footer">
                         <h2 class="title__line--2">ABOUT US</h2>
                         <div class="ft__details">
