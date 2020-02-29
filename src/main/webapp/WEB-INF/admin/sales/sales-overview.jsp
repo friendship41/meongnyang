@@ -549,6 +549,8 @@
 	<jsp:include page="../include/scripts-load.jsp" />	
 	<script>
 	$(function() {
+
+		chartGo();
 	
 		var twoWeekAgo = new Date(new Date().setDate(new Date().getDate()-15));
 		var oneDayAgo = new Date(new Date().setDate(new Date().getDate()-1));
