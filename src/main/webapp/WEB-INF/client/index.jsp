@@ -526,6 +526,23 @@
 </section>
 <!-- End Blog Area -->
 <!-- End Banner Area -->
+<c:choose>
+<c:when test="${emailSend eq true}">
+<script type="text/javascript"> 
+	alert("이메일 발송이 완료되었습니다.");
+</script>
+</c:when>
+<c:when test="${emailCertification eq true}">
+<script type="text/javascript"> 
+	alert("이메일 인증이 완료되었습니다. 로그인을 해주세요.");
+</script>
+</c:when>
+<c:when test="${loginCheckSubmit eq false}">
+<script type="text/javascript"> 
+	alert("로그인 실패 하셨습니다.");
+</script>
+</c:when>
+</c:choose>
 
 
 <jsp:include page="include/footer.jsp"></jsp:include>

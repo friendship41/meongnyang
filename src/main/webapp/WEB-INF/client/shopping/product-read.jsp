@@ -108,7 +108,7 @@
                                 <p><span>공유하기</span></p>
                                 <ul class="pro__share">
                                     <li><a href="#" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
-                                    <li><a href="#" target="_blank"><i class="icon-social-google icons"></i></a></li>
+                                    <li><a href="javascript:shareKakaoStory()"><img src="/resources/client/images/kakaostory_icon.png" height="36px"/></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                                            	<c:forEach var="qna" items="${qnaList}">
                                             <tr>
                                                 <input type="hidden" value="${qna.qnaTbDepth}">
-                                                <td class="product-remove"> "${qna.qnaTbNo}" </td>
+                                                <td class="product-remove"> "${qna.rnum}" </td>
 
                                                 <c:if test="${qna.qnaTbSecret == 'Y'}">
                                                     <!-- 비밀글 -->
@@ -298,7 +298,12 @@
                                                     </c:if>
                                                 </c:if>
 
+                                                <c:if test="${qna.adminsTbId eq null }">
                                                 <td class="product-price"><span class="amount">${qna.customerTbName}</span></td>
+                                                </c:if>
+                                                <c:if test="${qna.adminsTbId ne null }">
+                                                <td class="product-price"><span class="amount">${qna.adminsTbId}</span></td>
+                                                </c:if>
                                                 <td class="product-stock-status"><span class="wishlist-in-stock">${qna.qnaTbRegDate}</span></td>
                                             </tr>
                                             </c:forEach>
@@ -453,6 +458,13 @@
             .fail(function (xhr, status, errorThrown) {
                 alert(errorThrown);
             });
+    }
+
+    function shareKakaoStory() {
+        Kakao.Story.share({
+            url: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+            text: '상품명 : ${detail.productTbName}, 오늘뭐멍냥의 상품!'
+        });
     }
 </script>
 
@@ -612,6 +624,7 @@ $(document).ready(function() {
 		}
 	}
 });
+
 
 
 </script>

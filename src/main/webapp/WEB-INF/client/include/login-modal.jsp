@@ -2,19 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 로그인이 뜨는 모달부분 -->
-<c:choose>
-<c:when test="${loginCheckSubmit eq false}">
-<script type="text/javascript"> 
-	alert("로그인 실패 하셨습니다.")
-</script>
-</c:when>
-<c:when test="${mailSubmit eq false}">
-<script type="text/javascript"> 
-	alert("인증 메일이 발송되었습니다.")
-	
-</script>
-</c:when>
-</c:choose>
+
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -54,7 +42,7 @@
                                 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                     <div class="facts">
                                         <div class="register">
-                                            <form name="registryForm" action="registry.do" method="post"><!-- 회원가입 -->
+                                            <form name="registryForm" id="registryForm" action="registry.do" method="post"><!-- 회원가입 -->
                                                 <input placeholder="Name" name="customerTbName" type="text" required="">
                                                 <input placeholder="Email Address" name="customerTbEmail" type="email"
                                                        required="" oninput="checkEmail()" id="customerTbEmail">
@@ -144,7 +132,9 @@
 				} 
 			}
 			});
-		}
+	}
+	
+    
 		
 	
 </script>

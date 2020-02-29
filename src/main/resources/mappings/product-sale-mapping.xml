@@ -132,4 +132,11 @@
         WHERE PD_SALE_TB_NO = #{pdSaleTbNo}
     </update>
 
+    <update id="updateProductSaleReadCount" parameterType="productSale">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_READ_COUNT=PD_SALE_TB_READ_COUNT+1
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </update>
+
 </mapper>

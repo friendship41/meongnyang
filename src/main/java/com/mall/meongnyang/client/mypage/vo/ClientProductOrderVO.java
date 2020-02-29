@@ -21,25 +21,10 @@ public class ClientProductOrderVO {
     
     private String pdSaleTbProductName;
     private int orderProductCount;
+    private String customerTbName;
+    private Date dayFrom;
+	private Date dayTo;
     
-    private Date startDate;
-    private Date endDate;
-    
-    private String pdOrderTbPaymentDateStr;
-    private int pdOrderTbPaymentSum;
-    
-	public Date getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
 	public String getPdOrderTbNo() {
 		return pdOrderTbNo;
 	}
@@ -109,12 +94,6 @@ public class ClientProductOrderVO {
 	public int getPdOrderTbUsedPoint() {
 		return pdOrderTbUsedPoint;
 	}
-	public String getPdOrderTbPaymentDateStr() {
-		return pdOrderTbPaymentDateStr;
-	}
-	public void setPdOrderTbPaymentDateStr(String pdOrderTbPaymentDateStr) {
-		this.pdOrderTbPaymentDateStr = pdOrderTbPaymentDateStr;
-	}
 	public void setPdOrderTbUsedPoint(int pdOrderTbUsedPoint) {
 		this.pdOrderTbUsedPoint = pdOrderTbUsedPoint;
 	}
@@ -143,21 +122,60 @@ public class ClientProductOrderVO {
 	public void setOrderProductCount(int orderProductCount) {
 		this.orderProductCount = orderProductCount;
 	}
-	public int getPdOrderTbPaymentSum() {
-		return pdOrderTbPaymentSum;
+
+	public String getCustomerTbName()
+	{
+		return customerTbName;
 	}
-	public void setPdOrderTbPaymentSum(int pdOrderTbPaymentSum) {
-		this.pdOrderTbPaymentSum = pdOrderTbPaymentSum;
+
+	public void setCustomerTbName(String customerTbName)
+	{
+		this.customerTbName = customerTbName;
 	}
+
+	public Date getDayFrom()
+	{
+		return dayFrom;
+	}
+
+	public void setDayFrom(Date dayFrom)
+	{
+		this.dayFrom = dayFrom;
+	}
+
+	public Date getDayTo()
+	{
+		return dayTo;
+	}
+
+	public void setDayTo(Date dayTo)
+	{
+		this.dayTo = dayTo;
+	}
+
 	@Override
-	public String toString() {
-		return "ClientProductOrderVO [pdOrderTbNo=" + pdOrderTbNo + ", customerTbNo=" + customerTbNo
-				+ ", pdOrderTbOrderDate=" + pdOrderTbOrderDate + ", pdOrderTbPayment=" + pdOrderTbPayment
-				+ ", pdOrderTbState=" + pdOrderTbState + ", pdOrderTbAddress=" + pdOrderTbAddress + ", pdOrderTbAdCity="
-				+ pdOrderTbAdCity + ", pdOrderTbReceiver=" + pdOrderTbReceiver + ", pdOrderTbPaymentDate="
-				+ pdOrderTbPaymentDate + ", pdOrderTbPhone=" + pdOrderTbPhone + ", pdOrderTbDelivertyFee="
-				+ pdOrderTbDelivertyFee + ", pdOrderTbUsedPoint=" + pdOrderTbUsedPoint + ", startRow=" + startRow
-				+ ", endRow=" + endRow + ", pdSaleTbProductName=" + pdSaleTbProductName + ", orderProductCount="
-				+ orderProductCount + "]";
+	public String toString()
+	{
+		return "ClientProductOrderVO{" +
+				"pdOrderTbNo='" + pdOrderTbNo + '\'' +
+				", customerTbNo=" + customerTbNo +
+				", pdOrderTbOrderDate=" + pdOrderTbOrderDate +
+				", pdOrderTbPayment=" + pdOrderTbPayment +
+				", pdOrderTbState='" + pdOrderTbState + '\'' +
+				", pdOrderTbAddress='" + pdOrderTbAddress + '\'' +
+				", pdOrderTbAdCity='" + pdOrderTbAdCity + '\'' +
+				", pdOrderTbReceiver='" + pdOrderTbReceiver + '\'' +
+				", pdOrderTbPaymentDate=" + pdOrderTbPaymentDate +
+				", pdOrderTbPhone='" + pdOrderTbPhone + '\'' +
+				", pdOrderTbDelivertyFee=" + pdOrderTbDelivertyFee +
+				", pdOrderTbUsedPoint=" + pdOrderTbUsedPoint +
+				", startRow=" + startRow +
+				", endRow=" + endRow +
+				", pdSaleTbProductName='" + pdSaleTbProductName + '\'' +
+				", orderProductCount=" + orderProductCount +
+				", customerTbName='" + customerTbName + '\'' +
+				", dayFrom=" + dayFrom +
+				", dayTo=" + dayTo +
+				'}';
 	}
 }

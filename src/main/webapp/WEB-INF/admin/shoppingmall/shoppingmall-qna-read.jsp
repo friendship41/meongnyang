@@ -53,7 +53,12 @@
                                     <div class="form-group">
                                         <label for="qnaWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                           <input type="text" class="form-control" id="customerTbName" name="customerTbName" value="${adminQnaVO.adminsTbId }" readonly><!-- 몰겟음 -->
+                                        	<c:if test="${adminQnaVO.adminsTbId eq null }">
+                                           <input type="text" class="form-control" id="customerTbName" name="customerTbName" value="${adminQnaVO.customerTbName }" readonly>
+                                           </c:if>
+                                           <c:if test="${adminQnaVO.adminsTbId ne null }">
+                                           <input type="text" class="form-control" id="customerTbName" value="${adminQnaVO.adminsTbId }" readonly>
+                                           </c:if>
                                         </div>
                                     </div>
                                     <div class="form-group">

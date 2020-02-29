@@ -20,7 +20,6 @@ public class ClientLoginController {
 	@Autowired
 	private ClientSelectLoginService clientSelectLoginService;
 	
-	//필요없음
 	@Autowired
 	private ClientLogoutService clientLogoutService;
 	
@@ -34,11 +33,14 @@ public class ClientLoginController {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();		
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 		
-		if(tempVO!=null && (encoder.matches(clientCustomerVO.getCustomerTbPassword(), tempVO.getCustomerTbPassword()))) {
+		if(tempVO!=null 
+				&& (encoder.matches(clientCustomerVO.getCustomerTbPassword(), tempVO.getCustomerTbPassword()))
+				&& tempVO.getCustomerTbState().equals("N")) {
 			session.setAttribute("customer", tempVO);
 			
 			return "redirect:index.do";
 		} else {
+			
 			model.addAttribute("loginCheckSubmit", false);
 			return "index";
 		}
@@ -46,14 +48,12 @@ public class ClientLoginController {
 	
 	
 	
-	//�α׾ƿ�ó��
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logoutProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
 		
 		//session.invalidate();
 		session.setAttribute("customer", null);
-		
-		return "index";
+		return "redirect:index.do";
 	}
 	
 	

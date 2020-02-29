@@ -214,4 +214,38 @@
         WHERE PRODUCT_TB_BANNER_STATE = 'Y' AND PD_IMAGE_TB_REPRESENTATIVE = 'Y'
     </select>
 
+    <select id="selectPopularProductList" parameterType="product" resultType="product">
+        SELECT
+            X.*
+        FROM(
+            SELECT
+                B.*,
+                C.ORDERS_DETAIL_TB_AMOUNT
+            FROM(
+                SELECT
+                    A.*,
+                    PS.PD_SALE_TB_NO
+                FROM(
+                    SELECT
+                        P.PRODUCT_TB_CODE,
+                        P.PRODUCT_TB_NAME,
+                        MAX(PI.PD_IMAGE_TB_PATH) "PD_IMAGE_TB_PATH"
+                    FROM PRODUCT P JOIN PD_IMAGE PI
+                    ON P.PRODUCT_TB_CODE = PI.PRODUCT_TB_CODE
+                    GROUP BY P.PRODUCT_TB_CODE,P.PRODUCT_TB_NAME) A JOIN PD_SALE PS
+                ON A.PRODUCT_TB_CODE = PS.PRODUCT_TB_CODE) B JOIN (
+                SELECT
+                    OD.PD_SALE_TB_NO,
+                    SUM(OD.ORDERS_DETAIL_TB_AMOUNT) "ORDERS_DETAIL_TB_AMOUNT"
+                FROM ORDERS_DETAIL OD JOIN PD_ORDER PO
+                ON OD.PD_ORDER_TB_NO = PO.PD_ORDER_TB_NO
+                WHERE PO.PD_ORDER_TB_PAYMENT_DATE BETWEEN #{dayFrom} AND #{dayTo}
+                GROUP BY OD.PD_SALE_TB_NO) C
+            ON B.PD_SALE_TB_NO = C.PD_SALE_TB_NO
+            ORDER BY ORDERS_DETAIL_TB_AMOUNT DESC) X
+<![CDATA[
+        WHERE ROWNUM <=4
+]]>
+    </select>
+
 </mapper>

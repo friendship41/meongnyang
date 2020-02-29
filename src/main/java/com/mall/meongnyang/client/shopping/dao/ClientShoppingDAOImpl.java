@@ -65,4 +65,10 @@ public class ClientShoppingDAOImpl implements ClientShoppingDAO
     {
         sqlSessionTemplate.update("ProductSaleDAO.updateRollbackProductRemainCount", clientOrderDetailVO);
     }
+
+    @Override
+    public void updateProductSaleReadCount(AdminProductVO adminProductVO)
+    {
+        sqlSessionTemplate.update("ProductSaleDAO.updateProductSaleReadCount", adminProductVO);
+    }
 }
