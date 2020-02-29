@@ -9,7 +9,7 @@ import com.mall.meongnyang.admin.sales.dao.AdminSalesOverivewDAO;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 
 @Service
-public class AdminSelectSalesOverviewListServiceImpl implements AdminSelectSalesOverviewListService {
+public class AdminSelectSalesPaymentDailyServiceImpl implements AdminSelectSalesPaymentDailyService {
 
 	@Autowired
 	private AdminSalesOverivewDAO adminSalesOverivewDAO;
@@ -18,5 +18,4 @@ public class AdminSelectSalesOverviewListServiceImpl implements AdminSelectSales
 	public List<ClientProductOrderVO> selectSalesPayment(ClientProductOrderVO clientProductOrderVO) {
 		return adminSalesOverivewDAO.selectSalesPayment(clientProductOrderVO);
 	}
-
 }

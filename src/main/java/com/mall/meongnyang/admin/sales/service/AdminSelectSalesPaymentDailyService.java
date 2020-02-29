@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 
-public interface AdminSelectSalesOverviewListService {
+public interface AdminSelectSalesPaymentDailyService {
 	
 	List<ClientProductOrderVO> selectSalesPayment(ClientProductOrderVO clientProductOrderVO);
 

@@ -1,11 +1,10 @@
-package com.mall.meongnyang.admin.sales.dao;
+package com.mall.meongnyang.admin.sales.service;
 
 import java.util.List;
 
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 
-public interface AdminSalesOverivewDAO {
+public interface AdminSelectSalesPaymentMonthlyService {
 
-	List<ClientProductOrderVO> selectSalesPayment(ClientProductOrderVO clientProductOrderVO);
 	List<ClientProductOrderVO> selectSalesPaymentMonthly(ClientProductOrderVO clientProductOrderVO);
 }

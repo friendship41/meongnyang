@@ -26,6 +26,7 @@ public class ClientProductOrderVO {
     private Date endDate;
     
     private String pdOrderTbPaymentDateStr;
+    private int pdOrderTbPaymentSum;
     
 	public Date getStartDate() {
 		return startDate;
@@ -141,6 +142,12 @@ public class ClientProductOrderVO {
 	}
 	public void setOrderProductCount(int orderProductCount) {
 		this.orderProductCount = orderProductCount;
+	}
+	public int getPdOrderTbPaymentSum() {
+		return pdOrderTbPaymentSum;
+	}
+	public void setPdOrderTbPaymentSum(int pdOrderTbPaymentSum) {
+		this.pdOrderTbPaymentSum = pdOrderTbPaymentSum;
 	}
 	@Override
 	public String toString() {
