@@ -108,7 +108,7 @@
                                 <p><span>공유하기</span></p>
                                 <ul class="pro__share">
                                     <li><a href="#" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
-                                    <li><a href="#" target="_blank"><i class="icon-social-google icons"></i></a></li>
+                                    <li><a href="javascript:shareKakaoStory()"><img src="/resources/client/images/kakaostory_icon.png" height="36px"/></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -459,6 +459,13 @@
                 alert(errorThrown);
             });
     }
+
+    function shareKakaoStory() {
+        Kakao.Story.share({
+            url: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+            text: '상품명 : ${detail.productTbName}, 오늘뭐멍냥의 상품!'
+        });
+    }
 </script>
 
 <script>
@@ -617,6 +624,7 @@ $(document).ready(function() {
 		}
 	}
 });
+
 
 
 </script>

@@ -45,6 +45,7 @@ public class AdminProductVO
     private double pdSaleTbRating;
     private String pdSaleTbSize;
     private int pdSaleTbNo;
+    private int ordersDetailTbAmount;
 
 
 
@@ -372,6 +373,15 @@ public class AdminProductVO
         this.productTbBannerState = productTbBannerState;
     }
 
+    public int getOrdersDetailTbAmount()
+    {
+        return ordersDetailTbAmount;
+    }
+
+    public void setOrdersDetailTbAmount(int ordersDetailTbAmount)
+    {
+        this.ordersDetailTbAmount = ordersDetailTbAmount;
+    }
 
     @Override
     public String toString()
@@ -408,6 +418,7 @@ public class AdminProductVO
                 ", pdSaleTbRating=" + pdSaleTbRating +
                 ", pdSaleTbSize='" + pdSaleTbSize + '\'' +
                 ", pdSaleTbNo=" + pdSaleTbNo +
+                ", ordersDetailTbAmount=" + ordersDetailTbAmount +
                 ", uploadFile=" + uploadFile +
                 '}';
     }
