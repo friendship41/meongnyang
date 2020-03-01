@@ -63,4 +63,10 @@ public class AdminSelectProductController
         return adminSelectPopularProductListService.getPopularProductList(adminProductVO);
     }
 
+    @RequestMapping(value = "/productAnalysis.ado", method = RequestMethod.GET)
+    public String goToProductAnalysisPage()
+    {
+        return "product/product-analysis";
+    }
+
 }

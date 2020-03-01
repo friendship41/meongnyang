@@ -90,6 +90,23 @@ public class ClientCustomerVO {
 	public void setCustomerTbJoinPath(String customerTbJoinPath) {
 		this.customerTbJoinPath = customerTbJoinPath;
 	}
-	
-	
+
+	@Override
+	public String toString()
+	{
+		return "ClientCustomerVO{" +
+				"customerTbNo=" + customerTbNo +
+				", customerTbName='" + customerTbName + '\'' +
+				", customerTbPassword='" + customerTbPassword + '\'' +
+				", customerTbEmail='" + customerTbEmail + '\'' +
+				", customerTbPhone='" + customerTbPhone + '\'' +
+				", customerTbJoinDate=" + customerTbJoinDate +
+				", customerTbPoint=" + customerTbPoint +
+				", customerTbLastLogin=" + customerTbLastLogin +
+				", customerTbPwChange=" + customerTbPwChange +
+				", customerTbJoinWait='" + customerTbJoinWait + '\'' +
+				", customerTbJoinPath='" + customerTbJoinPath + '\'' +
+				", customerTbState='" + customerTbState + '\'' +
+				'}';
+	}
 }
