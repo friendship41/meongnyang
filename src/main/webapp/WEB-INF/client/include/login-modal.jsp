@@ -23,9 +23,6 @@
             <div class="modal-header">
             
                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            
-               
-            
                 <h4 class="modal-title" id="myModalLabel">로그인 / 회원가입</h4>
             </div>
             <div class="modal-body modal-body-sub">
@@ -64,8 +61,6 @@
                                                 <input placeholder="Confirm Password" name="Password" type="password"
                                                        required="" id="password2">
                                                 <div class="sign-up">
-                                                
-                                                
                                                    <input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
                                                
                                                 </div>
@@ -87,7 +82,7 @@
                                 <ul class="social">
                                     <li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
                                     <li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
-                                    <li class="social_twitter"><a href="#" id="kakao-login-btn" class="entypo-twitter"></a></li>
+                                    <li class="social_twitter"><a href="https://kauth.kakao.com/oauth/authorize?client_id=979aa4be781f57e07a085e52b0e8a729&redirect_uri=http://localhost:8080/klogin.do&response_type=code" id="kakao-login-btn" class="entypo-twitter"></a></li>
                                     <li class="social_behance"><a href="#" class="entypo-behance"></a></li>
                                 </ul>
                             </div>
@@ -98,49 +93,6 @@
         </div>
     </div>
 </div>
-
-
-
-<script type='text/javascript'>
-        //<![CDATA[
-        // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('76344ccbd913c5d48822d124bf00ba28');
-        // 카카오 로그인 버튼을 생성합니다.
-       Kakao.Auth.createLoginButton({
-        container: '#kakao-login-btn',
-        success: function(authObj) {
-            console.log(JSON.stringify(authObj.access_token));
-            console.log(JSON.stringify(authObj.token_type));
-            console.log(JSON.stringify(authObj.refresh_token));
-            console.log(JSON.stringify(authObj.expires_in));
-            console.log(JSON.stringify(authObj.scope));
-            console.log(JSON.stringify(authObj.refresh_token_expires_in));
-
-            Kakao.API.request({
-                url: '/v2/user/me',
-                success: function(res) {
-                    console.log(JSON.stringify(res.kakao_account.profile.nickname));
-                    if (res.kakao_account.has_email === true) {
-                        console.log(JSON.stringify(res.kakao_account.email));
-                    }
-
-                    if (res.kakao_account.has_gender === true) {
-                        console.log(JSON.stringify(res.kakao_account.gender));
-                    }
-
-                },
-                fail: function(error) {
-                    console.log(JSON.stringify(error));
-                }
-            });
-        },
-        fail: function(err) {
-            console.log(JSON.stringify(err));
-        }
-    });
-      //]]>
-    </script>
-
 
 <script type="text/javascript">
    function registryCheck() {
@@ -161,6 +113,5 @@
          loginForm.submit();
       }
    }
-   
    
 </script>
