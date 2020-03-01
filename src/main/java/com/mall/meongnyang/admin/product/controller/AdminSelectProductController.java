@@ -1,9 +1,6 @@
 package com.mall.meongnyang.admin.product.controller;
 
-import com.mall.meongnyang.admin.product.service.AdminSelectPopularProductListService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductOrderOverviewService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductOverviewListService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductSaleOverviewListService;
+import com.mall.meongnyang.admin.product.service.*;
 import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
@@ -26,6 +23,8 @@ public class AdminSelectProductController
     private AdminSelectProductOrderOverviewService adminSelectProductOrderOverviewService;
     @Autowired
     private AdminSelectPopularProductListService adminSelectPopularProductListService;
+    @Autowired
+    private AdminSelectReadcountSaleListService adminSelectReadcountSaleListService;
 
 
 
@@ -67,6 +66,13 @@ public class AdminSelectProductController
     public String goToProductAnalysisPage()
     {
         return "product/product-analysis";
+    }
+
+    @RequestMapping(value = "/readcountSaleListAjax.ado", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AdminProductVO> getReadcountSaleListAjax(AdminProductVO adminProductVO)
+    {
+        return adminSelectReadcountSaleListService.getReadcountSaleList(adminProductVO);
     }
 
 }

@@ -14,4 +14,5 @@ public interface AdminProductDAO
     public List<AdminProductVO> selectProductOverviewList(AdminProductVO adminProductVO);
     public void updateProductBannerState(AdminProductVO adminProductVO);
     public List<AdminProductVO> selectPopularProductList(AdminProductVO adminProductVO);
+    public List<AdminProductVO> selectReadcountSaleRateList(AdminProductVO adminProductVO);
 }
