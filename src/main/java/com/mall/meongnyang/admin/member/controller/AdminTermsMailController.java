@@ -30,9 +30,7 @@ public class AdminTermsMailController {
 	private AdminSelectMemberListService adminSelectMemberListService;
 
 	@RequestMapping(value = "/mail-write.ado")
-	public String write(AdminTermsVO adminTermsVO, Model model) {
-
-		
+	public String write(AdminTermsVO adminTermsVO, Model model) {		
 		
 		model.addAttribute("content", adminSelectTermsService.selectTerms(adminTermsVO));
 		
@@ -50,7 +48,7 @@ public class AdminTermsMailController {
 			e.printStackTrace();
 			model.addAttribute("message", "이메일 발송 실패...");
 		}
-		return "redirect:/term-manage.ado";
+		return "redirect:/term-manage1.ado";
 	}
 
 }

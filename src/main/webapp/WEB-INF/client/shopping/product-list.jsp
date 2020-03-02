@@ -69,8 +69,13 @@
                                             </div>
                                             <div class="fr__hover__info">
                                                 <ul class="product__action">
-                                                    <li><a href="/wishlistInsert.do?pdSaleTbSize=${product.pdSaleTbSize}&productTbCode=${product.productTbCode}&pdImageTbPath=${product.pdImageTbPath}"><i class="icon-heart icons"></i></a></li>
-                                                    <li><a onclick="addCart('${product.productTbCode}', '${product.pdSaleTbSize}')" style="cursor: pointer"><i class="icon-handbag icons"></i></a></li>
+                                                   <c:if test="${sessionScope.customer.customerTbNo != null}">
+                                                   	 	<li><a href="/wishlistInsert.do?pdSaleTbSize=${product.pdSaleTbSize}&productTbCode=${product.productTbCode}&pdImageTbPath=${product.pdImageTbPath}"><i class="icon-heart icons"></i></a></li>                                                   	 	
+                                                   	</c:if>
+                                                   	<c:if test="${sessionScope.customer.customerTbNo == null || sessionScope.customer.customerTbNo == '' || sessionScope.customer.customerTbNo eq '' || sessionScope.customer.customerTbNo eq null}">                                                   
+                                                   	 	<li><a href="void(0);" onclick="alert('로그인한 회원만 이용할 수 있습니다.');return false;"><i class="icon-heart icons"></i></a></li>
+                                                   	</c:if> 	
+                                                   	 	<li><a onclick="addCart('${product.productTbCode}', '${product.pdSaleTbSize}')" style="cursor: pointer"><i class="icon-handbag icons"></i></a></li>
                                                 </ul>
                                             </div>
                                             <div class="fr__product__inner">

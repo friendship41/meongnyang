@@ -48,6 +48,44 @@
 	 terms_tb_apply_date=#{termsTbApplyDate} 
 	 WHERE terms_tb_no=#{termsTbNo}
 	</update>
-
+	
+	<select id="selectTermsNecessaryList" parameterType="terms" resultType="terms">
+		SELECT
+		terms_tb_no ,
+		admins_tb_id ,
+		terms_tb_title ,
+		terms_tb_content ,
+		terms_tb_necessary ,
+		terms_tb_reg_date ,
+		terms_tb_expire_date ,
+		terms_tb_change_date ,
+		terms_tb_apply_date
+		FROM terms
+		where terms_tb_necessary = 'Y'
+		order by terms_tb_no asc
+	</select>
+	
+	<select id="selectTermsOptionList" parameterType="terms" resultType="terms">
+		SELECT
+		terms_tb_no ,
+		admins_tb_id ,
+		terms_tb_title ,
+		terms_tb_content ,
+		terms_tb_necessary ,
+		terms_tb_reg_date ,
+		terms_tb_expire_date ,
+		terms_tb_change_date ,
+		terms_tb_apply_date
+		FROM terms
+		where terms_tb_necessary = 'N'
+		order by terms_tb_no asc
+	</select>
+	
+	<insert id="insertTermsAgreeList" parameterType="termsAgree">		
+		INSERT		
+		INTO terms_agree		
+		VALUES			
+		(terms_agree_seq.nextval, #{termsTbNo}, #{customerTbNo}, #{termsAgreeTbConsentStatus}, SYSDATE, SYSDATE)		
+	</insert>
 
 </mapper>

@@ -50,10 +50,16 @@
                                                        required="" id="password1">
                                                 <input placeholder="Confirm Password" name="Password" type="password"
                                                        required="" id="password2">
+                                                <input type="hidden" id="agreeCheckNecessary" name="agreeCheckNecessary" value="">
+                                                <input type="hidden" id="agreeCheckOption" name="agreeCheckOption" value="N">
+                                                <div class="row text-center sign-with">                            						 
+                            					</div>
+                                                       <br><a href="javascript:termsPopupNecessary();">이용약관에 동의(필수)</a><br>
+                                                       <a href="javascript:termsPopupOption();">이용약관에 동의(선택)</a><br>
                                                 <div class="sign-up">
                                                 
                                                 
-                                                	<input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
+                                                	<input type="submit" value="Create Account" id="CreateAccount" onclick="return registryCheck()"/>
                                                		
                                                 </div>
                                             </form>
@@ -96,6 +102,12 @@
 		if(pw1 != pw2) {
 			alert("비밀번호가 일치하지 않습니다.");
 		}
+		
+		var check = document.getElementById('agreeCheckNecessary').value;
+		if(check != 'Y'){
+			alert("이용약관(필수)에 동의해 주세요");			
+			return false;			
+		}
 	}
 		
 	function loginCheck() {
@@ -133,7 +145,16 @@
 			}
 			});
 	}
-	
+	function termsPopupNecessary() {                  
+        window.name = "login-modal";        
+        window.open("termsCheck1.do", "terms",
+                "width = 800, height = 500, resizable = no, scrollbars = no, status = no");
+	}
+	function termsPopupOption() {                  
+       window.name = "login-modal";        
+       window.open("termsCheck2.do", "terms",
+               "width = 800, height = 500, resizable = no, scrollbars = no, status = no");
+	} 
     
 		
 	
