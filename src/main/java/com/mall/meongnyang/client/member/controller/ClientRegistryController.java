@@ -1,37 +1,118 @@
 package com.mall.meongnyang.client.member.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mall.meongnyang.admin.member.vo.AdminTermsVO;
 import com.mall.meongnyang.client.member.service.ClientInsertRegistryService;
+import com.mall.meongnyang.client.member.service.ClientInsertTermsAgreeListService;
+import com.mall.meongnyang.client.member.service.ClientSelectLoginService;
+import com.mall.meongnyang.client.member.service.ClientSelectTermsListService;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import com.mall.meongnyang.util.mail.MailService;
 import com.mall.meongnyang.util.mail.MailVO;
 
-
-
 @Controller
 public class ClientRegistryController {
-	
+
 	@Autowired
 	private ClientInsertRegistryService clientInsertRegistryService;
-	
 
-	
-	
-	
+	@Autowired
+	private ClientSelectLoginService clientSelectLoginService;
+
+	@Autowired
+	private MailService mailService;
+
+	@Autowired
+	private ClientSelectTermsListService clientSelectTermsListService;
+
+	@Autowired
+	private ClientInsertTermsAgreeListService clientInsertTermsAgreeListService;
+
 	@RequestMapping(value = "/registry.do", method = RequestMethod.POST)
-	public String registryProc(ClientCustomerVO clientCustomerVO, Model model) {
-		
-		
-		int result = clientInsertRegistryService.insertRegistry(clientCustomerVO);
-		 
-		// ���߿� ���� ������ Ȯ��
+	public String registryProc(@RequestParam String agreeCheckOption, ClientTermsAgreeVO clientTermsAgreeVO,
+			AdminTermsVO admintermsVo, ClientCustomerVO clientCustomerVO, Model model) {
+
+		clientInsertRegistryService.insertRegistry(clientCustomerVO);
+		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
+
+		// Mail 蹂대궡湲�
+		MailVO mailVO = new MailVO();
+		mailVO.setFrom("admin@naver.com"); // 愿�由ъ옄�븘�씠�뵒
+		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // �쉶�썝媛��엯 �븘�씠�뵒
+		mailVO.setSubject("�쉶�썝媛��엯 �씤利� �슂泥��엯�땲�떎.");
+		mailVO.setContent("<h1>硫붿씪�씤利�</h1>"
+				// base64 url�븫�샇�솕
+				+ "<a href='localhost:8080/index.do?customerTbNo=" + tempVO.getCustomerTbNo() + "&customerTbState=N"
+				+ "' >�씠硫붿씪 �씤利� �솗�씤</a>");
+		model.addAttribute("emailSend", true);
+		mailService.sendMail(mailVO);		
+
+		List<AdminTermsVO> termsList = clientSelectTermsListService.selectTermsOptionList(admintermsVo); // 선택사항 약관만
+																											// select
+		int[] termsTbNoList = new int[termsList.size()];
+		for (int i = 0; i < termsList.size(); i++) {
+			termsTbNoList[i] = termsList.get(i).getTermsTbNo();
+		}
+
+		List<ClientTermsAgreeVO> clientTermsAgreeVOList = new ArrayList<ClientTermsAgreeVO>();
+		for (int i = 0; i < termsTbNoList.length; i++) {
+			ClientTermsAgreeVO VO = new ClientTermsAgreeVO();
+			VO.setTermsTbNo(termsTbNoList[i]);
+			VO.setCustomerTbNo(tempVO.getCustomerTbNo());
+			VO.setTermsAgreeTbConsentStatus(agreeCheckOption);
+			clientTermsAgreeVOList.add(VO);
+		}
+		for (int i = 0; i < clientTermsAgreeVOList.size(); i++) {
+			clientTermsAgreeVO = clientTermsAgreeVOList.get(i);
+			clientInsertTermsAgreeListService.insertTermsAgreeListService(clientTermsAgreeVO);
+
+		}
+
 		return "index";
 	}
-	
-		
+
+	@RequestMapping(value = "/loginAjaxSingle.do")
+	@ResponseBody
+	public int idCheck(Model model, ClientCustomerVO clientCustomerVO) {
+		int result = 0;
+		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
+		if (tempVO != null) {
+
+			result = 1;
+			return result;
+		} else {
+			return result;
+		}
+
+	}
+
+	@RequestMapping(value = "/termsCheck1.do")
+	public String selectTermsNecessary(AdminTermsVO admintermsVo, Model model) {
+
+		List<AdminTermsVO> termsList = clientSelectTermsListService.selectTermsNecessaryList(admintermsVo);
+		model.addAttribute("termsList", termsList);
+
+		return "terms-agree";
+	}
+
+	@RequestMapping(value = "/termsCheck2.do")
+	public String selectTermsOption(AdminTermsVO admintermsVo, Model model) {
+
+		List<AdminTermsVO> termsList = clientSelectTermsListService.selectTermsOptionList(admintermsVo);
+		model.addAttribute("termsList", termsList);
+
+		return "terms-agree2";
+	}
+
 }

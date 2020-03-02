@@ -27,7 +27,7 @@ $(document).ready(function() {
         order: [[1,"desc"]]
     });
     $('#qnaTable').dataTable({
-        order: [[1,"desc"]]
+        order: [[1,"asc"]]
     });
     $('#faqTable').dataTable({
         order: [[1,"desc"]]

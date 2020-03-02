@@ -93,14 +93,7 @@
 
 
 <!-- Javascripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-           
-        <c:if test="${message != ''}">
-            alert('<c:out value="${message}"/>')
-        </c:if>
-  
-</script>
+
 <jsp:include page="../include/scripts-load.jsp"/>
 </body>
 </html>

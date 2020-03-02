@@ -12,6 +12,7 @@ public class AdminProductVO
     private String productTbName;
     private Date productTbRegDate;
     private String productTbDetail;
+    private String productTbBannerState;
 
     private String productCategoryTbParent;
     private String productCategoryTbMedian;
@@ -44,6 +45,7 @@ public class AdminProductVO
     private double pdSaleTbRating;
     private String pdSaleTbSize;
     private int pdSaleTbNo;
+    private int ordersDetailTbAmount;
 
 
 
@@ -361,6 +363,26 @@ public class AdminProductVO
         this.pdSaleTbNo = pdSaleTbNo;
     }
 
+    public String getProductTbBannerState()
+    {
+        return productTbBannerState;
+    }
+
+    public void setProductTbBannerState(String productTbBannerState)
+    {
+        this.productTbBannerState = productTbBannerState;
+    }
+
+    public int getOrdersDetailTbAmount()
+    {
+        return ordersDetailTbAmount;
+    }
+
+    public void setOrdersDetailTbAmount(int ordersDetailTbAmount)
+    {
+        this.ordersDetailTbAmount = ordersDetailTbAmount;
+    }
+
     @Override
     public String toString()
     {
@@ -370,6 +392,7 @@ public class AdminProductVO
                 ", productTbName='" + productTbName + '\'' +
                 ", productTbRegDate=" + productTbRegDate +
                 ", productTbDetail='" + productTbDetail + '\'' +
+                ", productTbBannerState='" + productTbBannerState + '\'' +
                 ", productCategoryTbParent='" + productCategoryTbParent + '\'' +
                 ", productCategoryTbMedian='" + productCategoryTbMedian + '\'' +
                 ", productCategoryTbSub='" + productCategoryTbSub + '\'' +
@@ -395,6 +418,7 @@ public class AdminProductVO
                 ", pdSaleTbRating=" + pdSaleTbRating +
                 ", pdSaleTbSize='" + pdSaleTbSize + '\'' +
                 ", pdSaleTbNo=" + pdSaleTbNo +
+                ", ordersDetailTbAmount=" + ordersDetailTbAmount +
                 ", uploadFile=" + uploadFile +
                 '}';
     }

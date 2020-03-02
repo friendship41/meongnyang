@@ -9,12 +9,13 @@ public interface ClientLoginDAO {
 	public ClientCustomerVO logout(ClientCustomerVO clientCustomerVO);
 	
 	public int insertRegistry(ClientCustomerVO clientCustomerVO);
+	//email
+	public void updateState(ClientCustomerVO clientCustomerVO);
 	
 	public void insertKakao(ClientCustomerVO clientCustomerVO); //카카오아이디집어넣기 
 	
-	//�α��ν� last login sysdate �߰�
 	public void updateLastLogin(ClientCustomerVO clientCustomerVO);
-
+	
 
 
 	public void updatePointUse(ClientOrderVO clientOrderVO);

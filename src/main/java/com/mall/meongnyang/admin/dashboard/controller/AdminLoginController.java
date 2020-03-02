@@ -21,7 +21,7 @@ public class AdminLoginController {
 	private AdminSelectLoginCheckService adminSelectLoginCheckService;
 	
 	
-	//단순한 로그인화면
+	
 	@RequestMapping(value = "/login.ado")
 	public String login() {
 		return "admin-page/login";
@@ -38,7 +38,7 @@ public class AdminLoginController {
 			session.setAttribute("adminId", tempVO.getAdminsTbId());
 			
 			return "index";
-		//실패
+		
 		} else {
 			model.addAttribute("loginCheckSubmit", false);
 			return "admin-page/login";

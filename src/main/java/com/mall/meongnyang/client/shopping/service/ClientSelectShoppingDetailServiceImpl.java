@@ -35,6 +35,8 @@ public class ClientSelectShoppingDetailServiceImpl implements ClientSelectShoppi
         List<AdminProductSaleVO> saleList = clientShoppingDAO.selectSingleProductSaleList(adminProductSaleVO);
         tempMap.put("saleList", saleList);
 
+        clientShoppingDAO.updateProductSaleReadCount(adminProductVO);
+
         return tempMap;
     }
 }

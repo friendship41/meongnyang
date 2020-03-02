@@ -39,22 +39,28 @@ public class ClientMyinfoAddressController {
 	
 	
 	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
-	public String addressList(ClientCmAddressVO clientCmAddressVO ,Model model) {
+	public String addressList(ClientCmAddressVO clientCmAddressVO, Model model, HttpSession session) {
+		ClientCustomerVO sessionVO = (ClientCustomerVO)session.getAttribute("customer");
+		
+		int no = sessionVO.getCustomerTbNo();
+		clientCmAddressVO.setCustomerTbNo(no);
 		List<ClientCmAddressVO> tempVO = clientSelectMyinfoAddressListService.selectMyinfoAddressList(clientCmAddressVO);
+				
 		model.addAttribute("myinfoAddressList", tempVO);
-		System.out.println(tempVO + " list »Ì¾Æ¿Ã¶§ ");
+		
 		return "mypage/myinfo";
 	}
 	
 	@RequestMapping(value = "/myinfo-address-single-ajax.do", method = RequestMethod.GET)
 	@ResponseBody
 	public ClientCmAddressVO addressListAjax(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
-		System.out.println(clientCmAddressVO + " ajax select");
+		
 		return clientSelectMyinfoAddressService.selectMyinfoAddress(clientCmAddressVO);
 	}
 	
 	@RequestMapping(value = "/myinfo-address-insert.do", method=RequestMethod.POST)
-	public String insertAddress(ClientCmAddressVO clientCmAddressVO) {
+	public String insertAddress(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
+		
 		
 		clientInsertMyinfoAddressService.insertMyinfoAddress(clientCmAddressVO);
 		
@@ -63,17 +69,19 @@ public class ClientMyinfoAddressController {
 	}
 	
 	@RequestMapping(value = "/myinfo-address-update.do", method=RequestMethod.POST)
-	public String updateAddress(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
+	public String updateAddress(ClientCmAddressVO clientCmAddressVO) {
+		
 		
 		clientUpdateMyinfoAddressService.updateMyinfoAddress(clientCmAddressVO);
 		return "redirect:myinfo.do";
 	}
 	
 	@RequestMapping(value = "/myinfo-address-delete.do", method=RequestMethod.GET)
-	public String deleteAddress(ClientCmAddressVO clientCmAddressVO) {
-		System.out.println(clientCmAddressVO);
+	public String deleteAddress(ClientCmAddressVO clientCmAddressVO, HttpSession session) {
+		
 		
 		clientDeleteMyinfoAddressService.deleteMyinfoAddress(clientCmAddressVO);
+		
 		return "redirect:myinfo.do";
 	}
 }
