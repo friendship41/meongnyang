@@ -81,7 +81,7 @@
 		order by terms_tb_no asc
 	</select>
 	
-	<insert id="insertTermsAgreeList" parameterType="termsAgree">		
+	<insert id="insertTermsAgreeList" parameterType="terms">		
 		INSERT		
 		INTO terms_agree		
 		VALUES			

@@ -56,10 +56,12 @@
 		WHERE customer_tb_no = #{customerTbNo}
 	</update>
 
-	<delete id="deleteMyinfoCustomer" parameterType="clientLogin">
-		DELETE FROM customer
+	<update id="deleteMyinfoCustomer" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_state = #{customerTbState}
 		WHERE customer_tb_password = #{customerTbPassword}
-	</delete>
+	</update>
 	
 	<update id="updatePointUse" parameterType="orderProc">
 		UPDATE CUSTOMER

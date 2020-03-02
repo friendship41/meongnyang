@@ -64,10 +64,10 @@ public class ClientMyinfoController {
 		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), SessionVO.getCustomerTbPassword())) {
 			if(newPassword1.equals(newPassword2)) {
 			
-			//»õ·Î¿î ¾ÏÈ£ ¾ÏÈ£È­ ½ÃÀü	
+			//ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½È£ ï¿½ï¿½È£È­ ï¿½ï¿½ï¿½ï¿½	
 			String securePw = encoder.encode(newPassword1);
 			
-			//»õ·Î¿î ÆÐ½º¿öµå°ª ¼ÂÆÃ
+			//ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å°ª ï¿½ï¿½ï¿½ï¿½
 			clientCustomerVO.setCustomerTbPassword(securePw);
 			
 			int id = SessionVO.getCustomerTbNo();
@@ -100,6 +100,7 @@ public class ClientMyinfoController {
 		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), sessionVO.getCustomerTbPassword())) {
 			String password = sessionVO.getCustomerTbPassword();
 			clientCustomerVO.setCustomerTbPassword(password);
+			clientCustomerVO.setCustomerTbState("T");
 			clientDeleteMyinfoCustomerService.deleteMyinfo(clientCustomerVO);
 			session.setAttribute("customer", null);
 			return "redirect:index.do";
