@@ -6,6 +6,7 @@ public class AdminSalesOverviewDataSetVO {
 	private int[] data;
 	private boolean fill;
 	private String borderColor;
+	private String[] backgroundColor;
 	private double lineTension;
 	
 	public String getLabel() {
@@ -38,5 +39,11 @@ public class AdminSalesOverviewDataSetVO {
 	public void setLineTension(double lineTension) {
 		this.lineTension = lineTension;
 	}
-
+	public String[] getBackgroundColor() {
+		return backgroundColor;
+	}
+	public void setBackgroundColor(String[] backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	
 }

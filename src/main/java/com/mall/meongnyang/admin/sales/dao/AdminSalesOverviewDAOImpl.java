@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 
 @Repository
-public class AdminSalesOverivewDAOImpl implements AdminSalesOverivewDAO {
+public class AdminSalesOverviewDAOImpl implements AdminSalesOverviewDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -22,6 +22,16 @@ public class AdminSalesOverivewDAOImpl implements AdminSalesOverivewDAO {
 	@Override
 	public List<ClientProductOrderVO> selectSalesPaymentMonthly(ClientProductOrderVO clientProductOrderVO) {
 		return sqlSessionTemplate.selectList("orderDAO.selectSalesPaymentMonthly", clientProductOrderVO);
+	}
+
+	@Override
+	public List<ClientProductOrderVO> selectSalesPaymentCategory(ClientProductOrderVO clientProductOrderVO) {
+		return sqlSessionTemplate.selectList("orderDAO.selectSalesPaymentCategory", clientProductOrderVO);
+	}
+
+	@Override
+	public List<ClientProductOrderVO> selectSalesPaymentRegion(ClientProductOrderVO clientProductOrderVO) {
+		return sqlSessionTemplate.selectList("orderDAO.selectSalesPaymentRegion", clientProductOrderVO);
 	}
 
 }

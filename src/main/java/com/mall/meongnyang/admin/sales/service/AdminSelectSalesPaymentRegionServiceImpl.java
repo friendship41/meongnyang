@@ -9,13 +9,14 @@ import com.mall.meongnyang.admin.sales.dao.AdminSalesOverviewDAO;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 
 @Service
-public class AdminSelectSalesPaymentDailyServiceImpl implements AdminSelectSalesPaymentDailyService {
+public class AdminSelectSalesPaymentRegionServiceImpl implements AdminSelectSalesPaymentRegionService {
 
 	@Autowired
-	private AdminSalesOverviewDAO adminSalesOverivewDAO;
+	private AdminSalesOverviewDAO adminSalesOverviewDAO;
 	
 	@Override
-	public List<ClientProductOrderVO> selectSalesPayment(ClientProductOrderVO clientProductOrderVO) {
-		return adminSalesOverivewDAO.selectSalesPayment(clientProductOrderVO);
+	public List<ClientProductOrderVO> selectSalesPaymentRegion(ClientProductOrderVO clientProductOrderVO) {
+		return adminSalesOverviewDAO.selectSalesPaymentRegion(clientProductOrderVO);
 	}
+
 }

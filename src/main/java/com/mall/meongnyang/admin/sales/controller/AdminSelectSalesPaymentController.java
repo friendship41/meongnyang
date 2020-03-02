@@ -1,6 +1,8 @@
 package com.mall.meongnyang.admin.sales.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,8 @@ public class AdminSelectSalesPaymentController {
 	
 	@RequestMapping(value = "/salesOverviewDay.ado")
 	@ResponseBody
-	public AdminSalesOverviewChartVO selectSalesOverviewDaily(ClientProductOrderVO clientProductOrderVO) {
+	public Map<String, Object> selectSalesOverviewDaily(ClientProductOrderVO clientProductOrderVO) {
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		List<ClientProductOrderVO> salesList = adminSelectSalesPaymentDailyService
 				.selectSalesPayment(clientProductOrderVO);
@@ -33,6 +36,7 @@ public class AdminSelectSalesPaymentController {
 		AdminSalesOverviewDataSetVO adminSalesOverviewDataSetVO = new AdminSalesOverviewDataSetVO();
 		adminSalesOverviewDataSetVO.setLabel("일별 매출");
 		adminSalesOverviewDataSetVO.setFill(false);
+		
 		adminSalesOverviewDataSetVO.setBorderColor("rgb(93,168,203)");
 		adminSalesOverviewDataSetVO.setLineTension(0.2);
 
@@ -66,18 +70,24 @@ public class AdminSelectSalesPaymentController {
 		adminSalesOverviewChartVO.setOptions("{}");
 		adminSalesOverviewChartVO.setData(adminSalesOverviewDataVO);
 
-		return adminSalesOverviewChartVO;
+		map.put("chart", adminSalesOverviewChartVO);
+		map.put("dailySales", salesList);
+		
+		return map;
 	}
 
 	@RequestMapping(value = "/salesOverviewMonth.ado")
 	@ResponseBody
-	public AdminSalesOverviewChartVO selectSalesOverviewMonthly(ClientProductOrderVO clientProductOrderVO) {
+	public Map<String, Object> selectSalesOverviewMonthly(ClientProductOrderVO clientProductOrderVO) {
+		
+		Map<String, Object> monthlyMap = new HashMap<String, Object>();
 		
 		List<ClientProductOrderVO> salesList = adminSelectSalesPaymentMonthlyService.selectSalesPaymentMonthly(clientProductOrderVO);
 
 		AdminSalesOverviewDataSetVO adminSalesOverviewDataSetVO = new AdminSalesOverviewDataSetVO();
 		adminSalesOverviewDataSetVO.setLabel("월별 매출");
 		adminSalesOverviewDataSetVO.setFill(false);
+		
 		adminSalesOverviewDataSetVO.setBorderColor("rgb(93,168,203)");
 		adminSalesOverviewDataSetVO.setLineTension(0.2);
 
@@ -109,8 +119,11 @@ public class AdminSelectSalesPaymentController {
 		adminSalesOverviewChartVO.setType("line");
 		adminSalesOverviewChartVO.setOptions("{}");
 		adminSalesOverviewChartVO.setData(adminSalesOverviewDataVO);
-
-		return adminSalesOverviewChartVO;
+		
+		monthlyMap.put("chart", adminSalesOverviewChartVO);
+		monthlyMap.put("salesMonthly", salesList);		
+		
+		return monthlyMap;
 
 	}
 	

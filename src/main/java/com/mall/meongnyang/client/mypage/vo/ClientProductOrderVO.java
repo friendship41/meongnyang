@@ -13,7 +13,7 @@ public class ClientProductOrderVO {
     private String pdOrderTbReceiver;
     private Date pdOrderTbPaymentDate;
     private String pdOrderTbPhone;
-    private int pdOrderTbDelivertyFee;
+    private int pdOrderTbDeliveryFee;
     private int pdOrderTbUsedPoint;
     
     private int startRow;    
@@ -27,9 +27,34 @@ public class ClientProductOrderVO {
 	
     private Date startDate;
     private Date endDate;
+    
     private String pdOrderTbPaymentDateStr;
     private int pdOrderTbPaymentSum;
+    private int pdSaleTbReceivedPrice;
     
+    private String productCategoryTbParent;
+    private String productCategoryTbSub;
+    private int ordersDetailTbPriceSum;
+    
+    
+	public String getProductCategoryTbParent() {
+		return productCategoryTbParent;
+	}
+	public void setProductCategoryTbParent(String productCategoryTbParent) {
+		this.productCategoryTbParent = productCategoryTbParent;
+	}
+	public int getOrdersDetailTbPriceSum() {
+		return ordersDetailTbPriceSum;
+	}
+	public void setOrdersDetailTbPriceSum(int ordersDetailTbPriceSum) {
+		this.ordersDetailTbPriceSum = ordersDetailTbPriceSum;
+	}
+	public String getProductCategoryTbSub() {
+		return productCategoryTbSub;
+	}
+	public void setProductCategoryTbSub(String productCategoryTbSub) {
+		this.productCategoryTbSub = productCategoryTbSub;
+	}
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -114,11 +139,11 @@ public class ClientProductOrderVO {
 	public void setPdOrderTbPhone(String pdOrderTbPhone) {
 		this.pdOrderTbPhone = pdOrderTbPhone;
 	}
-	public int getPdOrderTbDelivertyFee() {
-		return pdOrderTbDelivertyFee;
+	public int getPdOrderTbDeliveryFee() {
+		return pdOrderTbDeliveryFee;
 	}
-	public void setPdOrderTbDelivertyFee(int pdOrderTbDelivertyFee) {
-		this.pdOrderTbDelivertyFee = pdOrderTbDelivertyFee;
+	public void setPdOrderTbDeliveryFee(int pdOrderTbDelivertyFee) {
+		this.pdOrderTbDeliveryFee = pdOrderTbDelivertyFee;
 	}
 	public int getPdOrderTbUsedPoint() {
 		return pdOrderTbUsedPoint;
@@ -182,6 +207,12 @@ public class ClientProductOrderVO {
 		this.dayTo = dayTo;
 	}
 
+	public int getPdSaleTbReceivedPrice() {
+		return pdSaleTbReceivedPrice;
+	}
+	public void setPdSaleTbReceivedPrice(int pdSaleTbReceivedPrice) {
+		this.pdSaleTbReceivedPrice = pdSaleTbReceivedPrice;
+	}
 	@Override
 	public String toString()
 	{
@@ -196,7 +227,7 @@ public class ClientProductOrderVO {
 				", pdOrderTbReceiver='" + pdOrderTbReceiver + '\'' +
 				", pdOrderTbPaymentDate=" + pdOrderTbPaymentDate +
 				", pdOrderTbPhone='" + pdOrderTbPhone + '\'' +
-				", pdOrderTbDelivertyFee=" + pdOrderTbDelivertyFee +
+				", pdOrderTbDelivertyFee=" + pdOrderTbDeliveryFee +
 				", pdOrderTbUsedPoint=" + pdOrderTbUsedPoint +
 				", startRow=" + startRow +
 				", endRow=" + endRow +

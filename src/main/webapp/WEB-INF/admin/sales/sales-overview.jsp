@@ -102,7 +102,7 @@
 														<canvas id="sales_chart_month"></canvas>
 													</div>
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-														<form class="form-horizontal" action="javascript:void(0);">
+													<!-- 	<form class="form-horizontal" action="javascript:void(0);">
 															<div class="form-group">
 																<div class="col-sm-10">
 																	<div class="row">
@@ -121,38 +121,38 @@
 																	</div>
 																</div>
 															</div>
-														</form>
+														</form> -->
 														<div class="table-responsive">
 															<table id="dateSaleTable" class="display table" style="width: 100%; cellspacing: 0;">
 																<thead>
 																	<tr>
-																		<th>기간</th>
-																		<th>총매출</th>
-																		<th>원가</th>
-																		<th>배송비</th>
-																		<th>포인트소모</th>
-																		<th>순이익</th>
+																		<th>일자(일)</th>
+																		<th>총매출(원)</th>
+																		<th>원가(원)</th>
+																		<th>배송비(원)</th>
+																		<th>포인트소모(점)</th>
+																		<th>순이익(원)</th>
 																	</tr>
 																</thead>
-																<tfoot>
+																<tfoot id="dataSaleTableFoot">
 																	<tr>
-																		<th>기간</th>
-																		<th>총매출</th>
-																		<th>원가</th>
-																		<th>배송비</th>
-																		<th>포인트소모</th>
-																		<th>순이익</th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
 																	</tr>
 																</tfoot>
-																<tbody>
+																<tbody id="dataSaleTableBody">
 																	<tr>
-																		<td>000002</td>
-																		<td>개 사료 외 1종</td>
-																		<td><span class="label label-nowGo">배송중</span></td>
-																		<td>안창호</td>
-																		<td>2011/04/25</td>
-																		<td>150,000</td>
-																	</tr>																
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																	</tr>															
 																</tbody>
 															</table>
 														</div>
@@ -177,13 +177,13 @@
 																<div class="col-sm-10">
 																	<div class="row">
 																		<div class="col-md-4">
-																			<input type="text" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
+																			<input type="text" id="categorySalesStartDate" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
 																		</div>
 																		<div class="col-md-1">
 																			<label class="text-center center-block">~</label>
 																		</div>
 																		<div class="col-md-4">
-																			<input type="text" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
+																			<input type="text" id="categorySalesEndDate" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
 																		</div>
 																		<div class="col-md-1">
 																			<button id="dailySalesCategory" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
@@ -194,7 +194,7 @@
 														</form>
 														<canvas id="category_sales_chart_day"></canvas>
 													</div>
-													<div class="col-md-6">
+													<!-- <div class="col-md-6">
 														<div class="panel-heading clearfix">
 															<h4 class="panel-title">월별 매출</h4>
 														</div>
@@ -219,9 +219,9 @@
 															</div>
 														</form>
 														<canvas id="category_sales_chart_month"></canvas>
-													</div>
+													</div> -->
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-														<form class="form-horizontal" action="javascript:void(0);">
+														<!-- <form class="form-horizontal" action="javascript:void(0);">
 															<div class="form-group">
 																<div class="col-sm-10">
 																	<div class="row">
@@ -240,38 +240,37 @@
 																	</div>
 																</div>
 															</div>
-														</form>
+														</form> -->
 														<div class="table-responsive">
-															<table id="categorySaleTable" class="display table"
-																style="width: 100%; cellspacing: 0;">
+															<table id="categorySaleTable" class="display table"	style="width: 100%; cellspacing: 0;">
 																<thead>
 																	<tr>
 																		<th>카테고리</th>
-																		<th>총매출</th>
-																		<th>원가</th>
-																		<th>배송비</th>
-																		<th>포인트소모</th>
-																		<th>순이익</th>
+																		<th>총매출(원)</th>
+																		<th>원가(원)</th>
+																		<th>배송비(원)</th>
+																		<th>포인트소모(점)</th>
+																		<th>순이익(원)</th>
 																	</tr>
 																</thead>
-																<tfoot>
+																<tfoot id="categorySaleTableFoot">
 																	<tr>
-																		<th>기간</th>
-																		<th>총매출</th>
-																		<th>원가</th>
-																		<th>배송비</th>
-																		<th>포인트소모</th>
-																		<th>순이익</th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
 																	</tr>
 																</tfoot>
-																<tbody>
+																<tbody id="categorySaleTableBody">
 																	<tr>
-																		<td>000002</td>
-																		<td>개 사료 외 1종</td>
-																		<td><span class="label label-nowGo">배송중</span></td>
-																		<td>안창호</td>
-																		<td>2011/04/25</td>
-																		<td>150,000</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
 																	</tr>																	
 																</tbody>
 															</table>
@@ -298,13 +297,13 @@
 																<div class="col-sm-10">
 																	<div class="row">
 																		<div class="col-md-4">
-																			<input type="text" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
+																			<input type="text" id="dailySalesPriceStartDate" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
 																		</div>
 																		<div class="col-md-1">
 																			<label class="text-center center-block">~</label>
 																		</div>
 																		<div class="col-md-4">
-																			<input type="text" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
+																			<input type="text" id="dailySalesPriceEndDate" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
 																		</div>
 																		<div class="col-md-1">
 																			<button id="dailySalesPrice" class="btn btn-success center-block"style="margin-bottom: 14px;">조회</button>
@@ -324,13 +323,13 @@
 																<div class="col-sm-10">
 																	<div class="row">
 																		<div class="col-md-4">
-																			<input type="text" name="startMonth" class="date-picker text-center form-control" placeholder="01/01/2020">
+																			<input type="text" id="dailySalesPriceStartMonth" name="startMonth" class="date-picker text-center form-control" placeholder="01/01/2020">
 																		</div>
 																		<div class="col-md-1">
 																			<label class="text-center center-block">~</label>
 																		</div>
 																		<div class="col-md-4">
-																			<input type="text" name="endMonth" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
+																			<input type="text" id="dailySalesPriceEndMonth" name="endMonth" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
 																		</div>
 																		<div class="col-md-1">
 																			<button id="monthlySalesPrice" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
@@ -342,7 +341,7 @@
 														<canvas id="price_sales_chart_month"></canvas>
 													</div>
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-														<form class="form-horizontal" action="javascript:void(0);">
+														<!-- <form class="form-horizontal" action="javascript:void(0);">
 															<div class="form-group">
 																<div class="col-sm-10">
 																	<div class="row">
@@ -361,38 +360,37 @@
 																	</div>
 																</div>
 															</div>
-														</form>
+														</form> -->
 														<div class="table-responsive">
-															<table id="priceSaleTable" class="display table"
-																style="width: 100%; cellspacing: 0;">
+															<table id="priceSaleTable" class="display table" style="width: 100%; cellspacing: 0;">
 																<thead>
 																	<tr>
 																		<th>범주</th>
-																		<th>총매출</th>
-																		<th>총원가</th>
-																		<th>총배송비</th>
-																		<th>총포인트소모</th>
-																		<th>순이익</th>
+																		<th>매출(원)</th>
+																		<th>원가(원)</th>
+																		<th>판매량(개)</th>
+																		<th>비고</th>
+																		<th>비고</th>
 																	</tr>
 																</thead>
-																<tfoot>
+																<tfoot id="priceSaleTableFoot">
 																	<tr>
-																		<th>범주</th>
-																		<th>총매출</th>
-																		<th>총원가</th>
-																		<th>총배송비</th>
-																		<th>총포인트소모</th>
-																		<th>순이익</th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
+																		<th></th>
 																	</tr>
 																</tfoot>
-																<tbody>
+																<tbody id="priceSaleTableBody">
 																	<tr>
-																		<td>000002</td>
-																		<td>개 사료 외 1종</td>
-																		<td><span class="label label-nowGo">배송중</span></td>
-																		<td>안창호</td>
-																		<td>2011/04/25</td>
-																		<td>150,000</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
 																	</tr>
 																</tbody>
 															</table>
@@ -419,16 +417,16 @@
 																<div class="col-sm-10">
 																	<div class="row">
 																		<div class="col-md-4">
-																			<input type="text" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
+																			<input type="text" id="regionSalesStartDate" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
 																		</div>
 																		<div class="col-md-1">
 																			<label class="text-center center-block">~</label>
 																		</div>
 																		<div class="col-md-4">
-																			<input type="text" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
+																			<input type="text" id="regionSalesEndDate" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
 																		</div>
 																		<div class="col-md-1">
-																			<button id="dailySalesCity" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
+																			<button id="dailySalesRegion" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
 																		</div>
 																	</div>
 																</div>
@@ -436,7 +434,7 @@
 														</form>
 														<canvas id="region_sales_chart_day"></canvas>
 													</div>
-													<div class="col-md-6">
+													<!-- <div class="col-md-6">
 														<div class="panel-heading clearfix">
 															<h4 class="panel-title">월별 매출</h4>
 														</div>
@@ -461,9 +459,9 @@
 															</div>
 														</form>
 														<canvas id="region_sales_chart_month"></canvas>
-													</div>
+													</div> -->
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-														<form class="form-horizontal" action="javascript:void(0);">
+														<!-- <form class="form-horizontal" action="javascript:void(0);">
 															<div class="form-group">
 																<div class="col-sm-10">
 																	<div class="row">
@@ -482,21 +480,21 @@
 																	</div>
 																</div>
 															</div>
-														</form>
+														</form> -->
 														<div class="table-responsive">
 															<table id="regionSaleTable" class="display table"
 																style="width: 100%; cellspacing: 0;">
 																<thead>
 																	<tr>
 																		<th>지역</th>
-																		<th>총매출</th>
-																		<th>원가</th>
-																		<th>배송비</th>
-																		<th>포인트소모</th>
-																		<th>순이익</th>
+																		<th>총매출(원)</th>
+																		<th>원가(원)</th>
+																		<th>배송비(원)</th>
+																		<th>포인트소모(점)</th>
+																		<th>순이익(원)</th>
 																	</tr>
 																</thead>
-																<tfoot>
+																<tfoot id="regionSaleTableFoot">
 																	<tr>
 																		<th>지역</th>
 																		<th>총매출</th>
@@ -506,14 +504,14 @@
 																		<th>순이익</th>
 																	</tr>
 																</tfoot>
-																<tbody>
+																<tbody id="regionSaleTableBody">
 																	<tr>
-																		<td>000002</td>
-																		<td>개 사료 외 1종</td>
-																		<td><span class="label label-nowGo">배송중</span></td>
-																		<td>안창호</td>
-																		<td>2011/04/25</td>
-																		<td>150,000</td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
+																		<td></td>
 																	</tr>																	
 																</tbody>
 															</table>
@@ -549,8 +547,6 @@
 	<jsp:include page="../include/scripts-load.jsp" />	
 	<script>
 	$(function() {
-
-		chartGo();
 	
 		var twoWeekAgo = new Date(new Date().setDate(new Date().getDate()-15));
 		var oneDayAgo = new Date(new Date().setDate(new Date().getDate()-1));
@@ -562,8 +558,11 @@
         $("input[name='endMonth']").attr("value", new Date().yyyymmdd());
         
         dailySales();
-        monthlySales();
-        
+        monthlySales(null);
+        categorySales();
+        dailySalesPrice();
+        monthlySalesPrice();
+        regionSales();
         
 	 	function dailySales() {
 				
@@ -578,13 +577,55 @@
 	 			data:{},
 	 			dataType: "json"
 	 		})
-	 		.done(function(json) {
- 				console.log(json);
- 				new Chart(document.getElementById("sales_chart_day"), json);
+	 		.done(function(map) {
+ 				new Chart(document.getElementById("sales_chart_day"), map.chart);
+ 				
+ 				var dailySales = map.dailySales;
+				
+ 				var str = "";
+ 				var totPayment = 0;
+ 				var totReceive = 0;
+ 				var totDelive = 0;
+ 				var totPoint = 0;
+ 				
+ 				$(dailySales).each(function() {
+					var profit = this.pdOrderTbPaymentSum - this.pdSaleTbReceivedPrice - this.pdOrderTbDeliveryFee;
+					
+					totPayment += this.pdOrderTbPaymentSum;
+					totReceive += this.pdSaleTbReceivedPrice;
+	 				totDelive += this.pdOrderTbDeliveryFee;
+	 				totPoint += this.pdOrderTbUsedPoint;
+	 				
+					str += '<tr><td>' + this.pdOrderTbPaymentDateStr + '</td>';
+					str += '<td>' + this.pdOrderTbPaymentSum + '</td>';
+					str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
+					str += '<td>' + this.pdOrderTbDeliveryFee + '</td>';
+					str += '<td>' + this.pdOrderTbUsedPoint + '</td>';
+					str += '<td>' + profit + '</td>'
+					str += '</tr>';
+					
+				});	
+ 				
+ 				var str2 = "";
+ 				str2 += '<tr><th>총 합</th>'
+			    +  '<th>' + totPayment + '</th>'
+			    +  '<th>' + totReceive + '</th>'
+			    +  '<th>' + totDelive + '</th>'
+			    +  '<th>' + totPoint + '</th>'
+			    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
+			    + '</tr>';
+ 				
+				$("#dataSaleTable").DataTable().clear().destroy();				 
+				$("#dataSaleTableFoot").empty();
+				$("#dataSaleTableBody").empty();
+				$("#dataSaleTableFoot").html(str2);
+				$("#dataSaleTableBody").html(str);
+	            $("#dataSaleTable").DataTable();
+			   					
 	 		});
 		}
 	 	
-		function monthlySales() {
+		function monthlySales(event) {
 				
 	 		var startDate = $("#monthlySalesStartDate").val();
 	 		var endDate = $("#monthlySalesEndDate").val();
@@ -598,94 +639,190 @@
 	 			dataType: "json"
 	 		})
 	 		.done(function(json) {
- 				console.log(json);
- 				new Chart(document.getElementById("sales_chart_month"), json);
+ 				
+ 				new Chart(document.getElementById("sales_chart_month"), json.chart);
+				if(event != null){
+					var salesMonthly = json.salesMonthly;
+					
+	 				var str = "";
+	 				var totPayment = 0;
+	 				var totReceive = 0;
+	 				var totDelive = 0;
+	 				var totPoint = 0;
+	 				
+	 				$(salesMonthly).each(function() {
+						var profit = this.pdOrderTbPaymentSum - this.pdSaleTbReceivedPrice - this.pdOrderTbDeliveryFee;
+						
+						totPayment += this.pdOrderTbPaymentSum;
+						totReceive += this.pdSaleTbReceivedPrice;
+		 				totDelive += this.pdOrderTbDeliveryFee;
+		 				totPoint += this.pdOrderTbUsedPoint;
+		 				
+						str += '<tr><td>' + this.pdOrderTbPaymentDateStr + '</td>';
+						str += '<td>' + this.pdOrderTbPaymentSum + '</td>';
+						str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
+						str += '<td>' + this.pdOrderTbDeliveryFee + '</td>';
+						str += '<td>' + this.pdOrderTbUsedPoint + '</td>';
+						str += '<td>' + profit + '</td>'
+						str += '</tr>';
+						
+					});	
+	 				
+	 				var str2 = "";
+	 				str2 += '<tr><th>총 합</th>'
+				    +  '<th>' + totPayment + '</th>'
+				    +  '<th>' + totReceive + '</th>'
+				    +  '<th>' + totDelive + '</th>'
+				    +  '<th>' + totPoint + '</th>'
+				    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
+				    + '</tr>';
+	 				
+					$("#dataSaleTable").DataTable().clear().destroy();				 
+					$("#dataSaleTableFoot").empty();
+					$("#dataSaleTableBody").empty();
+					$("#dataSaleTableFoot").html(str2);
+					$("#dataSaleTableBody").html(str);
+		            $("#dataSaleTable").DataTable();
+				}
 	 		});
 		}
 	 	
+		function categorySales() {
+			
+	 		var startDate = $("#categorySalesStartDate").val();
+	 		var endDate = $("#categorySalesEndDate").val();
+	 		
+	 		var goUrl = "/salesCategory.ado?startDate="+startDate+"&endDate="+endDate;
+	 		
+	 		$.ajax({
+	 			type: "GET",
+	 			url: goUrl,
+	 			data:{},
+	 			dataType: "json"
+	 		})
+	 		.done(function(data) {
+	 			
+ 				new Chart(document.getElementById("category_sales_chart_day"), data.chart);
+ 				var categorySales = data.categorySales;
+				
+ 				var str = "";
+ 				var totPayment = 0;
+ 				var totReceive = 0;
+ 				var totDelive = 0;
+ 				var totPoint = 0;
+ 				
+ 				$(categorySales).each(function() {
+					var profit = this.ordersDetailTbPriceSum - this.pdSaleTbReceivedPrice - this.pdOrderTbDeliveryFee;
+					
+					totPayment += this.ordersDetailTbPriceSum;
+					totReceive += this.pdSaleTbReceivedPrice;
+	 				totDelive += this.pdOrderTbDeliveryFee;
+	 				totPoint += this.pdOrderTbUsedPoint;
+	 				
+					str += '<tr><td>' + this.productCategoryTbParent+"-"+this.productCategoryTbSub + '</td>';
+					str += '<td>' + this.ordersDetailTbPriceSum + '</td>';
+					str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
+					str += '<td>' + this.pdOrderTbDeliveryFee + '</td>';
+					str += '<td>' + this.pdOrderTbUsedPoint + '</td>';
+					str += '<td>' + profit + '</td>'
+					str += '</tr>';
+					
+				});	
+ 				
+ 				var str2 = "";
+ 				str2 += '<tr><th>총 합</th>'
+			    +  '<th>' + totPayment + '</th>'
+			    +  '<th>' + totReceive + '</th>'
+			    +  '<th>' + totDelive + '</th>'
+			    +  '<th>' + totPoint + '</th>'
+			    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
+			    + '</tr>';
+ 				
+				$("#categorySaleTable").DataTable().clear().destroy();				 
+				$("#categorySaleTableFoot").empty();
+				$("#categorySaleTableBody").empty();
+				$("#categorySaleTableFoot").html(str2);
+				$("#categorySaleTableBody").html(str);
+	            $("#categorySaleTable").DataTable();
+	 		});
+		}
+		
+		function regionSales() {
+			
+	 		var startDate = $("#regionSalesStartDate").val();
+	 		var endDate = $("#regionSalesEndDate").val();
+	 		
+	 		var goUrl = "/salesRegion.ado?startDate="+startDate+"&endDate="+endDate;
+	 		
+	 		$.ajax({
+	 			type: "GET",
+	 			url: goUrl,
+	 			data:{},
+	 			dataType: "json"
+	 		})
+	 		.done(function(data) {
+	 			
+ 				new Chart(document.getElementById("region_sales_chart_day"), data.chart);
+ 				var regionSales = data.regionSales;
+				
+ 				var str = "";
+ 				var totPayment = 0;
+ 				var totReceive = 0;
+ 				var totDelive = 0;
+ 				var totPoint = 0;
+ 				
+ 				$(regionSales).each(function() {
+					var profit = this.pdOrderTbPaymentSum - this.pdSaleTbReceivedPrice - this.pdOrderTbDeliveryFee;
+					
+					totPayment += this.pdOrderTbPaymentSum;
+					totReceive += this.pdSaleTbReceivedPrice;
+	 				totDelive += this.pdOrderTbDeliveryFee;
+	 				totPoint += this.pdOrderTbUsedPoint;
+	 				
+					str += '<tr><td>' + this.pdOrderTbAdCity+ '</td>';
+					str += '<td>' + this.pdOrderTbPaymentSum + '</td>';
+					str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
+					str += '<td>' + this.pdOrderTbDeliveryFee + '</td>';
+					str += '<td>' + this.pdOrderTbUsedPoint + '</td>';
+					str += '<td>' + profit + '</td>'
+					str += '</tr>';
+					
+				});	
+ 				
+ 				var str2 = "";
+ 				str2 += '<tr><th>총 합</th>'
+			    +  '<th>' + totPayment + '</th>'
+			    +  '<th>' + totReceive + '</th>'
+			    +  '<th>' + totDelive + '</th>'
+			    +  '<th>' + totPoint + '</th>'
+			    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
+			    + '</tr>';
+ 				
+				$("#regionSaleTable").DataTable().clear().destroy();				 
+				$("#regionSaleTableFoot").empty();
+				$("#regionSaleTableBody").empty();
+				$("#regionSaleTableFoot").html(str2);
+				$("#regionSaleTableBody").html(str);
+	            $("#regionSaleTable").DataTable();
+	 		});
+		}
+		
 	 	$("#dailySales").on('click', function() {
 			dailySales();
 		})	
 		
 	 	$("#monthlySales").on('click', function() {
-	 		monthlySales();
+	 		monthlySales(this);
+		})
+		
+		$("#dailySalesCategory").on('click', function() {
+			categorySales();
+		})
+		
+		$("#dailySalesRegion").on('click', function() {
+			regionSales();
 		})
 	    
-	    function chartGo() {	    	
-	
-	        new Chart(document.getElementById("category_sales_chart_day"), {
-	        	"type":"doughnut",
-	        	"data": {
-	        		"labels":["10대","20대","30대","40대","50대","60대"],
-	        		"datasets":[{
-	        			"label":"My First Dataset",
-	        			"data":[300,500,500,400,300,200],
-	        			"backgroundColor":[
-	        				"rgb(236, 94, 105)","rgb(0, 112, 224)","rgb(241, 194, 5)","rgb(144,241,88)","rgb(101, 80, 55)","rgb(41, 14, 5)"]}
-	        		]}
-	        });
-	        new Chart(document.getElementById("category_sales_chart_month"),{"type":"doughnut","data":{"labels":["10대","20대","30대","40대","50대","60대"],"datasets":[{"label":"My First Dataset","data":[300,500,500,400,300,200],"backgroundColor":["rgb(236, 94, 105)","rgb(0, 112, 224)","rgb(241, 194, 5)","rgb(144,241,88)","rgb(101, 80, 55)","rgb(41, 14, 5)"]}]}});
-	
-	        new Chart(document.getElementById("price_sales_chart_day"), {
-	            "type": "line",
-	            "data": {
-	                "labels": ["1일", "2일", "3일", "4일", "5일", "6일", "7일", "8일", "9일", "10일", "11일", "12일", "13일", "14일", "15일"],
-	                "datasets": [{
-	                    "label": "회원가입수",
-	                    "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000, 1000, 2000, 3000],
-	                    "fill": false,
-	                    "borderColor": "rgb(99, 203, 137)",
-	                    "lineTension": 0.2
-	                }, {
-	                    "label": "회원탈퇴수",
-	                    "data": [1000, 500, 1000, 500, 2000, 100, 600, 210, 3000, 1000, 2000, 2000, 0, 1000, 2000],
-	                    "fill": false,
-	                    "borderColor": "rgb(203,36,45)",
-	                    "lineTension": 0.2
-	                }, {
-	                    "label": "회원증감",
-	                    "data": [4000, 1500, 2000, 3500, 3000, 400, 3000, 3000, 5000, 1000, 8000, 10000, 1000, 1000, 1000],
-	                    "fill": false,
-	                    "borderColor": "rgb(42,94,203)",
-	                    "lineTension": 0.2
-	                }]
-	            },
-	            "options": {}
-	        });
-	        
-	        
-	        new Chart(document.getElementById("price_sales_chart_month"), {
-	            "type": "line",
-	            "data": {
-	                "labels": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-	                "datasets": [{
-	                    "label": "회원가입수",
-	                    "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000],
-	                    "fill": false,
-	                    "borderColor": "rgb(99, 203, 137)",
-	                    "lineTension": 0.2
-	                }, {
-	                    "label": "회원탈퇴수",
-	                    "data": [1000, 500, 1000, 500, 2000, 100, 600, 210, 3000, 1000, 2000, 2000],
-	                    "fill": false,
-	                    "borderColor": "rgb(203,36,45)",
-	                    "lineTension": 0.2
-	                }, {
-	                    "label": "회원증감",
-	                    "data": [4000, 1500, 2000, 3500, 3000, 400, 3000, 3000, 5000, 1000, 8000, 10000],
-	                    "fill": false,
-	                    "borderColor": "rgb(42,94,203)",
-	                    "lineTension": 0.2
-	                }]
-	            },
-	            "options": {}
-	        });
-	
-	        new Chart(document.getElementById("region_sales_chart_day"),{"type":"doughnut","data":{"labels":["10대","20대","30대","40대","50대","60대"],"datasets":[{"label":"My First Dataset","data":[300,500,500,400,300,200],"backgroundColor":["rgb(236, 94, 105)","rgb(0, 112, 224)","rgb(241, 194, 5)","rgb(144,241,88)","rgb(101, 80, 55)","rgb(41, 14, 5)"]}]}});
-	        new Chart(document.getElementById("region_sales_chart_month"),{"type":"doughnut","data":{"labels":["10대","20대","30대","40대","50대","60대"],"datasets":[{"label":"My First Dataset","data":[300,500,500,400,300,200],"backgroundColor":["rgb(236, 94, 105)","rgb(0, 112, 224)","rgb(241, 194, 5)","rgb(144,241,88)","rgb(101, 80, 55)","rgb(41, 14, 5)"]}]}});
-	
-	    }
-
 });
 </script>
 </body>
