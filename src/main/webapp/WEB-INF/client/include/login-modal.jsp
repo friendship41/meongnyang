@@ -2,6 +2,20 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 로그인이 뜨는 모달부분 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<c:choose>
+<c:when test="${loginCheckSubmit eq false}">
+<script type="text/javascript"> 
+   alert("로그인 실패 하셨습니다.")
+</script>
+</c:when>
+<c:when test="${mailSubmit eq false}">
+<script type="text/javascript"> 
+   alert("인증 메일이 발송되었습니다.")
+   
+</script>
+</c:when>
+</c:choose>
 
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
@@ -9,10 +23,7 @@
         <div class="modal-content">
             <div class="modal-header">
             
-            	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            
-            	
-            
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">로그인 / 회원가입</h4>
             </div>
             <div class="modal-body modal-body-sub">
@@ -57,10 +68,7 @@
                                                        <br><a href="javascript:termsPopupNecessary();">이용약관에 동의(필수)</a><br>
                                                        <a href="javascript:termsPopupOption();">이용약관에 동의(선택)</a><br>
                                                 <div class="sign-up">
-                                                
-                                                
                                                 	<input type="submit" value="Create Account" id="CreateAccount" onclick="return registryCheck()"/>
-                                               		
                                                 </div>
                                             </form>
                                         </div>
@@ -80,7 +88,7 @@
                                 <ul class="social">
                                     <li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
                                     <li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
-                                    <li class="social_twitter"><a href="#" class="entypo-twitter"></a></li>
+                                    <li class="social_twitter"><a href="https://kauth.kakao.com/oauth/authorize?client_id=979aa4be781f57e07a085e52b0e8a729&redirect_uri=http://localhost:8080/klogin.do&response_type=code" id="kakao-login-btn" class="entypo-twitter"></a></li>
                                     <li class="social_behance"><a href="#" class="entypo-behance"></a></li>
                                 </ul>
                             </div>
@@ -91,8 +99,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">

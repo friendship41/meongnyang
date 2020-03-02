@@ -16,8 +16,13 @@ public class ClientCustomerVO {
 	private String customerTbJoinPath;
 	private String customerTbState;
 	
-	
-	
+	public ClientCustomerVO() {
+		this.customerTbName = "";
+		this.customerTbPassword = "";
+		this.customerTbEmail = "";
+		this.customerTbPhone = "";
+  }
+  
 	public String getCustomerTbState() {
 		return customerTbState;
 	}
@@ -91,5 +96,13 @@ public class ClientCustomerVO {
 		this.customerTbJoinPath = customerTbJoinPath;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "ClientCustomerVO [customerTbNo=" + customerTbNo + ", customerTbName=" + customerTbName
+				+ ", customerTbPassword=" + customerTbPassword + ", customerTbEmail=" + customerTbEmail
+				+ ", customerTbPhone=" + customerTbPhone + ", customerTbJoinDate=" + customerTbJoinDate
+				+ ", customerTbPoint=" + customerTbPoint + ", customerTbLastLogin=" + customerTbLastLogin
+				+ ", customerTbPwChange=" + customerTbPwChange + ", customerTbJoinWait=" + customerTbJoinWait
+				+ ", customerTbJoinPath=" + customerTbJoinPath + "]";
+	}
 }

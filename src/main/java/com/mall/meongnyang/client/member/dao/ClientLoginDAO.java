@@ -12,7 +12,7 @@ public interface ClientLoginDAO {
 	//email
 	public void updateState(ClientCustomerVO clientCustomerVO);
 	
-	
+	public void insertKakao(ClientCustomerVO clientCustomerVO); //카카오아이디집어넣기 
 	
 	public void updateLastLogin(ClientCustomerVO clientCustomerVO);
 	
