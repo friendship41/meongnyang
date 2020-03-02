@@ -50,11 +50,11 @@ public class ClientRegistryController {
 		MailVO mailVO = new MailVO();
 		mailVO.setFrom("admin@naver.com"); // 愿�由ъ옄�븘�씠�뵒
 		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // �쉶�썝媛��엯 �븘�씠�뵒
-		mailVO.setSubject("�쉶�썝媛��엯 �씤利� �슂泥��엯�땲�떎.");
-		mailVO.setContent("<h1>硫붿씪�씤利�</h1>"
-				// base64 url�븫�샇�솕
+		mailVO.setSubject("오늘 뭐멍냥 회원가입 인증메일입니다.");
+		mailVO.setContent("<h1>클릭해주세요</h1>"
+				// base64 url암호화 필요함
 				+ "<a href='localhost:8080/index.do?customerTbNo=" + tempVO.getCustomerTbNo() + "&customerTbState=N"
-				+ "' >�씠硫붿씪 �씤利� �솗�씤</a>");
+				+ "' >회원가입 인증</a>");
 		model.addAttribute("emailSend", true);
 		mailService.sendMail(mailVO);		
 
