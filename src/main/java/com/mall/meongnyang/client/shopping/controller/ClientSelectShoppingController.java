@@ -1,20 +1,25 @@
 package com.mall.meongnyang.client.shopping.controller;
 
-import com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO;
-import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
-import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
-import com.mall.meongnyang.admin.product.vo.AdminProductVO;
-import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingDetailService;
-import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingListService;
-import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingProductCategoryService;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.Map;
+import com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO;
+import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
+import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
+import com.mall.meongnyang.admin.product.vo.AdminProductVO;
+import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+import com.mall.meongnyang.client.community.service.ClientSelectQnaListService;
+import com.mall.meongnyang.client.community.vo.ClientQnaListPaging;
+import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingDetailService;
+import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingListService;
+import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingProductCategoryService;
 
 @Controller
 public class ClientSelectShoppingController
@@ -26,6 +31,9 @@ public class ClientSelectShoppingController
     @Autowired
     private ClientSelectShoppingDetailService clientSelectShoppingDetailService;
 
+    @Autowired
+    private ClientSelectQnaListService clientSelectQnaListService;
+    
 
     @RequestMapping(value = "/shopping.do", method = RequestMethod.GET)
     public String goToShoppingPage(AdminProductCategoryVO adminProductCategoryVO, AdminProductVO adminProductVO, Model model)
@@ -54,13 +62,26 @@ public class ClientSelectShoppingController
     }
 
     @RequestMapping(value = "/shoppingDetail.do", method = RequestMethod.GET)
-    public String goToShoppingProductDetail(AdminProductVO adminProductVO, Model model)
+    public String goToShoppingProductDetail(@RequestParam(defaultValue = "1") int currentPage, AdminProductVO adminProductVO, Model model, AdminQnaVO adminQnaVO)
     {
-        Map<String, Object> detailMap = clientSelectShoppingDetailService.selectProductDetail(adminProductVO);
-        model.addAttribute("detail", (AdminProductVO)detailMap.get("detail"));
+    	
+    	ClientQnaListPaging paging = new ClientQnaListPaging(currentPage);
+		paging.createPaging(clientSelectQnaListService.selectCountQna());
+        
+		
+		adminQnaVO.setStartRow(paging.getStartRow());
+		adminQnaVO.setEndRow(paging.getEndRow());
+		
+		
+    	Map<String, Object> detailMap = clientSelectShoppingDetailService.selectProductDetail(adminProductVO);
+    	List<AdminQnaVO> tempVO = clientSelectQnaListService.selectQnaList(adminQnaVO);
+    			
+    	model.addAttribute("detail", (AdminProductVO)detailMap.get("detail"));
         model.addAttribute("imageList", (List<AdminProductImageVO>)detailMap.get("imageList"));
         model.addAttribute("saleList", (List<AdminProductSaleVO>)detailMap.get("saleList"));
-
+        model.addAttribute("qnaList", tempVO);
+        model.addAttribute("paging", paging);
+        
         return "shopping/product-read";
     }
 }

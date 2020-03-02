@@ -14,6 +14,8 @@ public class ClientUpdateMyinfoAddressServiceImpl implements ClientUpdateMyinfoA
 	
 	@Override
 	public void updateMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
+		
+		
 		clientMyinfoAddressDAO.updateMyinfoAddress(clientCmAddressVO);
 		
 	}

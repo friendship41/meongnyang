@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="../include/header.jsp"/>
         <!-- Start Bradcaump area -->
         <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/resources/client/images/bg/qna.jpg) no-repeat scroll center center / cover ;">
@@ -30,10 +31,10 @@
                             <div class="htc__category">
                                 <h4 class="title__line--4">Community</h4>
                                 <ul class="ht__cat__list">
-                                    <li><a href="#">공지</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Q&A</a></li>
-                                    <li><a href="#">Review</a></li>
+                                    <li><a href="notice.do">공지</a></li>
+                                    <li><a href="faq.do">FAQ</a></li>
+                                    <li><a href="qna-list.do">Q&A</a></li>
+                                    <li><a href="productReviewList.do">Review</a></li>
                                     <li><a href="#">Contact</a></li>
                                 </ul>
                             </div>
@@ -53,19 +54,102 @@
                                                 <th class="product-stock-stauts"><span class="nobr"> 날짜 </span></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="qnaTbody">
+
+                                        	<c:forEach var="qna" items="${clientQnaList}">
                                             <tr>
-                                                <td class="product-remove"> 2 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-success">Q</span> 배송문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객2 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
+                                                <input type="hidden" value="${qna.qnaTbDepth}">
+                                                <td class="product-remove"> "${qna.rnum}" </td>
+
+                                                <c:if test="${qna.qnaTbSecret == 'Y'}">
+                                                    <!-- 비밀글 -->
+                                                    <c:if test="${sessionScope.customer.customerTbNo eq qna.customerTbNo}">
+                                                        <!-- 내 글이면 -->
+                                                        <c:if test="${qna.qnaTbStatus eq 'N'}">
+                                                            <!-- 정상글 -->
+                                                            <td style="text-align: left;">
+                                                                <span class="badge badge-success">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                    <c:if test="${qna.adminsTbId eq null}">
+                                                                        Q
+                                                                    </c:if>
+                                                                    <c:if test="${qna.adminsTbId ne null}">
+                                                                        A
+                                                                    </c:if>
+                                                                </span>
+                                                                <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
+                                                            </td>
+                                                        </c:if>
+                                                        <c:if test="${qna.qnaTbStatus eq 'D'}">
+                                                            <!-- 삭제된글 -->
+                                                            <td style="text-align: left;">
+                                                                <span class="badge badge-success">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                    <c:if test="${qna.adminsTbId eq null}">
+                                                                        Q
+                                                                    </c:if>
+                                                                    <c:if test="${qna.adminsTbId ne null}">
+                                                                        A
+                                                                    </c:if>
+                                                                </span>삭제된 글입니다.
+                                                            </td>
+                                                        </c:if>
+                                                    </c:if>
+                                                    <c:if test="${sessionScope.customer.customerTbNo ne qna.customerTbNo}">
+                                                        <!-- 내 글이아니면 -->
+                                                        <td style="text-align: left;">
+                                                            <span class="badge badge-success">
+                                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                                    Q
+                                                                </c:if>
+                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                    A
+                                                                </c:if>
+                                                            </span>${qna.qnaTbTitle}
+                                                        </td>
+                                                    </c:if>
+                                                </c:if>
+                                                <c:if test="${qna.qnaTbSecret == 'N' }">
+                                                    <!-- 그냥 글 -->
+                                                    <c:if test="${qna.qnaTbStatus eq 'N'}">
+                                                        <!-- 정상글 -->
+                                                        <td style="text-align: left;">
+                                                            <span class="badge badge-success">
+                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                                    Q
+                                                                </c:if>
+                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                    A
+                                                                </c:if>
+                                                            </span>
+                                                            <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
+                                                        </td>
+                                                    </c:if>
+                                                    <c:if test="${qna.qnaTbStatus eq 'D'}">
+                                                        <!-- 삭제된 글 -->
+                                                        <td style="text-align: left;">
+                                                            <span class="badge badge-success">
+                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                                    Q
+                                                                </c:if>
+                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                    A
+                                                                </c:if>
+                                                            </span>삭제된 글입니다.
+                                                        </td>
+                                                    </c:if>
+                                                </c:if>
+												<c:if test="${qna.adminsTbId eq null }">
+                                                <td class="product-price"><span class="amount">${qna.customerTbName}</span></td>
+                                                </c:if>
+                                                <c:if test="${qna.adminsTbId ne null }">
+                                                <td class="product-price"><span class="amount">${qna.adminsTbId}</span></td>
+                                                </c:if>
+                                                <td class="product-stock-status"><span class="wishlist-in-stock">${qna.qnaTbRegDate}</span></td>
                                             </tr>
-                                            <tr>
-                                                <td class="product-remove"> 1 </td>
-                                                <td class="product-name"><a href="#"><span class="badge badge-warning">A</span> 구매문의 </a></td>
-                                                <td class="product-price"><span class="amount"> 고객1 </span></td>
-                                                <td class="product-stock-status"><span class="wishlist-in-stock"> 20200125 </span></td>
-                                            </tr>
+                                            </c:forEach>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -74,11 +158,15 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <ul class="htc__pagenation">
+                                    <c:if test="${paging.prev == true }">
                                         <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li class="active"><a href="#">3</a></li>
-                                        <li><a href="#">19</a></li>
-                                        <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                                        </c:if>
+                                        <c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }">
+                                        <li><a href="/qna-list.do?currentPage=${i}">${i}</a></li>
+                                        </c:forEach>
+                                        <c:if test="${paging.next == true }">
+                                        <li class="active"><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                                        </c:if>
                                     </ul>
                                 </div>
                             </div>
@@ -89,5 +177,24 @@
             </div>
         </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var listSize = '${clientQnaList.size()}';
+        listSize *=1;
+        for(var i=0; i<listSize; i++)
+        {
+            var tr = $("#qnaTbody").children().eq(i);
+            var depth = tr.children().eq(0).val();
+            depth *= 1;
+            if(depth != 0)
+            {
+                for(var j=0; j<depth; j++)
+                {
+                    tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+                }
+            }
+        }
+    });
+</script>
 <jsp:include page="../include/footer.jsp"/>

@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoService;
-import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressService;
-
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPasswordService;
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPhoneService;
-import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 
 @Controller
 public class ClientMyinfoController {
@@ -30,8 +27,7 @@ public class ClientMyinfoController {
 	@Autowired
 	private ClientDeleteMyinfoService clientDeleteMyinfoCustomerService;
 
-	@Autowired
-	private ClientSelectMyinfoAddressService clientSelectMyinfoAddressService;
+	
 	
 	
 	
@@ -64,18 +60,16 @@ public class ClientMyinfoController {
 		ClientCustomerVO SessionVO = (ClientCustomerVO) session.getAttribute("customer");
 		String no = SessionVO.getCustomerTbPassword();
 		
-		System.out.println(no + "¾ÏÈ£È­ µÈ ¾ÏÈ£(DB)");
-		System.out.println(clientCustomerVO.getCustomerTbPassword()+ " : DB°ª°ú ÀÏÄ¡ÇÏ´Â »ç¿ëÀÚ°¡ ÀûÀº°ª");
+		
 		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), SessionVO.getCustomerTbPassword())) {
 			if(newPassword1.equals(newPassword2)) {
 			
-			//»õ·Î¿î ¾ÏÈ£ ¾ÏÈ£È­ ½ÃÀü	
+			//ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½È£ ï¿½ï¿½È£È­ ï¿½ï¿½ï¿½ï¿½	
 			String securePw = encoder.encode(newPassword1);
 			
-			//»õ·Î¿î ÆÐ½º¿öµå°ª ¼ÂÆÃ
+			//ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å°ª ï¿½ï¿½ï¿½ï¿½
 			clientCustomerVO.setCustomerTbPassword(securePw);
-			System.out.println(newPassword1 + " : »õ·Î¿î ºñ¹ø");
-			System.out.println(securePw + " : ¾ÏÈ£È­µÈ »õ·Î¿î ºñ¹ø");	
+			
 			int id = SessionVO.getCustomerTbNo();
 			clientCustomerVO.setCustomerTbNo(id);
 			clientUpdateMyinfoPasswordService.updateMyinfoPassword(clientCustomerVO);
@@ -98,20 +92,23 @@ public class ClientMyinfoController {
 
 	@RequestMapping(value = "/myinfo-delete-customer.do", method = RequestMethod.POST)
 	public String deleteMyinfoCustomerProc(HttpSession session, ClientCustomerVO clientCustomerVO, Model model) {
-		ClientCustomerVO tempVO = (ClientCustomerVO) session.getAttribute("customer");
-		//¼¼¼Ç¿¡ ÀÖ´Â no°ª
-		String password = tempVO.getCustomerTbPassword();
-		//vo¿¡ ¼ÂÆÃ
-		clientCustomerVO.setCustomerTbPassword(password);
-		if(tempVO.getCustomerTbPassword().equals(clientCustomerVO.getCustomerTbPassword())) {
-			
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		ClientCustomerVO sessionVO = (ClientCustomerVO) session.getAttribute("customer");
+		
+		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), sessionVO.getCustomerTbPassword())) {
+			String password = sessionVO.getCustomerTbPassword();
+			clientCustomerVO.setCustomerTbPassword(password);
+			clientCustomerVO.setCustomerTbState("T");
 			clientDeleteMyinfoCustomerService.deleteMyinfo(clientCustomerVO);
-			
-		} else if(clientCustomerVO.getCustomerTbPassword() == null) {
+			session.setAttribute("customer", null);
+			return "redirect:index.do";
+		} else  {
 			model.addAttribute("passwordDelete", false);
 			return "mypage/myinfo";
 		}
-		return "mypage/myinfo";
+		
 	}
 	
 	

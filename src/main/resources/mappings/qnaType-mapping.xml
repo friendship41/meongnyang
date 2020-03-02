@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminQnaTypeDAO">
+	<insert id="insertQnaType" parameterType="qnaType">
+		INSERT INTO qna_type
+		VALUES(qna_type_seq.nextval, #{qnaTypeTbName})
+	</insert>
+	<update id="updateQnaType" parameterType="qnaType">
+		UPDATE qna_type
+		SET qna_type_tb_name = #{qnaTypeTbName}
+		WHERE qna_type_tb_no = #{qnaTypeTbNo}
+	</update>
+	<delete id="deleteQnaType" parameterType="qnaType">
+		DELETE FROM qna_type
+		WHERE qna_type_tb_no=#{qnaTypeTbNo}
+	</delete>
+	<select id="selectQnaTypeList" parameterType="qnaType" resultType="qnaType">
+		SELECT
+			qna_type_tb_no,
+			qna_type_tb_name
+		FROM 
+			qna_type
+	</select>
+	<select id="selectQnaType" parameterType="qnaType" resultType="qnaType">
+		SELECT
+			qna_type_tb_no,
+			qna_type_tb_name
+		FROM
+			qna_type
+		WHERE
+			qna_type_tb_no = #{qnaTypeTbNo}
+	</select>
+	
+</mapper>

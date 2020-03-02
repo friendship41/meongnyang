@@ -45,34 +45,30 @@
                     </div>
                 </div>
 
-                <!-- Start comment Form --> <!--여기부터다시수정하면됨!!!!!-->
+                <!-- Start comment Form --> 
 				
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
-            	<input type="hidden" name="customerTbNo" id="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
-            	<input type="hidden" name="cmAddressTbNickname" value="si"> <!-- kakao -->
-            	<input type="hidden" name="cmAddressTbPhone" value="010"> <!-- sessionScope.customer.customerTbPhone -->
+            	<input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
+            	<input type="hidden" name="cmAddressTbPhone" value="010">	
                     <div class="ht__comment__form">
-                    	
                         <h4 class="title__line--5">배송지 목록</h4>
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
                                 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
-                                
-                                <select class="ht__select" id="selectBox">
-                                	<option value="thisIsSelect">선택하세요</option>
+                                <select class="ht__select" id="selectBox" name="cmAddressTbNo">
+                                	<option id="addOption" value="-1">선택하세요</option>
                                 	<c:forEach var="address" items="${myinfoAddressList }">
- 										<option value="${address.cmAddressTbNo }">${address.cmAddressTbPostcode }&nbsp;&nbsp; ${address.cmAddressTbAddress1 }&nbsp;&nbsp;${address.cmAddressTbAddress2 }</option>
+ 										<option value="${address.cmAddressTbNo }">${address.cmAddressTbNickname }</option>
  									</c:forEach>
-                                    
                                 </select>
-                                <input type="text" placeholder="" name="cmAddressTbPostcode" id="cmAddressTbPostcode">
+                                <input type="text" placeholder="우편 번호 * " name="cmAddressTbPostcode" id="cmAddressTbPostcode">
                                 <input type="text" placeholder=" 주소 *" name="cmAddressTbAddress1" id="cmAddressTbAddress1">
                                 <input type="text" placeholder="상세 주소 *" name="cmAddressTbAddress2" id="cmAddressTbAddress2">
+                                <input type="text" placeholder="주소 별칭 *" name="cmAddressTbNickname" id="cmAddressTbNickname">
                                 <div class="ht__comment__btn--2 mt--30">
-                                	<button id="modifySubmitButton" class="fr__btn" >추가</button>
+                                	<button id="modifySubmitButton" class="fr__btn">추가</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
-                
                                 </div>
                             </div>
                             <div class="ht__comment__btn--2 mt--30">
@@ -82,7 +78,6 @@
                        </div>
                    </div>
                    </form>
-                   
                    <div class="ht__comment__form">
                     <form action="/myinfo-update-password.do" method="post">
                     <h4 class="title__line--5">비밀번호 변경</h4>
@@ -100,16 +95,14 @@
                     </form> 
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">연락처 등록 및 수정</h4>
-                        <form action="/myinfo-update-phone.do" method="POST">
+                        <form action="/myinfo-update-phone.do" id="phoneForm" method="POST">
                         <div class="ht__comment__form__inner">
-                           
                             <div class="comment__form">
-                            	<input type="text" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone">
+                            	<input type="text" id="customerTbPhone" placeholder="연락처를 입력하세요 (-생략해주세요)" name="customerTbPhone" maxlength="11">
                             </div>
-                        </div>
-                        	
+                        </div>	
                         <div class="ht__comment__btn--2 mt--30">
-                            <button class="fr__btn" type="submit">등록</button>
+                            <button type="button" class="fr__btn" onclick="phoneCheck()" type="submit">등록</button>
                         </div>
                         </form>	    
                     </div>
@@ -167,16 +160,18 @@
            	console.log(selectedValue);
             if(selectedValue === 'thisIsSelect')
             {
-            	$("#modifySubmitButton").html('추가');
+                $("#addOption").attr("value", -1);
+				$("#modifySubmitButton").html('추가');
                 $("#deleteBtn").hide();
-                $("#customerTbNo").attr("value", "${customerTbNo}"); //고객넘버에 따른 리스트
-                $("cmAddressTbAddressPostcode").removeAttr("value");
+                $("#cmAddressTbPostcode").removeAttr("value");
                 $("#cmAddressTbAddress1").removeAttr("value");
                 $("#cmAddressTbAddress2").removeAttr("value");
+                $("#cmAddressTbNickname").removeAttr("value");
                 $("#formToController").attr("action", "myinfo-address-insert.do");
             }
             else
             {
+            	
             	console.log(selectedValue);
                 var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddressTbNo="+selectedValue;
                 $.ajax({
@@ -187,10 +182,13 @@
                 })
                     .done(function(json) {
                         console.log(json);
+
+                        $("#addOption").attr("value", 'thisIsSelect');
                         $("#cmAddressTbNo").attr("value", json.cmAddressTbNo);
                         $("#cmAddressTbPostcode").attr("value", json.cmAddressTbPostcode);
  						$("#cmAddressTbAddress1").attr("value", json.cmAddressTbAddress1);
  						$("#cmAddressTbAddress2").attr("value", json.cmAddressTbAddress2);
+ 						$("#cmAddressTbNickname").attr("value", json.cmAddressTbNickname);
                         $("#modifySubmitButton").html('수정');
                         $("#deleteBtn").show();
                         var deleteUrl = "/myinfo-address-delete.do?cmAddressTbNo="+json.cmAddressTbNo;
@@ -213,6 +211,18 @@
                 }
             }).open();
         }
-    
-    
+	
+	function phoneCheck() {
+	var phone = $("#customerTbPhone").val();
+	var phoneSu = phone.length;
+	console.log(phoneSu);
+	if(phoneSu < 11) {
+		alert("전화번호를 다시한번 확인해주세요.");	
+	} else if(phone.indexOf("-") != -1) {
+		alert("-를 제거해주세요");	
+	} else {
+		$("#phoneForm").submit();
+	}
+
+	}
 </script>

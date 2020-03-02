@@ -27,11 +27,18 @@ public class AdminTermsController {
 	private AdminUpdateTermsService adminUpdateTermsService; 
 	
 	@RequestMapping(value="/term-manage.ado", method=RequestMethod.GET)
+	public String selectTermsList(Model model) {
+		List<AdminTermsVO> termsList = adminSelectTermsListService.selectTermsList(new AdminTermsVO());
+		model.addAttribute("termsList", termsList);		
+		return "member/term-manage";
+	}
+	
+	@RequestMapping(value="/term-manage1.ado", method=RequestMethod.GET)
 	public String selectTermsList(@RequestParam("message") String message  ,Model model) {
 		List<AdminTermsVO> termsList = adminSelectTermsListService.selectTermsList(new AdminTermsVO());
 		model.addAttribute("termsList", termsList);
 		model.addAttribute("message", message);
-		return "member/term-manage";
+		return "member/term-manage1";
 	}
 	
 	@RequestMapping(value="/term-read.ado", method=RequestMethod.GET)

@@ -56,10 +56,12 @@
 		WHERE customer_tb_no = #{customerTbNo}
 	</update>
 
-	<delete id="deleteMyinfoCustomer" parameterType="clientLogin">
-		DELETE FROM customer
-		WHERE customer_tb_password =#{customerTbPassword}
-	</delete>
+	<update id="deleteMyinfoCustomer" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_state = #{customerTbState}
+		WHERE customer_tb_password = #{customerTbPassword}
+	</update>
 	
 	<update id="updatePointUse" parameterType="orderProc">
 		UPDATE CUSTOMER
@@ -80,5 +82,12 @@
 		SET
 			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT+ROUND(#{pdOrderTbPayment}/100, 0)
 		WHERE CUSTOMER_TB_NO = ${customerTbNo}
+	</update>
+	<update id="updateState" parameterType="clientLogin">
+		UPDATE CUSTOMER
+		SET
+			customer_tb_state = #{customerTbState}
+		WHERE customer_Tb_no = #{customerTbNo}
+			
 	</update>
 </mapper>

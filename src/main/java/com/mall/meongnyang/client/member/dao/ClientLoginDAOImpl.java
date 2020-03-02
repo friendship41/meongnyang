@@ -41,18 +41,14 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 		sqlSessionTemplate.update("ClientLoginDAO.updateClientLastLogin", clientCustomerVO);
 		
 	}
-
-
-
-	@Override
+  
+  @Override
 	public void insertKakao(ClientCustomerVO clientCustomerVO) {
 		//kakao email name insert
 		sqlSessionTemplate.insert("ClientLoginDAO.insertKakao", clientCustomerVO);
 	}
 
-
-
-	@Override
+  @Override
 	public void updatePointUse(ClientOrderVO clientOrderVO)
 	{
 		sqlSessionTemplate.update("ClientLoginDAO.updatePointUse", clientOrderVO);
@@ -70,6 +66,11 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 		sqlSessionTemplate.update("ClientLoginDAO.updatePointPlus", clientOrderVO);
 	}
 
+	@Override
+	public void updateState(ClientCustomerVO clientCustomerVO) {
+		sqlSessionTemplate.update("ClientLoginDAO.updateState", clientCustomerVO);
+		
+	}
 	
 	
 }

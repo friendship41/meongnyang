@@ -114,4 +114,34 @@
 		WHERE PD_ORDER_TB_NO=#{pdOrderTbNo}
 	</delete>
 
+	<select id="selectAdminProductOrderOverview" parameterType="order" resultType="order">
+		SELECT
+			Y.*,
+			C.CUSTOMER_TB_NAME
+		FROM(
+			SELECT
+				X.*,
+				S.PD_SALE_TB_PRODUCT_NAME
+			FROM(
+				SELECT
+					O.PD_ORDER_TB_NO,
+					O.PD_ORDER_TB_PAYMENT,
+					O.PD_ORDER_TB_ORDER_DATE,
+					O.PD_ORDER_TB_STATE,
+					O.CUSTOMER_TB_NO,
+					D.PD_SALE_TB_NO,
+					D.ORDER_PRODUCT_COUNT
+				FROM PD_ORDER O JOIN (
+					SELECT
+						PD_ORDER_TB_NO,
+						MIN(PD_SALE_TB_NO) "PD_SALE_TB_NO",
+						COUNT(*) "ORDER_PRODUCT_COUNT"
+					FROM ORDERS_DETAIL
+					GROUP BY PD_ORDER_TB_NO) D
+				ON O.PD_ORDER_TB_NO = D.PD_ORDER_TB_NO
+				WHERE PD_ORDER_TB_ORDER_DATE BETWEEN #{dayFrom} AND #{dayTo}) X JOIN PD_SALE S
+			ON X.PD_SALE_TB_NO = S.PD_SALE_TB_NO) Y JOIN CUSTOMER C
+		ON Y.CUSTOMER_TB_NO = C.CUSTOMER_TB_NO
+	</select>
+
 </mapper>

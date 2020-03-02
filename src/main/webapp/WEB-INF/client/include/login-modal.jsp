@@ -16,6 +16,7 @@
 </script>
 </c:when>
 </c:choose>
+
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -39,11 +40,11 @@
                                     <div class="facts">
                                         <div class="register">
                                             <form name="loginForm" action="/login.do" method="post"><!-- 로그인 -->
-                                                <input name="customerTbEmail" placeholder="Email Address" type="text" required="">
-                                                <input name="customerTbPassword" placeholder="Password" type="password"
+                                                <input name="customerTbEmail"  placeholder="Email Address" type="text" required="">
+                                                <input name="customerTbPassword"  placeholder="Password" type="password"
                                                        required="">
                                                 <div class="sign-up">
-                                                   <input type="submit" value="Sign in" onclick="loginCheck()"/>
+                                                	<input type="submit" id="loginCheck" value="Sign in" onclick="loginCheck()"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -52,17 +53,22 @@
                                 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                     <div class="facts">
                                         <div class="register">
-                                            <form name="registryForm" action="registry.do" method="post"><!-- 회원가입 -->
+                                            <form name="registryForm" id="registryForm" action="registry.do" method="post"><!-- 회원가입 -->
                                                 <input placeholder="Name" name="customerTbName" type="text" required="">
                                                 <input placeholder="Email Address" name="customerTbEmail" type="email"
-                                                       required="">
+                                                       required="" oninput="checkEmail()" id="customerTbEmail">
                                                 <input placeholder="Password" name="customerTbPassword" type="password"
                                                        required="" id="password1">
                                                 <input placeholder="Confirm Password" name="Password" type="password"
                                                        required="" id="password2">
+                                                <input type="hidden" id="agreeCheckNecessary" name="agreeCheckNecessary" value="">
+                                                <input type="hidden" id="agreeCheckOption" name="agreeCheckOption" value="N">
+                                                <div class="row text-center sign-with">                            						 
+                            					</div>
+                                                       <br><a href="javascript:termsPopupNecessary();">이용약관에 동의(필수)</a><br>
+                                                       <a href="javascript:termsPopupOption();">이용약관에 동의(선택)</a><br>
                                                 <div class="sign-up">
-                                                   <input type="submit" value="Create Account" id="CreateAccount" onclick="registryCheck()"/>
-                                               
+                                                	<input type="submit" value="Create Account" id="CreateAccount" onclick="return registryCheck()"/>
                                                 </div>
                                             </form>
                                         </div>
@@ -94,24 +100,69 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-   function registryCheck() {
-      var pw1 = document.getElementById('password1').value;
-      var pw2 = document.getElementById('password2').value;
-      if(pw1 != pw2) {
-         alert("비밀번호가 일치하지 않습니다.");
-      }
-   }
-   function loginCheck() {
-      var loginForm = document.loginForm;
-      var userId = loginForm.customerTbEmail.value;
-      var password = loginForm.customerTbPassword.value;
-      
-      if(!userId || !password) {
-         alert("모두 입력해주세요")
-      } else {
-         loginForm.submit();
-      }
-   }
-   
+	function registryCheck() {
+		var pw1 = document.getElementById('password1').value;
+		var pw2 = document.getElementById('password2').value;
+		if(pw1 != pw2) {
+			alert("비밀번호가 일치하지 않습니다.");
+		}
+		
+		var check = document.getElementById('agreeCheckNecessary').value;
+		if(check != 'Y'){
+			alert("이용약관(필수)에 동의해 주세요");			
+			return false;			
+		}
+	}
+		
+	function loginCheck() {
+		var loginForm = document.loginForm;
+		var userId = loginForm.customerTbEmail.value;
+		var password = loginForm.customerTbPassword.value;
+		
+		if(!userId || !password) {
+			alert("모두 입력해주세요")
+		} else {
+			loginForm.submit();
+		}
+	}
+	
+	var registryCheck;
+	function checkEmail() {
+		var inputed = $("#customerTbEmail").val();
+		console.log(inputed);
+		$.ajax({
+			data : {
+				customerTbEmail : inputed
+			},
+			url : "/loginAjaxSingle.do",
+			success : function(data) {
+				if(data=='1') {
+					
+					$("#CreateAccount").prop("disabled", true);
+					$("#customerTbEmail").attr("style", "background-color: red");
+					alert('중복된아이디가 있습니다.');
+					registryCheck = 0;
+					if(registryCheck == 0) {
+						$("#CreateAccount").prop("disabled", false);
+					}
+				} 
+			}
+			});
+	}
+	function termsPopupNecessary() {                  
+        window.name = "login-modal";        
+        window.open("termsCheck1.do", "terms",
+                "width = 800, height = 500, resizable = no, scrollbars = no, status = no");
+	}
+	function termsPopupOption() {                  
+       window.name = "login-modal";        
+       window.open("termsCheck2.do", "terms",
+               "width = 800, height = 500, resizable = no, scrollbars = no, status = no");
+	} 
+    
+		
+	
 </script>
+

@@ -4,13 +4,6 @@
 
 <mapper namespace="OverviewDAO">
 
-	<resultMap id="adminOverviewResult" type="adminOverview">
-
-	</resultMap>
-
-
-
-
 	<select id="selectOverviewList" parameterType="adminOverview"
 		resultType="adminOverview">
 		SELECT
@@ -51,7 +44,25 @@
 	</select>
 
 
-
+	<insert id="insertUserCount" parameterType="userCount">
+		INSERT INTO USER_COUNT
+		VALUES (
+			SYSDATE,
+			#{userCountTbVisitors},
+			(
+				SELECT
+					COUNT(*)
+				FROM CUSTOMER
+				WHERE TO_CHAR(CUSTOMER_TB_JOIN_DATE,'yyyyMMdd') = TO_CHAR(SYSDATE, 'yyyyMMdd')
+			),
+			(
+				SELECT
+					COUNT(*)
+				FROM CUSTOMER
+				WHERE CUSTOMER_TB_STATE = 'D' AND TO_CHAR(CUSTOMER_TB_LAST_LOGIN,'yyyyMMdd') = TO_CHAR(SYSDATE, 'yyyyMMdd')
+			)
+		)
+	</insert>
 
 
 </mapper>
