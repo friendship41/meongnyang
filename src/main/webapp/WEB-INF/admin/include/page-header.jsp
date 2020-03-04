@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Page Header -->
 <div class="page-header">
     <div class="search-form">
@@ -14,9 +15,9 @@
                 <input type="text" name="search" class="form-control search-input"
                        placeholder="Type something...">
                 <span class="input-group-btn">
-                                    <button class="btn btn-default" id="close-search" type="button"><i
-                                            class="icon-close"></i></button>
-                                </span>
+                                            <button class="btn btn-default" id="close-search" type="button"><i
+                                                    class="icon-close"></i></button>
+                                        </span>
             </div>
         </form>
     </div>
@@ -45,60 +46,43 @@
                     <li><a href="javascript:void(0)" id="search-button"><i class="fa fa-search"></i></a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="javascript:void(0)" class="right-sidebar-toggle"
-                           data-sidebar-id="main-right-sidebar"><i class="fa fa-envelope"></i></a></li>
                     <li class="dropdown">
-                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"
-                           role="button" aria-haspopup="true" aria-expanded="false"><i
-                                class="fa fa-bell"></i></a>
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge pull-right badge-danger">${requestScope.limitedStockList.size() + requestScope.expireStockList.size() + requestScope.newQnaList.size()}</span><i class="fa fa-bell"></i></a>
                         <ul class="dropdown-menu dropdown-lg dropdown-content">
-                            <li class="drop-title">Notifications<a href="#" class="drop-title-link"><i
-                                    class="fa fa-angle-right"></i></a></li>
+                            <li class="drop-title">재고알림<a href="#" class="drop-title-link"><i class="fa fa-angle-right"></i></a></li>
                             <li class="slimscroll dropdown-notifications">
                                 <ul class="list-unstyled dropdown-oc">
-                                    <li>
-                                        <a href="#"><span class="notification-badge bg-primary"><i
-                                                class="fa fa-photo"></i></span>
-                                            <span class="notification-info">Finished uploading photos to gallery <b>"South Africa"</b>.
-                                                                <small class="notification-date">20:00</small>
-                                                            </span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><span class="notification-badge bg-primary"><i
-                                                class="fa fa-at"></i></span>
-                                            <span class="notification-info"><b>John Doe</b> mentioned you in a post "Update v1.5".
-                                                                <small class="notification-date">06:07</small>
-                                                            </span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><span class="notification-badge bg-danger"><i
-                                                class="fa fa-bolt"></i></span>
-                                            <span class="notification-info">4 new special offers from the apps you follow!
-                                                                <small class="notification-date">Yesterday</small>
-                                                            </span></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><span class="notification-badge bg-success"><i
-                                                class="fa fa-bullhorn"></i></span>
-                                            <span class="notification-info">There is a meeting with <b>Ethan</b> in 15 minutes!
-                                                                <small class="notification-date">Yesterday</small>
-                                                            </span></a>
-                                    </li>
+                                    <c:forEach var="limitStock" items="${requestScope.limitedStockList}">
+                                        <li>
+                                            <a href="productStock.ado">
+                                                <span class="notification-badge bg-danger"><i class="fa fa-bolt"></i></span>
+                                                <span class="notification-info"><b>${limitStock.pdSaleTbProductName}</b>의 재고가 부족합니다 <small class="notification-date">현재수량: ${limitStock.pdSaleTbRemainingAmount}</small></span>
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                    <c:forEach var="expireStock" items="${requestScope.expireStockList}">
+                                        <li>
+                                            <a href="productStock.ado">
+                                                <span class="notification-badge bg-danger"><i class="fa fa-calendar-times-o"></i></span>
+                                                <span class="notification-info"><b>${expireStock.pdSaleTbProductName}</b>의 유통기한이 임박했습니다 <small class="notification-date">유통기한: ${expireStock.pdSaleTbExpireDay}</small></span>
+                                            </a>
+                                        </li>
+                                    </c:forEach>
+                                    <c:forEach var="newQna" items="${requestScope.newQnaList}">
+                                        <li>
+                                            <a href="shoppingmall-qna-read.ado?qnaTbNo=${newQna.qnaTbNo}">
+                                                <span class="notification-badge bg-danger"><i class="fa fa-question"></i></span>
+                                                <span class="notification-info"><b>${newQna.qnaTbTitle}</b> / <small class="notification-date">답변이 필요합니다</small></span>
+                                            </a>
+                                        </li>
+                                    </c:forEach>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                     <li class="dropdown user-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false"><img
-                                src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="http://via.placeholder.com/36x36" alt="" class="img-circle"></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Calendar</a></li>
-                            <li><a href="#"><span class="badge pull-right badge-danger">42</span>Messages</a>
-                            </li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Account Settings</a></li>
                             <li><a href="logout.ado">Log Out</a></li>
                         </ul>
                     </li>
