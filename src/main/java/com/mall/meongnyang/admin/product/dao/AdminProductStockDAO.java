@@ -9,4 +9,6 @@ public interface AdminProductStockDAO
     public List<AdminProductSaleVO> selectProductStockList(AdminProductSaleVO adminProductSaleVO);
     public List<AdminProductSaleVO> selectExpireProductList(AdminProductSaleVO adminProductSaleVO);
     public void updateProductStock(AdminProductSaleVO adminProductSaleVO);
+    public List<AdminProductSaleVO> selectProductStockLimitedList(AdminProductSaleVO adminProductSaleVO);
+    public List<AdminProductSaleVO> selectProductExpireCommingList(AdminProductSaleVO adminProductSaleVO);
 }

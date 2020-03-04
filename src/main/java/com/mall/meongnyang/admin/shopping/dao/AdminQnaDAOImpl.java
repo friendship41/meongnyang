@@ -60,12 +60,11 @@ public class AdminQnaDAOImpl implements AdminQnaDAO {
 		
 	}
 
-	
+	@Override
+	public List<AdminQnaVO> selectNewQnalist(AdminQnaVO adminQnaVO)
+	{
+		return sqlSessionTemplate.selectList("qnaDAO.selectNewQnalist", adminQnaVO);
+	}
 
-	
-
-	
-
-	
 
 }

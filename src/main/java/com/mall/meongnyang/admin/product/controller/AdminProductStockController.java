@@ -25,7 +25,7 @@ public class AdminProductStockController
     @Autowired
     private AdminUpdateProductSaleService adminUpdateProductSaleService;
 
-    @RequestMapping(value = "productStock.ado", method = RequestMethod.GET)
+    @RequestMapping(value = "/productStock.ado", method = RequestMethod.GET)
     public String goToProductStockPage()
     {
         return "product/product-stock";
