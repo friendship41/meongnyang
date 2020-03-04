@@ -1,14 +1,13 @@
 package com.mall.meongnyang.admin.product.controller;
 
-import com.mall.meongnyang.admin.product.service.AdminSelectPopularProductListService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductOrderOverviewService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductOverviewListService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductSaleOverviewListService;
+import com.mall.meongnyang.admin.marketing.service.AdminSelectPromotionListService;
+import com.mall.meongnyang.admin.product.service.*;
 import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +25,14 @@ public class AdminSelectProductController
     private AdminSelectProductOrderOverviewService adminSelectProductOrderOverviewService;
     @Autowired
     private AdminSelectPopularProductListService adminSelectPopularProductListService;
-
+    @Autowired
+    private AdminSelectReadcountSaleListService adminSelectReadcountSaleListService;
+    @Autowired
+    private AdminSelectCancelProductRankingService adminSelectCancelProductRankingService;
+    @Autowired
+    private AdminSelectPromotionListService adminSelectPromotionListService;
+    @Autowired
+    private AdminSelectPromotionedProductSaleService adminSelectPromotionedProductSaleService;
 
 
     @RequestMapping(value = "productOverview.ado", method = RequestMethod.GET)
@@ -61,6 +67,34 @@ public class AdminSelectProductController
     public List<AdminProductVO> getPopularProductOverviewAjax(AdminProductVO adminProductVO)
     {
         return adminSelectPopularProductListService.getPopularProductList(adminProductVO);
+    }
+
+    @RequestMapping(value = "/productAnalysis.ado", method = RequestMethod.GET)
+    public String goToProductAnalysisPage(Model model)
+    {
+        model.addAttribute("promotionList", adminSelectPromotionListService.selectPromotionList());
+        return "product/product-analysis";
+    }
+
+    @RequestMapping(value = "/readcountSaleListAjax.ado", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AdminProductVO> getReadcountSaleListAjax(AdminProductVO adminProductVO)
+    {
+        return adminSelectReadcountSaleListService.getReadcountSaleList(adminProductVO);
+    }
+
+    @RequestMapping(value = "/productCancelRankingAjax.ado", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AdminProductVO> getCancelRankingAjax(AdminProductVO adminProductVO)
+    {
+        return adminSelectCancelProductRankingService.selectCancelProductRanking(adminProductVO);
+    }
+
+    @RequestMapping(value = "/productPromotionedAjax.ado", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AdminProductSaleVO> getPromotionedProductAjax(AdminProductSaleVO adminProductSaleVO)
+    {
+        return adminSelectPromotionedProductSaleService.selectPromotionedProductSale(adminProductSaleVO);
     }
 
 }

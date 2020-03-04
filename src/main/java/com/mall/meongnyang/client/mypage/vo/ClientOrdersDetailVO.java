@@ -100,5 +100,5 @@ public class ClientOrdersDetailVO {
 	public void setPdImageTbPath(String pdImageTbPath) {
 		this.pdImageTbPath = pdImageTbPath;
 	}
-	
+
 }

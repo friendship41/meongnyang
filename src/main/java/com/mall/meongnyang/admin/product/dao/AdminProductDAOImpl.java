@@ -60,4 +60,16 @@ public class AdminProductDAOImpl implements AdminProductDAO
     {
         return sqlSessionTemplate.selectList("ProductDAO.selectPopularProductList", adminProductVO);
     }
+
+    @Override
+    public List<AdminProductVO> selectReadcountSaleRateList(AdminProductVO adminProductVO)
+    {
+        return sqlSessionTemplate.selectList("ProductDAO.selectReadcountSaleRateList", adminProductVO);
+    }
+
+    @Override
+    public List<AdminProductVO> selectCancelProductRanking(AdminProductVO adminProductVO)
+    {
+        return sqlSessionTemplate.selectList("ProductDAO.selectCancelProductRanking", adminProductVO);
+    }
 }

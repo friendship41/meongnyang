@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -87,6 +86,8 @@ public class ClientKaLoginServiceImpl implements ClientKaLoginService{
 	public ClientCustomerVO getKakaoUserInfo(HashMap<String, Object> token) {
 	    
 			ClientCustomerVO clientCustomerVO = new ClientCustomerVO();
+			String nickName = "";
+			String email = "";
 			
 		    String reqURL = "https://kapi.kakao.com/v2/user/me";
 		    try {
@@ -115,9 +116,14 @@ public class ClientKaLoginServiceImpl implements ClientKaLoginService{
 		        
 		        JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 		        JsonObject kakaoAccount = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+
+		        // properties와 kakaoAccount JSON 값에 key 이름으로 nickname과 email이 있는 지 체크
+		        // 해당 코드가 없으면 카카오 사용자가 email 값이 없는 경우 key 이름 자체가 없어서 nullpointerexception 발생! 
+		        if (properties.getAsJsonObject().has("nickname"))
+		        	nickName = properties.getAsJsonObject().get("nickname").getAsString();
 		        
-		        String nickName = properties.getAsJsonObject().get("nickname").getAsString();
-		        String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
+		        if (kakaoAccount.getAsJsonObject().has("email"))
+		        	email = kakaoAccount.getAsJsonObject().get("email").getAsString();
 		        
 		        clientCustomerVO.setCustomerTbName(nickName);
 		        clientCustomerVO.setCustomerTbEmail(email);

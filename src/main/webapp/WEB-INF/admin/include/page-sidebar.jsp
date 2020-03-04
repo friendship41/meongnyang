@@ -41,7 +41,7 @@
                         <li><a href="productOverview.ado">상세현황</a></li>
                         <li><a href="productAdd.ado">상품등록</a></li>
                         <li><a href="productCategoryList.ado">카테고리</a></li>
-                        <li><a href="product/product-analysis.html">상품분석</a></li>
+                        <li><a href="productAnalysis.ado">상품분석</a></li>
                         <li><a href="productStock.ado">재고관리</a></li>
                     </ul>
                 </li>
@@ -73,8 +73,8 @@
                             class="accordion-icon fa fa-angle-left"></i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="sales/sales-overview.html">매출현황</a></li>
-                        <li><a href="sales/sales-analysis.html">매출분석</a></li>
+                        <li><a href="salesOverview.ado">매출현황</a></li>
+                        <li><a href="salesAnalysis.ado">매출분석</a></li>
                     </ul>
                 </li>
             </ul>

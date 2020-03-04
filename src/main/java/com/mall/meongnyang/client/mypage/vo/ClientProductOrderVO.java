@@ -13,7 +13,7 @@ public class ClientProductOrderVO {
     private String pdOrderTbReceiver;
     private Date pdOrderTbPaymentDate;
     private String pdOrderTbPhone;
-    private int pdOrderTbDelivertyFee;
+    private int pdOrderTbDeliveryFee;
     private int pdOrderTbUsedPoint;
     
     private int startRow;    
@@ -24,7 +24,74 @@ public class ClientProductOrderVO {
     private String customerTbName;
     private Date dayFrom;
 	private Date dayTo;
+	
+    private Date startDate;
+    private Date endDate;
     
+    private String pdOrderTbPaymentDateStr;
+    private int pdOrderTbPaymentSum;
+    private int pdSaleTbReceivedPrice;
+    
+    private String productCategoryTbParent;
+    private String productCategoryTbSub;
+    private int ordersDetailTbPriceSum;
+    private int ordersDetailTbAmount;
+    private String pdSaleTbSalesPriceRange;
+    
+	public String getPdSaleTbSalesPriceRange() {
+		return pdSaleTbSalesPriceRange;
+	}
+	public void setPdSaleTbSalesPriceRange(String pdSaleTbSalesPriceRange) {
+		this.pdSaleTbSalesPriceRange = pdSaleTbSalesPriceRange;
+	}
+	public int getOrdersDetailTbAmount() {
+		return ordersDetailTbAmount;
+	}
+	public void setOrdersDetailTbAmount(int ordersDetailTbAmount) {
+		this.ordersDetailTbAmount = ordersDetailTbAmount;
+	}
+	public String getProductCategoryTbParent() {
+		return productCategoryTbParent;
+	}
+	public void setProductCategoryTbParent(String productCategoryTbParent) {
+		this.productCategoryTbParent = productCategoryTbParent;
+	}
+	public int getOrdersDetailTbPriceSum() {
+		return ordersDetailTbPriceSum;
+	}
+	public void setOrdersDetailTbPriceSum(int ordersDetailTbPriceSum) {
+		this.ordersDetailTbPriceSum = ordersDetailTbPriceSum;
+	}
+	public String getProductCategoryTbSub() {
+		return productCategoryTbSub;
+	}
+	public void setProductCategoryTbSub(String productCategoryTbSub) {
+		this.productCategoryTbSub = productCategoryTbSub;
+	}
+	public Date getStartDate() {
+		return startDate;
+	}
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	public Date getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	public String getPdOrderTbPaymentDateStr() {
+		return pdOrderTbPaymentDateStr;
+	}
+	public void setPdOrderTbPaymentDateStr(String pdOrderTbPaymentDateStr) {
+		this.pdOrderTbPaymentDateStr = pdOrderTbPaymentDateStr;
+	}
+	public int getPdOrderTbPaymentSum() {
+		return pdOrderTbPaymentSum;
+	}
+	public void setPdOrderTbPaymentSum(int pdOrderTbPaymentSum) {
+		this.pdOrderTbPaymentSum = pdOrderTbPaymentSum;
+	}
 	public String getPdOrderTbNo() {
 		return pdOrderTbNo;
 	}
@@ -85,11 +152,11 @@ public class ClientProductOrderVO {
 	public void setPdOrderTbPhone(String pdOrderTbPhone) {
 		this.pdOrderTbPhone = pdOrderTbPhone;
 	}
-	public int getPdOrderTbDelivertyFee() {
-		return pdOrderTbDelivertyFee;
+	public int getPdOrderTbDeliveryFee() {
+		return pdOrderTbDeliveryFee;
 	}
-	public void setPdOrderTbDelivertyFee(int pdOrderTbDelivertyFee) {
-		this.pdOrderTbDelivertyFee = pdOrderTbDelivertyFee;
+	public void setPdOrderTbDeliveryFee(int pdOrderTbDelivertyFee) {
+		this.pdOrderTbDeliveryFee = pdOrderTbDelivertyFee;
 	}
 	public int getPdOrderTbUsedPoint() {
 		return pdOrderTbUsedPoint;
@@ -153,6 +220,12 @@ public class ClientProductOrderVO {
 		this.dayTo = dayTo;
 	}
 
+	public int getPdSaleTbReceivedPrice() {
+		return pdSaleTbReceivedPrice;
+	}
+	public void setPdSaleTbReceivedPrice(int pdSaleTbReceivedPrice) {
+		this.pdSaleTbReceivedPrice = pdSaleTbReceivedPrice;
+	}
 	@Override
 	public String toString()
 	{
@@ -167,7 +240,7 @@ public class ClientProductOrderVO {
 				", pdOrderTbReceiver='" + pdOrderTbReceiver + '\'' +
 				", pdOrderTbPaymentDate=" + pdOrderTbPaymentDate +
 				", pdOrderTbPhone='" + pdOrderTbPhone + '\'' +
-				", pdOrderTbDelivertyFee=" + pdOrderTbDelivertyFee +
+				", pdOrderTbDelivertyFee=" + pdOrderTbDeliveryFee +
 				", pdOrderTbUsedPoint=" + pdOrderTbUsedPoint +
 				", startRow=" + startRow +
 				", endRow=" + endRow +
