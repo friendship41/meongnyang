@@ -45,7 +45,7 @@
 						</form>
 					</div>
 					<div class="col-sm-6 col-md-3 background-image">
-						<img src="/resources/admin/images/adminLoginPage.png" width="1000">
+						<img src="/resources/admin/images/black.png" style="width: 1035px; height: 615px;">
 					</div>
 				</div>
 			</div>
