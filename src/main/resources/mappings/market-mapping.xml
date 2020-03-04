@@ -88,4 +88,24 @@
 		market_tb_no = #{marketTbNo}
 	</delete>
 
+	<select id="selectRecentMarketList" parameterType="market" resultType="market">
+<![CDATA[
+		SELECT
+			A.*
+		FROM(
+			SELECT
+				MARKET_TB_NO,
+				CUSTOMER_TB_NO,
+				MARKET_TB_TITLE,
+				MARKET_TB_CONTENT,
+				MARKET_TB_REG_DATE,
+				MARKET_TB_READ_COUNT,
+				MARKET_TB_SELL_OR_BUY,
+				MARKET_TB_IMG_PATH
+			FROM MARKET
+			ORDER BY MARKET_TB_REG_DATE DESC) A
+		WHERE ROWNUM <= 3
+]]>
+	</select>
+
 </mapper>
