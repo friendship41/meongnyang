@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoService;
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPasswordService;
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPhoneService;
+import com.mall.meongnyang.client.mypage.service.ClientUpdateTermsAgreeListService;
 
 @Controller
 public class ClientMyinfoController {
@@ -27,7 +29,8 @@ public class ClientMyinfoController {
 	@Autowired
 	private ClientDeleteMyinfoService clientDeleteMyinfoCustomerService;
 
-	
+	@Autowired
+	private ClientUpdateTermsAgreeListService clientUpdateTermsAgreeListService;
 	
 	
 	
@@ -110,6 +113,23 @@ public class ClientMyinfoController {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/myinfo-select-agree")
+	public String selectTermsAgree() {
+		
+		return "";
+	}
+	
+	@RequestMapping(value = "/myinfo-update-termsAgree.do", method = RequestMethod.POST)
+	public String updateTermsAgree(ClientTermsAgreeVO clientTermsAgreeVO, HttpSession session, ClientCustomerVO clientCustomerVO) {
+		
+		ClientCustomerVO tempVO = (ClientCustomerVO)session.getAttribute("customer");
+		int no = tempVO.getCustomerTbNo();
+		clientTermsAgreeVO.setCustomerTbNo(no);
+		clientUpdateTermsAgreeListService.updateTermsAgreeList(clientTermsAgreeVO);
+		return "mypage/myinfo";
+	}
+	
 	
 	
 	

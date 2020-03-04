@@ -106,6 +106,21 @@
                         </div>
                         </form>	    
                     </div>
+                   	<!-- 
+                   	
+                   	select
+                   	
+                   	 -->
+                   	<form action="/myinfo-update-termsAgree.do" method="post">
+                   	<div class="ht__comment__form">
+                   		<h4 class="title__line--5">광고성 정보제공동의  이메일수신동의</h4>
+                   	<input type="radio" name="termsAgreeTbConsentStatus" value="Y" style="width:20px; height:20px; border:1px;">동의&nbsp;&nbsp;&nbsp;
+                   	<input type="radio" name="termsAgreeTbConsentStatus" value="N" style="width:20px; height:20px; border:1px;">비동의
+                   		<div class="ht__comment__btn--2 mt--30">
+                            <button type="submit"  class="fr__btn">수정</button>
+                        </div>	
+                   	</div>
+                   	</form>
                     <form action="/myinfo-delete-customer.do" method="POST">
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">회원 탈퇴</h4>
