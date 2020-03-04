@@ -16,8 +16,13 @@ public class ClientCustomerVO {
 	private String customerTbJoinPath;
 	private String customerTbState;
 	
-	
-	
+	public ClientCustomerVO() {
+		this.customerTbName = "";
+		this.customerTbPassword = "";
+		this.customerTbEmail = "";
+		this.customerTbPhone = "";
+  }
+  
 	public String getCustomerTbState() {
 		return customerTbState;
 	}
@@ -90,7 +95,7 @@ public class ClientCustomerVO {
 	public void setCustomerTbJoinPath(String customerTbJoinPath) {
 		this.customerTbJoinPath = customerTbJoinPath;
 	}
-
+  
 	@Override
 	public String toString()
 	{

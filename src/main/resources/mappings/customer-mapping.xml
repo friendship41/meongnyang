@@ -27,6 +27,12 @@
 		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbPassword},
 		#{customerTbEmail}, sysdate)
 	</insert>
+	
+	<insert id="insertKakao" parameterType="clientLogin" >
+		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail})
+	</insert>
+	
 
 	<update id="updateClientLastLogin" parameterType="clientLogin">
 		UPDATE customer
@@ -50,10 +56,12 @@
 		WHERE customer_tb_no = #{customerTbNo}
 	</update>
 
-	<delete id="deleteMyinfoCustomer" parameterType="clientLogin">
-		DELETE FROM customer
+	<update id="deleteMyinfoCustomer" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_state = #{customerTbState}
 		WHERE customer_tb_password = #{customerTbPassword}
-	</delete>
+	</update>
 	
 	<update id="updatePointUse" parameterType="orderProc">
 		UPDATE CUSTOMER
