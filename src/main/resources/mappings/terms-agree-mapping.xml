@@ -5,11 +5,22 @@
 <mapper namespace="termsAgreeDAO">
 
 	
-	<select id="selectTermsAgreeList" parameterType="termsAgree">
-	
+	<select id="selectTermsAgree" parameterType="termsAgree" resultType="termsAgree">
+		SELECT
+			terms_agree_tb_no,
+			terms_tb_no,
+			customer_tb_no,
+			terms_agree_tb_consent_status,
+			
+			terms_agree_tb_consent_date,
+			terms_agree_tb_change_date
+		FROM
+			terms_agree
+		WHERE
+			terms_tb_no = #{termsTbNo} and customer_tb_no = #{customerTbNo}
 	</select>
 	
-	<update id="updateTermsAgreeList" parameterType="termsAgree">
+	<update id="updateTermsAgree" parameterType="termsAgree">
 		UPDATE terms_agree
 		SET
 			terms_agree_tb_consent_status = #{termsAgreeTbConsentStatus}

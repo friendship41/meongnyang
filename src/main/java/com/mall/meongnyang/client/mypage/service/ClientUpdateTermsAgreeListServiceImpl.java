@@ -12,10 +12,12 @@ public class ClientUpdateTermsAgreeListServiceImpl implements ClientUpdateTermsA
 	@Autowired
 	private ClientTermsAgreeDAO clientTermsAgreeDAO;
 	
-	@Override
-	public void updateTermsAgreeList(ClientTermsAgreeVO clientTermsAgreeVO) {
-		clientTermsAgreeDAO.updateTermsAgree(clientTermsAgreeVO);
+	
 
+	@Override
+	public void updateTermsAgree(ClientTermsAgreeVO clientTermsAgreeVO) {
+		clientTermsAgreeDAO.updateTermsAgree(clientTermsAgreeVO);
+		
 	}
 
 }

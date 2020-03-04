@@ -6,16 +6,19 @@ import org.springframework.stereotype.Service;
 import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import com.mall.meongnyang.client.mypage.dao.ClientTermsAgreeDAO;
 
-@Service("ClientselectErmsAgreeListService")
+@Service("ClientselectTermsAgreeListService")
 public class ClientSelectTermsAgreeListServiceImpl implements ClientSelectTermsAgreeListService {
 
 	@Autowired
 	private ClientTermsAgreeDAO clientTermsAgreeDAO;
-	
+
 	@Override
-	public ClientTermsAgreeVO selectTermsAgreeList(ClientTermsAgreeVO clientTermsAgreeVO) {
+	public ClientTermsAgreeVO selectTermsAgree(ClientTermsAgreeVO clientTermsAgreeVO) {
+		ClientTermsAgreeVO tempVO = clientTermsAgreeDAO.selectTermsAgree(clientTermsAgreeVO);
 		
-		return clientTermsAgreeDAO.selectTermsAgree(clientTermsAgreeVO);
+		return tempVO;
 	}
+	
+	
 
 }

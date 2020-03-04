@@ -14,13 +14,15 @@ public class ClientTermsAgreeDAOImpl implements ClientTermsAgreeDAO {
 	
 	@Override
 	public ClientTermsAgreeVO selectTermsAgree(ClientTermsAgreeVO clientTermsAgreeVO) {
-		sqlSessionTemplate.selectList("termsAgreeDAO.selectTermsAgreeList", clientTermsAgreeVO);
-		return null;
+		ClientTermsAgreeVO tempVO = sqlSessionTemplate.selectOne("termsAgreeDAO.selectTermsAgree", clientTermsAgreeVO);
+		
+		return tempVO;
+		
 	}
 
 	@Override
 	public void updateTermsAgree(ClientTermsAgreeVO clientTermsAgreeVO) {
-		sqlSessionTemplate.update("termsAgreeDAO.updateTermsAgreeList", clientTermsAgreeVO);
+		sqlSessionTemplate.update("termsAgreeDAO.updateTermsAgree", clientTermsAgreeVO);
 
 	}
 

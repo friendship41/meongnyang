@@ -35,6 +35,8 @@ public class ClientMyinfoController {
 	
 	
 	
+	
+	
 
 	@RequestMapping(value = "/myinfo-update-phone.do", method = RequestMethod.POST)
 	public String updateMyinfoPhoneProc(ClientCustomerVO clientCustomerVO, HttpSession session) {
@@ -114,11 +116,7 @@ public class ClientMyinfoController {
 		
 	}
 	
-	@RequestMapping(value = "/myinfo-select-agree")
-	public String selectTermsAgree() {
-		
-		return "";
-	}
+	
 	
 	@RequestMapping(value = "/myinfo-update-termsAgree.do", method = RequestMethod.POST)
 	public String updateTermsAgree(ClientTermsAgreeVO clientTermsAgreeVO, HttpSession session, ClientCustomerVO clientCustomerVO) {
@@ -126,8 +124,8 @@ public class ClientMyinfoController {
 		ClientCustomerVO tempVO = (ClientCustomerVO)session.getAttribute("customer");
 		int no = tempVO.getCustomerTbNo();
 		clientTermsAgreeVO.setCustomerTbNo(no);
-		clientUpdateTermsAgreeListService.updateTermsAgreeList(clientTermsAgreeVO);
-		return "mypage/myinfo";
+		clientUpdateTermsAgreeListService.updateTermsAgree(clientTermsAgreeVO);
+		return "redirect:myinfo.do";
 	}
 	
 	
