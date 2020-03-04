@@ -25,7 +25,8 @@ public class ClientCheckoutController
 
         if(clientCustomerVO.getCustomerTbPhone() == null || clientCustomerVO.getCustomerTbPhone().equals(""))
         {
-            return "redirect:/myinfo.do";
+            model.addAttribute("message", "전화번호를 입력해 주세요");
+            return "mypage/message-and-go-myinfo";
         }
 
         ClientCmAddressVO clientCmAddressVO = new ClientCmAddressVO();
