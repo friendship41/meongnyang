@@ -296,5 +296,38 @@
         ON H.PRODUCT_CATEGORY_TB_NO = I.PRODUCT_CATEGORY_TB_NO
 ]]>
     </select>
+    
+    <select id="selectCancelProductRanking" parameterType="product" resultType="product">
+        SELECT
+            ROWNUM RNUM,
+            C.*
+        FROM(
+            SELECT
+                B.*,
+                PDT.PRODUCT_CATEGORY_TB_NO,
+                PDT.PRODUCT_TB_NAME,
+                PC.PRODUCT_CATEGORY_TB_PARENT,
+                PC.PRODUCT_CATEGORY_TB_MEDIAN,
+                PC.PRODUCT_CATEGORY_TB_SUB
+            FROM(
+                SELECT
+                    A.PRODUCT_TB_CODE,
+                    COUNT(*) "CANCEL_CNT"
+                FROM(
+                    SELECT
+                        PO.PD_ORDER_TB_NO,
+                        OD.PD_SALE_TB_NO,
+                        PS.PRODUCT_TB_CODE
+                    FROM PD_ORDER PO JOIN ORDERS_DETAIL OD
+                    ON PO.PD_ORDER_TB_NO = OD.PD_ORDER_TB_NO
+                    JOIN PD_SALE PS
+                    ON OD.PD_SALE_TB_NO = PS.PD_SALE_TB_NO
+                    WHERE PO.PD_ORDER_TB_STATE = 'C' AND PO.PD_ORDER_TB_ORDER_DATE BETWEEN #{dayFrom} AND #{dayTo}) A
+                GROUP BY PRODUCT_TB_CODE) B JOIN PRODUCT PDT
+            ON B.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+            JOIN PRODUCT_CATEGORY PC
+            ON PDT.PRODUCT_CATEGORY_TB_NO = PC.PRODUCT_CATEGORY_TB_NO
+            ORDER BY CANCEL_CNT DESC) C
+    </select>
 
 </mapper>

@@ -108,23 +108,23 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2020">
+                                                    <input id="cancelRankingDayFrom" type="text" class="date-picker text-center form-control" placeholder="01/01/2020">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="text-center center-block">~</label>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom:14px;">
+                                                    <input id="cancelRankingDayTo" type="text" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span onclick="getCancelRankingTable()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table id="refundProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="cancelRankingTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>순위</th>
@@ -143,27 +143,13 @@
                                             <th>반품/환불 수</th>
                                         </tr>
                                         </tfoot>
-                                        <tbody>
+                                        <tbody id="cancelRankingTableBody">
                                         <tr>
-                                            <td>1</td>
-                                            <td>000001</td>
-                                            <td>강아지-사료</td>
-                                            <td>개 사료1</td>
-                                            <td>1000000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>000002</td>
-                                            <td>고양이-사료</td>
-                                            <td>고양이 사료1</td>
-                                            <td>800000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>000003</td>
-                                            <td>강아지-옷1</td>
-                                            <td>스웨터1</td>
-                                            <td>10000</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -275,6 +261,13 @@
         getDataFromServerAjax(url, 'readcountSaleTable');
     }
 
+    function getCancelRankingTable() {
+        var dayFrom = $("#cancelRankingDayFrom").val();
+        var dayTo = $("#cancelRankingDayTo").val();
+        var url = "/productCancelRankingAjax.ado?dayFrom="+dayFrom+"&dayTo="+dayTo;
+        getDataFromServerAjax(url, 'cancelRankingTable');
+    }
+
 
     function getDataFromServerAjax(urlTo, toWhere) {
         $.ajax({
@@ -294,6 +287,10 @@
                     if(toWhere === 'readcountSaleTable')
                     {
                         settingReadcountSaleTable(json);
+                    }
+                    else if(toWhere === 'cancelRankingTable')
+                    {
+                        settingCancelRankingTable(json);
                     }
                 }
             })
@@ -326,12 +323,38 @@
     }
 
 
+    function settingCancelRankingTable(json) {
+        var cancelRankingHTML = "";
+
+        for(var i=0; i<json.length; i++)
+        {
+            var cancelRankingSingle = json[i];
+
+            cancelRankingHTML += '<tr>';
+            cancelRankingHTML += '<td>'+cancelRankingSingle.rnum+'</td>';
+            cancelRankingHTML += '<td>'+cancelRankingSingle.productTbCode+'</td>';
+            cancelRankingHTML += '<td>'+cancelRankingSingle.productCategoryTbParent+'-'+cancelRankingSingle.productCategoryTbMedian+'-'+cancelRankingSingle.productCategoryTbSub+'</td>';
+            cancelRankingHTML += '<td>'+cancelRankingSingle.productTbName+'</td>';
+            cancelRankingHTML += '<td>'+cancelRankingSingle.cancelCnt+'</td>';
+            cancelRankingHTML += '</tr>';
+
+        }
+        $("#cancelRankingTable").DataTable().clear().destroy();
+        $("#cancelRankingTableBody").empty();
+        $("#cancelRankingTableBody").append(cancelRankingHTML);
+        $("#cancelRankingTable").DataTable();
+    }
+
 
 
     $(document).ready(function () {
         $("#readcountSaleDayFrom").attr("value", getMonthAgoDate(6).yyyymmdd());
         $("#readcountSaleDayTo").attr("value", new Date().yyyymmdd());
         getReadcountSaleTable();
+
+        $("#cancelRankingDayFrom").attr("value", getMonthAgoDate(6).yyyymmdd());
+        $("#cancelRankingDayTo").attr("value", new Date().yyyymmdd());
+        getCancelRankingTable();
     })
 
 </script>

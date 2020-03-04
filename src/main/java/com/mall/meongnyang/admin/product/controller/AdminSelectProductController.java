@@ -25,7 +25,8 @@ public class AdminSelectProductController
     private AdminSelectPopularProductListService adminSelectPopularProductListService;
     @Autowired
     private AdminSelectReadcountSaleListService adminSelectReadcountSaleListService;
-
+    @Autowired
+    private AdminSelectCancelProductRankingService adminSelectCancelProductRankingService;
 
 
     @RequestMapping(value = "productOverview.ado", method = RequestMethod.GET)
@@ -73,6 +74,13 @@ public class AdminSelectProductController
     public List<AdminProductVO> getReadcountSaleListAjax(AdminProductVO adminProductVO)
     {
         return adminSelectReadcountSaleListService.getReadcountSaleList(adminProductVO);
+    }
+
+    @RequestMapping(value = "/productCancelRankingAjax.ado", method = RequestMethod.GET)
+    @ResponseBody
+    public List<AdminProductVO> getCancelRankingAjax(AdminProductVO adminProductVO)
+    {
+        return adminSelectCancelProductRankingService.selectCancelProductRanking(adminProductVO);
     }
 
 }

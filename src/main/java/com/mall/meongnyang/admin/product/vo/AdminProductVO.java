@@ -51,6 +51,8 @@ public class AdminProductVO
     private int pdSaleTbReadCount;
     private int odCnt;
 
+    private int cancelCnt;
+
 
 
 
@@ -417,6 +419,16 @@ public class AdminProductVO
         this.odCnt = odCnt;
     }
 
+    public int getCancelCnt()
+    {
+        return cancelCnt;
+    }
+
+    public void setCancelCnt(int cancelCnt)
+    {
+        this.cancelCnt = cancelCnt;
+    }
+
     @Override
     public String toString()
     {
@@ -456,6 +468,7 @@ public class AdminProductVO
                 ", rnum=" + rnum +
                 ", pdSaleTbReadCount=" + pdSaleTbReadCount +
                 ", odCnt=" + odCnt +
+                ", cancelCnt=" + cancelCnt +
                 ", uploadFile=" + uploadFile +
                 '}';
     }

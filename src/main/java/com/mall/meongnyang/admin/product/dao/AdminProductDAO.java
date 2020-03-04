@@ -15,4 +15,5 @@ public interface AdminProductDAO
     public void updateProductBannerState(AdminProductVO adminProductVO);
     public List<AdminProductVO> selectPopularProductList(AdminProductVO adminProductVO);
     public List<AdminProductVO> selectReadcountSaleRateList(AdminProductVO adminProductVO);
+    public List<AdminProductVO> selectCancelProductRanking(AdminProductVO adminProductVO);
 }
