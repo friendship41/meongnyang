@@ -48,7 +48,7 @@ public class ClientRegistryController {
 
 		// Mail 蹂대궡湲�
 		MailVO mailVO = new MailVO();
-		mailVO.setFrom("admin@naver.com"); // 愿�由ъ옄�븘�씠�뵒
+		mailVO.setFrom("dlsdyd1245@naver.com"); // 愿�由ъ옄�븘�씠�뵒
 		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // �쉶�썝媛��엯 �븘�씠�뵒
 		mailVO.setSubject("오늘 뭐멍냥 회원가입 인증메일입니다.");
 		mailVO.setContent("<h1>클릭해주세요</h1>"

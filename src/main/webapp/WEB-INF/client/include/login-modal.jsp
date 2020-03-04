@@ -6,12 +6,12 @@
 <c:choose>
 <c:when test="${loginCheckSubmit eq false}">
 <script type="text/javascript"> 
-   alert("로그인 실패 하셨습니다.")
+   alert("로그인 실패 하셨습니다.");
 </script>
 </c:when>
 <c:when test="${mailSubmit eq false}">
 <script type="text/javascript"> 
-   alert("인증 메일이 발송되었습니다.")
+   alert("인증 메일이 발송되었습니다.");
    
 </script>
 </c:when>
@@ -107,7 +107,7 @@
 		var pw2 = document.getElementById('password2').value;
 		if(pw1 != pw2) {
 			alert("비밀번호가 일치하지 않습니다.");
-		}
+		} 
 		
 		var check = document.getElementById('agreeCheckNecessary').value;
 		if(check != 'Y'){
@@ -128,7 +128,7 @@
 		}
 	}
 	
-	var registryCheck;
+	
 	function checkEmail() {
 		var inputed = $("#customerTbEmail").val();
 		console.log(inputed);
@@ -140,14 +140,15 @@
 			success : function(data) {
 				if(data=='1') {
 					
+					console.log(data);
+					alert('중복된아이디가 있습니다.');
 					$("#CreateAccount").prop("disabled", true);
 					$("#customerTbEmail").attr("style", "background-color: red");
-					alert('중복된아이디가 있습니다.');
-					registryCheck = 0;
-					if(registryCheck == 0) {
-						$("#CreateAccount").prop("disabled", false);
-					}
-				} 
+					
+				} else {
+					$("#customerTbEmail").attr("style", "background-color: white");
+					$("#CreateAccount").prop("disabled", false);
+				}
 			}
 			});
 	}
@@ -160,7 +161,7 @@
        window.name = "login-modal";        
        window.open("termsCheck2.do", "terms",
                "width = 800, height = 500, resizable = no, scrollbars = no, status = no");
-	} 
+	}
     
 		
 	
