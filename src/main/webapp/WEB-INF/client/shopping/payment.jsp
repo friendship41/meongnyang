@@ -38,7 +38,7 @@
                 <input type="hidden" name="">
             </form>
             <div class="col-lg-6 col-md-12 col-sm-12">
-                <span onclick="kakaoPayGo()"><img src="/resources/client/images/payment_icon_yellow_large.png" alt="카카오페이 결제"></span>
+                <span onclick="kakaoPayGo()" style="cursor: pointer"><img src="/resources/client/images/payment_icon_yellow_large.png" alt="카카오페이 결제"></span>
             </div>
         </div>
     </div>
