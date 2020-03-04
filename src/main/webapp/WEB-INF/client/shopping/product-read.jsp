@@ -107,7 +107,7 @@
                             <div class="sin__desc product__share__link">
                                 <p><span>공유하기</span></p>
                                 <ul class="pro__share">
-                                    <li><a href="#" target="_blank"><i class="icon-social-instagram icons"></i></a></li>
+                                    <li><a id="kakao-link-btn" href="javascript:;"><img src="/resources/client/images/kakaolink_btn_small.png" height="36px"></a></li>
                                     <li><a href="javascript:shareKakaoStory()"><img src="/resources/client/images/kakaostory_icon.png" height="36px"/></a></li>
                                 </ul>
                             </div>
@@ -352,6 +352,7 @@
             var discount = optionMap.get(opNo)[1];
             setPrice(nP,discount);
         })
+        kakaoLink();
     });
 
     function getOptionMap() {
@@ -464,6 +465,44 @@
         Kakao.Story.share({
             url: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
             text: '상품명 : ${detail.productTbName}, 오늘뭐멍냥의 상품!'
+        });
+    }
+    
+    function kakaoLink() {
+        Kakao.Link.createDefaultButton({
+            container: '#kakao-link-btn',
+            objectType: 'commerce',
+            content: {
+                title: '${detail.productTbName}',
+                imageUrl: 'http://localhost:8080${imageList.get(0).pdImageTbPath}',
+                link: {
+                    mobileWebUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+                    webUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}'
+                }
+            },
+            commerce: {
+                regularPrice: ${saleList.get(0).pdSaleTbSalesPrice},
+                <c:if test="${saleList.get(0).pdSaleTbDiscountRate ne 0}">
+                    discountPrice: ${saleList.get(0).pdSaleTbSalesPrice*(100-saleList.get(0).pdSaleTbDiscountRate)/100},
+                    discountRate: ${saleList.get(0).pdSaleTbDiscountRate}
+                </c:if>
+            },
+            buttons: [
+                {
+                    title: '구매하기',
+                    link: {
+                        mobileWebUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+                        webUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}'
+                    }
+                },
+                {
+                    title: '공유하기',
+                    link: {
+                        mobileWebUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+                        webUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}'
+                    }
+                }
+            ]
         });
     }
 </script>
