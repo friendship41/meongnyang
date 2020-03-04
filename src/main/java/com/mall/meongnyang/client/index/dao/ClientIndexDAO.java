@@ -8,4 +8,5 @@ public interface ClientIndexDAO
 {
     public List<AdminProductVO> selectBannerImgList(AdminProductVO adminProductVO);
     public List<AdminProductVO> selectNewArrivalList(AdminProductVO adminProductVO);
+    public List<AdminProductVO> selectBestSellerList(AdminProductVO adminProductVO);
 }

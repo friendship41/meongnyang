@@ -24,4 +24,10 @@ public class ClientIndexDAOImpl implements ClientIndexDAO
     {
         return sqlSessionTemplate.selectList("ProductDAO.selectNewArrivalList", adminProductVO);
     }
+
+    @Override
+    public List<AdminProductVO> selectBestSellerList(AdminProductVO adminProductVO)
+    {
+        return sqlSessionTemplate.selectList("ProductDAO.selectBestSellerList", adminProductVO);
+    }
 }

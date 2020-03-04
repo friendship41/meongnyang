@@ -372,5 +372,51 @@
         ON F.PD_SALE_TB_NO = G.PD_SALE_TB_NO
 ]]>
     </select>
+    
+    <select id="selectBestSellerList" parameterType="product" resultType="product">
+<![CDATA[
+        SELECT
+            F.*
+        FROM(
+            SELECT
+                B.*,
+                PDT.PRODUCT_TB_NAME,
+                C.PD_IMAGE_TB_PATH,
+                D.PD_SALE_TB_NO,
+                E.PD_SALE_TB_SALES_PRICE,
+                E.PD_SALE_TB_DISCOUNT_RATE,
+                E.PD_SALE_TB_SIZE
+            FROM(
+                SELECT
+                    PS.PRODUCT_TB_CODE,
+                    SUM(A.ORDER_CNT) "ORDER_CNT"
+                FROM(
+                    SELECT
+                        PD_SALE_TB_NO,
+                        COUNT(*) "ORDER_CNT"
+                    FROM ORDERS_DETAIL OD JOIN PD_ORDER PO
+                    ON OD.PD_ORDER_TB_NO = PO.PD_ORDER_TB_NO
+                    WHERE PO.PD_ORDER_TB_STATE IN ('P', 'D', 'A')
+                    GROUP BY PD_SALE_TB_NO) A JOIN PD_SALE PS
+                ON A.PD_SALE_TB_NO = PS.PD_SALE_TB_NO
+                GROUP BY PS.PRODUCT_TB_CODE) B JOIN PRODUCT PDT
+            ON B.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+            JOIN (SELECT * FROM PD_IMAGE WHERE PD_IMAGE_TB_REPRESENTATIVE = 'Y') C
+            ON PDT.PRODUCT_TB_CODE = C.PRODUCT_TB_CODE
+            JOIN (
+                SELECT
+                    PRODUCT_TB_CODE,
+                    MIN(PD_SALE_TB_NO) "PD_SALE_TB_NO"
+                FROM PD_SALE
+                WHERE PD_SALE_TB_STATE = 'Y'
+                GROUP BY PRODUCT_TB_CODE
+            ) D
+            ON B.PRODUCT_TB_CODE = D.PRODUCT_TB_CODE
+            JOIN PD_SALE E
+            ON D.PD_SALE_TB_NO = E.PD_SALE_TB_NO
+            ORDER BY B.ORDER_CNT DESC) F
+        WHERE ROWNUM <= 8
+]]>
+    </select>
 
 </mapper>
