@@ -42,122 +42,51 @@
             <div class="col-xs-12">
                 <div class="section__title--2 text-center">
                     <h2 class="title__line">New Arrivals</h2>
-                    <p>But I must explain to you how all this mistaken idea</p>
+                    <p>신제품들 입니다</p>
                 </div>
             </div>
         </div>
         <div class="htc__product__container">
             <div class="row">
                 <div class="product__list clearfix mt--30">
-                    <!-- Start Single Category -->
-                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-                        <div class="category">
-                            <div class="ht__cat__thumb">
-                                <a href="product-details.html">
-                                    <img src="../../resources/client/images/product/1.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="fr__hover__info">
-                                <ul class="product__action">
-                                    <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                    <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-
-                                </ul>
-                            </div>
-                            <div class="fr__product__inner">
-                                <h4><a href="product-details.html">Largest Water Pot</a></h4>
-                                <ul class="fr__pro__prize">
-                                    <li class="old__prize">$30.3</li>
-                                    <li>$25.9</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                    <!-- Start Single Category -->
-                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-                        <div class="category">
-                            <div class="ht__cat__thumb">
-                                <a href="product-details.html">
-                                    <img src="../../resources/client/images/product/2.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="fr__hover__info">
-                                <ul class="product__action">
-                                    <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                    <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-
-                                </ul>
-                            </div>
-                            <div class="fr__product__inner">
-                                <h4><a href="product-details.html">nemo enim ipsam</a></h4>
-                                <ul class="fr__pro__prize">
-                                    <li class="old__prize">$30.3</li>
-                                    <li>$25.9</li>
-                                </ul>
+                    <c:forEach var="newArrival" items="${newArrivalsList}">
+                        <input type="hidden" id="psNo-${newArrival.productTbCode}" value="${newArrival.pdSaleTbNo}">
+                        <!-- Start Single Category -->
+                        <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
+                            <div class="category">
+                                <div class="ht__cat__thumb">
+                                    <a href="shoppingDetail.do?productTbCode=${newArrival.productTbCode}">
+                                        <img src="${newArrival.pdImageTbPath}" id="productImg-${newArrival.productTbCode}" alt="product images" width="290px" height="385px">
+                                    </a>
+                                </div>
+                                <div class="fr__hover__info">
+                                    <ul class="product__action">
+                                        <c:if test="${sessionScope.customer ne null}">
+                                            <li><a href="wishlistInsert.do?pdSaleTbSize=${newArrival.pdSaleTbSize}&productTbCode=${newArrival.productTbCode}&pdImageTbPath=${newArrival.pdImageTbPath}"><i class="icon-heart icons"></i></a></li>
+                                        </c:if>
+                                        <c:if test="${sessionScope.customer eq null}">
+                                            <li><a href="void(0);" onclick="alert('로그인한 회원만 이용할 수 있습니다.');return false;"><i class="icon-heart icons"></i></a></li>
+                                        </c:if>
+                                        <li><a onclick="addCart('${newArrival.productTbCode}', '${newArrival.pdSaleTbSize}')" style="cursor: pointer"><i class="icon-handbag icons"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="fr__product__inner">
+                                    <h4><a href="shoppingDetail.do?productTbCode=${newArrival.productTbCode}" id="productName-${newArrival.productTbCode}">${newArrival.productTbName}</a></h4>
+                                    <ul class="fr__pro__prize">
+                                        <c:if test="${newArrival.pdSaleTbDiscountRate eq 0}">
+                                            <li id="nowPrice-${newArrival.productTbCode}">${newArrival.pdSaleTbSalesPrice}원</li>
+                                            <li id="nowDiscount-${newArrival.productTbCode}"></li>
+                                        </c:if>
+                                        <c:if test="${newArrival.pdSaleTbDiscountRate ne 0}">
+                                            <li class="old__prize" id="nowPrice-${newArrival.productTbCode}">${newArrival.pdSaleTbSalesPrice}원</li>
+                                            <li id="nowDiscount-${newArrival.productTbCode}">${newArrival.pdSaleTbDiscountRate}원</li>
+                                        </c:if>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- End Single Category -->
-                    <!-- Start Single Category -->
-                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-                        <div class="category">
-                            <div class="ht__cat__thumb">
-                                <a href="product-details.html">
-                                    <img src="../../resources/client/images/product/3.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="fr__hover__info">
-                                <ul class="product__action">
-                                    <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                    <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-
-                                </ul>
-                            </div>
-                            <div class="fr__product__inner">
-                                <h4><a href="product-details.html">Chair collection</a></h4>
-                                <ul class="fr__pro__prize">
-                                    <li class="old__prize">$30.3</li>
-                                    <li>$25.9</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Category -->
-                    <!-- Start Single Category -->
-                    <div class="col-md-4 col-lg-3 col-sm-4 col-xs-12">
-                        <div class="category">
-                            <div class="ht__cat__thumb">
-                                <a href="product-details.html">
-                                    <img src="../../resources/client/images/product/4.jpg" alt="product images">
-                                </a>
-                            </div>
-                            <div class="fr__hover__info">
-                                <ul class="product__action">
-                                    <li><a href="wishlist.html"><i class="icon-heart icons"></i></a></li>
-
-                                    <li><a href="cart.html"><i class="icon-handbag icons"></i></a></li>
-
-
-                                </ul>
-                            </div>
-                            <div class="fr__product__inner">
-                                <h4><a href="product-details.html">dummy Product name</a></h4>
-                                <ul class="fr__pro__prize">
-                                    <li class="old__prize">$30.3</li>
-                                    <li>$25.9</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- End Single Category new 상품 4개수정  -->
+                        <!-- End Single Category -->
+                    </c:forEach>
                 </div>
             </div>
         </div>
