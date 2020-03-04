@@ -42,7 +42,6 @@
 											style="width: 100%; cellspacing: 0;">
 											<thead>
 												<tr>
-
 													<th>글번호</th>
 													<th>제목</th>
 													<th>글쓴이</th>
@@ -52,7 +51,6 @@
 											</thead>
 											<tfoot>
 												<tr>
-
 													<th>글번호</th>
 													<th>제목</th>
 													<th>글쓴이</th>
@@ -96,8 +94,6 @@
 														<td>${qna.qnaTbReadcount }</td>
 													</tr>
 												</c:forEach>
-
-
 											</tbody>
 										</table>
 									</div>
@@ -108,11 +104,7 @@
 					<!-- !Row -->
 				</div>
 				<!-- Main Wrapper -->
-				<div class="page-footer">
-					<p>
-						메인프로젝트 뭐먹냥 <i class="fa fa-heart"></i> by team4
-					</p>
-				</div>
+				<jsp:include page="../include/page-footer.jsp"/>
 			</div>
 			<!-- /Page Inner -->
 			<jsp:include page="../include/right-sidebar.jsp" />
@@ -122,9 +114,7 @@
 	<!-- /Page Container -->
 
 
-	<!-- Javascripts -->
-	<jsp:include page="../include/scripts-load.jsp" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var listSize = '${adminQnaList.size()}';
@@ -139,8 +129,17 @@
 				}
 			}
 		}
+		$("#qnaTable").DataTable().destroy();
+		$("#qnaTable").DataTable({
+			order: [[0,'asc']],
+			ordering: true,
+		});
 	});
 </script>
+
+
+<!-- Javascripts -->
+<jsp:include page="../include/scripts-load.jsp" />
 </body>
 
 </html>
