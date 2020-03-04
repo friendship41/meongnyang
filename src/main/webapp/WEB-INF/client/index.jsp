@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="include/header.jsp"/>
@@ -535,11 +534,6 @@
 <c:when test="${emailCertification eq true}">
 <script type="text/javascript"> 
 	alert("이메일 인증이 완료되었습니다. 로그인을 해주세요.");
-</script>
-</c:when>
-<c:when test="${loginCheckSubmit eq false}">
-<script type="text/javascript"> 
-	alert("로그인 실패 하셨습니다.");
 </script>
 </c:when>
 </c:choose>

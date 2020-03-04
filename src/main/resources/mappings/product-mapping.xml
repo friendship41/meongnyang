@@ -248,4 +248,86 @@
 ]]>
     </select>
 
+    <select id="selectReadcountSaleRateList" parameterType="product" resultType="product">
+<![CDATA[
+        SELECT
+            H.*,
+            I.PRODUCT_CATEGORY_TB_PARENT,
+            I.PRODUCT_CATEGORY_TB_MEDIAN,
+            I.PRODUCT_CATEGORY_TB_SUB
+        FROM(
+            SELECT
+                ROWNUM RNUM,
+                F.*,
+                G.PRODUCT_CATEGORY_TB_NO,
+                G.PRODUCT_TB_NAME
+            FROM(
+                SELECT
+                    D.*,
+                    E.PD_SALE_TB_READ_COUNT,
+                    ROUND(E.PD_SALE_TB_READ_COUNT/D.OD_CNT, 2) "RO"
+                FROM(
+                    SELECT
+                        C.PRODUCT_TB_CODE,
+                        SUM(C.OD_CNT) "OD_CNT"
+                    FROM(
+                        SELECT
+                            A.*,
+                            B.PRODUCT_TB_CODE
+                        FROM(
+                            SELECT
+                                X.PD_SALE_TB_NO,
+                                COUNT(*) "OD_CNT"
+                            FROM ORDERS_DETAIL X JOIN PD_ORDER Y
+                            ON X.PD_ORDER_TB_NO = Y.PD_ORDER_TB_NO
+                            WHERE (Y.PD_ORDER_TB_PAYMENT_DATE BETWEEN #{dayFrom} AND #{dayTo}) AND PD_ORDER_TB_STATE IN ('P', 'D', 'A')
+                            GROUP BY X.PD_SALE_TB_NO) A JOIN PD_SALE B
+                        ON A.PD_SALE_TB_NO = B.PD_SALE_TB_NO) C
+                    GROUP BY C.PRODUCT_TB_CODE) D JOIN (
+                    SELECT
+                        PRODUCT_TB_CODE,
+                        PD_SALE_TB_READ_COUNT
+                    FROM PD_SALE
+                    GROUP BY PRODUCT_TB_CODE, PD_SALE_TB_READ_COUNT) E
+                ON D.PRODUCT_TB_CODE = E.PRODUCT_TB_CODE
+                WHERE OD_CNT > 0
+                ORDER BY RO) F JOIN PRODUCT G
+            ON F.PRODUCT_TB_CODE = G.PRODUCT_TB_CODE) H JOIN PRODUCT_CATEGORY I
+        ON H.PRODUCT_CATEGORY_TB_NO = I.PRODUCT_CATEGORY_TB_NO
+]]>
+    </select>
+    
+    <select id="selectCancelProductRanking" parameterType="product" resultType="product">
+        SELECT
+            ROWNUM RNUM,
+            C.*
+        FROM(
+            SELECT
+                B.*,
+                PDT.PRODUCT_CATEGORY_TB_NO,
+                PDT.PRODUCT_TB_NAME,
+                PC.PRODUCT_CATEGORY_TB_PARENT,
+                PC.PRODUCT_CATEGORY_TB_MEDIAN,
+                PC.PRODUCT_CATEGORY_TB_SUB
+            FROM(
+                SELECT
+                    A.PRODUCT_TB_CODE,
+                    COUNT(*) "CANCEL_CNT"
+                FROM(
+                    SELECT
+                        PO.PD_ORDER_TB_NO,
+                        OD.PD_SALE_TB_NO,
+                        PS.PRODUCT_TB_CODE
+                    FROM PD_ORDER PO JOIN ORDERS_DETAIL OD
+                    ON PO.PD_ORDER_TB_NO = OD.PD_ORDER_TB_NO
+                    JOIN PD_SALE PS
+                    ON OD.PD_SALE_TB_NO = PS.PD_SALE_TB_NO
+                    WHERE PO.PD_ORDER_TB_STATE = 'C' AND PO.PD_ORDER_TB_ORDER_DATE BETWEEN #{dayFrom} AND #{dayTo}) A
+                GROUP BY PRODUCT_TB_CODE) B JOIN PRODUCT PDT
+            ON B.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+            JOIN PRODUCT_CATEGORY PC
+            ON PDT.PRODUCT_CATEGORY_TB_NO = PC.PRODUCT_CATEGORY_TB_NO
+            ORDER BY CANCEL_CNT DESC) C
+    </select>
+
 </mapper>

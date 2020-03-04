@@ -47,6 +47,12 @@ public class AdminProductVO
     private int pdSaleTbNo;
     private int ordersDetailTbAmount;
 
+    private int rnum;
+    private int pdSaleTbReadCount;
+    private int odCnt;
+
+    private int cancelCnt;
+
 
 
 
@@ -383,6 +389,46 @@ public class AdminProductVO
         this.ordersDetailTbAmount = ordersDetailTbAmount;
     }
 
+    public int getRnum()
+    {
+        return rnum;
+    }
+
+    public void setRnum(int rnum)
+    {
+        this.rnum = rnum;
+    }
+
+    public int getPdSaleTbReadCount()
+    {
+        return pdSaleTbReadCount;
+    }
+
+    public void setPdSaleTbReadCount(int pdSaleTbReadCount)
+    {
+        this.pdSaleTbReadCount = pdSaleTbReadCount;
+    }
+
+    public int getOdCnt()
+    {
+        return odCnt;
+    }
+
+    public void setOdCnt(int odCnt)
+    {
+        this.odCnt = odCnt;
+    }
+
+    public int getCancelCnt()
+    {
+        return cancelCnt;
+    }
+
+    public void setCancelCnt(int cancelCnt)
+    {
+        this.cancelCnt = cancelCnt;
+    }
+
     @Override
     public String toString()
     {
@@ -419,6 +465,10 @@ public class AdminProductVO
                 ", pdSaleTbSize='" + pdSaleTbSize + '\'' +
                 ", pdSaleTbNo=" + pdSaleTbNo +
                 ", ordersDetailTbAmount=" + ordersDetailTbAmount +
+                ", rnum=" + rnum +
+                ", pdSaleTbReadCount=" + pdSaleTbReadCount +
+                ", odCnt=" + odCnt +
+                ", cancelCnt=" + cancelCnt +
                 ", uploadFile=" + uploadFile +
                 '}';
     }

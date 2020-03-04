@@ -30,6 +30,13 @@ public class AdminProductSaleVO
     private int ordersDetialTbAmount;
     private String cartImage;
 
+    private String promotionTbName;
+    private String productCategoryTbParent;
+    private String productCategoryTbMedian;
+    private String productCategoryTbSub;
+    private int saleCnt;
+
+
     public int getPdSaleTbNo()
     {
         return pdSaleTbNo;
@@ -250,6 +257,57 @@ public class AdminProductSaleVO
         this.cartImage = cartImage;
     }
 
+
+    public String getPromotionTbName()
+    {
+        return promotionTbName;
+    }
+
+    public void setPromotionTbName(String promotionTbName)
+    {
+        this.promotionTbName = promotionTbName;
+    }
+
+    public String getProductCategoryTbParent()
+    {
+        return productCategoryTbParent;
+    }
+
+    public void setProductCategoryTbParent(String productCategoryTbParent)
+    {
+        this.productCategoryTbParent = productCategoryTbParent;
+    }
+
+    public String getProductCategoryTbMedian()
+    {
+        return productCategoryTbMedian;
+    }
+
+    public void setProductCategoryTbMedian(String productCategoryTbMedian)
+    {
+        this.productCategoryTbMedian = productCategoryTbMedian;
+    }
+
+    public String getProductCategoryTbSub()
+    {
+        return productCategoryTbSub;
+    }
+
+    public void setProductCategoryTbSub(String productCategoryTbSub)
+    {
+        this.productCategoryTbSub = productCategoryTbSub;
+    }
+
+    public int getSaleCnt()
+    {
+        return saleCnt;
+    }
+
+    public void setSaleCnt(int saleCnt)
+    {
+        this.saleCnt = saleCnt;
+    }
+
     @Override
     public String toString()
     {
@@ -276,6 +334,11 @@ public class AdminProductSaleVO
                 ", productTbBannerState='" + productTbBannerState + '\'' +
                 ", ordersDetialTbAmount=" + ordersDetialTbAmount +
                 ", cartImage='" + cartImage + '\'' +
+                ", promotionTbName='" + promotionTbName + '\'' +
+                ", productCategoryTbParent='" + productCategoryTbParent + '\'' +
+                ", productCategoryTbMedian='" + productCategoryTbMedian + '\'' +
+                ", productCategoryTbSub='" + productCategoryTbSub + '\'' +
+                ", saleCnt=" + saleCnt +
                 '}';
     }
 }
