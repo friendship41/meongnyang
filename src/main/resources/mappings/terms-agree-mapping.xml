@@ -17,7 +17,7 @@
 		FROM
 			terms_agree
 		WHERE
-			terms_tb_no = #{termsTbNo} and customer_tb_no = #{customerTbNo}
+			terms_tb_no = 2 and customer_tb_no = #{customerTbNo}
 	</select>
 	
 	<update id="updateTermsAgree" parameterType="termsAgree">

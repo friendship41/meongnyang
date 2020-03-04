@@ -51,7 +51,7 @@ public class ClientMyinfoAddressController {
 		List<ClientCmAddressVO> tempVO = clientSelectMyinfoAddressListService.selectMyinfoAddressList(clientCmAddressVO);
 		
 		clientTermsAgreeVO.setCustomerTbNo(no);
-		clientTermsAgreeVO.setTermsTbNo(2);
+		
 		ClientTermsAgreeVO termsAgreeVO = clientSelectTermsAgreeListService.selectTermsAgree(clientTermsAgreeVO);
 		
 		
