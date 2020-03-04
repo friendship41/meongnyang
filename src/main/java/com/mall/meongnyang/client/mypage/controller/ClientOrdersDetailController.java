@@ -1,16 +1,15 @@
 package com.mall.meongnyang.client.mypage.controller;
 
-import java.util.List;
-
+import com.mall.meongnyang.client.mypage.service.ClientSelectOrderDetailService;
+import com.mall.meongnyang.client.mypage.service.ClientSelectProductOrderService;
+import com.mall.meongnyang.client.mypage.vo.ClientOrdersDetailVO;
+import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mall.meongnyang.client.mypage.service.ClientSelectOrderDetailService;
-import com.mall.meongnyang.client.mypage.service.ClientSelectProductOrderService;
-import com.mall.meongnyang.client.mypage.vo.ClientOrdersDetailVO;
-import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
+import java.util.List;
 
 @Controller
 public class ClientOrdersDetailController {
@@ -28,7 +27,7 @@ public class ClientOrdersDetailController {
 		ClientProductOrderVO clientProductOrderVO = new ClientProductOrderVO();
 		clientProductOrderVO.setPdOrderTbNo(clientOrdersDetailVO.getPdOrderTbNo());
 		ClientProductOrderVO order = clientSelectProductOrderService.selectProductOrder(clientProductOrderVO);
-		
+
 		model.addAttribute("detailList", detailList);
 		model.addAttribute("order", order);
 		

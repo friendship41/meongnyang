@@ -27,6 +27,7 @@
         <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO" alias="promotion"/>
         <typeAlias type="com.mall.meongnyang.client.community.vo.ClientReviewVO" alias="review"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminTermsVO" alias="terms"/>
+        <typeAlias type="com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO" alias="termsAgree"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminQnaVO" alias="qna"/>
         <typeAlias type="com.mall.meongnyang.admin.shopping.vo.AdminQnaTypeVO" alias="qnaType"/>
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminOverviewVisitorVO" alias = "adminOverview"/>

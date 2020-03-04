@@ -5,7 +5,7 @@
 
 <jsp:include page="../include/header.jsp" />
         <!-- Start Bradcaump area -->
-        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(resources/client/images/bg/order-read.jpg) no-repeat scroll center center / cover ;">
+        <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/resources/client/images/bg/order-read.jpg) no-repeat scroll center center / cover ;">
             <div class="ht__bradcaump__wrap">
                 <div class="container">
                     <div class="row">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="order-details__count__single">
                                     <h5>배송비</h5>
-                                    <span class="price"><fmt:formatNumber value="${order.pdOrderTbDelivertyFee }"/> 원</span>
+                                    <span class="price"><fmt:formatNumber value="${order.pdOrderTbDeliveryFee }"/> 원</span>
                                 </div>
                             </div>
                             <div class="ordre-details__total">
