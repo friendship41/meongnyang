@@ -129,7 +129,7 @@
                 <ul class="pro__details__tab" role="tablist">
                     <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">상품상세</a></li>
                     <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab" id="reviewTap">review</a></li>
-                    <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">Q&A(2)</a></li>
+                    <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">Q&A</a></li>
                 </ul>
                 <!-- End List And Grid View -->
             </div>
@@ -352,6 +352,23 @@
             var discount = optionMap.get(opNo)[1];
             setPrice(nP,discount);
         })
+        
+        var listSize = '${qnaList.size()}';
+		listSize *= 1;
+	for(var i=0; i<listSize; i++) {
+		
+		var tr = $("#qnaTbody").children().eq(i);
+		var depth = tr.children().eq(0).val();
+		
+		depth *=1;
+		if(depth != 0) {
+			for(var j=0; j<depth; j++) {
+				tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+				
+			}
+		}
+	}
+        
     });
 
     function getOptionMap() {
@@ -610,20 +627,7 @@ $(function() {
 	
 });
 
-$(document).ready(function() {
-	var listSize = '${qnaList.size()}';
-	listSize *= 1;
-	for(var i=0; i<listSize; i++) {
-		var tr = $("#qnaTbody").children().eq(i);
-		var depth = tr.children().eq(0).val();
-		depth *=1;
-		if(depth != 0) {
-			for(var j=0; j<depth; j++) {
-				tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
-			}
-		}
-	}
-});
+
 
 
 
