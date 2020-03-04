@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="termsAgreeDAO">
+
+	
+	<select id="selectTermsAgree" parameterType="termsAgree" resultType="termsAgree">
+		SELECT
+			terms_agree_tb_no,
+			terms_tb_no,
+			customer_tb_no,
+			terms_agree_tb_consent_status,
+			
+			terms_agree_tb_consent_date,
+			terms_agree_tb_change_date
+		FROM
+			terms_agree
+		WHERE
+			terms_tb_no = 2 and customer_tb_no = #{customerTbNo}
+	</select>
+	
+	<update id="updateTermsAgree" parameterType="termsAgree">
+		UPDATE terms_agree
+		SET
+			terms_agree_tb_consent_status = #{termsAgreeTbConsentStatus}
+		WHERE
+			customer_tb_no = #{customerTbNo}
+	</update>
+
+</mapper>

@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoAddressService;
 import com.mall.meongnyang.client.mypage.service.ClientInsertMyinfoAddressService;
 import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressListService;
 import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressService;
+import com.mall.meongnyang.client.mypage.service.ClientSelectTermsAgreeListService;
 import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoAddressService;
 import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 
@@ -37,15 +39,23 @@ public class ClientMyinfoAddressController {
 	@Autowired
 	private ClientSelectMyinfoAddressListService clientSelectMyinfoAddressListService;
 	
+	@Autowired
+	private ClientSelectTermsAgreeListService clientSelectTermsAgreeListService;
 	
 	@RequestMapping(value = "/myinfo.do", method = RequestMethod.GET)
-	public String addressList(ClientCmAddressVO clientCmAddressVO, Model model, HttpSession session) {
+	public String addressList(ClientCmAddressVO clientCmAddressVO, Model model, HttpSession session, ClientTermsAgreeVO clientTermsAgreeVO) {
 		ClientCustomerVO sessionVO = (ClientCustomerVO)session.getAttribute("customer");
 		
 		int no = sessionVO.getCustomerTbNo();
 		clientCmAddressVO.setCustomerTbNo(no);
 		List<ClientCmAddressVO> tempVO = clientSelectMyinfoAddressListService.selectMyinfoAddressList(clientCmAddressVO);
-				
+		
+		clientTermsAgreeVO.setCustomerTbNo(no);
+		
+		ClientTermsAgreeVO termsAgreeVO = clientSelectTermsAgreeListService.selectTermsAgree(clientTermsAgreeVO);
+		
+		
+		model.addAttribute("termsAgreeVO", termsAgreeVO);
 		model.addAttribute("myinfoAddressList", tempVO);
 		
 		return "mypage/myinfo";
