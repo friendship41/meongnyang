@@ -34,4 +34,14 @@ public class AdminSalesOverviewDAOImpl implements AdminSalesOverviewDAO {
 		return sqlSessionTemplate.selectList("orderDAO.selectSalesPaymentRegion", clientProductOrderVO);
 	}
 
+	@Override
+	public List<ClientProductOrderVO> selectSalesPaymentPrice(ClientProductOrderVO clientProductOrderVO) {
+		return sqlSessionTemplate.selectList("orderDAO.selectSalesPaymentPrice", clientProductOrderVO);
+	}
+
+	@Override
+	public List<ClientProductOrderVO> selectSalesPaymentPriceMonthly(ClientProductOrderVO clientProductOrderVO) {
+		return sqlSessionTemplate.selectList("orderDAO.selectSalesPaymentPriceMonthly", clientProductOrderVO);
+	}
+
 }

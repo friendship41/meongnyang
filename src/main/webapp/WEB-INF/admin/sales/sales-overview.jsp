@@ -134,7 +134,7 @@
 																		<th>순이익(원)</th>
 																	</tr>
 																</thead>
-																<tfoot id="dataSaleTableFoot">
+																<tfoot id="dateSaleTableFoot">
 																	<tr>
 																		<th></th>
 																		<th></th>
@@ -144,7 +144,7 @@
 																		<th></th>
 																	</tr>
 																</tfoot>
-																<tbody id="dataSaleTableBody">
+																<tbody id="dateSaleTableBody">
 																	<tr>
 																		<td></td>
 																		<td></td>
@@ -170,7 +170,7 @@
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
-															<h4 class="panel-title">일별 매출</h4>
+															<h4 class="panel-title">기간별 매출</h4>
 														</div>
 														<form class="form-horizontal" action="javascript:void(0);">
 															<div class="form-group">
@@ -248,9 +248,9 @@
 																		<th>카테고리</th>
 																		<th>총매출(원)</th>
 																		<th>원가(원)</th>
-																		<th>배송비(원)</th>
-																		<th>포인트소모(점)</th>
-																		<th>순이익(원)</th>
+																		<th>판매량(개)</th>
+																		<th>비고</th>
+																		<th>비고</th>
 																	</tr>
 																</thead>
 																<tfoot id="categorySaleTableFoot">
@@ -561,7 +561,7 @@
         monthlySales(null);
         categorySales();
         dailySalesPrice();
-        monthlySalesPrice();
+        monthlySalesPrice(null);
         regionSales();
         
 	 	function dailySales() {
@@ -615,12 +615,12 @@
 			    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
 			    + '</tr>';
  				
-				$("#dataSaleTable").DataTable().clear().destroy();				 
-				$("#dataSaleTableFoot").empty();
-				$("#dataSaleTableBody").empty();
-				$("#dataSaleTableFoot").html(str2);
-				$("#dataSaleTableBody").html(str);
-	            $("#dataSaleTable").DataTable();
+				$("#dateSaleTable").DataTable().clear().destroy();				 
+				$("#dateSaleTableFoot").empty();
+				$("#dateSaleTableBody").empty();
+				$("#dateSaleTableFoot").append(str2);
+				$("#dateSaleTableBody").append(str);
+	            $("#dateSaleTable").DataTable();
 			   					
 	 		});
 		}
@@ -677,12 +677,12 @@
 				    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
 				    + '</tr>';
 	 				
-					$("#dataSaleTable").DataTable().clear().destroy();				 
-					$("#dataSaleTableFoot").empty();
-					$("#dataSaleTableBody").empty();
-					$("#dataSaleTableFoot").html(str2);
-					$("#dataSaleTableBody").html(str);
-		            $("#dataSaleTable").DataTable();
+					$("#dateSaleTable").DataTable().clear().destroy();				 
+					$("#dateSaleTableFoot").empty();
+					$("#dateSaleTableBody").empty();
+					$("#dateSaleTableFoot").html(str2);
+					$("#dateSaleTableBody").html(str);
+		            $("#dateSaleTable").DataTable();
 				}
 	 		});
 		}
@@ -708,23 +708,21 @@
  				var str = "";
  				var totPayment = 0;
  				var totReceive = 0;
- 				var totDelive = 0;
- 				var totPoint = 0;
+ 				var totAmount = 0;
  				
  				$(categorySales).each(function() {
-					var profit = this.ordersDetailTbPriceSum - this.pdSaleTbReceivedPrice - this.pdOrderTbDeliveryFee;
+					//var profit = this.ordersDetailTbPriceSum - this.pdSaleTbReceivedPrice - this.pdOrderTbDeliveryFee;
 					
 					totPayment += this.ordersDetailTbPriceSum;
 					totReceive += this.pdSaleTbReceivedPrice;
-	 				totDelive += this.pdOrderTbDeliveryFee;
-	 				totPoint += this.pdOrderTbUsedPoint;
+	 				totAmount += this.ordersDetailTbAmount;
 	 				
 					str += '<tr><td>' + this.productCategoryTbParent+"-"+this.productCategoryTbSub + '</td>';
 					str += '<td>' + this.ordersDetailTbPriceSum + '</td>';
 					str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
-					str += '<td>' + this.pdOrderTbDeliveryFee + '</td>';
-					str += '<td>' + this.pdOrderTbUsedPoint + '</td>';
-					str += '<td>' + profit + '</td>'
+					str += '<td>' + this.ordersDetailTbAmount + '</td>';
+					str += '<td></td>';
+					str += '<td></td>'
 					str += '</tr>';
 					
 				});	
@@ -733,9 +731,9 @@
  				str2 += '<tr><th>총 합</th>'
 			    +  '<th>' + totPayment + '</th>'
 			    +  '<th>' + totReceive + '</th>'
-			    +  '<th>' + totDelive + '</th>'
-			    +  '<th>' + totPoint + '</th>'
-			    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
+			    +  '<th>' + totAmount + '</th>'
+			    +  '<th></th>'
+			    +  '<th></th>'
 			    + '</tr>';
  				
 				$("#categorySaleTable").DataTable().clear().destroy();				 
@@ -807,6 +805,124 @@
 	 		});
 		}
 		
+		function dailySalesPrice() {
+			
+	 		var startDate = $("#dailySalesPriceStartDate").val();
+	 		var endDate = $("#dailySalesPriceEndDate").val();
+	 		
+	 		var goUrl = "/salesPriceDay.ado?startDate="+startDate+"&endDate="+endDate;
+	 		
+	 		$.ajax({
+	 			type: "GET",
+	 			url: goUrl,
+	 			data:{},
+	 			dataType: "json"
+	 		})
+	 		.done(function(map) {
+ 				new Chart(document.getElementById("price_sales_chart_day"), map.chart);
+ 				
+ 				var dailySalesPrice = map.dailySalesPrice;
+				
+ 				var str = "";
+ 				var totPayment = 0;
+ 				var totReceive = 0;
+ 				var totAmount = 0;
+ 				
+ 				$(dailySalesPrice).each(function() {
+										
+					totPayment += this.ordersDetailTbPriceSum;
+					totReceive += this.pdSaleTbReceivedPrice;
+					totAmount += this.ordersDetailTbAmount;
+	 				
+					str += '<tr><td>' + this.pdSaleTbSalesPriceRange + '</td>';
+					str += '<td>' + this.ordersDetailTbPriceSum + '</td>';
+					str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
+					str += '<td>' + this.ordersDetailTbAmount + '</td>';
+					str += '<td></td>';
+					str += '<td></td>'
+					str += '</tr>';
+					
+				});	
+ 				
+ 				var str2 = "";
+ 				str2 += '<tr><th>총 합</th>'
+			    +  '<th>' + totPayment + '</th>'
+			    +  '<th>' + totReceive + '</th>'
+			    +  '<th>' + totAmount + '</th>'
+			    +  '<th></th>'
+			    +  '<th></th>'
+			    + '</tr>';
+ 				
+				$("#priceSaleTable").DataTable().clear().destroy();				 
+				$("#priceSaleTableFoot").empty();
+				$("#priceSaleTableBody").empty();
+				$("#priceSaleTableFoot").html(str2);
+				$("#priceSaleTableBody").html(str);
+	            $("#priceSaleTable").DataTable();
+
+	 		});
+		}
+	 	
+		function monthlySalesPrice(event) {
+				
+	 		var startDate = $("#dailySalesPriceStartMonth").val();
+	 		var endDate = $("#dailySalesPriceEndMonth").val();
+	 		
+	 		var goUrl = "/salesPriceMonth.ado?startDate="+startDate+"&endDate="+endDate;
+	 		
+	 		$.ajax({
+	 			type: "GET",
+	 			url: goUrl,
+	 			data:{},
+	 			dataType: "json"
+	 		})
+	 		.done(function(json) {
+ 				
+ 				new Chart(document.getElementById("price_sales_chart_month"), json.chart);
+ 				if(event != null){
+					var monthlySalesPrice = json.monthlySalesPrice;
+					
+	 				var str = "";
+	 				var totPayment = 0;
+	 				var totReceive = 0;
+	 				var totAmount = 0;
+	 				
+	 				$(dailySalesPrice).each(function() {
+											
+						totPayment += this.ordersDetailTbPriceSum;
+						totReceive += this.pdSaleTbReceivedPrice;
+						totAmount += this.ordersDetailTbAmount;
+		 				
+						str += '<tr><td>' + this.pdSaleTbSalesPriceRange + '</td>';
+						str += '<td>' + this.ordersDetailTbPriceSum + '</td>';
+						str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
+						str += '<td>' + this.ordersDetailTbAmount + '</td>';
+						str += '<td></td>';
+						str += '<td></td>'
+						str += '</tr>';
+						
+					});	
+	 				
+	 				var str2 = "";
+	 				str2 += '<tr><th>총 합</th>'
+				    +  '<th>' + totPayment + '</th>'
+				    +  '<th>' + totReceive + '</th>'
+				    +  '<th>' + totAmount + '</th>'
+				    +  '<th></th>'
+				    +  '<th></th>'
+				    + '</tr>';
+	 				
+					$("#priceSaleTable").DataTable().clear().destroy();				 
+					$("#priceSaleTableFoot").empty();
+					$("#priceSaleTableBody").empty();
+					$("#priceSaleTableFoot").html(str2);
+					$("#priceSaleTableBody").html(str);
+		            $("#priceSaleTable").DataTable();
+				}
+	 		}); 
+		}
+		
+		
 	 	$("#dailySales").on('click', function() {
 			dailySales();
 		})	
@@ -817,6 +933,14 @@
 		
 		$("#dailySalesCategory").on('click', function() {
 			categorySales();
+		})
+		
+		$("#dailySalesPrice").on('click', function() {
+			dailySalesPrice();
+		})
+		
+		$("#monthlySalesPrice").on('click', function() {
+			monthlySalesPrice(this);
 		})
 		
 		$("#dailySalesRegion").on('click', function() {

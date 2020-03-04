@@ -35,8 +35,21 @@ public class ClientProductOrderVO {
     private String productCategoryTbParent;
     private String productCategoryTbSub;
     private int ordersDetailTbPriceSum;
+    private int ordersDetailTbAmount;
+    private String pdSaleTbSalesPriceRange;
     
-    
+	public String getPdSaleTbSalesPriceRange() {
+		return pdSaleTbSalesPriceRange;
+	}
+	public void setPdSaleTbSalesPriceRange(String pdSaleTbSalesPriceRange) {
+		this.pdSaleTbSalesPriceRange = pdSaleTbSalesPriceRange;
+	}
+	public int getOrdersDetailTbAmount() {
+		return ordersDetailTbAmount;
+	}
+	public void setOrdersDetailTbAmount(int ordersDetailTbAmount) {
+		this.ordersDetailTbAmount = ordersDetailTbAmount;
+	}
 	public String getProductCategoryTbParent() {
 		return productCategoryTbParent;
 	}
