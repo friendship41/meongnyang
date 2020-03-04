@@ -138,5 +138,37 @@
             PD_SALE_TB_READ_COUNT=PD_SALE_TB_READ_COUNT+1
         WHERE PRODUCT_TB_CODE=#{productTbCode}
     </update>
+    
+    <select id="selectPromotionedProductSale" parameterType="productSale" resultType="productSale">
+        SELECT
+            A.*,
+            B.SALE_CNT
+        FROM(
+            SELECT
+                PMT.PROMOTION_TB_CODE,
+                PMT.PROMOTION_TB_NAME,
+                PS.PRODUCT_TB_CODE,
+                PS.PD_SALE_TB_PRODUCT_NAME,
+                PS.PD_SALE_TB_NO,
+                PDT.PRODUCT_CATEGORY_TB_NO,
+                PCATE.PRODUCT_CATEGORY_TB_PARENT,
+                PCATE.PRODUCT_CATEGORY_TB_MEDIAN,
+                PCATE.PRODUCT_CATEGORY_TB_SUB
+            FROM PROMOTION PMT JOIN PD_SALE PS
+            ON PMT.PROMOTION_TB_CODE = PS.PROMOTION_TB_CODE
+            JOIN PRODUCT PDT
+            ON PS.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+            JOIN PRODUCT_CATEGORY PCATE
+            ON PDT.PRODUCT_CATEGORY_TB_NO = PCATE.PRODUCT_CATEGORY_TB_NO
+            WHERE PMT.PROMOTION_TB_CODE = #{promotionTbCode}) A JOIN (
+            SELECT
+                OD.PD_SALE_TB_NO,
+                COUNT(*) "SALE_CNT"
+            FROM ORDERS_DETAIL OD JOIN PD_ORDER PO
+            ON OD.PD_ORDER_TB_NO = PO.PD_ORDER_TB_NO
+            WHERE PO.PD_ORDER_TB_STATE IN ('P','D','A')
+            GROUP BY PD_SALE_TB_NO) B
+        ON A.PD_SALE_TB_NO = B.PD_SALE_TB_NO
+    </select>
 
 </mapper>

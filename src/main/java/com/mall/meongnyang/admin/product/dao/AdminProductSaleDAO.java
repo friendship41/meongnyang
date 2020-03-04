@@ -11,4 +11,5 @@ public interface AdminProductSaleDAO
     public AdminProductSaleVO selectProductSale(AdminProductSaleVO adminProductSaleVO);
     public void updateProductSale(AdminProductSaleVO adminProductSaleVO);
     public List<AdminProductSaleVO> selectProductSaleOverviewList(AdminProductSaleVO adminProductSaleVO);
+    public List<AdminProductSaleVO> selectPromotionedProductSale(AdminProductSaleVO adminProductSaleVO);
 }

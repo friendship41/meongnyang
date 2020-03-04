@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
@@ -172,23 +173,22 @@
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2020">
+                                                    <select id="promotionSelect">
+                                                        <option value="-1" selected>프로모션을 선택해 주세요</option>
+                                                        <c:forEach var="promotionSingle" items="${promotionList}">
+                                                            <option value="${promotionSingle.promotionTbCode}">${promotionSingle.promotionTbName}</option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <label class="text-center center-block">~</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom:14px;">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
+                                                    <span onclick="getPromotionedProductTable()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                                 <div class="table-responsive">
-                                    <table id="marketingProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="promotionedProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
                                             <th>프로모션코드</th>
@@ -196,43 +196,17 @@
                                             <th>상품코드</th>
                                             <th>카테고리</th>
                                             <th>상품명</th>
-                                            <th>반품/환불 수</th>
+                                            <th>판매량</th>
                                         </tr>
                                         </thead>
-                                        <tfoot>
+                                        <tbody id="promotionedProductTableBody">
                                         <tr>
-                                            <th>프로모션코드</th>
-                                            <th>프로모션명</th>
-                                            <th>상품코드</th>
-                                            <th>카테고리</th>
-                                            <th>상품명</th>
-                                            <th>반품/환불 수</th>
-                                        </tr>
-                                        </tfoot>
-                                        <tbody>
-                                        <tr>
-                                            <td>000001</td>
-                                            <td>겨울세일</td>
-                                            <td>000001</td>
-                                            <td>강아지-사료</td>
-                                            <td>개 사료1</td>
-                                            <td>1000000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>000001</td>
-                                            <td>겨울세일</td>
-                                            <td>000002</td>
-                                            <td>고양이-사료</td>
-                                            <td>고양이 사료1</td>
-                                            <td>500000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>000001</td>
-                                            <td>겨울세일</td>
-                                            <td>000003</td>
-                                            <td>강아지-옷</td>
-                                            <td>좋은옷1</td>
-                                            <td>10000</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -268,6 +242,20 @@
         getDataFromServerAjax(url, 'cancelRankingTable');
     }
 
+    function getPromotionedProductTable() {
+        var promotionCode = $("#promotionSelect option:selected").val();
+        promotionCode *= 1;
+        if(promotionCode === -1)
+        {
+            alert('프로모션을 선택해 주세요');
+        }
+        else
+        {
+            var url = "/productPromotionedAjax.ado?promotionTbCode="+promotionCode;
+            getDataFromServerAjax(url, 'promotionedProductTable');
+        }
+    }
+
 
     function getDataFromServerAjax(urlTo, toWhere) {
         $.ajax({
@@ -291,6 +279,10 @@
                     else if(toWhere === 'cancelRankingTable')
                     {
                         settingCancelRankingTable(json);
+                    }
+                    else if(toWhere === 'promotionedProductTable')
+                    {
+                        settingPromotionedProductTable(json);
                     }
                 }
             })
@@ -345,6 +337,31 @@
         $("#cancelRankingTable").DataTable();
     }
 
+
+    function settingPromotionedProductTable(json) {
+        var promotionedProductHTML = "";
+
+        for(var i=0; i<json.length; i++)
+        {
+            var promotionedProductSingle = json[i];
+
+            promotionedProductHTML += '<tr>';
+            promotionedProductHTML += '<td>'+promotionedProductSingle.promotionTbCode+'</td>';
+            promotionedProductHTML += '<td>'+promotionedProductSingle.promotionTbName+'</td>';
+            promotionedProductHTML += '<td>'+promotionedProductSingle.productTbCode+'</td>';
+            promotionedProductHTML += '<td>'+promotionedProductSingle.productCategoryTbParent+'-'+promotionedProductSingle.productCategoryTbMedian+'-'+promotionedProductSingle.productCategoryTbSub+'</td>';
+            promotionedProductHTML += '<td>'+promotionedProductSingle.pdSaleTbProductName+'</td>';
+            promotionedProductHTML += '<td>'+promotionedProductSingle.saleCnt+'</td>';
+            promotionedProductHTML += '</tr>';
+
+
+
+        }
+        $("#promotionedProductTable").DataTable().clear().destroy();
+        $("#promotionedProductTableBody").empty();
+        $("#promotionedProductTableBody").append(promotionedProductHTML);
+        $("#promotionedProductTable").DataTable();
+    }
 
 
     $(document).ready(function () {
