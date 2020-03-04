@@ -330,11 +330,59 @@
             });
     }
 
+    function insertAddressAjax(nickname) {
+        var ajaxUrl = "/insertAddressAjax.do";
+
+        var params = {};
+        params.cmAddressTbNickname = nickname;
+        params.cmAddressTbPostcode = $("#postcode").val();
+        params.cmAddressTbAddress1 = $("#address1").val();
+        params.cmAddressTbAddress2 = $("#address2").val();
+        params.cmAddressTbPhone = $("#phoneNum").val();
+        $.ajax({
+            url: ajaxUrl,
+            type: "POST",
+            data: params,
+            async: false,
+            dataType: "json"
+        })
+            .done(function(json) {
+                if(json.state === 'success')
+                {
+                    alert('주소 추가 성공!');
+                }
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
+
     function submitToPay() {
         if(checkinputs() === false)
         {
             return;
         }
+
+
+        var addseNow = $("#addressSelectBox option:selected").val();
+        if(addseNow === 'thisIsSelect')
+        {
+            var tf = confirm('배송지를 저장하시겠습니까?');
+            if(tf === true)
+            {
+                var returnV = prompt('주소의 별칭을 입력해 주세요');
+                if (returnV === '' || returnV === null)
+                {
+                    alert("처음부터 다시 해주세요");
+                    return;
+                }
+                else
+                {
+                    insertAddressAjax(returnV);
+                }
+            }
+        }
+
 
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");
