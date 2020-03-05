@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="single-input">
-                                                    <input id="receivePerson" type="text" placeholder="수령인">
+                                                    <input id="receivePerson" type="text" placeholder="수령인" value="${sessionScope.customer.customerTbName}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -202,6 +202,52 @@
         $("#mileage").text(Math.floor((nowMoney+2500)*0.01) + " 점");
     });
 
+    function checkinputs() {
+        var recp = $("#receivePerson").val();
+        if(recp === '' || recp === null)
+        {
+            alert('수령인을 입력해 주세요');
+            return false;
+        }
+
+        var odp = $("#orderPerson").val();
+        if(odp === '' || odp === null)
+        {
+            alert('주문자명을 입력해 주세요');
+            return false;
+        }
+
+        var phone = $("#phoneNum").val();
+        if(phone === '' || phone === null)
+        {
+            alert('연락처를 입력해 주세요');
+            return false;
+        }
+
+        var pstc = $("#postcode").val();
+        if(pstc === '' || pstc === null)
+        {
+            alert('우편번호를 입력해 주세요');
+            return false;
+        }
+
+        var add2 = $("#address2").val();
+        if(add2 === '' || add2 === null)
+        {
+            alert('상세주소를 입력해 주세요');
+            return false;
+        }
+
+        var up = $("#usePoint").val();
+        if(up === '' || up === null)
+        {
+            alert('사용할 포인트를 입력해 주세요');
+            return false;
+        }
+
+        return true;
+    }
+    
     function bindCheckoutPoint() {
         var myPoint = $("#myPoint").val();
         var usePoint = $("#usePoint").val();
@@ -284,7 +330,60 @@
             });
     }
 
+    function insertAddressAjax(nickname) {
+        var ajaxUrl = "/insertAddressAjax.do";
+
+        var params = {};
+        params.cmAddressTbNickname = nickname;
+        params.cmAddressTbPostcode = $("#postcode").val();
+        params.cmAddressTbAddress1 = $("#address1").val();
+        params.cmAddressTbAddress2 = $("#address2").val();
+        params.cmAddressTbPhone = $("#phoneNum").val();
+        $.ajax({
+            url: ajaxUrl,
+            type: "POST",
+            data: params,
+            async: false,
+            dataType: "json"
+        })
+            .done(function(json) {
+                if(json.state === 'success')
+                {
+                    alert('주소 추가 성공!');
+                }
+            })
+            .fail(function (xhr, status, errorThrown) {
+                alert(errorThrown);
+            });
+    }
+
     function submitToPay() {
+        if(checkinputs() === false)
+        {
+            return;
+        }
+
+
+        var addseNow = $("#addressSelectBox option:selected").val();
+        if(addseNow === 'thisIsSelect')
+        {
+            var tf = confirm('배송지를 저장하시겠습니까?');
+            if(tf === true)
+            {
+                var returnV = prompt('주소의 별칭을 입력해 주세요');
+                if (returnV === '' || returnV === null)
+                {
+                    alert("처음부터 다시 해주세요");
+                    return;
+                }
+                else
+                {
+                    insertAddressAjax(returnV);
+                }
+            }
+        }
+
+
         var form = document.createElement("form");
         form.setAttribute("charset", "UTF-8");
         form.setAttribute("method", "Post");

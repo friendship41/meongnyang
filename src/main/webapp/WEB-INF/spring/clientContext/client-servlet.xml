@@ -62,6 +62,22 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*.do"/>
+			<mvc:exclude-mapping path="/index.do"/>
+			<mvc:exclude-mapping path="/login.do"/>
+			<mvc:exclude-mapping path="/registry.do"/>
+			<mvc:exclude-mapping path="/loginAjaxSingle.do"/>
+			<mvc:exclude-mapping path="/termsCheck1.do"/>
+			<mvc:exclude-mapping path="/termsCheck2.do"/>
+			<mvc:exclude-mapping path="/addCartAjax.do"/>
+			<mvc:exclude-mapping path="/removeCartAjax.do"/>
+			<mvc:exclude-mapping path="/shopping.do"/>
+			<mvc:exclude-mapping path="/shoppingDetail.do"/>
+			<mvc:exclude-mapping path="/productReviewList.do"/>
+			<mvc:exclude-mapping path="/needLogin.do"/>
+			<bean class="com.mall.meongnyang.client.intercepter.login.LoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
 			<bean class="com.mall.meongnyang.client.intercepter.menu.MenuCheckInterceptor">
 				<constructor-arg ref="clientSelectProductCategoryListService"/>
 			</bean>

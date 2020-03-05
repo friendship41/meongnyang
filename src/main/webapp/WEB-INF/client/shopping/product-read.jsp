@@ -100,8 +100,8 @@
                             </div>
                             <div class="sin__desc align--left">
                                 <ul class="shopping__btn">
-                                    <li><a onclick="addCart()" style="cursor: pointer"> Add Cart </a></li>
-                                    <li class="shp__checkout"><a href="checkout.html">Check Out</a></li>
+                                    <li><a onclick="addCartD()" style="cursor: pointer"> Add Cart </a></li>
+                                    <li class="shp__checkout"><a href="javascript:checkOutGoGo()">Check Out</a></li>
                                 </ul>
                             </div>
                             <div class="sin__desc product__share__link">
@@ -225,45 +225,56 @@
                                                         <c:if test="${qna.qnaTbStatus eq 'N'}">
                                                             <!-- 정상글 -->
                                                             <td style="text-align: left;">
-                                                                <span class="badge badge-success">
-                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     <c:if test="${qna.adminsTbId eq null}">
-                                                                        Q
+                                                                        <span class="badge badge-success">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            Q
+                                                                        </span>
                                                                     </c:if>
                                                                     <c:if test="${qna.adminsTbId ne null}">
-                                                                        A
+                                                                        <span class="badge badge-warning">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            A
+                                                                        </span>
                                                                     </c:if>
-                                                                </span>
                                                                 <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
                                                             </td>
                                                         </c:if>
                                                         <c:if test="${qna.qnaTbStatus eq 'D'}">
                                                             <!-- 삭제된글 -->
                                                             <td style="text-align: left;">
-                                                                <span class="badge badge-success">
-                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     <c:if test="${qna.adminsTbId eq null}">
-                                                                        Q
+                                                                        <span class="badge badge-success">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            Q
+                                                                        </span>
                                                                     </c:if>
                                                                     <c:if test="${qna.adminsTbId ne null}">
-                                                                        A
+                                                                        <span class="badge badge-warning">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            A
+                                                                        </span>
                                                                     </c:if>
-                                                                </span>삭제된 글입니다.
+                                                                삭제된 글입니다.
                                                             </td>
                                                         </c:if>
                                                     </c:if>
                                                     <c:if test="${sessionScope.customer.customerTbNo ne qna.customerTbNo}">
                                                         <!-- 내 글이아니면 -->
                                                         <td style="text-align: left;">
-                                                            <span class="badge badge-success">
-                                                                <i class="fa fa-lock" aria-hidden="true"></i>
-                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                            <c:if test="${qna.adminsTbId eq null}">
+                                                                <span class="badge badge-success">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     Q
-                                                                </c:if>
-                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                </span>
+                                                            </c:if>
+                                                            <c:if test="${qna.adminsTbId ne null}">
+                                                                <span class="badge badge-warning">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     A
-                                                                </c:if>
-                                                            </span>${qna.qnaTbTitle}
+                                                                </span>
+                                                            </c:if>
+                                                            ${qna.qnaTbTitle}
                                                         </td>
                                                     </c:if>
                                                 </c:if>
@@ -272,28 +283,33 @@
                                                     <c:if test="${qna.qnaTbStatus eq 'N'}">
                                                         <!-- 정상글 -->
                                                         <td style="text-align: left;">
-                                                            <span class="badge badge-success">
                                                                 <c:if test="${qna.adminsTbId eq null}">
-                                                                    Q
+                                                                    <span class="badge badge-success">
+                                                                        Q
+                                                                    </span>
                                                                 </c:if>
                                                                 <c:if test="${qna.adminsTbId ne null}">
-                                                                    A
+                                                                    <span class="badge badge-warning">
+                                                                        A
+                                                                    </span>
                                                                 </c:if>
-                                                            </span>
                                                             <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
                                                         </td>
                                                     </c:if>
                                                     <c:if test="${qna.qnaTbStatus eq 'D'}">
                                                         <!-- 삭제된 글 -->
                                                         <td style="text-align: left;">
-                                                            <span class="badge badge-success">
-                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                            <c:if test="${qna.adminsTbId eq null}">
+                                                                <span class="badge badge-success">
                                                                     Q
-                                                                </c:if>
-                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                </span>
+                                                            </c:if>
+                                                            <c:if test="${qna.adminsTbId ne null}">
+                                                                <span class="badge badge-warning">
                                                                     A
-                                                                </c:if>
-                                                            </span>삭제된 글입니다.
+                                                                </span>
+                                                            </c:if>
+                                                            삭제된 글입니다.
                                                         </td>
                                                     </c:if>
                                                 </c:if>
@@ -353,7 +369,25 @@
             setPrice(nP,discount);
         })
         kakaoLink();
+
+        var listSize = '${qnaList.size()}';
+        listSize *= 1;
+        for(var i=0; i<listSize; i++) {
+            var tr = $("#qnaTbody").children().eq(i);
+            var depth = tr.children().eq(0).val();
+            depth *=1;
+            if(depth != 0) {
+                for(var j=0; j<depth; j++) {
+                    tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
+                }
+            }
+        }
     });
+
+    function checkOutGoGo() {
+        addCartD();
+        location.href="checkout.do";
+    }
 
     function getOptionMap() {
         var optionMap = new Map();
@@ -381,7 +415,7 @@
         }
     }
 
-    function addCart() {
+    function addCartD() {
         var params ="?pdSaleTbSalesPrice=";
 
         var amount = $("#ordersDetialTbAmount").val();
@@ -647,21 +681,6 @@ $(function() {
 	
 	});
 	
-});
-
-$(document).ready(function() {
-	var listSize = '${qnaList.size()}';
-	listSize *= 1;
-	for(var i=0; i<listSize; i++) {
-		var tr = $("#qnaTbody").children().eq(i);
-		var depth = tr.children().eq(0).val();
-		depth *=1;
-		if(depth != 0) {
-			for(var j=0; j<depth; j++) {
-				tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
-			}
-		}
-	}
 });
 
 
