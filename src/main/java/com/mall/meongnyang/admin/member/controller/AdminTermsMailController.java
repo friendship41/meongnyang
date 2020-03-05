@@ -1,22 +1,19 @@
 package com.mall.meongnyang.admin.member.controller;
 
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.mall.meongnyang.admin.member.service.AdminSelectMemberListService;
 import com.mall.meongnyang.admin.member.service.AdminSelectTermsService;
 import com.mall.meongnyang.admin.member.service.AdminTermsMailService;
 import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
-import com.mall.meongnyang.admin.member.vo.AdminTermsMailVO;
 import com.mall.meongnyang.admin.member.vo.AdminTermsVO;
+import com.mall.meongnyang.util.mail.MailVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.inject.Inject;
+import java.util.List;
 
 @Controller
 @RequestMapping("/*")
@@ -38,15 +35,15 @@ public class AdminTermsMailController {
 	}
 
 	@RequestMapping(value = "/send.ado", method = RequestMethod.POST)
-	public String send(@ModelAttribute AdminTermsMailVO mailVO, AdminMemberVO adminMemberVO, Model model) {
+	public String send(MailVO mailVO, AdminMemberVO adminMemberVO, Model model) {
 		try {
 			List<AdminMemberVO> memberList = adminSelectMemberListService.selectMemberList(adminMemberVO);
 			mailService.send(mailVO, memberList);
-			model.addAttribute("message", "ÀÌ¸ŞÀÏÀÌ ¹ß¼ÛµÇ¾ú½À´Ï´Ù.");
+			model.addAttribute("message", "ë©”ì¼ì„ ë³´ëƒˆìŠµë‹ˆë‹¤");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "ÀÌ¸ŞÀÏ ¹ß¼Û ½ÇÆĞ...");
+			model.addAttribute("message", "...ë©”ì¼ë³´ë‚´ê¸°ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
 		}
 		return "redirect:/term-manage1.ado";
 	}

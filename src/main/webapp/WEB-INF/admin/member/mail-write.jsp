@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <label for="senderMail" class="col-sm-2 control-label">발신자 이메일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="senderMail" id="senderMail" value="kangholee8512@gmail.com" readonly>
+                                            <input type="text" class="form-control" name="from" id="senderMail" value="poo963369@naver.com">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -61,13 +61,13 @@
                                     <div class="form-group">
                                         <label for="subject" class="col-sm-2 control-label" >제목</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="subject" id="subject" value="약관 수정 메일" readonly>
+                                            <input type="text" class="form-control" name="Subject" id="subject" value="약관 수정 메일" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="message" class="col-sm-2 control-label">수정 후 약관상세</label>
                                         <div class="col-sm-10">
-                                            <textarea rows="10" class="form-control" name="message" id="message" value="${content.termsTbContent }" readonly>${content.termsTbContent }</textarea>
+                                            <textarea rows="10" class="form-control" name="content" id="message" value="${content.termsTbContent }" readonly>${content.termsTbContent }</textarea>
                                         </div>
                                     </div>                            
                                    
@@ -85,9 +85,7 @@
                 </div>
                 <!-- !Row -->
             </div><!-- Main Wrapper -->
-            <div class="page-footer">
-                <p>메인프로젝트 뭐멍냥 <i class="fa fa-heart"></i> by team4</p>
-            </div>
+            <jsp:include page="../include/page-footer.jsp"/>
         </div>
         <!-- /Page Inner -->
         <jsp:include page="../include/right-sidebar.jsp"/>

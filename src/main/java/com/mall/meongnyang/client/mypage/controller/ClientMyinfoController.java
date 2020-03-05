@@ -1,7 +1,11 @@
 package com.mall.meongnyang.client.mypage.controller;
 
-import javax.servlet.http.HttpSession;
-
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
+import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoService;
+import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPasswordService;
+import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPhoneService;
+import com.mall.meongnyang.client.mypage.service.ClientUpdateTermsAgreeListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,12 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
-import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
-import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoService;
-import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPasswordService;
-import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoPhoneService;
-import com.mall.meongnyang.client.mypage.service.ClientUpdateTermsAgreeListService;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ClientMyinfoController {
@@ -49,8 +48,9 @@ public class ClientMyinfoController {
 		phone.insert(8, "-");
 		
 		clientCustomerVO.setCustomerTbPhone(phone.toString());
-		
-		
+
+		tempVO.setCustomerTbPhone(phone.toString());
+		session.setAttribute("customer", tempVO);
 		clientUpdateMyinfoPhoneService.updateMyinfoPhone(clientCustomerVO);
 
 		return "mypage/myinfo";

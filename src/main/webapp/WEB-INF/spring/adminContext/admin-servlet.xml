@@ -23,7 +23,7 @@
 
 
 	<!-- 메일 서비스 -->
-	<bean id="mailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
+	<bean id="MailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
 
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -45,6 +45,23 @@
             </props>
         </property>
     </bean>
+
+
+
+	<!-- shopping 메뉴 세션세팅 인터셉트, 방문자수 카운팅 인터셉트 -->
+	<bean id="AdminSelectProductStockLimitedListService" class="com.mall.meongnyang.admin.intercepter.stockAlert.AdminSelectProductStockLimitedListServiceImpl"/>
+	<bean id="AdminSelectProductExpireCommingListService" class="com.mall.meongnyang.admin.intercepter.stockAlert.AdminSelectProductExpireCommingListServiceImpl"/>
+	<bean id="AdminSelectNewQnaListService" class="com.mall.meongnyang.admin.intercepter.stockAlert.AdminSelectNewQnaListServiceImpl"/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.ado"/>
+			<bean class="com.mall.meongnyang.admin.intercepter.stockAlert.StockCheckInterceptor">
+				<constructor-arg ref="AdminSelectProductStockLimitedListService"/>
+				<constructor-arg ref="AdminSelectProductExpireCommingListService"/>
+				<constructor-arg ref="AdminSelectNewQnaListService"/>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 
 

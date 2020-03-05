@@ -179,4 +179,20 @@
 		WHERE 
 			qna_tb_no = #{qnaTbNo}
 	</delete>
+
+
+	<select id="selectNewQnalist" parameterType="qna" resultType="qna">
+		select
+			A.*,
+			Q.QNA_TB_NO,
+			Q.QNA_TB_TITLE
+		from(
+			select
+				qna_tb_ref,
+				count(*) "cnt"
+			from qna
+			group by qna_tb_ref
+			having count(*) = 1) A JOIN QNA Q
+		ON A.qna_tb_ref = Q.qna_tb_ref
+	</select>
 </mapper>

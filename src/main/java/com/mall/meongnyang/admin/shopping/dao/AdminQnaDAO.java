@@ -14,4 +14,5 @@ public interface AdminQnaDAO {
 	public void updateStep(AdminQnaVO adminQnaVO);
 	public void updateStepDepth(AdminQnaVO adminQnaVO);
 	public void insertAdminQnaReply(AdminQnaVO adminQnaVO);
+	public List<AdminQnaVO> selectNewQnalist(AdminQnaVO adminQnaVO);
 }

@@ -60,4 +60,27 @@
         WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
     </update>
 
+    <select id="selectProductStockLimitedList" parameterType="productSale" resultType="productSale">
+<![CDATA[
+        SELECT
+            PD_SALE_TB_NO,
+            PD_SALE_TB_PRODUCT_NAME,
+            PD_SALE_TB_REMAINING_AMOUNT,
+            PD_SALE_TB_LIMIT_AMOUNT
+        FROM PD_SALE
+        WHERE PD_SALE_TB_REMAINING_AMOUNT <= PD_SALE_TB_LIMIT_AMOUNT
+]]>
+    </select>
+
+    <select id="selectProductExpireCommingList" parameterType="productSale" resultType="productSale">
+<![CDATA[
+        SELECT
+            PD_SALE_TB_NO,
+            PD_SALE_TB_PRODUCT_NAME,
+            PD_SALE_TB_EXPIRE_DAY
+        FROM PD_SALE
+        WHERE PD_SALE_TB_EXPIRE_DAY < (SYSDATE+60)
+]]>
+    </select>
+
 </mapper>

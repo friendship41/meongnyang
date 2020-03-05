@@ -28,7 +28,13 @@ public class ClientIndexController
     private ClientSelectIndexBestSellerListService clientSelectIndexBestSellerListService;
     @Autowired
     private ClientSelectIndexRecentMarketListService clientSelectIndexRecentMarketListService;
-    
+
+    @RequestMapping(value = "/needLogin.do")
+    public String needLogin()
+    {
+        return "include/needLogin";
+    }
+
     @RequestMapping("/index.do")
     public String indexPage(Model model, ClientCustomerVO clientCustomerVO)
     {

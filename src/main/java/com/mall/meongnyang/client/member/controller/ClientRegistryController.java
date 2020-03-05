@@ -1,16 +1,5 @@
 package com.mall.meongnyang.client.member.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.mall.meongnyang.admin.member.vo.AdminTermsVO;
 import com.mall.meongnyang.client.member.service.ClientInsertRegistryService;
 import com.mall.meongnyang.client.member.service.ClientInsertTermsAgreeListService;
@@ -20,6 +9,16 @@ import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import com.mall.meongnyang.util.mail.MailService;
 import com.mall.meongnyang.util.mail.MailVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ClientRegistryController {
@@ -48,7 +47,7 @@ public class ClientRegistryController {
 
 		// Mail 蹂대궡湲�
 		MailVO mailVO = new MailVO();
-		mailVO.setFrom("dlsdyd1245@naver.com"); // 愿�由ъ옄�븘�씠�뵒
+		mailVO.setFrom("poo963369@naver.com"); // 愿�由ъ옄�븘�씠�뵒
 		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // �쉶�썝媛��엯 �븘�씠�뵒
 		mailVO.setSubject("오늘 뭐멍냥 회원가입 인증메일입니다.");
 		mailVO.setContent("<h1>클릭해주세요</h1>"
@@ -79,7 +78,10 @@ public class ClientRegistryController {
 
 		}
 
-		return "index";
+		model.addAttribute("message","인증메일이 발송되었습니다. 확인해 주세요");
+		model.addAttribute("urldo","/index.do");
+
+		return "include/message-and-go-urldo";
 	}
 
 	@RequestMapping(value = "/loginAjaxSingle.do")

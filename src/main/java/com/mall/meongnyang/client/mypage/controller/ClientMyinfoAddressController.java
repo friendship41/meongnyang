@@ -1,9 +1,9 @@
 package com.mall.meongnyang.client.mypage.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
+import com.mall.meongnyang.client.mypage.service.*;
+import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
-import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
-import com.mall.meongnyang.client.mypage.service.ClientDeleteMyinfoAddressService;
-import com.mall.meongnyang.client.mypage.service.ClientInsertMyinfoAddressService;
-import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressListService;
-import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressService;
-import com.mall.meongnyang.client.mypage.service.ClientSelectTermsAgreeListService;
-import com.mall.meongnyang.client.mypage.service.ClientUpdateMyinfoAddressService;
-import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ClientMyinfoAddressController {
@@ -76,6 +69,15 @@ public class ClientMyinfoAddressController {
 		
 		
 		return "redirect:myinfo.do";
+	}
+
+	@RequestMapping(value = "/insertAddressAjax.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String insertAddressAjax(ClientCmAddressVO clientCmAddressVO, HttpSession session)
+	{
+		clientCmAddressVO.setCustomerTbNo(((ClientCustomerVO)session.getAttribute("customer")).getCustomerTbNo());
+		clientInsertMyinfoAddressService.insertMyinfoAddress(clientCmAddressVO);
+		return "{\"state\":\"success\"}";
 	}
 	
 	@RequestMapping(value = "/myinfo-address-update.do", method=RequestMethod.POST)

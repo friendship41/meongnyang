@@ -34,7 +34,7 @@ public class MailServiceImpl implements MailService
 
             msg.setSubject(mailVO.getSubject(), "UTF-8");
 
-            msg.setText(mailVO.getContent(), "UTF-8");
+            msg.setText(mailVO.getContent(), "UTF-8","B");
 
             msg.setHeader("content-Type", "text/html");
 

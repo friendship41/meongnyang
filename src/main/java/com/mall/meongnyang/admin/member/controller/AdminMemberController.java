@@ -1,18 +1,22 @@
 package com.mall.meongnyang.admin.member.controller;
 
-import java.util.List;
-
+import com.mall.meongnyang.admin.marketing.service.AdminSelectPromotionListService;
+import com.mall.meongnyang.admin.marketing.service.AdminSelectPromotionService;
+import com.mall.meongnyang.admin.marketing.vo.AdminPromotionVO;
+import com.mall.meongnyang.admin.member.service.AdminSelectAgreeMailCustomerListService;
+import com.mall.meongnyang.admin.member.service.AdminSelectMemberListService;
+import com.mall.meongnyang.admin.member.service.AdminUpdateMemberService;
+import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.util.mail.MailService;
+import com.mall.meongnyang.util.mail.MailVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mall.meongnyang.admin.member.service.AdminMemberMailService;
-import com.mall.meongnyang.admin.member.service.AdminSelectMemberListService;
-import com.mall.meongnyang.admin.member.service.AdminUpdateMemberService;
-import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
-import com.mall.meongnyang.util.mail.MailVO;
+import java.util.List;
 
 
 @Controller
@@ -23,10 +27,18 @@ public class AdminMemberController {
 	
 	@Autowired
 	private AdminSelectMemberListService adminSelectMemberListService;
-	
+
 	@Autowired
-	private AdminMemberMailService adminMemberMailService;
-	
+	private MailService mailService;
+
+	@Autowired
+	private AdminSelectPromotionListService adminSelectPromotionListService;
+
+	@Autowired
+	private AdminSelectPromotionService adminSelectPromotionService;
+
+	@Autowired
+	private AdminSelectAgreeMailCustomerListService adminSelectAgreeMailCustomerListService;
 	
 	
 	
@@ -36,7 +48,7 @@ public class AdminMemberController {
 	    	List<AdminMemberVO> adminMemberList = adminSelectMemberListService.selectMemberList(new AdminMemberVO());
 	    	
 	    	model.addAttribute("adminMemberList", adminMemberList);
-	    	
+	    	model.addAttribute("promotionList", adminSelectPromotionListService.selectPromotionList());
 	    	
 	        return "member/member-manage";
 	    }
@@ -46,27 +58,30 @@ public class AdminMemberController {
 	    {
 	    	
 	        adminUpdateMemberService.updateMember(adminMemberVO);
-	        
 
 	        return "redirect:member-Manage.ado";
 	    }
 
 	    
 	    @RequestMapping(value="/memberMail.ado", method= {RequestMethod.GET, RequestMethod.POST})
-	    public String memberMailPage(AdminMemberVO adminMemberVO)
+	    public String memberMailPage(AdminMemberVO adminMemberVO, AdminPromotionVO adminPromotionVO)
 	    {
-	    	List<AdminMemberVO> list = adminSelectMemberListService.selectMemberList(adminMemberVO); 
-	    	//메일보내기  
-	    	for(AdminMemberVO vo : list) {
-	    		MailVO mail = new MailVO();
-	    		mail.setTo(vo.getCustomerTbEmail());
-	    		mail.setFrom("ssbin9610@nate.com");
-	    		mail.setSubject("프로모션메일제목");
-	    		mail.setContent("프로모션정보");
-	    		adminMemberMailService.sendMail(mail);
+	    	List<ClientCustomerVO> cusList = adminSelectAgreeMailCustomerListService.selectMailAgreeCustomerList(new ClientCustomerVO());
+
+	    	AdminPromotionVO promotion = adminSelectPromotionService.selectPromotion(adminPromotionVO.getPromotionTbCode());
+
+	    	//메일보내기
+			MailVO mail = new MailVO();
+			mail.setFrom("poo963369@naver.com");
+			mail.setSubject(promotion.getPromotionTbName());
+			mail.setContent(promotion.getPromotionTbContent());
+	    	for(ClientCustomerVO clientCustomerVO : cusList)
+	    	{
+				mail.setTo(clientCustomerVO.getCustomerTbEmail());
+	    		mailService.sendMail(mail);
 	    	}
 	    	
-	    	return "member/member-Manage.ado";
+	    	return "redirect:member-Manage.ado";
 	    }
 	    
 	   

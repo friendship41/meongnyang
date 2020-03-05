@@ -120,16 +120,15 @@
                             <div class="panel-body">
                                 <form class="form-inline">
                                     <div class="form-group" style="margin-right: 10px">
-                                        <select class="form-control">
-                                            <option>프로모션1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                        <select id="promotionSelectBox" class="form-control">
+                                            <option value="-1">프로모션을 선택해 주세요</option>
+                                            <c:forEach var="promotion" items="${promotionList}">
+                                                <option value="${promotion.promotionTbCode}">${promotion.promotionTbName}</option>
+                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <a class="btn btn-rounded btn-success" href="/memberMail.ado">전체메일 보내기</a>
+                                        <a class="btn btn-rounded btn-success" href="javascript:sendPromotionMail()">전체메일 보내기</a>
                                         
                                     </div>
                                 </form>
@@ -139,9 +138,7 @@
                 </div>
                 <!-- !Row -->
             </div><!-- Main Wrapper -->
-            <div class="page-footer">
-                <p>메인프로젝트 뭐멍냥 <i class="fa fa-heart"></i> by team4</p>
-            </div>
+            <jsp:include page="../include/page-footer.jsp"/>
         </div>
         <!-- /Page Inner -->
         <jsp:include page="../include/right-sidebar.jsp"/>
@@ -151,6 +148,19 @@
 <!-- /Page Container -->
 
 
+<script>
+    function sendPromotionMail() {
+        var selectedPromotion = $("#promotionSelectBox option:selected").val();
+        if(selectedPromotion === '-1' || selectedPromotion === -1)
+        {
+            alert("프로모션을 선택해 주세요");
+        }
+        else
+        {
+            location.href = '/memberMail.ado?promotionTbCode='+selectedPromotion;
+        }
+    }
+</script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
 </body>

@@ -26,9 +26,6 @@ $(document).ready(function() {
     $('#noticeTable').dataTable({
         order: [[1,"desc"]]
     });
-    $('#qnaTable').dataTable({
-        order: [[1,"asc"]]
-    });
     $('#faqTable').dataTable({
         order: [[1,"desc"]]
     });
