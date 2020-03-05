@@ -39,7 +39,7 @@
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">our address</h2>
-                                <p>666 5th Ave New York, NY, United </p>
+                                <p>서울 종로구 돈화문로 26</p>
                             </div>
                         </div>
                         <div class="address">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">openning hour</h2>
-                                <p>666 5th Ave New York, NY, United </p>
+                                <p>영업 시간은 평일 10시 ~ 6시 입니다. </p>
                             </div>
                         </div>
 
@@ -58,7 +58,7 @@
                             </div>
                             <div class="address__details">
                                 <h2 class="ct__title">Phone Number</h2>
-                                <p>123-6586-587456</p>
+                                <p>010-5454-3456</p>
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
    
 
     <!-- Google Map js -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmGmeot5jcjdaJTvfCmQPfzeoG_pABeWo "></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT7sSTMO5sgyqu_1l0KuaIK_QAyv0U44c"></script>
     <script src="../js/contact-map.js"></script>
     <script>
         // When the window has finished loading create our google map below
@@ -90,12 +90,12 @@
             // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
             var mapOptions = {
                 // How zoomed in you want the map to start at (always required)
-                zoom: 12,
+                zoom: 18,
 
                 scrollwheel: false,
 
                 // The latitude and longitude to center the map (always required)
-                center: new google.maps.LatLng(23.7286, 90.3854), // New York
+                center: new google.maps.LatLng(37.571144, 126.992489), // DanSungSa
 
                 // How you would like to style the map.
                 // This is where you would paste any style found on Snazzy Maps.
@@ -277,10 +277,10 @@
 
             // Let's also add a marker while we're at it
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(23.7286, 90.3854),
+                position: new google.maps.LatLng(37.571144, 126.992489),
                 map: map,
                 title: 'Ramble!',
-                icon: 'images/icons/map-2.png',
+                icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
                 animation:google.maps.Animation.BOUNCE
 
             });

@@ -95,10 +95,7 @@
 														<td>${qna.qnaTbRegDate }</td>
 														<td>${qna.qnaTbReadcount }</td>
 													</tr>
-												</c:forEach>
-
-
-											</tbody>
+												</c:forEach>											</tbody>
 										</table>
 									</div>
 								</div>
