@@ -16,7 +16,7 @@ public class LabelMaker { // 날짜와 날짜사이의 일수 계산해서 chart
 		String[] labels = new String[calDateDays + 1]; // 라벨 담을 배열
 
 		Calendar cld = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
 
 		cld.setTime(startDate);
 

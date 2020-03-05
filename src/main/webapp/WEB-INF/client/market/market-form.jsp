@@ -44,13 +44,13 @@
 								<label for="smallinput"
 									class="col-sm-2 control-label label-input-sm">이름</label>
 								<div class="col-sm-8">
-									<input type="text" placeholder="Name *">
+									<input type="text" placeholder="Name *" value="${customer.customerTbName}" readonly="readonly">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="email" class="col-sm-2 control-label label-input-sm">이메일</label>
 								<div class="col-sm-8">
-									<input type="email" id="email" placeholder="Email *">
+									<input type="email" id="email" placeholder="Email *" value="${customer.customerTbEmail}" readonly="readonly">
 								</div>
 							</div>
 							<div class="form-group">
