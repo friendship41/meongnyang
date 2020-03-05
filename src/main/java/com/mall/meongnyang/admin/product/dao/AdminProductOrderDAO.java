@@ -11,4 +11,5 @@ public interface AdminProductOrderDAO
     public List<ClientOrderVO> selectOrderStateList();
     public void deleteProductOrder(ClientOrderVO clientOrderVO);
     public void deleteOrderDetailByNo(ClientOrderVO clientOrderVO);
+    public void updateOrderState(ClientOrderVO clientOrderVO);
 }

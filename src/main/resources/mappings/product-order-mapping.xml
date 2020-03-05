@@ -320,6 +320,11 @@
 		ON PO.CUSTOMER_TB_NO = C.CUSTOMER_TB_NO
 	</select>
 
-
+	<update id="updateOrderState" parameterType="orderProc">
+		UPDATE PD_ORDER
+		SET
+			PD_ORDER_TB_STATE = #{pdOrderTbState}
+		WHERE PD_ORDER_TB_NO = #{pdOrderTbNo}
+	</update>
 
 </mapper>

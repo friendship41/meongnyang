@@ -2,6 +2,7 @@ package com.mall.meongnyang.admin.product.controller;
 
 import com.mall.meongnyang.admin.product.service.AdminDeleteProductOrderService;
 import com.mall.meongnyang.admin.product.service.AdminSelectOrderStateListService;
+import com.mall.meongnyang.admin.product.service.AdminUpdateOrderStateService;
 import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,8 @@ public class AdminDeliveryProductController
     private AdminSelectOrderStateListService adminSelectOrderStateListService;
     @Autowired
     private AdminDeleteProductOrderService adminDeleteProductOrderService;
+    @Autowired
+    private AdminUpdateOrderStateService adminUpdateOrderStateService;
 
 
     @RequestMapping(value = "/productProcess.ado", method = RequestMethod.GET)
@@ -30,6 +33,13 @@ public class AdminDeliveryProductController
     public String deleteProductOrder(ClientOrderVO clientOrderVO)
     {
         adminDeleteProductOrderService.deleteProductOrder(clientOrderVO);
+        return "redirect:productProcess.ado";
+    }
+
+    @RequestMapping(value = "/updateProductOrder.ado", method = RequestMethod.GET)
+    public String updateProductOrder(ClientOrderVO clientOrderVO)
+    {
+        adminUpdateOrderStateService.updateOrderState(clientOrderVO);
         return "redirect:productProcess.ado";
     }
 

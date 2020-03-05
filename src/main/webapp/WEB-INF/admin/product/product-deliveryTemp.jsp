@@ -61,11 +61,11 @@
                                                     </c:when>
                                                     <c:when test="${singleOrder.pdOrderTbState eq 'P'}">
                                                         <td><span class="label label-info">결제완료</span></td>
-                                                        <td><span class="btn btn-primary">배송시작</span></td>
+                                                        <td><span onclick="updateState('${singleOrder.pdOrderTbNo}','D')" class="btn btn-primary">배송시작</span></td>
                                                     </c:when>
                                                     <c:when test="${singleOrder.pdOrderTbState eq 'D'}">
                                                         <td><span class="label label-nowGo">배송중</span></td>
-                                                        <td><span class="btn btn-default">배송완료</span></td>
+                                                        <td><span onclick="updateState('${singleOrder.pdOrderTbNo}','A')" class="btn btn-default">배송완료</span></td>
                                                     </c:when>
                                                     <c:when test="${singleOrder.pdOrderTbState eq 'A'}">
                                                         <td><span class="label label-success">배송완료</span></td>
@@ -73,7 +73,7 @@
                                                     </c:when>
                                                     <c:when test="${singleOrder.pdOrderTbState eq 'R'}">
                                                         <td><span class="label label-danger">환불요청</span></td>
-                                                        <td><span class="btn btn-danger">환불처리</span></td>
+                                                        <td><span onclick="updateState('${singleOrder.pdOrderTbNo}','C')" class="btn btn-danger">환불처리</span></td>
                                                     </c:when>
                                                     <c:when test="${singleOrder.pdOrderTbState eq 'C'}">
                                                         <td><span class="label label-danger">환불/취소완료</span></td>
@@ -109,6 +109,11 @@
 
     function deleteOrder(orderNum) {
         var url = '/deleteProductOrder.ado?pdOrderTbNo='+orderNum;
+        location.href = url;
+    }
+    
+    function updateState(orderNum, stateTo) {
+        var url = '/updateProductOrder.ado?pdOrderTbNo='+orderNum+'&pdOrderTbState='+stateTo;
         location.href = url;
     }
 </script>
