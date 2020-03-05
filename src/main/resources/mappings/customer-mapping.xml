@@ -29,10 +29,14 @@
 	</insert>
 	
 	<insert id="insertKakao" parameterType="clientLogin" >
-		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email)
-		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail})
+		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email, customer_tb_join_path)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail}, 'K')
 	</insert>
 	
+	<insert id="insertNaver" parameterType="clientLogin">
+	INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email, customer_tb_join_path)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail}, 'N')
+	</insert>
 
 	<update id="updateClientLastLogin" parameterType="clientLogin">
 		UPDATE customer

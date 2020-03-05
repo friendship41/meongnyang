@@ -89,8 +89,8 @@
                                     <li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
                                     <li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
                                     <li class="social_twitter"><a href="https://kauth.kakao.com/oauth/authorize?client_id=979aa4be781f57e07a085e52b0e8a729&redirect_uri=http://localhost:8080/klogin.do&response_type=code" id="kakao-login-btn" class="entypo-twitter"></a></li>
-                                    <li class="social_behance"><a href="#" class="entypo-behance"></a></li>
-                                </ul>
+                                    <li class="social_behance"><a href="${url}" class="entypo-behance"></a></li>
+                                </ul>									
                             </div>
                         </div>
                     </div>
