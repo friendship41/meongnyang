@@ -544,7 +544,7 @@
 <script>
 $(function() {
 	
-	var customer = '${customer}';
+	var customer = "${customer}";
 	
 	getReviewList();
 	

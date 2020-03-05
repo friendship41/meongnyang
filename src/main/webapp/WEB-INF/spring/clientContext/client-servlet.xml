@@ -74,6 +74,7 @@
 			<mvc:exclude-mapping path="/shoppingDetail.do"/>
 			<mvc:exclude-mapping path="/productReviewList.do"/>
 			<mvc:exclude-mapping path="/needLogin.do"/>
+			<mvc:exclude-mapping path="/insertReview.do"/>
 			<bean class="com.mall.meongnyang.client.intercepter.login.LoginInterceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
