@@ -68,7 +68,7 @@
                                             <td class="product-price"><span class="amount">${order.pdOrderTbPayment}</span></td>
                                             <c:if test="${order.pdOrderTbState eq 'P'}">
                                             <td class="product-stock-status"><span class="badge badge-payComp">결제완료</span></td>
-                                            <td class="product-add-to-cart"><a href="#">주문취소</a></td>
+                                            <td class="product-add-to-cart"><a href="/updateOrderState.do?pdOrderTbNo=${order.pdOrderTbNo}&pdOrderTbState=C">주문취소</a></td>
                                             </c:if>
                                             <c:if test="${order.pdOrderTbState eq 'D'}">
                                             <td class="product-stock-status"><span class="badge badge-nowGo">배송중</span></td>
@@ -76,11 +76,19 @@
                                             </c:if>
                                             <c:if test="${order.pdOrderTbState eq 'A'}">
                                             <td class="product-stock-status"><span class="badge badge-complete">배송완료</span></td>
-                                            <td class="product-add-to-cart"><a href="#">리뷰작성</a><a href="#">환불반품</a></td>
+                                            <td class="product-add-to-cart"><a href="/updateOrderState.do?pdOrderTbNo=${order.pdOrderTbNo}&pdOrderTbState=R">환불반품</a></td>
                                             </c:if>
                                             <c:if test="${order.pdOrderTbState eq 'C'}">
                                             <td class="product-stock-status"><span class="badge badge-cancel">취소됨</span></td>
                                             <td class="product-add-to-cart"></td>
+                                            </c:if>
+                                            <c:if test="${order.pdOrderTbState eq 'W'}">
+                                                <td class="product-stock-status"><span class="badge badge-warning">결제대기</span></td>
+                                                <td class="product-add-to-cart"></td>
+                                            </c:if>
+                                            <c:if test="${order.pdOrderTbState eq 'R'}">
+                                                <td class="product-stock-status"><span class="badge badge-warning">환불요청중</span></td>
+                                                <td class="product-add-to-cart"></td>
                                             </c:if>
                                         </tr>
                                         </c:forEach>                                     

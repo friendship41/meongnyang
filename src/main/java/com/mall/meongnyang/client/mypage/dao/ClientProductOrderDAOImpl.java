@@ -47,5 +47,11 @@ public class ClientProductOrderDAOImpl implements ClientProductOrderDAO {
 		sqlSessionTemplate.delete("orderDAO.deleteProductOrder", clientOrderVO);
 	}
 
+	@Override
+	public void updateOrderState(ClientOrderVO clientOrderVO)
+	{
+		sqlSessionTemplate.update("orderDAO.updateOrderState", clientOrderVO);
+	}
+
 
 }
