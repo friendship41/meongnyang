@@ -57,7 +57,7 @@
                                                 <c:choose>
                                                     <c:when test="${singleOrder.pdOrderTbState eq 'W'}">
                                                         <td><span class="label label-warning">결제대기</span></td>
-                                                        <td><span class="btn btn-danger">삭제</span></td>
+                                                        <td><span onclick="deleteOrder('${singleOrder.pdOrderTbNo}')" class="btn btn-danger">삭제</span></td>
                                                     </c:when>
                                                     <c:when test="${singleOrder.pdOrderTbState eq 'P'}">
                                                         <td><span class="label label-info">결제완료</span></td>
@@ -108,7 +108,8 @@
     });
 
     function deleteOrder(orderNum) {
-        var url = ''+orderNum;
+        var url = '/deleteProductOrder.ado?pdOrderTbNo='+orderNum;
+        location.href = url;
     }
 </script>
 

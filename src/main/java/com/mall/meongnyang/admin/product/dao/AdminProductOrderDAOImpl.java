@@ -25,4 +25,16 @@ public class AdminProductOrderDAOImpl implements AdminProductOrderDAO
     {
         return sqlSessionTemplate.selectList("orderDAO.selectOrderStateList");
     }
+
+    @Override
+    public void deleteProductOrder(ClientOrderVO clientOrderVO)
+    {
+        sqlSessionTemplate.delete("orderDAO.deleteProductOrder",clientOrderVO);
+    }
+
+    @Override
+    public void deleteOrderDetailByNo(ClientOrderVO clientOrderVO)
+    {
+        sqlSessionTemplate.delete("orderDetailDAO.deleteOrderDetailByNo", clientOrderVO);
+    }
 }
