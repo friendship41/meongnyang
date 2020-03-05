@@ -1,12 +1,12 @@
 package com.mall.meongnyang.admin.member.dao;
 
-import java.util.List;
-
+import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
+import java.util.List;
 
 
 
@@ -28,7 +28,11 @@ public class AdminMemberDAOImpl implements AdminMemberDAO {
 		return sqlSessionTemplate.selectList("MemberDAO.selectMemberList", adminMemberVO);
 	}
 
-	
+	@Override
+	public List<ClientCustomerVO> selectMailAgreeCustomerList(ClientCustomerVO clientCustomerVO)
+	{
+		return sqlSessionTemplate.selectList("ClientLoginDAO.selectMailAgreeCustomerList", clientCustomerVO);
+	}
 
-	
+
 }

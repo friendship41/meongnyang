@@ -23,7 +23,7 @@
 
 
 	<!-- 메일 서비스 -->
-	<bean id="mailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
+	<bean id="MailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
 
 
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

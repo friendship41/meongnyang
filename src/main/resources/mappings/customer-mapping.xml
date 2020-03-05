@@ -90,4 +90,13 @@
 		WHERE customer_Tb_no = #{customerTbNo}
 			
 	</update>
+
+	<select id="selectMailAgreeCustomerList" parameterType="clientLogin" resultType="clientLogin">
+		SELECT
+			C.CUSTOMER_TB_EMAIL
+		FROM CUSTOMER C JOIN TERMS_AGREE T
+		ON C.CUSTOMER_TB_NO = T.CUSTOMER_TB_NO
+        WHERE C.CUSTOMER_TB_STATE = 'N' AND T.TERMS_AGREE_TB_CONSENT_STATUS = 'Y'
+        GROUP BY C.CUSTOMER_TB_EMAIL
+	</select>
 </mapper>

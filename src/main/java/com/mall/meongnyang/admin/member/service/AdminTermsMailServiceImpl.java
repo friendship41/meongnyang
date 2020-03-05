@@ -1,52 +1,31 @@
 package com.mall.meongnyang.admin.member.service;
 
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
-
-import org.springframework.mail.javamail.JavaMailSender;
+import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
+import com.mall.meongnyang.util.mail.MailService;
+import com.mall.meongnyang.util.mail.MailVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
-import com.mall.meongnyang.admin.member.vo.AdminTermsMailVO;
+import java.util.List;
 
 @Service
 public class AdminTermsMailServiceImpl implements AdminTermsMailService {
-	@Inject
-	JavaMailSender mailSender;
-	
-	
-	
-	
+	@Autowired
+    private MailService mailService;
+
 	@Override
-	public void send(AdminTermsMailVO mailVO, List<AdminMemberVO> memberList) {
+	public void send(MailVO mailVO, List<AdminMemberVO> memberList) {
+	    mailVO.setContent("수정된 약관 전문입니다:<br>"+mailVO.getContent());
 		try {
-            // �̸��� ��ü
-            MimeMessage msg = mailSender.createMimeMessage();
- 
-            
-            InternetAddress[] toAddr = new InternetAddress[memberList.size()];
-            for(int i=0; i<memberList.size(); i++) {
-            	toAddr[i] = new InternetAddress(memberList.get(i).getCustomerTbEmail());
+		    for (AdminMemberVO member : memberList)
+            {
+                mailVO.setTo(member.getCustomerTbEmail());
+                mailService.sendMail(mailVO);
             }
-                        
-            msg.addRecipients(RecipientType.TO, toAddr);
-            
-            msg.addFrom(new InternetAddress[] { new InternetAddress(mailVO.getSenderMail(), mailVO.getSenderName()) });
- 
-          
-            msg.setSubject(mailVO.getSubject(), "utf-8");
-           
-            msg.setText(mailVO.getMessage(), "utf-8");
-                           
-            mailSender.send(msg);
-        } catch (Exception e) {
+        }
+		catch (Exception e)
+        {
             e.printStackTrace();
         }
-		
-		
 	}
 }

@@ -46,4 +46,16 @@ public class MailVO
     {
         this.content = content;
     }
+
+
+    @Override
+    public String toString()
+    {
+        return "MailVO{" +
+                "from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", Subject='" + Subject + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }
