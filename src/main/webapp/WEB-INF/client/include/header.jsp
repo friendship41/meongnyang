@@ -98,7 +98,7 @@
                                             <li><a href="faq.do">FAQ</a></li>
                                             <li><a href="qna-list.do">Q&A</a></li>
                                             <li><a href="reviewList.do">리뷰</a></li>
-                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="contact.do">Contact</a></li>
                                         </ul>
                                     </li>
                                     <li class="drop"><a href="market-list.do">Market</a>

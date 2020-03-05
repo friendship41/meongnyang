@@ -9,25 +9,28 @@
             <div class="row">
                 <!-- Start Single Footer Widget -->
                 <div class="col-md-12">
-
                     <div class="footer">
-                        <h2 class="title__line--2">ABOUT US</h2>
-                        <div class="ft__details">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim</p>
-                            <div class="ft__social__link">
-                                <ul class="social__link">
-                                    <li><a href="#"><i class="icon-social-twitter icons"></i></a></li>
-
-                                    <li><a href="#"><i class="icon-social-instagram icons"></i></a></li>
-
-                                    <li><a href="#"><i class="icon-social-facebook icons"></i></a></li>
-
-                                    <li><a href="#"><i class="icon-social-google icons"></i></a></li>
-
-                                    <li><a href="#"><i class="icon-social-linkedin icons"></i></a></li>
-                                </ul>
-                            </div>
+                        <div class="ft__details" style="float:left; width: 33%;">
+                        		<h2 class="title__line--2">ABOUT US</h2>
+                        		<p>(주)오늘뭐멍냥</p>
+                            	<p>주소 : 서울 종로구 돈화문로 26</p>
+                            	<p>영업시간 : 영업 시간은 평일 10시 ~ 6시</p>
+                            	<p>계좌 : 110 - 353 - 032123 신한</p>
+                            	<p>사업자번호/대표자명 : 815-81-12355 / 서은영</p>
+                        </div>
+                        <div class="ft__details" style="float:left; width: 40%;">
+                        		 <h2 class="title__line--2">고객센터</h2>
+								<p>주소 : 주소 : 서울 종로구 돈화문로 26</p>
+								<p>Tel : 123-123</p>
+								<p>E-mail : moengnyang@naver.com</p>
+								<p>대표자명 : 김철수</p>
+                        </div>
+                        <div class="ft__details" style="float:right; width: 20%;">
+                        		<h2 class="title__line--2">전자금융거래분쟁담당</h2>
+								<p>주소 : 주소 : 서울 종로구 돈화문로 26</p>
+								<p>Tel : 123-123</p>
+								<p>E-mail : moengnyang@naver.com</p>
+								<p>대표자명 : 김민희</p>
                         </div>
                     </div>
                 </div>

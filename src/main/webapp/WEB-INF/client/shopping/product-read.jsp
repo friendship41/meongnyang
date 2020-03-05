@@ -129,7 +129,7 @@
                 <ul class="pro__details__tab" role="tablist">
                     <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">상품상세</a></li>
                     <li role="presentation" class="review"><a href="#review" role="tab" data-toggle="tab" id="reviewTap">review</a></li>
-                    <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">Q&A(2)</a></li>
+                    <li role="presentation" class="shipping"><a href="#shipping" role="tab" data-toggle="tab">Q&A</a></li>
                 </ul>
                 <!-- End List And Grid View -->
             </div>
