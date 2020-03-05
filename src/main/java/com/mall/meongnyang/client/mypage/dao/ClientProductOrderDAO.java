@@ -13,4 +13,5 @@ public interface ClientProductOrderDAO {
 	public void insertProductOrder(ClientOrderVO clientOrderVO);
 	public void updateProductOrderPay(ClientOrderVO clientOrderVO);
 	public void deleteProductOrder(ClientOrderVO clientOrderVO);
+	public void updateOrderState(ClientOrderVO clientOrderVO);
 }

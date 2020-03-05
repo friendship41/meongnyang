@@ -43,6 +43,7 @@
                         <li><a href="productCategoryList.ado">카테고리</a></li>
                         <li><a href="productAnalysis.ado">상품분석</a></li>
                         <li><a href="productStock.ado">재고관리</a></li>
+                        <li><a href="productProcess.ado">(임시)배송/환불처리관련</a></li>
                     </ul>
                 </li>
                 <li>

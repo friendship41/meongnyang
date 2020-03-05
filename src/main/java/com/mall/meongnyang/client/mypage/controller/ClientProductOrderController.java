@@ -1,25 +1,28 @@
 package com.mall.meongnyang.client.mypage.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.mypage.service.ClientSelectProductOrderListService;
+import com.mall.meongnyang.client.mypage.service.ClientupdateOrderStateService;
+import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
+import com.mall.meongnyang.client.mypage.vo.OrderPaging;
+import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
-import com.mall.meongnyang.client.mypage.service.ClientSelectProductOrderListService;
-import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
-import com.mall.meongnyang.client.mypage.vo.OrderPaging;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ClientProductOrderController {
 	
 	@Autowired
 	private ClientSelectProductOrderListService orderListService;
+	@Autowired
+	private ClientupdateOrderStateService clientupdateOrderStateService;
 	
 	@RequestMapping("/orderList.do")
 	public String selectOrderList(@RequestParam(defaultValue = "1") int currentPage, HttpSession session,
@@ -43,5 +46,12 @@ public class ClientProductOrderController {
 		model.addAttribute("orderList", orderList);
 		
 		return "mypage/order-list";
+	}
+
+	@RequestMapping(value = "/updateOrderState.do", method = RequestMethod.GET)
+	public String updateorderState(ClientOrderVO clientOrderVO)
+	{
+		clientupdateOrderStateService.updateOrderState(clientOrderVO);
+		return "redirect:orderList.do";
 	}
 }

@@ -24,6 +24,8 @@ public class ClientOrderVO
     private String tid;
     private String pg_token;
 
+    private String customerTbName;
+
     public String getPdOrderTbNo()
     {
         return pdOrderTbNo;
@@ -184,6 +186,16 @@ public class ClientOrderVO
         this.tid = tid;
     }
 
+    public String getCustomerTbName()
+    {
+        return customerTbName;
+    }
+
+    public void setCustomerTbName(String customerTbName)
+    {
+        this.customerTbName = customerTbName;
+    }
+
     @Override
     public String toString()
     {
@@ -204,6 +216,7 @@ public class ClientOrderVO
                 ", orderRepProductName='" + orderRepProductName + '\'' +
                 ", tid='" + tid + '\'' +
                 ", pg_token='" + pg_token + '\'' +
+                ", customerTbName='" + customerTbName + '\'' +
                 '}';
     }
 }
