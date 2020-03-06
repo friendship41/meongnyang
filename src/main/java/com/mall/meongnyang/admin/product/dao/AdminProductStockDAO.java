@@ -12,4 +12,5 @@ public interface AdminProductStockDAO
     public List<AdminProductSaleVO> selectProductStockLimitedList(AdminProductSaleVO adminProductSaleVO);
     public List<AdminProductSaleVO> selectProductExpireCommingList(AdminProductSaleVO adminProductSaleVO);
     public List<AdminProductSaleVO> selectDashBoardProductStorkList();
+    public List<AdminProductSaleVO> selectDashboardExpireProductList();
 }

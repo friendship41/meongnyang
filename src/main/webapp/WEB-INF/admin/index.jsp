@@ -158,13 +158,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        <c:forEach var="expire" items="${dashboardExpireList}">
+                                            <tr>
+                                                <td>${expire.rowNumber}</td>
+                                                <td>${expire.productTbCode}</td>
+                                                <td>${expire.pdSaleTbProductName}</td>
+                                                <td>${expire.pdSaleTbStartDay}</td>
+                                                <td><span class="label label-danger">${expire.pdSaleTbExpireDay}</span></td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

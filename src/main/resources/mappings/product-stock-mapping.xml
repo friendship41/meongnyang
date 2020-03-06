@@ -29,6 +29,30 @@
         ]]>
     </select>
 
+    <select id="selectDashboardExpireProductList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ROWNUM "ROW_NUMBER",
+                A.PD_SALE_TB_NO,
+                A.PRODUCT_TB_CODE,
+                A.PD_SALE_TB_PRODUCT_NAME,
+                PD_SALE_TB_START_DAY,
+                PD_SALE_TB_EXPIRE_DAY
+            FROM(
+                SELECT
+                    PD_SALE_TB_NO,
+                    PRODUCT_TB_CODE,
+                    PD_SALE_TB_PRODUCT_NAME,
+                    PD_SALE_TB_START_DAY,
+                    PD_SALE_TB_EXPIRE_DAY
+                FROM PD_SALE
+                WHERE PD_SALE_TB_EXPIRE_DAY < (SYSDATE+60) AND PD_SALE_TB_STATE = 'Y'
+                ORDER BY PD_SALE_TB_EXPIRE_DAY DESC
+            ) A
+        ]]>
+    </select>
+
+
     <select id="selectProductStorkList" parameterType="productSale" resultType="productSale">
         <![CDATA[
             SELECT
