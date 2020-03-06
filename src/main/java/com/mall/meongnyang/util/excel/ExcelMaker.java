@@ -361,7 +361,7 @@ public class ExcelMaker {
 			} else {
 				if (!label.get(cnt).equals(salesList.get(i).getPdSaleTbSalesPriceRange())) {
 					label.add(salesList.get(i).getPdSaleTbSalesPriceRange());
-					cnt = i;
+					cnt += 1;
 				}
 			}
 		}

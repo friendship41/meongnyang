@@ -28,7 +28,6 @@
 					<h3 class="breadcrumb-header">매출 현황</h3>
 				</div>
 				<div id="main-wrapper">
-
 					<!-- 상세정보 -->
 					<!-- Row -->
 					<div class="row">
@@ -47,8 +46,8 @@
 											</div>
 											<div id="1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne1">&nbsp;
 												<input type='hidden' name='targets' value='dailySales'>
-											 	<a href="javascript:void(0)" id="excelDown1"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
-											 	<a href="javascript:void(0)" id="pdfDown1"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
+											 	<a href="javascript:void(0)" id="excelDown1" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown1" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -149,8 +148,8 @@
 											</div>
 											<div id="2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">&nbsp;
 												<input type='hidden' name='targets' value='categorySales'>
-												<a href="javascript:void(0)" id="excelDown2"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
-											 	<a href="javascript:void(0)" id="pdfDown2"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
+												<a href="javascript:void(0)" id="excelDown2" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown2" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -222,8 +221,8 @@
 											</div>
 											<div id="3" class="panel-collapse collapse" role="tabpanel"	aria-labelledby="headingThree3">&nbsp;
 												<input type='hidden' name='targets' value='dailySalesPrice'>
-												<a href="javascript:void(0)" id="excelDown3"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
-											 	<a href="javascript:void(0)" id="excelDown3"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
+												<a href="javascript:void(0)" id="excelDown3" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown3" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -321,8 +320,8 @@
 											</div>
 											<div id="4" class="panel-collapse collapse" role="tabpanel"	aria-labelledby="headingFour4">&nbsp;
 												<input type='hidden' name='targets' value='regionSales'>
-												<a href="javascript:void(0)" id="excelDown4"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
-											 	<a href="javascript:void(0)" id="excelDown4"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
+												<a href="javascript:void(0)" id="excelDown4" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown4" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -670,7 +669,7 @@
 				$("#regionSaleTableBody").empty();
 				$("#regionSaleTableFoot").html(str2);
 				$("#regionSaleTableBody").html(str);
-	            $("#regionSaleTable").DataTable();
+	            $("#regionSaleTable").DataTable({"order": [1,'desc']});
 	 		});
 		}
 		
@@ -908,11 +907,91 @@
 		}
 	}
 	
+	function pdfDown(event) {
+		switch(event.target.id){ // 각각 event 객체로 전달된 target 프로퍼티에서 id의 값을 알 수 있다.
+			case 'pdfDown1':
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = "";
+		 		var endDate = "";
+		 		
+		 		var goUrl = "";
+				
+				if(targets === 'dailySales'){
+					startDate = $("#dailySalesStartDate").val();
+			 		endDate = $("#dailySalesEndDate").val();
+				} else if(targets === 'monthlySales'){
+					startDate = $("#monthlySalesStartDate").val();
+			 		endDate = $("#monthlySalesEndDate").val();
+				}
+				
+				goUrl = "/pdfdown.ado?targets="+targets+"&startDate="+startDate+"&endDate="+endDate;
+		 		
+				location.href=goUrl;
+			    break;
+			
+			case 'pdfDown2':
+				
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = $("#categorySalesStartDate").val();
+		 		var endDate = $("#categorySalesEndDate").val();
+		 		
+		 		var goUrl = "/pdfdown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href=goUrl;
+		 		
+			    break;
+			    
+			case 'pdfDown3':	
+
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = "";
+		 		var endDate = "";
+		 		
+		 		var goUrl = "";
+		 		if(targets === 'dailySalesPrice') {
+		 			startDate = $("#dailySalesPriceStartDate").val();
+			 		endDate = $("#dailySalesPriceEndDate").val();			 	
+		 			
+		 		} else if(targets === 'monthlySalesPrice') {
+		 			startDate = $("#monthlySalesPriceStartDate").val();
+			 		endDate = $("#monthlySalesPriceEndDate").val();		 			
+		 		}
+		 		
+		 		goUrl = "/pdfdown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href = goUrl;
+		 		
+				break;
+			
+			case 'pdfDown4':
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = $("#regionSalesStartDate").val();
+		 		var endDate = $("#regionSalesEndDate").val();
+		 		
+		 		var goUrl = "/pdfdown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href = goUrl;
+		 		
+			    break;
+		}
+	}
+	
 	$(document).on('click', '#excelDown1', excelDown);
 	$(document).on('click', '#excelDown2', excelDown);
 	$(document).on('click', '#excelDown3', excelDown);
 	$(document).on('click', '#excelDown4', excelDown);
-
+	$(document).on('click', '#pdfDown1', pdfDown);
+	$(document).on('click', '#pdfDown2', pdfDown);
+	$(document).on('click', '#pdfDown3', pdfDown);
+	$(document).on('click', '#pdfDown4', pdfDown);
 </script>
 
 </body>
