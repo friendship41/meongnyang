@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="include/head.jsp"/>
-<body onload="chartGo()">
+<body>
 
 <!-- Page Container -->
 <div class="page-container">
@@ -36,7 +36,7 @@
                                         <i class="icon-arrow_downward stats-icon"></i>
                                     </c:if>
                                     <c:if test="${monthlySale.upDown eq 'n'}">
-                                        <i class="icon-arrow-left stats-icon"></i>
+                                        <i class="icon-arrow-right stats-icon"></i>
                                     </c:if>
                                 </div>
                             </div>
@@ -46,11 +46,19 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">5,000,000</span>
+                                    <span class="stats-number">${dailySale.pdOrderTbPayment}</span>
                                     <p class="stats-info">일 매출</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_downward stats-icon"></i>
+                                    <c:if test="${dailySale.upDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${dailySale.upDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${dailySale.upDown eq 'n'}">
+                                        <i class="icon-arrow-right stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -59,11 +67,24 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">+10,555</span>
+                                    <c:if test="${userCount.userCountTbJoiners eq 0}">
+                                        <span class="stats-number">0</span>
+                                    </c:if>
+                                    <c:if test="${userCount.userCountTbJoiners ne 0}">
+                                        <span class="stats-number">+${userCount.userCountTbJoiners}</span>
+                                    </c:if>
                                     <p class="stats-info">신규 회원</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_upward stats-icon"></i>
+                                    <c:if test="${userCount.joinUpDown eq 'n'}">
+                                        <i class="icon-arrow-right stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.joinUpDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.joinUpDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -72,11 +93,19 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">5,000,000</span>
+                                    <span class="stats-number">${userCount.userCountTbVisitors}</span>
                                     <p class="stats-info">일일 방문자</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_upward stats-icon"></i>
+                                    <c:if test="${userCount.visitUpDown eq 'n'}">
+                                        <i class="icon-arrow-right stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.visitUpDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.visitUpDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -257,41 +286,12 @@
 </div><!-- /Page Container -->
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    function chartGo() {
-        new Chart(document.getElementById("sales_chart_week"), {
-            "type": "line",
-            "data": {
-                "labels": ["1일", "2일", "3일", "4일", "5일", "6일", "7일", "8일", "9일", "10일", "11일", "12일", "13일", "14일", "15일"],
-                "datasets": [{
-                    "label": "방문자 수",
-                    "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000, 1000, 2000, 3000],
-                    "fill": false,
-                    "borderColor": "rgb(93,168,203)",
-                    "lineTension": 0.2
-                }]
-            },
-            "options": {}
-        });
-        new Chart(document.getElementById("visit_chart_week"), {
-            "type": "line",
-            "data": {
-                "labels": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                "datasets": [{
-                    "label": "방문자 수",
-                    "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000],
-                    "fill": false,
-                    "borderColor": "rgb(93,168,203)",
-                    "lineTension": 0.2
-                }]
-            },
-            "options": {}
-        });
-
-
-
-    }
+    $(document).ready(function () {
+        new Chart(document.getElementById("visit_chart_week"), JSON.parse('${visitorChart}'));
+        new Chart(document.getElementById("sales_chart_week"), JSON.parse('${saleChart}'));
+    })
 </script>
 
 <jsp:include page="include/scripts-load.jsp"/>
