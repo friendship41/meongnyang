@@ -25,11 +25,19 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">50,000,000</span>
+                                    <span class="stats-number">${monthlySale.pdOrderTbPayment}</span>
                                     <p class="stats-info">월 매출</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_upward stats-icon"></i>
+                                    <c:if test="${monthlySale.upDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${monthlySale.upDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${monthlySale.upDown eq 'n'}">
+                                        <i class="icon-arrow-left stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -180,7 +188,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">주문현황</h4>
+                                <h4 class="panel-title">주간 주문현황</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
@@ -205,15 +213,34 @@
                                             <th>주문상태</th>
                                         </tr>
                                         </tfoot>
-                                        <tbody id="orderTableBody">
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
+                                        <tbody>
+                                        <c:forEach var="orderProduct" items="${dashboardOrderList}">
+                                            <tr>
+                                                <td>${orderProduct.pdOrderTbNo}</td>
+                                                <td>${orderProduct.pdSaleTbProductName}</td>
+                                                <td>${orderProduct.customerTbName}</td>
+                                                <td>${orderProduct.pdOrderTbPayment}</td>
+                                                <td>${orderProduct.pdOrderTbOrderDate}</td>
+                                                <c:choose>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'W'}">
+                                                        <td><span class="label label-warning">결제대기</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'P'}">
+                                                        <td><span class="label label-info">결제완료</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'D'}">
+                                                        <td><span class="label label-nowGo">배송중</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'A'}">
+                                                        <td><span class="label label-success">배송완료</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'C'}">
+                                                        <td><span class="label label-danger">결제취소</span></td>
+                                                    </c:when>
+                                                    <c:otherwise><td></td></c:otherwise>
+                                                </c:choose>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

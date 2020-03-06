@@ -26,6 +26,11 @@ public class ClientOrderVO
 
     private String customerTbName;
 
+    private String prvMonth;
+    private String nowMonth;
+    private String upDown;
+    private String pdOrderTbPaymentDateStr;
+
     public String getPdOrderTbNo()
     {
         return pdOrderTbNo;
@@ -196,6 +201,46 @@ public class ClientOrderVO
         this.customerTbName = customerTbName;
     }
 
+    public String getPrvMonth()
+    {
+        return prvMonth;
+    }
+
+    public void setPrvMonth(String prvMonth)
+    {
+        this.prvMonth = prvMonth;
+    }
+
+    public String getNowMonth()
+    {
+        return nowMonth;
+    }
+
+    public void setNowMonth(String nowMonth)
+    {
+        this.nowMonth = nowMonth;
+    }
+
+    public String getUpDown()
+    {
+        return upDown;
+    }
+
+    public void setUpDown(String upDown)
+    {
+        this.upDown = upDown;
+    }
+
+    public String getPdOrderTbPaymentDateStr()
+    {
+        return pdOrderTbPaymentDateStr;
+    }
+
+    public void setPdOrderTbPaymentDateStr(String pdOrderTbPaymentDateStr)
+    {
+        this.pdOrderTbPaymentDateStr = pdOrderTbPaymentDateStr;
+    }
+
     @Override
     public String toString()
     {
@@ -217,6 +262,10 @@ public class ClientOrderVO
                 ", tid='" + tid + '\'' +
                 ", pg_token='" + pg_token + '\'' +
                 ", customerTbName='" + customerTbName + '\'' +
+                ", prvMonth='" + prvMonth + '\'' +
+                ", nowMonth='" + nowMonth + '\'' +
+                ", upDown='" + upDown + '\'' +
+                ", pdOrderTbPaymentDateStr='" + pdOrderTbPaymentDateStr + '\'' +
                 '}';
     }
 }
