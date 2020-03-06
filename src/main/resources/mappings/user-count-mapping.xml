@@ -64,5 +64,8 @@
 		)
 	</insert>
 
+	<select id="selectSingleByDate" parameterType="userCount" resultType="userCount">
+
+	</select>
 
 </mapper>

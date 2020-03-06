@@ -1,5 +1,6 @@
 package com.mall.meongnyang.admin.index.comtroller;
 
+import com.mall.meongnyang.admin.index.service.AdminSelectDailySaleListService;
 import com.mall.meongnyang.admin.index.service.AdminSelectDashboardExpireProductListService;
 import com.mall.meongnyang.admin.index.service.AdminSelectDashboardStockListService;
 import com.mall.meongnyang.admin.index.service.AdminSelectMonthlySaleListService;
@@ -27,6 +28,8 @@ public class IndexController
     private AdminSelectProductOrderOverviewService adminSelectProductOrderOverviewService;
     @Autowired
     private AdminSelectMonthlySaleListService adminSelectMonthlySaleListService;
+    @Autowired
+    private AdminSelectDailySaleListService adminSelectDailySaleListService;
 
 
 
@@ -37,47 +40,14 @@ public class IndexController
         model.addAttribute("dashboardExpireList", adminSelectDashboardExpireProductListService.selectDashboardExpireProductList());
         model.addAttribute("dashboardOrderList", adminSelectProductOrderOverviewService.selectProductOrderList(getRecentDateVO()));
 
-        ClientOrderVO monthlySale = new ClientOrderVO();
         List<ClientOrderVO> monthlySaleList = adminSelectMonthlySaleListService.selectDashboardMonthMoney(new ClientOrderVO());
-        if(monthlySaleList.size() == 0)
-        {
-            monthlySale.setPdOrderTbPayment(0);
-            monthlySale.setUpDown("n");
-        }
-        else if(monthlySaleList.size() == 1)
-        {
-            SimpleDateFormat sdf = new SimpleDateFormat("MM");
-            if (sdf.format(new java.util.Date()).equals(monthlySaleList.get(0).getPdOrderTbPaymentDateStr().substring(3)))
-            {
-                monthlySale.setPdOrderTbPayment(monthlySaleList.get(0).getPdOrderTbPayment());
-                monthlySale.setUpDown("u");
-            }
-            else
-            {
-                monthlySale.setPdOrderTbPayment(0);
-                monthlySale.setUpDown("d");
-            }
-        }
-        else
-        {
-            int prv = monthlySaleList.get(0).getPdOrderTbPayment();
-            int now = monthlySaleList.get(1).getPdOrderTbPayment();
-            monthlySale.setPdOrderTbPayment(now);
-            if(prv < now)
-            {
-                monthlySale.setUpDown("u");
-            }
-            else if (prv == now)
-            {
-                monthlySale.setUpDown("n");
-            }
-            else
-            {
-                monthlySale.setUpDown("d");
-            }
-        }
+        model.addAttribute("monthlySale", getMonthAndDayClientOrderVO("MM",monthlySaleList));
 
-        model.addAttribute("monthlySale", monthlySale);
+        List<ClientOrderVO> dailySaleList = adminSelectDailySaleListService.selectDashboardDailyMoney(new ClientOrderVO());
+        model.addAttribute("dailySale", getMonthAndDayClientOrderVO("dd",dailySaleList));
+
+
+
 
         return "index";
     }
@@ -97,5 +67,59 @@ public class IndexController
         clientProductOrderVO.setDayFrom(new Date(calendar.getTimeInMillis()));
 
         return clientProductOrderVO;
+    }
+
+    private ClientOrderVO getMonthAndDayClientOrderVO(String mmOrdd, List<ClientOrderVO> xSaleList)
+    {
+        ClientOrderVO xSale = new ClientOrderVO();
+        if(xSaleList.size() == 0)
+        {
+            xSale.setPdOrderTbPayment(0);
+            xSale.setUpDown("n");
+        }
+        else if(xSaleList.size() == 1)
+        {
+            SimpleDateFormat sdf = new SimpleDateFormat(mmOrdd);
+            String dbmd = null;
+            if(mmOrdd.equals("MM"))
+            {
+                dbmd = xSaleList.get(0).getPdOrderTbPaymentDateStr().split("-")[1];
+            }
+            else
+            {
+                dbmd = xSaleList.get(0).getPdOrderTbPaymentDateStr().split("-")[2];
+            }
+
+            if (sdf.format(new java.util.Date()).equals(dbmd))
+            {
+                xSale.setPdOrderTbPayment(xSaleList.get(0).getPdOrderTbPayment());
+                xSale.setUpDown("u");
+            }
+            else
+            {
+                xSale.setPdOrderTbPayment(0);
+                xSale.setUpDown("d");
+            }
+        }
+        else
+        {
+            int prv = xSaleList.get(0).getPdOrderTbPayment();
+            int now = xSaleList.get(1).getPdOrderTbPayment();
+            xSale.setPdOrderTbPayment(now);
+            if(prv < now)
+            {
+                xSale.setUpDown("u");
+            }
+            else if (prv == now)
+            {
+                xSale.setUpDown("n");
+            }
+            else
+            {
+                xSale.setUpDown("d");
+            }
+        }
+
+        return xSale;
     }
 }

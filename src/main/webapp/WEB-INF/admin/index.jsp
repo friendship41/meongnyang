@@ -36,7 +36,7 @@
                                         <i class="icon-arrow_downward stats-icon"></i>
                                     </c:if>
                                     <c:if test="${monthlySale.upDown eq 'n'}">
-                                        <i class="icon-arrow-left stats-icon"></i>
+                                        <i class="icon-arrow-right stats-icon"></i>
                                     </c:if>
                                 </div>
                             </div>
@@ -46,11 +46,19 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">5,000,000</span>
+                                    <span class="stats-number">${dailySale.pdOrderTbPayment}</span>
                                     <p class="stats-info">일 매출</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_downward stats-icon"></i>
+                                    <c:if test="${dailySale.upDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${dailySale.upDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${dailySale.upDown eq 'n'}">
+                                        <i class="icon-arrow-right stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
