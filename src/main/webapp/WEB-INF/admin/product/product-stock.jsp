@@ -179,15 +179,15 @@
 <script>
     function searchStock() {
         var stockAjaxParam = "/productStockListAjax.ado?dayFrom="+new Date($("#stockFromInput").val()).yyyymmdd()+"&dayTo="+new Date($("#stockToInput").val()).yyyymmdd();
-        getDataFromServerAjax(stockAjaxParam);
+        getDataFromServerAjax(stockAjaxParam, 'stock');
     }
 
     function searchExpireDate() {
         var expireAjaxParam = "/productExpireListAjax.ado?dayFrom="+new Date($("#expireFromInput").val()).yyyymmdd()+"&dayTo="+new Date($("#expireToInput").val()).yyyymmdd();
-        getDataFromServerAjax(expireAjaxParam);
+        getDataFromServerAjax(expireAjaxParam, 'expire');
     }
 
-    function getDataFromServerAjax(urlTo) {
+    function getDataFromServerAjax(urlTo, toWhere) {
         $.ajax({
             url: urlTo,
             type: "GET",
@@ -202,11 +202,11 @@
                 }
                 else
                 {
-                    if(json[0].pdSaleTbExpireDay == null)
+                    if(toWhere === 'stock')
                     {
                         settingStockTable(json);
                     }
-                    else
+                    else if (toWhere === 'expire')
                     {
                         settingExpireTable(json);
                     }
@@ -348,13 +348,12 @@
             .done(function(json) {
                 console.log(json);
 
-                if(json.state === "success")
-                {
-                    $("#stockProductTable").DataTable().destroy();
-                    var expireTr = "expireItem"+saleNum;
-                    document.getElementById(expireTr).remove();
-                    $("#expirationProductTable").DataTable();
-                }
+                $("#expirationProductTable").DataTable().destroy();
+                var expireTr = "expireItem"+saleNum;
+                var target = document.getElementById(expireTr);
+                var parent = document.getElementById("expireDayTableBody");
+                parent.removeChild(target);
+                $("#expirationProductTable").DataTable();
             })
             .fail(function (xhr, status, errorThrown) {
                 alert(errorThrown);
@@ -367,13 +366,13 @@
         $("#stockFromInput").attr("value", twoMonth.yyyymmdd());
         $("#stockToInput").attr("value", new Date().yyyymmdd());
         var stockTwoMonthAjaxUrl = "/productStockListAjax.ado?dayFrom="+twoMonth.yyyymmdd()+"&dayTo="+new Date().yyyymmdd();
-        getDataFromServerAjax(stockTwoMonthAjaxUrl);
+        getDataFromServerAjax(stockTwoMonthAjaxUrl, 'stock');
 
         var threeMonthAfter = getMonthAfterDate(3);
         $("#expireFromInput").attr("value", new Date().yyyymmdd());
         $("#expireToInput").attr("value", threeMonthAfter.yyyymmdd());
         var expireTwoMonthAjaxUrl = "/productExpireListAjax.ado?dayFrom="+new Date().yyyymmdd()+"&dayTo="+threeMonthAfter.yyyymmdd();
-        getDataFromServerAjax(expireTwoMonthAjaxUrl);
+        getDataFromServerAjax(expireTwoMonthAjaxUrl, 'expire');
     })
 </script>
 <!-- Javascripts -->

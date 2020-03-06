@@ -12,4 +12,5 @@ public interface AdminProductOrderDAO
     public void deleteProductOrder(ClientOrderVO clientOrderVO);
     public void deleteOrderDetailByNo(ClientOrderVO clientOrderVO);
     public void updateOrderState(ClientOrderVO clientOrderVO);
+    public List<ClientOrderVO> selectDashboardMonthMoney(ClientOrderVO clientOrderVO);
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="include/head.jsp"/>
@@ -24,11 +25,19 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">50,000,000</span>
+                                    <span class="stats-number">${monthlySale.pdOrderTbPayment}</span>
                                     <p class="stats-info">월 매출</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_upward stats-icon"></i>
+                                    <c:if test="${monthlySale.upDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${monthlySale.upDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${monthlySale.upDown eq 'n'}">
+                                        <i class="icon-arrow-left stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -103,29 +112,32 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">재고 현황</h4>
+                                <h4 class="panel-title">재고현황</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table id="stockProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
-                                            <th>제품 코드</th>
-                                            <th>제품 이름</th>
-                                            <th>제품수량</th>
+                                            <th>#</th>
+                                            <th>상품코드</th>
+                                            <th>상품명</th>
+                                            <th>판매개시일</th>
+                                            <th>현재수량</th>
+                                            <th>통보수량</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>000001</td>
-                                            <td>강아지 사료</td>
-                                            <td>50</td>
-                                        </tr>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td>고양이 사료</td>
-                                            <td>80</td>
-                                        </tr>
+                                        <c:forEach var="stock" items="${dashboardStockList}">
+                                            <tr>
+                                                <td>${stock.rowNumber}</td>
+                                                <td>${stock.productTbCode}</td>
+                                                <td>${stock.pdSaleTbProductName}</td>
+                                                <td>${stock.pdSaleTbStartDay}</td>
+                                                <td><span class="label label-danger">${stock.pdSaleTbRemainingAmount}</span></td>
+                                                <td>${stock.pdSaleTbLimitAmount}</td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -139,29 +151,30 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">유통기한 임박 상품 현황</h4>
+                                <h4 class="panel-title">유통기한 임박상품</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
                                     <table id="expirationProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
-                                            <th>제품 코드</th>
-                                            <th>제품 이름</th>
-                                            <th>제품수량</th>
+                                            <th>#</th>
+                                            <th>상품코드</th>
+                                            <th>상품명</th>
+                                            <th>판매개시일</th>
+                                            <th>유통기한</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>000001</td>
-                                            <td>강아지 사료</td>
-                                            <td>50</td>
-                                        </tr>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td>고양이 사료</td>
-                                            <td>80</td>
-                                        </tr>
+                                        <c:forEach var="expire" items="${dashboardExpireList}">
+                                            <tr>
+                                                <td>${expire.rowNumber}</td>
+                                                <td>${expire.productTbCode}</td>
+                                                <td>${expire.pdSaleTbProductName}</td>
+                                                <td>${expire.pdSaleTbStartDay}</td>
+                                                <td><span class="label label-danger">${expire.pdSaleTbExpireDay}</span></td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>
@@ -175,46 +188,59 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title">주문 현황</h4>
+                                <h4 class="panel-title">주간 주문현황</h4>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table id="orderProductTable" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <table id="orderTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>
                                         <tr>
-                                            <th>주문 번호</th>
-                                            <th>주문 상품</th>
+                                            <th>주문번호</th>
+                                            <th>주문상품</th>
                                             <th>주문자명</th>
                                             <th>주문금액</th>
                                             <th>주문일자</th>
                                             <th>주문상태</th>
                                         </tr>
                                         </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>주문번호</th>
+                                            <th>주문상품</th>
+                                            <th>주문자명</th>
+                                            <th>주문금액</th>
+                                            <th>주문일자</th>
+                                            <th>주문상태</th>
+                                        </tr>
+                                        </tfoot>
                                         <tbody>
-                                        <tr>
-                                            <td>000002</td>
-                                            <td>개 사료 외 1종</td>
-                                            <td>안창호</td>
-                                            <td>150,000</td>
-                                            <td>2011/04/25</td>
-                                            <td><span class="label label-nowGo">배송중</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>000003</td>
-                                            <td>개 사료 외 1종</td>
-                                            <td>안창호</td>
-                                            <td>150,000</td>
-                                            <td>2011/04/25</td>
-                                            <td><span class="label label-nowGo">배송중</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>000001</td>
-                                            <td>켓타워 외 2종</td>
-                                            <td>최창호</td>
-                                            <td>336,000</td>
-                                            <td>2008/11/28</td>
-                                            <td><span class="label label-success">배송완료</span></td>
-                                        </tr>
+                                        <c:forEach var="orderProduct" items="${dashboardOrderList}">
+                                            <tr>
+                                                <td>${orderProduct.pdOrderTbNo}</td>
+                                                <td>${orderProduct.pdSaleTbProductName}</td>
+                                                <td>${orderProduct.customerTbName}</td>
+                                                <td>${orderProduct.pdOrderTbPayment}</td>
+                                                <td>${orderProduct.pdOrderTbOrderDate}</td>
+                                                <c:choose>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'W'}">
+                                                        <td><span class="label label-warning">결제대기</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'P'}">
+                                                        <td><span class="label label-info">결제완료</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'D'}">
+                                                        <td><span class="label label-nowGo">배송중</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'A'}">
+                                                        <td><span class="label label-success">배송완료</span></td>
+                                                    </c:when>
+                                                    <c:when test="${orderProduct.pdOrderTbState eq 'C'}">
+                                                        <td><span class="label label-danger">결제취소</span></td>
+                                                    </c:when>
+                                                    <c:otherwise><td></td></c:otherwise>
+                                                </c:choose>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

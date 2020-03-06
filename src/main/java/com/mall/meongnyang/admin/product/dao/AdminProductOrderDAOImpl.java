@@ -43,4 +43,10 @@ public class AdminProductOrderDAOImpl implements AdminProductOrderDAO
     {
         sqlSessionTemplate.update("orderDAO.updateOrderState", clientOrderVO);
     }
+
+    @Override
+    public List<ClientOrderVO> selectDashboardMonthMoney(ClientOrderVO clientOrderVO)
+    {
+        return sqlSessionTemplate.selectList("orderDAO.selectDashboardMonthMoney", clientOrderVO);
+    }
 }

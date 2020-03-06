@@ -343,4 +343,15 @@
 		WHERE PD_ORDER_TB_NO = #{pdOrderTbNo}
 	</update>
 
+	<select id="selectDashboardMonthMoney" parameterType="orderProc" resultType="orderProc">
+		SELECT
+			TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM') "PD_ORDER_TB_PAYMENT_DATE_STR",
+			SUM(PD_ORDER_TB_PAYMENT) "PD_ORDER_TB_PAYMENT"
+		FROM PD_ORDER
+		WHERE PD_ORDER_TB_PAYMENT_DATE IS NOT NULL
+		GROUP BY TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM')
+		HAVING TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM') IN (#{prvMonth},#{nowMonth})
+		ORDER BY PD_ORDER_TB_PAYMENT_DATE_STR
+	</select>
+
 </mapper>
