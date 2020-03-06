@@ -30,7 +30,10 @@ public class IndexController
     private AdminSelectDailySaleListService adminSelectDailySaleListService;
     @Autowired
     private AdminSelectUserCountService adminSelectUserCountService;
-
+    @Autowired
+    private AdminSelectWeekVisitorService adminSelectWeekVisitorService;
+    @Autowired
+    private AdminSelectWeekSaleService adminSelectWeekSaleService;
 
 
     @RequestMapping("/index.ado")
@@ -50,6 +53,8 @@ public class IndexController
         ClientUserCountVO prevUserCount = adminSelectUserCountService.selectSinglePrevUserCountByDate(new ClientUserCountVO());
         model.addAttribute("userCount", getUpDownSettedUserCount(clientUserCountVO, prevUserCount));
 
+        model.addAttribute("visitorChart", adminSelectWeekVisitorService.getWeekVisitorChartJSONStr());
+        model.addAttribute("saleChart", adminSelectWeekSaleService.getWeekSaleChartJSONStr());
 
         return "index";
     }
@@ -127,8 +132,6 @@ public class IndexController
 
     private ClientUserCountVO getUpDownSettedUserCount(ClientUserCountVO target, ClientUserCountVO prev)
     {
-        System.out.println(target);
-        System.out.println(prev);
         if(target == null)
         {
             target = new ClientUserCountVO();

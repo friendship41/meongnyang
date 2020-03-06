@@ -74,4 +74,21 @@
 		WHERE to_char(USER_COUNT_TB_DATE, 'yy/MM/dd') = to_char(#{userCountTbDate}, 'yy/MM/dd')
 	</select>
 
+	<select id="selectWeekVisitorList" parameterType="userCount" resultType="userCount">
+<![CDATA[
+		SELECT
+			TO_DATE(A.USER_COUNT_TB_DATE_STR, 'yyyy/MM/dd') "USER_COUNT_TB_DATE",
+			CASE WHEN UC.USER_COUNT_TB_VISITORS IS NULL THEN 0
+				ELSE UC.USER_COUNT_TB_VISITORS
+				END "USER_COUNT_TB_VISITORS"
+		FROM(
+			SELECT
+				TO_CHAR(#{startDate} + LEVEL-1,'yyyy-MM-dd') "USER_COUNT_TB_DATE_STR"
+			FROM DUAL
+			CONNECT BY #{startDate} + LEVEL-1 <= #{endDate}) A LEFT OUTER JOIN USER_COUNT UC
+		ON A.USER_COUNT_TB_DATE_STR = TO_CHAR(UC.USER_COUNT_TB_DATE, 'yyyy-MM-dd')
+		ORDER BY TO_DATE(A.USER_COUNT_TB_DATE_STR, 'yyyy/MM/dd') ASC
+]]>
+	</select>
+
 </mapper>

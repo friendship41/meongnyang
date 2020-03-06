@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="include/head.jsp"/>
-<body onload="chartGo()">
+<body>
 
 <!-- Page Container -->
 <div class="page-container">
@@ -286,41 +286,12 @@
 </div><!-- /Page Container -->
 
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    function chartGo() {
-        new Chart(document.getElementById("sales_chart_week"), {
-            "type": "line",
-            "data": {
-                "labels": ["1일", "2일", "3일", "4일", "5일", "6일", "7일", "8일", "9일", "10일", "11일", "12일", "13일", "14일", "15일"],
-                "datasets": [{
-                    "label": "방문자 수",
-                    "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000, 1000, 2000, 3000],
-                    "fill": false,
-                    "borderColor": "rgb(93,168,203)",
-                    "lineTension": 0.2
-                }]
-            },
-            "options": {}
-        });
-        new Chart(document.getElementById("visit_chart_week"), {
-            "type": "line",
-            "data": {
-                "labels": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
-                "datasets": [{
-                    "label": "방문자 수",
-                    "data": [5000, 2000, 3000, 4000, 5000, 500, 3600, 3210, 8000, 2000, 10000, 12000],
-                    "fill": false,
-                    "borderColor": "rgb(93,168,203)",
-                    "lineTension": 0.2
-                }]
-            },
-            "options": {}
-        });
-
-
-
-    }
+    $(document).ready(function () {
+        new Chart(document.getElementById("visit_chart_week"), JSON.parse('${visitorChart}'));
+        new Chart(document.getElementById("sales_chart_week"), JSON.parse('${saleChart}'));
+    })
 </script>
 
 <jsp:include page="include/scripts-load.jsp"/>
