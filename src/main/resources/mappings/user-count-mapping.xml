@@ -65,7 +65,13 @@
 	</insert>
 
 	<select id="selectSingleByDate" parameterType="userCount" resultType="userCount">
-
+		SELECT
+			USER_COUNT_TB_DATE,
+			USER_COUNT_TB_VISITORS,
+			USER_COUNT_TB_JOINERS,
+			USER_COUNT_TB_OUTCOUNT
+		FROM USER_COUNT
+		WHERE to_char(USER_COUNT_TB_DATE, 'yy/MM/dd') = to_char(#{userCountTbDate}, 'yy/MM/dd')
 	</select>
 
 </mapper>

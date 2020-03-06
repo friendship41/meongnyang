@@ -1,11 +1,9 @@
 package com.mall.meongnyang.admin.index.comtroller;
 
-import com.mall.meongnyang.admin.index.service.AdminSelectDailySaleListService;
-import com.mall.meongnyang.admin.index.service.AdminSelectDashboardExpireProductListService;
-import com.mall.meongnyang.admin.index.service.AdminSelectDashboardStockListService;
-import com.mall.meongnyang.admin.index.service.AdminSelectMonthlySaleListService;
+import com.mall.meongnyang.admin.index.service.*;
 import com.mall.meongnyang.admin.product.service.AdminSelectProductOrderOverviewService;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
+import com.mall.meongnyang.client.scheduler.todaycount.ClientUserCountVO;
 import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +28,8 @@ public class IndexController
     private AdminSelectMonthlySaleListService adminSelectMonthlySaleListService;
     @Autowired
     private AdminSelectDailySaleListService adminSelectDailySaleListService;
+    @Autowired
+    private AdminSelectUserCountService adminSelectUserCountService;
 
 
 
@@ -46,7 +46,9 @@ public class IndexController
         List<ClientOrderVO> dailySaleList = adminSelectDailySaleListService.selectDashboardDailyMoney(new ClientOrderVO());
         model.addAttribute("dailySale", getMonthAndDayClientOrderVO("dd",dailySaleList));
 
-
+        ClientUserCountVO clientUserCountVO = adminSelectUserCountService.selectSingleByDate(new ClientUserCountVO());
+        ClientUserCountVO prevUserCount = adminSelectUserCountService.selectSinglePrevUserCountByDate(new ClientUserCountVO());
+        model.addAttribute("userCount", getUpDownSettedUserCount(clientUserCountVO, prevUserCount));
 
 
         return "index";
@@ -121,5 +123,44 @@ public class IndexController
         }
 
         return xSale;
+    }
+
+    private ClientUserCountVO getUpDownSettedUserCount(ClientUserCountVO target, ClientUserCountVO prev)
+    {
+        System.out.println(target);
+        System.out.println(prev);
+        if(target == null)
+        {
+            target = new ClientUserCountVO();
+            target.setUserCountTbJoiners(0);
+            target.setUserCountTbVisitors(0);
+        }
+        if(prev == null)
+        {
+            prev = new ClientUserCountVO();
+            prev.setUserCountTbJoiners(0);
+            prev.setUserCountTbVisitors(0);
+        }
+
+        int targetJoin = target.getUserCountTbJoiners();
+        int prevJoin = prev.getUserCountTbJoiners();
+        int targetVisit = target.getUserCountTbVisitors();
+        int prevVisit = prev.getUserCountTbVisitors();
+
+        if(targetJoin == prevJoin)
+            target.setJoinUpDown("n");
+        else if (targetJoin > prevJoin)
+            target.setJoinUpDown("u");
+        else
+            target.setJoinUpDown("d");
+
+        if (targetVisit == prevVisit)
+            target.setVisitUpDown("n");
+        else if (targetVisit > prevVisit)
+            target.setVisitUpDown("u");
+        else
+            target.setVisitUpDown("d");
+
+        return target;
     }
 }

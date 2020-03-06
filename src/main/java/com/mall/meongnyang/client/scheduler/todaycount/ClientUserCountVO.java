@@ -9,6 +9,9 @@ public class ClientUserCountVO
     private int userCountTbJoiners;
     private int userCountTbOutcount;
 
+    private String joinUpDown;
+    private String visitUpDown;
+
     public Date getUserCountTbDate()
     {
         return userCountTbDate;
@@ -49,6 +52,25 @@ public class ClientUserCountVO
         this.userCountTbOutcount = userCountTbOutcount;
     }
 
+    public String getJoinUpDown()
+    {
+        return joinUpDown;
+    }
+
+    public void setJoinUpDown(String joinUpDown)
+    {
+        this.joinUpDown = joinUpDown;
+    }
+
+    public String getVisitUpDown()
+    {
+        return visitUpDown;
+    }
+
+    public void setVisitUpDown(String visitUpDown)
+    {
+        this.visitUpDown = visitUpDown;
+    }
 
     @Override
     public String toString()
@@ -58,6 +80,8 @@ public class ClientUserCountVO
                 ", userCountTbVisitors=" + userCountTbVisitors +
                 ", userCountTbJoiners=" + userCountTbJoiners +
                 ", userCountTbOutcount=" + userCountTbOutcount +
+                ", joinUpDown='" + joinUpDown + '\'' +
+                ", visitUpDown='" + visitUpDown + '\'' +
                 '}';
     }
 }

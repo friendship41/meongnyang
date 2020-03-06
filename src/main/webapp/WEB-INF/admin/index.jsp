@@ -67,11 +67,24 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">+10,555</span>
+                                    <c:if test="${userCount.userCountTbJoiners eq 0}">
+                                        <span class="stats-number">0</span>
+                                    </c:if>
+                                    <c:if test="${userCount.userCountTbJoiners ne 0}">
+                                        <span class="stats-number">+${userCount.userCountTbJoiners}</span>
+                                    </c:if>
                                     <p class="stats-info">신규 회원</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_upward stats-icon"></i>
+                                    <c:if test="${userCount.joinUpDown eq 'n'}">
+                                        <i class="icon-arrow-right stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.joinUpDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.joinUpDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -80,11 +93,19 @@
                         <div class="panel panel-white stats-widget">
                             <div class="panel-body">
                                 <div class="pull-left">
-                                    <span class="stats-number">5,000,000</span>
+                                    <span class="stats-number">${userCount.userCountTbVisitors}</span>
                                     <p class="stats-info">일일 방문자</p>
                                 </div>
                                 <div class="pull-right">
-                                    <i class="icon-arrow_upward stats-icon"></i>
+                                    <c:if test="${userCount.visitUpDown eq 'n'}">
+                                        <i class="icon-arrow-right stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.visitUpDown eq 'u'}">
+                                        <i class="icon-arrow_upward stats-icon"></i>
+                                    </c:if>
+                                    <c:if test="${userCount.visitUpDown eq 'd'}">
+                                        <i class="icon-arrow_downward stats-icon"></i>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
