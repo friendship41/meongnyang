@@ -250,5 +250,4 @@
 </c:when>
 </c:choose>
 
-
 <jsp:include page="include/footer.jsp"></jsp:include>

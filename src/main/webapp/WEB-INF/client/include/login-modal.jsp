@@ -87,7 +87,7 @@
                             <div class="col-md-12">
                                 <ul class="social">
                                     <li class="social_facebook"><a href="#" class="entypo-facebook"></a></li>
-                                    <li class="social_dribbble"><a href="#" class="entypo-dribbble"></a></li>
+                                    <li class="social_dribbble"><a href="javascript:googleLoginGo()" class="entypo-dribbble" data-onsuccess="onSignIn"></a></li>
                                     <li class="social_twitter"><a href="https://kauth.kakao.com/oauth/authorize?client_id=979aa4be781f57e07a085e52b0e8a729&redirect_uri=http://localhost:8080/klogin.do&response_type=code" id="kakao-login-btn" class="entypo-twitter"></a></li>
                                     <li class="social_behance"><a href="${url}" class="entypo-behance"></a></li>
                                 </ul>									
@@ -101,7 +101,29 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
 <script type="text/javascript">
+
+    function start() {
+        gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+                client_id: '466559862469-rpts5vfh9qtqesurt0ovu2p7poq2ej39.apps.googleusercontent.com',
+                // Scopes to request in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+            });
+        });
+    }
+
+    function googleLoginGo() {
+        auth2.grantOfflineAccess().then(signInCallback);
+    }
+
+    function signInCallback(authResult) {
+        if (authResult['code']){
+            location.href = ('/googleLogin.do?code='+authResult['code']);
+        }
+    }
+
 	function registryCheck() {
 		var pw1 = document.getElementById('password1').value;
 		var pw2 = document.getElementById('password2').value;

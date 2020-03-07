@@ -79,6 +79,7 @@
 			<mvc:exclude-mapping path="/insertReview.do"/>
 			<mvc:exclude-mapping path="/klogin.do"/>
 			<mvc:exclude-mapping path="/NaverLogin.do"/>
+			<mvc:exclude-mapping path="/googleLogin.do"/>
 			<bean class="com.mall.meongnyang.client.intercepter.login.LoginInterceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>
