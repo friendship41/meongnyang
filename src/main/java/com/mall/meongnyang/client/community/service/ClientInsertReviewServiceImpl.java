@@ -1,15 +1,14 @@
 package com.mall.meongnyang.client.community.service;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.client.community.dao.ClientReviewDAO;
 import com.mall.meongnyang.client.community.vo.ClientReviewVO;
 import com.mall.meongnyang.util.imagesave.SaveImageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Service
 public class ClientInsertReviewServiceImpl implements ClientInsertReviewService {
@@ -30,6 +29,9 @@ public class ClientInsertReviewServiceImpl implements ClientInsertReviewService 
 		}
 		
 		clientReviewDAO.insertReview(clientReviewVO);
+		AdminProductSaleVO adminProductSaleVO = new AdminProductSaleVO();
+		adminProductSaleVO.setProductTbCode(clientReviewVO.getProductTbCode());
+		clientReviewDAO.updateProductSaleRating(adminProductSaleVO);
 	}
 
 	@Override

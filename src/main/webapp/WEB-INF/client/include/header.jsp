@@ -10,6 +10,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="google-signin-client_id" content="466559862469-rpts5vfh9qtqesurt0ovu2p7poq2ej39.apps.googleusercontent.com">
+
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/client/images/favicon.ico'/>">
     <link rel="apple-touch-icon" href="<c:url value='/resources/client/apple-touch-icon.png'/>">

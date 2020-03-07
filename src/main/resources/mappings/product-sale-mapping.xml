@@ -171,4 +171,12 @@
         ON A.PD_SALE_TB_NO = B.PD_SALE_TB_NO
     </select>
 
+    <update id="updateProductSaleRating" parameterType="productSale">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_RATING = (SELECT SUM(REVIEW_TB_RATING)/COUNT(*) FROM REVIEW WHERE PRODUCT_TB_CODE = #{productTbCode})
+        WHERE PRODUCT_TB_CODE = #{productTbCode}
+    </update>
+
+
 </mapper>

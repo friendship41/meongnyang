@@ -45,7 +45,7 @@ public class ClientSelectProductCategoryListServiceImpl implements ClientSelectP
                 tempMap.put(pName,nMap);
             }
         }
-        System.out.println(tempMap);
+//        System.out.println(tempMap);
         menuVO.setMenu(tempMap);
         return menuVO;
     }

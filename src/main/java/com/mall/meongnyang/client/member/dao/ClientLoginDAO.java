@@ -21,4 +21,6 @@ public interface ClientLoginDAO {
 	public void updatePointUse(ClientOrderVO clientOrderVO);
 	public void updatePointRollback(ClientOrderVO clientOrderVO);
 	public void updatePointPlus(ClientOrderVO clientOrderVO);
+
+	public void insertGoogleCustomer(ClientCustomerVO clientCustomerVO);
 }

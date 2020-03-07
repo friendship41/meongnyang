@@ -1,8 +1,9 @@
 package com.mall.meongnyang.client.community.dao;
 
-import java.util.List;
-
+import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
 import com.mall.meongnyang.client.community.vo.ClientReviewVO;
+
+import java.util.List;
 
 public interface ClientReviewDAO {
 	
@@ -13,4 +14,5 @@ public interface ClientReviewDAO {
 	void deleteReview(ClientReviewVO clientReviewVO);
 	int selectReveiwCount(ClientReviewVO clientReviewVO);
 	int selectCount(ClientReviewVO clientReviewVO);
+	public void updateProductSaleRating(AdminProductSaleVO adminProductSaleVO);
 }

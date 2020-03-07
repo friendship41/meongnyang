@@ -49,7 +49,7 @@ public class ClientNaverLoginController {
 	@RequestMapping(value="/NaverLogin.do",method = { RequestMethod.GET, RequestMethod.POST })
 	public String NaverLogin(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,ClientCustomerVO clientCustomerVO) 
 		throws IOException, ParseException {
-			System.out.println("여기는 callback");
+//			System.out.println("여기는 callback");
 			OAuth2AccessToken oauthToken;
 	        oauthToken = naverLoginBO.getAccessToken(session, code, state);
 	        //로그인 사용자 정보를 읽어온다.
@@ -74,8 +74,8 @@ public class ClientNaverLoginController {
 			String naveremail = (String)response_obj.get("email");
 			String navername=(String)response_obj.get("name");
 			
-			System.out.println(naveremail);
-			System.out.println(navername);
+//			System.out.println(naveremail);
+//			System.out.println(navername);
 			
 			
 			ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);

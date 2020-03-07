@@ -11,7 +11,7 @@ public class AuthMailServer extends Authenticator
     public AuthMailServer()
     {
         String id = "poo963369";
-        String pw = "1158038qwe";     //비밀번호
+        String pw = "########";     //비밀번호
 
         pa = new PasswordAuthentication(id, pw);
     }

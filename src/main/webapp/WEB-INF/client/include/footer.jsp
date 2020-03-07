@@ -64,6 +64,7 @@
 <script src="<c:url value='/resources/client/js/easyResponsiveTabs.js'/>" type="text/javascript"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
+
     $(document).ready(function () {
         $('#horizontalTab').easyResponsiveTabs({
             type: 'default', //Types: default, vertical, accordion
@@ -71,6 +72,7 @@
             fit: true   // 100% fit in a container
         });
     });
+
     function removeCartItem(itemId) {
         var ajaxUrl = "/removeCartAjax.do?productTbCode="+itemId;
         $.ajax({
