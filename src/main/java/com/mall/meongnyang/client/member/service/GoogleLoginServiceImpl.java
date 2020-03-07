@@ -22,7 +22,7 @@ public class GoogleLoginServiceImpl implements GoogleLoginService
         paramSb.append(code);
         paramSb.append("&client_id=466559862469-rpts5vfh9qtqesurt0ovu2p7poq2ej39.apps.googleusercontent.com");
         paramSb.append("&client_secret=QG2fuX57pJ4q_bfYJVbTvKft");
-        paramSb.append("&redirect_uri=http://localhost:8080");
+        paramSb.append("&redirect_uri=http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com");
         paramSb.append("&grant_type=authorization_code");
 
         GoogleCustomerVO googleCustomerVO = null;

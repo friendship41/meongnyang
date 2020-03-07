@@ -52,7 +52,7 @@ public class ClientRegistryController {
 		mailVO.setSubject("오늘 뭐멍냥 회원가입 인증메일입니다.");
 		mailVO.setContent("<h1>클릭해주세요</h1>"
 				// base64 url암호화 필요함
-				+ "<a href='localhost:8080/index.do?customerTbNo=" + tempVO.getCustomerTbNo() + "&customerTbState=N"
+				+ "<a href='ec2-3-135-222-11.us-east-2.compute.amazonaws.com/index.do?customerTbNo=" + tempVO.getCustomerTbNo() + "&customerTbState=N"
 				+ "' >회원가입 인증</a>");
 		model.addAttribute("emailSend", true);
 		mailService.sendMail(mailVO);		
