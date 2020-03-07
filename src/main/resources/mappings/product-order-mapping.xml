@@ -22,52 +22,43 @@
 		AND A.PD_ORDER_TB_STATE in ('P', 'D', 'A')
 	</sql>
 	
+	<sql id="case">
+		<![CDATA[
+		(case
+			when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
+			when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
+			when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
+			when A.pd_sale_tb_sales_price >= 100000 then '10만원 이상'  
+		end)
+		]]>
+	</sql>
+	
 	<!-- 가격범주 별 월간 매출 -->
 	<select id="selectSalesPaymentPriceMonthly" parameterType="order" resultType="order">
 		SELECT
 		    TO_CHAR(A.PD_ORDER_TB_PAYMENT_DATE, 'YY-MM') PD_ORDER_TB_PAYMENT_DATE_STR,
-		    <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end) pd_sale_tb_sales_price_range,]]>
+		    <include refid="case" /> pd_sale_tb_sales_price_range,
 		    SUM(A.orders_detail_tb_price) orders_detail_tb_price_sum,
 		    SUM(A.pd_sale_tb_received_price) pd_sale_tb_received_price,
 		    SUM(A.orders_detail_tb_amount) orders_detail_tb_amount
 		    <include refid="subPriceSales"/>
 		GROUP BY TO_CHAR(A.PD_ORDER_TB_PAYMENT_DATE, 'YY-MM'),
-		    <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end)]]>
+		     <include refid="case" />
+		ORDER BY <include refid="case" /> ASC
 	</select>
 
 	<!-- 가격범주 별 일간 매출 -->
 	<select id="selectSalesPaymentPrice" parameterType="order" resultType="order">
 		SELECT
 		    TO_CHAR(A.PD_ORDER_TB_PAYMENT_DATE, 'MM-dd') "PD_ORDER_TB_PAYMENT_DATE_STR",
-		   <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end) pd_sale_tb_sales_price_range,]]>
+		    <include refid="case" /> pd_sale_tb_sales_price_range,
 		    SUM(A.orders_detail_tb_price) orders_detail_tb_price_sum,
 		    SUM(A.pd_sale_tb_received_price) pd_sale_tb_received_price,
 		    SUM(A.orders_detail_tb_amount) orders_detail_tb_amount
 		    <include refid="subPriceSales"/>
-		GROUP BY  TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'MM-dd'),
-		    <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end),]]>
-		    TO_CHAR(A.pd_order_tb_payment_date, 'yyyy-MM-dd')
-		ORDER BY TO_CHAR(A.pd_order_tb_payment_date, 'yyyy-MM-dd') ASC	
+		GROUP BY TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'MM-dd'),
+		     <include refid="case" />
+		ORDER BY <include refid="case" /> ASC	
 	</select>
 
 	<!-- 지역별 기간 매출 -->
@@ -96,7 +87,7 @@
 		AND po.PD_ORDER_TB_STATE in ('P', 'D', 'A')
 		AND po.pd_order_tb_ad_city = b.pd_order_tb_ad_city
 		GROUP BY po.PD_ORDER_TB_AD_CITY
-		ORDER BY po.PD_ORDER_TB_AD_CITY ASC
+		ORDER BY SUM(po.PD_ORDER_TB_PAYMENT) DESC
 	</select>
 
 	<!-- 카테고리 기간별매출 -->

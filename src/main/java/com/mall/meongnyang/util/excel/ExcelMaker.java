@@ -357,11 +357,11 @@ public class ExcelMaker {
 		int cnt = 0;
 		for (int i = 0; i < salesList.size(); i++) {
 			if (i == 0) {
-				label.add(salesList.get(i).getPdSaleTbSalesPriceRange());
+				label.add(salesList.get(i).getPdSaleTbSalesPriceRange().replace(" ",""));
 			} else {
-				if (!label.get(cnt).equals(salesList.get(i).getPdSaleTbSalesPriceRange())) {
-					label.add(salesList.get(i).getPdSaleTbSalesPriceRange());
-					cnt = i;
+				if (!label.get(cnt).equals(salesList.get(i).getPdSaleTbSalesPriceRange().replace(" ",""))) {
+					label.add(salesList.get(i).getPdSaleTbSalesPriceRange().replace(" ",""));
+					cnt += 1;
 				}
 			}
 		}
@@ -375,7 +375,7 @@ public class ExcelMaker {
 			int tmpRecivePirce = 0;
 			int tmpAmount = 0;
 			for (int j = 0; j < salesList.size(); j++) {
-				if (label.get(i).equals(salesList.get(j).getPdSaleTbSalesPriceRange())) {
+				if (label.get(i).equals(salesList.get(j).getPdSaleTbSalesPriceRange().replace(" ",""))) {
 					tmpPrice += salesList.get(j).getOrdersDetailTbPriceSum();
 					tmpRecivePirce += salesList.get(j).getPdSaleTbReceivedPrice();
 					tmpAmount += salesList.get(j).getOrdersDetailTbAmount();
