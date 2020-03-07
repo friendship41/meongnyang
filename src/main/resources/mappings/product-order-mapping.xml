@@ -28,7 +28,7 @@
 			when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
 			when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
 			when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
+			when A.pd_sale_tb_sales_price >= 100000 then '10만원 이상'  
 		end)
 		]]>
 	</sql>

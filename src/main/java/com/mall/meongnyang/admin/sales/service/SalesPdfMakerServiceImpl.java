@@ -38,18 +38,18 @@ public class SalesPdfMakerServiceImpl implements SalesPdfMakerService {
 		Table table = new Table(UnitValue.createPercentArray(6)).useAllAvailableWidth();
 		
 		// 테이블에 컬럼명 추가
-		table.addCell(new Cell().add(new Paragraph("일자").setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("매출").setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("원가").setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("배송비").setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("포인트소모").setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("순이익").setFont(font)));
+		table.addHeaderCell(new Cell().add(new Paragraph("일자").setFont(font)));
+		table.addHeaderCell(new Cell().add(new Paragraph("매출").setFont(font)));
+		table.addHeaderCell(new Cell().add(new Paragraph("원가").setFont(font)));
+		table.addHeaderCell(new Cell().add(new Paragraph("배송비").setFont(font)));
+		table.addHeaderCell(new Cell().add(new Paragraph("포인트소모").setFont(font)));
+		table.addHeaderCell(new Cell().add(new Paragraph("순이익").setFont(font)));
 
 		int totpay = 0;
 		int totRePirce = 0;
 		int totDelFee = 0;
 		int totPoint = 0;
-		int totprofit = totpay - totRePirce - totDelFee;
+		
 
 		for (ClientProductOrderVO vo : list) {
 			int profit = (vo.getPdOrderTbPaymentSum() - vo.getPdSaleTbReceivedPrice()
@@ -66,16 +66,15 @@ public class SalesPdfMakerServiceImpl implements SalesPdfMakerService {
 			totDelFee += vo.getPdOrderTbDeliveryFee();
 			totPoint += vo.getPdOrderTbUsedPoint();
 		}
-
-		table.addCell(new Cell().add(new Paragraph("총합").setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("" + totpay).setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("" + totRePirce).setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("" + totDelFee).setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("" + totPoint).setFont(font)));
-		table.addCell(new Cell().add(new Paragraph("" + totprofit).setFont(font)));
+		int totprofit = totpay - totRePirce - totDelFee;
+		table.addFooterCell(new Cell().add(new Paragraph("총합").setFont(font)));
+		table.addFooterCell(new Cell().add(new Paragraph("" + totpay).setFont(font)));
+		table.addFooterCell(new Cell().add(new Paragraph("" + totRePirce).setFont(font)));
+		table.addFooterCell(new Cell().add(new Paragraph("" + totDelFee).setFont(font)));
+		table.addFooterCell(new Cell().add(new Paragraph("" + totPoint).setFont(font)));
+		table.addFooterCell(new Cell().add(new Paragraph("" + totprofit).setFont(font)));
 
 		return table;
 
 	}
-
 }
