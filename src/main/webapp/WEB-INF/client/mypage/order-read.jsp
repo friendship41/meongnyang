@@ -55,7 +55,7 @@
                                         <img src="${detail.pdImageTbPath}" alt="ordered item" width="58px" height="70">
                                     </div>
                                     <div class="single-item__content">
-                                        <a href="#">${detail.pdSaleTbProductName}</a>
+                                        <a href="shoppingDetail.do?productTbCode=${detail.productTbCode}">${detail.pdSaleTbProductName}</a>
                                         <span class="price"><fmt:formatNumber value="${detail.ordersDetailTbPrice}"/> 원</span>
                                         <c:set var="sumPrice" value="${sumPrice + detail.ordersDetailTbPrice}" />
                                     </div>

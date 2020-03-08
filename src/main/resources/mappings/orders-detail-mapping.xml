@@ -11,7 +11,8 @@
 		op.orders_detail_tb_amount,
 		op.pd_order_tb_no,
 		op.orders_detail_tb_price,
-		op.pd_sale_tb_product_name,		
+		op.pd_sale_tb_product_name,
+		op.product_tb_code,		
 		pi.pd_image_tb_path
 		FROM pd_image pi, 
 		    (SELECT 

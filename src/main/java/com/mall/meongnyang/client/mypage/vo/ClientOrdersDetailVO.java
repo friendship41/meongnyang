@@ -20,6 +20,8 @@ public class ClientOrdersDetailVO {
     private int pdOrderTbUsedPoint;
     
     private String pdImageTbPath;
+    
+    private String productTbCode;
    
 	public int getOrdersDetailTbNo() {
 		return ordersDetailTbNo;
@@ -99,6 +101,12 @@ public class ClientOrdersDetailVO {
 	}
 	public void setPdImageTbPath(String pdImageTbPath) {
 		this.pdImageTbPath = pdImageTbPath;
+	}
+	public String getProductTbCode() {
+		return productTbCode;
+	}
+	public void setProductTbCode(String productTbCode) {
+		this.productTbCode = productTbCode;
 	}
 
 }
