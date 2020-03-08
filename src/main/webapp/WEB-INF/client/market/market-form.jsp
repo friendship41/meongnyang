@@ -45,6 +45,7 @@
 								<label for="smallinput"
 									class="col-sm-2 control-label label-input-sm">이름</label>
 								<div class="col-sm-8">
+									<input type="hidden" name="customerTbNo" value="${customer.customerTbNo}">
 									<input type="text" placeholder="Name *" value="${customer.customerTbName}" readonly="readonly">
 								</div>
 							</div>

@@ -109,5 +109,32 @@
 		WHERE ROWNUM <= 3
 ]]>
 	</select>
+	
+	<!-- 주소있는 마켓리스트 -->
+	<select id="selectMarketMap" resultType="marketMap" parameterType="marketMap">
+<![CDATA[
+		SELECT
+		    A.CM_ADDRESS_TB_NO "CM_ADDRESS_TB_NO",
+		    A.CM_ADDRESS_TB_LAT "CM_ADDRESS_TB_LAT",
+		    A.CM_ADDRESS_TB_LNG "CM_ADDRESS_TB_LNG",
+		    B.MARKET_TB_NO "MARKET_TB_NO",
+		    B.MARKET_TB_TITLE "MARKET_TB_TITLE",
+		    B.MARKET_TB_SELL_OR_BUY "MARKET_TB_SELL_OR_BUY"
+		FROM cm_address A
+		JOIN 
+		    (SELECT
+		    MARKET_TB_NO ,
+		    CUSTOMER_TB_NO ,
+		    MARKET_TB_TITLE ,
+		    MARKET_TB_REG_DATE ,
+		    MARKET_TB_SELL_OR_BUY ,
+		    CM_ADDRESS_TB_NO 
+		    FROM market
+		    WHERE market_tb_reg_date >= add_months(sysdate,-1)
+		    AND cm_address_tb_no IS NOT NULL AND cm_address_tb_no >= 0) B
+		ON A.CM_ADDRESS_TB_NO = B.cm_address_tb_no
+		WHERE  B.customer_tb_no != ${customerTbNo}
+]]>		
+	</select>
 
 </mapper>

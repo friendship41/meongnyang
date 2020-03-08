@@ -41,10 +41,10 @@
 						</select>
 					</div>
 				<div class="write__market__list">
+					<a href="/marketMap.do">내 주변 검색</a>
 					<a href="/market-form.do">글쓰기</a>
 				</div>
 				</div>
-				<!-- 글쓰기 버튼 추가 -->
 				<hr>
 				<!-- Start Single Blog -->
 				<c:forEach items="${marketList}" var="market">
