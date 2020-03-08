@@ -27,24 +27,25 @@
 <!-- End Bradcaump area -->
 <!-- Start Blog Area -->
 <!-- 구매 판매 버튼 추가 -->
-<div class="htc__grid__top__market__list">
-	<div class="htc__select__option">
-		<select class="ht__select" id="selector">
-			<option value="all">전체</option>
-			<option value="sell">구매</option>
-			<option value="buy">판매</option>
-		</select>
-	</div>
-</div>
 
 <section class="htc__blog__area bg__white ptb--100">
 	<div class="container">
 		<div class="row">
 			<div class="ht__blog__wrap blog--page clearfix">
-				<!-- 글쓰기 버튼 추가 -->
+				<div class="htc__grid__top__market__list">
+					<div class="htc__select__option">
+						<select class="ht__select" id="selector">
+							<option value="all">전체</option>
+							<option value="sell">구매</option>
+							<option value="buy">판매</option>
+						</select>
+					</div>
 				<div class="write__market__list">
 					<a href="/market-form.do">글쓰기</a>
 				</div>
+				</div>
+				<!-- 글쓰기 버튼 추가 -->
+				<hr>
 				<!-- Start Single Blog -->
 				<c:forEach items="${marketList}" var="market">
 					<div class="col-md-6 col-lg-4 col-sm-12 col-xs-12">
