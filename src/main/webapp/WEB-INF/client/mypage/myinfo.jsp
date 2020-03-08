@@ -50,7 +50,8 @@
                 <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
             	<input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }"> <!-- sessionScope.customer.customerTbNo -->
-            	<input type="hidden" name="cmAddressTbPhone" value="010">	
+            	<input type="hidden" name="cmAddressTbPhone" value="010">
+            	
                     <div class="ht__comment__form">
                         <h4 class="title__line--5">배송지 목록</h4>
                         <div class="ht__comment__form__inner">
@@ -231,7 +232,7 @@
             	
                 oncomplete:function(data) {
                     $("#cmAddressTbPostcode").val(data.zonecode);
-                    $("#cmAddressTbAddress1").val(data.address)
+                    $("#cmAddressTbAddress1").val(data.address);
                     $("#cmAddressTbAddress2").focus();
                 }
             }).open();
