@@ -1,12 +1,12 @@
 package com.mall.meongnyang.client.community.dao;
 
-import java.util.List;
-
+import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
+import com.mall.meongnyang.client.community.vo.ClientReviewVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.mall.meongnyang.client.community.vo.ClientReviewVO;
+import java.util.List;
 
 @Repository
 public class ClientReviewDAOImpl implements ClientReviewDAO {
@@ -49,4 +49,9 @@ public class ClientReviewDAOImpl implements ClientReviewDAO {
 		return sessionTemplate.selectOne("reviewDAO.cntProduct", clientReviewVO);
 	}
 
+	@Override
+	public void updateProductSaleRating(AdminProductSaleVO adminProductSaleVO)
+	{
+		sessionTemplate.update("ProductSaleDAO.updateProductSaleRating", adminProductSaleVO);
+	}
 }

@@ -29,7 +29,6 @@ public class AdminSelectSalesPaymentRegionController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		List<ClientProductOrderVO> salesList = paymentRegion.selectSalesPaymentRegion(clientProductOrderVO);
-		
 
 		AdminSalesOverviewDataSetVO adminSalesOverviewDataSetVO = new AdminSalesOverviewDataSetVO();
 		adminSalesOverviewDataSetVO.setLabel("지역별 매출");

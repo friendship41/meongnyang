@@ -37,6 +37,8 @@
 	<bean id="RequestVOFactory" class="com.mall.meongnyang.util.apiRequest.voFactory.RequestVOFactoryImpl"/>
 
 
+	<!-- 네이버 로그인관련 -->
+	<bean id="naverLoginBO" class="com.mall.meongnyang.client.member.controller.NaverLoginBO" />
 
 
 	<!-- resources mapping -->
@@ -74,6 +76,10 @@
 			<mvc:exclude-mapping path="/shoppingDetail.do"/>
 			<mvc:exclude-mapping path="/productReviewList.do"/>
 			<mvc:exclude-mapping path="/needLogin.do"/>
+			<mvc:exclude-mapping path="/insertReview.do"/>
+			<mvc:exclude-mapping path="/klogin.do"/>
+			<mvc:exclude-mapping path="/NaverLogin.do"/>
+			<mvc:exclude-mapping path="/googleLogin.do"/>
 			<bean class="com.mall.meongnyang.client.intercepter.login.LoginInterceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>

@@ -28,7 +28,6 @@
 					<h3 class="breadcrumb-header">매출 현황</h3>
 				</div>
 				<div id="main-wrapper">
-
 					<!-- 상세정보 -->
 					<!-- Row -->
 					<div class="row">
@@ -38,16 +37,17 @@
 									<h4 class="panel-title">매출 현황</h4>
 								</div>
 								<div class="panel-body">
-									<div class="panel-group" id="accordion2" role="tablist"
-										aria-multiselectable="true">
+									<div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">
 										<div class="panel panel-primary">
 											<div class="panel-heading" role="tab" id="headingOne1">
 												<h4 class="panel-title">
 													<a data-toggle="collapse" data-parent="#accordion2" href="#1" aria-expanded="true" aria-controls="collapseOne">기간별 매출 현황 </a>
 												</h4>
 											</div>
-											<div id="1" class="panel-collapse collapse in"
-												role="tabpanel" aria-labelledby="headingOne1">
+											<div id="1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne1">&nbsp;
+												<input type='hidden' name='targets' value='dailySales'>
+											 	<a href="javascript:void(0)" id="excelDown1" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown1" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -102,26 +102,6 @@
 														<canvas id="sales_chart_month"></canvas>
 													</div>
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-													<!-- 	<form class="form-horizontal" action="javascript:void(0);">
-															<div class="form-group">
-																<div class="col-sm-10">
-																	<div class="row">
-																		<div class="col-md-4">
-																			<input type="text" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
-																		</div>
-																		<div class="col-md-1">
-																			<label class="text-center center-block">~</label>
-																		</div>
-																		<div class="col-md-4">
-																			<input type="text" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
-																		</div>
-																		<div class="col-md-1">
-																			<button id="periodSales" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</form> -->
 														<div class="table-responsive">
 															<table id="dateSaleTable" class="display table" style="width: 100%; cellspacing: 0;">
 																<thead>
@@ -166,7 +146,10 @@
 													<a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#2" aria-expanded="false" aria-controls="collapseTwo"> 카테고리별 매출 현황 </a>
 												</h4>
 											</div>
-											<div id="2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">
+											<div id="2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">&nbsp;
+												<input type='hidden' name='targets' value='categorySales'>
+												<a href="javascript:void(0)" id="excelDown2" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown2" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -193,54 +176,8 @@
 															</div>
 														</form>
 														<canvas id="category_sales_chart_day"></canvas>
-													</div>
-													<!-- <div class="col-md-6">
-														<div class="panel-heading clearfix">
-															<h4 class="panel-title">월별 매출</h4>
-														</div>
-														<form class="form-horizontal" action="javascript:void(0);">
-															<div class="form-group">
-																<div class="col-sm-10">
-																	<div class="row">
-																		<div class="col-md-4">
-																			<input type="text" name="startMonth" class="date-picker text-center form-control" placeholder="01/01/2020">
-																		</div>
-																		<div class="col-md-1">
-																			<label class="text-center center-block">~</label>
-																		</div>
-																		<div class="col-md-4">
-																			<input type="text" name="endMonth" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
-																		</div>
-																		<div class="col-md-1">
-																			<button id="monthlySalesCategory" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</form>
-														<canvas id="category_sales_chart_month"></canvas>
-													</div> -->
+													</div>												
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-														<!-- <form class="form-horizontal" action="javascript:void(0);">
-															<div class="form-group">
-																<div class="col-sm-10">
-																	<div class="row">
-																		<div class="col-md-4">
-																			<input type="text" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
-																		</div>
-																		<div class="col-md-1">
-																			<label class="text-center center-block">~</label>
-																		</div>
-																		<div class="col-md-4">
-																			<input type="text" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
-																		</div>
-																		<div class="col-md-1">
-																			<button id="periodSalesCategory" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</form> -->
 														<div class="table-responsive">
 															<table id="categorySaleTable" class="display table"	style="width: 100%; cellspacing: 0;">
 																<thead>
@@ -250,7 +187,6 @@
 																		<th>원가(원)</th>
 																		<th>판매량(개)</th>
 																		<th>비고</th>
-																		<th>비고</th>
 																	</tr>
 																</thead>
 																<tfoot id="categorySaleTableFoot">
@@ -259,13 +195,11 @@
 																		<th></th>
 																		<th></th>
 																		<th></th>
-																		<th></th>
-																		<th></th>
+																		<th></th>																
 																	</tr>
 																</tfoot>
 																<tbody id="categorySaleTableBody">
 																	<tr>
-																		<td></td>
 																		<td></td>
 																		<td></td>
 																		<td></td>
@@ -285,8 +219,10 @@
 													<a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#3" aria-expanded="false" aria-controls="collapseThree"> 가격별 매출 현황 </a>
 												</h4>
 											</div>
-											<div id="3" class="panel-collapse collapse" role="tabpanel"
-												aria-labelledby="headingThree3">
+											<div id="3" class="panel-collapse collapse" role="tabpanel"	aria-labelledby="headingThree3">&nbsp;
+												<input type='hidden' name='targets' value='dailySalesPrice'>
+												<a href="javascript:void(0)" id="excelDown3" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown3" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -323,13 +259,13 @@
 																<div class="col-sm-10">
 																	<div class="row">
 																		<div class="col-md-4">
-																			<input type="text" id="dailySalesPriceStartMonth" name="startMonth" class="date-picker text-center form-control" placeholder="01/01/2020">
+																			<input type="text" id="monthlySalesPriceStartDate" name="startMonth" class="date-picker text-center form-control" placeholder="01/01/2020">
 																		</div>
 																		<div class="col-md-1">
 																			<label class="text-center center-block">~</label>
 																		</div>
 																		<div class="col-md-4">
-																			<input type="text" id="dailySalesPriceEndMonth" name="endMonth" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
+																			<input type="text" id="monthlySalesPriceEndDate" name="endMonth" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
 																		</div>
 																		<div class="col-md-1">
 																			<button id="monthlySalesPrice" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
@@ -341,26 +277,6 @@
 														<canvas id="price_sales_chart_month"></canvas>
 													</div>
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-														<!-- <form class="form-horizontal" action="javascript:void(0);">
-															<div class="form-group">
-																<div class="col-sm-10">
-																	<div class="row">
-																		<div class="col-md-4">
-																			<input type="text" name="startDate" class="form-control" placeholder="0">
-																		</div>
-																		<div class="col-md-1">
-																			<label class="text-center center-block">~</label>
-																		</div>
-																		<div class="col-md-4">
-																			<input type="text" name="endDate" class="form-control" placeholder="10000" style="margin-bottom: 14px;">
-																		</div>
-																		<div class="col-md-1">
-																			<button id="periodSalesPrice" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</form> -->
 														<div class="table-responsive">
 															<table id="priceSaleTable" class="display table" style="width: 100%; cellspacing: 0;">
 																<thead>
@@ -369,7 +285,6 @@
 																		<th>매출(원)</th>
 																		<th>원가(원)</th>
 																		<th>판매량(개)</th>
-																		<th>비고</th>
 																		<th>비고</th>
 																	</tr>
 																</thead>
@@ -380,12 +295,10 @@
 																		<th></th>
 																		<th></th>
 																		<th></th>
-																		<th></th>
 																	</tr>
 																</tfoot>
 																<tbody id="priceSaleTableBody">
 																	<tr>
-																		<td></td>
 																		<td></td>
 																		<td></td>
 																		<td></td>
@@ -405,8 +318,10 @@
 													<a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#4" aria-expanded="false" aria-controls="collapseTwo"> 지역별 매출 현황 </a>
 												</h4>
 											</div>
-											<div id="4" class="panel-collapse collapse" role="tabpanel"
-												aria-labelledby="headingFour4">
+											<div id="4" class="panel-collapse collapse" role="tabpanel"	aria-labelledby="headingFour4">&nbsp;
+												<input type='hidden' name='targets' value='regionSales'>
+												<a href="javascript:void(0)" id="excelDown4" style="font-size: 25px; color: green;"><i class="fa fa-file-excel-o" aria-hidden="true"></i><span class="sr-only">&nbsp;&nbsp;</span>EXCEL</a>&nbsp;
+											 	<a href="javascript:void(0)" id="pdfDown4" style="font-size: 25px; color: #B40431;"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span class="sr-only">&nbsp;&nbsp;</span>PDF</a>
 												<div class="panel-body">
 													<div class="col-md-6">
 														<div class="panel-heading clearfix">
@@ -433,57 +348,10 @@
 															</div>
 														</form>
 														<canvas id="region_sales_chart_day"></canvas>
-													</div>
-													<!-- <div class="col-md-6">
-														<div class="panel-heading clearfix">
-															<h4 class="panel-title">월별 매출</h4>
-														</div>
-														<form class="form-horizontal">
-															<div class="form-group">
-																<div class="col-sm-10">
-																	<div class="row">
-																		<div class="col-md-4">
-																			<input type="text" name="startMonth" class="date-picker text-center form-control" placeholder="01/01/2020">
-																		</div>
-																		<div class="col-md-1">
-																			<label class="text-center center-block">~</label>
-																		</div>
-																		<div class="col-md-4">
-																			<input type="text" name="endMonth" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
-																		</div>
-																		<div class="col-md-1">
-																			<button type="submit" id="mothlySalesCity" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</form>
-														<canvas id="region_sales_chart_month"></canvas>
-													</div> -->
+													</div>													
 													<div class="col-lg-12 col-md-12" style="margin-top: 80px">
-														<!-- <form class="form-horizontal" action="javascript:void(0);">
-															<div class="form-group">
-																<div class="col-sm-10">
-																	<div class="row">
-																		<div class="col-md-4">
-																			<input type="text" name="startDate" class="date-picker text-center form-control" placeholder="01/01/2020">
-																		</div>
-																		<div class="col-md-1">
-																			<label class="text-center center-block">~</label>
-																		</div>
-																		<div class="col-md-4">
-																			<input type="text" name="endDate" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom: 14px;">
-																		</div>
-																		<div class="col-md-1">
-																			<button type="submit" id="periodSalesCity" class="btn btn-success center-block" style="margin-bottom: 14px;">조회</button>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</form> -->
 														<div class="table-responsive">
-															<table id="regionSaleTable" class="display table"
-																style="width: 100%; cellspacing: 0;">
+															<table id="regionSaleTable" class="display table" style="width: 100%; cellspacing: 0;">
 																<thead>
 																	<tr>
 																		<th>지역</th>
@@ -614,19 +482,20 @@
 			    +  '<th>' + totPoint + '</th>'
 			    +  '<th>' + (totPayment - totReceive - totDelive) + '</th>'
 			    + '</tr>';
- 				
+ 				   
+			    
 				$("#dateSaleTable").DataTable().clear().destroy();				 
 				$("#dateSaleTableFoot").empty();
 				$("#dateSaleTableBody").empty();
 				$("#dateSaleTableFoot").append(str2);
 				$("#dateSaleTableBody").append(str);
 	            $("#dateSaleTable").DataTable();
-			   					
+			   	
 	 		});
 		}
 	 	
 		function monthlySales(event) {
-				
+			
 	 		var startDate = $("#monthlySalesStartDate").val();
 	 		var endDate = $("#monthlySalesEndDate").val();
 	 		
@@ -658,7 +527,8 @@
 		 				totDelive += this.pdOrderTbDeliveryFee;
 		 				totPoint += this.pdOrderTbUsedPoint;
 		 				
-						str += '<tr><td>' + this.pdOrderTbPaymentDateStr + '</td>';
+						str += '<tr> <input type="hidden" value="monthly">';
+						str += '<td>' + this.pdOrderTbPaymentDateStr + '</td>';
 						str += '<td>' + this.pdOrderTbPaymentSum + '</td>';
 						str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
 						str += '<td>' + this.pdOrderTbDeliveryFee + '</td>';
@@ -721,7 +591,6 @@
 					str += '<td>' + this.ordersDetailTbPriceSum + '</td>';
 					str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
 					str += '<td>' + this.ordersDetailTbAmount + '</td>';
-					str += '<td></td>';
 					str += '<td></td>'
 					str += '</tr>';
 					
@@ -729,12 +598,11 @@
  				
  				var str2 = "";
  				str2 += '<tr><th>총 합</th>'
-			    +  '<th>' + totPayment + '</th>'
-			    +  '<th>' + totReceive + '</th>'
-			    +  '<th>' + totAmount + '</th>'
-			    +  '<th></th>'
-			    +  '<th></th>'
-			    + '</tr>';
+				    +  '<th>' + totPayment + '</th>'
+				    +  '<th>' + totReceive + '</th>'
+				    +  '<th>' + totAmount + '</th>'
+				    +  '<th></th>'
+				    +  '</tr>';
  				
 				$("#categorySaleTable").DataTable().clear().destroy();				 
 				$("#categorySaleTableFoot").empty();
@@ -801,7 +669,7 @@
 				$("#regionSaleTableBody").empty();
 				$("#regionSaleTableFoot").html(str2);
 				$("#regionSaleTableBody").html(str);
-	            $("#regionSaleTable").DataTable();
+	            $("#regionSaleTable").DataTable({"order": [1,'desc']});
 	 		});
 		}
 		
@@ -839,7 +707,6 @@
 					str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
 					str += '<td>' + this.ordersDetailTbAmount + '</td>';
 					str += '<td></td>';
-					str += '<td></td>'
 					str += '</tr>';
 					
 				});	
@@ -850,7 +717,6 @@
 			    +  '<th>' + totReceive + '</th>'
 			    +  '<th>' + totAmount + '</th>'
 			    +  '<th></th>'
-			    +  '<th></th>'
 			    + '</tr>';
  				
 				$("#priceSaleTable").DataTable().clear().destroy();				 
@@ -858,15 +724,21 @@
 				$("#priceSaleTableBody").empty();
 				$("#priceSaleTableFoot").html(str2);
 				$("#priceSaleTableBody").html(str);
-	            $("#priceSaleTable").DataTable();
+	            $("#priceSaleTable").DataTable({
+	            	"order": [4,'desc'],
+	            	"columnDefs" : [{
+                        "targets": 0,
+                        "orderable" : false		                      
+					}]	            	
+	            });
 
 	 		});
 		}
 	 	
 		function monthlySalesPrice(event) {
 				
-	 		var startDate = $("#dailySalesPriceStartMonth").val();
-	 		var endDate = $("#dailySalesPriceEndMonth").val();
+	 		var startDate = $("#monthlySalesPriceStartDate").val();
+	 		var endDate = $("#monthlySalesPriceEndDate").val();
 	 		
 	 		var goUrl = "/salesPriceMonth.ado?startDate="+startDate+"&endDate="+endDate;
 	 		
@@ -887,7 +759,7 @@
 	 				var totReceive = 0;
 	 				var totAmount = 0;
 	 				
-	 				$(dailySalesPrice).each(function() {
+	 				$(monthlySalesPrice).each(function() {
 											
 						totPayment += this.ordersDetailTbPriceSum;
 						totReceive += this.pdSaleTbReceivedPrice;
@@ -898,7 +770,6 @@
 						str += '<td>' + this.pdSaleTbReceivedPrice + '</td>';
 						str += '<td>' + this.ordersDetailTbAmount + '</td>';
 						str += '<td></td>';
-						str += '<td></td>'
 						str += '</tr>';
 						
 					});	
@@ -909,26 +780,33 @@
 				    +  '<th>' + totReceive + '</th>'
 				    +  '<th>' + totAmount + '</th>'
 				    +  '<th></th>'
-				    +  '<th></th>'
 				    + '</tr>';
 	 				
-					$("#priceSaleTable").DataTable().clear().destroy();				 
+	 				$("#priceSaleTable").DataTable().clear().destroy();				 
 					$("#priceSaleTableFoot").empty();
 					$("#priceSaleTableBody").empty();
 					$("#priceSaleTableFoot").html(str2);
 					$("#priceSaleTableBody").html(str);
-		            $("#priceSaleTable").DataTable();
-				}
+		            $("#priceSaleTable").DataTable({
+		            	"order": [4,'desc'],
+		            	"columnDefs" : [{
+	                        "targets": 0,
+	                        "orderable" : false		                      
+						}]
+		            });
+		       }
 	 		}); 
 		}
 		
 		
 	 	$("#dailySales").on('click', function() {
 			dailySales();
+	 		$('#1').children('input[name=targets]').val('dailySales');
 		})	
 		
 	 	$("#monthlySales").on('click', function() {
 	 		monthlySales(this);
+	 		$('#1').children('input[name=targets]').val('monthlySales');
 		})
 		
 		$("#dailySalesCategory").on('click', function() {
@@ -937,10 +815,12 @@
 		
 		$("#dailySalesPrice").on('click', function() {
 			dailySalesPrice();
+			$('#3').children('input[name=targets]').val('dailySalesPrice');
 		})
 		
 		$("#monthlySalesPrice").on('click', function() {
 			monthlySalesPrice(this);
+			$('#3').children('input[name=targets]').val('monthlySalesPrice');
 		})
 		
 		$("#dailySalesRegion").on('click', function() {
@@ -949,5 +829,170 @@
 	    
 });
 </script>
+<script type="text/javascript">	
+	function excelDown(event) {
+		switch(event.target.id){ // 각각 event 객체로 전달된 target 프로퍼티에서 id의 값을 알 수 있다.
+			case 'excelDown1':
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = "";
+		 		var endDate = "";
+		 		
+		 		var goUrl = "";
+				
+				if(targets === 'dailySales'){
+					startDate = $("#dailySalesStartDate").val();
+			 		endDate = $("#dailySalesEndDate").val();
+				} else if(targets === 'monthlySales'){
+					startDate = $("#monthlySalesStartDate").val();
+			 		endDate = $("#monthlySalesEndDate").val();
+				}
+				
+				goUrl = "/exceldown.ado?targets="+targets+"&startDate="+startDate+"&endDate="+endDate;
+		 		
+				location.href=goUrl;
+			    break;
+			
+			case 'excelDown2':
+				
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = $("#categorySalesStartDate").val();
+		 		var endDate = $("#categorySalesEndDate").val();
+		 		
+		 		var goUrl = "/exceldown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href=goUrl;
+		 		
+			    break;
+			    
+			case 'excelDown3':	
+
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = "";
+		 		var endDate = "";
+		 		
+		 		var goUrl = "";
+		 		if(targets === 'dailySalesPrice') {
+		 			startDate = $("#dailySalesPriceStartDate").val();
+			 		endDate = $("#dailySalesPriceEndDate").val();			 	
+		 			
+		 		} else if(targets === 'monthlySalesPrice') {
+		 			startDate = $("#monthlySalesPriceStartDate").val();
+			 		endDate = $("#monthlySalesPriceEndDate").val();		 			
+		 		}
+		 		
+		 		goUrl = "/exceldown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href = goUrl;
+		 		
+				break;
+			
+			case 'excelDown4':
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = $("#regionSalesStartDate").val();
+		 		var endDate = $("#regionSalesEndDate").val();
+		 		
+		 		var goUrl = "/exceldown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href = goUrl;
+		 		
+			    break;
+		}
+	}
+	
+	function pdfDown(event) {
+		switch(event.target.id){ // 각각 event 객체로 전달된 target 프로퍼티에서 id의 값을 알 수 있다.
+			case 'pdfDown1':
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = "";
+		 		var endDate = "";
+		 		
+		 		var goUrl = "";
+				
+				if(targets === 'dailySales'){
+					startDate = $("#dailySalesStartDate").val();
+			 		endDate = $("#dailySalesEndDate").val();
+				} else if(targets === 'monthlySales'){
+					startDate = $("#monthlySalesStartDate").val();
+			 		endDate = $("#monthlySalesEndDate").val();
+				}
+				
+				goUrl = "/pdfdown.ado?targets="+targets+"&startDate="+startDate+"&endDate="+endDate;
+		 		
+				location.href=goUrl;
+			    break;
+			
+			case 'pdfDown2':
+				
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = $("#categorySalesStartDate").val();
+		 		var endDate = $("#categorySalesEndDate").val();
+		 		
+		 		var goUrl = "/pdfdown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href=goUrl;
+		 		
+			    break;
+			    
+			case 'pdfDown3':	
+
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = "";
+		 		var endDate = "";
+		 		
+		 		var goUrl = "";
+		 		if(targets === 'dailySalesPrice') {
+		 			startDate = $("#dailySalesPriceStartDate").val();
+			 		endDate = $("#dailySalesPriceEndDate").val();			 	
+		 			
+		 		} else if(targets === 'monthlySalesPrice') {
+		 			startDate = $("#monthlySalesPriceStartDate").val();
+			 		endDate = $("#monthlySalesPriceEndDate").val();		 			
+		 		}
+		 		
+		 		goUrl = "/pdfdown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href = goUrl;
+		 		
+				break;
+			
+			case 'pdfDown4':
+				var targets = $(this).parent().children('input[name=targets]').val();
+				console.log(targets);
+				
+				var startDate = $("#regionSalesStartDate").val();
+		 		var endDate = $("#regionSalesEndDate").val();
+		 		
+		 		var goUrl = "/pdfdown.ado?targets="+ targets + "&startDate=" + startDate + "&endDate=" + endDate;
+		 		
+		 		location.href = goUrl;
+		 		
+			    break;
+		}
+	}
+	
+	$(document).on('click', '#excelDown1', excelDown);
+	$(document).on('click', '#excelDown2', excelDown);
+	$(document).on('click', '#excelDown3', excelDown);
+	$(document).on('click', '#excelDown4', excelDown);
+	$(document).on('click', '#pdfDown1', pdfDown);
+	$(document).on('click', '#pdfDown2', pdfDown);
+	$(document).on('click', '#pdfDown3', pdfDown);
+	$(document).on('click', '#pdfDown4', pdfDown);
+</script>
+
 </body>
 </html>

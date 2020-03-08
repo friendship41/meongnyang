@@ -67,8 +67,21 @@ public class ClientLoginDAOImpl implements ClientLoginDAO {
 	}
 
 	@Override
+	public void insertGoogleCustomer(ClientCustomerVO clientCustomerVO)
+	{
+		sqlSessionTemplate.insert("ClientLoginDAO.insertGoogle", clientCustomerVO);
+	}
+
+	@Override
 	public void updateState(ClientCustomerVO clientCustomerVO) {
 		sqlSessionTemplate.update("ClientLoginDAO.updateState", clientCustomerVO);
+		
+	}
+
+	@Override
+	public void insertNaver(ClientCustomerVO clientCustomerVO) {
+		// 네이버
+		sqlSessionTemplate.insert("ClientLoginDAO.insertNaver", clientCustomerVO);
 		
 	}
 	

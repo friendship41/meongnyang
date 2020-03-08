@@ -37,26 +37,6 @@
                                 <h4 class="panel-title">프로모션 진행현황</h4>
                             </div>
                             <div class="panel-body">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <div class="col-sm-10">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/01/2020">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <label class="text-center center-block">~</label>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom:14px;">
-                                                </div>
-                                                <div class="col-md-1">
-                                                    <button type="submit" class="btn btn-success center-block" style="margin-bottom:14px;">조회</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
                                 <div class="table-responsive">
                                     <table id="readCountProductTable" class="display table" style="width: 100%; cellspacing: 0;">
                                         <thead>

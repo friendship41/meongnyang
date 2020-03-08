@@ -1,8 +1,8 @@
 package com.mall.meongnyang.client.community.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.mall.meongnyang.client.community.service.ClientSelectReviewListService;
+import com.mall.meongnyang.client.community.vo.ClientReviewVO;
+import com.mall.meongnyang.client.community.vo.ReviewPaging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mall.meongnyang.client.community.service.ClientSelectReviewListService;
-import com.mall.meongnyang.client.community.vo.ClientReviewVO;
-import com.mall.meongnyang.client.community.vo.ReviewPaging;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class ClientSelectReviewListController {
@@ -43,8 +42,8 @@ public class ClientSelectReviewListController {
 		ReviewPaging paging = new ReviewPaging(currentPage);
 		paging.creatPage(selectReviewListService.selectReveiwCount(clientReviewVO));
 		
-		System.out.println("시작" + paging.getStartRow());
-		System.out.println("끝 " + paging.getEndRow());
+//		System.out.println("시작" + paging.getStartRow());
+//		System.out.println("끝 " + paging.getEndRow());
 		
 		clientReviewVO.setStartRow(paging.getStartRow());
 		clientReviewVO.setEndRow(paging.getEndRow());

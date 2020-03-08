@@ -8,14 +8,15 @@
 		INSERT 
 		INTO 
 			cm_address
-		VALUES(cm_address_seq.nextval, #{customerTbNo}, #{cmAddressTbNickname}, #{cmAddressTbPostcode}, #{cmAddressTbAddress1}, #{cmAddressTbAddress2}, #{cmAddressTbPhone})					
+		VALUES(cm_address_seq.nextval, #{customerTbNo}, #{cmAddressTbNickname}, #{cmAddressTbPostcode}, #{cmAddressTbAddress1}, #{cmAddressTbAddress2}, #{cmAddressTbPhone}, TRUNC(#{cmAddressTbLat},6), TRUNC(#{cmAddressTbLng},6))
 		
 	</insert>
 	<update id="updateMyinfoAddress" parameterType="clientMyinfo">
 		UPDATE cm_address
 		SET 
 			cm_address_tb_nickname=#{cmAddressTbNickname}, cm_address_tb_postcode=#{cmAddressTbPostcode}, 
-			cm_address_tb_address1=#{cmAddressTbAddress1}, cm_address_tb_address2=#{cmAddressTbAddress2} 
+			cm_address_tb_address1=#{cmAddressTbAddress1}, cm_address_tb_address2=#{cmAddressTbAddress2},
+			CM_ADDRESS_TB_LAT=TRUNC(#{cmAddressTbLat},6), CM_ADDRESS_TB_LNG=TRUNC(#{cmAddressTbLng},6)
 		WHERE 
 			cm_address_tb_no = #{cmAddressTbNo}
 	</update>

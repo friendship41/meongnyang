@@ -22,65 +22,72 @@
 		AND A.PD_ORDER_TB_STATE in ('P', 'D', 'A')
 	</sql>
 	
+	<sql id="case">
+		<![CDATA[
+		(case
+			when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
+			when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
+			when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
+			when A.pd_sale_tb_sales_price >= 100000 then '10만원 이상'  
+		end)
+		]]>
+	</sql>
+	
 	<!-- 가격범주 별 월간 매출 -->
 	<select id="selectSalesPaymentPriceMonthly" parameterType="order" resultType="order">
 		SELECT
 		    TO_CHAR(A.PD_ORDER_TB_PAYMENT_DATE, 'YY-MM') PD_ORDER_TB_PAYMENT_DATE_STR,
-		    <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end) pd_sale_tb_sales_price_range,]]>
+		    <include refid="case" /> pd_sale_tb_sales_price_range,
 		    SUM(A.orders_detail_tb_price) orders_detail_tb_price_sum,
 		    SUM(A.pd_sale_tb_received_price) pd_sale_tb_received_price,
 		    SUM(A.orders_detail_tb_amount) orders_detail_tb_amount
 		    <include refid="subPriceSales"/>
 		GROUP BY TO_CHAR(A.PD_ORDER_TB_PAYMENT_DATE, 'YY-MM'),
-		    <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end)]]>
+		     <include refid="case" />
+		ORDER BY <include refid="case" /> ASC
 	</select>
 
 	<!-- 가격범주 별 일간 매출 -->
 	<select id="selectSalesPaymentPrice" parameterType="order" resultType="order">
 		SELECT
-		    TO_CHAR(A.PD_ORDER_TB_PAYMENT_DATE, 'dd') "PD_ORDER_TB_PAYMENT_DATE_STR",
-		   <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end) pd_sale_tb_sales_price_range,]]>
+		    TO_CHAR(A.PD_ORDER_TB_PAYMENT_DATE, 'MM-dd') "PD_ORDER_TB_PAYMENT_DATE_STR",
+		    <include refid="case" /> pd_sale_tb_sales_price_range,
 		    SUM(A.orders_detail_tb_price) orders_detail_tb_price_sum,
 		    SUM(A.pd_sale_tb_received_price) pd_sale_tb_received_price,
 		    SUM(A.orders_detail_tb_amount) orders_detail_tb_amount
 		    <include refid="subPriceSales"/>
-		GROUP BY  TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'dd'),
-		    <![CDATA[(case
-		         when A.pd_sale_tb_sales_price < 10000 then '1만원미만' 
-			     when A.pd_sale_tb_sales_price < 50000 then '5만원미만'
-			     when A.pd_sale_tb_sales_price < 100000 then '10만원미만'
-			     when A.pd_sale_tb_sales_price >= 100000 then '10만원이상'  
-		    end),]]>
-		    TO_CHAR(A.pd_order_tb_payment_date, 'yyyy-MM-dd')
-		ORDER BY TO_CHAR(A.pd_order_tb_payment_date, 'yyyy-MM-dd') ASC	
+		GROUP BY TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'MM-dd'),
+		     <include refid="case" />
+		ORDER BY <include refid="case" /> ASC	
 	</select>
 
 	<!-- 지역별 기간 매출 -->
 	<select id="selectSalesPaymentRegion" parameterType="order" resultType="order">
 		SELECT 
-		    PD_ORDER_TB_AD_CITY ,
+		    po.PD_ORDER_TB_AD_CITY ,
 		    SUM(po.PD_ORDER_TB_PAYMENT) PD_ORDER_TB_PAYMENT_SUM,
 		    SUM(po.PD_ORDER_TB_DELIVERY_FEE) PD_ORDER_TB_DELIVERY_FEE,
 		    SUM(po.PD_ORDER_TB_USED_POINT) PD_ORDER_TB_USED_POINT,
 		    SUM(B.pd_sale_tb_received_price) pd_sale_tb_received_price
-		<include refid="subSales"/>
-		GROUP BY PD_ORDER_TB_AD_CITY
-		ORDER BY PD_ORDER_TB_AD_CITY ASC
+		FROM pd_order po, 
+		    (SELECT
+		        sum(ps.pd_sale_tb_received_price) pd_sale_tb_received_price,
+		        A.PD_ORDER_TB_AD_CITY
+		    FROM pd_sale ps,
+		            (select 
+		            po.pd_order_tb_no,
+		            po.pd_order_tb_payment_date,
+		            od.pd_sale_tb_no,
+		            po.PD_ORDER_TB_AD_CITY
+		            from pd_order po, orders_detail od
+		            WHERE po.pd_order_tb_no = od.pd_order_tb_no) A
+		    WHERE ps.pd_sale_tb_no = A.pd_sale_tb_no 
+		    GROUP BY A.PD_ORDER_TB_AD_CITY) B
+		<![CDATA[WHERE po.PD_ORDER_TB_PAYMENT_DATE >= #{startDate} AND po.PD_ORDER_TB_PAYMENT_DATE <= (#{endDate}+1)]]>
+		AND po.PD_ORDER_TB_STATE in ('P', 'D', 'A')
+		AND po.pd_order_tb_ad_city = b.pd_order_tb_ad_city
+		GROUP BY po.PD_ORDER_TB_AD_CITY
+		ORDER BY SUM(po.PD_ORDER_TB_PAYMENT) DESC
 	</select>
 
 	<!-- 카테고리 기간별매출 -->
@@ -139,14 +146,14 @@
 	<!-- 일별 매출 현황 -->
 	<select id="selectSalesPayment" parameterType="order" resultType="order">
 		SELECT 
-			TO_CHAR(po.PD_ORDER_TB_PAYMENT_DATE, 'dd') PD_ORDER_TB_PAYMENT_DATE_STR,
+			TO_CHAR(po.PD_ORDER_TB_PAYMENT_DATE, 'MM-dd') PD_ORDER_TB_PAYMENT_DATE_STR,
 			SUM(PD_ORDER_TB_PAYMENT) PD_ORDER_TB_PAYMENT_SUM,
 			SUM(PD_ORDER_TB_DELIVERY_FEE) PD_ORDER_TB_DELIVERY_FEE,
 			SUM(PD_ORDER_TB_USED_POINT) PD_ORDER_TB_USED_POINT,
 			SUM(pd_sale_tb_received_price) pd_sale_tb_received_price
 		<include refid="subSales"/>
 		AND po.pd_order_tb_no = b.pd_order_tb_no
-		GROUP BY TO_CHAR(po.PD_ORDER_TB_PAYMENT_DATE, 'dd'), TO_CHAR(po.pd_order_tb_payment_date, 'yyyy-MM-dd')
+		GROUP BY TO_CHAR(po.PD_ORDER_TB_PAYMENT_DATE, 'MM-dd'), TO_CHAR(po.pd_order_tb_payment_date, 'yyyy-MM-dd')
 		ORDER BY TO_CHAR(po.pd_order_tb_payment_date, 'yyyy-MM-dd') ASC
 	</select>
 	
@@ -308,6 +315,45 @@
 				WHERE PD_ORDER_TB_ORDER_DATE BETWEEN #{dayFrom} AND #{dayTo}) X JOIN PD_SALE S
 			ON X.PD_SALE_TB_NO = S.PD_SALE_TB_NO) Y JOIN CUSTOMER C
 		ON Y.CUSTOMER_TB_NO = C.CUSTOMER_TB_NO
+	</select>
+
+	<select id="selectOrderStateList" parameterType="orderProc" resultType="orderProc">
+		SELECT
+			PO.PD_ORDER_TB_NO,
+			C.CUSTOMER_TB_NAME,
+			PO.PD_ORDER_TB_ORDER_DATE,
+			PO.PD_ORDER_TB_STATE
+		FROM PD_ORDER PO JOIN CUSTOMER C
+		ON PO.CUSTOMER_TB_NO = C.CUSTOMER_TB_NO
+	</select>
+
+	<update id="updateOrderState" parameterType="orderProc">
+		UPDATE PD_ORDER
+		SET
+			PD_ORDER_TB_STATE = #{pdOrderTbState}
+		WHERE PD_ORDER_TB_NO = #{pdOrderTbNo}
+	</update>
+
+	<select id="selectDashboardMonthMoney" parameterType="orderProc" resultType="orderProc">
+		SELECT
+			TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM') "PD_ORDER_TB_PAYMENT_DATE_STR",
+			SUM(PD_ORDER_TB_PAYMENT) "PD_ORDER_TB_PAYMENT"
+		FROM PD_ORDER
+		WHERE PD_ORDER_TB_PAYMENT_DATE IS NOT NULL AND PD_ORDER_TB_STATE IN ('P','D','A')
+		GROUP BY TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM')
+		HAVING TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM') IN (#{prvMonth},#{nowMonth})
+		ORDER BY PD_ORDER_TB_PAYMENT_DATE_STR
+	</select>
+
+	<select id="selectDashboardDayMoney" parameterType="orderProc" resultType="orderProc">
+		SELECT
+			TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM-dd') "PD_ORDER_TB_PAYMENT_DATE_STR",
+			SUM(PD_ORDER_TB_PAYMENT) "PD_ORDER_TB_PAYMENT"
+		FROM PD_ORDER
+		WHERE PD_ORDER_TB_PAYMENT_DATE IS NOT NULL AND PD_ORDER_TB_STATE IN ('P','D','A')
+		GROUP BY TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM-dd')
+		HAVING TO_CHAR(PD_ORDER_TB_PAYMENT_DATE, 'YY-MM-dd') IN (#{prvMonth},#{nowMonth})
+		ORDER BY PD_ORDER_TB_PAYMENT_DATE_STR
 	</select>
 
 </mapper>

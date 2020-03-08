@@ -29,10 +29,14 @@
 	</insert>
 	
 	<insert id="insertKakao" parameterType="clientLogin" >
-		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email)
-		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail})
+		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email, customer_tb_join_path)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail}, 'K')
 	</insert>
 	
+	<insert id="insertNaver" parameterType="clientLogin">
+	INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email, customer_tb_join_path)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail}, 'N')
+	</insert>
 
 	<update id="updateClientLastLogin" parameterType="clientLogin">
 		UPDATE customer
@@ -99,4 +103,8 @@
         WHERE C.CUSTOMER_TB_STATE = 'N' AND T.TERMS_AGREE_TB_CONSENT_STATUS = 'Y'
         GROUP BY C.CUSTOMER_TB_EMAIL
 	</select>
+
+	<insert id="insertGoogle" parameterType="clientLogin">
+	INSERT INTO customer VALUES(customer_seq.nextval,#{customerTbName},NULL,#{customerTbEmail},NULL,SYSDATE,0,SYSDATE,SYSDATE,'G','N')
+	</insert>
 </mapper>

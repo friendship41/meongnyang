@@ -2,6 +2,7 @@ package com.mall.meongnyang.admin.member.dao;
 
 import com.mall.meongnyang.admin.member.vo.AdminMemberVO;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.scheduler.todaycount.ClientUserCountVO;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,6 +33,12 @@ public class AdminMemberDAOImpl implements AdminMemberDAO {
 	public List<ClientCustomerVO> selectMailAgreeCustomerList(ClientCustomerVO clientCustomerVO)
 	{
 		return sqlSessionTemplate.selectList("ClientLoginDAO.selectMailAgreeCustomerList", clientCustomerVO);
+	}
+
+	@Override
+	public ClientUserCountVO selectSingleByDate(ClientUserCountVO clientUserCountVO)
+	{
+		return sqlSessionTemplate.selectOne("OverviewDAO.selectSingleByDate", clientUserCountVO);
 	}
 
 

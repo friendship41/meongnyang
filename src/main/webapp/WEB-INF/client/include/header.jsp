@@ -10,6 +10,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="google-signin-client_id" content="466559862469-rpts5vfh9qtqesurt0ovu2p7poq2ej39.apps.googleusercontent.com">
+
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/client/images/favicon.ico'/>">
     <link rel="apple-touch-icon" href="<c:url value='/resources/client/apple-touch-icon.png'/>">
@@ -125,7 +127,7 @@
                                                 <li><a href="faq.do">FAQ</a></li>
                                                 <li><a href="qna-list.do">Q&A</a></li>
                                                 <li><a href="reviewList.do">리뷰</a></li>
-                                                <li><a href="#">Contact</a></li>
+                                                <li><a href="contact.do">Contact</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="market-list.do">Market</a></li>
@@ -147,7 +149,7 @@
                                 </c:when>
                                 <c:otherwise>
                                 <div class="header__account">
-                                    <a href="/myinfo.do"><i class="icon-user icons"></i></a>
+                                    <a href="myinfo.do"><i class="icon-user icons"></i></a>
                                 </div>
                                 </c:otherwise>
                                 </c:choose>
