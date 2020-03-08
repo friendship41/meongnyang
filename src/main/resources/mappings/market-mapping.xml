@@ -60,14 +60,16 @@
 		market_tb_title,
 		market_tb_content,
 		market_tb_sell_or_buy,
-		market_tb_img_path)
+		market_tb_img_path,
+		cm_address_tb_no)
 		VALUES 
 		(market_seq.nextval,
 		#{customerTbNo}, 
 		#{marketTbTitle}, 
 		#{marketTbContent},
 		#{marketTbSellOrBuy},
-		#{marketTbImgPath, jdbcType=VARCHAR})
+		#{marketTbImgPath, jdbcType=VARCHAR},
+		#{cmAddressTbNo})
 	</insert>
 
 	<update id="updateMarket" parameterType="market">

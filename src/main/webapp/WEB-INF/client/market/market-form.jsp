@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <jsp:include page="../include/header.jsp" />
 
 <!-- Start Bradcaump area -->
@@ -34,7 +35,7 @@
 							<div class="form-group">
 								<label for="selector" class="col-sm-2 control-label"></label>
 								<div class="col-sm-8">
-									<select name="marketTbSellOrBuy" id="selector" class="form-control1">
+									<select name="marketTbSellOrBuy" id="selector" class="form-control1" style="height: 25px;">
 										<option value="sell">판매</option>
 										<option value="buy">구매</option>
 									</select>
@@ -54,6 +55,17 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="selector" class="col-sm-2 control-label">주소 선택</label>
+								<div class="col-sm-8">
+									<select name="cmAddressTbNo" id="selector" class="form-control1" style="height: 25px;">
+										<option id="addOption" value="-1">선택하세요</option>
+                                   	<c:forEach var="address" items="${addressList }">
+                                        <option value="${address.cmAddressTbNo}">${address.cmAddressTbNickname}</option>
+                                    </c:forEach>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="filename"
 									class="col-sm-2 control-label label-input-sm">첨부파일</label>
 								<div class="col-sm-8">
@@ -63,7 +75,7 @@
 							<div class="form-group">
 								<label for="message" class="col-sm-2 control-label">제목</label>
 								<div class="col-sm-8">
-									<input type="text" name="marketTbTitle" placeholder="">
+									<input type="text" name="marketTbTitle">
 								</div>
 							</div>
 							<div class="form-group">

@@ -14,6 +14,7 @@ public class ClientMarketVO {
 	private int marketTbReadCount;
 	private String marketTbSellOrBuy;
 	private String marketTbImgPath;
+	private String cmAddressTbNo;
 	
 	private MultipartFile uploadFile;
 	
@@ -89,11 +90,19 @@ public class ClientMarketVO {
 		this.endRow = endRow;
 	}
 
+	public String getCmAddressTbNo() {
+		return cmAddressTbNo;
+	}
+	public void setCmAddressTbNo(String cmAddressTbNo) {
+		this.cmAddressTbNo = cmAddressTbNo;
+	}
 	@Override
 	public String toString() {
 		return "ClientMarketVO [marketTbNo=" + marketTbNo + ", customerTbNo=" + customerTbNo + ", marketTbTitle="
 				+ marketTbTitle + ", marketTbContent=" + marketTbContent + ", marketTbRegDate=" + marketTbRegDate
 				+ ", marketTbReadCount=" + marketTbReadCount + ", marketTbSellOrBuy=" + marketTbSellOrBuy
-				+ ", marketTbImgPath=" + marketTbImgPath + ", uploadFile=" + uploadFile + "]";
+				+ ", marketTbImgPath=" + marketTbImgPath + ", cmAddressTbNo=" + cmAddressTbNo + ", uploadFile="
+				+ uploadFile + ", startRow=" + startRow + ", endRow=" + endRow + "]";
 	}
+	
 }
