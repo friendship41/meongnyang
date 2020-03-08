@@ -14,6 +14,7 @@ public class ClientInsertMyinfoAddressServiceImpl implements ClientInsertMyinfoA
 	
 	@Override
 	public void insertMyinfoAddress(ClientCmAddressVO clientCmAddressVO) {
+		
 		clientMyinfoAddressDAO.insertMyinfoAddress(clientCmAddressVO);
 		
 	}

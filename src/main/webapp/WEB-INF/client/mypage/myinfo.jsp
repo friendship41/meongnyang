@@ -75,7 +75,7 @@
                                 <input type="text" placeholder="주소 별칭 *" name="cmAddressTbNickname"
                                        id="cmAddressTbNickname">
                                 <div class="ht__comment__btn--2 mt--30">
-                                    <button id="modifySubmitButton" class="fr__btn">추가</button>
+                                	<button id="modifySubmitButton" class="fr__btn" type="button" onclick="addressCheck()">추가</button>
                                     <a class="fr__btn" href="#" id="deleteBtn">삭제</a>
                                 </div>
                             </div>
@@ -87,18 +87,18 @@
                     </div>
                 </form>
                 <div class="ht__comment__form">
-                    <form action="/myinfo-update-password.do" method="post">
+                    <form action="/myinfo-update-password.do" id="passwordForm" method="post">
                         <h4 class="title__line--5">비밀번호 변경</h4>
 
                         <div class="ht__comment__form__inner">
                             <div class="comment__form">
-                                <input type="password" placeholder="현재 비밀번호 *" name="customerTbPassword">
-                                <input type="password" placeholder="새 비밀번호 *" name="newPassword1">
-                                <input type="password" placeholder="비밀번호 확인" name="newPassword2">
+                                <input type="password" id="customerTbPassword" placeholder="현재 비밀번호 *" name="customerTbPassword" maxlength="15">
+                                <input type="password" id="newPassword1" placeholder="새 비밀번호 *" name="newPassword1" maxlength="15">
+                                <input type="password" id="newPassword2" placeholder="비밀번호 확인" name="newPassword2" maxlength="15">
                             </div>
                         </div>
                         <div class="ht__comment__btn--2 mt--30">
-                            <button class="fr__btn" type="submit">수정</button>
+                            <button type="button" class="fr__btn" onclick="passwordCheck()">수정</button>
                         </div>
                     </form>
                     <div class="ht__comment__form">
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             <div class="ht__comment__btn--2 mt--30">
-                                <button type="button" class="fr__btn" onclick="phoneCheck()" type="submit">등록</button>
+                                <button type="button" class="fr__btn" onclick="phoneCheck()">등록</button>
                             </div>
                         </form>
                     </div>
@@ -283,4 +283,49 @@
         }
 
     }
+  
+    function passwordCheck() {
+		var password = $("#customerTbPassword").val();
+		var password1 = $("#newPassword1").val();
+		var password2 = $("#newPassword2").val();
+	
+		var passwordSu = password.length;
+		var password1Su = password1.length;
+		var password2Su = password2.length;
+		
+		if(passwordSu == 0) {
+			alert("비밀번호를 입력해주세요");
+		} else if(password1Su == 0) {
+			alert("새로운 비밀번호를 입력해주세요");
+		} else if(password2Su == 0){
+			alert("새로운 비밀번호를 입력해주세요");
+		} else {
+			$("#passwordForm").submit();
+		}
+	}
+	
+	function addressCheck() {
+		var postcode = $("#cmAddressTbPostcode").val();
+		var address1 = $("#cmAddressTbAddress1").val();
+		var address2 = $("#cmAddressTbAddress2").val();
+		var nickname = $("#cmAddressTbNickname").val();
+		
+		var postcodeSu = postcode.length;
+		var address1Su = address1.length;
+		var address2Su = address2.length;
+		var nicknameSu = nickname.length;
+		
+		if(postcodeSu == 0) {
+			alert("postcode를 입력해주세요");
+		} else if(address1Su == 0) {
+			alert("주소를 입력해주세요.");
+		} else if(address2Su == 0) {
+			alert("상세주소를 입력해주세요.");
+		} else if(nicknameSu == 0) {
+			alert("주소별명을 입력해주세요.");
+		} else {
+			$("#formToController").submit();
+		}
+	}
+  
 </script>
