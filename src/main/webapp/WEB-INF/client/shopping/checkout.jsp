@@ -42,6 +42,8 @@
                             <div class="accordion__body">
                                 <div class="bilinfo">
                                     <form action="#">
+                                        <input type="hidden" name="cmAddressTbLat" id="lat">
+                                        <input type="hidden" name="cmAddressTbLng" id="lng">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="single-input mt-0">
@@ -156,6 +158,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56d66fb708db72842c6c188e866a48f7&libraries=services"></script>
 <script>
     $(document).ready(function () {
         $("#addressSelectBox").change(function () {
@@ -169,6 +172,8 @@
                 $("#postcode").val('');
                 $("#address1").val('');
                 $("#address2").val('');
+                $("#lat").val('');
+                $("#lng").val('');
             }
             else
             {
@@ -187,6 +192,8 @@
                         $("#postcode").val(json.cmAddressTbPostcode);
                         $("#address1").val(json.cmAddressTbAddress1);
                         $("#address2").val(json.cmAddressTbAddress2);
+                        $("#lat").attr("value", json.cmAddressTbLat);
+                        $("#lng").attr("value", json.cmAddressTbLng);
                     })
                     .fail(function (xhr, status, errorThrown) {
                         alert(errorThrown);
@@ -276,6 +283,18 @@
                 $("#address1").val(data.address)
                 $("#address2").focus();
                 $("#addressSelectBox option:eq(0)").attr("selected", "selected");
+
+                geocoder.addressSearch(data.address, function (results, status) {
+                    // 정상적으로 검색이 완료됐으면
+                    if (status === daum.maps.services.Status.OK) {
+
+                        var result = results[0]; //첫번째 결과의 값을 활용
+
+                        $("#lat").attr("value", result.y);
+                        $("#lng").attr("value", result.x);
+                        // console.log('lat: '+result.y+', lng: '+result.x);
+                    }
+                });
             }
         }).open();
     }
@@ -339,6 +358,8 @@
         params.cmAddressTbAddress1 = $("#address1").val();
         params.cmAddressTbAddress2 = $("#address2").val();
         params.cmAddressTbPhone = $("#phoneNum").val();
+        params.cmAddressTbLat = $("#lat").val();
+        params.cmAddressTbLng = $("#lng").val();
         $.ajax({
             url: ajaxUrl,
             type: "POST",
@@ -357,6 +378,7 @@
             });
     }
 
+    var geocoder = new daum.maps.services.Geocoder();
     function submitToPay() {
         if(checkinputs() === false)
         {

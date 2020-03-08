@@ -8,6 +8,9 @@ public class ClientCmAddressVO {
 	private String cmAddressTbAddress1;
 	private String cmAddressTbAddress2;
 	private String cmAddressTbPhone;
+	private double cmAddressTbLat;
+	private double cmAddressTbLng;
+
 	public int getCmAddressTbNo() {
 		return cmAddressTbNo;
 	}
@@ -50,15 +53,40 @@ public class ClientCmAddressVO {
 	public void setCmAddressTbPhone(String cmAddressTbPhone) {
 		this.cmAddressTbPhone = cmAddressTbPhone;
 	}
-	@Override
-	public String toString() {
-		return "ClientCmAddressVO [cmAddressTbNo=" + cmAddressTbNo + ", customerTbNo=" + customerTbNo
-				+ ", cmAddressTbNickname=" + cmAddressTbNickname + ", cmAddressTbPostcode=" + cmAddressTbPostcode
-				+ ", cmAddressTbAddress1=" + cmAddressTbAddress1 + ", cmAddressTbAddress2=" + cmAddressTbAddress2
-				+ ", cmAddressTbPhone=" + cmAddressTbPhone + "]";
+
+	public double getCmAddressTbLat()
+	{
+		return cmAddressTbLat;
 	}
-	
-	
-	
-	
+
+	public void setCmAddressTbLat(double cmAddressTbLat)
+	{
+		this.cmAddressTbLat = cmAddressTbLat;
+	}
+
+	public double getCmAddressTbLng()
+	{
+		return cmAddressTbLng;
+	}
+
+	public void setCmAddressTbLng(double cmAddressTbLng)
+	{
+		this.cmAddressTbLng = cmAddressTbLng;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "ClientCmAddressVO{" +
+				"cmAddressTbNo=" + cmAddressTbNo +
+				", customerTbNo=" + customerTbNo +
+				", cmAddressTbNickname='" + cmAddressTbNickname + '\'' +
+				", cmAddressTbPostcode='" + cmAddressTbPostcode + '\'' +
+				", cmAddressTbAddress1='" + cmAddressTbAddress1 + '\'' +
+				", cmAddressTbAddress2='" + cmAddressTbAddress2 + '\'' +
+				", cmAddressTbPhone='" + cmAddressTbPhone + '\'' +
+				", cmAddressTbLat=" + cmAddressTbLat +
+				", cmAddressTbLng=" + cmAddressTbLng +
+				'}';
+	}
 }
