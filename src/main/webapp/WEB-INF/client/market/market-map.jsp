@@ -10,7 +10,7 @@
 </head>
 <body>
 <div style="float:left; width: 20%;">
-<select class="ht__select" name="cmAddressTbNo" style="width:100px;height:50px;">
+<select class="ht__select" id="selectBox" name="cmAddressTbNo" style="width:100px;height:50px;">
           		<option id="addOption" value="thisIsSelect">선택하세요</option>
           <c:forEach var="address" items="${addressList }">
           		<option value="${address.cmAddressTbNo }">${address.cmAddressTbNickname }</option>
@@ -26,6 +26,7 @@
          
 </select>
 </div>
+<input type="hidden" id="mapList" value="${mapList }">
 <div id="map" style="width:600px;height:500px; width: 60%;"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6909f7ffa42194d19411603d190716fa&libraries=services"></script>
@@ -33,17 +34,46 @@
 
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 
-var meLat = 33.450705;
-var meLng = 126.570677;
+var meLat;
+var meLng;
+var mapList = $("#mapList").val();
+
+    $("#selectBox").change(function () {
+    	 var selectedValue = $("#selectBox option:selected").val();
+         console.log(selectedValue);
+    	if(selectedValue == 'thisIsSelect') 
+    		{
+    			$("#addOption").attr("value", -1);
+    		}
+    	else 
+    	{
+            var ajaxUrl = "/market-map-single-ajax.do?cmAddressTbNo=" + selectedValue;
+            $.ajax({
+                url     : ajaxUrl,
+                type    : "GET",
+                async	: false,
+                data    : {},
+                dataType: "json"
+            })
+                .done(function (json) {
+                    console.log(json);
+                    console.log(json.cmAddressTbLat);
+                    console.log(json.cmAddressTbLng);
+                   meLat = json.cmAddressTbLat;
+                   meLng = json.cmAddressTbLng;
+                })
+                .fail(function (xhr, status, errorThrown) {
+                    alert(errorThrown);
+                });
+    	}
+        });
 
 $("#select").change(function() {
-	selectValue = $("#select").val();
+	var selectValue = $("#select").val();
 	console.log(selectValue);
-		
 		mapLevel(selectValue);
-		console.log(selectValue);
-		
-		
+		console.log(mapList);
+	
 });
 
 function mapLevel(selectValue) {
@@ -83,39 +113,20 @@ function mapLevel(selectValue) {
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
+	var positions = new Array();
+	for (var i =0; i < mapList.length; i++) {
+		positions[i]={
+	    	content: '<div>'+mapList[i].marketTbTitle+'</div>',
+	    	latlng: new kakao.maps.LatLng(mapList[i].cmAddressTbLat, mapList[i].cmAddressTbLng),
+	    	title: "market-read.do?marketTbNo="+mapList[i].marketTbNo
+		}
+		
+		console.log(positions);
+	}
+	
 	
 	//이미지 지도에 표시할 마커입니다
 	//이미지 지도에 표시할 마커를 아래와 같이 배열로 넣어주면 여러개의 마커를 표시할 수 있습니다 
-
-	/* for (var i =0; i < marketMapList; i++) {
-		content: '<div>$(title)</div>',
-		latlng: new kakao.maps.LatLng($(lat), $(lng)),
-		title: "http://www.daum.net"
-	} */
-	//for문으로 돌리기(마커찍을 구매/판매자들)
-	var positions = [
-	    {
-	        content: '<div>사료 팝니다</div>', 
-	        latlng: new kakao.maps.LatLng(33.450705, 126.570677),
-	        title: "http://www.daum.net"
-	    },
-	    {
-	        content: '<div>사료 삽니다</div>', 
-	        latlng: new kakao.maps.LatLng(33.450936, 126.569477),
-	        title: "http://www.naver.com"
-	    },
-	    {
-	        content: '<div>캣타워 팝니다</div>', 
-	        latlng: new kakao.maps.LatLng(33.450879, 126.569940),
-	        title: "http://www.kgitbank.com"
-	    },
-	    {
-	        content: '<div>옷 삽니다</div>',
-	        latlng: new kakao.maps.LatLng(33.451393, 126.570738),
-	        title: "http://mgr.kgitbank.com"
-	    }
-	]; 
-
 	var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
 	for (let i = 0; i < positions.length; i ++) {
@@ -124,20 +135,20 @@ function mapLevel(selectValue) {
 	    var imageSize = new kakao.maps.Size(31, 35);
 	    
 	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-	    if(false) {
-	    var marker = new kakao.maps.Marker({
-	        map: map, // 마커를 표시할 지도
-	        position: positions[i].latlng, // 마커의 위치
-	        image: markerImage, //마커이미지 if(팝니다) image : markerImage	
-	        title: positions[i].title //title값
-	    });
-	    }
 	    if(true) {
-	   	var marker = new kakao.maps.Marker({
-	    	map: map, // 마커를 표시할 지도
-	    	position: positions[i].latlng, // 마커의 위치
-	    	title: positions[i].title //title값
-	    });
+		    var marker = new kakao.maps.Marker({
+		        map: map, // 마커를 표시할 지도
+		        position: positions[i].latlng, // 마커의 위치
+		        image: markerImage, //마커이미지 if(팝니다) image : markerImage	
+		        title: positions[i].title //title값
+		    });
+	    }
+	    if(false) {
+		   	var marker = new kakao.maps.Marker({
+		    	map: map, // 마커를 표시할 지도
+		    	position: positions[i].latlng, // 마커의 위치
+		    	title: positions[i].title //title값
+		    });
 	    }
 	    
 	    var infowindow = new kakao.maps.InfoWindow({
@@ -147,7 +158,6 @@ function mapLevel(selectValue) {
 	    //title 값 나옴
 	    console.log(positions[i].title);
 	    
-	 	
 	    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 	    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
