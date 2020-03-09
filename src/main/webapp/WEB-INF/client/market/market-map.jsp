@@ -82,9 +82,16 @@ var mapList = new Array();
 
 $("#select").change(function() {
 	var selectValue = $("#select").val();
-	console.log(selectValue);
+	var selectBox = $("#selectBox").val();
+	if(selectBox == 'thisIsSelect') {
+		alert("본인의 주소를 먼저 선택해주세요.");
+		$("#addOption").attr("value", "select");
+	} else {
+		console.log(selectValue);
 		mapLevel(selectValue);
 		console.log(mapList);
+	}
+	
 	
 });
 
@@ -109,7 +116,7 @@ function mapLevel(selectValue) {
 		var options = { //지도를 생성할 때 필요한 기본 옵션
 				//center: new kakao.maps.LatLng("$(lat)", "$(lng)"), //당사자
 				center: new kakao.maps.LatLng(meLat, meLng),
-				level: 7   	
+				level: 6   	
 				
 			};
 	}
