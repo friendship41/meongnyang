@@ -26,7 +26,7 @@
          
 </select>
 </div>
-<input type="hidden" id="mapList" value="${mapList }">
+
 <div id="map" style="width:600px;height:500px; width: 60%;"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6909f7ffa42194d19411603d190716fa&libraries=services"></script>
@@ -36,7 +36,19 @@ var container = document.getElementById('map'); //지도를 담을 영역의 DOM
 
 var meLat;
 var meLng;
-var mapList = $("#mapList").val();
+var mapList = new Array();
+
+<c:forEach items="${mapList}" var="mapList">
+	var obj = new Object();
+	obj.customerTbNo = "${mapList.customerTbNo}";
+	obj.marketTbNo = "${mapList.marketTbNo}";
+	obj.marketTbTitle = "${mapList.marketTbTitle}";
+	obj.marketTbSellOrBuy = "${mapList.marketTbSellOrBuy}";
+	obj.cmAddressTbNo = "${mapList.cmAddressTbNo}";
+	obj.cmAddressTbLat = "${mapList.cmAddressTbLat}";
+	obj.cmAddressTbLng = "${mapList.cmAddressTbLng}";
+	mapList.push(obj);
+</c:forEach>
 
     $("#selectBox").change(function () {
     	 var selectedValue = $("#selectBox option:selected").val();
@@ -113,15 +125,21 @@ function mapLevel(selectValue) {
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
+	
 	var positions = new Array();
-	for (var i =0; i < mapList.length; i++) {
-		positions[i]={
-	    	content: '<div>'+mapList[i].marketTbTitle+'</div>',
-	    	latlng: new kakao.maps.LatLng(mapList[i].cmAddressTbLat, mapList[i].cmAddressTbLng),
-	    	title: "market-read.do?marketTbNo="+mapList[i].marketTbNo
-		}
-		
-		console.log(positions);
+	for (let i =0; i < mapList.length; i++) {
+			var obj2 = new Object();
+	    	obj2.content= '<div>'+mapList[i].marketTbTitle+'</div>';
+	    	obj2.latlng= new kakao.maps.LatLng(mapList[i].cmAddressTbLat, mapList[i].cmAddressTbLng);
+	    	obj2.title= "market-read.do?marketTbNo="+mapList[i].marketTbNo;
+	    	
+	    	console.log(obj2.content);
+	    	console.log(obj2.latlng);
+	    	console.log(obj2.title);
+	    	
+	    	positions.push(obj2);
+			console.log(positions);
+			
 	}
 	
 	
@@ -135,19 +153,19 @@ function mapLevel(selectValue) {
 	    var imageSize = new kakao.maps.Size(31, 35);
 	    
 	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-	    if(true) {
+	    if(mapList[i].marketTbSellOrBuy == "S") {
 		    var marker = new kakao.maps.Marker({
 		        map: map, // 마커를 표시할 지도
-		        position: positions[i].latlng, // 마커의 위치
-		        image: markerImage, //마커이미지 if(팝니다) image : markerImage	
-		        title: positions[i].title //title값
+		        position: positions[i].latlng, 
+		        image: markerImage, 
+		        title: positions[i].title 
 		    });
 	    }
-	    if(false) {
+	    else if(mapList[i].marketTbSellOrBuy == "B") {
 		   	var marker = new kakao.maps.Marker({
-		    	map: map, // 마커를 표시할 지도
-		    	position: positions[i].latlng, // 마커의 위치
-		    	title: positions[i].title //title값
+		    	map: map, 
+		    	position: positions[i].latlng, 
+		    	title: positions[i].title 
 		    });
 	    }
 	    
@@ -155,8 +173,7 @@ function mapLevel(selectValue) {
 	        content: positions[i].content // 인포윈도우에 표시할 내용
 	    });
 	    
-	    //title 값 나옴
-	    console.log(positions[i].title);
+	    
 	    
 	    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 	    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
