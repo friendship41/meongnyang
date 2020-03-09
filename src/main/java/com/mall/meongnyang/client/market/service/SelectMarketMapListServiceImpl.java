@@ -17,11 +17,9 @@ public class SelectMarketMapListServiceImpl implements SelectMarketMapListServic
 	@Override
 	public List<MarketMapVO> selectMarketMap(MarketMapVO marketMapVO) {
 		
-		List<MarketMapVO> vo = marketMapDAO.selectMarketMap(marketMapVO);
+		List<MarketMapVO> list = marketMapDAO.selectMarketMap(marketMapVO);
 		
-		
-		
-		return null;
+		return list;
 	}
 
 }

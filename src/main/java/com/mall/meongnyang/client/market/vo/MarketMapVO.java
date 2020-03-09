@@ -10,7 +10,14 @@ public class MarketMapVO {
 	private double cmAddressTbLat; //위도
 	private double cmAddressTbLng; //경도
 	
+	private int searchRadius;
 	
+	public int getSearchRadius() {
+		return searchRadius;
+	}
+	public void setSearchRadius(int searchRadius) {
+		this.searchRadius = searchRadius;
+	}
 	public int getCustomerTbNo() {
 		return customerTbNo;
 	}
@@ -53,6 +60,7 @@ public class MarketMapVO {
 	public void setCmAddressTbLng(double cmAddressTbLng) {
 		this.cmAddressTbLng = cmAddressTbLng;
 	}
+	
 	@Override
 	public String toString() {
 		return "MarketMapVO [marketTbNo=" + marketTbNo + ", marketTbTitle=" + marketTbTitle + ", marketTbSellOrBuy="
