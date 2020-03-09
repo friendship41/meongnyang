@@ -178,5 +178,45 @@
         WHERE PRODUCT_TB_CODE = #{productTbCode}
     </update>
 
+	<!-- 추천 상품 가져오기 -->
+	<select id="selectRecommendProduct" parameterType="recommend" resultType="recommend">
+<![CDATA[
+		SELECT
+		*
+		FROM
+		    (SELECT
+		        d.PRODUCT_TB_CODE,
+		        p.product_tb_name,
+		        img.PD_IMAGE_TB_PATH,
+		        COUNT(d.PRODUCT_TB_CODE) "PRODUCT_TB_CODE_CNT"
+		    FROM orders_detail C
+		    JOIN
+		        (SELECT
+		            od.PD_SALE_TB_NO ,
+		            od.PD_ORDER_TB_NO,
+		            a.PRODUCT_TB_CODE
+		        FROM orders_detail od
+		        JOIN
+		            (SELECT
+		                PD_SALE_TB_NO,
+		                PRODUCT_TB_CODE
+		            FROM pd_sale
+		            WHERE product_tb_code = #{productTbCode}) A
+		        ON od.pd_sale_tb_no = A.pd_sale_tb_no) B
+		    ON c.pd_order_tb_no = b.pd_order_tb_no
+		    JOIN pd_sale D
+		    ON c.pd_sale_tb_no = d.pd_sale_tb_no
+		    JOIN pd_image img
+		    ON img.pd_image_tb_representative = 'Y'
+		    AND img.product_tb_code = d.product_tb_code
+		    JOIN product p
+		    ON p.product_tb_code = d.product_tb_code
+		    WHERE c.pd_sale_tb_no != b.pd_sale_tb_no 
+		    GROUP BY d.PRODUCT_TB_CODE, p.product_tb_name, img.PD_IMAGE_TB_PATH
+		    ORDER BY COUNT(d.PRODUCT_TB_CODE) DESC)
+		WHERE ROWNUM <= 3
+]]>	
+	</select>
+	
 
 </mapper>

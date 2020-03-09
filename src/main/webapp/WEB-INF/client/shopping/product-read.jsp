@@ -9,6 +9,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 
+<c:if test="${not empty recommendProduct}">
+<div id="floatMenu">
+	<div class="shp__cart__wrap">
+		<div class="shp__single__product">
+			<h4>추천 상품</h4>
+		</div>
+		<c:forEach items="${recommendProduct}" var="recommend">
+			<div class="shp__single__product">
+				<div class="shp__pro__thumb">
+					<a href="/shoppingDetail.do?productTbCode=${recommend.productTbCode}">
+						<img src="${recommend.pdImageTbPath}" alt="product images" width="99px" height="119px">
+					</a>
+				</div>
+				<div class="shp__pro__details">
+					<h2>
+						<a href="/shoppingDetail.do?productTbCode=${recommend.productTbCode}">${recommend.productTbName}</a>
+					</h2>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+</div>
+</c:if>
 
 <!-- Start Bradcaump area -->
 <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(/resources/client/images/bg/product-read.jpg) no-repeat scroll center center / cover ;">
@@ -382,7 +405,30 @@
                     tr.children().eq(2).prepend('<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>');
                 }
             }
-        }
+        }	
+        
+        var floatPosition = parseInt($("#floatMenu").css('top'));
+    
+        $(window).scroll(function() {
+    		var scrollTop = $(window).scrollTop();
+    		
+    		var newPosition = scrollTop + floatPosition + "px";
+    		
+			if(scrollTop >= $("#htc__footer").height()) {
+				newPosition = $("#floatMenu").height() + $("#htc__footer").height() - 60 + "px";
+			}
+			$("#floatMenu").stop().animate({
+    			"top" : newPosition
+    		}, 500);	
+
+    		if($(window).width() <= 480) {
+		        $("#floatMenu").stop();
+		    }
+    		
+				    
+    	}).scroll();    
+        
+       
     });
 
     function checkOutGoGo() {
