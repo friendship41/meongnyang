@@ -47,7 +47,9 @@
 			cm_address_tb_postcode,
 			cm_address_tb_address1,
 			cm_address_tb_address2,
-			cm_address_tb_phone
+			cm_address_tb_phone,
+			CM_ADDRESS_TB_LAT,
+			CM_ADDRESS_TB_LNG
 		FROM 
 			cm_address
 		WHERE 

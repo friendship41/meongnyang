@@ -90,7 +90,7 @@ public class ClientRegistryController {
 		int result = 0;
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 		if (tempVO != null) {
-
+			
 			result = 1;
 			return result;
 		} else {
