@@ -3,6 +3,7 @@ package com.mall.meongnyang.client.market.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ import com.mall.meongnyang.client.market.service.ClientSelectMarketService;
 import com.mall.meongnyang.client.market.service.ClientUpdateMarketService;
 import com.mall.meongnyang.client.market.vo.ClientMarketVO;
 import com.mall.meongnyang.client.market.vo.MarketListPaging;
+import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressListService;
+import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 
 @Controller
 public class ClientMarketController {
@@ -37,8 +41,19 @@ public class ClientMarketController {
 	@Autowired
 	private ClientUpdateMarketService ClientUpdateMarketService;
 	
+	@Autowired
+	private ClientSelectMyinfoAddressListService addressListService;
+	
 	@RequestMapping(value = "/market-form.do", method = RequestMethod.GET)
-	public String marketForm() {
+	public String marketForm(HttpSession session, Model model) {
+		
+		ClientCustomerVO vo = (ClientCustomerVO) session.getAttribute("customer");
+		
+		ClientCmAddressVO clientCmAddressVO = new ClientCmAddressVO();
+		clientCmAddressVO.setCustomerTbNo(vo.getCustomerTbNo());		
+		
+		model.addAttribute("addressList", addressListService.selectMyinfoAddressList(clientCmAddressVO));
+		
 		return "market/market-form";
 	}
 	
