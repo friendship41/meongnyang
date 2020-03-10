@@ -42,6 +42,12 @@ public class ClientRegistryController {
 	public String registryProc(@RequestParam String agreeCheckOption, ClientTermsAgreeVO clientTermsAgreeVO,
 			AdminTermsVO admintermsVo, ClientCustomerVO clientCustomerVO, Model model) {
 
+		
+		ClientCustomerVO tempVO2 = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
+		
+		if(tempVO2 == null) {
+			
+		
 		clientInsertRegistryService.insertRegistry(clientCustomerVO);
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);
 
@@ -77,11 +83,16 @@ public class ClientRegistryController {
 			clientInsertTermsAgreeListService.insertTermsAgreeListService(clientTermsAgreeVO);
 
 		}
+			model.addAttribute("message","인증메일이 발송되었습니다. 확인해 주세요");
+			model.addAttribute("urldo","/index.do");
+			return "include/message-and-go-urldo";
+		} else {
+			model.addAttribute("registryMessage", "등록된 아이디입니다.");
+			model.addAttribute("urldo","/index.do");
+			return "include/message-and-go-url";
+		}
+		
 
-		model.addAttribute("message","인증메일이 발송되었습니다. 확인해 주세요");
-		model.addAttribute("urldo","/index.do");
-
-		return "include/message-and-go-urldo";
 	}
 
 	@RequestMapping(value = "/loginAjaxSingle.do")

@@ -15,6 +15,11 @@
    
 </script>
 </c:when>
+<c:when test="${registryMessage eq false}">
+<script type="text/javascript"> 
+   alert("등록된 아이디입니다.");
+</script>
+</c:when>
 </c:choose>
 
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"

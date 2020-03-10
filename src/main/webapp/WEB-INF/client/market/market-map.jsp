@@ -56,35 +56,36 @@ var mapList = new Array();
 	mapList.push(obj);
 </c:forEach>
 
-
-    $("#selectBox").change(function () {
-    	 var selectedValue = $("#selectBox option:selected").val();
-         
-    	if(selectedValue == 'thisIsSelect') 
-    		{
-    			console.log(selectedValue);
-    			$("#select").hide();
-    		}
-    	else 
-    	{
-            var ajaxUrl = "/market-map-single-ajax.do?cmAddressTbNo=" + selectedValue;
-            $.ajax({
-                url     : ajaxUrl,
-                type    : "GET",
-                async	: false,
-                data    : {},
-                dataType: "json"
-            })
-                .done(function (json) {
-                   meLat = json.cmAddressTbLat;
-                   meLng = json.cmAddressTbLng;
-                   $("#select").show();
-                })
-                .fail(function (xhr, status, errorThrown) {
-                    alert(errorThrown);
-                });
-    	}
-        });
+ 	
+	
+	$("#selectBox").change(function () {
+   	 var selectedValue = $("#selectBox option:selected").val();
+        
+   	if(selectedValue == 'thisIsSelect') 
+   		{
+   			console.log(selectedValue);
+   			$("#select").hide();
+   		}
+   	else 
+   		{
+           var ajaxUrl = "/market-map-single-ajax.do?cmAddressTbNo=" + selectedValue;
+           $.ajax({
+               url     : ajaxUrl,
+               type    : "GET",
+               async	: false,
+               data    : {},
+               dataType: "json"
+           })
+               .done(function (json) {
+                  meLat = json.cmAddressTbLat;
+                  meLng = json.cmAddressTbLng;
+                  $("#select").show();
+               })
+               .fail(function (xhr, status, errorThrown) {
+                   alert(errorThrown);
+               });
+   		}
+       		});
 
 $("#select").change(function() {
 	var selectValue = $("#select").val();
@@ -94,11 +95,12 @@ $("#select").change(function() {
 		$("#select").attr("value", "select");
 	} else {
 		mapLevel(selectValue);
-		
 	}
 	
-	
 });
+
+
+    
 
 function mapLevel(selectValue) {
 	if(selectValue == "1") {
@@ -166,8 +168,9 @@ function mapLevel(selectValue) {
 	    	obj2.latlng= new kakao.maps.LatLng(mapList[i].cmAddressTbLat, mapList[i].cmAddressTbLng);
 	    	obj2.title= "market-read.do?marketTbNo="+mapList[i].marketTbNo;
 	    	
+	    	
 	    	positions.push(obj2);
-			
+			console.log(positions);
 			
 	}
 	
