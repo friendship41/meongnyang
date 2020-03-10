@@ -182,10 +182,10 @@
         </script>
     </c:when>
     <c:when test="${ passwordsuccess eq false }">
-        <script type="text/javascript">
-            alert("password가 성공적으로 변경되었습니다.");
-        </script>
-    </c:when>
+    <script type="text/javascript">
+        alert("password가 성공적으로 변경되었습니다.");
+    </script>
+</c:when>
 </c:choose>
 
 <jsp:include page="../include/footer.jsp"/>

@@ -248,6 +248,7 @@
 	alert("이메일 인증이 완료되었습니다. 로그인을 해주세요.");
 </script>
 </c:when>
+
 </c:choose>
 
 <jsp:include page="include/footer.jsp"></jsp:include>

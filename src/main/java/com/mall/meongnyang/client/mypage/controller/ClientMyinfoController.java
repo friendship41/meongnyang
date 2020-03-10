@@ -91,7 +91,7 @@ public class ClientMyinfoController {
 		
 		
 
-		return "redirect:myinfo.do";
+		return "mypage/myinfo";
 			
 	}
 
