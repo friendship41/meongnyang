@@ -56,5 +56,21 @@
             </if>
         WHERE EVENT_TB_NO = #{eventTbNo}
     </update>
+    
+    <select id="selectAvailableEvent" parameterType="event" resultType="event">
+<![CDATA[
+        SELECT
+            EVENT_TB_NO,
+            ROULETTE_SIZE,
+            EVENT_IMG,
+            EVENT_STATE,
+            EVENT_MESSAGE,
+            EVENT_START_DATE,
+            EVENT_END_DATE
+        FROM EVENT
+        WHERE EVENT_START_DATE < SYSDATE AND EVENT_END_DATE > SYSDATE AND EVENT_STATE = 'Y'
+]]>
+
+    </select>
 
 </mapper>

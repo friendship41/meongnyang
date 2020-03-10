@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EventAttendenceDAO">
+
+    <select id="selectAttendenceToday" parameterType="eventAttendence" resultType="eventAttendence">
+        SELECT
+            EVENT_ATTENDENCE_TB_NO,
+            EVENT_TB_NO,
+            CUSTOMER_TB_NO,
+            ATTEND_DATE
+        FROM EVENT_ATTENDENCE
+        WHERE EVENT_TB_NO=#{eventTbNo} AND CUSTOMER_TB_NO=#{customerTbNo}
+            AND (ATTEND_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'yyyy/MM/dd'), 'yyyy/MM/dd') AND TO_DATE(TO_CHAR(SYSDATE+1, 'yyyy/MM/dd'), 'yyyy/MM/dd'))
+    </select>
+
+</mapper>

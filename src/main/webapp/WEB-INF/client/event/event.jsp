@@ -20,7 +20,11 @@
 <noscript>
     <strong>We're sorry but vue-wheel doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 </noscript>
-<div id=app></div>
+<div>
+    <div><p>${eventInfo.eventMessage}</p></div>
+    <div id=app></div>
+    <div>이벤트 기간: ${eventInfo.eventStartDate} ~ ${eventInfo.eventEndDate}</div>
+</div>
 <script src=/resources/client/js/event/chunk-vendors.a3589d38.js></script>
 <script src=/resources/client/js/event/app.8dcabf2f.js></script>
 </body>

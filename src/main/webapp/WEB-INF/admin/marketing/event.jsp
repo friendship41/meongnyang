@@ -149,7 +149,7 @@
                                                     <input type="file" id="uploadFile" name="uploadFile" required>
                                                 </c:if>
                                                 <c:if test="${nowEvent ne null}">
-                                                    <img src="${nowEvent.eventImg}" width="600" height="400">
+                                                    <img src="${nowEvent.eventImg}" width="600" height="600">
                                                     <input type="file" id="uploadFile" name="uploadFile">
                                                 </c:if>
                                             </div>
