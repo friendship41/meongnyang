@@ -83,4 +83,11 @@ public class ClientIndexController
         return "index";
     }
 
+    @RequestMapping(value = "/eventStart.do")
+    public String eventStartPage(HttpSession session)
+    {
+        session.setAttribute("eventGo","f");
+        return "event/event";
+    }
+
 }

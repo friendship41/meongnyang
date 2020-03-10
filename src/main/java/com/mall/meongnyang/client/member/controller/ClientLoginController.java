@@ -35,6 +35,7 @@ public class ClientLoginController {
 				&& (encoder.matches(clientCustomerVO.getCustomerTbPassword(), tempVO.getCustomerTbPassword()))
 				&& tempVO.getCustomerTbState().equals("N")) {
 			session.setAttribute("customer", tempVO);
+			session.setAttribute("eventGo","t");
 
 			return "redirect:index.do";
 		}

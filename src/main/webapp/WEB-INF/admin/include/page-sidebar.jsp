@@ -66,6 +66,7 @@
                     <ul class="sub-menu">
                         <li><a href="promotion-overview.ado">프로모션 현황</a></li>
                         <li><a href="promotion-write.ado">프로모션 등록</a></li>
+                        <li><a href="event.ado">이벤트 현황/등록</a></li>
                     </ul>
                 </li>
                 <li>

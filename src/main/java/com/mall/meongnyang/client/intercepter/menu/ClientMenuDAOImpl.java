@@ -20,6 +20,6 @@ public class ClientMenuDAOImpl implements ClientMenuDAO
     @Override
     public List<AdminProductCategoryVO> selectProductCategoryList()
     {
-        return sqlSessionTemplate.selectList("CategoryDAO.selectCategoryList");
+        return sqlSessionTemplate.selectList("CategoryDAO.selectCategoryList", new AdminProductCategoryVO());
     }
 }
