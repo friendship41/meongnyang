@@ -182,10 +182,10 @@
         </script>
     </c:when>
     <c:when test="${ passwordsuccess eq false }">
-        <script type="text/javascript">
-            alert("password가 성공적으로 변경되었습니다.");
-        </script>
-    </c:when>
+    <script type="text/javascript">
+        alert("password가 성공적으로 변경되었습니다.");
+    </script>
+</c:when>
 </c:choose>
 
 <jsp:include page="../include/footer.jsp"/>
@@ -211,7 +211,6 @@
                 $("#lng").val('');
                 $("#formToController").attr("action", "myinfo-address-insert.do");
             } else {
-
                 console.log(selectedValue);
                 var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddressTbNo=" + selectedValue;
                 $.ajax({
@@ -222,7 +221,6 @@
                 })
                     .done(function (json) {
                         console.log(json);
-
                         $("#addOption").attr("value", 'thisIsSelect');
                         $("#cmAddressTbNo").attr("value", json.cmAddressTbNo);
                         $("#cmAddressTbPostcode").attr("value", json.cmAddressTbPostcode);

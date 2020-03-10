@@ -15,6 +15,11 @@
    
 </script>
 </c:when>
+<c:when test="${registryMessage eq false}">
+<script type="text/javascript"> 
+   alert("등록된 아이디입니다.");
+</script>
+</c:when>
 </c:choose>
 
 <div class="modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88"
@@ -53,7 +58,7 @@
                                 <div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
                                     <div class="facts">
                                         <div class="register">
-                                            <form name="registryForm" id="registryForm" action="registry.do" method="post"><!-- 회원가입 -->
+                                            <form name="registryForm" id="registryForm" action="registry.do" method="post" autocomplete="off"><!-- 회원가입 -->
                                                 <input placeholder="Name" name="customerTbName" type="text" required="">
                                                 <input placeholder="Email Address" name="customerTbEmail" type="email"
                                                        required="" oninput="checkEmail()" id="customerTbEmail">

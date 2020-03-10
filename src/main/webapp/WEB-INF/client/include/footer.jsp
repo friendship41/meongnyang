@@ -20,7 +20,7 @@
                         </div>
                         <div class="ft__details" style="float:left; width: 40%;">
                         		 <h2 class="title__line--2">고객센터</h2>
-								<p>주소 : 주소 : 서울 종로구 돈화문로 26</p>
+								<p>주소  : 서울 종로구 돈화문로 26</p>
 								<p>Tel : 123-123</p>
 								<p>E-mail : moengnyang@naver.com</p>
 								<p>대표자명 : 김철수</p>

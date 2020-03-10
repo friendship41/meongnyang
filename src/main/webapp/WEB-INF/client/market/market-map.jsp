@@ -17,13 +17,11 @@
           </c:forEach>
 </select>
 <br><br><br>
-
 <select class="ht__select" id="select" style="width:130px;height:50px;">
           		<option value="select">반경을 선택하세요</option>
          		<option value="1">1KM</option>	
           		<option value="2">2KM</option>
 				<option value="5">5KM</option>
-         
 </select>
 <br><br><br>
 <br><br>
@@ -58,35 +56,36 @@ var mapList = new Array();
 	mapList.push(obj);
 </c:forEach>
 
-    $("#selectBox").change(function () {
-    	 var selectedValue = $("#selectBox option:selected").val();
-         console.log(selectedValue);
-    	if(selectedValue == 'thisIsSelect') 
-    		{
-    			$("#addOption").attr("value", -1);
-    		}
-    	else 
-    	{
-            var ajaxUrl = "/market-map-single-ajax.do?cmAddressTbNo=" + selectedValue;
-            $.ajax({
-                url     : ajaxUrl,
-                type    : "GET",
-                async	: false,
-                data    : {},
-                dataType: "json"
-            })
-                .done(function (json) {
-                    console.log(json);
-                    console.log(json.cmAddressTbLat);
-                    console.log(json.cmAddressTbLng);
-                   meLat = json.cmAddressTbLat;
-                   meLng = json.cmAddressTbLng;
-                })
-                .fail(function (xhr, status, errorThrown) {
-                    alert(errorThrown);
-                });
-    	}
-        });
+ 	
+	
+	$("#selectBox").change(function () {
+   	 var selectedValue = $("#selectBox option:selected").val();
+        
+   	if(selectedValue == 'thisIsSelect') 
+   		{
+   			console.log(selectedValue);
+   			$("#select").hide();
+   		}
+   	else 
+   		{
+           var ajaxUrl = "/market-map-single-ajax.do?cmAddressTbNo=" + selectedValue;
+           $.ajax({
+               url     : ajaxUrl,
+               type    : "GET",
+               async	: false,
+               data    : {},
+               dataType: "json"
+           })
+               .done(function (json) {
+                  meLat = json.cmAddressTbLat;
+                  meLng = json.cmAddressTbLng;
+                  $("#select").show();
+               })
+               .fail(function (xhr, status, errorThrown) {
+                   alert(errorThrown);
+               });
+   		}
+       		});
 
 $("#select").change(function() {
 	var selectValue = $("#select").val();
@@ -95,13 +94,13 @@ $("#select").change(function() {
 		alert("본인의 주소를 먼저 선택해주세요.");
 		$("#select").attr("value", "select");
 	} else {
-		console.log(selectValue);
 		mapLevel(selectValue);
-		console.log(mapList);
 	}
 	
-	
 });
+
+
+    
 
 function mapLevel(selectValue) {
 	if(selectValue == "1") {
@@ -130,6 +129,27 @@ function mapLevel(selectValue) {
 	}
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(meLat, meLng); 
+	// 마커를 생성합니다
+	var marker2 = new kakao.maps.Marker({
+	    position: markerPosition,
+	});
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker2.setMap(map);
+	
+	var iwContent = '<div>나 </div>', 
+    iwPosition = new kakao.maps.LatLng(meLat, meLng); //인포윈도우 표시 위치입니다
+		// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+    	position : iwPosition, 
+    	content : iwContent 
+	});
+  
+	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	infowindow.open(map, marker2); 
+	
+	
 	var mapTypeControl = new kakao.maps.MapTypeControl();
 
 	//지도에 컨트롤을 추가해야 지도위에 표시됩니다
@@ -148,9 +168,6 @@ function mapLevel(selectValue) {
 	    	obj2.latlng= new kakao.maps.LatLng(mapList[i].cmAddressTbLat, mapList[i].cmAddressTbLng);
 	    	obj2.title= "market-read.do?marketTbNo="+mapList[i].marketTbNo;
 	    	
-	    	console.log(obj2.content);
-	    	console.log(obj2.latlng);
-	    	console.log(obj2.title);
 	    	
 	    	positions.push(obj2);
 			console.log(positions);
