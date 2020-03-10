@@ -12,7 +12,7 @@
     </update>
 
     <insert id="insertEvent" parameterType="event">
-        INSERT INTO EVENT VALUES(EVENT_SEQ.NEXTVAL, #{rouletteSize}, #{eventImg}, 'Y', #{eventMessage}, (SELECT #{eventStartDate}+1 FROM DUAL), #{eventEndDate})
+        INSERT INTO EVENT VALUES(EVENT_SEQ.NEXTVAL, #{rouletteSize}, #{eventImg}, 'Y', #{eventMessage}, #{eventStartDate}, (SELECT #{eventEndDate}+1 FROM DUAL))
     </insert>
 
     <select id="selectYstateEvent" parameterType="event" resultType="event">
@@ -30,16 +30,19 @@
 
     <select id="selectEventStarted" parameterType="event" resultType="event">
         SELECT
-            EVENT_TB_NO,
-            ROULETTE_SIZE,
-            EVENT_IMG,
-            EVENT_STATE,
-            EVENT_MESSAGE,
-            EVENT_START_DATE,
-            (SELECT EVENT_END_DATE-1 FROM DUAL) "EVENT_END_DATE",
-            (SELECT AVG(EVENT_POINT) FROM EVENT_POINT WHERE EVENT_TB_NO = EVENT_TB_NO) "POINT_AVG"
-        FROM EVENT
-        WHERE EVENT_STATE = 'Y'
+            A.*,
+            (SELECT AVG(EVENT_POINT) FROM EVENT_POINT WHERE EVENT_TB_NO = A.EVENT_TB_NO) "POINT_AVG"
+        FROM (
+            SELECT
+                EVENT_TB_NO,
+                ROULETTE_SIZE,
+                EVENT_IMG,
+                EVENT_STATE,
+                EVENT_MESSAGE,
+                EVENT_START_DATE,
+                (SELECT EVENT_END_DATE-1 FROM DUAL) "EVENT_END_DATE"
+            FROM EVENT
+            WHERE EVENT_STATE = 'Y') A
     </select>
 
     <update id="updateEvent" parameterType="event">

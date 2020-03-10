@@ -186,7 +186,7 @@
                                         </c:if>
                                         <c:if test="${nowEvent ne null}">
                                             <button type="submit" class="btn btn-primary">이벤트 수정</button>
-                                            <a href="#" class="btn btn-primary">포인트 종료</a>
+                                            <a href="deleteEvent.ado" class="btn btn-primary">이벤트 종료</a>
                                         </c:if>
                                     </div>
                                 </form>

@@ -24,6 +24,8 @@ public class AdminEventController
     private AdminUpdateEventPointListService adminUpdateEventPointListService;
     @Autowired
     private AdminUpdateEventService adminUpdateEventService;
+    @Autowired
+    private AdminUpdateEventStateService adminUpdateEventStateService;
 
 
     @RequestMapping(value = "/event.ado", method = RequestMethod.GET)
@@ -50,6 +52,13 @@ public class AdminEventController
     {
         adminUpdateEventPointListService.updateEventPoint(adminEventPointVO);
         adminUpdateEventService.updateEvent(adminEventVO, request);
+        return "redirect:event.ado";
+    }
+
+    @RequestMapping(value = "/deleteEvent.ado", method = RequestMethod.GET)
+    public String deleteEvent()
+    {
+        adminUpdateEventStateService.updateEventStateN();
         return "redirect:event.ado";
     }
 
