@@ -9,24 +9,32 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div style="float:left; width: 20%;">
-<select class="ht__select" id="selectBox" name="cmAddressTbNo" style="width:100px;height:50px;">
+<div style="float:left; width: 20%;  margin-left:50px;">
+<select class="ht__select" id="selectBox" name="cmAddressTbNo" style="width:130px;height:50px;">
           		<option id="addOption" value="thisIsSelect">선택하세요</option>
           <c:forEach var="address" items="${addressList }">
           		<option value="${address.cmAddressTbNo }">${address.cmAddressTbNickname }</option>
           </c:forEach>
 </select>
 <br><br><br>
-<br>
-<select class="ht__select" id="select" style="width:100px;height:50px;">
+
+<select class="ht__select" id="select" style="width:130px;height:50px;">
           		<option value="select">반경을 선택하세요</option>
          		<option value="1">1KM</option>	
           		<option value="2">2KM</option>
 				<option value="5">5KM</option>
          
 </select>
+<br><br><br>
+<br><br>
+<fieldset style="width:100px; border:1px;">
+<legend>범례</legend>
+	<label for="buy">삽니다</label>
+	<img src="http://i1.daumcdn.net/dmaps/apis/n_local_blit_04.png">
+	<label for="sale">팝니다</label>
+	<img src="http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png">
+</fieldset>
 </div>
-
 <div id="map" style="width:600px;height:500px; width: 60%;"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6909f7ffa42194d19411603d190716fa&libraries=services"></script>
@@ -85,7 +93,7 @@ $("#select").change(function() {
 	var selectBox = $("#selectBox").val();
 	if(selectBox == 'thisIsSelect') {
 		alert("본인의 주소를 먼저 선택해주세요.");
-		$("#addOption").attr("value", "select");
+		$("#select").attr("value", "select");
 	} else {
 		console.log(selectValue);
 		mapLevel(selectValue);
@@ -98,7 +106,7 @@ $("#select").change(function() {
 function mapLevel(selectValue) {
 	if(selectValue == "1") {
 		var options = { //지도를 생성할 때 필요한 기본 옵션
-				//center: new kakao.maps.LatLng("$(lat)", "$(lng)"), //당사자
+				
 				center: new kakao.maps.LatLng(meLat, meLng),
 				level: 4   	
 					
@@ -106,7 +114,7 @@ function mapLevel(selectValue) {
 		
 	} else if(selectValue == "2") {
 		var options = { //지도를 생성할 때 필요한 기본 옵션
-				//center: new kakao.maps.LatLng("$(lat)", "$(lng)"), //당사자
+				
 				center: new kakao.maps.LatLng(meLat, meLng),
 				level: 5    
 			
@@ -114,7 +122,7 @@ function mapLevel(selectValue) {
 		
 	} else if(selectValue == "5") {
 		var options = { //지도를 생성할 때 필요한 기본 옵션
-				//center: new kakao.maps.LatLng("$(lat)", "$(lng)"), //당사자
+				
 				center: new kakao.maps.LatLng(meLat, meLng),
 				level: 6   	
 				
@@ -153,13 +161,14 @@ function mapLevel(selectValue) {
 	//이미지 지도에 표시할 마커입니다
 	//이미지 지도에 표시할 마커를 아래와 같이 배열로 넣어주면 여러개의 마커를 표시할 수 있습니다 
 	var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
+	var imageSrc2 = "http://i1.daumcdn.net/dmaps/apis/n_local_blit_04.png";
 	for (let i = 0; i < positions.length; i ++) {
 	    // 마커를 생성합니다
 	    
 	    var imageSize = new kakao.maps.Size(31, 35);
-	    
+	   
 	    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+	    var markerImage2 = new kakao.maps.MarkerImage(imageSrc2, imageSize);
 	    if(mapList[i].marketTbSellOrBuy == "S") {
 		    var marker = new kakao.maps.Marker({
 		        map: map, // 마커를 표시할 지도
@@ -168,10 +177,12 @@ function mapLevel(selectValue) {
 		        title: positions[i].title 
 		    });
 	    }
+	    
 	    else if(mapList[i].marketTbSellOrBuy == "B") {
 		   	var marker = new kakao.maps.Marker({
 		    	map: map, 
-		    	position: positions[i].latlng, 
+		    	position: positions[i].latlng,
+		    	image: markerImage2,
 		    	title: positions[i].title 
 		    });
 	    }
