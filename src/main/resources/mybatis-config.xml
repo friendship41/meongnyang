@@ -35,7 +35,9 @@
         <typeAlias type="com.mall.meongnyang.admin.member.vo.AdminOverviewVisitorVO" alias = "adminOverview"/>
         <typeAlias type="com.mall.meongnyang.client.scheduler.todaycount.ClientUserCountVO" alias="userCount"/>
         <typeAlias type="com.mall.meongnyang.client.mypage.vo.ClientWishlistVO" alias="wishlist"/>
-        
+        <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminEventVO" alias="event"/>
+        <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminEventPointVO" alias="eventPoint"/>
+        <typeAlias type="com.mall.meongnyang.admin.marketing.vo.AdminEventAttendenceVO" alias="eventAttendence"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappings/adminMember-mapping.xml"/>
@@ -61,5 +63,8 @@
         <mapper resource="mappings/user-count-mapping.xml"/>
         <mapper resource="mappings/wishlist-mapping.xml"/>
         <mapper resource="mappings/terms-agree-mapping.xml"/>
+        <mapper resource="mappings/event-mapping.xml"/>
+        <mapper resource="mappings/event-point-mapping.xml"/>
+        <mapper resource="mappings/event-attendence-mapping.xml"/>
     </mappers>
 </configuration>

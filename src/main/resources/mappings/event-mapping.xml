@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EventDAO">
+
+    <update id="updateAllEventNstate">
+        UPDATE EVENT
+        SET
+            EVENT_STATE = 'N'
+        WHERE EVENT_STATE = 'Y'
+    </update>
+
+    <insert id="insertEvent" parameterType="event">
+        INSERT INTO EVENT VALUES(EVENT_SEQ.NEXTVAL, #{rouletteSize}, #{eventImg}, 'Y', #{eventMessage}, #{eventStartDate}, (SELECT #{eventEndDate}+1 FROM DUAL))
+    </insert>
+
+    <select id="selectYstateEvent" parameterType="event" resultType="event">
+        SELECT
+            EVENT_TB_NO,
+            ROULETTE_SIZE,
+            EVENT_IMG,
+            EVENT_STATE,
+            EVENT_MESSAGE,
+            EVENT_START_DATE,
+            EVENT_END_DATE
+        FROM EVENT
+        WHERE EVENT_STATE = 'Y'
+    </select>
+
+    <select id="selectEventStarted" parameterType="event" resultType="event">
+        SELECT
+            A.*,
+            (SELECT AVG(EVENT_POINT) FROM EVENT_POINT WHERE EVENT_TB_NO = A.EVENT_TB_NO) "POINT_AVG"
+        FROM (
+            SELECT
+                EVENT_TB_NO,
+                ROULETTE_SIZE,
+                EVENT_IMG,
+                EVENT_STATE,
+                EVENT_MESSAGE,
+                EVENT_START_DATE,
+                (SELECT EVENT_END_DATE-1 FROM DUAL) "EVENT_END_DATE"
+            FROM EVENT
+            WHERE EVENT_STATE = 'Y') A
+    </select>
+
+    <update id="updateEvent" parameterType="event">
+        UPDATE EVENT
+        SET
+            EVENT_MESSAGE = #{eventMessage},
+            EVENT_START_DATE = #{eventStartDate},
+            EVENT_END_DATE = #{eventEndDate}
+            <if test="eventImg != null">
+                ,EVENT_IMG = #{eventImg}
+            </if>
+        WHERE EVENT_TB_NO = #{eventTbNo}
+    </update>
+    
+    <select id="selectAvailableEvent" parameterType="event" resultType="event">
+<![CDATA[
+        SELECT
+            EVENT_TB_NO,
+            ROULETTE_SIZE,
+            EVENT_IMG,
+            EVENT_STATE,
+            EVENT_MESSAGE,
+            EVENT_START_DATE,
+            EVENT_END_DATE
+        FROM EVENT
+        WHERE EVENT_START_DATE < SYSDATE AND EVENT_END_DATE > SYSDATE AND EVENT_STATE = 'Y'
+]]>
+
+    </select>
+
+</mapper>

@@ -71,6 +71,12 @@
             width: 'auto', //auto or any width like 600px
             fit: true   // 100% fit in a container
         });
+
+        var event = '${eventGo}';
+        if(event === 't')
+        {
+            window.open("/eventStart.do", "이벤트페이지", 'width=800, height=1000');
+        }
     });
 
     function removeCartItem(itemId) {

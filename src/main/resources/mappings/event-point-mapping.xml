@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EventPointDAO">
+
+    <insert id="insertEventPoint" parameterType="eventPoint">
+        INSERT INTO EVENT_POINT (ROULETTE_POINT_TB_NO, EVENT_TB_NO, EVENT_POINT)
+        SELECT EVENT_POINT_SEQ.NEXTVAL, A, B
+        FROM(
+        SELECT #{eventTbNo} AS A, #{inp1} AS B FROM DUAL
+        UNION ALL
+        SELECT #{eventTbNo} AS A, #{inp2} AS B FROM DUAL
+        <if test="rouletteSize >= 4">
+            UNION ALL
+            SELECT #{eventTbNo} AS A, #{inp3} AS B FROM DUAL
+            UNION ALL
+            SELECT #{eventTbNo} AS A, #{inp4} AS B FROM DUAL
+        </if>
+        <if test="rouletteSize >= 6">
+            UNION ALL
+            SELECT #{eventTbNo} AS A, #{inp5} AS B FROM DUAL
+            UNION ALL
+            SELECT #{eventTbNo} AS A, #{inp6} AS B FROM DUAL
+        </if>
+        <if test="rouletteSize >= 8">
+            UNION ALL
+            SELECT #{eventTbNo} AS A, #{inp7} AS B FROM DUAL
+            UNION ALL
+            SELECT #{eventTbNo} AS A, #{inp8} AS B FROM DUAL
+        </if>
+        )
+    </insert>
+
+    <select id="selectAllEventPointList" parameterType="eventPoint" resultType="eventPoint">
+        SELECT
+            ROULETTE_POINT_TB_NO,
+            EVENT_TB_NO,
+            EVENT_POINT
+        FROM EVENT_POINT
+        WHERE EVENT_TB_NO = #{eventTbNo}
+        ORDER BY ROULETTE_POINT_TB_NO ASC
+    </select>
+
+    <update id="updateEventPoint" parameterType="eventPoint">
+        UPDATE EVENT_POINT
+        SET
+            EVENT_POINT = #{eventPoint}
+        WHERE ROULETTE_POINT_TB_NO = #{roulettePointTbNo}
+    </update>
+
+</mapper>

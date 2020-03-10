@@ -79,8 +79,8 @@ public class ClientIndexController
         model.addAttribute("url", naverAuthUrl);
 
 
-
         return "index";
     }
+
 
 }
