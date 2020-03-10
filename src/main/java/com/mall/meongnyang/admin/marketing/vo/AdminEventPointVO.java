@@ -1,5 +1,7 @@
 package com.mall.meongnyang.admin.marketing.vo;
 
+import java.util.List;
+
 public class AdminEventPointVO
 {
     private int roulettePointTbNo;
@@ -16,6 +18,8 @@ public class AdminEventPointVO
     private int inp8;
 
     private int rouletteSize;
+
+    private List<AdminEventPointVO> pointList;
 
     public int getRoulettePointTbNo()
     {
@@ -137,6 +141,16 @@ public class AdminEventPointVO
         this.rouletteSize = rouletteSize;
     }
 
+    public List<AdminEventPointVO> getPointList()
+    {
+        return pointList;
+    }
+
+    public void setPointList(List<AdminEventPointVO> pointList)
+    {
+        this.pointList = pointList;
+    }
+
     @Override
     public String toString()
     {
@@ -153,6 +167,7 @@ public class AdminEventPointVO
                 ", inp7=" + inp7 +
                 ", inp8=" + inp8 +
                 ", rouletteSize=" + rouletteSize +
+                ", pointList=" + pointList +
                 '}';
     }
 }

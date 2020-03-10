@@ -39,9 +39,17 @@
                                     <form class="form-horizontal" id="formToController" action="insertEvent.ado" method="post" enctype="multipart/form-data">
                                 </c:if>
                                 <c:if test="${nowEvent ne null}">
-                                    <form class="form-horizontal" id="formToController" action="deleteEvent.ado" method="post" enctype="multipart/form-data">
+                                    <form class="form-horizontal" id="formToController" action="updateEvent.ado" method="post" enctype="multipart/form-data">
                                         <input type="hidden" name="eventTbNo" value="${nowEvent.eventTbNo}">
                                 </c:if>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">이벤트 간단 제목</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" name="eventMessage" value="${nowEvent.eventMessage}" required>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">룰렛 칸 갯수</label>
                                         <div class="col-sm-10">
@@ -122,10 +130,11 @@
                                         </c:if>
                                         <c:if test="${nowEvent ne null}">
                                             <c:forEach var="point" items="${nowEventPoint}" varStatus="i">
+                                                <input type="hidden" name="pointList[${i.index}].roulettePointTbNo" value="${point.roulettePointTbNo}">
                                                 <div class="form-group">
                                                     <label class="col-sm-2 control-label">${i.index + 1}번 칸 포인트</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" name="inp${i.index + 1}" value="${point.eventPoint}" required>
+                                                        <input type="text" class="form-control" name="pointList[${i.index}].eventPoint" value="${point.eventPoint}" required>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -141,6 +150,7 @@
                                                 </c:if>
                                                 <c:if test="${nowEvent ne null}">
                                                     <img src="${nowEvent.eventImg}" width="600" height="400">
+                                                    <input type="file" id="uploadFile" name="uploadFile">
                                                 </c:if>
                                             </div>
                                         </div>
@@ -155,14 +165,28 @@
                                         </div>
                                     </c:if>
 
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">시작일</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control date-picker" name="eventStartDate" value="${nowEvent.eventStartDate}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">종료일</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control date-picker" name="eventEndDate" value="${nowEvent.eventEndDate}" required>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10" id="formButtonsHere">
                                         <c:if test="${nowEvent eq null}">
                                             <button type="submit" class="btn btn-primary">이벤트 시작</button>
                                         </c:if>
                                         <c:if test="${nowEvent ne null}">
-                                            <a href="#" class="btn btn-primary">포인트 수정</a>
-                                            <button type="submit" class="btn btn-primary">이벤트 종료</button>
+                                            <button type="submit" class="btn btn-primary">이벤트 수정</button>
+                                            <a href="#" class="btn btn-primary">포인트 종료</a>
                                         </c:if>
                                     </div>
                                 </form>

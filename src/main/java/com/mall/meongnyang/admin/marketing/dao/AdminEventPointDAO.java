@@ -8,4 +8,5 @@ public interface AdminEventPointDAO
 {
     public void insertEventPoint(AdminEventPointVO adminEventPointVO);
     public List<AdminEventPointVO> selectAllEventPointList(AdminEventPointVO adminEventPointVO);
+    public void updateEventPoint(AdminEventPointVO adminEventPointVO);
 }

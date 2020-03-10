@@ -3,12 +3,18 @@ package com.mall.meongnyang.admin.marketing.vo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.Date;
+
 public class AdminEventVO
 {
     private int eventTbNo;
     private int rouletteSize;
     private String eventImg;
     private String eventState;
+    private String eventMessage;
+    private Date eventStartDate;
+    private Date eventEndDate;
+
     private double pointAvg;
 
     @JsonIgnore
@@ -75,6 +81,36 @@ public class AdminEventVO
         this.pointAvg = pointAvg;
     }
 
+    public String getEventMessage()
+    {
+        return eventMessage;
+    }
+
+    public void setEventMessage(String eventMessage)
+    {
+        this.eventMessage = eventMessage;
+    }
+
+    public Date getEventStartDate()
+    {
+        return eventStartDate;
+    }
+
+    public void setEventStartDate(Date eventStartDate)
+    {
+        this.eventStartDate = eventStartDate;
+    }
+
+    public Date getEventEndDate()
+    {
+        return eventEndDate;
+    }
+
+    public void setEventEndDate(Date eventEndDate)
+    {
+        this.eventEndDate = eventEndDate;
+    }
+
     @Override
     public String toString()
     {
@@ -83,6 +119,9 @@ public class AdminEventVO
                 ", rouletteSize=" + rouletteSize +
                 ", eventImg='" + eventImg + '\'' +
                 ", eventState='" + eventState + '\'' +
+                ", eventMessage='" + eventMessage + '\'' +
+                ", eventStartDate=" + eventStartDate +
+                ", eventEndDate=" + eventEndDate +
                 ", pointAvg=" + pointAvg +
                 ", uploadFile=" + uploadFile +
                 '}';

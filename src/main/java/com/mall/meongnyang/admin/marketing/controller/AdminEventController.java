@@ -1,8 +1,6 @@
 package com.mall.meongnyang.admin.marketing.controller;
 
-import com.mall.meongnyang.admin.marketing.service.AdminInsertEventAndPointService;
-import com.mall.meongnyang.admin.marketing.service.AdminSelectEventStartedPointListService;
-import com.mall.meongnyang.admin.marketing.service.AdminSelectEventStartedService;
+import com.mall.meongnyang.admin.marketing.service.*;
 import com.mall.meongnyang.admin.marketing.vo.AdminEventPointVO;
 import com.mall.meongnyang.admin.marketing.vo.AdminEventVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,11 @@ public class AdminEventController
     private AdminSelectEventStartedPointListService adminSelectEventStartedPointListService;
     @Autowired
     private AdminInsertEventAndPointService adminInsertEventAndPointService;
+    @Autowired
+    private AdminUpdateEventPointListService adminUpdateEventPointListService;
+    @Autowired
+    private AdminUpdateEventService adminUpdateEventService;
+
 
     @RequestMapping(value = "/event.ado", method = RequestMethod.GET)
     public String goToEventPage(Model model)
@@ -38,10 +41,16 @@ public class AdminEventController
     @RequestMapping(value = "/insertEvent.ado", method = RequestMethod.POST)
     public String insertEvent(AdminEventVO adminEventVO, AdminEventPointVO adminEventPointVO, HttpServletRequest request)
     {
-        System.out.println(adminEventVO);
-        System.out.println(adminEventPointVO);
-        System.out.println(adminEventVO.getUploadFile());
         adminInsertEventAndPointService.insertEventAndPoint(adminEventVO, adminEventPointVO, request);
         return "redirect:event.ado";
     }
+
+    @RequestMapping(value = "/updateEvent.ado", method = RequestMethod.POST)
+    public String updateEvent(AdminEventVO adminEventVO, AdminEventPointVO adminEventPointVO, HttpServletRequest request)
+    {
+        adminUpdateEventPointListService.updateEventPoint(adminEventPointVO);
+        adminUpdateEventService.updateEvent(adminEventVO, request);
+        return "redirect:event.ado";
+    }
+
 }

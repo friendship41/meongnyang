@@ -42,4 +42,11 @@
         ORDER BY ROULETTE_POINT_TB_NO ASC
     </select>
 
+    <update id="updateEventPoint" parameterType="eventPoint">
+        UPDATE EVENT_POINT
+        SET
+            EVENT_POINT = #{eventPoint}
+        WHERE ROULETTE_POINT_TB_NO = #{roulettePointTbNo}
+    </update>
+
 </mapper>

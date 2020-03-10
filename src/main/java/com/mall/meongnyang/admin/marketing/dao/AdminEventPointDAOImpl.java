@@ -24,4 +24,10 @@ public class AdminEventPointDAOImpl implements AdminEventPointDAO
     {
         return sqlSessionTemplate.selectList("EventPointDAO.selectAllEventPointList", adminEventPointVO);
     }
+
+    @Override
+    public void updateEventPoint(AdminEventPointVO adminEventPointVO)
+    {
+        sqlSessionTemplate.update("EventPointDAO.updateEventPoint", adminEventPointVO);
+    }
 }

@@ -34,4 +34,10 @@ public class AdminEventDAOImpl implements AdminEventDAO
     {
         return sqlSessionTemplate.selectOne("EventDAO.selectEventStarted", adminEventVO);
     }
+
+    @Override
+    public void updateEvent(AdminEventVO adminEventVO)
+    {
+        sqlSessionTemplate.update("EventDAO.updateEvent", adminEventVO);
+    }
 }
