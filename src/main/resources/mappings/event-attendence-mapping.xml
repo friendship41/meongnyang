@@ -15,4 +15,9 @@
             AND (ATTEND_DATE BETWEEN TO_DATE(TO_CHAR(SYSDATE, 'yyyy/MM/dd'), 'yyyy/MM/dd') AND TO_DATE(TO_CHAR(SYSDATE+1, 'yyyy/MM/dd'), 'yyyy/MM/dd'))
     </select>
 
+    <insert id="insertAttendence" parameterType="eventAttendence">
+        INSERT INTO EVENT_ATTENDENCE (EVENT_ATTENDENCE_TB_NO, EVENT_TB_NO, CUSTOMER_TB_NO, ATTEND_DATE)
+        VALUES (EVENT_ATTENDENCE_SEQ.NEXTVAL, #{eventTbNo}, #{customerTbNo}, SYSDATE)
+    </insert>
+
 </mapper>

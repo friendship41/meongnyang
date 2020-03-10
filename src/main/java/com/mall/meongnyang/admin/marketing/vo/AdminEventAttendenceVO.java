@@ -9,6 +9,8 @@ public class AdminEventAttendenceVO
     private int customerTbNo;
     private Date attendDate;
 
+    private double degree;
+
     public int getEventAttendenceTbNo()
     {
         return eventAttendenceTbNo;
@@ -49,6 +51,16 @@ public class AdminEventAttendenceVO
         this.attendDate = attendDate;
     }
 
+    public double getDegree()
+    {
+        return degree;
+    }
+
+    public void setDegree(double degree)
+    {
+        this.degree = degree;
+    }
+
     @Override
     public String toString()
     {
@@ -57,6 +69,7 @@ public class AdminEventAttendenceVO
                 ", eventTbNo=" + eventTbNo +
                 ", customerTbNo=" + customerTbNo +
                 ", attendDate=" + attendDate +
+                ", degree=" + degree +
                 '}';
     }
 }

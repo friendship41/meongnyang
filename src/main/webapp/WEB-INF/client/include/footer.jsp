@@ -75,7 +75,7 @@
         var event = '${eventGo}';
         if(event === 't')
         {
-            window.open("/eventStart.do", "이벤트페이지", 'width=800, height=850');
+            window.open("/eventStart.do", "이벤트페이지", 'width=800, height=1000');
         }
     });
 

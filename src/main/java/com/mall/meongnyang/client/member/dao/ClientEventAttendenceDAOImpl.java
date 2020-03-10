@@ -16,4 +16,10 @@ public class ClientEventAttendenceDAOImpl implements ClientEventAttendenceDAO
     {
         return sqlSessionTemplate.selectOne("EventAttendenceDAO.selectAttendenceToday", adminEventAttendenceVO);
     }
+
+    @Override
+    public void insertAttendence(AdminEventAttendenceVO adminEventAttendenceVO)
+    {
+        sqlSessionTemplate.insert("EventAttendenceDAO.insertAttendence", adminEventAttendenceVO);
+    }
 }
