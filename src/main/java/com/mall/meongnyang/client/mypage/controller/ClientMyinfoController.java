@@ -78,7 +78,7 @@ public class ClientMyinfoController {
 			int id = SessionVO.getCustomerTbNo();
 			clientCustomerVO.setCustomerTbNo(id);
 			clientUpdateMyinfoPasswordService.updateMyinfoPassword(clientCustomerVO);
-//			System.out.println(clientCustomerVO.getCustomerTbPassword());
+
 			model.addAttribute("passwordsuccess", false);
 			} else {
 				model.addAttribute("passwordCheck", false);
@@ -91,7 +91,7 @@ public class ClientMyinfoController {
 		
 		
 
-		return "mypage/myinfo";
+		return "redirect:myinfo.do";
 			
 	}
 
