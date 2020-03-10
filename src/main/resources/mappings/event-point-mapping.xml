@@ -32,4 +32,14 @@
         )
     </insert>
 
+    <select id="selectAllEventPointList" parameterType="eventPoint" resultType="eventPoint">
+        SELECT
+            ROULETTE_POINT_TB_NO,
+            EVENT_TB_NO,
+            EVENT_POINT
+        FROM EVENT_POINT
+        WHERE EVENT_TB_NO = #{eventTbNo}
+        ORDER BY ROULETTE_POINT_TB_NO ASC
+    </select>
+
 </mapper>

@@ -35,62 +35,135 @@
                     <div class="col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-
-                                <form class="form-horizontal" id="formToController" action="insertEvent.ado" method="post" enctype="multipart/form-data">
-
+                                <c:if test="${nowEvent eq null}">
+                                    <form class="form-horizontal" id="formToController" action="insertEvent.ado" method="post" enctype="multipart/form-data">
+                                </c:if>
+                                <c:if test="${nowEvent ne null}">
+                                    <form class="form-horizontal" id="formToController" action="deleteEvent.ado" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="eventTbNo" value="${nowEvent.eventTbNo}">
+                                </c:if>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">룰렛 칸 갯수</label>
                                         <div class="col-sm-10">
-                                            <select style="margin-bottom:15px;" class="form-control" id="rouletteSelectBox" name="rouletteSize">
-                                                <option value="2" selected>2</option>
-                                                <option value="4">4</option>
-                                                <option value="6">6</option>
-                                                <option value="8">8</option>
+                                            <c:if test="${nowEvent eq null}">
+                                                <select style="margin-bottom:15px;" class="form-control" id="rouletteSelectBox" name="rouletteSize">
+                                            </c:if>
+                                            <c:if test="${nowEvent ne null}">
+                                                <select style="margin-bottom:15px;" class="form-control" id="rouletteSelectBox" name="rouletteSize" readonly="">
+                                            </c:if>
+                                                <c:if test="${nowEvent eq null}">
+                                                    <option value="2" selected>2</option>
+                                                    <option value="4">4</option>
+                                                    <option value="6">6</option>
+                                                    <option value="8">8</option>
+                                                </c:if>
+                                                <c:if test="${nowEvent ne null}">
+                                                    <c:if test="${nowEvent.rouletteSize == 2}">
+                                                        <option value="2" selected>2</option>
+                                                        <option value="4">4</option>
+                                                        <option value="6">6</option>
+                                                        <option value="8">8</option>
+                                                    </c:if>
+                                                    <c:if test="${nowEvent.rouletteSize == 4}">
+                                                        <option value="2">2</option>
+                                                        <option value="4" selected>4</option>
+                                                        <option value="6">6</option>
+                                                        <option value="8">8</option>
+                                                    </c:if>
+                                                    <c:if test="${nowEvent.rouletteSize == 6}">
+                                                        <option value="2">2</option>
+                                                        <option value="4">4</option>
+                                                        <option value="6" selected>6</option>
+                                                        <option value="8">8</option>
+                                                    </c:if>
+                                                    <c:if test="${nowEvent.rouletteSize == 8}">
+                                                        <option value="2">2</option>
+                                                        <option value="4">4</option>
+                                                        <option value="6">6</option>
+                                                        <option value="8" selected>8</option>
+                                                    </c:if>
+                                                </c:if>
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2"></div>
-                                    <div id="exImgDiv2" class="col-md-10">
-                                        <img src="/resources/admin/images/roulette-2.png" width="600" height="400">
-                                    </div>
-                                    <div id="exImgDiv4" class="col-md-10">
-                                        <img src="/resources/admin/images/roulette-4.png" width="600" height="400">
-                                    </div>
-                                    <div id="exImgDiv6" class="col-md-10">
-                                        <img src="/resources/admin/images/roulette-6.png" width="600" height="400">
-                                    </div>
-                                    <div id="exImgDiv8" class="col-md-10">
-                                        <img src="/resources/admin/images/roulette-8.png" width="600" height="400">
-                                    </div>
+                                    <c:if test="${nowEvent eq null}">
+                                        <div class="col-md-2"></div>
+                                        <div id="exImgDiv2" class="col-md-10">
+                                            <img src="/resources/admin/images/roulette-2.png" width="600" height="400">
+                                        </div>
+                                        <div id="exImgDiv4" class="col-md-10">
+                                            <img src="/resources/admin/images/roulette-4.png" width="600" height="400">
+                                        </div>
+                                        <div id="exImgDiv6" class="col-md-10">
+                                            <img src="/resources/admin/images/roulette-6.png" width="600" height="400">
+                                        </div>
+                                        <div id="exImgDiv8" class="col-md-10">
+                                            <img src="/resources/admin/images/roulette-8.png" width="600" height="400">
+                                        </div>
+                                    </c:if>
+
+
 
                                     <div id="inputDiv">
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">1번 칸 포인트</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="inp1" required>
+                                        <c:if test="${nowEvent eq null}">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">1번 칸 포인트</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="inp1" required>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-2 control-label">2번 칸 포인트</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="inp2" required>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">2번 칸 포인트</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" name="inp2" required>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </c:if>
+                                        <c:if test="${nowEvent ne null}">
+                                            <c:forEach var="point" items="${nowEventPoint}" varStatus="i">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">${i.index + 1}번 칸 포인트</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" name="inp${i.index + 1}" value="${point.eventPoint}" required>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </c:if>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="uploadFile" class="col-sm-2 control-label">룰렛 이미지</label>
                                         <div class="col-sm-10">
                                             <div class="input-group">
-                                                <input type="file" id="uploadFile" name="uploadFile" required>
+                                                <c:if test="${nowEvent eq null}">
+                                                    <input type="file" id="uploadFile" name="uploadFile" required>
+                                                </c:if>
+                                                <c:if test="${nowEvent ne null}">
+                                                    <img src="${nowEvent.eventImg}" width="600" height="400">
+                                                </c:if>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <c:if test="${nowEvent ne null}">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">포인트 평균값</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" value="${nowEvent.pointAvg}" readonly>
+                                            </div>
+                                        </div>
+                                    </c:if>
+
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10" id="formButtonsHere">
-                                        <button type="submit" class="btn btn-primary">이벤트 시작</button>
+                                        <c:if test="${nowEvent eq null}">
+                                            <button type="submit" class="btn btn-primary">이벤트 시작</button>
+                                        </c:if>
+                                        <c:if test="${nowEvent ne null}">
+                                            <a href="#" class="btn btn-primary">포인트 수정</a>
+                                            <button type="submit" class="btn btn-primary">이벤트 종료</button>
+                                        </c:if>
                                     </div>
                                 </form>
                             </div>

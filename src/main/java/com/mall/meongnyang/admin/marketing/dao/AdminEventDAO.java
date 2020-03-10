@@ -7,4 +7,5 @@ public interface AdminEventDAO
     public void updateAllEventNstate(AdminEventVO adminEventVO);
     public void insertEvent(AdminEventVO adminEventVO);
     public AdminEventVO selectYstateEvent(AdminEventVO adminEventVO);
+    public AdminEventVO selectEventStarted(AdminEventVO adminEventVO);
 }

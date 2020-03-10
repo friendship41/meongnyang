@@ -9,6 +9,7 @@ public class AdminEventVO
     private int rouletteSize;
     private String eventImg;
     private String eventState;
+    private double pointAvg;
 
     @JsonIgnore
     private MultipartFile uploadFile;
@@ -64,6 +65,16 @@ public class AdminEventVO
         this.uploadFile = uploadFile;
     }
 
+    public double getPointAvg()
+    {
+        return pointAvg;
+    }
+
+    public void setPointAvg(double pointAvg)
+    {
+        this.pointAvg = pointAvg;
+    }
+
     @Override
     public String toString()
     {
@@ -72,6 +83,8 @@ public class AdminEventVO
                 ", rouletteSize=" + rouletteSize +
                 ", eventImg='" + eventImg + '\'' +
                 ", eventState='" + eventState + '\'' +
+                ", pointAvg=" + pointAvg +
+                ", uploadFile=" + uploadFile +
                 '}';
     }
 }
