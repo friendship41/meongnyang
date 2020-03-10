@@ -867,3 +867,49 @@ h3.other-nw {
     color: #fff;
     cursor: pointer;
 }
+
+/* 플로팅 추천메뉴 */
+#floatMenu {
+	background: rgba(246, 246, 248, 0.9) none repeat scroll 0 0;
+ 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+	position: absolute;
+	width: auto;
+	height: auto;
+	right: 10px;
+	top: 200px;
+	z-index: 1;
+}
+#floatMenu h4 {
+	margin-left: auto;
+	margin-right: auto;
+}
+#floatMenu .shp__cart__wrap {
+    margin-top: 15px;
+    color: #606060;
+}
+
+@media (max-width: 480px) {
+	#floatMenu * {
+		display: inline;
+		font-size: xx-small;
+	}
+	#floatMenu {
+		display: flex;
+		background: rgba(246, 246, 248, 0.9) none repeat scroll 0 0;
+	 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		width: max-content;
+		height: auto;
+		position: absolute;
+		right: 0px;
+		top: 200px;
+		z-index: 0;
+	}
+	#floatMenu h4 {
+		margin-left: 0px;
+		margin-right: 0px;
+	}
+	#floatMenu .shp__cart__wrap {
+	    margin-top: 15px;
+	    color: #606060;
+	}
+}

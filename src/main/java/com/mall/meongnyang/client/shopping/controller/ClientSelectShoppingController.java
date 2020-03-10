@@ -17,9 +17,11 @@ import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
 import com.mall.meongnyang.client.community.service.ClientSelectQnaListService;
 import com.mall.meongnyang.client.community.vo.ClientQnaListPaging;
+import com.mall.meongnyang.client.shopping.service.ClientSelectRecommendProductService;
 import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingDetailService;
 import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingListService;
 import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingProductCategoryService;
+import com.mall.meongnyang.client.shopping.vo.ClientRecommendProductVO;
 
 @Controller
 public class ClientSelectShoppingController
@@ -33,6 +35,9 @@ public class ClientSelectShoppingController
 
     @Autowired
     private ClientSelectQnaListService clientSelectQnaListService;
+    
+    @Autowired
+    private ClientSelectRecommendProductService recommendProductService;
     
 
     @RequestMapping(value = "/shopping.do", method = RequestMethod.GET)
@@ -72,15 +77,19 @@ public class ClientSelectShoppingController
 		adminQnaVO.setStartRow(paging.getStartRow());
 		adminQnaVO.setEndRow(paging.getEndRow());
 		
+		ClientRecommendProductVO clientRecommendProductVO = new ClientRecommendProductVO();
+		clientRecommendProductVO.setProductTbCode(adminProductVO.getProductTbCode());
 		
     	Map<String, Object> detailMap = clientSelectShoppingDetailService.selectProductDetail(adminProductVO);
     	List<AdminQnaVO> tempVO = clientSelectQnaListService.selectQnaList(adminQnaVO);
+    	List<ClientRecommendProductVO> recommendProduct = recommendProductService.selectRecommendProduct(clientRecommendProductVO);
     			
     	model.addAttribute("detail", (AdminProductVO)detailMap.get("detail"));
         model.addAttribute("imageList", (List<AdminProductImageVO>)detailMap.get("imageList"));
         model.addAttribute("saleList", (List<AdminProductSaleVO>)detailMap.get("saleList"));
         model.addAttribute("qnaList", tempVO);
         model.addAttribute("paging", paging);
+        model.addAttribute("recommendProduct", recommendProduct);
         
         return "shopping/product-read";
     }
