@@ -38,7 +38,7 @@
                             </div>
                             <div class="panel-body">
                                 <form class="form-horizontal" action="term-write.ado" method="post">
-                   	                        <!-- <input type="hidden" name="adminsTbId" value="${sessionScope.id}">  -->                                    
+                   	                <input type="hidden" name="adminsTbId" value="${sessionScope.adminId}">                                   
                                     <div class="form-group">
                                         <label for="termNumber" class="col-sm-2 control-label">약관번호</label>
                                         <div class="col-sm-10">

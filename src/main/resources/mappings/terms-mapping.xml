@@ -36,7 +36,7 @@
 	
 	<insert id="insertTerms" parameterType="terms">
 	INSERT INTO terms 
-	VALUES(#{termsTbNo},'admin',#{termsTbTitle}, #{termsTbContent}, #{termsTbNecessary, jdbcType=VARCHAR}, SYSDATE, #{termsTbExpireDate}, SYSDATE, #{termsTbApplyDate})
+	VALUES(#{termsTbNo},#{adminsTbId},#{termsTbTitle}, #{termsTbContent}, #{termsTbNecessary, jdbcType=VARCHAR}, SYSDATE, #{termsTbExpireDate}, SYSDATE, #{termsTbApplyDate})
 	</insert>
 	
 	<update id="updateTerms" parameterType="terms">
