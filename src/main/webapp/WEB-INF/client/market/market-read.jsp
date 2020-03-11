@@ -162,10 +162,14 @@ $(function() {
 					str += '<li><a href="javascript:void(0)" class="prevPage" value="'+(data.paging.startPage - data.paging.pageBlock)+'"><i class="zmdi zmdi-chevron-left"></i></a></li>';
 				}
 				for(var i = data.paging.startPage; i <= data.paging.endPage; i++) {
-					str += '<li><a href="javascript:void(0)" class="goPage" data-page="'+i+'">' + i + '</a></li>';
+					if(data.paging.currentPage == i){
+						str += '<li class="active"><a href="javascript:void(0)" class="goPage" data-page="'+i+'">' + i + '</a></li>';						
+					} else {
+						str += '<li><a href="javascript:void(0)" class="goPage" data-page="'+i+'">' + i + '</a></li>';						
+					}
 				}
 				if(data.paging.next == true){
-					str += '<li class="active"><a href="javascript:void(0)" class="nextPage" value="'+(data.paging.endPage + 1)+'"><i class="zmdi zmdi-chevron-right"></i></a></li>';
+					str += '<li><a href="javascript:void(0)" class="nextPage" value="'+(data.paging.endPage + 1)+'"><i class="zmdi zmdi-chevron-right"></i></a></li>';
 				}
 			str += '</ul>'
 			    +  '</div>'
