@@ -25,7 +25,7 @@ public class AdminProductVO
     private Date dayTo;
 
     private String orderMethod;
-    private String SearchWord;
+    private String searchWord;
 
     private String filterPrice;
     private int minPrice;
@@ -201,12 +201,12 @@ public class AdminProductVO
 
     public String getSearchWord()
     {
-        return SearchWord;
+        return searchWord;
     }
 
     public void setSearchWord(String searchWord)
     {
-        SearchWord = searchWord;
+        this.searchWord = searchWord;
     }
 
     public int getStartNum()
@@ -447,7 +447,7 @@ public class AdminProductVO
                 ", dayFrom=" + dayFrom +
                 ", dayTo=" + dayTo +
                 ", orderMethod='" + orderMethod + '\'' +
-                ", SearchWord='" + SearchWord + '\'' +
+                ", searchWord='" + searchWord + '\'' +
                 ", filterPrice='" + filterPrice + '\'' +
                 ", minPrice=" + minPrice +
                 ", maxPrice=" + maxPrice +

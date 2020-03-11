@@ -178,8 +178,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="search__inner">
-                            <form action="#" method="get">
-                                <input placeholder="Search here... " type="text">
+                            <form action="/shopping.do" method="get">
+                                <input type="hidden" name="minPrice" value="0">
+                                <input type="hidden" name="maxPrice" value="1000000">
+                                <select name="productCategoryTbNo" style="height: 30px; font-size: larger; margin-bottom: 5px; border-width: 0;" required>
+                                    <c:forEach var="cate" items="${sessionScope.fullCategoryList}">
+                                        <option value="${cate.productCategoryTbNo}">${cate.productCategoryTbParent}-${cate.productCategoryTbMedian}-${cate.productCategoryTbSub}</option>
+                                    </c:forEach>
+                                </select>
+                                <input name="searchWord" placeholder="Search here... " type="text" required>
                                 <button type="submit"></button>
                             </form>
                             <div class="search__close__btn">

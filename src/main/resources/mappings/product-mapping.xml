@@ -159,8 +159,14 @@
                         GROUP BY ss.PRODUCT_TB_CODE
                     ) od
                     ON p.PRODUCT_TB_CODE = od.PRODUCT_TB_CODE
-                    WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
         ]]>
+                    <if test="searchWord == null">
+                        WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
+                    </if>
+                    <if test="searchWord != null">
+                        WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
+                        AND p.PRODUCT_TB_NAME LIKE '%'||#{searchWord}||'%'
+                    </if>
                     <if test="orderMethod == null">
                         ORDER BY ps.PD_SALE_TB_START_DAY DESC
                     </if>

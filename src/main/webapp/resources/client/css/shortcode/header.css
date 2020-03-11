@@ -634,7 +634,7 @@ nav.off__canvars--menu ul li ul li a:hover {
   line-height: 60px;
   position: absolute;
   right: 40px;
-  top: 0;
+  top: 35px;
   width: 60px;
   transition: 0.3s;
 }
@@ -649,7 +649,7 @@ nav.off__canvars--menu ul li ul li a:hover {
   line-height: 58px;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 35px;
 }
 .search__area .search__inner .search__close__btn {
   color: #fff;

@@ -126,19 +126,20 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="htc__pagenation">
+                            <!-- /shopping.do?productCategoryTbNo=&minPrice=&maxPrice=&orderMethod=&searchWord=&nowPage= -->
                             <c:if test="${pageInfo.nowPage > 10}">
-                                <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                                <li><a href="javascript:goToPage('${pageInfo.nowPage-1}')"><i class="zmdi zmdi-chevron-left"></i></a></li>
                             </c:if>
                             <c:forEach var="i" begin="${pageInfo.startBlock}" end="${pageInfo.endBlock}" step="1">
                                 <c:if test="${i eq pageInfo.nowPage}">
-                                    <li class="active"><a href="#">${i}</a></li>
+                                    <li class="active"><a href="javascript:goToPage('${i}')">${i}</a></li>
                                 </c:if>
                                 <c:if test="${i ne pageInfo.nowPage}">
-                                    <li><a href="#">${i}</a></li>
+                                    <li><a href="javascript:goToPage('${i}')">${i}</a></li>
                                 </c:if>
                             </c:forEach>
                             <c:if test="${pageInfo.endBlock < pageInfo.allBlockCnt}">
-                                <li><a href="#"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                                <li><a href="javascript:goToPage('${pageInfo.nowPage+1}')"><i class="zmdi zmdi-chevron-right"></i></a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -203,7 +204,21 @@
             var filterPrice = $("#amount").val();
             location.href="shopping.do?productCategoryTbNo=${nowCategory}&filterPrice="+filterPrice+"&orderMethod="+selectedValue;
         })
-    })
+    });
+
+    function goToPage(nowPage) {
+        var selectedValue = $("#orderMethod option:selected").val();
+        var filterPrice = $("#amount").val();
+        var searchWord = '${searchWord}';
+        if(searchWord === '')
+        {
+            location.href = '/shopping.do?productCategoryTbNo=${nowCategory}&filterPrice='+filterPrice+'&orderMethod='+selectedValue+'&nowPage='+nowPage;
+        }
+        else
+        {
+            location.href = '/shopping.do?productCategoryTbNo=${nowCategory}&filterPrice='+filterPrice+'&orderMethod='+selectedValue+'&searchWord='+searchWord+'&nowPage='+nowPage;
+        }
+    }
 
     function priceFilter() {
         var filterPrice = $("#amount").val();

@@ -1,5 +1,6 @@
 package com.mall.meongnyang.client.intercepter.menu;
 
+import com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +11,6 @@ public class MenuCheckInterceptor extends HandlerInterceptorAdapter
 {
     ClientSelectProductCategoryListService clientSelectProductCategoryListService;
 
-    public MenuCheckInterceptor()
-    {
-    }
     public MenuCheckInterceptor(ClientSelectProductCategoryListService clientSelectProductCategoryListService)
     {
         this.clientSelectProductCategoryListService = clientSelectProductCategoryListService;
@@ -26,6 +24,7 @@ public class MenuCheckInterceptor extends HandlerInterceptorAdapter
         if(menuVO == null)
         {
             session.setAttribute("menu", clientSelectProductCategoryListService.getMenu());
+            session.setAttribute("fullCategoryList", clientSelectProductCategoryListService.getAllCategory(new AdminProductCategoryVO()));
         }
         return true;
     }

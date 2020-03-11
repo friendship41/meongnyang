@@ -10,9 +10,6 @@ public class ClientSelectProductCategoryListServiceImpl implements ClientSelectP
 {
     private ClientMenuDAO clientMenuDAO;
 
-    public ClientSelectProductCategoryListServiceImpl()
-    {
-    }
     public ClientSelectProductCategoryListServiceImpl(ClientMenuDAO clientMenuDAO)
     {
         this.clientMenuDAO = clientMenuDAO;
@@ -23,7 +20,7 @@ public class ClientSelectProductCategoryListServiceImpl implements ClientSelectP
     {
         MenuVO menuVO = new MenuVO();
 
-        List<AdminProductCategoryVO> categoryList = clientMenuDAO.selectProductCategoryList();
+        List<AdminProductCategoryVO> categoryList = clientMenuDAO.selectProductCategoryList(new AdminProductCategoryVO());
         Map<String, Map<Integer, String>> tempMap = new HashMap<>();
         for(AdminProductCategoryVO productCategory : categoryList)
         {
@@ -48,5 +45,11 @@ public class ClientSelectProductCategoryListServiceImpl implements ClientSelectP
 //        System.out.println(tempMap);
         menuVO.setMenu(tempMap);
         return menuVO;
+    }
+
+    @Override
+    public List<AdminProductCategoryVO> getAllCategory(AdminProductCategoryVO adminProductCategoryVO)
+    {
+        return clientMenuDAO.selectProductCategoryList(adminProductCategoryVO);
     }
 }

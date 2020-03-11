@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface ClientMenuDAO
 {
-    public List<AdminProductCategoryVO> selectProductCategoryList();
+    public List<AdminProductCategoryVO> selectProductCategoryList(AdminProductCategoryVO adminProductCategoryVO);
 }
