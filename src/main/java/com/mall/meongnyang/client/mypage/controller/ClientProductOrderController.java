@@ -44,6 +44,7 @@ public class ClientProductOrderController {
 	
 		model.addAttribute("page", page);
 		model.addAttribute("orderList", orderList);
+		model.addAttribute("currentPage", currentPage);
 		
 		return "mypage/order-list";
 	}
