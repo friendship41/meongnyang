@@ -93,7 +93,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">유통기한</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="pdSaleTbExpireDay">
+                                            <input type="text" class="form-control date-picker" name="pdSaleTbExpireDay" id="inputPdSaleTbExpireDay">
                                         </div>
                                     </div>
                                     <!-- 옷이면 사이즈 먹거리면 용량 -->
@@ -112,7 +112,7 @@
 
                                     <div class="col-md-2"></div>
                                     <div class="col-md-10">
-                                        <button class="btn btn-primary">판매등록</button>
+                                        <button type="submit" class="btn btn-primary">판매등록</button>
                                     </div>
 
                                 </form>
@@ -135,6 +135,17 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+    $("form").on("submit", function() {
+        inputCheck();
+    });
+    function inputCheck(){
+        var expire = $("#inputPdSaleTbExpireDay").val();
+        if(expire === '' || expire === null)
+        {
+            $("#inputPdSaleTbExpireDay").remove();
+        }
+    }
+
     $(document).ready(function () {
         var repCheck = ${repCheck};
         if(repCheck ===false)

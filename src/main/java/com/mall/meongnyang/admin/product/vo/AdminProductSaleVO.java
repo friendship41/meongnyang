@@ -36,6 +36,7 @@ public class AdminProductSaleVO
     private String productCategoryTbSub;
     private int saleCnt;
 
+    private java.util.Date tempDate;
 
     public int getPdSaleTbNo()
     {
@@ -308,6 +309,16 @@ public class AdminProductSaleVO
         this.saleCnt = saleCnt;
     }
 
+    public java.util.Date getTempDate()
+    {
+        return tempDate;
+    }
+
+    public void setTempDate(java.util.Date tempDate)
+    {
+        this.tempDate = tempDate;
+    }
+
     @Override
     public String toString()
     {
@@ -339,6 +350,7 @@ public class AdminProductSaleVO
                 ", productCategoryTbMedian='" + productCategoryTbMedian + '\'' +
                 ", productCategoryTbSub='" + productCategoryTbSub + '\'' +
                 ", saleCnt=" + saleCnt +
+                ", tempDate=" + tempDate +
                 '}';
     }
 }
