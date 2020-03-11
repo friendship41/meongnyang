@@ -96,7 +96,22 @@
                                         <tfoot>
                                         <tr>
                                             <td colspan="6">                                              
-                                            <h4 class="wishlist-share-title">1</h4>                                                
+						                        <ul class="htc__pagenation">
+						                           <c:if test="${page.prev}">
+						                           <li><a href="/orderList.do?currentPage=${page.startBlock - page.pageBlock}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+						                           </c:if>
+						                           <c:forEach var="i" begin="${page.startBlock}" end="${page.endBlock}">
+						                           <c:if test="${currentPage eq i}">
+						                           <li class="active"><a href="/orderList.do?currentPage=${i}">${i}</a></li> 
+						                           </c:if>
+						                           <c:if test="${currentPage ne i}">
+						                           <li><a href="/orderList.do?currentPage=${i}">${i}</a></li>
+						                           </c:if>						                
+						                           </c:forEach>
+						                           <c:if test="${page.next}">
+						                           <li><a href="/orderList.do?currentPage=${page.startBlock + 1}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+						                           </c:if>
+						                        </ul>                                  
                                             </td>
                                         </tr>
                                         </tfoot>
