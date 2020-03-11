@@ -61,6 +61,7 @@ $(document).ready(function () {
 
     $("#select").hide();
     $("#selectBox").val('thisIsSelect');
+    $("#select").val('select');
 	
 	$("#selectBox").change(function () {
    	 var selectedValue = $("#selectBox option:selected").val();
