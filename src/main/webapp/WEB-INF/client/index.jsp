@@ -132,7 +132,7 @@
             <div class="col-xs-12">
                 <div class="section__title--2 text-center">
                     <h2 class="title__line">Best Seller</h2>
-                    <p>But I must explain to you how all this mistaken idea</p>
+                    <p>오늘뭐멍냥의 베스트 셀러 제품입니다.</p>
                 </div>
             </div>
         </div>
@@ -190,7 +190,7 @@
             <div class="col-xs-12">
                 <div class="section__title--2 text-center">
                     <h2 class="title__line">Market</h2>
-                    <p>But I must explain to you how all this mistaken idea</p>
+                    <p>중고거래 최근 게시글입니다.</p>
                 </div>
             </div>
         </div>
