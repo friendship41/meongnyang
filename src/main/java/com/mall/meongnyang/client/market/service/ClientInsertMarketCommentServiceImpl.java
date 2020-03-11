@@ -19,8 +19,7 @@ public class ClientInsertMarketCommentServiceImpl implements ClientInsertMarketC
 			clientMarketCommentDAO.updateStep(clientMarketCommentVO);
 			clientMarketCommentVO.setMarketCommentTbStep(clientMarketCommentVO.getMarketCommentTbStep() + 1);
 		} 
-		clientMarketCommentVO.setCustomerTbNo(26);
-		
+
 		clientMarketCommentDAO.insertMarketComment(clientMarketCommentVO);		
 	}
 

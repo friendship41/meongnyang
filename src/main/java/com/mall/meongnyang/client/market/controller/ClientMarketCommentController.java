@@ -1,13 +1,13 @@
 package com.mall.meongnyang.client.market.controller;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mall.meongnyang.client.market.service.ClientDeleteMarketCommentService;
@@ -15,6 +15,7 @@ import com.mall.meongnyang.client.market.service.ClientInsertMarketCommentServic
 import com.mall.meongnyang.client.market.service.ClientSelectMarketCommentListService;
 import com.mall.meongnyang.client.market.service.ClientUpdateMarketCommentService;
 import com.mall.meongnyang.client.market.vo.ClientMarketCommentVO;
+import com.mall.meongnyang.client.market.vo.MarketListPaging;
 
 @Controller
 public class ClientMarketCommentController {
@@ -30,18 +31,25 @@ public class ClientMarketCommentController {
 	
 	@Autowired
 	private ClientUpdateMarketCommentService clientUpdateMarketCommentService;
+
 	
 	@RequestMapping("/commentList.do")
-	public ResponseEntity<List<ClientMarketCommentVO>> commentList(ClientMarketCommentVO clientMarketComment) {
-		ResponseEntity<List<ClientMarketCommentVO>> entity = null;
+	@ResponseBody
+	public Map<String, Object> commentList(@RequestParam(defaultValue = "1") int currentPage, ClientMarketCommentVO clientMarketCommentVO) {
 		
-		try {
-			entity = new ResponseEntity<>(commentListService.selectCommentList(clientMarketComment), HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		return entity;
+		MarketListPaging paging = new MarketListPaging(currentPage);
+		
+		paging.setPageSize(10);
+		paging.createPaging(commentListService.selectCommentCount(clientMarketCommentVO));
+		
+		clientMarketCommentVO.setStartRow(paging.getStartRow());
+		clientMarketCommentVO.setEndRow(paging.getEndRow());		
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("comment", commentListService.selectCommentList(clientMarketCommentVO));
+		map.put("paging", paging);
+		
+		return map;
 	}	
 	
 	@RequestMapping("/insertComment.do")
