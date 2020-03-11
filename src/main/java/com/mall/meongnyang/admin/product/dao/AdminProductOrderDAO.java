@@ -14,4 +14,5 @@ public interface AdminProductOrderDAO
     public void updateOrderState(ClientOrderVO clientOrderVO);
     public List<ClientOrderVO> selectDashboardMonthMoney(ClientOrderVO clientOrderVO);
     public List<ClientOrderVO> selectDashboardDayMoney(ClientOrderVO clientOrderVO);
+    public ClientProductOrderVO selectOrder(ClientProductOrderVO clientProductOrderVO);
 }

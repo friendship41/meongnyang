@@ -19,16 +19,23 @@ public class ClientupdateOrderStateServiceImpl implements ClientupdateOrderState
     @Override
     public void updateOrderState(ClientOrderVO clientOrderVO)
     {
-        ClientProductOrderVO clientProductOrderVO = new ClientProductOrderVO();
-        clientProductOrderVO.setPdOrderTbNo(clientOrderVO.getPdOrderTbNo());
-        ClientProductOrderVO orderDB = clientProductOrderDAO.selectProductOrder(clientProductOrderVO);
-        clientOrderVO.setPdOrderTbTid(orderDB.getPdOrderTbTid());
-        clientOrderVO.setPdOrderTbPayment(orderDB.getPdOrderTbPayment());
+        if (clientOrderVO.getPdOrderTbState().equalsIgnoreCase("C"))
+        {
+            ClientProductOrderVO clientProductOrderVO = new ClientProductOrderVO();
+            clientProductOrderVO.setPdOrderTbNo(clientOrderVO.getPdOrderTbNo());
+            ClientProductOrderVO orderDB = clientProductOrderDAO.selectProductOrder(clientProductOrderVO);
+            clientOrderVO.setPdOrderTbTid(orderDB.getPdOrderTbTid());
+            clientOrderVO.setPdOrderTbPayment(orderDB.getPdOrderTbPayment());
 
-        KakaoPayCancelResponseVO kakaoPayCancelResponseVO = kakaoPayCancelService.kakaopaycancel(clientOrderVO);
+            KakaoPayCancelResponseVO kakaoPayCancelResponseVO = kakaoPayCancelService.kakaopaycancel(clientOrderVO);
 //        System.out.println(kakaoPayCancelResponseVO);
 
-        if(kakaoPayCancelResponseVO.getStatus().equals("CANCEL_PAYMENT"))
+            if(kakaoPayCancelResponseVO.getStatus().equals("CANCEL_PAYMENT"))
+            {
+                clientProductOrderDAO.updateOrderState(clientOrderVO);
+            }
+        }
+        else
         {
             clientProductOrderDAO.updateOrderState(clientOrderVO);
         }
