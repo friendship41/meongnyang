@@ -107,7 +107,7 @@
                             <div class="ht__comment__form__inner">
                                 <div class="comment__form">
                                     <input type="text" id="customerTbPhone" placeholder="연락처를 입력하세요 (-생략해주세요)"
-                                           name="customerTbPhone" maxlength="11">
+                                           name="customerTbPhone" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11">
                                 </div>
                             </div>
                             <div class="ht__comment__btn--2 mt--30">
@@ -272,12 +272,12 @@
         var phone = $("#customerTbPhone").val();
         var phoneSu = phone.length;
         console.log(phoneSu);
-        if (phoneSu < 11) {
+        if (phoneSu < 11 || phoneSu > 11) {
             alert("전화번호를 다시한번 확인해주세요.");
         } else if (phone.indexOf("-") != -1) {
             alert("-를 제거해주세요");
         } else {
-            $("#phoneForm").submit();
+        	$("#phoneForm").submit();
         }
 
     }
