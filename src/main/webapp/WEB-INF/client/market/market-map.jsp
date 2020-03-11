@@ -59,7 +59,8 @@ var mapList = new Array();
 $(document).ready(function () {
 	
 
-    $("#select").hide(); 	
+    $("#select").hide();
+    $("#selectBox").val('thisIsSelect');
 	
 	$("#selectBox").change(function () {
    	 var selectedValue = $("#selectBox option:selected").val();
@@ -97,7 +98,7 @@ $("#select").change(function() {
 	var selectBox = $("#selectBox").val();
 	if(selectBox == 'thisIsSelect') {
 		alert("본인의 주소를 먼저 선택해주세요.");
-		$("#select").attr("value", "select");
+		$("#select").hide();
 	} else {
 		mapLevel(selectValue);
 	}
