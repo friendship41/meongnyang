@@ -56,7 +56,10 @@ var mapList = new Array();
 	mapList.push(obj);
 </c:forEach>
 
- 	
+$(document).ready(function () {
+	
+
+    $("#select").hide(); 	
 	
 	$("#selectBox").change(function () {
    	 var selectedValue = $("#selectBox option:selected").val();
@@ -87,6 +90,8 @@ var mapList = new Array();
    		}
        		});
 
+});
+	
 $("#select").change(function() {
 	var selectValue = $("#select").val();
 	var selectBox = $("#selectBox").val();
