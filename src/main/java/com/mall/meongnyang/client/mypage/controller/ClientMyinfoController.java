@@ -53,7 +53,7 @@ public class ClientMyinfoController {
 		session.setAttribute("customer", tempVO);
 		clientUpdateMyinfoPhoneService.updateMyinfoPhone(clientCustomerVO);
 
-		return "mypage/myinfo";
+		return "redirect:myinfo.do";
 	}
 
 	
