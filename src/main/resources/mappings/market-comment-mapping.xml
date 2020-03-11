@@ -27,6 +27,7 @@
 			market_comment_tb_ref,
 			market_comment_tb_step,
 			market_comment_tb_state,
+			customer_tb_no,
 			customer_tb_name
 			FROM (SELECT 
 				mc.MARKET_COMMENT_TB_NO ,
@@ -36,11 +37,12 @@
 				mc.MARKET_COMMENT_TB_REF ,
 				mc.MARKET_COMMENT_TB_STEP ,
 				mc.MARKET_COMMENT_TB_STATE ,
+				mc.customer_tb_no,
 				cus.customer_tb_name
 				FROM market_comment mc, customer cus
 				WHERE market_tb_no = ${marketTbNo} AND mc.customer_tb_no = cus.customer_tb_no
 				ORDER BY market_comment_tb_ref ASC, market_comment_tb_step ASC))
-		<![CDATA[WHERE rnum >= 1 and rnum <= 10]]>
+		<![CDATA[WHERE rnum >= #{startRow} and rnum <= #{endRow}]]>
 	</select>
 
 	<insert id="insertComment" parameterType="comment">
