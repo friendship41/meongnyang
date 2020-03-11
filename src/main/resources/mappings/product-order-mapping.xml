@@ -194,7 +194,8 @@
 			PD_ORDER_TB_PAYMENT_DATE ,
 			PD_ORDER_TB_PHONE ,
 			PD_ORDER_TB_DELIVERY_FEE ,
-			PD_ORDER_TB_USED_POINT 
+			PD_ORDER_TB_USED_POINT ,
+			PD_ORDER_TB_TID
 		FROM pd_order
 		WHERE pd_order_tb_no = #{pdOrderTbNo}
 	</select>
@@ -270,7 +271,8 @@
 			NULL,
 			#{pdOrderTbPhone},
 			2500,
-			#{pdOrderTbUsedPoint}
+			#{pdOrderTbUsedPoint},
+			#{pdOrderTbTid}
 		)
 	</insert>
 

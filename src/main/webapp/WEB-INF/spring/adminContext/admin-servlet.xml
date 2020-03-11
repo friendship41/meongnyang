@@ -26,6 +26,13 @@
 	<bean id="MailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
 
 
+	<!-- 카카오페이 관련 서비스 -->
+	<bean id="KakaoPayCancelService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayCancelServiceImpl"/>
+	<bean id="ParamMapToString" class="com.mall.meongnyang.util.apiRequest.service.ParamMapToString"/>
+	<bean id="RequestVOFactory" class="com.mall.meongnyang.util.apiRequest.voFactory.RequestVOFactoryImpl"/>
+
+
+
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10240000"/><!-- 10M -->
 	</bean>

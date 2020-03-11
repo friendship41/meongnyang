@@ -80,11 +80,12 @@ public class ClientPaymentController
 
 
         clientOrderVO.setTid(responseVO.getTid());
+        clientOrderVO.setPdOrderTbTid(responseVO.getTid());
         session.setAttribute("orderInfo", clientOrderVO);
         clientOrderVO.setPdOrderTbOrderDate(responseVO.getCreated_at());
 
 
-        System.out.println(clientOrderVO);
+//        System.out.println(clientOrderVO);
         clientInsertOrderService.insertOrderAndDetail(clientOrderVO);
 
 
@@ -110,7 +111,7 @@ public class ClientPaymentController
 
 
 
-        System.out.println(responseVO.getPartner_user_id());
+//        System.out.println(responseVO.getPartner_user_id());
         session.setAttribute("ready", null);
         session.setAttribute("orderInfo", null);
         session.setAttribute("cartList", null);
