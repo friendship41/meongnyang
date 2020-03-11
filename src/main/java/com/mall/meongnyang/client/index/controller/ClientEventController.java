@@ -34,7 +34,10 @@ public class ClientEventController
     {
         ClientCustomerVO clientCustomerVO = (ClientCustomerVO) session.getAttribute("customer");
         adminEventAttendenceVO.setCustomerTbNo(clientCustomerVO.getCustomerTbNo());
-        clientInsertEventAttendenceService.insertAttendence(adminEventAttendenceVO);
+        int resultPoint = clientInsertEventAttendenceService.insertAttendence(adminEventAttendenceVO);
+
+        clientCustomerVO.setCustomerTbPoint(clientCustomerVO.getCustomerTbPoint()+resultPoint);
+        session.setAttribute("customer", clientCustomerVO);
         return "redirect:index.do";
     }
 }

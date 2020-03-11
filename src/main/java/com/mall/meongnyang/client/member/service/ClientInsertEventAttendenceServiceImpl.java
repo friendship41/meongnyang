@@ -23,7 +23,7 @@ public class ClientInsertEventAttendenceServiceImpl implements ClientInsertEvent
     private ClientLoginDAO clientLoginDAO;
 
     @Override
-    public void insertAttendence(AdminEventAttendenceVO adminEventAttendenceVO)
+    public int insertAttendence(AdminEventAttendenceVO adminEventAttendenceVO)
     {
         AdminEventVO adminEventVO = clientEventDAO.selectAvailableEvent(new AdminEventVO());
         if(adminEventVO != null)
@@ -41,7 +41,9 @@ public class ClientInsertEventAttendenceServiceImpl implements ClientInsertEvent
             clientOrderVO.setPdOrderTbUsedPoint(point);
             clientLoginDAO.updatePointRollback(clientOrderVO);
 
+            return point;
         }
+        return 0;
     }
 
 
