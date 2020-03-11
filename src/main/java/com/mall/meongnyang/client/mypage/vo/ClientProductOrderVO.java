@@ -37,6 +37,8 @@ public class ClientProductOrderVO {
     private int ordersDetailTbPriceSum;
     private int ordersDetailTbAmount;
     private String pdSaleTbSalesPriceRange;
+
+    private String pdOrderTbTid;
     
 	public String getPdSaleTbSalesPriceRange() {
 		return pdSaleTbSalesPriceRange;
@@ -226,6 +228,17 @@ public class ClientProductOrderVO {
 	public void setPdSaleTbReceivedPrice(int pdSaleTbReceivedPrice) {
 		this.pdSaleTbReceivedPrice = pdSaleTbReceivedPrice;
 	}
+
+	public String getPdOrderTbTid()
+	{
+		return pdOrderTbTid;
+	}
+
+	public void setPdOrderTbTid(String pdOrderTbTid)
+	{
+		this.pdOrderTbTid = pdOrderTbTid;
+	}
+
 	@Override
 	public String toString()
 	{
@@ -240,7 +253,7 @@ public class ClientProductOrderVO {
 				", pdOrderTbReceiver='" + pdOrderTbReceiver + '\'' +
 				", pdOrderTbPaymentDate=" + pdOrderTbPaymentDate +
 				", pdOrderTbPhone='" + pdOrderTbPhone + '\'' +
-				", pdOrderTbDelivertyFee=" + pdOrderTbDeliveryFee +
+				", pdOrderTbDeliveryFee=" + pdOrderTbDeliveryFee +
 				", pdOrderTbUsedPoint=" + pdOrderTbUsedPoint +
 				", startRow=" + startRow +
 				", endRow=" + endRow +
@@ -249,6 +262,17 @@ public class ClientProductOrderVO {
 				", customerTbName='" + customerTbName + '\'' +
 				", dayFrom=" + dayFrom +
 				", dayTo=" + dayTo +
+				", startDate=" + startDate +
+				", endDate=" + endDate +
+				", pdOrderTbPaymentDateStr='" + pdOrderTbPaymentDateStr + '\'' +
+				", pdOrderTbPaymentSum=" + pdOrderTbPaymentSum +
+				", pdSaleTbReceivedPrice=" + pdSaleTbReceivedPrice +
+				", productCategoryTbParent='" + productCategoryTbParent + '\'' +
+				", productCategoryTbSub='" + productCategoryTbSub + '\'' +
+				", ordersDetailTbPriceSum=" + ordersDetailTbPriceSum +
+				", ordersDetailTbAmount=" + ordersDetailTbAmount +
+				", pdSaleTbSalesPriceRange='" + pdSaleTbSalesPriceRange + '\'' +
+				", pdOrderTbTid='" + pdOrderTbTid + '\'' +
 				'}';
 	}
 }
