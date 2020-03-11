@@ -77,4 +77,10 @@ public class ClientShoppingDAOImpl implements ClientShoppingDAO
     {
         sqlSessionTemplate.update("ProductSaleDAO.updatePromotionEndProductSale", adminProductSaleVO);
     }
+
+    @Override
+    public void updateExpireDayOverProductSale(AdminProductSaleVO adminProductSaleVO)
+    {
+        sqlSessionTemplate.update("ProductSaleDAO.updateExpireDayOverProductSale", adminProductSaleVO);
+    }
 }

@@ -35,6 +35,7 @@ public class DailySchedulerService
 
 
         clientShoppingDAO.updatePromotionEndProductSale(new AdminProductSaleVO());
+        clientShoppingDAO.updateExpireDayOverProductSale(new AdminProductSaleVO());
     }
 
 }
