@@ -7,5 +7,6 @@ public interface RequestVOFactory
 {
     public RequestRestVO getKakaoPayReadyRequestVO(ClientOrderVO clientOrderVO);
     public RequestRestVO getKakaoPayApprovedRequestVO(ClientOrderVO clientOrderVO);
+    public RequestRestVO getKakaoPayCancelRequestVO(ClientOrderVO clientOrderVO);
     
 }

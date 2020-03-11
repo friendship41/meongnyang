@@ -31,6 +31,8 @@ public class ClientOrderVO
     private String upDown;
     private String pdOrderTbPaymentDateStr;
 
+    private String pdOrderTbTid;
+
     public String getPdOrderTbNo()
     {
         return pdOrderTbNo;
@@ -241,6 +243,16 @@ public class ClientOrderVO
         this.pdOrderTbPaymentDateStr = pdOrderTbPaymentDateStr;
     }
 
+    public String getPdOrderTbTid()
+    {
+        return pdOrderTbTid;
+    }
+
+    public void setPdOrderTbTid(String pdOrderTbTid)
+    {
+        this.pdOrderTbTid = pdOrderTbTid;
+    }
+
     @Override
     public String toString()
     {
@@ -266,6 +278,7 @@ public class ClientOrderVO
                 ", nowMonth='" + nowMonth + '\'' +
                 ", upDown='" + upDown + '\'' +
                 ", pdOrderTbPaymentDateStr='" + pdOrderTbPaymentDateStr + '\'' +
+                ", pdOrderTbTid='" + pdOrderTbTid + '\'' +
                 '}';
     }
 }

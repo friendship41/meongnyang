@@ -84,4 +84,36 @@ public class RequestVOFactoryImpl implements RequestVOFactory
 
         return requestRestVO;
     }
+
+    @Override
+    public RequestRestVO getKakaoPayCancelRequestVO(ClientOrderVO clientOrderVO)
+    {
+        RequestRestVO requestRestVO = new RequestRestVO();
+
+        try
+        {
+            requestRestVO.setTargetUrl(new URI("https://kapi.kakao.com/v1/payment/cancel"));
+        }
+        catch (URISyntaxException e)
+        {
+            e.printStackTrace();
+        }
+
+
+        HttpHeaders h = new HttpHeaders();
+        h.add("Authorization","KakaoAK "+"03a55c21febbc010522ac2faa27b2e07");
+        h.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+        h.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE+";charset=UTF-8");
+        requestRestVO.setHeader(h);
+
+        MultiValueMap<String,String> p = new LinkedMultiValueMap<>();
+        p.add("cid","TC0ONETIME");
+        p.add("tid", clientOrderVO.getPdOrderTbTid());
+        p.add("cancel_amount", ""+clientOrderVO.getPdOrderTbPayment());
+        p.add("cancel_tax_free_amount", "0");
+
+        requestRestVO.setParamMap(p);
+
+        return requestRestVO;
+    }
 }
