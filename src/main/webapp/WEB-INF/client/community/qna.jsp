@@ -68,45 +68,56 @@
                                                         <c:if test="${qna.qnaTbStatus eq 'N'}">
                                                             <!-- 정상글 -->
                                                             <td style="text-align: left;">
-                                                                <span class="badge badge-success">
-                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     <c:if test="${qna.adminsTbId eq null}">
-                                                                        Q
+                                                                        <span class="badge badge-success">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            Q
+                                                                        </span>
                                                                     </c:if>
                                                                     <c:if test="${qna.adminsTbId ne null}">
-                                                                        A
+                                                                        <span class="badge badge-warning">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            A
+                                                                        </span>
                                                                     </c:if>
-                                                                </span>
                                                                 <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
                                                             </td>
                                                         </c:if>
                                                         <c:if test="${qna.qnaTbStatus eq 'D'}">
                                                             <!-- 삭제된글 -->
                                                             <td style="text-align: left;">
-                                                                <span class="badge badge-success">
-                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     <c:if test="${qna.adminsTbId eq null}">
-                                                                        Q
+                                                                        <span class="badge badge-success">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            Q
+                                                                        </span>
                                                                     </c:if>
                                                                     <c:if test="${qna.adminsTbId ne null}">
-                                                                        A
+                                                                        <span class="badge badge-warning">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            A
+                                                                        </span>
                                                                     </c:if>
-                                                                </span>삭제된 글입니다.
+                                                                삭제된 글입니다.
                                                             </td>
                                                         </c:if>
                                                     </c:if>
                                                     <c:if test="${sessionScope.customer.customerTbNo ne qna.customerTbNo}">
                                                         <!-- 내 글이아니면 -->
                                                         <td style="text-align: left;">
-                                                            <span class="badge badge-success">
-                                                                <i class="fa fa-lock" aria-hidden="true"></i>
-                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                            <c:if test="${qna.adminsTbId eq null}">
+                                                                <span class="badge badge-success">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     Q
-                                                                </c:if>
-                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                </span>
+                                                            </c:if>
+                                                            <c:if test="${qna.adminsTbId ne null}">
+                                                                <span class="badge badge-warning">
+                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
                                                                     A
-                                                                </c:if>
-                                                            </span>${qna.qnaTbTitle}
+                                                                </span>
+                                                            </c:if>
+                                                            ${qna.qnaTbTitle}
                                                         </td>
                                                     </c:if>
                                                 </c:if>
@@ -115,32 +126,38 @@
                                                     <c:if test="${qna.qnaTbStatus eq 'N'}">
                                                         <!-- 정상글 -->
                                                         <td style="text-align: left;">
-                                                            <span class="badge badge-success">
                                                                 <c:if test="${qna.adminsTbId eq null}">
-                                                                    Q
+                                                                    <span class="badge badge-success">
+                                                                        Q
+                                                                    </span>
                                                                 </c:if>
                                                                 <c:if test="${qna.adminsTbId ne null}">
-                                                                    A
+                                                                    <span class="badge badge-warning">
+                                                                        A
+                                                                    </span>
                                                                 </c:if>
-                                                            </span>
                                                             <a href="qna-read.do?qnaTbNo=${qna.qnaTbNo}">${qna.qnaTbTitle}</a>
                                                         </td>
                                                     </c:if>
                                                     <c:if test="${qna.qnaTbStatus eq 'D'}">
                                                         <!-- 삭제된 글 -->
                                                         <td style="text-align: left;">
-                                                            <span class="badge badge-success">
-                                                                <c:if test="${qna.adminsTbId eq null}">
+                                                            <c:if test="${qna.adminsTbId eq null}">
+                                                                <span class="badge badge-success">
                                                                     Q
-                                                                </c:if>
-                                                                <c:if test="${qna.adminsTbId ne null}">
+                                                                </span>
+                                                            </c:if>
+                                                            <c:if test="${qna.adminsTbId ne null}">
+                                                                <span class="badge badge-warning">
                                                                     A
-                                                                </c:if>
-                                                            </span>삭제된 글입니다.
+                                                                </span>
+                                                            </c:if>
+                                                            삭제된 글입니다.
                                                         </td>
                                                     </c:if>
                                                 </c:if>
-												<c:if test="${qna.adminsTbId eq null }">
+
+                                                <c:if test="${qna.adminsTbId eq null }">
                                                 <td class="product-price"><span class="amount">${qna.customerTbName}</span></td>
                                                 </c:if>
                                                 <c:if test="${qna.adminsTbId ne null }">
