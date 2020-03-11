@@ -63,7 +63,7 @@ public class ClientMyinfoController {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		ClientCustomerVO SessionVO = (ClientCustomerVO) session.getAttribute("customer");
-		String no = SessionVO.getCustomerTbPassword();
+		
 		
 		
 		if (encoder.matches(clientCustomerVO.getCustomerTbPassword(), SessionVO.getCustomerTbPassword())) {
@@ -79,7 +79,8 @@ public class ClientMyinfoController {
 			clientCustomerVO.setCustomerTbNo(id);
 			clientUpdateMyinfoPasswordService.updateMyinfoPassword(clientCustomerVO);
 
-			model.addAttribute("passwordsuccess", false);
+			model.addAttribute("messagePassword", "성공적으로 변경되었습니다.");
+			return "mypage/message-and-go-index";
 			} else {
 				model.addAttribute("passwordCheck", false);
 				return "mypage/myinfo";
@@ -91,7 +92,7 @@ public class ClientMyinfoController {
 		
 		
 
-		return "mypage/myinfo";
+		
 			
 	}
 
