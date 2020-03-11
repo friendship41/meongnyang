@@ -10,7 +10,7 @@
 			admins_tb_position,
 			admins_tb_employment_status
 		FROM admins
-		WHERE admins_tb_id = #{adminsTbId}
+		WHERE admins_tb_id = #{adminsTbId} AND ADMINS_TB_EMPLOYMENT_STATUS = 'N'
 	</select>
 	
 </mapper>
