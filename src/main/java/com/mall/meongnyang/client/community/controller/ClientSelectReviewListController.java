@@ -30,6 +30,7 @@ public class ClientSelectReviewListController {
 		
 		model.addAttribute("reviewList", selectReviewListService.selectReviewList(clientReviewVO));
 		model.addAttribute("page", paging);
+		model.addAttribute("currentage", currentPage);
 		
 		return "community/review-list";
 	}

@@ -75,10 +75,15 @@
                            <li><a href="/reviewList.do?currentPage=${page.startPage - page.pageBlock}"><i class="zmdi zmdi-chevron-left"></i></a></li>
                            </c:if>
                            <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}">
-                           <li><a href="/reviewList.do?currentPage=${i}">${i}</a></li>
+                           <c:if test="${currentPage eq i}">
+                           	<li class="active"><a href="/reviewList.do?currentPage=${i}">${i}</a></li>                           
+                           </c:if>
+                           <c:if test="${currentPage ne i}">
+                           	<li><a href="/reviewList.do?currentPage=${i}">${i}</a></li>   
+                           </c:if>
                            </c:forEach>
                            <c:if test="${page.next}">
-                           <li class="active"><a href="/reviewList.do?currentPage=${page.endPage + 1}"><i class="zmdi zmdi-chevron-right"></i></a></li>
+                           <li><a href="/reviewList.do?currentPage=${page.endPage + 1}"><i class="zmdi zmdi-chevron-right"></i></a></li>
                            </c:if>
                         </ul>
                     </div>
