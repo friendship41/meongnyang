@@ -37,7 +37,7 @@ public class AdminLoginController {
 			
 			session.setAttribute("adminId", tempVO.getAdminsTbId());
 			
-			return "index";
+			return "redirect:index.ado";
 		
 		} else {
 			model.addAttribute("loginCheckSubmit", false);

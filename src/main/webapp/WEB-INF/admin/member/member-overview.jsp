@@ -53,7 +53,7 @@
                                                     <input type="text" id=datePickerTwo class="date-picker text-center form-control" placeholder="01/15/2020" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <span  onclick="getMemberTabeOne()"  class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
+                                                    <span  onclick="getMemberTabeOne()"  class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                                                     <input type="text" id="monthPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <span onclick="getMemberTableTwo()"  class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
+                                                    <span onclick="getMemberTableTwo()"  class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,7 +120,7 @@
                                                     <input type="text" id="memberDayPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <span onclick="getDayMemberNumber()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
+                                                    <span onclick="getDayMemberNumber()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +150,7 @@
                                                     <input type="text" id="monthMemberPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <span onclick="getMonthMemberNumber()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
+                                                    <span onclick="getMonthMemberNumber()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,7 +187,7 @@
                                                     <input type="text" id="dayIncDecPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <sapn onclick="getDayIncDec()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</sapn>
+                                                    <span onclick="getDayIncDec()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -217,7 +217,7 @@
                                                     <input type="text" id="monthInDecPickerTwo" class="date-picker text-center form-control" placeholder="12/01/2019" style="margin-bottom:14px;">
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <span onclick="getMonthInDec()" class="btn btn-success center-block" style="margin-bottom:14px;">조회</span>
+                                                    <span onclick="getMonthInDec()" class="btn btn-success" style="margin-bottom:14px;">조회</span>
                                                 </div>
                                             </div>
                                         </div>

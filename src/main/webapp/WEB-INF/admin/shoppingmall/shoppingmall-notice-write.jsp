@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label for="noticeWriter" class="col-sm-2 control-label">글쓴이</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="noticeWriter" name="adminsTbId" readonly value="${sessionScope.id}">
+                                            <input type="text" class="form-control" id="noticeWriter" name="adminsTbId" readonly value="${sessionScope.adminId}">
                                         </div>
                                     </div>
                                     <div class="form-group">
