@@ -34,8 +34,8 @@
                                     <li><a href="notice.do">공지</a></li>
                                     <li><a href="faq.do">FAQ</a></li>
                                     <li><a href="qna-list.do">Q&A</a></li>
-                                    <li><a href="productReviewList.do">Review</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="reviewList.do">Review</a></li>
+                                    <li><a href="contact.do">Contact</a></li>
                                 </ul>
                             </div>
                         </div>

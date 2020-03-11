@@ -33,11 +33,11 @@
                             <div class="htc__category">
                                 <h4 class="title__line--4">Community</h4>
                                 <ul class="ht__cat__list">
-                                    <li><a href="#">공지</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Q&A</a></li>
-                                    <li><a href="#">Review</a></li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="notice.do">공지</a></li>
+                                    <li><a href="faq.do">FAQ</a></li>
+                                    <li><a href="qna-list.do">Q&A</a></li>
+                                    <li><a href="reviewList.do">Review</a></li>
+                                    <li><a href="contact.do">Contact</a></li>
                                 </ul>
                             </div>
                         </div>
