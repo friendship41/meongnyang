@@ -1,7 +1,11 @@
 package com.mall.meongnyang.client.member.controller;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.mall.meongnyang.admin.marketing.vo.AdminEventAttendenceVO;
+import com.mall.meongnyang.admin.marketing.vo.AdminEventVO;
 import com.mall.meongnyang.client.member.service.ClientNaverLoginService;
+import com.mall.meongnyang.client.member.service.ClientSelectAvailableEventService;
+import com.mall.meongnyang.client.member.service.ClientSelectEventAttendenceService;
 import com.mall.meongnyang.client.member.service.ClientSelectLoginService;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import org.json.simple.JSONObject;
@@ -36,6 +40,11 @@ public class ClientNaverLoginController {
 	
 	@Autowired
 	private NaverLoginBO naverLoginBO;
+
+	@Autowired
+	private ClientSelectAvailableEventService clientSelectAvailableEventService;
+	@Autowired
+	private ClientSelectEventAttendenceService clientSelectEventAttendenceService;
 	
 
 	private String apiResult = null;
@@ -89,7 +98,24 @@ public class ClientNaverLoginController {
 				}else if(tempVO!=null && clientCustomerVO.getCustomerTbPassword()!=null) {
 			
 					session.setAttribute("customer", tempVO);
-				
+
+				AdminEventVO event = clientSelectAvailableEventService.selectAvailableEvent(new AdminEventVO());
+				if(event != null)
+				{
+					AdminEventAttendenceVO adminEventAttendenceVO = new AdminEventAttendenceVO();
+					adminEventAttendenceVO.setCustomerTbNo(tempVO.getCustomerTbNo());
+					adminEventAttendenceVO.setEventTbNo(event.getEventTbNo());
+					boolean isEventAttended = clientSelectEventAttendenceService.checkAttendenceToday(adminEventAttendenceVO);
+					if(isEventAttended)
+					{
+						session.setAttribute("eventGo","f");
+					}
+					else
+					{
+						session.setAttribute("eventGo","t");
+					}
+				}
+
 					return "redirect:/index.do";
 				}else {
 					model.addAttribute("loginCheckSubmit",false);
