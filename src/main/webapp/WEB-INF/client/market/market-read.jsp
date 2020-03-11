@@ -52,11 +52,11 @@
 				</c:if>
 				
 					<div class="bl__dtl">
-						<%-- <c:if test="${market.customerTbNo eq customer.customerTbNo }"> --%>
+						<c:if test="${market.customerTbNo eq customer.customerTbNo }">
 						<div class="reply__btn">
 							<a href="#" onclick="deleteMarket()">글삭제</a> <a href="market-update.do?marketTbNo=${market.marketTbNo}">글수정</a>
 						</div>
-						<%-- </c:if> --%>
+						</c:if>
 						<br>
 						<pre>${market.marketTbContent }</pre>
 						<a class="reply__btn" href="/qna-form.do?qnaTypeTbNo=7&customerTbNo=${market.customerTbNo}" style="margin-left: 95%;">신고</a>
@@ -85,11 +85,9 @@
 							</div>
 						</div>
 						</form>
-			<%-- 			<c:if test="${customer != null}"> --%>
 						<div class="ht__comment__btn--2 mt--30">
 							<a href="javascript:void(0);" class="fr__btn" id="addcomment-btn">댓글 등록</a>
 						</div>
-						<%-- </c:if> --%>
 					</div>
 					<!-- End comment Form -->
 				</div>
@@ -114,18 +112,19 @@ function deleteMarket() {
 //start jqury
 $(function() {
 	var marketNo = $("#marketTbNo").val();
+	var currentPage = "1";
 	var state = false;
 
-	getComment();
+	getComment(marketNo, currentPage);
 	
 	//코멘트 불러오기
-	function getComment() {
+	function getComment(marketNo, currentPage) {
 		
-		$.getJSON("/commentList.do?marketTbNo=" + marketNo, function(data) {
+		$.getJSON("/commentList.do?marketTbNo=" + marketNo + "&currentPage=" + currentPage, function(data) {
 			console.log(data);
 			var str = "";
 			
-			$(data).each(function() {
+			$(data.comment).each(function() {
 				if (data.marketCommentTbStep === 0){
 				str += '<div class="comment">'		
 				} else if (this.marketCommentTbStep >= 1){
@@ -155,10 +154,49 @@ $(function() {
 					+ '</div></div>'
 					+ '<hr>';
 			});
+			
+			str += '<div class="row">'
+				+  '<div class="col-xs-12">'
+				+  '<ul class="htc__pagenation">';
+				if(data.paging.prev == true) {
+					str += '<li><a href="javascript:void(0)" class="prevPage" value="'+(data.paging.startPage - data.paging.pageBlock)+'"><i class="zmdi zmdi-chevron-left"></i></a></li>';
+				}
+				for(var i = data.paging.startPage; i <= data.paging.endPage; i++) {
+					str += '<li><a href="javascript:void(0)" class="goPage" data-page="'+i+'">' + i + '</a></li>';
+				}
+				if(data.paging.next == true){
+					str += '<li class="active"><a href="javascript:void(0)" class="nextPage" value="'+(data.paging.endPage + 1)+'"><i class="zmdi zmdi-chevron-right"></i></a></li>';
+				}
+			str += '</ul>'
+			    +  '</div>'
+				+  '</div>';
+			
 			$("#comment-content").html(str);
 		});
 		
-	}
+	};
+	
+	//이전페이지
+	$(document).on('click', '.prevPage', function() {
+		var marketNo = $("#marketTbNo").val();
+		var currentPage = $("#prevPage").val();
+		getComment(marketNo, currentPage);
+	});
+	
+	//선택페이지이동.
+	$(document).on('click', '.goPage', function() {
+		var marketNo = $("#marketTbNo").val();
+		var currentPage = $(this).attr("data-page");
+		getComment(marketNo, currentPage);
+	});
+	
+	//다음페이지
+	$(document).on('click', '.nextPage', function() {
+		var marketNo = $("#marketTbNo").val();
+		var currentPage = $("#nextPage").val();
+		getComment(marketNo, currentPage);
+	});
+	
 	
 	//코멘트 저장하기
 	$("#addcomment-btn").click(function(e) {
@@ -182,7 +220,7 @@ $(function() {
             data: JSON.stringify(clientMarketComment), //서버로 전송할 데이터
             success: function(result) { //함수의 매개변수는 통신성공시의 데이터가 저장될 곳.
                if(result === "insertSuccess") {
-                  getComment();
+                  getComment(marketNo, currentPage);
                   $("#marketCommentTbContent").val("");
                } else {
                   alert("댓글등록 실패");
@@ -216,7 +254,7 @@ $(function() {
 			data: JSON.stringify(clientMarketComment),
 			success: function(result) {
 				if(result === "deleteSuccess"){
-					getComment();
+					getComment(marketNo, currentPage);
 				} else{
 					alert("삭제 실패");
 				}
@@ -265,7 +303,7 @@ $(function() {
 			data: JSON.stringify(clientMarketComment),
 			success: function(result) {
 				if(result === "updateSuccess"){
-					getComment();
+					getComment(marketNo, currentPage);
 				} else {
 					alert("수정 실패");
 				}
@@ -353,7 +391,7 @@ $(function() {
             data: JSON.stringify(clientMarketComment), //서버로 전송할 데이터
             success: function(result) { //함수의 매개변수는 통신성공시의 데이터가 저장될 곳.
                if(result === "replyInsertSuccess") {
-                  getComment();
+                  getComment(marketNo, currentPage);
                   cancle();
                } else {
                   alert("댓글등록 실패");

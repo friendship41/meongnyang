@@ -36,8 +36,8 @@
 					<div class="htc__select__option">
 						<select class="ht__select" id="selector">
 							<option value="all">전체</option>
-							<option value="sell">구매</option>
-							<option value="buy">판매</option>
+							<option value="buy">구매</option>
+							<option value="sell">판매</option>
 						</select>
 					</div>
 				<div class="write__market__list">
