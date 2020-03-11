@@ -126,7 +126,7 @@ $(function() {
 			var str = "";
 			
 			$(data).each(function() {
-				if (this.marketCommentTbStep === 0){
+				if (data.marketCommentTbStep === 0){
 				str += '<div class="comment">'		
 				} else if (this.marketCommentTbStep >= 1){
 					str += '<div class="comment comment--reply">'
@@ -137,7 +137,7 @@ $(function() {
 					+ '<input type="hidden" name="marketCommentTbNo" value="'+ this.marketCommentTbNo+'">'
 					+ '<div class="ht__comment__title">'
 					if(this.marketCommentTbState === 'N'){
-						str += '<h2><a href="#">' + this.customerTbName + '</a></h2>'
+						str += '<h2>' + this.customerTbName + '</h2>'
 						+ '<div class="reply__btn"><a href="javascript:void(0);" name="replyBtn" style="margin-left:10px;">reply</a></div>'
 						+ '<div class="reply__btn"><a href="javascript:void(0);" name="updateBtn" style="margin-left:10px;">update</a></div>'
 						+ '<div class="reply__btn"><a href="javascript:void(0);" name="deleteBtn" style="margin-left:10px;">delete</a></div>'
@@ -320,6 +320,7 @@ $(function() {
 		var replyAdd = $(this).parent().parent().next().next().next();
        	replyAdd.remove();
        	$(this).parent().html('<a href="javascript:void(0);" name="replyBtn">reply</a>');
+       	state = false;
     });
 	
 	//대댓글 저장하기
