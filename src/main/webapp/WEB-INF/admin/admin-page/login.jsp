@@ -43,10 +43,7 @@
 							<button class="btn btn-primary" type="submit">로그인</button>
 							<br>
 						</form>
-					</div>
-					<div class="col-sm-6 col-md-3 background-image">
-						<img src="/resources/admin/images/black.png" style="width: 1035px; height: 615px;">
-					</div>
+					</div>				
 				</div>
 			</div>
 		</div>
