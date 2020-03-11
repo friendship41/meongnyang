@@ -42,7 +42,7 @@
                                     <div class="form-group">
                                         <label for="termNumber" class="col-sm-2 control-label">약관번호</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" name="termsTbNo" id="termNumber">
+                                            <input type="number" class="form-control" name="termsTbNo" id="termNumber">
                                         </div>
                                     </div>
                                     <div class="form-group">

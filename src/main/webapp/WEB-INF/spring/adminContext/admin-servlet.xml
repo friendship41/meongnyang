@@ -62,6 +62,12 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*.ado"/>
+			<mvc:exclude-mapping path="/login.ado"/>
+			<mvc:exclude-mapping path="/needLogin.ado"/>
+			<bean class="com.mall.meongnyang.admin.intercepter.login.AdminLoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.ado"/>
 			<bean class="com.mall.meongnyang.admin.intercepter.stockAlert.StockCheckInterceptor">
 				<constructor-arg ref="AdminSelectProductStockLimitedListService"/>
 				<constructor-arg ref="AdminSelectProductExpireCommingListService"/>

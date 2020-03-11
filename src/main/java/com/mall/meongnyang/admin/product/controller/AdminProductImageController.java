@@ -1,10 +1,8 @@
 package com.mall.meongnyang.admin.product.controller;
 
-import com.mall.meongnyang.admin.product.service.AdminDeleteProductImageService;
-import com.mall.meongnyang.admin.product.service.AdminInsertProductImageService;
-import com.mall.meongnyang.admin.product.service.AdminSelectProductImageService;
-import com.mall.meongnyang.admin.product.service.AdminUpdateProductImageService;
+import com.mall.meongnyang.admin.product.service.*;
 import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
+import com.mall.meongnyang.admin.product.vo.AdminProductVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,11 +26,16 @@ public class AdminProductImageController
     private AdminDeleteProductImageService adminDeleteProductImageService;
     @Autowired
     private AdminUpdateProductImageService adminUpdateProductImageService;
+    @Autowired
+    private AdminSelectProductService adminSelectProductService;
 
     @RequestMapping("/productImageAdd.ado")
     public String goToImageAddPage(@RequestParam("productTbCode") String productCode, @RequestParam("resultMessage") String resultMessage, Model model)
     {
-//        상품이름 받아와야함
+        AdminProductVO adminProductVO = new AdminProductVO();
+        adminProductVO.setProductTbCode(productCode);
+        AdminProductVO product = adminSelectProductService.selectSingleProduct(adminProductVO);
+        model.addAttribute("product", product);
 
         if(resultMessage != null && !resultMessage.equals("none"))
         {

@@ -65,20 +65,27 @@ public class AdminProductSaleController
     }
 
     @RequestMapping(value = "/insertProductSale.ado", method = RequestMethod.POST)
-    public String insertProductSaleProc(AdminProductSaleVO adminProductSaleVO)
+    public String insertProductSaleProc(AdminProductSaleVO adminProductSaleVO, Model model)
     {
         adminProductSaleVO.setPdSaleTbRemainingAmount(adminProductSaleVO.getPdSaleTbReceivedAmount());
         adminInsertProductSaleService.insertProductSale(adminProductSaleVO);
+        if(adminProductSaleVO.getInsertMore().equalsIgnoreCase("t"))
+        {
+            model.addAttribute("repCheck", true);
+
+            AdminProductVO adminProductVO = new AdminProductVO();
+            adminProductVO.setProductTbCode(adminProductSaleVO.getProductTbCode());
+            AdminProductVO product = adminSelectProductService.selectSingleProduct(adminProductVO);
+            model.addAttribute("product", product);
+
+            List<AdminPromotionVO> promotionList = adminSelectPromotionListService.selectPromotionList();
+            model.addAttribute("promotionList", promotionList);
+
+            model.addAttribute("productSale", adminProductSaleVO);
+            return "product/product-sale";
+        }
         return "redirect:productOverview.ado";
     }
-
-//    @RequestMapping(value = "/stopSaleProductAjax.ado", method = RequestMethod.GET)
-//    @ResponseBody
-//    public String stopSaleProduct(AdminProductSaleVO adminProductSaleVO)
-//    {
-//        adminUpdateProductSaleService.stopSale(adminProductSaleVO);
-//        return "{\"pdSaleTbNo\":\""+adminProductSaleVO.getPdSaleTbNo()+"\"}";
-//    }
 
     @RequestMapping(value = "/restartSaleProduct.ado", method = RequestMethod.GET)
     public String restartSaleProductPage(AdminProductSaleVO adminProductSaleVO, Model model)

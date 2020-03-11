@@ -531,20 +531,24 @@
 
 
     $(document).ready(function () {
+        var tomorrow = new Date;
+        tomorrow.setDate(tomorrow.getDate()+1);
+        tomorrow = tomorrow.yyyymmdd();
+
         $("#allProductDayFrominput").attr("value", getMonthAgoDate(6).yyyymmdd());
-        $("#allProductDayToinput").attr("value", new Date().yyyymmdd());
+        $("#allProductDayToinput").attr("value", tomorrow);
         getProductAllTable();
 
         $("#productSaleDayFromInput").attr("value", getMonthAgoDate(6).yyyymmdd());
-        $("#productSaleDayToInput").attr("value", new Date().yyyymmdd());
+        $("#productSaleDayToInput").attr("value", tomorrow);
         getProductSaleTable();
 
         $("#popularDayFrom").attr("value", getMonthAgoDate(6).yyyymmdd());
-        $("#popularDayTo").attr("value", new Date().yyyymmdd());
+        $("#popularDayTo").attr("value", tomorrow);
         getpopularProductList();
 
         $("#productOrderDayFrom").attr("value", getMonthAgoDate(6).yyyymmdd());
-        $("#productOrderDayTo").attr("value", new Date().yyyymmdd());
+        $("#productOrderDayTo").attr("value", tomorrow);
         getProductOrderTable();
     })
 </script>

@@ -4,5 +4,5 @@ import com.mall.meongnyang.admin.marketing.vo.AdminEventAttendenceVO;
 
 public interface ClientInsertEventAttendenceService
 {
-    public void insertAttendence(AdminEventAttendenceVO adminEventAttendenceVO);
+    public int insertAttendence(AdminEventAttendenceVO adminEventAttendenceVO);
 }

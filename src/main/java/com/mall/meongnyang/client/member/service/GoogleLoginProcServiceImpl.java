@@ -2,6 +2,7 @@ package com.mall.meongnyang.client.member.service;
 
 import com.mall.meongnyang.client.member.dao.ClientLoginDAO;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import com.mall.meongnyang.client.member.vo.GoogleCustomerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,8 @@ public class GoogleLoginProcServiceImpl implements GoogleLoginProcService
 {
     @Autowired
     private ClientLoginDAO clientLoginDAO;
+    @Autowired
+    private ClientInsertTermsAgreeListService clientInsertTermsAgreeListService;
 
     @Override
     public ClientCustomerVO googleLoginProc(GoogleCustomerVO googleCustomerVO)
@@ -24,6 +27,12 @@ public class GoogleLoginProcServiceImpl implements GoogleLoginProcService
             customerTemp.setCustomerTbName(googleCustomerVO.getName());
             clientLoginDAO.insertGoogleCustomer(customerTemp);
             customerDB = clientLoginDAO.selectLoginCheck(customerTemp);
+
+            ClientTermsAgreeVO clientTermsAgreeVO = new ClientTermsAgreeVO();
+            clientTermsAgreeVO.setTermsTbNo(2);
+            clientTermsAgreeVO.setCustomerTbNo(customerDB.getCustomerTbNo());
+            clientTermsAgreeVO.setTermsAgreeTbConsentStatus("N");
+            clientInsertTermsAgreeListService.insertTermsAgreeListService(clientTermsAgreeVO);
         }
         else
         {

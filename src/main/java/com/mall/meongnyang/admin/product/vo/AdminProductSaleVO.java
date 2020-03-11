@@ -38,6 +38,8 @@ public class AdminProductSaleVO
 
     private java.util.Date tempDate;
 
+    private String insertMore;
+
     public int getPdSaleTbNo()
     {
         return pdSaleTbNo;
@@ -319,6 +321,16 @@ public class AdminProductSaleVO
         this.tempDate = tempDate;
     }
 
+    public String getInsertMore()
+    {
+        return insertMore;
+    }
+
+    public void setInsertMore(String insertMore)
+    {
+        this.insertMore = insertMore;
+    }
+
     @Override
     public String toString()
     {
@@ -351,6 +363,7 @@ public class AdminProductSaleVO
                 ", productCategoryTbSub='" + productCategoryTbSub + '\'' +
                 ", saleCnt=" + saleCnt +
                 ", tempDate=" + tempDate +
+                ", insertMore='" + insertMore + '\'' +
                 '}';
     }
 }

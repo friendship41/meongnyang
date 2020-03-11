@@ -30,10 +30,15 @@ public class GoogleLoginServiceImpl implements GoogleLoginService
         try
         {
             String tokenJson = getHttpConnection("https://accounts.google.com/o/oauth2/token", paramSb.toString());
+            if (tokenJson == null)
+                return null;
+
             Gson gson = new Gson();
             GoogleToken token = gson.fromJson(tokenJson, GoogleToken.class);
 
             String ret = getHttpConnection("https://www.googleapis.com/oauth2/v1/userinfo?access_token="+token.getAccess_token());
+            if (ret == null)
+                return null;
 
             googleCustomerVO = gson.fromJson(ret, GoogleCustomerVO.class);
 
@@ -56,6 +61,10 @@ public class GoogleLoginServiceImpl implements GoogleLoginService
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         int responseCode = conn.getResponseCode();
+        if(responseCode>250)
+        {
+            return null;
+        }
         String line;
         StringBuffer buffer = new StringBuffer();
         try (InputStream stream = conn.getInputStream()) {
@@ -83,6 +92,10 @@ public class GoogleLoginServiceImpl implements GoogleLoginService
             }
         }
         int responseCode = conn.getResponseCode();
+        if(responseCode>250)
+        {
+            return null;
+        }
         String line;
         StringBuffer buffer = new StringBuffer();
         try (InputStream stream = conn.getInputStream()) {
