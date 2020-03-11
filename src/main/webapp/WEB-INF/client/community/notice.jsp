@@ -73,16 +73,22 @@
                             <!-- Start Pagenation -->
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <ul class="htc__pagenation">
-                                        <c:if test="${paging.prev == true}">
-                                        <li><a href="#"><i class="zmdi zmdi-chevron-left"></i></a></li>
-                                        </c:if>
-                                   	    <c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
-                                   	    <li><a href="/notice.do?currentPage=${i}">${i}</a></li> 
-                                   	    </c:forEach>
-                                   	    <c:if test="${paging.next == true }">
-                                   	    <li class="active"><a href="#"><i class="zmdi zmdi-chevron-right" ></i></a></li>
-                                   	    </c:if>
+                                    <ul class="htc__pagenation">                                        
+                                    <c:if test="${paging.prev == true}">
+                                        <li><a href="/notice.do?currentPage=${paging.startPage - paging.pageBlock}"><i class="zmdi zmdi-chevron-left"></i></a></li>
+                                    </c:if>
+                                   	<c:forEach var="i" begin="${paging.startPage}" end="${paging.endPage}">
+                                   	  <c:if test="${paging.currentPage eq i}">
+			                           	<li class="active"><a href="/notice.do?currentPage=${i}">${i}</a></li>                           
+			                          </c:if>
+			                          <c:if test="${paging.currentPage ne i}">
+			                           	<li><a href="/notice.do?currentPage=${i}">${i}</a></li>   
+			                          </c:if>                                   	     
+                                   	</c:forEach>
+                                   	  <c:if test="${paging.next == true }">
+                                   	    <li><a href="/notice.do?currentPage=${paging.endPage + 1}"><i class="zmdi zmdi-chevron-right" ></i></a></li>
+                                   	  </c:if>
+                                   </ul>                                   
                                 </div>
                             </div>
                             <!-- End Pagenation -->
