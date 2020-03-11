@@ -61,7 +61,7 @@
                                            <tr>
                                               <td>${noticeList.noticeTbNo}</td>
                                               <td><a class="f-bold" href="/notice-read.do?noticeTbNo=${noticeList.noticeTbNo}">${noticeList.noticeTbTitle}</a></td>
-                                              <td>${noticeList.adminsTbId}</td>
+                                              <td>관리자</td>
                                               <td>${noticeList.noticeTbRegDate}</td>
                                         </c:forEach>
                      
