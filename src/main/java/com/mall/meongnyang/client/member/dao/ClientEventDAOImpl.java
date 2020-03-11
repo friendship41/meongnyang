@@ -25,4 +25,10 @@ public class ClientEventDAOImpl implements ClientEventDAO
     {
         return sqlSessionTemplate.selectList("EventPointDAO.selectAllEventPointList", adminEventPointVO);
     }
+
+    @Override
+    public void updateDateOverEventState(AdminEventVO adminEventVO)
+    {
+        sqlSessionTemplate.update("EventPointDAO.updateDateOverEventState", adminEventVO);
+    }
 }

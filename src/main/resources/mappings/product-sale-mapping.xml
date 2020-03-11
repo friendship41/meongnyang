@@ -219,4 +219,11 @@
 	</select>
 	
 
+    <update id="updatePromotionEndProductSale" parameterType="productSale">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_STATE = 'N'
+        WHERE PROMOTION_TB_CODE IN (SELECT PROMOTION_TB_CODE FROM PROMOTION WHERE TO_CHAR(PROMOTION_TB_END_DATE, 'yyyy/MM/dd') = TO_CHAR(SYSDATE, 'yyyy/MM/dd'))
+    </update>
+
 </mapper>

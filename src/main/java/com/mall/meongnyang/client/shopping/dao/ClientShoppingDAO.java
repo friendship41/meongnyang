@@ -19,4 +19,5 @@ public interface ClientShoppingDAO
     public void updateProductStateWhenZero(ClientOrderVO clientOrderVO);
     public void updateRollbackProductRemainCount(ClientOrderDetailVO clientOrderDetailVO);
     public void updateProductSaleReadCount(AdminProductVO adminProductVO);
+    public void updatePromotionEndProductSale(AdminProductSaleVO adminProductSaleVO);
 }

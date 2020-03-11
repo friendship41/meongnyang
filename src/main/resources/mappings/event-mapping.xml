@@ -73,4 +73,12 @@
 
     </select>
 
+    <update id="updateDateOverEventState" parameterType="event">
+<![CDATA[
+        UPDATE EVENT
+        SET
+            EVENT_STATE='N'
+        WHERE TO_CHAR(EVENT_END_DATE-1,'yyyy/MM/dd') = TO_CHAR(SYSDATE,'yyyy/MM/dd')
+]]>
+    </update>
 </mapper>

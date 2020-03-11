@@ -9,4 +9,5 @@ public interface ClientEventDAO
 {
     public AdminEventVO selectAvailableEvent(AdminEventVO adminEventVO);
     public List<AdminEventPointVO> selectAllEventPointList(AdminEventPointVO adminEventPointVO);
+    public void updateDateOverEventState(AdminEventVO adminEventVO);
 }
