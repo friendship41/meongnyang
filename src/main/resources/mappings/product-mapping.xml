@@ -165,7 +165,7 @@
                     </if>
                     <if test="searchWord != null">
                         WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
-                        AND p.PRODUCT_TB_NAME LIKE '%'||#{searchWord}||'%'
+                        AND UPPER(p.PRODUCT_TB_NAME) LIKE '%'||UPPER(#{searchWord})||'%'
                     </if>
                     <if test="orderMethod == null">
                         ORDER BY ps.PD_SALE_TB_START_DAY DESC
