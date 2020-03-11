@@ -9,17 +9,16 @@ public class ClientMenuDAOImpl implements ClientMenuDAO
 {
     private SqlSessionTemplate sqlSessionTemplate;
 
-    public ClientMenuDAOImpl()
-    {
-    }
     public ClientMenuDAOImpl(SqlSessionTemplate sqlSessionTemplate)
     {
         this.sqlSessionTemplate = sqlSessionTemplate;
     }
 
     @Override
-    public List<AdminProductCategoryVO> selectProductCategoryList()
+    public List<AdminProductCategoryVO> selectProductCategoryList(AdminProductCategoryVO adminProductCategoryVO)
     {
-        return sqlSessionTemplate.selectList("CategoryDAO.selectCategoryList", new AdminProductCategoryVO());
+        return sqlSessionTemplate.selectList("CategoryDAO.selectCategoryList", adminProductCategoryVO);
     }
+
+
 }
