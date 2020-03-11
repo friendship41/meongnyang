@@ -1,15 +1,5 @@
 package com.mall.meongnyang.client.shopping.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.mall.meongnyang.admin.product.vo.AdminProductCategoryVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
 import com.mall.meongnyang.admin.product.vo.AdminProductSaleVO;
@@ -22,6 +12,15 @@ import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingDetailSer
 import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingListService;
 import com.mall.meongnyang.client.shopping.service.ClientSelectShoppingProductCategoryService;
 import com.mall.meongnyang.client.shopping.vo.ClientRecommendProductVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ClientSelectShoppingController
@@ -63,6 +62,12 @@ public class ClientSelectShoppingController
         }
         model.addAttribute("pageInfo", adminProductVO);
         model.addAttribute("productList", productList);
+
+        if(adminProductVO.getSearchWord() != null)
+        {
+            model.addAttribute("searchWord", adminProductVO.getSearchWord());
+        }
+
         return "shopping/product-list";
     }
 
