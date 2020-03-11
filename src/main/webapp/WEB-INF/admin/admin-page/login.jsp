@@ -29,7 +29,7 @@
 				<div class="row">
 					<div class="col-sm-6 col-md-3 login-box">
 						<h4 class="login-title">Sign in to your account</h4>
-						<form action="index.ado" method="post">
+						<form action="login.ado" method="post">
 							<div class="form-group">
 								<label for="exampleInputEmail1">Email address</label> 
 								<input type="email" class="form-control" id="exampleInputEmail1"

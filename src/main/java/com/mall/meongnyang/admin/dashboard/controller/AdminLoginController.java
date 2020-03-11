@@ -1,16 +1,15 @@
 package com.mall.meongnyang.admin.dashboard.controller;
 
-import javax.servlet.http.HttpSession;
-
+import com.mall.meongnyang.admin.dashboard.service.AdminLogoutService;
+import com.mall.meongnyang.admin.dashboard.service.AdminSelectLoginCheckService;
+import com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mall.meongnyang.admin.dashboard.service.AdminLogoutService;
-import com.mall.meongnyang.admin.dashboard.service.AdminSelectLoginCheckService;
-import com.mall.meongnyang.admin.dashboard.vo.AdminLoginVO;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class AdminLoginController {
@@ -28,7 +27,7 @@ public class AdminLoginController {
 	}
 	
 	
-	@RequestMapping(value = "/index.ado", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.ado", method = RequestMethod.POST)
 	public String loginProc(AdminLoginVO adminLoginVO, HttpSession session, Model model) {
 		
 		AdminLoginVO tempVO = adminSelectLoginCheckService.selectLoginCheck(adminLoginVO);
@@ -53,5 +52,11 @@ public class AdminLoginController {
 		session.setAttribute("adminId", null);;
 		
 		return "admin-page/login";
+	}
+
+	@RequestMapping(value = "/needLogin.ado")
+	public String needLogin()
+	{
+		return "admin-page/needLogin";
 	}
 }
