@@ -4,43 +4,31 @@
 
 <mapper namespace="OverviewDAO">
 
-	<select id="selectOverviewList" parameterType="adminOverview"
-		resultType="adminOverview">
+	<select id="selectOverviewList" parameterType="adminOverview" resultType="adminOverview">
+<![CDATA[
 		SELECT
-		TO_CHAR(user_count_tb_date,'dd')
-		"user_count_tb_date",
-		user_count_tb_visitors,
-		user_count_tb_joiners,
-		user_count_tb_outcount
-		FROM
-		user_count
-		WHERE user_count_tb_date BETWEEN '${StartDate}' and
-		'${EndDate}'
-
+		    TO_CHAR(user_count_tb_date,'MM-dd') "user_count_tb_date",
+		    user_count_tb_visitors,
+		    user_count_tb_joiners,
+		    user_count_tb_outcount
+		FROM user_count
+		WHERE user_count_tb_date BETWEEN '2020-02-10' AND TO_DATE('2020-03-11')+1
+		ORDER BY user_count_tb_date ASC
+]]>
 	</select>
 
-	<select id="selectOverviewListMonth"
-		parameterType="adminOverview" resultType="adminOverview">
-
-		
-    SELECT
-		 K.USER_COUNT_TB_DATE,
-		 SUM(USER_COUNT_TB_VISITORS) "userCountTbVisitors",
-		 SUM(USER_COUNT_TB_JOINERS) "userCountTbJoiners",
-		 SUM(USER_COUNT_TB_OUTCOUNT) "userCountTbOutcount"
-		FROM(
+	<select id="selectOverviewListMonth" parameterType="adminOverview" resultType="adminOverview">
+<![CDATA[
 		SELECT
-		TO_CHAR(USER_COUNT_TB_DATE,'MM') "USER_COUNT_TB_DATE",
-		 USER_COUNT_TB_VISITORS,
-		 USER_COUNT_TB_JOINERS,
-		 USER_COUNT_TB_OUTCOUNT
+		     TO_CHAR(USER_COUNT_TB_DATE, 'YY-MM') "USER_COUNT_TB_DATE",
+		     SUM(USER_COUNT_TB_VISITORS) "USER_COUNT_TB_VISITORS",
+		     SUM(USER_COUNT_TB_JOINERS) "USER_COUNT_TB_JOINERS",
+		     SUM(USER_COUNT_TB_OUTCOUNT) "USER_COUNT_TB_OUTCOUNT"
 		FROM USER_COUNT
-		) K
-		GROUP BY K.USER_COUNT_TB_DATE
-		ORDER BY K.USER_COUNT_TB_DATE ASC
-
-	
-
+		WHERE user_count_tb_date >= #{StartDate} AND user_count_tb_date <= #{EndDate}+1
+		GROUP BY TO_CHAR(USER_COUNT_TB_DATE, 'YY-MM')
+		ORDER BY USER_COUNT_TB_DATE	ASC
+]]>
 	</select>
 
 

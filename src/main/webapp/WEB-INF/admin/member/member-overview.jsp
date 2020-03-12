@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="kor">
 <jsp:include page="../include/head.jsp"/>
-<body onload="go()">
+<body>
 
 <!-- Page Container -->
 <div class="page-container">
@@ -227,123 +227,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- !Row -->
-                <!-- 상세정보 -->
-                <!-- Row -->
-                <!--                        <div class="row">-->
-                <!--                            <div class="col-md-12">-->
-                <!--                                <div class="panel panel-white">-->
-                <!--                                    <div class="panel-heading clearfix">-->
-                <!--                                        <h4 class="panel-title">상세 회원 증감추이</h4>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="panel-body">-->
-                <!--                                        <div class="panel-group" id="accordion2" role="tablist" aria-multiselectable="true">-->
-                <!--                                            <div class="panel panel-primary">-->
-                <!--                                                <div class="panel-heading" role="tab" id="headingOne1">-->
-                <!--                                                    <h4 class="panel-title">-->
-                <!--                                                        <a data-toggle="collapse" data-parent="#accordion2" href="#1" aria-expanded="true" aria-controls="collapseOne">-->
-                <!--                                                            기간별 회원 증감추이-->
-                <!--                                                        </a>-->
-                <!--                                                    </h4>-->
-                <!--                                                </div>-->
-                <!--                                                <div id="1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne1">-->
-                <!--                                                    <div class="panel-body">-->
-                <!--                                                        <div class="col-md-6">-->
-                <!--                                                            <div class="panel panel-white">-->
-                <!--                                                                <div class="panel-body">-->
-                <!--                                                                    <div class="panel-heading clearfix">-->
-                <!--                                                                        <h4 class="panel-title">지역별 회원 증감추이</h4>-->
-                <!--                                                                    </div>-->
-                <!--                                                                    <canvas id="join_chart_day"></canvas>-->
-                <!--                                                                </div>-->
-                <!--                                                            </div>-->
-                <!--                                                        </div>-->
-                <!--                                                        <div class="col-md-6">-->
-                <!--                                                            <div class="panel panel-white">-->
-                <!--                                                                <div class="panel-body">-->
-                <!--                                                                    <div class="panel-heading clearfix">-->
-                <!--                                                                        <h4 class="panel-title">월별 회원 증감추이</h4>-->
-                <!--                                                                    </div>-->
-                <!--                                                                    <canvas id="join_chart_month"></canvas>-->
-                <!--                                                                </div>-->
-                <!--                                                            </div>-->
-                <!--                                                        </div>-->
-                <!--                                                    </div>-->
-                <!--                                                </div>-->
-                <!--                                            </div>-->
-                <!--                                            <div class="panel panel-success">-->
-                <!--                                                <div class="panel-heading" role="tab" id="headingTwo2">-->
-                <!--                                                    <h4 class="panel-title">-->
-                <!--                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#2" aria-expanded="false" aria-controls="collapseTwo">-->
-                <!--                                                            연령별 회원 증감추이-->
-                <!--                                                        </a>-->
-                <!--                                                    </h4>-->
-                <!--                                                </div>-->
-                <!--                                                <div id="2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo2">-->
-                <!--                                                    <div class="panel-body">-->
-                <!--                                                        <div class="col-md-6">-->
-                <!--                                                            <div class="panel panel-white">-->
-                <!--                                                                <div class="panel-body">-->
-                <!--                                                                    <div class="panel-heading clearfix">-->
-                <!--                                                                        <h4 class="panel-title">연령별 가입추이</h4>-->
-                <!--                                                                    </div>-->
-                <!--                                                                    <canvas id="age_join_chart"></canvas>-->
-                <!--                                                                </div>-->
-                <!--                                                            </div>-->
-                <!--                                                        </div>-->
-                <!--                                                        <div class="col-md-6">-->
-                <!--                                                            <div class="panel panel-white">-->
-                <!--                                                                <div class="panel-body">-->
-                <!--                                                                    <div class="panel-heading clearfix">-->
-                <!--                                                                        <h4 class="panel-title">연령별 탈퇴추이</h4>-->
-                <!--                                                                    </div>-->
-                <!--                                                                    <canvas id="age_drop_chart"></canvas>-->
-                <!--                                                                </div>-->
-                <!--                                                            </div>-->
-                <!--                                                        </div>-->
-                <!--                                                    </div>-->
-                <!--                                                </div>-->
-                <!--                                            </div>-->
-                <!--                                            <div class="panel panel-danger">-->
-                <!--                                                <div class="panel-heading" role="tab" id="headingThree3">-->
-                <!--                                                    <h4 class="panel-title">-->
-                <!--                                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion2" href="#3" aria-expanded="false" aria-controls="collapseThree">-->
-                <!--                                                            성별별 회원 증감추이-->
-                <!--                                                        </a>-->
-                <!--                                                    </h4>-->
-                <!--                                                </div>-->
-                <!--                                                <div id="3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree3">-->
-                <!--                                                    <div class="panel-body">-->
-                <!--                                                        <div class="col-md-6">-->
-                <!--                                                            <div class="panel panel-white">-->
-                <!--                                                                <div class="panel-body">-->
-                <!--                                                                    <div class="panel-heading clearfix">-->
-                <!--                                                                        <h4 class="panel-title">연령별 가입추이</h4>-->
-                <!--                                                                    </div>-->
-                <!--                                                                    <canvas id="gender_join_chart"></canvas>-->
-                <!--                                                                </div>-->
-                <!--                                                            </div>-->
-                <!--                                                        </div>-->
-                <!--                                                        <div class="col-md-6">-->
-                <!--                                                            <div class="panel panel-white">-->
-                <!--                                                                <div class="panel-body">-->
-                <!--                                                                    <div class="panel-heading clearfix">-->
-                <!--                                                                        <h4 class="panel-title">연령별 탈퇴추이</h4>-->
-                <!--                                                                    </div>-->
-                <!--                                                                    <canvas id="gender_drop_chart"></canvas>-->
-                <!--                                                                </div>-->
-                <!--                                                            </div>-->
-                <!--                                                        </div>-->
-                <!--                                                    </div>-->
-                <!--                                                </div>-->
-                <!--                                            </div>-->
-                <!--                                        </div>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!-- !Row -->
+                </div>                
             </div>
             <!-- Main Wrapper -->
             <jsp:include page="../include/page-footer.jsp"/>
@@ -357,194 +241,201 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	
-	function getMemberTabeOne(){
+	$(document).ready(function() {
 		
+		var twoWeekAgo = new Date(new Date().setDate(new Date().getDate()-15));
+		var oneDayAgo = new Date(new Date().setDate(new Date().getDate()-1));
+		
+		$("#datePickerOne").attr("value", twoWeekAgo.yyyymmdd());
+		$("#datePickerTwo").attr("value", oneDayAgo.yyyymmdd());
+		
+		$("#monthPickerOne").attr("value", getMonthAgoDate(6).yyyymmdd());
+		$("#monthPickerTwo").attr("value", new Date().yyyymmdd());
+		
+		$("#memberDayPickerOne").attr("value", twoWeekAgo.yyyymmdd());
+		$("#memberDayPickerTwo").attr("value", oneDayAgo.yyyymmdd());
+		
+		$("#monthMemberPickerOne").attr("value", getMonthAgoDate(6).yyyymmdd());
+		$("#monthMemberPickerTwo").attr("value", new Date().yyyymmdd());
+		
+		$("#dayIncDecPickerOne").attr("value", twoWeekAgo.yyyymmdd());
+		$("#dayIncDecPickerTwo").attr("value", oneDayAgo.yyyymmdd());
+		
+		$("#monthInDecPickerOne").attr("value", getMonthAgoDate(6).yyyymmdd());
+		$("#monthInDecPickerTwo").attr("value", new Date().yyyymmdd());
+		
+		
+		getMemberTabeOne();
+		getMemberTableTwo();
+		getDayMemberNumber();
+		getMonthMemberNumber();
+		getDayIncDec();
+		getMonthInDec();
+		
+	})
+
+	function getMemberTabeOne() {
+
 		var date1 = $("#datePickerOne").val();
 		var date2 = $("#datePickerTwo").val();
-		date1+="";
-		date2+="";
-		var ajaxUrl = "/memberOverviewAjax.ado?StartDate="+date1+"&EndDate="+date2;
-		
+		date1 += "";
+		date2 += "";
+		var ajaxUrl = "/memberOverviewAjax.ado?StartDate=" + date1
+				+ "&EndDate=" + date2;
+
 		$.ajax({
-		
-			url: ajaxUrl,
-			type: "GET",
-			data: {},
-			dataType: "json"
-		
+
+			url : ajaxUrl,
+			type : "GET",
+			data : {},
+			dataType : "json"
+
 		})
-		
-		.done(function (json){
+
+		.done(function(json) {
 			console.log(json);
-			new Chart(document.getElementById("visit_chart_day"),json);
-			
-		})
-		.fail(function (xhr, status, errorThrown){
-			alert(errorThrown);	
+			new Chart(document.getElementById("visit_chart_day"), json);
+
+		}).fail(function(xhr, status, errorThrown) {
+			alert(errorThrown);
 		});
-		
-			
-		}
-	
-	
-	function getMemberTableTwo(){
-		
+
+	}
+
+	function getMemberTableTwo() {
+
 		var date1 = $("#monthPickerOne").val();
 		var date2 = $("#monthPickerTwo").val();
-		date1+="";
-		date2+="";
-		var ajaxUrl = "/memberOverviewTwoAjax.ado?StartDate="+date1+"&EndDate="+date2;
-		
+		date1 += "";
+		date2 += "";
+		var ajaxUrl = "/memberOverviewTwoAjax.ado?StartDate=" + date1
+				+ "&EndDate=" + date2;
+
 		$.ajax({
-		
-			url: ajaxUrl,
-			type: "GET",
-			data: {},
-			dataType: "json"
-		
+
+			url : ajaxUrl,
+			type : "GET",
+			data : {},
+			dataType : "json"
+
 		})
-		
-		.done(function (json){
+
+		.done(function(json) {
 			console.log(json);
-			new Chart(document.getElementById("visit_chart_month"),json);
-			
-		})
-		.fail(function (xhr, status, errorThrown){
-			alert(errorThrown);	
+			new Chart(document.getElementById("visit_chart_month"), json);
+
+		}).fail(function(xhr, status, errorThrown) {
+			alert(errorThrown);
 		});
 	}
-	
 
-	function getDayMemberNumber(){
-		
+	function getDayMemberNumber() {
+
 		var date1 = $("#memberDayPickerOne").val();
 		var date2 = $("#memberDayPickerTwo").val();
-		date1+="";
-		date2+="";
-		var ajaxUrl = "/memberOverviewThreeAjax.ado?StartDate="+date1+"&EndDate="+date2;
-		
+		date1 += "";
+		date2 += "";
+		var ajaxUrl = "/memberOverviewThreeAjax.ado?StartDate=" + date1
+				+ "&EndDate=" + date2;
+
 		$.ajax({
-		
-			url: ajaxUrl,
-			type: "GET",
-			data: {},
-			dataType: "json"
-		
+
+			url : ajaxUrl,
+			type : "GET",
+			data : {},
+			dataType : "json"
+
 		})
-		
-		.done(function (json){
+
+		.done(function(json) {
 			console.log(json);
-			new Chart(document.getElementById("member_chart_day"),json);
-			
-		})
-		.fail(function (xhr, status, errorThrown){
-			alert(errorThrown);	
+			new Chart(document.getElementById("member_chart_day"), json);
+
+		}).fail(function(xhr, status, errorThrown) {
+			alert(errorThrown);
 		});
 	}
-	
-function getMonthMemberNumber(){
-		
+
+	function getMonthMemberNumber() {
+
 		var date1 = $("#monthMemberPickerOne").val();
 		var date2 = $("#monthMemberPickerTwo").val();
-		date1+="";
-		date2+="";
-		var ajaxUrl = "/memberOverviewFourAjax.ado?StartDate="+date1+"&EndDate="+date2;
-		
+		date1 += "";
+		date2 += "";
+		var ajaxUrl = "/memberOverviewFourAjax.ado?StartDate=" + date1
+				+ "&EndDate=" + date2;
+
 		$.ajax({
-		
-			url: ajaxUrl,
-			type: "GET",
-			data: {},
-			dataType: "json"
-		
+
+			url : ajaxUrl,
+			type : "GET",
+			data : {},
+			dataType : "json"
+
 		})
-		
-		.done(function (json){
+
+		.done(function(json) {
 			console.log(json);
-			new Chart(document.getElementById("member_chart_month"),json);
-			
-		})
-		.fail(function (xhr, status, errorThrown){
-			alert(errorThrown);	
+			new Chart(document.getElementById("member_chart_month"), json);
+
+		}).fail(function(xhr, status, errorThrown) {
+			alert(errorThrown);
 		});
 	}
-	
-function getDayIncDec(){
-	
-	var date1 = $("#dayIncDecPickerOne").val();
-	var date2 = $("#dayIncDecPickerTwo").val();
-	date1+="";
-	date2+="";
-	var ajaxUrl = "/memberOverviewDayAjax.ado?StartDate="+date1+"&EndDate="+date2;
-	
-	$.ajax({
-	
-		url: ajaxUrl,
-		type: "GET",
-		data: {},
-		dataType: "json"
-	
-	})
-	
-	.done(function (json){
-		console.log(json);
-		new Chart(document.getElementById("join_chart_day"),json);
-		
-	})
-	.fail(function (xhr, status, errorThrown){
-		alert(errorThrown);	
-	});
-}
 
-function getMonthInDec(){
-	
-	var date1 = $("#monthInDecPickerOne").val();
-	var date2 = $("#monthInDecPickerTwo").val();
-	date1+="";
-	date2+="";
-	var ajaxUrl = "/memberOverviewMonthAjax.ado?StartDate="+date1+"&EndDate="+date2;
-	
-	$.ajax({
-	
-		url: ajaxUrl,
-		type: "GET",
-		data: {},
-		dataType: "json"
-	
-	})
-	
-	.done(function (json){
-		console.log(json);
-		new Chart(document.getElementById("join_chart_month"),json);
-		
-	})
-	.fail(function (xhr, status, errorThrown){
-		alert(errorThrown);	
-	});
-}
-	
-	
-	
-	
-	
+	function getDayIncDec() {
 
-    function go() {
-        new Chart(document.getElementById("join_chart_day"),{"type":"line","data":{"labels":["1일","2일","3일","4일","5일","6일","7일","8일","9일","10일","11일","12일","13일","14일","15일"],"datasets":[{"label":"회원가입수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000,1000,2000,3000],"fill":false,"borderColor":"rgb(99, 203, 137)","lineTension":0.2},{"label":"회원탈퇴수","data":[1000,500,1000,500,2000,100,600,210,3000,1000,2000,2000,0,1000,2000],"fill":false,"borderColor":"rgb(203,36,45)","lineTension":0.2},{"label":"회원증감","data":[4000,1500,2000,3500,3000,400,3000,3000,5000,1000,8000,10000,1000,1000,1000],"fill":false,"borderColor":"rgb(42,94,203)","lineTension":0.2}]},"options":{}});
-        new Chart(document.getElementById("join_chart_month"),{"type":"line","data":{"labels":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"datasets":[{"label":"회원가입수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000],"fill":false,"borderColor":"rgb(99, 203, 137)","lineTension":0.2},{"label":"회원탈퇴수","data":[1000,500,1000,500,2000,100,600,210,3000,1000,2000,2000],"fill":false,"borderColor":"rgb(203,36,45)","lineTension":0.2},{"label":"회원증감","data":[4000,1500,2000,3500,3000,400,3000,3000,5000,1000,8000,10000],"fill":false,"borderColor":"rgb(42,94,203)","lineTension":0.2}]},"options":{}});
+		var date1 = $("#dayIncDecPickerOne").val();
+		var date2 = $("#dayIncDecPickerTwo").val();
+		date1 += "";
+		date2 += "";
+		var ajaxUrl = "/memberOverviewDayAjax.ado?StartDate=" + date1
+				+ "&EndDate=" + date2;
 
-        new Chart(document.getElementById("member_chart_day"),{"type":"line","data":{"labels":["1일","2일","3일","4일","5일","6일","7일","8일","9일","10일","11일","12일","13일","14일","15일"],"datasets":[{"label":"총 회원 수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000,1000,2000,3000],"fill":false,"borderColor":"rgb(203,137,63)","lineTension":0.2}]},"options":{}});
-        new Chart(document.getElementById("member_chart_month"),{"type":"line","data":{"labels":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"datasets":[{"label":"총 회원 수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000],"fill":false,"borderColor":"rgb(203,137,63)","lineTension":0.2}]},"options":{}});
+		$.ajax({
 
-        new Chart(document.getElementById("visit_chart_day"),{"type":"line","data":{"labels":["1일","2일","3일","4일","5일","6일","7일","8일","9일","10일","11일","12일","13일","14일","15일"],"datasets":[{"label":"방문자 수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000,1000,2000,3000],"fill":false,"borderColor":"rgb(93,168,203)","lineTension":0.2}]},"options":{}});
-        new Chart(document.getElementById("visit_chart_month"),{"type":"line","data":{"labels":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"datasets":[{"label":"방문자 수","data":[5000,2000,3000,4000,5000,500,3600,3210,8000,2000,10000,12000],"fill":false,"borderColor":"rgb(93,168,203)","lineTension":0.2}]},"options":{}});
-        //
-        // new Chart(document.getElementById("age_join_chart"),{"type":"doughnut","data":{"labels":["10대","20대","30대","40대","50대","60대"],"datasets":[{"label":"My First Dataset","data":[300,500,500,400,300,200],"backgroundColor":["rgb(236, 94, 105)","rgb(0, 112, 224)","rgb(241, 194, 5)","rgb(144,241,88)","rgb(101, 80, 55)","rgb(41, 14, 5)"]}]}});
-        // new Chart(document.getElementById("age_drop_chart"),{"type":"doughnut","data":{"labels":["10대","20대","30대","40대","50대","60대"],"datasets":[{"label":"My First Dataset","data":[300,500,500,400,300,200],"backgroundColor":["rgb(236, 94, 105)","rgb(0, 112, 224)","rgb(241, 194, 5)","rgb(144,241,88)","rgb(101, 80, 55)","rgb(41, 14, 5)"]}]}});
-        //
-        // new Chart(document.getElementById("gender_join_chart"),{"type":"doughnut","data":{"labels":["남성","여성"],"datasets":[{"label":"My First Dataset","data":[300,500],"backgroundColor":["rgb(236, 94, 105)","rgb(0, 112, 224)"]}]}});
-        // new Chart(document.getElementById("gender_drop_chart"),{"type":"doughnut","data":{"labels":["남성","여성"],"datasets":[{"label":"My First Dataset","data":[300,500],"backgroundColor":["rgb(236, 94, 105)","rgb(0, 112, 224)"]}]}});
-    }
+			url : ajaxUrl,
+			type : "GET",
+			data : {},
+			dataType : "json"
+
+		})
+
+		.done(function(json) {
+			console.log(json);
+			new Chart(document.getElementById("join_chart_day"), json);
+
+		}).fail(function(xhr, status, errorThrown) {
+			alert(errorThrown);
+		});
+	}
+
+	function getMonthInDec() {
+
+		var date1 = $("#monthInDecPickerOne").val();
+		var date2 = $("#monthInDecPickerTwo").val();
+		date1 += "";
+		date2 += "";
+		var ajaxUrl = "/memberOverviewMonthAjax.ado?StartDate=" + date1
+				+ "&EndDate=" + date2;
+
+		$.ajax({
+
+			url : ajaxUrl,
+			type : "GET",
+			data : {},
+			dataType : "json"
+
+		})
+
+		.done(function(json) {
+			console.log(json);
+			new Chart(document.getElementById("join_chart_month"), json);
+
+		}).fail(function(xhr, status, errorThrown) {
+			alert(errorThrown);
+		});
+	}
 </script>
 
 <!-- Javascripts -->
