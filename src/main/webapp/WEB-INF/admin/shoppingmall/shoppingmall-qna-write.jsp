@@ -37,7 +37,7 @@
                                     <input type="hidden" name="qnaTbRef" value="${insertInfo.qnaTbRef }">
                                     <input type="hidden" name="qnaTbStep" value="${insertInfo.qnaTbStep }">
                                     <input type="hidden" name="qnaTbDepth" value="${insertInfo.qnaTbDepth }">
-                                    <input type="hidden" name="qnaTbSecret" value="Y">
+                                    <input type="hidden" name="qnaTbSecret" value="${insertInfo.qnaTbSecret }">
                                     <input type="hidden" name="pdSaleTbNo" value="${insertInfo.pdSaleTbNo}"><!-- 상품번호 value값 추가 -->
                             		<input type="hidden" name="pdOrderTbNo" value="${insertInfo.pdOrderTbNo}"><!-- order번호 -->
                             		<input type="hidden" name="adminsTbId" value="${sessionScope.adminId }">
