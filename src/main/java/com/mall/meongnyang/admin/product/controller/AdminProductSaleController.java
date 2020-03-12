@@ -102,7 +102,7 @@ public class AdminProductSaleController
     @RequestMapping(value = "/restartSaleProduct.ado", method = RequestMethod.POST)
     public String restartSaleProductProc(AdminProductSaleVO adminProductSaleVO)
     {
-        System.out.println(adminProductSaleVO);
+        //System.out.println(adminProductSaleVO);
         adminUpdateProductSaleService.restartSale(adminProductSaleVO);
         return "redirect:productOverview.ado";
     }

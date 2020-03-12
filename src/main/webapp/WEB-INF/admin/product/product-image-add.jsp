@@ -123,7 +123,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
                 if(json.deleteState === "deleteSucess")
                 {
                     var tempp =  "imgDiv-"+json.imgno;
@@ -144,7 +144,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
                 if(json.updateRepState === "updateSucess")
                 {
                     if(json.pastRepImgNo !== '-1')

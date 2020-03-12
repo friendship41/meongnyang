@@ -170,7 +170,7 @@
 
         $("#promotionSelectBox").change(function () {
             var selectedValue = $("#promotionSelectBox option:selected").val();
-            console.log(selectedValue);
+            //console.log(selectedValue);
             if(selectedValue === '-1')
             {
                 $("#discountInput").attr("value","");
@@ -186,7 +186,7 @@
                     dataType: "json"
                 })
                     .done(function(json) {
-                        console.log(json);
+                        //console.log(json);
                         $("#discountInput").attr("value", json.promotionTbDiscountRate);
                         $("#saleStartDateInput").attr("value", json.promotionTbStartDate);
                     })

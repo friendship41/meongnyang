@@ -56,7 +56,7 @@ public class AdminProductCategoryController
     @RequestMapping(value = "/productCategoryDelete.ado", method = RequestMethod.GET)
     public String deleteCategory(AdminProductCategoryVO adminProductCategoryVO)
     {
-        System.out.println(adminProductCategoryVO);
+        //System.out.println(adminProductCategoryVO);
 
         adminDeleteProductCategoryService.deleteCategory(adminProductCategoryVO);
 

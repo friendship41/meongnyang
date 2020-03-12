@@ -86,7 +86,7 @@
 
         $("#selectBox").change(function () {
             var selectedValue = $("#selectBox option:selected").val();
-            console.log(selectedValue);
+            //console.log(selectedValue);
             if(selectedValue === 'thisIsInsert')
             {
                 $("#categorySubmitButton").html('카테고리 추가');
@@ -104,7 +104,7 @@
                     dataType: "json"
                 })
                     .done(function(json) {
-                        console.log(json);
+                        //console.log(json);
                         $("#qnaTypeTbNo").attr("value", json.qnaTypeTbNo);
                         $("#qnaTypeTbName").attr("value", json.qnaTypeTbName);
                         $("#categorySubmitButton").html('카테고리 수정');

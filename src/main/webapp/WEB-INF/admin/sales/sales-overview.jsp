@@ -834,7 +834,7 @@
 		switch(event.target.id){ // 각각 event 객체로 전달된 target 프로퍼티에서 id의 값을 알 수 있다.
 			case 'excelDown1':
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = "";
 		 		var endDate = "";
@@ -857,7 +857,7 @@
 			case 'excelDown2':
 				
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = $("#categorySalesStartDate").val();
 		 		var endDate = $("#categorySalesEndDate").val();
@@ -871,7 +871,7 @@
 			case 'excelDown3':	
 
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = "";
 		 		var endDate = "";
@@ -894,7 +894,7 @@
 			
 			case 'excelDown4':
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = $("#regionSalesStartDate").val();
 		 		var endDate = $("#regionSalesEndDate").val();
@@ -911,7 +911,7 @@
 		switch(event.target.id){ // 각각 event 객체로 전달된 target 프로퍼티에서 id의 값을 알 수 있다.
 			case 'pdfDown1':
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = "";
 		 		var endDate = "";
@@ -934,7 +934,7 @@
 			case 'pdfDown2':
 				
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = $("#categorySalesStartDate").val();
 		 		var endDate = $("#categorySalesEndDate").val();
@@ -948,7 +948,7 @@
 			case 'pdfDown3':	
 
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = "";
 		 		var endDate = "";
@@ -971,7 +971,7 @@
 			
 			case 'pdfDown4':
 				var targets = $(this).parent().children('input[name=targets]').val();
-				console.log(targets);
+				//console.log(targets);
 				
 				var startDate = $("#regionSalesStartDate").val();
 		 		var endDate = $("#regionSalesEndDate").val();

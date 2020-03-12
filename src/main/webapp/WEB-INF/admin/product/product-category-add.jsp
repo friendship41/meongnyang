@@ -98,7 +98,7 @@
 
         $("#categorySelectBox").change(function () {
             var selectedValue = $("#categorySelectBox option:selected").val();
-            console.log(selectedValue);
+            //console.log(selectedValue);
             if(selectedValue === 'thisIsInsert')
             {
                 $("#categorySubmitButton").html('카테고리 추가');
@@ -119,7 +119,7 @@
                     dataType: "json"
                 })
                     .done(function(json) {
-                        console.log(json);
+                        //console.log(json);
                         $("#productCategoryTbNo").attr("value", json.productCategoryTbNo);
                         $("#productCategoryTbParent").attr("value", json.productCategoryTbParent);
                         $("#productCategoryTbMedian").attr("value", json.productCategoryTbMedian);

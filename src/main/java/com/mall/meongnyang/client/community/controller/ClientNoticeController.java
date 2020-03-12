@@ -38,7 +38,7 @@ public class ClientNoticeController {
 	    	adminNoticeVO.setEndRow(paging.getEndRow());
 	    	
 	        List<AdminNoticeVO> clientNoticeList = clientSelectNoticeListService.selectNoticeList(adminNoticeVO);
-	        System.out.println(clientNoticeList);
+	        //System.out.println(clientNoticeList);
 	       
 	        
 	        

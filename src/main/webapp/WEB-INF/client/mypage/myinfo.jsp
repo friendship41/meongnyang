@@ -197,7 +197,7 @@
 
         $("#selectBox").change(function () {
             var selectedValue = $("#selectBox option:selected").val();
-            console.log(selectedValue);
+            //console.log(selectedValue);
             if (selectedValue === 'thisIsSelect') {
                 $("#addOption").attr("value", -1);
                 $("#modifySubmitButton").html('추가');
@@ -210,7 +210,7 @@
                 $("#lng").val('');
                 $("#formToController").attr("action", "myinfo-address-insert.do");
             } else {
-                console.log(selectedValue);
+                //console.log(selectedValue);
                 var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddressTbNo=" + selectedValue;
                 $.ajax({
                     url     : ajaxUrl,
@@ -219,7 +219,7 @@
                     dataType: "json"
                 })
                     .done(function (json) {
-                        console.log(json);
+                        //console.log(json);
                         $("#addOption").attr("value", 'thisIsSelect');
                         $("#cmAddressTbNo").attr("value", json.cmAddressTbNo);
                         $("#cmAddressTbPostcode").attr("value", json.cmAddressTbPostcode);
@@ -246,7 +246,7 @@
         new daum.Postcode({
 
             oncomplete: function (data) {
-                console.log(data);
+                //console.log(data);
                 $("#cmAddressTbPostcode").val(data.zonecode);
                 $("#cmAddressTbAddress1").val(data.address);
 
@@ -270,7 +270,7 @@
     function phoneCheck() {
         var phone = $("#customerTbPhone").val();
         var phoneSu = phone.length;
-        console.log(phoneSu);
+        //console.log(phoneSu);
         if (phoneSu < 11 || phoneSu > 11) {
             alert("전화번호를 다시한번 확인해주세요.");
         } else if (phone.indexOf("-") != -1) {

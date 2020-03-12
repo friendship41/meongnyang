@@ -66,7 +66,7 @@ public class IndexController
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new java.util.Date());
         calendar.add(Calendar.DATE, 1);
-        System.out.println(calendar.getTime());
+        //System.out.println(calendar.getTime());
 
         ClientProductOrderVO clientProductOrderVO = new ClientProductOrderVO();
         clientProductOrderVO.setDayTo(new Date(calendar.getTimeInMillis()));
@@ -78,7 +78,7 @@ public class IndexController
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         clientProductOrderVO.setDayFrom(new Date(calendar.getTimeInMillis()));
-        System.out.println(calendar.getTime());
+        //System.out.println(calendar.getTime());
 
         return clientProductOrderVO;
     }

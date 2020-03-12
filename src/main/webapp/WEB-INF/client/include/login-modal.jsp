@@ -157,7 +157,7 @@
 	
 	function checkEmail() {
 		var inputed = $("#customerTbEmail").val();
-		console.log(inputed);
+		//console.log(inputed);
 		$.ajax({
 			data : {
 				customerTbEmail : inputed
@@ -166,7 +166,7 @@
 			success : function(data) {
 				if(data=='1') {
 					
-					console.log(data);
+					//console.log(data);
 					alert('중복된아이디가 있습니다.');
 					$("#CreateAccount").prop("disabled", true);
 					$("#customerTbEmail").attr("style", "background-color: red");

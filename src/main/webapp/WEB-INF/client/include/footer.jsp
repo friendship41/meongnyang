@@ -126,7 +126,7 @@
         var nowPrice = document.getElementById(normalPrice).innerText;
         var nowDiscount = document.getElementById(discountPrice).innerText;
         nowPrice = nowPrice.substring(0, nowPrice.length-1);
-        console.log(nowDiscount);
+        //console.log(nowDiscount);
         if(nowDiscount == null || nowDiscount === '' || nowDiscount == 0 || nowDiscount === '0')
         {
             params += nowPrice;
@@ -163,7 +163,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
 
                 var cartItemHTML = '<div class="shp__single__product" id="pCart-'+json.productTbCode+'">\n' +
                     '                        <div class="shp__pro__thumb">\n' +

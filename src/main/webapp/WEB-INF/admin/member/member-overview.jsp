@@ -293,7 +293,7 @@
 		})
 
 		.done(function(json) {
-			console.log(json);
+			//console.log(json);
 			new Chart(document.getElementById("visit_chart_day"), json);
 
 		}).fail(function(xhr, status, errorThrown) {
@@ -321,7 +321,7 @@
 		})
 
 		.done(function(json) {
-			console.log(json);
+			//console.log(json);
 			new Chart(document.getElementById("visit_chart_month"), json);
 
 		}).fail(function(xhr, status, errorThrown) {
@@ -348,7 +348,7 @@
 		})
 
 		.done(function(json) {
-			console.log(json);
+			//console.log(json);
 			new Chart(document.getElementById("member_chart_day"), json);
 
 		}).fail(function(xhr, status, errorThrown) {
@@ -375,7 +375,7 @@
 		})
 
 		.done(function(json) {
-			console.log(json);
+			//console.log(json);
 			new Chart(document.getElementById("member_chart_month"), json);
 
 		}).fail(function(xhr, status, errorThrown) {
@@ -402,7 +402,7 @@
 		})
 
 		.done(function(json) {
-			console.log(json);
+			//console.log(json);
 			new Chart(document.getElementById("join_chart_day"), json);
 
 		}).fail(function(xhr, status, errorThrown) {
@@ -429,7 +429,7 @@
 		})
 
 		.done(function(json) {
-			console.log(json);
+			//console.log(json);
 			new Chart(document.getElementById("join_chart_month"), json);
 
 		}).fail(function(xhr, status, errorThrown) {

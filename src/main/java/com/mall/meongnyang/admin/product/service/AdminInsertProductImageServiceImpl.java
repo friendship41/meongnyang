@@ -21,7 +21,7 @@ public class AdminInsertProductImageServiceImpl implements AdminInsertProductIma
     @Override
     public AdminProductImageVO insertProductImageReturnImages(AdminProductImageVO adminProductImageVO, HttpServletRequest request)
     {
-        System.out.println(adminProductImageVO);
+//        System.out.println(adminProductImageVO);
         int imgCnt = adminProductImageDAO.selectProductImageCount(adminProductImageVO);
         if(imgCnt >= 3)
         {

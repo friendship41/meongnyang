@@ -503,7 +503,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
 
                 var cartItemHTML = '<div class="shp__single__product" id="pCart-'+json.productTbCode+'">\n' +
                     '                        <div class="shp__pro__thumb">\n' +

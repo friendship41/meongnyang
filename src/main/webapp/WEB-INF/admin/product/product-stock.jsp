@@ -195,7 +195,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
                 if(json.length === 0)
                 {
                     alert("조회된 데이터가 없습니다.");
@@ -307,7 +307,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
 
                 if(json.state === "success")
                 {
@@ -346,7 +346,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
 
                 $("#expirationProductTable").DataTable().destroy();
                 var expireTr = "expireItem"+saleNum;

@@ -323,7 +323,7 @@
             dataType: "json"
         })
             .done(function(json) {
-                console.log(json);
+                //console.log(json);
                 if(json.length === 0)
                 {
                     alert("조회된 데이터가 없습니다.");
@@ -521,7 +521,7 @@
 
     function settingStopSaleResult(json){
         var saleBtn = "productSaleBtn"+json.pdSaleTbNo;
-        console.log(saleBtn);
+        //console.log(saleBtn);
         $("#onSaleProductTable").DataTable().destroy();
         document.getElementById(saleBtn).setAttribute("onclick", "location.href='restartSaleProduct.ado?pdSaleTbNo="+json.pdSaleTbNo+"'");
         document.getElementById(saleBtn).innerText = "판매재등록";

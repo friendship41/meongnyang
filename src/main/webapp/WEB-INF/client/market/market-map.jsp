@@ -68,7 +68,7 @@ $(document).ready(function () {
         
    	if(selectedValue == 'thisIsSelect') 
    		{
-   			console.log(selectedValue);
+   			//console.log(selectedValue);
    			$("#select").hide();
    		}
    	else 
@@ -177,7 +177,7 @@ function mapLevel(selectValue) {
 	    	
 	    	
 	    	positions.push(obj2);
-			console.log(positions);
+			//console.log(positions);
 			
 	}
 	

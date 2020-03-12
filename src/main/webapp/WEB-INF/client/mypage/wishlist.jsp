@@ -114,7 +114,7 @@
 	            nowDiscount = nowDiscount.substring(0, nowDiscount.length-1);
 	            params += nowDiscount;
 	        }
-	        console.log(nowDiscount);          
+	        //console.log(nowDiscount);          
 	        var name = document.getElementById("productName-"+productTbCode).innerText;
 	        params += "&pdSaleTbProductName=";
 	        params += name;
@@ -136,7 +136,7 @@
 
 	        })
 	            .done(function(json) {
-	                console.log(json);					
+	                //console.log(json);					
 	                var cartItemHTML = '<div class="shp__single__product" id="pCart-'+json.productTbCode+'">\n' +
                     '                        <div class="shp__pro__thumb">\n' +
                     '                            <a href="shoppingDetail.do?productTbCode='+json.productTbCode+'">\n' +

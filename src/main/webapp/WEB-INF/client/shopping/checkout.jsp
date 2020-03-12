@@ -163,7 +163,7 @@
     $(document).ready(function () {
         $("#addressSelectBox").change(function () {
             var selectedValue = $("#addressSelectBox option:selected").val();
-            console.log(selectedValue);
+            //console.log(selectedValue);
 
             if(selectedValue === 'thisIsSelect')
             {
@@ -177,7 +177,7 @@
             }
             else
             {
-                console.log(selectedValue);
+                //console.log(selectedValue);
                 var ajaxUrl = "/myinfo-address-single-ajax.do?cmAddressTbNo="+selectedValue;
                 $.ajax({
                     url: ajaxUrl,
@@ -186,7 +186,7 @@
                     dataType: "json"
                 })
                     .done(function(json) {
-                        console.log(json);
+                        //console.log(json);
                         $("#phoneNum").val(json.cmAddressTbPhone);
                         $("#addressFindBtn").hide();
                         $("#postcode").val(json.cmAddressTbPostcode);
@@ -292,7 +292,7 @@
 
                         $("#lat").attr("value", result.y);
                         $("#lng").attr("value", result.x);
-                        // console.log('lat: '+result.y+', lng: '+result.x);
+                        //console.log('lat: '+result.y+', lng: '+result.x);
                     }
                 });
             }

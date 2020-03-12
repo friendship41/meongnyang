@@ -76,7 +76,7 @@ public class AdminQnaTypeController {
     @RequestMapping(value = "/qnaCategoryDelete.ado", method = RequestMethod.GET)
     public String deleteQnaCategory(AdminQnaTypeVO adminQnaTypeVO)
     {
-        System.out.println(adminQnaTypeVO);
+//        System.out.println(adminQnaTypeVO);
 
         adminDeleteQnaTypeService.deleteQnaType(adminQnaTypeVO);
 

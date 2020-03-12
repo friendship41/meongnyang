@@ -121,7 +121,7 @@ $(function() {
 	function getComment(marketNo, currentPage) {
 		
 		$.getJSON("/commentList.do?marketTbNo=" + marketNo + "&currentPage=" + currentPage, function(data) {
-			console.log(data);
+			//console.log(data);
 			var str = "";
 			
 			$(data.comment).each(function() {
@@ -240,7 +240,7 @@ $(function() {
 	$(document).on("click", "a[name='deleteBtn']", function() {
 		
 		var commentNo = $(this).parent().parent().parent().children("input[name='marketCommentTbNo']").val();
-		console.log(commentNo);
+		//console.log(commentNo);
 		var state = "D";
 		
 		var clientMarketComment = {
@@ -273,14 +273,14 @@ $(function() {
 	$(document).on("click", "a[name='updateBtn']", function() {
 		var addupdate = $(this).parent().parent().next().next()
 		var content = addupdate.text();
-		console.log(content);
+		//console.log(content);
 		addupdate.html("<div><input type='text' id='updateReply' value='" + content + "'><a id='updateReplyBtn'>수정</a>&nbsp;<a id='cancleUpReply'>취소</a></div>");	
 	});
 	
 	//코멘트 수정창 취소
 	$(document).on("click", "#cancleUpReply", function(){
 		var content = $("#updateReply").val();
-		console.log(content);
+		//console.log(content);
 		$("#updateReply").parent().text(content);
 		$("#updateReply").parent().remove();
 	});
@@ -288,9 +288,9 @@ $(function() {
 	//코멘트 수정요청
 	$(document).on("click", "#updateReplyBtn", function(){
 		var commentNo = $(this).parents("div .ht__comment__details").children("input[name='marketCommentTbNo']").val();
-		console.log(commentNo);
+		//console.log(commentNo);
 		var commentContent = $("#updateReply").val();
-		console.log(commentContent);
+		//console.log(commentContent);
 
 		var clientMarketComment = {
 			marketCommentTbNo : commentNo,
@@ -324,9 +324,9 @@ $(function() {
 		
 		if(!state){
 		var ref = $(this).parent().parent().parent().children("input[name='marketCommentTbRef']").val();
-		console.log(ref);
+		//console.log(ref);
 		var step = $(this).parent().parent().parent().children("input[name='marketCommentTbStep']").val();
-		console.log(step);
+		//console.log(step);
 		
 		var replyAdd = $(this).parent().parent().next().next();
 		var str = "";
@@ -372,10 +372,10 @@ $(function() {
 		const comment = $("#commentReplyContent").val();
 		const ref = $("input[name='commentTbRef']").val();
 		const step = $("input[name='commentTbStep']").val();
-		console.log(cusNo);
-		console.log(comment);
-		console.log(ref);
-		console.log(step);
+		//console.log(cusNo);
+		//console.log(comment);
+		//console.log(ref);
+		//console.log(step);
 		
 		const clientMarketComment = {
 			marketTbNo : marketNo,

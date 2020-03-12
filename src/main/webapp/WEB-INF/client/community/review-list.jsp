@@ -106,10 +106,10 @@ $(document).ready(function () {
     	var image = $(this).find("#img").attr("src");
     	var href = 'shoppingDetail.do?productTbCode=' + $("#code").val();
     	
-    	console.log(productName);
+/*     	console.log(productName);
     	console.log(content);
     	console.log(image);
-    	console.log(href);
+    	console.log(href); */
         $("#myModal").modal();
         
         $("#productName").text(productName);
