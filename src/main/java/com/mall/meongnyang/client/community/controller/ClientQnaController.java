@@ -98,6 +98,7 @@ public class ClientQnaController {
 
 	@RequestMapping(value = "/qna-delete.do", method = RequestMethod.GET)
 	public String qnaDelete(AdminQnaVO adminQnaVO) {
+		
 		clientDeleteQnaService.deleteQna(adminQnaVO);
 		return "redirect:qna-list.do";
 	}

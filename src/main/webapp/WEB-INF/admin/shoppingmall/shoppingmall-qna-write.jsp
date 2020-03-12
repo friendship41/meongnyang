@@ -33,7 +33,7 @@
                     <div class="col-lg-12 col-md-12">
                         <div class="panel panel-white">
                             <div class="panel-body">
-                                <form class="form-horizontal" action="shoppingmall-qna-write.ado" method="post">
+                                <form class="form-horizontal" id="qna-write" action="shoppingmall-qna-write.ado" method="post">
                                     <input type="hidden" name="qnaTbRef" value="${insertInfo.qnaTbRef }">
                                     <input type="hidden" name="qnaTbStep" value="${insertInfo.qnaTbStep }">
                                     <input type="hidden" name="qnaTbDepth" value="${insertInfo.qnaTbDepth }">
@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">작성일</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" readonly>
+                                            <input type="text" class="form-control date-picker" id="datePickerSysdate" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -70,7 +70,7 @@
                                     <div class="form-group" style="margin-top: 50px">
                                         <div class="col-sm-2"></div>
                                         <div class="col-sm-10">
-                                            <button type="submit" class="btn btn-primary">답변작성</button>
+                                            <button type="button" class="btn btn-primary" onclick="textareaCheck()">답변작성</button>
                                             
                                         </div>
                                     </div>
@@ -89,8 +89,26 @@
     <!-- /Page Content -->
 </div>
 <!-- /Page Container -->
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		$("#datePickerSysdate").attr("value", new Date().yyyymmdd());
+		
+	});
+	
+	function textareaCheck() {
+		var textArea = $("#qnaTbContent").val();
+		var textAreaSu = textArea.length;
+		
+		if(textAreaSu == 0 ) {
+			alert("글을 입력해주세요.");
+		} else {
+			$("#qna-write").submit();
+		}
+	}
+	
+</script>
 <!-- Javascripts -->
 <jsp:include page="../include/scripts-load.jsp"/>
 </body>
