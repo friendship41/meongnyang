@@ -85,7 +85,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="qnaTbContent" class="col-sm-2 control-label">내용</label>
-                                <div class="col-sm-8"><textarea id="qnaTbContent" placeholder="Context *" name="qnaTbContent"><c:if test="${insertInfo.pdSaleTbNo ne null}">제품판매코드: ${insertInfo.pdSaleTbNo}</c:if><c:if test="${insertInfo.pdOrderTbNo ne null}">주문상품번호: ${insertInfo.pdOrderTbNo}</c:if></textarea></div>
+                                <div class="col-sm-8"><textarea id="qnaTbContent" placeholder="Context *" name="qnaTbContent"><c:if test="${insertInfo.pdSaleTbNo ne 0}">제품판매코드: ${insertInfo.pdSaleTbNo}</c:if><c:if test="${insertInfo.pdOrderTbNo ne null}">주문상품번호: ${insertInfo.pdOrderTbNo}</c:if><c:if test="${insertInfo.customerTbNo ne 0}">신고 고객번호: ${insertInfo.customerTbNo}</c:if></textarea></div>
                             </div>
                             <div class="form-group">
                                 <div align="center" class="ht__comment__btn--2 mt--50 col-sm-10">

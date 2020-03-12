@@ -57,7 +57,7 @@ public class ClientQnaController {
 		return "community/qna";
 	}
 
-	//ī�װ� �� �������ְ�
+
 	@RequestMapping(value = "/qna-form.do", method = RequestMethod.GET)
     public String qnaCategoryList(Model model, AdminQnaVO adminQnaVO)
     {
