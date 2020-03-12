@@ -161,7 +161,7 @@
                                                 <td class="product-price"><span class="amount">${qna.customerTbName}</span></td>
                                                 </c:if>
                                                 <c:if test="${qna.adminsTbId ne null }">
-                                                <td class="product-price"><span class="amount">${qna.adminsTbId}</span></td>
+                                                <td class="product-price"><span class="amount">관리자</span></td>
                                                 </c:if>
                                                 <td class="product-stock-status"><span class="wishlist-in-stock">${qna.qnaTbRegDate}</span></td>
                                             </tr>
