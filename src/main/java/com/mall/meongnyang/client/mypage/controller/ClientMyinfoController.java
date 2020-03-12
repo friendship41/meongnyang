@@ -109,7 +109,8 @@ public class ClientMyinfoController {
 			clientCustomerVO.setCustomerTbState("T");
 			clientDeleteMyinfoCustomerService.deleteMyinfo(clientCustomerVO);
 			session.setAttribute("customer", null);
-			return "redirect:index.do";
+			model.addAttribute("messageDelete", "성공적으로 탈퇴되었습니다.");
+			return "mypage/message-and-go-index2";
 		} else  {
 			model.addAttribute("passwordDelete", false);
 			return "mypage/myinfo";
