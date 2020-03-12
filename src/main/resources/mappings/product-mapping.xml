@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductDAO">
+
+	<insert id="insertProduct" parameterType="product">
+        INSERT INTO product
+        VALUES(#{productTbCode}, #{productCategoryTbNo}, #{productTbName}, SYSDATE, #{productTbDetail}, 'N')
+    </insert>
+
+    <delete id="deleteProduct" parameterType="product">
+        DELETE FROM product
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </delete>
+
+    <select id="selectProductList" parameterType="product" resultType="product">
+        SELECT
+            PRODUCT_TB_CODE,
+            PRODUCT_CATEGORY_TB_NO,
+            PRODUCT_TB_NAME,
+            PRODUCT_TB_REG_DATE,
+            PRODUCT_TB_DETAIL
+        FROM product
+    </select>
+
+    <select id="selectProduct" parameterType="product" resultType="product">
+        SELECT
+            PRODUCT_TB_CODE,
+            PRODUCT_CATEGORY_TB_NO,
+            PRODUCT_TB_NAME,
+            PRODUCT_TB_REG_DATE,
+            PRODUCT_TB_DETAIL
+        FROM product
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </select>
+
+    <update id="updateProduct" parameterType="product">
+        UPDATE product
+        SET
+            PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo},
+            PRODUCT_TB_NAME=#{productTbName}
+            <if test="productTbDetail != null">
+                ,PRODUCT_TB_DETAIL=#{productTbDetail}
+            </if>
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </update>
+
+    <select id="selectProductOverviewList" parameterType="product" resultType="product">
+        SELECT
+            p.PRODUCT_TB_CODE,
+            p.PRODUCT_CATEGORY_TB_NO,
+            p.PRODUCT_TB_NAME,
+            p.PRODUCT_TB_REG_DATE,
+            p.PRODUCT_TB_DETAIL,
+            pc.PRODUCT_CATEGORY_TB_PARENT,
+            pc.PRODUCT_CATEGORY_TB_MEDIAN,
+            pc.PRODUCT_CATEGORY_TB_SUB,
+            (
+                SELECT
+                    COUNT(*)
+                FROM pd_image pi
+                WHERE p.PRODUCT_TB_CODE = pi.PRODUCT_TB_CODE
+            ) "product_image_count",
+            (
+                SELECT
+                    COUNT(*)
+                FROM pd_sale ps
+                WHERE p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
+            ) "product_sale_count"
+        FROM product p JOIN product_category pc
+        ON p.PRODUCT_CATEGORY_TB_NO = pc.PRODUCT_CATEGORY_TB_NO
+        WHERE PRODUCT_TB_REG_DATE BETWEEN #{dayFrom} AND #{dayTo}
+    </select>
+
+    <select id="selectProductCnt" parameterType="product" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM(
+            SELECT
+                ps.PRODUCT_TB_CODE,
+                p.PRODUCT_CATEGORY_TB_NO
+            FROM(
+                SELECT
+                    PRODUCT_TB_CODE
+                FROM pd_sale
+                WHERE PD_SALE_TB_STATE = 'Y'
+                GROUP BY PRODUCT_TB_CODE) ps JOIN product p
+            ON ps.PRODUCT_TB_CODE = p.PRODUCT_TB_CODE
+            WHERE p.PRODUCT_CATEGORY_TB_NO = #{productCategoryTbNo})
+    </select>
+
+    <select id="selectShoppingList" parameterType="product" resultType="product">
+        <![CDATA[
+            SELECT
+                b.rnum,
+                b.PRODUCT_TB_CODE,
+                b.PRODUCT_TB_NAME,
+                b.PD_IMAGE_TB_PATH,
+                b.PD_SALE_TB_SALES_PRICE,
+                b.PD_SALE_TB_DISCOUNT_RATE,
+                b.PD_SALE_TB_RATING,
+                b.PD_SALE_TB_PRODUCT_NAME,
+                b.PD_SALE_TB_SIZE,
+                b.PD_SALE_TB_NO
+            FROM
+                (SELECT
+                    rownum rnum,
+                    a.PRODUCT_TB_CODE,
+                    a.PRODUCT_TB_NAME,
+                    a.PD_IMAGE_TB_PATH,
+                    a.PD_SALE_TB_SALES_PRICE,
+                    a.PD_SALE_TB_DISCOUNT_RATE,
+                    a.PD_SALE_TB_RATING,
+                    a.PD_SALE_TB_PRODUCT_NAME,
+                    a.PD_SALE_TB_SIZE,
+                    a.PD_SALE_TB_NO
+                FROM
+                    (SELECT
+                        p.PRODUCT_TB_CODE,
+                        p.PRODUCT_TB_NAME,
+                        pi.PD_IMAGE_TB_PATH,
+                        ps.PD_SALE_TB_SALES_PRICE,
+                        ps.PD_SALE_TB_DISCOUNT_RATE,
+                        ps.PD_SALE_TB_RATING,
+                        ps.PD_SALE_TB_PRODUCT_NAME,
+                        ps.PD_SALE_TB_SIZE,
+                        ps.PD_SALE_TB_NO
+                    FROM product p JOIN (
+                        SELECT PRODUCT_TB_CODE, PD_IMAGE_TB_PATH FROM pd_image WHERE PD_IMAGE_TB_REPRESENTATIVE = 'Y'
+                    ) pi
+                    ON p.PRODUCT_TB_CODE = pi.PRODUCT_TB_CODE
+                    JOIN (
+                        SELECT
+                            k.PD_SALE_TB_NO,
+                            psd.PRODUCT_TB_CODE,
+                            psd.PD_SALE_TB_SALES_PRICE,
+                            psd.PD_SALE_TB_DISCOUNT_RATE,
+                            psd.PD_SALE_TB_START_DAY,
+                            psd.PD_SALE_TB_RATING,
+                            psd.PD_SALE_TB_PRODUCT_NAME,
+                            psd.PD_SALE_TB_SIZE
+                        FROM (
+                            SELECT
+                                MAX(s.PD_SALE_TB_NO) "PD_SALE_TB_NO"
+                            FROM PD_SALE s
+                            WHERE s.PD_SALE_TB_STATE='Y'
+                            GROUP BY s.PRODUCT_TB_CODE) k JOIN pd_sale psd
+                        ON k.PD_SALE_TB_NO = psd.PD_SALE_TB_NO
+                        WHERE psd.PD_SALE_TB_SALES_PRICE BETWEEN ${minPrice} AND #{maxPrice}
+                    ) ps
+                    on p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
+                    LEFT OUTER JOIN (
+                        SELECT
+                            ss.PRODUCT_TB_CODE,
+                            COUNT(*) "PD_ORDER_CNT"
+                        FROM orders_detail dd JOIN pd_sale ss
+                        ON dd.PD_SALE_TB_NO = ss.PD_SALE_TB_NO
+                        GROUP BY ss.PRODUCT_TB_CODE
+                    ) od
+                    ON p.PRODUCT_TB_CODE = od.PRODUCT_TB_CODE
+        ]]>
+                    <if test="searchWord == null">
+                        WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
+                    </if>
+                    <if test="searchWord != null">
+                        WHERE PRODUCT_CATEGORY_TB_NO=#{productCategoryTbNo}
+                        AND UPPER(p.PRODUCT_TB_NAME) LIKE '%'||UPPER(#{searchWord})||'%'
+                    </if>
+                    <if test="orderMethod == null">
+                        ORDER BY ps.PD_SALE_TB_START_DAY DESC
+                    </if>
+                    <if test="orderMethod != null">
+                        <if test='orderMethod.equals("none")'>
+                            ORDER BY ps.PD_SALE_TB_START_DAY DESC
+                        </if>
+                        <if test='orderMethod.equals("recent")'>
+                            ORDER BY ps.PD_SALE_TB_START_DAY DESC
+                        </if>
+                        <if test='orderMethod.equals("popularity")'>
+                            ORDER BY od.PD_ORDER_CNT DESC
+                        </if>
+                    </if>
+        <![CDATA[
+                    ) a
+                ) b
+            WHERE b.rnum>=#{startNum} AND b.rnum <#{endNum}
+        ]]>
+    </select>
+
+    <select id="selectProductDetail" parameterType="product" resultType="product">
+        SELECT
+            p.PRODUCT_TB_CODE,
+            p.PRODUCT_TB_NAME,
+            p.PRODUCT_TB_DETAIL,
+            ps.PD_SALE_TB_RATING
+        FROM product p JOIN (
+            SELECT
+                PRODUCT_TB_CODE,
+                PD_SALE_TB_RATING
+            FROM pd_sale
+            WHERE PRODUCT_TB_CODE=#{productTbCode} AND ROWNUM=1
+        ) ps
+        ON p.PRODUCT_TB_CODE = ps.PRODUCT_TB_CODE
+    </select>
+
+
+    <update id="updateBannerState" parameterType="product">
+        UPDATE PRODUCT
+        SET
+            PRODUCT_TB_BANNER_STATE = #{productTbBannerState}
+        WHERE PRODUCT_TB_CODE = #{productTbCode}
+    </update>
+
+    <select id="selectBannerImg" parameterType="product" resultType="product">
+        SELECT
+            *
+        FROM PRODUCT P JOIN PD_IMAGE PI
+        ON P.PRODUCT_TB_CODE = PI.PRODUCT_TB_CODE
+        WHERE PRODUCT_TB_BANNER_STATE = 'Y' AND PD_IMAGE_TB_REPRESENTATIVE = 'Y'
+    </select>
+
+    <select id="selectPopularProductList" parameterType="product" resultType="product">
+        SELECT
+            X.*
+        FROM(
+            SELECT
+                B.*,
+                C.ORDERS_DETAIL_TB_AMOUNT
+            FROM(
+                SELECT
+                    A.*,
+                    PS.PD_SALE_TB_NO
+                FROM(
+                    SELECT
+                        P.PRODUCT_TB_CODE,
+                        P.PRODUCT_TB_NAME,
+                        MAX(PI.PD_IMAGE_TB_PATH) "PD_IMAGE_TB_PATH"
+                    FROM PRODUCT P JOIN PD_IMAGE PI
+                    ON P.PRODUCT_TB_CODE = PI.PRODUCT_TB_CODE
+                    GROUP BY P.PRODUCT_TB_CODE,P.PRODUCT_TB_NAME) A JOIN PD_SALE PS
+                ON A.PRODUCT_TB_CODE = PS.PRODUCT_TB_CODE) B JOIN (
+                SELECT
+                    OD.PD_SALE_TB_NO,
+                    SUM(OD.ORDERS_DETAIL_TB_AMOUNT) "ORDERS_DETAIL_TB_AMOUNT"
+                FROM ORDERS_DETAIL OD JOIN PD_ORDER PO
+                ON OD.PD_ORDER_TB_NO = PO.PD_ORDER_TB_NO
+                WHERE PO.PD_ORDER_TB_PAYMENT_DATE BETWEEN #{dayFrom} AND #{dayTo}
+                GROUP BY OD.PD_SALE_TB_NO) C
+            ON B.PD_SALE_TB_NO = C.PD_SALE_TB_NO
+            ORDER BY ORDERS_DETAIL_TB_AMOUNT DESC) X
+<![CDATA[
+        WHERE ROWNUM <=4
+]]>
+    </select>
+
+    <select id="selectReadcountSaleRateList" parameterType="product" resultType="product">
+<![CDATA[
+        SELECT
+            H.*,
+            I.PRODUCT_CATEGORY_TB_PARENT,
+            I.PRODUCT_CATEGORY_TB_MEDIAN,
+            I.PRODUCT_CATEGORY_TB_SUB
+        FROM(
+            SELECT
+                ROWNUM RNUM,
+                F.*,
+                G.PRODUCT_CATEGORY_TB_NO,
+                G.PRODUCT_TB_NAME
+            FROM(
+                SELECT
+                    D.*,
+                    E.PD_SALE_TB_READ_COUNT,
+                    ROUND(E.PD_SALE_TB_READ_COUNT/D.OD_CNT, 2) "RO"
+                FROM(
+                    SELECT
+                        C.PRODUCT_TB_CODE,
+                        SUM(C.OD_CNT) "OD_CNT"
+                    FROM(
+                        SELECT
+                            A.*,
+                            B.PRODUCT_TB_CODE
+                        FROM(
+                            SELECT
+                                X.PD_SALE_TB_NO,
+                                COUNT(*) "OD_CNT"
+                            FROM ORDERS_DETAIL X JOIN PD_ORDER Y
+                            ON X.PD_ORDER_TB_NO = Y.PD_ORDER_TB_NO
+                            WHERE (Y.PD_ORDER_TB_PAYMENT_DATE BETWEEN #{dayFrom} AND #{dayTo}) AND PD_ORDER_TB_STATE IN ('P', 'D', 'A')
+                            GROUP BY X.PD_SALE_TB_NO) A JOIN PD_SALE B
+                        ON A.PD_SALE_TB_NO = B.PD_SALE_TB_NO) C
+                    GROUP BY C.PRODUCT_TB_CODE) D JOIN (
+                    SELECT
+                        PRODUCT_TB_CODE,
+                        PD_SALE_TB_READ_COUNT
+                    FROM PD_SALE
+                    GROUP BY PRODUCT_TB_CODE, PD_SALE_TB_READ_COUNT) E
+                ON D.PRODUCT_TB_CODE = E.PRODUCT_TB_CODE
+                WHERE OD_CNT > 0
+                ORDER BY RO) F JOIN PRODUCT G
+            ON F.PRODUCT_TB_CODE = G.PRODUCT_TB_CODE) H JOIN PRODUCT_CATEGORY I
+        ON H.PRODUCT_CATEGORY_TB_NO = I.PRODUCT_CATEGORY_TB_NO
+]]>
+    </select>
+    
+    <select id="selectCancelProductRanking" parameterType="product" resultType="product">
+        SELECT
+            ROWNUM RNUM,
+            C.*
+        FROM(
+            SELECT
+                B.*,
+                PDT.PRODUCT_CATEGORY_TB_NO,
+                PDT.PRODUCT_TB_NAME,
+                PC.PRODUCT_CATEGORY_TB_PARENT,
+                PC.PRODUCT_CATEGORY_TB_MEDIAN,
+                PC.PRODUCT_CATEGORY_TB_SUB
+            FROM(
+                SELECT
+                    A.PRODUCT_TB_CODE,
+                    COUNT(*) "CANCEL_CNT"
+                FROM(
+                    SELECT
+                        PO.PD_ORDER_TB_NO,
+                        OD.PD_SALE_TB_NO,
+                        PS.PRODUCT_TB_CODE
+                    FROM PD_ORDER PO JOIN ORDERS_DETAIL OD
+                    ON PO.PD_ORDER_TB_NO = OD.PD_ORDER_TB_NO
+                    JOIN PD_SALE PS
+                    ON OD.PD_SALE_TB_NO = PS.PD_SALE_TB_NO
+                    WHERE PO.PD_ORDER_TB_STATE = 'C' AND PO.PD_ORDER_TB_ORDER_DATE BETWEEN #{dayFrom} AND #{dayTo}) A
+                GROUP BY PRODUCT_TB_CODE) B JOIN PRODUCT PDT
+            ON B.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+            JOIN PRODUCT_CATEGORY PC
+            ON PDT.PRODUCT_CATEGORY_TB_NO = PC.PRODUCT_CATEGORY_TB_NO
+            ORDER BY CANCEL_CNT DESC) C
+    </select>
+    
+    <select id="selectNewArrivalList" parameterType="product" resultType="product">
+<![CDATA[
+        SELECT
+            E.*,
+            F.PD_SALE_TB_NO,
+            G.PD_SALE_TB_SALES_PRICE,
+            G.PD_SALE_TB_DISCOUNT_RATE,
+            G.PD_SALE_TB_SIZE
+        FROM(
+            SELECT
+                D.*
+            FROM(
+                SELECT
+                    B.*,
+                    PDT.PRODUCT_TB_NAME,
+                    PDT.PRODUCT_TB_REG_DATE,
+                    C.PD_IMAGE_TB_PATH
+                FROM(
+                    SELECT
+                        A.*
+                    FROM(
+                        SELECT
+                            PRODUCT_TB_CODE
+                        FROM PD_SALE
+                        WHERE PD_SALE_TB_STATE = 'Y') A
+                    GROUP BY A.PRODUCT_TB_CODE) B JOIN PRODUCT PDT
+                ON B.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+                JOIN (SELECT * FROM PD_IMAGE WHERE PD_IMAGE_TB_REPRESENTATIVE = 'Y') C
+                ON PDT.PRODUCT_TB_CODE = C.PRODUCT_TB_CODE
+                ORDER BY PDT.PRODUCT_TB_REG_DATE DESC) D
+            WHERE ROWNUM <= 4) E JOIN (
+            SELECT
+                PRODUCT_TB_CODE,
+                MIN(PD_SALE_TB_NO) "PD_SALE_TB_NO"
+            FROM PD_SALE
+            GROUP BY PRODUCT_TB_CODE
+        ) F
+        ON E.PRODUCT_TB_CODE = F.PRODUCT_TB_CODE
+        JOIN PD_SALE G
+        ON F.PD_SALE_TB_NO = G.PD_SALE_TB_NO
+]]>
+    </select>
+    
+    <select id="selectBestSellerList" parameterType="product" resultType="product">
+<![CDATA[
+        SELECT
+            F.*
+        FROM(
+            SELECT
+                B.*,
+                PDT.PRODUCT_TB_NAME,
+                C.PD_IMAGE_TB_PATH,
+                D.PD_SALE_TB_NO,
+                E.PD_SALE_TB_SALES_PRICE,
+                E.PD_SALE_TB_DISCOUNT_RATE,
+                E.PD_SALE_TB_SIZE
+            FROM(
+                SELECT
+                    PS.PRODUCT_TB_CODE,
+                    SUM(A.ORDER_CNT) "ORDER_CNT"
+                FROM(
+                    SELECT
+                        PD_SALE_TB_NO,
+                        COUNT(*) "ORDER_CNT"
+                    FROM ORDERS_DETAIL OD JOIN PD_ORDER PO
+                    ON OD.PD_ORDER_TB_NO = PO.PD_ORDER_TB_NO
+                    WHERE PO.PD_ORDER_TB_STATE IN ('P', 'D', 'A')
+                    GROUP BY PD_SALE_TB_NO) A JOIN PD_SALE PS
+                ON A.PD_SALE_TB_NO = PS.PD_SALE_TB_NO
+                GROUP BY PS.PRODUCT_TB_CODE) B JOIN PRODUCT PDT
+            ON B.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+            JOIN (SELECT * FROM PD_IMAGE WHERE PD_IMAGE_TB_REPRESENTATIVE = 'Y') C
+            ON PDT.PRODUCT_TB_CODE = C.PRODUCT_TB_CODE
+            JOIN (
+                SELECT
+                    PRODUCT_TB_CODE,
+                    MIN(PD_SALE_TB_NO) "PD_SALE_TB_NO"
+                FROM PD_SALE
+                WHERE PD_SALE_TB_STATE = 'Y'
+                GROUP BY PRODUCT_TB_CODE
+            ) D
+            ON B.PRODUCT_TB_CODE = D.PRODUCT_TB_CODE
+            JOIN PD_SALE E
+            ON D.PD_SALE_TB_NO = E.PD_SALE_TB_NO
+            ORDER BY B.ORDER_CNT DESC) F
+        WHERE ROWNUM <= 8
+]]>
+    </select>
+
+</mapper>

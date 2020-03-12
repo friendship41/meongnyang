@@ -3,6 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<welcome-file-list>
+		<welcome-file>welcomepage.jsp</welcome-file>
+	</welcome-file-list>
+	
 	<!-- 인코딩 필터 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -58,7 +62,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/adminContext/admin-servlet.xml
-				<!-- 아래와 같이 각 팀원들이 만들 컨텍스트를 등록하면 됩니다. 
+				<!-- 아래와 같이 각 팀원들이 만들 컨텍스트를 등록하면 됩니다.
 				/WEB-INF/spring/adminContext/adminPageContext.xml -->
 			</param-value>
 		</init-param>
@@ -68,5 +72,6 @@
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.ado</url-pattern>
 	</servlet-mapping>
+
 
 </web-app>

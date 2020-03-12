@@ -10,6 +10,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="google-signin-client_id" content="466559862469-rpts5vfh9qtqesurt0ovu2p7poq2ej39.apps.googleusercontent.com">
+
     <!-- Place favicon.ico in the root directory -->
     <link rel="shortcut icon" type="image/x-icon" href="<c:url value='/resources/client/images/favicon.ico'/>">
     <link rel="apple-touch-icon" href="<c:url value='/resources/client/apple-touch-icon.png'/>">
@@ -45,6 +47,7 @@
 <body>
 
 <jsp:include page="login-modal.jsp"/>
+<jsp:include page="review-modal.jsp"/>
 <%--<%@include file="login-modal.jsp"%>--%>
 
 <!--[if lt IE 8]>
@@ -54,6 +57,12 @@
 
 <!-- Body main wrapper start -->
 <div class="wrapper">
+    
+    <!-- 카카오톡 상담문의 -->
+    <a href="javascript:void kakaoChat()">
+        <img src="/resources/client/images/question_small_yellow_pc.png" style="position: fixed; bottom: 80px; right: 20px; z-index: 2147483647;">
+    </a>
+    
     <!-- Start Header Style -->
     <header id="htc__header" class="htc__header__area header--one">
         <!-- Start Mainmenu Area -->
@@ -64,43 +73,37 @@
                     <div class="menumenu__container clearfix">
                         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-5">
                             <div class="logo">
-                                <a href="index.html"><img src="images/logo/4.png" alt="logo images"></a>
+                                <a href="index.do"><img src="/resources/client/images/logo/logo_final.png" alt="logo images"></a>
                             </div>
                         </div>
                         <div class="col-md-7 col-lg-8 col-sm-5 col-xs-3">
                             <nav class="main__menu__nav hidden-xs hidden-sm">
                                 <ul class="main__menu">
-                                    <li class="drop"><a href="index.html">Home</a></li>
+                                    <li class="drop"><a href="index.do">Home</a></li>
                                     <li class="drop"><a href="#">Shopping</a>
                                         <ul class="dropdown mega_dropdown">
                                             <!-- Start Single Mega MEnu -->
-                                            <li><a class="mega__title" href="#">강아지</a>
-                                                <ul class="mega__item">
-                                                    <li><a href="#">먹거리</a></li>
-                                                    <li><a href="#">용품</a></li>
-                                                </ul>
-                                            </li>
-                                            <!-- End Single Mega MEnu -->
-                                            <!-- Start Single Mega MEnu -->
-                                            <li><a class="mega__title" href="product-grid.html">고양이</a>
-                                                <ul class="mega__item">
-                                                    <li><a href="#">먹거리</a></li>
-                                                    <li><a href="#">용품</a></li>
-                                                </ul>
-                                            </li>
-                                            <!-- End Single Mega MEnu -->
+                                            <c:forEach var="singleMenu" items="${sessionScope.menu.menu}" varStatus="status">
+                                                <li><a class="mega__title">${singleMenu.key}</a>
+                                                    <ul class="mega__item">
+                                                        <c:forEach var="subMenu" items="${singleMenu.value}" varStatus="status">
+                                                            <li><a href="shopping.do?productCategoryTbNo=${subMenu.key}">${subMenu.value}</a></li>
+                                                        </c:forEach>
+                                                    </ul>
+                                                </li>
+                                            </c:forEach>
                                         </ul>
                                     </li>
                                     <li class="drop"><a href="#">Community</a>
                                         <ul class="dropdown">
-                                            <li><a href="#">공지</a></li>
-                                            <li><a href="#">FAQ</a></li>
-                                            <li><a href="#">Q&A</a></li>
-                                            <li><a href="#">리뷰</a></li>
-                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="notice.do">공지</a></li>
+                                            <li><a href="faq.do">FAQ</a></li>
+                                            <li><a href="qna-list.do">Q&A</a></li>
+                                            <li><a href="reviewList.do">리뷰</a></li>
+                                            <li><a href="contact.do">Contact</a></li>
                                         </ul>
                                     </li>
-                                    <li class="drop"><a href="#">Market</a>
+                                    <li class="drop"><a href="market-list.do">Market</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -108,25 +111,26 @@
                             <div class="mobile-menu clearfix visible-xs visible-sm">
                                 <nav id="mobile_dropdown">
                                     <ul>
-                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="index.do">Home</a></li>
                                         <li><a href="#">Shopping</a>
                                             <ul>
-                                                <li><a href="blog.html">강아지 먹거리</a></li>
-                                                <li><a href="blog-details.html">강아지 용품</a></li>
-                                                <li><a href="cart.html">고양이 먹거리</a></li>
-                                                <li><a href="checkout.html">고양이 용품</a></li>
+                                                <c:forEach var="singleMenu" items="${sessionScope.menu.menu}" varStatus="status">
+                                                    <c:forEach var="subMenu" items="${singleMenu.value}" varStatus="status">
+                                                        <li><a href="shopping.do?productCategoryTbNo=${subMenu.key}">${singleMenu.key}-${subMenu.value}</a></li>
+                                                    </c:forEach>
+                                                </c:forEach>
                                             </ul>
                                         </li>
                                         <li><a href="#">Community</a>
                                             <ul>
-                                                <li><a href="#">공지</a></li>
-                                                <li><a href="#">FAQ</a></li>
-                                                <li><a href="#">Q&A</a></li>
-                                                <li><a href="#">리뷰</a></li>
-                                                <li><a href="#">Contact</a></li>
+                                                <li><a href="notice.do">공지</a></li>
+                                                <li><a href="faq.do">FAQ</a></li>
+                                                <li><a href="qna-list.do">Q&A</a></li>
+                                                <li><a href="reviewList.do">리뷰</a></li>
+                                                <li><a href="contact.do">Contact</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="blog.html">Market</a></li>
+                                        <li><a href="market-list.do">Market</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -136,12 +140,22 @@
                                 <div class="header__search search search__open">
                                     <a href="#"><i class="icon-magnifier icons"></i></a>
                                 </div>
-                                <div class="header__account">
+                                
+                                <c:choose>
+                                <c:when test="${sessionScope.customer eq null }">
+                                 <div class="header__account">
                                     <a href="#"><i class="icon-user icons" onclick="loginModal()"></i></a>
                                 </div>
+                                </c:when>
+                                <c:otherwise>
+                                <div class="header__account">
+                                    <a href="myinfo.do"><i class="icon-user icons"></i></a>
+                                </div>
+                                </c:otherwise>
+                                </c:choose>
                                 <div class="htc__shopping__cart">
                                     <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a>
-                                    <a class="cart__menu" href="#"><span class="htc__qua">2</span></a>
+                                    <a class="cart__menu" href="#"><span id="cartListSize" class="htc__qua">${sessionScope.cartList.size()}</span></a>
                                 </div>
                             </div>
                         </div>
@@ -164,8 +178,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="search__inner">
-                            <form action="#" method="get">
-                                <input placeholder="Search here... " type="text">
+                            <form action="/shopping.do" method="get">
+                                <input type="hidden" name="minPrice" value="0">
+                                <input type="hidden" name="maxPrice" value="1000000">
+                                <select name="productCategoryTbNo" style="height: 30px; font-size: larger; margin-bottom: 5px; border-width: 0;" required>
+                                    <c:forEach var="cate" items="${sessionScope.fullCategoryList}">
+                                        <option value="${cate.productCategoryTbNo}">${cate.productCategoryTbParent}-${cate.productCategoryTbMedian}-${cate.productCategoryTbSub}</option>
+                                    </c:forEach>
+                                </select>
+                                <input name="searchWord" placeholder="Search here... " type="text" required>
                                 <button type="submit"></button>
                             </form>
                             <div class="search__close__btn">
@@ -183,61 +204,33 @@
                 <div class="offsetmenu__close__btn">
                     <a href="#"><i class="zmdi zmdi-close"></i></a>
                 </div>
-                <div class="shp__cart__wrap">
-                    <div class="shp__single__product">
-                        <div class="shp__pro__thumb">
-                            <a href="#">
-                                <img src="images/product-2/sm-smg/1.jpg" alt="product images">
-                            </a>
+                <div id="cartWrapDiv" class="shp__cart__wrap">
+                    <c:set var="subtotalPrice" value="0"/>
+                    <c:forEach var="item" items="${sessionScope.cartList}">
+                        <div class="shp__single__product" id="pCart-${item.productTbCode}">
+                            <div class="shp__pro__thumb">
+                                <a href="shoppingDetail.do?productTbCode=${item.productTbCode}">
+                                    <img src="${item.cartImage}" alt="product images" width="99" height="119">
+                                </a>
+                            </div>
+                            <div class="shp__pro__details">
+                                <h2><a href="shoppingDetail.do?productTbCode=${item.productTbCode}">${item.pdSaleTbProductName}</a></h2>
+                                <span class="quantity">수량: ${item.ordersDetialTbAmount}</span>
+                                <span class="shp__price">${item.pdSaleTbSalesPrice}원</span>
+                            </div>
+                            <div class="remove__btn">
+                                <a onclick="removeCartItem('${item.productTbCode}')" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+                            </div>
                         </div>
-                        <div class="shp__pro__details">
-                            <h2><a href="product-details.html">BO&Play Wireless Speaker</a></h2>
-                            <span class="quantity">QTY: 1</span>
-                            <span class="shp__price">$105.00</span>
-                        </div>
-                        <div class="remove__btn">
-                            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                        </div>
-                    </div>
-                    <div class="shp__single__product">
-                        <div class="shp__pro__thumb">
-                            <a href="#">
-                                <img src="images/product-2/sm-smg/1.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="shp__pro__details">
-                            <h2><a href="product-details.html">BO&Play Wireless Speaker</a></h2>
-                            <span class="quantity">QTY: 1</span>
-                            <span class="shp__price">$105.00</span>
-                        </div>
-                        <div class="remove__btn">
-                            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                        </div>
-                    </div>
-                    <div class="shp__single__product">
-                        <div class="shp__pro__thumb">
-                            <a href="#">
-                                <img src="images/product-2/sm-smg/2.jpg" alt="product images">
-                            </a>
-                        </div>
-                        <div class="shp__pro__details">
-                            <h2><a href="product-details.html">Brone Candle</a></h2>
-                            <span class="quantity">QTY: 1</span>
-                            <span class="shp__price">$25.00</span>
-                        </div>
-                        <div class="remove__btn">
-                            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-                        </div>
-                    </div>
-                </div>
+                        <c:set var="subtotalPrice" value="${subtotalPrice + item.pdSaleTbSalesPrice}"/>
+                    </c:forEach>
                 <ul class="shoping__total">
-                    <li class="subtotal">Subtotal:</li>
-                    <li class="total__price">$130.00</li>
+                    <li class="subtotal">합 계:</li>
+                    <li id="cartSubtotal" class="total__price" value="${subtotalPrice}">${subtotalPrice}원</li>
                 </ul>
-                <ul class="shopping__btn">
-                    <li><a href="cart.html">View Cart</a></li>
-                    <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
-                </ul>
+                    <ul class="shopping__btn">
+                        <li class="shp__checkout"><a href="checkout.do">Checkout</a></li>
+                    </ul>
             </div>
         </div>
         <!-- End Cart Panel -->

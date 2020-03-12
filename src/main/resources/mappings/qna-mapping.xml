@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qnaDAO">
+
+
+	<insert id="insertNewQna" parameterType="qna">
+		INSERT INTO qna
+		VALUES
+			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
+			#{qnaTbContent}, sysdate, 0, #{qnaTbSecret}, qna_seq.nextval, 0, 0, 'N', #{pdOrderTbNo}, null
+			)
+	</insert>
+
+	<select id="selectQnaList" resultType="qna" parameterType="qna">
+		SELECT
+			q.*,
+			c.CUSTOMER_TB_NAME
+		FROM(
+			SELECT
+				ROWNUM rnum,
+				qna_tb_no,
+				pd_sale_tb_no,
+				qna_type_tb_no,
+				customer_tb_no,
+				qna_tb_title,
+				qna_tb_content,
+				qna_tb_reg_date,
+				qna_tb_readcount,
+				qna_tb_secret,
+				qna_tb_ref,
+				qna_tb_step,
+				qna_tb_depth,
+				qna_tb_status,
+				pd_order_tb_no,
+				ADMINS_TB_ID
+			FROM (
+				SELECT
+					*
+				FROM
+					qna
+				ORDER BY qna_tb_ref DESC, qna_tb_step ASC)
+			) q JOIN CUSTOMER c
+		ON q.customer_tb_no = c.customer_tb_no
+		<![CDATA[
+		WHERE rnum >= #{startRow} AND rnum <= #{endRow}
+		]]>
+	</select>
+	<select id="selectAdminQnaList" resultType="qna" parameterType="qna">
+		SELECT
+			*
+		FROM(
+			SELECT
+				ROWNUM rnum,
+				qna_tb_no,
+				pd_sale_tb_no,
+				qna_type_tb_no,
+				customer_tb_no,
+				qna_tb_title,
+				qna_tb_content,
+				qna_tb_reg_date,
+				qna_tb_readcount,
+				qna_tb_secret,
+				qna_tb_ref,
+				qna_tb_step,
+				qna_tb_depth,
+				qna_tb_status,
+				pd_order_tb_no,
+				ADMINS_TB_ID
+			FROM (
+				SELECT
+					*
+				FROM
+					qna
+				ORDER BY qna_tb_ref DESC, qna_tb_step ASC)
+				) q JOIN CUSTOMER c
+		ON q.customer_tb_no = c.customer_tb_no
+		
+	</select>
+	<!-- 전체 글수 -->
+	<select id="selectCountQna" resultType="int">
+		SELECT COUNT(*) FROM qna
+	</select>
+	<!-- 게시글 조회수 증가 -->
+	<update id="updateReadcount" parameterType="int">
+		UPDATE
+			qna
+		SET
+			qna_tb_readcount = qna_tb_readcount + 1
+		WHERE qna_tb_no = #{qnaTbNo}
+	</update>
+	<select id="selectQna" parameterType="qna" resultType="qna">
+		SELECT
+			q.qna_tb_no,
+			q.pd_sale_tb_no,
+			q.qna_type_tb_no,
+			q.customer_tb_no,
+			q.qna_tb_title,
+			q.qna_tb_content,
+			q.qna_tb_reg_date,
+			q.qna_tb_readcount,
+			q.qna_tb_secret,
+			q.qna_tb_ref,
+			q.qna_tb_step,
+			q.qna_tb_depth,
+			q.qna_tb_status,
+			q.pd_order_tb_no,
+			q.ADMINS_TB_ID,
+			c.CUSTOMER_TB_NAME,
+			c.CUSTOMER_TB_EMAIL
+		FROM qna q JOIN CUSTOMER c
+		ON q.customer_tb_no = c.customer_tb_no
+		WHERE
+			qna_tb_no = #{qnaTbNo}
+	</select>
+	<insert id="insertAdminQnaReply" parameterType="qna">
+		INSERT INTO qna
+		VALUES
+			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
+			#{qnaTbContent}, sysdate, 0, #{qnaTbSecret}, #{qnaTbRef}, #{qnaTbStep}, #{qnaTbDepth}, 'N', #{pdOrderTbNo}, #{adminsTbId}
+			)
+	</insert>
+	<!-- 답변글 -->
+	<insert id="insertQnaReply" parameterType="qna">
+		INSERT INTO qna
+		VALUES
+			(qna_seq.nextval, #{pdSaleTbNo}, #{qnaTypeTbNo}, #{customerTbNo}, #{qnaTbTitle},
+			#{qnaTbContent}, sysdate, 0, #{qnaTbSecret}, #{qnaTbRef}, #{qnaTbStep}, #{qnaTbDepth}, 'N', #{pdOrderTbNo}, null
+			)
+	</insert>
+	<update id="updateStep" parameterType="qna">
+		UPDATE
+			qna
+		SET
+			qna_tb_step = qna_tb_step + 1
+		WHERE
+			qna_tb_ref = #{qnaTbRef} AND qna_tb_step > #{qnaTbStep}
+	</update>
+	<update id="updateStepDepth" parameterType="qna">
+		UPDATE
+			qna
+		SET
+			qna_tb_step = qna_tb_step + 1,
+			qna_tb_depth = qna_tb_depth +1
+		WHERE
+			qna_tb_no =
+			(SELECT
+				c.qna_tb_no
+			FROM
+				(SELECT
+					ROWNUM RNUM,
+					b.qna_tb_no
+				FROM
+				(SELECT
+					A.qna_tb_no
+				FROM qna a
+				WHERE qna_tb_ref = #{qnaTbRef} AND qna_tb_step = #{qnaTbStep}
+				ORDER BY qna_tb_no) b ) c
+				WHERE c.rnum = 2)
+	</update>
+
+
+	
+
+	<update id="updateQna" parameterType="qna">
+		UPDATE qna
+		SET
+			qna_tb_title = #{qnaTbTitle},
+			qna_tb_content = #{qnaTbContent}
+			
+		WHERE 
+			qna_tb_no = #{qnaTbNo}
+	</update>
+	
+	<delete id="deleteQna" parameterType="qna">
+		UPDATE qna
+		SET
+			qna_tb_title = #{qnaTbTitle},
+			qna_tb_status = #{qnaTbStatus}
+		WHERE 
+			qna_tb_no = #{qnaTbNo}
+	</delete>
+
+
+	<select id="selectNewQnalist" parameterType="qna" resultType="qna">
+		select
+			A.*,
+			Q.QNA_TB_NO,
+			Q.QNA_TB_TITLE
+		from(
+			select
+				qna_tb_ref,
+				count(*) "cnt"
+			from qna
+			group by qna_tb_ref
+			having count(*) = 1) A JOIN QNA Q
+		ON A.qna_tb_ref = Q.qna_tb_ref
+	</select>
+</mapper>

@@ -1,31 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:c="http://www.springframework.org/schema/c"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:c="http://www.springframework.org/schema/c"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-4.3.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
 	<!-- 어노테이션 활성화 -->
 	<mvc:annotation-driven/>
-	
+
 
 	<!-- 클라이언트 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.mall.meongnyang.client"/>
-	
-	
+
+
+	<!-- 스케줄러 세팅 -->
+	<task:annotation-driven/>
+
+
+	<!-- 트렌젝션 설정 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+	<!-- aop Log설정 -->
+	<bean id="clientServiceLogAdvice" class="com.mall.meongnyang.client.log.ClientServiceLog"/>
+	<aop:config>
+		<aop:aspect id="serviceLogAspect" ref="clientServiceLogAdvice">
+			<aop:pointcut id="serviceImplMethod" expression="execution(public * com.mall.meongnyang.client..*ServiceImpl.*(..)) and !bean(ClientLoginService)"/>
+			<aop:around pointcut-ref="serviceImplMethod" method="serviceRunLog"/>
+		</aop:aspect>
+	</aop:config>
+
+
+	<!-- 메일 서비스 -->
+	<bean id="MailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
+
+	<!-- API 서버 요청 클래스, 그 외 필요한 클라스 -->
+	<bean id="KakaoPayReadyService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayReadyServiceImpl"/>
+	<bean id="KakaoPayApprovedService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayApprovedServiceImpl"/>
+	<bean id="KakaoPayCancelService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayCancelServiceImpl"/>
+	<bean id="ParamMapToString" class="com.mall.meongnyang.util.apiRequest.service.ParamMapToString"/>
+	<bean id="RequestVOFactory" class="com.mall.meongnyang.util.apiRequest.voFactory.RequestVOFactoryImpl"/>
+
+
+	<!-- 네이버 로그인관련 -->
+	<bean id="naverLoginBO" class="com.mall.meongnyang.client.member.controller.NaverLoginBO" />
+
+
 	<!-- resources mapping -->
 <!--	<mvc:resources mapping="/client/css/**" location="/resources/client/css/"/>-->
 <!--	<mvc:resources mapping="/client/fonts/**" location="/resources/client/fonts/"/>-->
 <!--	<mvc:resources mapping="/client/img/**" location="/resources/client/images/"/>-->
 <!--	<mvc:resources mapping="/client/js/**" location="/resources/client/js/"/>-->
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
-	
-	
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000"/><!-- 10M -->
+	</bean>
+
+
+	<!-- shopping 메뉴 세션세팅 인터셉트, 방문자수 카운팅 인터셉트 -->
+	<bean id="clientMenuDAO" class="com.mall.meongnyang.client.intercepter.menu.ClientMenuDAOImpl">
+		<constructor-arg ref="sqlSessionTemplate"/>
+	</bean>
+	<bean id="clientSelectProductCategoryListService" class="com.mall.meongnyang.client.intercepter.menu.ClientSelectProductCategoryListServiceImpl">
+		<constructor-arg ref="clientMenuDAO"/>
+	</bean>
+	<bean id="VisitCounter" class="com.mall.meongnyang.client.intercepter.visitCount.VisitCounter"/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<mvc:exclude-mapping path="/index.do"/>
+			<mvc:exclude-mapping path="/login.do"/>
+			<mvc:exclude-mapping path="/registry.do"/>
+			<mvc:exclude-mapping path="/loginAjaxSingle.do"/>
+			<mvc:exclude-mapping path="/termsCheck1.do"/>
+			<mvc:exclude-mapping path="/termsCheck2.do"/>
+			<mvc:exclude-mapping path="/addCartAjax.do"/>
+			<mvc:exclude-mapping path="/removeCartAjax.do"/>
+			<mvc:exclude-mapping path="/shopping.do"/>
+			<mvc:exclude-mapping path="/shoppingDetail.do"/>
+			<mvc:exclude-mapping path="/productReviewList.do"/>
+			<mvc:exclude-mapping path="/needLogin.do"/>
+			<mvc:exclude-mapping path="/insertReview.do"/>
+			<mvc:exclude-mapping path="/klogin.do"/>
+			<mvc:exclude-mapping path="/NaverLogin.do"/>
+			<mvc:exclude-mapping path="/googleLogin.do"/>
+			<bean class="com.mall.meongnyang.client.intercepter.login.LoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<bean class="com.mall.meongnyang.client.intercepter.menu.MenuCheckInterceptor">
+				<constructor-arg ref="clientSelectProductCategoryListService"/>
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<bean class="com.mall.meongnyang.client.intercepter.visitCount.VisitCountInterceptor">
+				<constructor-arg ref="VisitCounter"/>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 
 	<!-- View Resolver(제일 밑으로 유지) -->

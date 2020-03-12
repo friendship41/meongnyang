@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductSaleDAO">
+
+	<insert id="insertProductSale" parameterType="productSale">
+        INSERT INTO pd_sale
+        VALUES(
+            pd_sale_seq.NEXTVAL,
+            #{productTbCode},
+            <if test="promotionTbCode == -1">
+                null,
+            </if>
+            <if test="promotionTbCode != -1">
+                #{promotionTbCode},
+            </if>
+            #{pdSaleTbProductName},
+            #{pdSaleTbReceivedPrice},
+            #{pdSaleTbSalesPrice},
+            #{pdSaleTbReceivedAmount},
+            #{pdSaleTbRemainingAmount},
+            #{pdSaleTbLimitAmount},
+            #{pdSaleTbStartDay},
+            <if test="pdSaleTbExpireDay == null">
+                null,
+            </if>
+            <if test="pdSaleTbExpireDay != null">
+                #{pdSaleTbExpireDay},
+            </if>
+            #{pdSaleTbSize},
+            0,
+            0,
+            #{pdSaleTbDiscountRate, jdbcType=INTEGER},
+            'Y'
+        )
+    </insert>
+
+    <update id="updateProductSaleState" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+            PD_SALE_TB_STATE=#{pdSaleTbState}
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
+
+    <update id="updateProductSale" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+        <if test="promotionTbCode != -1">
+            PROMOTION_TB_CODE=#{promotionTbCode},
+        </if>
+        PD_SALE_TB_PRODUCT_NAME=#{pdSaleTbProductName},
+        PD_SALE_TB_RECEIVED_PRICE=#{pdSaleTbReceivedPrice},
+        PD_SALE_TB_SALES_PRICE=#{pdSaleTbSalesPrice},
+        PD_SALE_TB_LIMIT_AMOUNT=#{pdSaleTbLimitAmount},
+        PD_SALE_TB_START_DAY=#{pdSaleTbStartDay},
+        <if test="pdSaleTbExpireDay != null">
+            PD_SALE_TB_EXPIRE_DAY=#{pdSaleTbExpireDay},
+        </if>
+        PD_SALE_TB_DISCOUNT_RATE=#{pdSaleTbDiscountRate, jdbcType=INTEGER},
+        PD_SALE_TB_STATE='Y'
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
+
+    <select id="selectProductSale" parameterType="productSale" resultType="productSale">
+        SELECT
+            PD_SALE_TB_NO,
+            PRODUCT_TB_CODE,
+            PROMOTION_TB_CODE,
+            PD_SALE_TB_PRODUCT_NAME,
+            PD_SALE_TB_RECEIVED_PRICE,
+            PD_SALE_TB_SALES_PRICE,
+            PD_SALE_TB_RECEIVED_AMOUNT,
+            PD_SALE_TB_REMAINING_AMOUNT,
+            PD_SALE_TB_LIMIT_AMOUNT,
+            PD_SALE_TB_EXPIRE_DAY,
+            PD_SALE_TB_SIZE,
+            PD_SALE_TB_DISCOUNT_RATE
+        FROM pd_sale
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </select>
+
+    <select id="selectProductSaleOverviewList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ps.PD_SALE_TB_NO,
+                ps.PRODUCT_TB_CODE,
+                ps.PD_SALE_TB_PRODUCT_NAME,
+                ps.PROMOTION_TB_CODE,
+                ps.PD_SALE_TB_SALES_PRICE,
+                ps.PD_SALE_TB_DISCOUNT_RATE,
+                ps.PD_SALE_TB_REMAINING_AMOUNT,
+                ps.PD_SALE_TB_RATING,
+                ps.PD_SALE_TB_STATE,
+                p.PRODUCT_TB_BANNER_STATE
+            FROM pd_sale ps JOIN product p
+            ON ps.PRODUCT_TB_CODE = p.PRODUCT_TB_CODE
+            WHERE p.PRODUCT_TB_REG_DATE >= #{dayFrom} AND p.PRODUCT_TB_REG_DATE <= #{dayTo}
+        ]]>
+    </select>
+
+    <select id="selectSingleProductSaleList" parameterType="productSale" resultType="productSale">
+        SELECT
+            PD_SALE_TB_NO,
+            PD_SALE_TB_SALES_PRICE,
+            PD_SALE_TB_DISCOUNT_RATE,
+            PD_SALE_TB_SIZE
+        FROM pd_sale
+        WHERE PRODUCT_TB_CODE = #{productTbCode} AND PD_SALE_TB_STATE = 'Y'
+    </select>
+
+    <update id="updateProductRemainCount" parameterType="orderDetilProc">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_REMAINING_AMOUNT = PD_SALE_TB_REMAINING_AMOUNT - #{ordersDetailTbAmount}
+        WHERE PD_SALE_TB_NO = #{pdSaleTbNo}
+    </update>
+    
+    <update id="updateSaleStateWhenZero" parameterType="orderProc">
+        UPDATE PD_SALE
+        SET PD_SALE_TB_STATE =
+            CASE
+                WHEN PD_SALE_TB_REMAINING_AMOUNT=0 THEN 'N'
+                ELSE 'Y'
+            END
+    </update>
+
+    <update id="updateRollbackProductRemainCount" parameterType="orderDetilProc">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_REMAINING_AMOUNT = PD_SALE_TB_REMAINING_AMOUNT + #{ordersDetailTbAmount}
+        WHERE PD_SALE_TB_NO = #{pdSaleTbNo}
+    </update>
+
+    <update id="updateProductSaleReadCount" parameterType="productSale">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_READ_COUNT=PD_SALE_TB_READ_COUNT+1
+        WHERE PRODUCT_TB_CODE=#{productTbCode}
+    </update>
+    
+    <select id="selectPromotionedProductSale" parameterType="productSale" resultType="productSale">
+        SELECT
+            A.*,
+            B.SALE_CNT
+        FROM(
+            SELECT
+                PMT.PROMOTION_TB_CODE,
+                PMT.PROMOTION_TB_NAME,
+                PS.PRODUCT_TB_CODE,
+                PS.PD_SALE_TB_PRODUCT_NAME,
+                PS.PD_SALE_TB_NO,
+                PDT.PRODUCT_CATEGORY_TB_NO,
+                PCATE.PRODUCT_CATEGORY_TB_PARENT,
+                PCATE.PRODUCT_CATEGORY_TB_MEDIAN,
+                PCATE.PRODUCT_CATEGORY_TB_SUB
+            FROM PROMOTION PMT JOIN PD_SALE PS
+            ON PMT.PROMOTION_TB_CODE = PS.PROMOTION_TB_CODE
+            JOIN PRODUCT PDT
+            ON PS.PRODUCT_TB_CODE = PDT.PRODUCT_TB_CODE
+            JOIN PRODUCT_CATEGORY PCATE
+            ON PDT.PRODUCT_CATEGORY_TB_NO = PCATE.PRODUCT_CATEGORY_TB_NO
+            WHERE PMT.PROMOTION_TB_CODE = #{promotionTbCode}) A JOIN (
+            SELECT
+                OD.PD_SALE_TB_NO,
+                COUNT(*) "SALE_CNT"
+            FROM ORDERS_DETAIL OD JOIN PD_ORDER PO
+            ON OD.PD_ORDER_TB_NO = PO.PD_ORDER_TB_NO
+            WHERE PO.PD_ORDER_TB_STATE IN ('P','D','A')
+            GROUP BY PD_SALE_TB_NO) B
+        ON A.PD_SALE_TB_NO = B.PD_SALE_TB_NO
+    </select>
+
+    <update id="updateProductSaleRating" parameterType="productSale">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_RATING = (SELECT SUM(REVIEW_TB_RATING)/COUNT(*) FROM REVIEW WHERE PRODUCT_TB_CODE = #{productTbCode})
+        WHERE PRODUCT_TB_CODE = #{productTbCode}
+    </update>
+
+	<!-- 추천 상품 가져오기 -->
+	<select id="selectRecommendProduct" parameterType="recommend" resultType="recommend">
+<![CDATA[
+		SELECT
+		*
+		FROM
+		    (SELECT
+		        d.PRODUCT_TB_CODE,
+		        p.product_tb_name,
+		        img.PD_IMAGE_TB_PATH,
+		        COUNT(d.PRODUCT_TB_CODE) "PRODUCT_TB_CODE_CNT"
+		    FROM orders_detail C
+		    JOIN
+		        (SELECT
+		            od.PD_SALE_TB_NO ,
+		            od.PD_ORDER_TB_NO,
+		            a.PRODUCT_TB_CODE
+		        FROM orders_detail od
+		        JOIN
+		            (SELECT
+		                PD_SALE_TB_NO,
+		                PRODUCT_TB_CODE
+		            FROM pd_sale
+		            WHERE product_tb_code = #{productTbCode}) A
+		        ON od.pd_sale_tb_no = A.pd_sale_tb_no) B
+		    ON c.pd_order_tb_no = b.pd_order_tb_no
+		    JOIN pd_sale D
+		    ON c.pd_sale_tb_no = d.pd_sale_tb_no
+		    JOIN pd_image img
+		    ON img.pd_image_tb_representative = 'Y'
+		    AND img.product_tb_code = d.product_tb_code
+		    JOIN product p
+		    ON p.product_tb_code = d.product_tb_code
+		    WHERE c.pd_sale_tb_no != b.pd_sale_tb_no 
+		    GROUP BY d.PRODUCT_TB_CODE, p.product_tb_name, img.PD_IMAGE_TB_PATH
+		    ORDER BY COUNT(d.PRODUCT_TB_CODE) DESC)
+		WHERE ROWNUM <= 3
+]]>	
+	</select>
+	
+
+    <update id="updatePromotionEndProductSale" parameterType="productSale">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_STATE = 'N'
+        WHERE PROMOTION_TB_CODE IN (SELECT PROMOTION_TB_CODE FROM PROMOTION WHERE TO_CHAR(PROMOTION_TB_END_DATE, 'yyyy/MM/dd') = TO_CHAR(SYSDATE, 'yyyy/MM/dd'))
+    </update>
+
+    <update id="updateExpireDayOverProductSale" parameterType="productSale">
+        UPDATE PD_SALE
+        SET
+            PD_SALE_TB_STATE = 'N'
+        WHERE TO_CHAR(PD_SALE_TB_EXPIRE_DAY, 'yyyy/MM/dd') =  TO_CHAR(SYSDATE, 'yyyy/MM/dd')
+    </update>
+
+</mapper>

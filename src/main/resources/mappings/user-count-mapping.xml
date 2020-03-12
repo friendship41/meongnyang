@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OverviewDAO">
+
+	<select id="selectOverviewList" parameterType="adminOverview" resultType="adminOverview">
+<![CDATA[
+		SELECT
+		    TO_CHAR(user_count_tb_date,'MM-dd') "user_count_tb_date",
+		    user_count_tb_visitors,
+		    user_count_tb_joiners,
+		    user_count_tb_outcount
+		FROM user_count
+		WHERE user_count_tb_date BETWEEN '2020-02-10' AND TO_DATE('2020-03-11')+1
+		ORDER BY user_count_tb_date ASC
+]]>
+	</select>
+
+	<select id="selectOverviewListMonth" parameterType="adminOverview" resultType="adminOverview">
+<![CDATA[
+		SELECT
+		     TO_CHAR(USER_COUNT_TB_DATE, 'YY-MM') "USER_COUNT_TB_DATE",
+		     SUM(USER_COUNT_TB_VISITORS) "USER_COUNT_TB_VISITORS",
+		     SUM(USER_COUNT_TB_JOINERS) "USER_COUNT_TB_JOINERS",
+		     SUM(USER_COUNT_TB_OUTCOUNT) "USER_COUNT_TB_OUTCOUNT"
+		FROM USER_COUNT
+		WHERE user_count_tb_date >= #{StartDate} AND user_count_tb_date <= #{EndDate}+1
+		GROUP BY TO_CHAR(USER_COUNT_TB_DATE, 'YY-MM')
+		ORDER BY USER_COUNT_TB_DATE	ASC
+]]>
+	</select>
+
+
+	<insert id="insertUserCount" parameterType="userCount">
+		INSERT INTO USER_COUNT
+		VALUES (
+			SYSDATE,
+			#{userCountTbVisitors},
+			(
+				SELECT
+					COUNT(*)
+				FROM CUSTOMER
+				WHERE TO_CHAR(CUSTOMER_TB_JOIN_DATE,'yyyyMMdd') = TO_CHAR(SYSDATE, 'yyyyMMdd')
+			),
+			(
+				SELECT
+					COUNT(*)
+				FROM CUSTOMER
+				WHERE CUSTOMER_TB_STATE = 'D' AND TO_CHAR(CUSTOMER_TB_LAST_LOGIN,'yyyyMMdd') = TO_CHAR(SYSDATE, 'yyyyMMdd')
+			)
+		)
+	</insert>
+
+	<select id="selectSingleByDate" parameterType="userCount" resultType="userCount">
+		SELECT
+			USER_COUNT_TB_DATE,
+			USER_COUNT_TB_VISITORS,
+			USER_COUNT_TB_JOINERS,
+			USER_COUNT_TB_OUTCOUNT
+		FROM USER_COUNT
+		WHERE to_char(USER_COUNT_TB_DATE, 'yy/MM/dd') = to_char(#{userCountTbDate}, 'yy/MM/dd')
+	</select>
+
+	<select id="selectWeekVisitorList" parameterType="userCount" resultType="userCount">
+<![CDATA[
+		SELECT
+			TO_DATE(A.USER_COUNT_TB_DATE_STR, 'yyyy/MM/dd') "USER_COUNT_TB_DATE",
+			CASE WHEN UC.USER_COUNT_TB_VISITORS IS NULL THEN 0
+				ELSE UC.USER_COUNT_TB_VISITORS
+				END "USER_COUNT_TB_VISITORS"
+		FROM(
+			SELECT
+				TO_CHAR(#{startDate} + LEVEL-1,'yyyy-MM-dd') "USER_COUNT_TB_DATE_STR"
+			FROM DUAL
+			CONNECT BY #{startDate} + LEVEL-1 <= #{endDate}) A LEFT OUTER JOIN USER_COUNT UC
+		ON A.USER_COUNT_TB_DATE_STR = TO_CHAR(UC.USER_COUNT_TB_DATE, 'yyyy-MM-dd')
+		ORDER BY TO_DATE(A.USER_COUNT_TB_DATE_STR, 'yyyy/MM/dd') ASC
+]]>
+	</select>
+
+</mapper>

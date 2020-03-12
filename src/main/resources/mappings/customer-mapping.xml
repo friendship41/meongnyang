@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ClientLoginDAO">
+
+	<select id="selectClientLoginCheck" resultType="clientLogin">
+		SELECT
+			customer_tb_no,
+			customer_tb_name,
+			customer_tb_password,
+			customer_tb_email,
+			customer_tb_phone,
+			customer_tb_join_date,
+			customer_tb_point,
+			customer_tb_last_login,
+			customer_tb_pw_change,
+			customer_tb_join_path,
+			customer_tb_state
+		FROM customer
+		WHERE customer_tb_email = #{customerTbEmail} 
+	</select>
+	
+	<insert id="insertRegistry" parameterType="clientLogin" >
+		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_password,
+								customer_tb_email, customer_tb_join_date)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbPassword},
+		#{customerTbEmail}, sysdate)
+	</insert>
+	
+	<insert id="insertKakao" parameterType="clientLogin" >
+		INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email, customer_tb_join_path, customer_tb_state)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail}, 'K', 'N')
+	</insert>
+	
+	<insert id="insertNaver" parameterType="clientLogin">
+	INSERT INTO customer (customer_tb_no, customer_tb_name, customer_tb_email, customer_tb_join_path, customer_tb_state)
+		VALUES(customer_seq.nextval, #{customerTbName}, #{customerTbEmail}, 'N', 'N')
+	</insert>
+
+	<update id="updateClientLastLogin" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_last_login = sysdate
+		WHERE
+			customer_tb_no = #{customerTbNo}
+	</update>
+	
+	<update id="updateMyinfoPhone" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_phone = #{customerTbPhone}
+		WHERE customer_tb_no = #{customerTbNo}
+	</update>
+	
+	<update id="updateMyinfoPassword" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_password = #{customerTbPassword}, customer_tb_pw_change = sysdate
+		WHERE customer_tb_no = #{customerTbNo}
+	</update>
+
+	<update id="deleteMyinfoCustomer" parameterType="clientLogin">
+		UPDATE customer
+		SET
+			customer_tb_state = #{customerTbState}
+		WHERE customer_tb_password = #{customerTbPassword}
+	</update>
+	
+	<update id="updatePointUse" parameterType="orderProc">
+		UPDATE CUSTOMER
+		SET
+			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT-#{pdOrderTbUsedPoint}
+		WHERE CUSTOMER_TB_NO = #{customerTbNo}
+	</update>
+
+	<update id="updatePointRollback" parameterType="orderProc">
+		UPDATE CUSTOMER
+		SET
+			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT+#{pdOrderTbUsedPoint}
+		WHERE CUSTOMER_TB_NO = #{customerTbNo}
+	</update>
+
+	<update id="updatePointPlus" parameterType="orderProc">
+		UPDATE CUSTOMER
+		SET
+			CUSTOMER_TB_POINT = CUSTOMER_TB_POINT+ROUND(#{pdOrderTbPayment}/100, 0)
+		WHERE CUSTOMER_TB_NO = ${customerTbNo}
+	</update>
+	<update id="updateState" parameterType="clientLogin">
+		UPDATE CUSTOMER
+		SET
+			customer_tb_state = #{customerTbState}
+		WHERE customer_Tb_no = #{customerTbNo}
+			
+	</update>
+
+	<select id="selectMailAgreeCustomerList" parameterType="clientLogin" resultType="clientLogin">
+		SELECT
+			C.CUSTOMER_TB_EMAIL
+		FROM CUSTOMER C JOIN TERMS_AGREE T
+		ON C.CUSTOMER_TB_NO = T.CUSTOMER_TB_NO
+        WHERE C.CUSTOMER_TB_STATE = 'N' AND T.TERMS_AGREE_TB_CONSENT_STATUS = 'Y'
+        GROUP BY C.CUSTOMER_TB_EMAIL
+	</select>
+
+	<insert id="insertGoogle" parameterType="clientLogin">
+	INSERT INTO customer VALUES(customer_seq.nextval,#{customerTbName},NULL,#{customerTbEmail},NULL,SYSDATE,0,SYSDATE,SYSDATE,'G','N')
+	</insert>
+</mapper>

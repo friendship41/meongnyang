@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminLoginDAO">
+	<select id="selectLoginCheck" resultType="login">
+		SELECT 
+			admins_tb_id,
+			admins_tb_password,
+			admins_tb_position,
+			admins_tb_employment_status
+		FROM admins
+		WHERE admins_tb_id = #{adminsTbId} AND ADMINS_TB_EMPLOYMENT_STATUS = 'N'
+	</select>
+	
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ProductStockDAO">
+
+    <select id="selectDashBoardProductStorkList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ROWNUM "ROW_NUMBER",
+                A.PD_SALE_TB_NO,
+                a.PRODUCT_TB_CODE,
+                A.PD_SALE_TB_PRODUCT_NAME,
+                A.PD_SALE_TB_REMAINING_AMOUNT,
+                A.PD_SALE_TB_LIMIT_AMOUNT,
+                PD_SALE_TB_START_DAY
+            FROM(
+                SELECT
+                    PD_SALE_TB_NO,
+                    PRODUCT_TB_CODE,
+                    PD_SALE_TB_PRODUCT_NAME,
+                    PD_SALE_TB_REMAINING_AMOUNT,
+                    PD_SALE_TB_LIMIT_AMOUNT,
+                    PD_SALE_TB_START_DAY
+                FROM PD_SALE
+                WHERE PD_SALE_TB_REMAINING_AMOUNT <= PD_SALE_TB_LIMIT_AMOUNT AND PD_SALE_TB_STATE = 'Y'
+                ORDER BY PD_SALE_TB_START_DAY DESC
+            ) A
+        ]]>
+    </select>
+
+    <select id="selectDashboardExpireProductList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ROWNUM "ROW_NUMBER",
+                A.PD_SALE_TB_NO,
+                A.PRODUCT_TB_CODE,
+                A.PD_SALE_TB_PRODUCT_NAME,
+                PD_SALE_TB_START_DAY,
+                PD_SALE_TB_EXPIRE_DAY
+            FROM(
+                SELECT
+                    PD_SALE_TB_NO,
+                    PRODUCT_TB_CODE,
+                    PD_SALE_TB_PRODUCT_NAME,
+                    PD_SALE_TB_START_DAY,
+                    PD_SALE_TB_EXPIRE_DAY
+                FROM PD_SALE
+                WHERE PD_SALE_TB_EXPIRE_DAY < (SYSDATE+60) AND PD_SALE_TB_STATE = 'Y'
+                ORDER BY PD_SALE_TB_EXPIRE_DAY DESC
+            ) A
+        ]]>
+    </select>
+
+
+    <select id="selectProductStorkList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ROWNUM "ROW_NUMBER",
+                A.PD_SALE_TB_NO,
+                a.PRODUCT_TB_CODE,
+                A.PD_SALE_TB_PRODUCT_NAME,
+                A.PD_SALE_TB_REMAINING_AMOUNT,
+                A.PD_SALE_TB_LIMIT_AMOUNT,
+                PD_SALE_TB_START_DAY
+            FROM(
+                SELECT
+                    PD_SALE_TB_NO,
+                    PRODUCT_TB_CODE,
+                    PD_SALE_TB_PRODUCT_NAME,
+                    PD_SALE_TB_REMAINING_AMOUNT,
+                    PD_SALE_TB_LIMIT_AMOUNT,
+                    PD_SALE_TB_START_DAY
+                FROM PD_SALE
+                WHERE PD_SALE_TB_START_DAY>#{dayFrom} AND PD_SALE_TB_START_DAY<#{dayTo} AND PD_SALE_TB_STATE = 'Y'
+                ORDER BY PD_SALE_TB_START_DAY DESC
+            ) A
+        ]]>
+    </select>
+
+    <select id="selectExpireProductList" parameterType="productSale" resultType="productSale">
+        <![CDATA[
+            SELECT
+                ROWNUM "ROW_NUMBER",
+                A.PD_SALE_TB_NO,
+                a.PRODUCT_TB_CODE,
+                A.PD_SALE_TB_PRODUCT_NAME,
+                PD_SALE_TB_START_DAY,
+                PD_SALE_TB_EXPIRE_DAY
+            FROM(
+                SELECT
+                    PD_SALE_TB_NO,
+                    PRODUCT_TB_CODE,
+                    PD_SALE_TB_PRODUCT_NAME,
+                    PD_SALE_TB_START_DAY,
+                    PD_SALE_TB_EXPIRE_DAY
+                FROM PD_SALE
+                WHERE PD_SALE_TB_EXPIRE_DAY BETWEEN #{dayFrom} AND #{dayTo} AND PD_SALE_TB_STATE = 'Y'
+                ORDER BY PD_SALE_TB_EXPIRE_DAY DESC
+            ) A
+        ]]>
+    </select>
+
+    <update id="updateProductStock" parameterType="productSale">
+        UPDATE pd_sale
+        SET
+            PD_SALE_TB_RECEIVED_AMOUNT=(SELECT PD_SALE_TB_RECEIVED_AMOUNT FROM pd_sale WHERE PD_SALE_TB_NO=#{pdSaleTbNo})+#{pdSaleTbReceivedAmount},
+            PD_SALE_TB_REMAINING_AMOUNT=(SELECT PD_SALE_TB_REMAINING_AMOUNT FROM pd_sale WHERE PD_SALE_TB_NO=#{pdSaleTbNo})+#{pdSaleTbReceivedAmount}
+        WHERE PD_SALE_TB_NO=#{pdSaleTbNo}
+    </update>
+
+    <select id="selectProductStockLimitedList" parameterType="productSale" resultType="productSale">
+<![CDATA[
+        SELECT
+            PD_SALE_TB_NO,
+            PD_SALE_TB_PRODUCT_NAME,
+            PD_SALE_TB_REMAINING_AMOUNT,
+            PD_SALE_TB_LIMIT_AMOUNT
+        FROM PD_SALE
+        WHERE PD_SALE_TB_REMAINING_AMOUNT <= PD_SALE_TB_LIMIT_AMOUNT AND PD_SALE_TB_STATE = 'Y'
+]]>
+    </select>
+
+    <select id="selectProductExpireCommingList" parameterType="productSale" resultType="productSale">
+<![CDATA[
+        SELECT
+            PD_SALE_TB_NO,
+            PD_SALE_TB_PRODUCT_NAME,
+            PD_SALE_TB_EXPIRE_DAY
+        FROM PD_SALE
+        WHERE PD_SALE_TB_EXPIRE_DAY < (SYSDATE+60) AND PD_SALE_TB_STATE = 'Y'
+]]>
+    </select>
+
+</mapper>

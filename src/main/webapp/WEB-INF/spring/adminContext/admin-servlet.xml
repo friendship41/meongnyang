@@ -5,9 +5,13 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 어노테이션 활성화 -->
 	<mvc:annotation-driven/>
@@ -20,10 +24,78 @@
 	
 	<!-- 관리자 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.mall.meongnyang.admin"/>
+
+
+	<!-- 트렌젝션 설정 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+	<!-- aop Log설정 -->
+	<bean id="AdminServiceLogAdvice" class="com.mall.meongnyang.admin.log.AdminServiceLog"/>
+	<aop:config>
+		<aop:aspect id="serviceLogAspect" ref="AdminServiceLogAdvice">
+			<aop:pointcut id="serviceImplMethod" expression="execution(public * com.mall.meongnyang.client..*ServiceImpl.*(..)) and !bean(AdminSelectLoginCheck)"/>
+			<aop:around pointcut-ref="serviceImplMethod" method="serviceRunLog"/>
+		</aop:aspect>
+	</aop:config>
+
+
+
+	<!-- 메일 서비스 -->
+	<bean id="MailService" class="com.mall.meongnyang.util.mail.MailServiceImpl"/>
+
+
+	<!-- 카카오페이 관련 서비스 -->
+	<bean id="KakaoPayCancelService" class="com.mall.meongnyang.util.apiRequest.service.KakaoPayCancelServiceImpl"/>
+	<bean id="ParamMapToString" class="com.mall.meongnyang.util.apiRequest.service.ParamMapToString"/>
+	<bean id="RequestVOFactory" class="com.mall.meongnyang.util.apiRequest.voFactory.RequestVOFactoryImpl"/>
+
+
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10240000"/><!-- 10M -->
+	</bean>
 	
+	<!-- 이메일 발송 bean 설정 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" /> <!-- gmail을 사용 -->
+        <property name="port" value="587" />
+        <property name="username" value="kangholee8512@gmail.com" />
+        <property name="password" value="" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+
+
+	<!-- shopping 메뉴 세션세팅 인터셉트, 방문자수 카운팅 인터셉트 -->
+	<bean id="AdminSelectProductStockLimitedListService" class="com.mall.meongnyang.admin.intercepter.stockAlert.AdminSelectProductStockLimitedListServiceImpl"/>
+	<bean id="AdminSelectProductExpireCommingListService" class="com.mall.meongnyang.admin.intercepter.stockAlert.AdminSelectProductExpireCommingListServiceImpl"/>
+	<bean id="AdminSelectNewQnaListService" class="com.mall.meongnyang.admin.intercepter.stockAlert.AdminSelectNewQnaListServiceImpl"/>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.ado"/>
+			<mvc:exclude-mapping path="/login.ado"/>
+			<mvc:exclude-mapping path="/needLogin.ado"/>
+			<bean class="com.mall.meongnyang.admin.intercepter.login.AdminLoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/*.ado"/>
+			<bean class="com.mall.meongnyang.admin.intercepter.stockAlert.StockCheckInterceptor">
+				<constructor-arg ref="AdminSelectProductStockLimitedListService"/>
+				<constructor-arg ref="AdminSelectProductExpireCommingListService"/>
+				<constructor-arg ref="AdminSelectNewQnaListService"/>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
-	
-	
+
 
 	<!-- View Resolver -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
