@@ -6,6 +6,7 @@ import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import com.mall.meongnyang.client.member.vo.GoogleCustomerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("GoogleLoginProcService")
 public class GoogleLoginProcServiceImpl implements GoogleLoginProcService
@@ -16,6 +17,7 @@ public class GoogleLoginProcServiceImpl implements GoogleLoginProcService
     private ClientInsertTermsAgreeListService clientInsertTermsAgreeListService;
 
     @Override
+    @Transactional
     public ClientCustomerVO googleLoginProc(GoogleCustomerVO googleCustomerVO)
     {
         ClientCustomerVO customerTemp = new ClientCustomerVO();

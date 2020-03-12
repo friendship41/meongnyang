@@ -10,6 +10,7 @@ import com.mall.meongnyang.util.apiRequest.vo.KakaoPayReadyResponseVO;
 import com.mall.meongnyang.util.codeGen.GenerateCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,6 +52,7 @@ public class ClientPaymentController
     }
 
     @RequestMapping(value = "/paymentReady.do", method = RequestMethod.POST)
+    @Transactional
     public String readyRoPay(ClientOrderVO clientOrderVO, HttpSession session, Model model)
     {
         clientOrderVO.setPdOrderTbNo(new GenerateCode().generateOrderCode());
@@ -94,6 +96,7 @@ public class ClientPaymentController
     }
 
     @RequestMapping(value = "/kakaoPayApproval.do", method = RequestMethod.GET)
+    @Transactional
     public String kakaoPayApprove(HttpSession session, @RequestParam("pg_token")String pg_token, Model model)
     {
         ClientOrderVO clientOrderVO = (ClientOrderVO)session.getAttribute("orderInfo");
@@ -122,6 +125,7 @@ public class ClientPaymentController
     }
 
     @RequestMapping(value = {"/kakaoPayCancel.do","/kakaoPayFail.do"})
+    @Transactional
     public String failToPay(HttpSession session, Model model)
     {
         ClientOrderVO orderInfo = (ClientOrderVO)session.getAttribute("orderInfo");

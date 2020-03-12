@@ -7,6 +7,7 @@ import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import com.mall.meongnyang.client.member.vo.ClientTermsAgreeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +33,7 @@ public class ClientKaLoginController
 
 
     @RequestMapping(value = "/klogin.do")
+    @Transactional
     public String klogin(@RequestParam("code") String code, HttpSession session, Model model)
     {
         HashMap<String, Object> token = clientInsertKaLoginService.getKakaoAccessToken(code);

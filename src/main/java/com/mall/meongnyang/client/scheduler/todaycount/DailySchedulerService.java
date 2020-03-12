@@ -8,6 +8,7 @@ import com.mall.meongnyang.client.shopping.dao.ClientShoppingDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DailySchedulerService
@@ -23,6 +24,7 @@ public class DailySchedulerService
 
 
     @Scheduled(cron = "59 59 23 * * *")
+    @Transactional
     public void dailyService()
     {
         ClientUserCountVO clientUserCountVO = new ClientUserCountVO();

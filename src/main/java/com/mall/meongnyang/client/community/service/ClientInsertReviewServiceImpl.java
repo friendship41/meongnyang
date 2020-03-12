@@ -6,6 +6,7 @@ import com.mall.meongnyang.client.community.vo.ClientReviewVO;
 import com.mall.meongnyang.util.imagesave.SaveImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class ClientInsertReviewServiceImpl implements ClientInsertReviewService 
 	private ClientReviewDAO clientReviewDAO;
 
 	@Override
+	@Transactional
 	public void insertReview(ClientReviewVO clientReviewVO, HttpServletRequest request) {
 		
 		if (clientReviewVO.getFile() != null) {

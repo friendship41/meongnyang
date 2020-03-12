@@ -7,6 +7,7 @@ import com.mall.meongnyang.admin.marketing.vo.AdminEventVO;
 import com.mall.meongnyang.util.imagesave.SaveImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class AdminInsertEventAndPointServiceImpl implements AdminInsertEventAndP
     private AdminEventPointDAO adminEventPointDAO;
 
     @Override
+    @Transactional
     public void insertEventAndPoint(AdminEventVO adminEventVO, AdminEventPointVO adminEventPointVO, HttpServletRequest request)
     {
         SaveImageService saveImageService = new SaveImageService();

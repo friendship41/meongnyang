@@ -5,6 +5,7 @@ import com.mall.meongnyang.client.mypage.service.ClientSelectMyinfoAddressListSe
 import com.mall.meongnyang.client.mypage.vo.ClientCmAddressVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ public class ClientCheckoutController
     private ClientSelectMyinfoAddressListService clientSelectMyinfoAddressListService;
 
     @RequestMapping(value = "/checkout.do", method = RequestMethod.GET)
+    @Transactional
     public String goToCheckoutPage(HttpSession session, Model model)
     {
         ClientCustomerVO clientCustomerVO = (ClientCustomerVO) session.getAttribute("customer");

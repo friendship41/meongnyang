@@ -1,5 +1,7 @@
 package com.mall.meongnyang.util.mail;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -9,6 +11,7 @@ import java.util.Properties;
 public class MailServiceImpl implements MailService
 {
     @Override
+    @Transactional
     public void sendMail(MailVO mailVO)
     {
         Properties props = new Properties();

@@ -7,6 +7,7 @@ import com.mall.meongnyang.util.apiRequest.service.KakaoPayCancelService;
 import com.mall.meongnyang.util.apiRequest.vo.KakaoPayCancelResponseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("ClientupdateOrderStateService")
 public class ClientupdateOrderStateServiceImpl implements ClientupdateOrderStateService
@@ -17,6 +18,7 @@ public class ClientupdateOrderStateServiceImpl implements ClientupdateOrderState
     private KakaoPayCancelService kakaoPayCancelService;
 
     @Override
+    @Transactional
     public void updateOrderState(ClientOrderVO clientOrderVO)
     {
         if (clientOrderVO.getPdOrderTbState().equalsIgnoreCase("C"))

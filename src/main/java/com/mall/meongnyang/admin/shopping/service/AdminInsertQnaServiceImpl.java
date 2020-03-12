@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.mall.meongnyang.admin.shopping.dao.AdminQnaDAO;
 import com.mall.meongnyang.admin.shopping.vo.AdminQnaVO;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("AdminInsertQnaService")
 public class AdminInsertQnaServiceImpl implements AdminInsertQnaService {
@@ -15,6 +16,7 @@ public class AdminInsertQnaServiceImpl implements AdminInsertQnaService {
 	
 
 	@Override
+	@Transactional
 	public void insertAdminQnaReply(AdminQnaVO adminQnaVO) {
 		
 		adminQnaDAO.insertAdminQnaReply(adminQnaVO);

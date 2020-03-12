@@ -6,11 +6,13 @@
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc"
 	   xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
 	   xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/task
-		http://www.springframework.org/schema/task/spring-task-4.3.xsd">
+		http://www.springframework.org/schema/task/spring-task-4.3.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 
 	<!-- 어노테이션 활성화 -->
@@ -25,6 +27,8 @@
 	<task:annotation-driven/>
 
 
+	<!-- 트렌젝션 설정 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 
 	<!-- 메일 서비스 -->

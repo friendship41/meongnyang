@@ -4,6 +4,7 @@ import com.mall.meongnyang.admin.product.dao.AdminProductImageDAO;
 import com.mall.meongnyang.admin.product.vo.AdminProductImageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("AdminUpdateProductImageService")
 public class AdminUpdateProductImageServiceImpl implements AdminUpdateProductImageService
@@ -12,6 +13,7 @@ public class AdminUpdateProductImageServiceImpl implements AdminUpdateProductIma
     private AdminProductImageDAO adminProductImageDAO;
 
     @Override
+    @Transactional
     public String updateProductImageRep(AdminProductImageVO adminProductImageVO)
     {
 //        프로덕트 넘버 필요

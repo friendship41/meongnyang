@@ -1,15 +1,13 @@
 package com.mall.meongnyang.client.market.service;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.mall.meongnyang.client.market.dao.ClientMarketDAO;
 import com.mall.meongnyang.client.market.vo.ClientMarketVO;
 import com.mall.meongnyang.util.imagesave.SaveImageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @Service
 public class ClientUpdateMarketServiceImpl implements ClientUpdateMarketService{
@@ -37,7 +35,7 @@ public class ClientUpdateMarketServiceImpl implements ClientUpdateMarketService{
 				e.printStackTrace();
 			}
 		}
-		System.out.println(clientMarketVO);
+//		System.out.println(clientMarketVO);
 		clientMarketDAO.updateMarket(clientMarketVO);
 	}
 

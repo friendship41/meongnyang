@@ -1,22 +1,17 @@
 package com.mall.meongnyang.client.member.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mall.meongnyang.client.member.dao.ClientLoginDAO;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 @Service
 public class ClientKaLoginServiceImpl implements ClientKaLoginService{
@@ -100,7 +95,7 @@ public class ClientKaLoginServiceImpl implements ClientKaLoginService{
 		        
 		        // TODO 카카오톡 API를 참고하여 responseCode를 이용해 예외 처리
 		        int responseCode = conn.getResponseCode();
-		        System.out.println("responseCode : " + responseCode);
+//		        System.out.println("responseCode : " + responseCode);
 		        
 		        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
 		        
@@ -124,7 +119,12 @@ public class ClientKaLoginServiceImpl implements ClientKaLoginService{
 		        
 		        if (kakaoAccount.getAsJsonObject().has("email"))
 		        	email = kakaoAccount.getAsJsonObject().get("email").getAsString();
-		        
+
+		        if(email == null || email.equals(""))
+                {
+                    email = ""+element.getAsJsonObject().get("id").getAsInt();
+                }
+
 		        clientCustomerVO.setCustomerTbName(nickName);
 		        clientCustomerVO.setCustomerTbEmail(email);
 		        

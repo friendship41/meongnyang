@@ -5,6 +5,7 @@ import com.mall.meongnyang.client.mypage.dao.ClientProductOrderDAO;
 import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("ClientInsertOrderService")
 public class ClientInsertOrderServiceImpl implements ClientInsertOrderService
@@ -15,6 +16,7 @@ public class ClientInsertOrderServiceImpl implements ClientInsertOrderService
     private ClientOrdersDetailDAO clientOrdersDetailDAO;
 
     @Override
+    @Transactional
     public void insertOrderAndDetail(ClientOrderVO clientOrderVO)
     {
         String orderNum = clientOrderVO.getPdOrderTbNo();
