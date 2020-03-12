@@ -1,5 +1,6 @@
 package com.mall.meongnyang.client.member.service;
 
+import com.mall.meongnyang.util.annotation.NoLogging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ public class ClientInsertRegistryServiceImpl implements ClientInsertRegistryServ
 	private ClientLoginDAO clientLoginDAO;
 
 	@Override
+	@NoLogging
 	public int insertRegistry(ClientCustomerVO clientCustomerVO) {
 		BCryptPasswordEncoder encoder 
 			= new BCryptPasswordEncoder();
