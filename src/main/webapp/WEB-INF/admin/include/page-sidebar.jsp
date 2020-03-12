@@ -76,7 +76,6 @@
                     </a>
                     <ul class="sub-menu">
                         <li><a href="salesOverview.ado">매출현황</a></li>
-                        <li><a href="salesAnalysis.ado">매출분석</a></li>
                     </ul>
                 </li>
             </ul>
