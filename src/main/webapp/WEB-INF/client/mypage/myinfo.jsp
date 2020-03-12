@@ -51,7 +51,6 @@
             <div class="col-lg-8">
                 <form id="formToController" action="myinfo-address-insert.do" method="post">
                     <input type="hidden" name="customerTbNo" value="${sessionScope.customer.customerTbNo }">
-                    <!-- sessionScope.customer.customerTbNo -->
                     <input type="hidden" name="cmAddressTbPhone" value="010">
                     <input type="hidden" name="cmAddressTbLat" id="lat">
                     <input type="hidden" name="cmAddressTbLng" id="lng">
