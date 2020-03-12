@@ -14,6 +14,7 @@ public class ClientDeleteQnaServiceImpl implements ClientDeleteQnaService {
 	
 	@Override
 	public void deleteQna(AdminQnaVO adminQnaVO) {
+		adminQnaVO.setQnaTbTitle("삭제된 글 입니다.");
 		clientQnaDAO.deleteQna(adminQnaVO);
 		
 	}

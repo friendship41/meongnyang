@@ -98,7 +98,7 @@
                                                                             A
                                                                         </span>
                                                                     </c:if>
-                                                                삭제된 글입니다.
+                                                                ${qna.qnaTbTitle}
                                                             </td>
                                                         </c:if>
                                                     </c:if>
@@ -137,7 +137,7 @@
                                                                             A
                                                                         </span>
                                                                     </c:if>
-                                                                삭제된 글입니다.
+                                                               ${qna.qnaTbTitle}
                                                             </td>
                                                         </c:if>
                                                     </c:if>
@@ -173,7 +173,7 @@
                                                                     A
                                                                 </span>
                                                             </c:if>
-                                                            삭제된 글입니다.
+                                                           ${qna.qnaTbTitle}
                                                         </td>
                                                     </c:if>
                                                 </c:if>

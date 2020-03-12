@@ -166,15 +166,17 @@
 	<update id="updateQna" parameterType="qna">
 		UPDATE qna
 		SET
-			qna_tb_title = #{qnaTbTitle},
+			
 			qna_tb_content = #{qnaTbContent}
 			
 		WHERE 
 			qna_tb_no = #{qnaTbNo}
 	</update>
+	
 	<delete id="deleteQna" parameterType="qna">
 		UPDATE qna
 		SET
+			qna_tb_title = #{qnaTbTitle},
 			qna_tb_status = #{qnaTbStatus}
 		WHERE 
 			qna_tb_no = #{qnaTbNo}

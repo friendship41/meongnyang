@@ -82,7 +82,7 @@
                                                                     </c:if> <c:if test="${qna.adminsTbId ne null}">
                                                                         A
                                                                     </c:if>
-															</span>삭제된 글입니다.</td>
+															</span>${qna.qnaTbTitle }</td>
 														</c:if>
 														<c:if test="${qna.adminsTbId ne null }">
 														<td>${qna.adminsTbId}</td>
