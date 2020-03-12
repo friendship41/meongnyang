@@ -5,9 +5,11 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- 어노테이션 활성화 -->
 	<mvc:annotation-driven/>
@@ -20,6 +22,10 @@
 	
 	<!-- 관리자 컴포넌트 스캔 -->
 	<context:component-scan base-package="com.mall.meongnyang.admin"/>
+
+
+	<!-- 트렌젝션 설정 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 
 
 	<!-- 메일 서비스 -->

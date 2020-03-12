@@ -9,6 +9,7 @@ import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +30,7 @@ public class ClientLoginController {
 	
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@Transactional
 	public String loginProc(ClientCustomerVO clientCustomerVO,  HttpSession session, Model model) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();		
 		ClientCustomerVO tempVO = clientSelectLoginService.selectLoginCheck(clientCustomerVO);

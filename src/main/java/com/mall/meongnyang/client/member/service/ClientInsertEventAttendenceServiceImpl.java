@@ -9,6 +9,7 @@ import com.mall.meongnyang.client.member.dao.ClientLoginDAO;
 import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ClientInsertEventAttendenceServiceImpl implements ClientInsertEvent
     private ClientLoginDAO clientLoginDAO;
 
     @Override
+    @Transactional
     public int insertAttendence(AdminEventAttendenceVO adminEventAttendenceVO)
     {
         AdminEventVO adminEventVO = clientEventDAO.selectAvailableEvent(new AdminEventVO());

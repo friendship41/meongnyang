@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.mall.meongnyang.client.market.dao.ClientMarketCommentDAO;
 import com.mall.meongnyang.client.market.vo.ClientMarketCommentVO;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientInsertMarketCommentServiceImpl implements ClientInsertMarketCommentService {
@@ -13,6 +14,7 @@ public class ClientInsertMarketCommentServiceImpl implements ClientInsertMarketC
 	private ClientMarketCommentDAO clientMarketCommentDAO;
 	
 	@Override
+	@Transactional
 	public void insertComment(ClientMarketCommentVO clientMarketCommentVO) {
 	
 		if(clientMarketCommentVO.getMarketCommentTbRef() > 0) {

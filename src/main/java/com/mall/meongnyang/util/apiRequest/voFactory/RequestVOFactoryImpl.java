@@ -4,6 +4,7 @@ import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import com.mall.meongnyang.util.apiRequest.vo.RequestRestVO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -13,6 +14,7 @@ import java.net.URISyntaxException;
 public class RequestVOFactoryImpl implements RequestVOFactory
 {
     @Override
+    @Transactional
     public RequestRestVO getKakaoPayReadyRequestVO(ClientOrderVO clientOrderVO)
     {
         RequestRestVO requestRestVO = new RequestRestVO();
@@ -51,6 +53,7 @@ public class RequestVOFactoryImpl implements RequestVOFactory
     }
 
     @Override
+    @Transactional
     public RequestRestVO getKakaoPayApprovedRequestVO(ClientOrderVO clientOrderVO)
     {
         RequestRestVO requestRestVO = new RequestRestVO();
@@ -86,6 +89,7 @@ public class RequestVOFactoryImpl implements RequestVOFactory
     }
 
     @Override
+    @Transactional
     public RequestRestVO getKakaoPayCancelRequestVO(ClientOrderVO clientOrderVO)
     {
         RequestRestVO requestRestVO = new RequestRestVO();
