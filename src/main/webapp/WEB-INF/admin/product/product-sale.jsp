@@ -158,6 +158,11 @@
         {
             $("#inputPdSaleTbExpireDay").remove();
         }
+        var discountInput = $("#discountInput").val();
+        if(discountInput === '' || discountInput === null)
+        {
+            $("#discountInput").attr("value", 0);
+        }
     }
 
     $(document).ready(function () {
