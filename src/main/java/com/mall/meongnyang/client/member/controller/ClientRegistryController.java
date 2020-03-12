@@ -55,12 +55,12 @@ public class ClientRegistryController {
 
 		// Mail 蹂대궡湲�
 		MailVO mailVO = new MailVO();
-		mailVO.setFrom("poo963369@naver.com"); // 愿�由ъ옄�븘�씠�뵒
-		mailVO.setTo(clientCustomerVO.getCustomerTbEmail()); // �쉶�썝媛��엯 �븘�씠�뵒
+		mailVO.setFrom("poo963369@naver.com");
+		mailVO.setTo(clientCustomerVO.getCustomerTbEmail());
 		mailVO.setSubject("오늘 뭐멍냥 회원가입 인증메일입니다.");
 		mailVO.setContent("<h1>클릭해주세요</h1>"
 				// base64 url암호화 필요함
-				+ "<a href='ec2-3-135-222-11.us-east-2.compute.amazonaws.com/index.do?customerTbNo=" + tempVO.getCustomerTbNo() + "&customerTbState=N"
+				+ "<a href='http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/index.do?customerTbNo=" + tempVO.getCustomerTbNo() + "&customerTbState=N"
 				+ "' >회원가입 인증</a>");
 		model.addAttribute("emailSend", true);
 		mailService.sendMail(mailVO);		
