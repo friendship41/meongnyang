@@ -79,7 +79,12 @@
 						</div>
 					</div>
 					<div class="ht__comment__btn--2 mt--30">
+						<c:if test="${sessionScope.customer.customerTbNo eq clientQnaVO.customerTbNo }">
 						<button class="fr__btns" type="submit">답글</button>
+						</c:if>
+						<c:if test="${sessionScope.customer.customerTbNo ne clientQnaVO.customerTbNo }">
+						
+						</c:if>
 						<c:if
 							test="${clientQnaVO.adminsTbId ne null || sessionScope.customer.customerTbNo != clientQnaVO.customerTbNo}">
 
