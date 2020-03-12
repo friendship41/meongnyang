@@ -104,21 +104,42 @@
                                                     </c:if>
                                                     <c:if test="${sessionScope.customer.customerTbNo ne qna.customerTbNo}">
                                                         <!-- 내 글이아니면 -->
-                                                        <td style="text-align: left;">
-                                                            <c:if test="${qna.adminsTbId eq null}">
-                                                                <span class="badge badge-success">
-                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
-                                                                    Q
-                                                                </span>
-                                                            </c:if>
-                                                            <c:if test="${qna.adminsTbId ne null}">
-                                                                <span class="badge badge-warning">
-                                                                    <i class="fa fa-lock" aria-hidden="true"></i>
-                                                                    A
-                                                                </span>
-                                                            </c:if>
-                                                            ${qna.qnaTbTitle}
-                                                        </td>
+                                                        <c:if test="${qna.qnaTbStatus eq 'N'}">
+                                                            <!-- 정상글 -->
+                                                            <td style="text-align: left;">
+                                                                    <c:if test="${qna.adminsTbId eq null}">
+                                                                        <span class="badge badge-success">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            Q
+                                                                        </span>
+                                                                    </c:if>
+                                                                    <c:if test="${qna.adminsTbId ne null}">
+                                                                        <span class="badge badge-warning">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            A
+                                                                        </span>
+                                                                    </c:if>
+                                                                ${qna.qnaTbTitle}
+                                                            </td>
+                                                        </c:if>
+                                                        <c:if test="${qna.qnaTbStatus eq 'D'}">
+                                                            <!-- 삭제된글 -->
+                                                            <td style="text-align: left;">
+                                                                    <c:if test="${qna.adminsTbId eq null}">
+                                                                        <span class="badge badge-success">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            Q
+                                                                        </span>
+                                                                    </c:if>
+                                                                    <c:if test="${qna.adminsTbId ne null}">
+                                                                        <span class="badge badge-warning">
+                                                                            <i class="fa fa-lock" aria-hidden="true"></i>
+                                                                            A
+                                                                        </span>
+                                                                    </c:if>
+                                                                삭제된 글입니다.
+                                                            </td>
+                                                        </c:if>
                                                     </c:if>
                                                 </c:if>
                                                 <c:if test="${qna.qnaTbSecret == 'N' }">
