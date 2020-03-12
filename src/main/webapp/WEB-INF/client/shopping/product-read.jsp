@@ -555,7 +555,7 @@
             objectType: 'commerce',
             content: {
                 title: '${detail.productTbName}',
-                imageUrl: 'http://localhost:8080${imageList.get(0).pdImageTbPath}',
+                imageUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com${imageList.get(0).pdImageTbPath}',
                 link: {
                     mobileWebUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
                     webUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}'

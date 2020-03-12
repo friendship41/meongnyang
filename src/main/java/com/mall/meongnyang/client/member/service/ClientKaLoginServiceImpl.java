@@ -1,22 +1,17 @@
 package com.mall.meongnyang.client.member.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.HashMap;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mall.meongnyang.client.member.dao.ClientLoginDAO;
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 
 @Service
 public class ClientKaLoginServiceImpl implements ClientKaLoginService{
@@ -47,7 +42,7 @@ public class ClientKaLoginServiceImpl implements ClientKaLoginService{
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=979aa4be781f57e07a085e52b0e8a729");
-            sb.append("&redirect_uri=http://localhost:8080/klogin.do");
+            sb.append("&redirect_uri=http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/klogin.do");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
