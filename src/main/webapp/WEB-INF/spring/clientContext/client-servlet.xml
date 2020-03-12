@@ -6,13 +6,13 @@
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:mvc="http://www.springframework.org/schema/mvc"
 	   xmlns:task="http://www.springframework.org/schema/task"
-	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
 	   xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/task
 		http://www.springframework.org/schema/task/spring-task-4.3.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
 	<!-- 어노테이션 활성화 -->
@@ -29,6 +29,16 @@
 
 	<!-- 트렌젝션 설정 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+	<!-- aop Log설정 -->
+	<bean id="clientServiceLogAdvice" class="com.mall.meongnyang.client.log.ClientServiceLog"/>
+	<aop:config>
+		<aop:aspect id="serviceLogAspect" ref="clientServiceLogAdvice">
+			<aop:pointcut id="serviceImplMethod" expression="execution(public * com.mall.meongnyang.client..*ServiceImpl.*(..))"/>
+			<aop:around pointcut-ref="serviceImplMethod" method="serviceRunLog"/>
+		</aop:aspect>
+	</aop:config>
 
 
 	<!-- 메일 서비스 -->

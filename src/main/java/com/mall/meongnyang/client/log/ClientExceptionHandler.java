@@ -1,4 +1,4 @@
-package com.mall.meongnyang.client.exceptionHandler;
+package com.mall.meongnyang.client.log;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
