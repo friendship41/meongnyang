@@ -59,7 +59,7 @@
 						</c:if>
 						<br>
 						<pre>${market.marketTbContent }</pre>
-						<a class="reply__btn" href="/qna-form.do?qnaTypeTbNo=7&customerTbNo=${market.customerTbNo}" style="margin-left: 95%;">신고</a>
+						<a class="reply__btn" href="/qna-form.do?qnaTypeTbNo=4&customerTbNo=${market.customerTbNo}" style="margin-left: 95%;">신고</a>
 					</div>
 					<!-- Start Comment Area -->
 					<div class="htc__comment__area">

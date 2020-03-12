@@ -72,7 +72,7 @@
                                             </c:if>
                                             <c:if test="${order.pdOrderTbState eq 'D'}">
                                             <td class="product-stock-status"><span class="badge badge-nowGo">배송중</span></td>
-                                            <td class="product-add-to-cart"><a href="#">배송조회</a></td>
+                                            <td class="product-add-to-cart"><a href="#">배송조회</a><a href="qna-form.do?qnaTypeTbNo=3&pdOrderTbNo=${order.pdOrderTbNo}">배송문의</a></td>
                                             </c:if>
                                             <c:if test="${order.pdOrderTbState eq 'A'}">
                                             <td class="product-stock-status"><span class="badge badge-complete">배송완료</span></td>

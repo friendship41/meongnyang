@@ -224,7 +224,7 @@
                             <div class="wishlist-content">
                                 <form action="qna-form.do" method="get">
                                     <input type="hidden" name="pdSaleTbNo" value="${saleList.get(0).pdSaleTbNo}">
-                                    <input type="hidden" name="qnaTypeTbNo" value="5">
+                                    <input type="hidden" name="qnaTypeTbNo" value="2">
                                     <div class="wishlist-table table-responsive">
                                         <table>
                                             <thead>
