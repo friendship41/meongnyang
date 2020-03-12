@@ -55,7 +55,7 @@
                                     <div class="accordion__body">
                                         <div class="accordion__body__form">
                                             <div class="row">
-                                                <div class="col-md-7">                                                 
+                                                <div class="col-md-12">                                                 
                                                      <h5 class="checkout-method__title"><i class="zmdi zmdi-caret-right"></i>${faqList.faqTbContent }</h5>                                                    
                                                 </div>
                                             </div>
