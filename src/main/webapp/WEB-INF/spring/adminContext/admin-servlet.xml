@@ -6,10 +6,12 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 어노테이션 활성화 -->
 	<mvc:annotation-driven/>
@@ -26,6 +28,17 @@
 
 	<!-- 트렌젝션 설정 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+	<!-- aop Log설정 -->
+	<bean id="AdminServiceLogAdvice" class="com.mall.meongnyang.admin.log.AdminServiceLog"/>
+	<aop:config>
+		<aop:aspect id="serviceLogAspect" ref="AdminServiceLogAdvice">
+			<aop:pointcut id="serviceImplMethod" expression="execution(public * com.mall.meongnyang.client..*ServiceImpl.*(..)) and !bean(AdminSelectLoginCheck)"/>
+			<aop:around pointcut-ref="serviceImplMethod" method="serviceRunLog"/>
+		</aop:aspect>
+	</aop:config>
+
 
 
 	<!-- 메일 서비스 -->

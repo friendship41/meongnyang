@@ -10,7 +10,6 @@ public class ClientContactController {
 	
 	@RequestMapping(value = "contact.do")
 	public String contactForm() {
-		
 		return "community/contact";
 	}
 }

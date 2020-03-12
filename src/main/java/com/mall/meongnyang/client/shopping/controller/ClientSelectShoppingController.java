@@ -42,6 +42,10 @@ public class ClientSelectShoppingController
     @RequestMapping(value = "/shopping.do", method = RequestMethod.GET)
     public String goToShoppingPage(AdminProductCategoryVO adminProductCategoryVO, AdminProductVO adminProductVO, Model model)
     {
+        int a = 0;
+        int b = 10/a;
+
+
         model.addAttribute("nowCategory",adminProductCategoryVO.getProductCategoryTbNo());
 
         List<AdminProductCategoryVO> categoryList = clientSelectProductCategoryService.getSelectedProductCategory(adminProductCategoryVO);
