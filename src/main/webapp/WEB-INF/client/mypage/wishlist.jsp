@@ -63,7 +63,7 @@
 	                                                <td class="product-name"><a id="productName-${wishlist.productTbCode}" href="/shoppingDetail.do?productTbCode=${wishlist.productTbCode}">${wishlist.pdSaleTbProductName}</a></td>
 	                                                <td class="old-prize">
 	                                                	<ul  class="pro__prize">                                                	                                                		
-	                                                        	<li id="nowPrice-${wishlist.productTbCode}" class="old__prize"><c:out value="${wishlist.pdSaleTbSalesPrice}" />원</sli><br>
+	                                                        	<li id="nowPrice-${wishlist.productTbCode}" class="old__prize"><c:out value="${wishlist.pdSaleTbSalesPrice}" />원</li><br>
 	                                                        <c:if test="${wishlist.pdSaleTbDiscountRate == 0 }">	
 	                                                        	<li id="nowDiscount-${wishlist.productTbCode}"><c:out value="${wishlist.pdSaleTbSalesPrice}" />원</li>
 	                                                        </c:if>
@@ -76,11 +76,11 @@
 	                                                </td>                                                
 	                                                <c:if test="${wishlist.pdSaleTbRemainingAmount == 0 }">
 	                                                	<td class="product-stock-status"><span class="wishlist-in-stock">SOLD OUT</span></td>
-	                                                	<td class="product-add-to-cart">Not Available</a></td>
+	                                                	<td class="product-add-to-cart">Not Available</td>
 	                                                </c:if>
 	                                                <c:if test="${wishlist.pdSaleTbRemainingAmount > 0 }">
 	                                                	<td class="product-stock-status"><span class="wishlist-in-stock">In Stock</span><br><span class="wishlist-in-stock">(재고수량:${wishlist.pdSaleTbRemainingAmount})</span></td>
-	                                               	 	<td class="product-add-to-cart"><a onclick="addCart('${wishlist.productTbCode}')" style="cursor: pointer"> Add to Cart</a></td>
+	                                               	 	<td class="product-add-to-cart"><a onclick="addCartW('${wishlist.productTbCode}')" style="cursor: pointer"> Add to Cart</a></td>
 	                                                </c:if>                                                
 	                                            </tr>
                                             </c:forEach>                                            
@@ -98,7 +98,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 	 	
-	 	function addCart(productTbCode) {
+	 	function addCartW(productTbCode) {
 	 		
 	 		var params ="?pdSaleTbSalesPrice=";			
 	        var amount = 1;               	       	
