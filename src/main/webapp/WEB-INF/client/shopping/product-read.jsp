@@ -413,9 +413,9 @@
     		var scrollTop = $(window).scrollTop();
     		
     		var newPosition = scrollTop + floatPosition + "px";
-    	
+    		
 			if($(document).height() - $(window).scrollTop() < $(window).height()) {
-				newPosition = $("#floatMenu").height() + $("#htc__footer").height() - 60 + "px";
+				newPosition = floatPosition + $("#htc__footer").height()+ "px";
 			} else {
 				newPosition = scrollTop + floatPosition + "px";
 			}
@@ -430,7 +430,6 @@
 				    
     	}).scroll();    
         
-       
     });
 
     function checkOutGoGo() {
