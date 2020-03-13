@@ -414,9 +414,12 @@
     		
     		var newPosition = scrollTop + floatPosition + "px";
     		
-			if(scrollTop >= $("#htc__footer").height()) {
-				newPosition = $("#floatMenu").height() + $("#htc__footer").height() - 60 + "px";
+			if($(document).height() - $(window).scrollTop() < $(window).height()) {
+				newPosition = floatPosition + $("#htc__footer").height()+ "px";
+			} else {
+				newPosition = scrollTop + floatPosition + "px";
 			}
+			
 			$("#floatMenu").stop().animate({
     			"top" : newPosition
     		}, 500);	
@@ -424,11 +427,9 @@
     		if($(window).width() <= 480) {
 		        $("#floatMenu").stop();
 		    }
-    		
 				    
     	}).scroll();    
         
-       
     });
 
     function checkOutGoGo() {
