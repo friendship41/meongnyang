@@ -29,6 +29,6 @@ public class ClientEventDAOImpl implements ClientEventDAO
     @Override
     public void updateDateOverEventState(AdminEventVO adminEventVO)
     {
-        sqlSessionTemplate.update("EventPointDAO.updateDateOverEventState", adminEventVO);
+        sqlSessionTemplate.update("EventDAO.updateDateOverEventState", adminEventVO);
     }
 }
