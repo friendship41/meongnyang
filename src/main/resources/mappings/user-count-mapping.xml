@@ -12,7 +12,7 @@
 		    user_count_tb_joiners,
 		    user_count_tb_outcount
 		FROM user_count
-		WHERE user_count_tb_date BETWEEN '2020-02-10' AND TO_DATE('2020-03-11')+1
+		WHERE user_count_tb_date BETWEEN #{StartDate} AND #{EndDate}+1
 		ORDER BY user_count_tb_date ASC
 ]]>
 	</select>
