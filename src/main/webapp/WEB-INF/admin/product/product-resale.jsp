@@ -95,7 +95,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">유통기한</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control date-picker" name="pdSaleTbExpireDay" value="${productSale.pdSaleTbExpireDay}">
+                                            <input id="inputPdSaleTbExpireDay" type="text" class="form-control date-picker" name="pdSaleTbExpireDay" value="${productSale.pdSaleTbExpireDay}">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -128,6 +128,23 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+    $("form").on("submit", function() {
+        inputCheck();
+    });
+
+    function inputCheck(){
+        var expire = $("#inputPdSaleTbExpireDay").val();
+        if(expire === '' || expire === null)
+        {
+            $("#inputPdSaleTbExpireDay").remove();
+        }
+        var discountInput = $("#discountInput").val();
+        if(discountInput === '' || discountInput === null)
+        {
+            $("#discountInput").attr("value", 0);
+        }
+    }
+
     $(document).ready(function () {
         $("#promotionSelectBox").change(function () {
             var selectedValue = $("#promotionSelectBox option:selected").val();
