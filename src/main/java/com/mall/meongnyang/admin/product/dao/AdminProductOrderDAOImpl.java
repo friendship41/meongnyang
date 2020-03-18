@@ -1,5 +1,6 @@
 package com.mall.meongnyang.admin.product.dao;
 
+import com.mall.meongnyang.client.mypage.vo.ClientOrdersDetailVO;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -60,5 +61,11 @@ public class AdminProductOrderDAOImpl implements AdminProductOrderDAO
     public ClientProductOrderVO selectOrder(ClientProductOrderVO clientProductOrderVO)
     {
         return sqlSessionTemplate.selectOne("orderDAO.selectOrder", clientProductOrderVO);
+    }
+
+    @Override
+    public List<ClientOrdersDetailVO> selectOrderDetailVO(ClientOrdersDetailVO clientOrdersDetailVO)
+    {
+        return sqlSessionTemplate.selectList("orderDetailDAO.selectOrderDetail", clientOrdersDetailVO);
     }
 }

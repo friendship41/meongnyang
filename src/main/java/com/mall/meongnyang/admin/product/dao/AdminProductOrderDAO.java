@@ -1,5 +1,6 @@
 package com.mall.meongnyang.admin.product.dao;
 
+import com.mall.meongnyang.client.mypage.vo.ClientOrdersDetailVO;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
 import com.mall.meongnyang.client.shopping.vo.ClientOrderVO;
 
@@ -15,4 +16,5 @@ public interface AdminProductOrderDAO
     public List<ClientOrderVO> selectDashboardMonthMoney(ClientOrderVO clientOrderVO);
     public List<ClientOrderVO> selectDashboardDayMoney(ClientOrderVO clientOrderVO);
     public ClientProductOrderVO selectOrder(ClientProductOrderVO clientProductOrderVO);
+    public List<ClientOrdersDetailVO> selectOrderDetailVO(ClientOrdersDetailVO clientOrdersDetailVO);
 }
