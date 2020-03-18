@@ -1,8 +1,8 @@
 package com.mall.meongnyang.client.market.vo;
 
-import java.sql.Date;
-
 import org.springframework.web.multipart.MultipartFile;
+
+import java.sql.Date;
 
 public class ClientMarketVO {
 	
@@ -15,6 +15,7 @@ public class ClientMarketVO {
 	private String marketTbSellOrBuy;
 	private String marketTbImgPath;
 	private String cmAddressTbNo;
+	private String customerTbName;
 	
 	private MultipartFile uploadFile;
 	
@@ -95,6 +96,12 @@ public class ClientMarketVO {
 	}
 	public void setCmAddressTbNo(String cmAddressTbNo) {
 		this.cmAddressTbNo = cmAddressTbNo;
+	}
+	public String getCustomerTbName() {
+		return customerTbName;
+	}
+	public void setCustomerTbName(String customerTbName) {
+		this.customerTbName = customerTbName;
 	}
 	@Override
 	public String toString() {

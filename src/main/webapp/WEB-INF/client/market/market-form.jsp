@@ -88,7 +88,7 @@
 							<div class="form-group">
 								<div class="col-sm-2"></div>
 								<div class="ht__comment__btn--2 mt--50 col-sm-8">
-									<input type="submit" class="fr__btn" value="등록"> <input type="button" class="fr__btn" src="/market-list.do" value="취소">
+									<input type="submit" class="fr__btn" value="등록"> <input type="button" id="cancleBtn" class="fr__btn" value="취소">
 								</div>
 							</div>
 						</form>
@@ -100,6 +100,10 @@
 </div>
 <!-- cart-main-area end -->
 
-
-
 <jsp:include page="../include/footer.jsp" />
+
+<script>
+	$('#cancleBtn').click(function() {
+		history.go(-1);
+	})
+</script>
