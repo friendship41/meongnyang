@@ -25,7 +25,7 @@
         <!-- Page Inner -->
         <div class="page-inner">
             <div class="page-title">
-                <h3 class="breadcrumb-header">프로모션 현황</h3>
+                <h3 class="breadcrumb-header">공지 글쓰기</h3>
             </div>
             <div id="main-wrapper">
                 <!-- Row -->

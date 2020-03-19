@@ -70,9 +70,17 @@
 								<div class="bl__date">
 									<span>${market.marketTbRegDate}</span>
 								</div>
-								<h2>
-									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">${market.marketTbTitle}</a>
-								</h2>
+								<c:if test="${market.marketTbSellOrBuy eq 'S'}">
+									<h2>
+									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">[판매]${market.marketTbTitle}</a>
+									</h2>
+								</c:if>
+								<c:if test="${market.marketTbSellOrBuy eq 'B'}">
+									<h2>
+									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">[구매]${market.marketTbTitle}</a>
+									</h2>
+								</c:if>
+								
 								<div class="blog__btn">
 									<a href="/market-read.do?marketTbNo=${market.marketTbNo}">더보기</a>
 								</div>

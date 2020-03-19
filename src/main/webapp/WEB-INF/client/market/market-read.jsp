@@ -38,6 +38,9 @@
 							<td><h6 class="title__line--5" style="font-size: 30px; margin-right: 15px">제목</h6></td>
 							<td><h6 class="title__line--5"  style="font-size: 30px">${market.marketTbTitle}</h6></td>
 						</tr>
+						<tr>
+							<td><h4>작성자 : ${market.customerTbName}</h4></td>
+						</tr>
 					</table>
 				</div>
 				<div class="htc__blog__details__wrap">

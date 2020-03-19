@@ -59,6 +59,9 @@
                                         <span class="price"><fmt:formatNumber value="${detail.ordersDetailTbPrice}"/> 원</span>
                                         <c:set var="sumPrice" value="${sumPrice + detail.ordersDetailTbPrice}" />
                                     </div>
+                                    <div>
+                                        <span>수량: ${detail.ordersDetailTbAmount}</span>
+                                    </div>
                                 </div>
                             </c:forEach>
                             <c:out value="sumPrice" />                                                  

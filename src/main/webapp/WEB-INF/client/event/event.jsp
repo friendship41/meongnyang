@@ -12,6 +12,9 @@
     <meta charset=utf-8>
     <meta http-equiv=X-UA-Compatible content="IE=edge">
     <meta name=viewport content="width=device-width,initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap&subset=korean" rel="stylesheet">
+
     <title>이벤트 페이지</title>
 <%--    <link href=/resources/client/js/event/app.39956212.js rel=preload as=script>--%>
     <link href=/resources/client/js/event/chunk-vendors.a3589d38.js rel=preload as=script>
@@ -21,8 +24,8 @@
     <strong>We're sorry but vue-wheel doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 </noscript>
 <div>
-    <div><p>${eventInfo.eventMessage}</p></div>
-    <div>이벤트 기간: ${eventInfo.eventStartDate} ~ ${eventInfo.eventEndDate}</div>
+    <div><p style="font-family: 'Jua', sans-serif;font-size: xx-large;position: relative;left: 40%;">${eventInfo.eventMessage}</p></div>
+    <div><p style="font-family: 'Jua', sans-serif;position: relative;left: 30%;">이벤트 기간: ${eventInfo.eventStartDate} ~ ${eventInfo.eventEndDate}</p></div>
     <div id=app></div>
 </div>
 <script src=/resources/client/js/event/chunk-vendors.a3589d38.js></script>
