@@ -123,6 +123,7 @@
                 WHEN PD_SALE_TB_REMAINING_AMOUNT=0 THEN 'N'
                 ELSE 'Y'
             END
+        WHERE PD_SALE_TB_STATE = 'Y'
     </update>
 
     <update id="updateRollbackProductRemainCount" parameterType="orderDetilProc">
