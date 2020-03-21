@@ -33,7 +33,7 @@ public class ClientSelectShoppingListServiceImpl implements ClientSelectShopping
 
         int startNum = (nowPage-1)*articleCnt+1;
         adminProductVO.setStartNum(startNum);
-        adminProductVO.setEndNum(startNum+11);
+        adminProductVO.setEndNum(startNum+12);
 
         if(nowPage < blockCnt)
         {
