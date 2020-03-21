@@ -17,7 +17,7 @@
         <param name="MaxFileSize" value="50MB"/>
         <param name="MaxBackupIndex" value="10"/>
         <param name="Append" value="true"/>
-        <param name="File" value="/log/server.log"/>
+        <param name="File" value="c://log//server.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %5p [%c] %m%n" />
         </layout>

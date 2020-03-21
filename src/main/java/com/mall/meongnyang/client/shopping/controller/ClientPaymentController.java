@@ -120,7 +120,7 @@ public class ClientPaymentController
         session.setAttribute("cartList", null);
 
 
-        model.addAttribute("message", "결제가 완료되엇습니다.");
+        model.addAttribute("message", "결제가 완료되었습니다.");
         return "shopping/payment-success";
     }
 

@@ -73,7 +73,7 @@ public class IndexController
 
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        calendar.add(Calendar.DATE, (dayOfWeek-1)*-1);
+        calendar.add(Calendar.DATE, -7);
         calendar.set(Calendar.HOUR, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);

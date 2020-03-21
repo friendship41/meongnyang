@@ -42,7 +42,7 @@ public class ClientKaLoginServiceImpl implements ClientKaLoginService{
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=979aa4be781f57e07a085e52b0e8a729");
-            sb.append("&redirect_uri=http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/klogin.do");
+            sb.append("&redirect_uri=http://localhost:8080/klogin.do");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();

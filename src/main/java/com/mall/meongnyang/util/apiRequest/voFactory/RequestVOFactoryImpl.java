@@ -43,9 +43,9 @@ public class RequestVOFactoryImpl implements RequestVOFactory
         p.add("quantity", ""+clientOrderVO.getOrderDetailVOList().size());
         p.add("total_amount", ""+clientOrderVO.getPdOrderTbPayment());
         p.add("tax_free_amount","0");
-        p.add("approval_url", "http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/kakaoPayApproval.do");
-        p.add("cancel_url", "http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/kakaoPayCancel.do");
-        p.add("fail_url","http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/kakaoPayFail.do");
+        p.add("approval_url", "http://localhost:8080/kakaoPayApproval.do");
+        p.add("cancel_url", "http://localhost:8080/kakaoPayCancel.do");
+        p.add("fail_url","http://localhost:8080/kakaoPayFail.do");
 
         requestRestVO.setParamMap(p);
 

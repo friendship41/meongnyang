@@ -92,7 +92,7 @@
                             <div class="col-md-12">
                                 <ul class="social">
                                     <li class="social_dribbble"><a href="javascript:googleLoginGo()" class="entypo-dribbble" data-onsuccess="onSignIn"></a></li>
-                                    <li class="social_twitter"><a href="https://kauth.kakao.com/oauth/authorize?client_id=979aa4be781f57e07a085e52b0e8a729&redirect_uri=http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/klogin.do&response_type=code" id="kakao-login-btn" class="entypo-twitter"></a></li>
+                                    <li class="social_twitter"><a href="https://kauth.kakao.com/oauth/authorize?client_id=979aa4be781f57e07a085e52b0e8a729&redirect_uri=http://localhost:8080/klogin.do&response_type=code" id="kakao-login-btn" class="entypo-twitter"></a></li>
                                     <li class="social_behance"><a href="${url}" class="entypo-behance"></a></li>
                                 </ul>									
                             </div>

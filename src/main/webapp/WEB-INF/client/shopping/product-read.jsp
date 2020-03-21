@@ -545,7 +545,7 @@
 
     function shareKakaoStory() {
         Kakao.Story.share({
-            url: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+            url: 'http://localhost:8080/shoppingDetail.do?productTbCode=${detail.productTbCode}',
             text: '상품명 : ${detail.productTbName}, 오늘뭐멍냥의 상품!'
         });
     }
@@ -556,10 +556,10 @@
             objectType: 'commerce',
             content: {
                 title: '${detail.productTbName}',
-                imageUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com${imageList.get(0).pdImageTbPath}',
+                imageUrl: 'http://localhost:8080${imageList.get(0).pdImageTbPath}',
                 link: {
-                    mobileWebUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
-                    webUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}'
+                    mobileWebUrl: 'http://localhost:8080/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+                    webUrl: 'http://localhost:8080/shoppingDetail.do?productTbCode=${detail.productTbCode}'
                 }
             },
             commerce: {
@@ -573,15 +573,15 @@
                 {
                     title: '구매하기',
                     link: {
-                        mobileWebUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
-                        webUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}'
+                        mobileWebUrl: 'http://localhost:8080/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+                        webUrl: 'http://localhost:8080/shoppingDetail.do?productTbCode=${detail.productTbCode}'
                     }
                 },
                 {
                     title: '공유하기',
                     link: {
-                        mobileWebUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}',
-                        webUrl: 'http://ec2-3-135-222-11.us-east-2.compute.amazonaws.com/shoppingDetail.do?productTbCode=${detail.productTbCode}'
+                        mobileWebUrl: 'http://localhost:8080/shoppingDetail.do?productTbCode=${detail.productTbCode}',
+                        webUrl: 'http://localhost:8080/shoppingDetail.do?productTbCode=${detail.productTbCode}'
                     }
                 }
             ]
