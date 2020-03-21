@@ -1,6 +1,7 @@
 package com.mall.meongnyang.client.mypage.controller;
 
 import com.mall.meongnyang.client.member.vo.ClientCustomerVO;
+import com.mall.meongnyang.client.mypage.service.ClientRollbackPointAndStockService;
 import com.mall.meongnyang.client.mypage.service.ClientSelectProductOrderListService;
 import com.mall.meongnyang.client.mypage.service.ClientupdateOrderStateService;
 import com.mall.meongnyang.client.mypage.vo.ClientProductOrderVO;
@@ -23,6 +24,8 @@ public class ClientProductOrderController {
 	private ClientSelectProductOrderListService orderListService;
 	@Autowired
 	private ClientupdateOrderStateService clientupdateOrderStateService;
+	@Autowired
+	private ClientRollbackPointAndStockService clientRollbackPointAndStockService;
 	
 	@RequestMapping("/orderList.do")
 	public String selectOrderList(@RequestParam(defaultValue = "1") int currentPage, HttpSession session,
@@ -51,6 +54,7 @@ public class ClientProductOrderController {
 	@RequestMapping(value = "/updateOrderState.do", method = RequestMethod.GET)
 	public String updateorderState(ClientOrderVO clientOrderVO)
 	{
+		clientRollbackPointAndStockService.ClientRollbackPointAndStockService(clientOrderVO);
 		clientupdateOrderStateService.updateOrderState(clientOrderVO);
 		return "redirect:orderList.do";
 	}
